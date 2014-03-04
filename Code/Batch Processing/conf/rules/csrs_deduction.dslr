@@ -1,0 +1,212 @@
+/*
+ * Copyright (C) 2013 TopCoder Inc., All Rights Reserved.
+ */
+package gov.opm.scrd.rules
+
+
+import gov.opm.scrd.entities.application.ExtendedServicePeriod;
+import gov.opm.scrd.entities.application.ServicePeriod;
+
+import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+
+/**
+ * <p>
+ * This is the DSLR rule resource for deduction calculation request validation and calculation.
+ * This rules are applied to CSRS.
+ *
+ * It currently supports rules that are applicable(extracted from) in Scenario #1, Scenario #2.
+ * </p>
+ 
+ * <p>
+ * <b>Thread Safety:</b>
+ * Thread safety is not an issue for drools rules.
+ * </p>
+ * 
+ * @author albertwang, TCSASSEMBLER
+ * @version 1.0
+ *
+ * @since  OPM - Implement Business Rules Engine Deduction Calculation Assembly v1.0
+ */
+ 
+/**
+ * Represents the expander for the rules
+ */
+expander common_deduction.dsl
+
+/**
+ * Represents the ExtendedServicePeriod that is used for outputting calculation result
+ */
+global List<ExtendedServicePeriod> extendedServicePeriods;
+
+
+/**
+ * Validates if the begin date is set.
+ */
+rule "Require begin date for Service Period"
+    // use salience to guarantee that the validation rule runs first
+    salience 100
+    when
+        There is a Service Period that has no begin date
+        // check this to avoid the infinite loop
+        The message "Begin date is required." has not been reported yet
+    then
+        Report error "Begin date is required."
+end
+
+/**
+ * Validates if the end date is set.
+ */
+rule "Require end date for Service Period"
+    // use salience to guarantee that the validation rule runs first
+    salience 100
+    when
+        There is a Service Period that has no end date
+        // check this to avoid the infinite loop
+        The message "End date is required." has not been reported yet
+    then
+        Report error "End date is required."
+end
+
+/**
+ * Validates if the amount is set.
+ */
+rule "Require amount for Service Period"
+    // use salience to guarantee that the validation rule runs first
+    salience 100
+    when
+        There is a Service Period that has no amount
+        // check this to avoid the infinite loop
+        The message "Amount is required." has not been reported yet
+    then
+        Report error "Amount is required."
+end
+
+/**
+ * Validates if the pay type is set.
+ */
+rule "Require PayType for Service Period"
+    // use salience to guarantee that the validation rule runs first
+    salience 100
+    when
+        There is a Service Period that has no payType
+        // check this to avoid the infinite loop
+        The message "PayType is required." has not been reported yet
+    then
+        Report error "PayType is required."
+end
+
+/**
+ * Validates if the retirement type is set.
+ */
+rule "Require RetirementType for Service Period"
+    // use salience to guarantee that the validation rule runs first
+    salience 100
+    when
+        There is a Service Period that has no retirementType
+        // check this to avoid the infinite loop
+        The message "RetirementType is required." has not been reported yet
+    then
+        
+        Report error "RetirementType is required."
+end
+
+/**
+ * Validates if the service type is set.
+ */
+rule "Require ServiceType for Service Period"
+    // use salience to guarantee that the validation rule runs first
+    salience 100
+    when
+        There is a Service Period that has no serviceType
+        // check this to avoid the infinite loop
+        The message "ServiceType is required." has not been reported yet
+    then
+        Report error "ServiceType is required."
+end
+
+/**
+ * Validates if the period type is set.
+ */
+rule "Require PeriodType for Service Period"
+    // use salience to guarantee that the validation rule runs first
+    salience 100
+    when
+        There is a Service Period that has no periodType
+        // check this to avoid the infinite loop
+        The message "PeriodType is required." has not been reported yet
+    then
+        Report error "PeriodType is required."
+end
+
+
+/**
+ * Validates if the begin date is not later than the end date.
+ */
+rule "Begin date must not be later than end date"
+    // use salience to guarantee that the validation rule runs first
+    salience 100
+    when
+        There is a Service Period that has begin date later than end date
+        // check this to avoid the infinite loop
+        The message "Begin date must not be later than End date." has not been reported yet
+    then
+        Report error "Begin date must not be later than End date."
+end
+
+/**
+ * Rules to apply to the service period of CSRS Firefighter Annual Salary Deposit,
+ * It uses 0.075 as the deduction rate.
+ */
+rule "CSRS Firefighter Annual Salary Deposit Calculation"
+    when
+        There is a valid Service Period that has retirement type as "CSRS" and has period type as "DEPOSIT" and has pay type as "ANNUAL SALARY" and has service type as "FIREFIGHTER"
+    then
+        Calculate earnings in service period for annual salary
+        Calculate deduction in service period at deduction rate 0.075
+        Continue Extended Service Period with no more than 3 days break
+end
+
+/**
+ * Rules to apply to the service period of CSRS DC Government Hourly Rate Deposit,
+ * It uses 0.07 as the deduction rate, and 2080 as the hourly rate multiplier.
+ */
+rule "CSRS DC Government Hourly Rate Deposit Calculation"
+    when
+        There is a valid Service Period that has retirement type as "CSRS" and has period type as "DEPOSIT" and has pay type as "HOURLY RATE" and has service type as "DC GOVERNMENT"
+    then
+        Calculate earnings in service period for hourly rate with multiplier 2080
+        Calculate deduction in service period at deduction rate 0.07
+        Continue Extended Service Period with no more than 3 days break
+end
+
+/**
+ * Rules to apply to the service period of CSRS GS Hourly Rate Deposit Calculation, and the begin date is after 01-Mar-1986.
+ * It uses 0.07 as the deduction rate, and 2087 as the hourly rate multiplier.
+ */
+rule "CSRS GS Hourly Rate Deposit Calculation After 3-1-86"
+    when
+        There is a valid Service Period that has retirement type as "CSRS" and has period type as "DEPOSIT" and has pay type as "HOURLY RATE" and has service type as "GS" and is after "01-Mar-1986"
+    then
+        Calculate earnings in service period for hourly rate with multiplier 2087
+        Calculate deduction in service period at deduction rate 0.07
+        Continue Extended Service Period with no more than 3 days break
+end
+
+/**
+ * Rules to apply to the service period of CSRS GS Hourly Rate Deposit Calculation, and the begin date is before 01-Mar-1986.
+ * It uses 0.07 as the deduction rate, and 2080 as the hourly rate multiplier.
+ */
+rule "CSRS GS Hourly Rate Deposit Calculation Before 3-1-86"
+    when
+        There is a valid Service Period that has retirement type as "CSRS" and has period type as "DEPOSIT" and has pay type as "HOURLY RATE" and has service type as "GS" and is before "01-Mar-1986"
+    then
+        Calculate earnings in service period for hourly rate with multiplier 2080
+        Calculate deduction in service period at deduction rate 0.07
+        Continue Extended Service Period with no more than 3 days break
+end
+
+

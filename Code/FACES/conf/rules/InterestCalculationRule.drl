@@ -1,0 +1,13 @@
+package gov.opm.scrd.rules.account.interest
+
+import gov.opm.scrd.entities.application.CalculationRequest;
+import gov.opm.scrd.entities.application.CalculationResponse;
+
+rule "Default Rule"
+salience 10
+	when
+		CalculationRequest()
+		$response: CalculationResponse()
+	then
+		$response.setAmount(((float) java.lang.Math.random() * 1000));
+end

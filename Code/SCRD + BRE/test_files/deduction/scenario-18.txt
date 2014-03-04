@@ -1,0 +1,4 @@
+#beginDate, endDate, retirementType, periodType, appointmentType, serviceType, amount, payType, interestAccrualDate, connerCase
+ServicePeriod1=05/07/1985,02/28/1986,CSRS,DEPOSIT,TEMPORARY,FIREFIGHTER,12862.00,ANNUAL SALARY,null,false
+ServicePeriod2=01/01/1987,01/02/1988,CSRS,DEPOSIT,TEMPORARY,FIREFIGHTER,13248.00,ANNUAL SALARY,null,false
+ServicePeriod3=01/03/1988,12/31/1988,CSRS,DEPOSIT,TEMPORARY,FIREFIGHTER,13513.00,ANNUAL SALARY,null,false

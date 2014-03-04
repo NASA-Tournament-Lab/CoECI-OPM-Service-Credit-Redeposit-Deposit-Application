@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<process xmlns="http://drools.org/drools-5.0/process"
+         xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
+         xs:schemaLocation="http://drools.org/drools-5.0/process drools-processes-5.0.xsd"
+         type="RuleFlow" name="Deduction" id="Deduction" package-name="gov.opm.scrd.rules" >
+
+  <header>
+  </header>
+
+  <nodes>
+    <start id="1" name="Start" x="119" y="57" width="48" height="48" />
+    <ruleSet id="3" name="Split Service Period" x="81" y="205" width="156" height="50" ruleFlowGroup="Split Service Period" />
+    <ruleSet id="4" name="Calculate Earnings" x="78" y="281" width="153" height="48" ruleFlowGroup="Calculate Earnings" />
+    <ruleSet id="5" name="Calculate Deduction" x="78" y="358" width="148" height="52" ruleFlowGroup="Calculate Deduction" />
+    <ruleSet id="6" name="Continue Extended Service Period" x="61" y="433" width="212" height="48" ruleFlowGroup="Continue Extended Service Period" />
+    <end id="7" name="End" x="152" y="500" width="48" height="48" />
+  </nodes>
+
+  <connections>
+    <connection from="1" to="3" />
+    <connection from="3" to="4" />
+    <connection from="4" to="5" />
+    <connection from="5" to="6" />
+    <connection from="6" to="7" />
+  </connections>
+
+</process>

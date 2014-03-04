@@ -1,0 +1,1 @@
+UPDATE opm.calculation set frozen = true where id <= 4;

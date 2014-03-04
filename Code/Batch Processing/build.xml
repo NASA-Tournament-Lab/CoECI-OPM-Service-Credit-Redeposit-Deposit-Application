@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Copyright 2014 OPM.gov
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+
+<project name="OPM - Batch Processing - Job Assembly" default="test-batch">
+
+    <property file="build.properties" />
+    <!-- <property name="deploy.dir" value="${jboss.home}/standalone/deployments" />
+    <property name="modules.dir" value="${jboss.home}/modules/system/layers/base" /> -->
+    <property name="build.dir" value="build" />
+    <property name="dist.dir" value="dist" />
+    <property name="src.dir" value="src" />
+    <property name="conf.dir" value="conf" />
+    
+    <property name="submission.jar" value="opm_batch_process_job_module_assembly_1.0.0_submission.jar"/>
+
+    <!-- Tests Settings -->
+    <property name="package" value="gov.opm.scrd" />
+    <property name="tests.src.dir" value="${src.dir}/java/tests" />
+    <property name="tests.build.dir" value="${build.dir}/tests" />
+    <property name="tests.classes.dir" value="${tests.build.dir}/classes" />
+    <property name="tests.log.dir" value="log"/>
+
+    <!-- Shared jar Settings -->
+    <property name="core.src.dir" value="${src.dir}/java/core" />
+    <property name="core.build.dir" value="${build.dir}/core" />
+    <property name="core.classes.dir" value="${core.build.dir}/classes" />
+    <property name="core.dist.dir" value="${dist.dir}/core" />
+    <property name="core-dist-name" value="opm-scrd-core.jar" />
+
+    <!-- EJB Settings -->
+    <property name="ejb.src.dir" value="${src.dir}/java/ejb" />
+    <property name="ejb.build.dir" value="${build.dir}/ejb" />
+    <property name="ejb.classes.dir" value="${ejb.build.dir}/classes" />
+    <property name="ejb.dist.dir" value="${dist.dir}/ejb" />
+    <property name="ejb.conf.dir" value="${conf.dir}/ejb" />
+    <property name="jpa.conf.dir" value="${conf.dir}/jpa" />
+    <property name="rules.conf.dir" value="${conf.dir}/rules" />
+    <property name="ejb-dist-name" value="opm-scrd-ejb.jar" />
+    
+    <!-- WebApp Settings -->
+    <property name="web.src.dir" value="${src.dir}/java/web" />
+    <property name="web.build.dir" value="${build.dir}/web" />
+    <property name="web.classes.dir" value="${web.build.dir}/classes" />
+    <property name="web.dist.dir" value="${dist.dir}/web" />
+    <property name="web-dist-name" value="opm-scrd-web.war" />
+    <property name="web.conf.dir" value="${conf.dir}/web" />
+    <property name="web.dir" value="${src.dir}/web" />
+    
+    <!-- EAR Settings -->
+    <property name="ear.conf.dir" value="${conf.dir}/ear" />
+    <property name="ear-file" value="opm.ear" />
+    <property name="ear.build.dir" value="${build.dir}/ear" />
+
+    <!-- JBoss Settings -->
+    <property name="jboss.conf.dir" value="${conf.dir}/jboss" />
+    <property name="jboss.modules.dir" value="${jboss.conf.dir}/modules" />
+
+    <import file="build-dependencies.xml" />
+
+    <path id="buildpath">
+        <fileset dir="lib">
+            <include name="*.jar" />
+        </fileset>
+        <!-- <path refid="jboss.eap.runtime"> </path> -->
+        <fileset refid="j2ee"></fileset>
+        <fileset refid="drools"></fileset>
+        <fileset refid="postgresql"></fileset>
+        <fileset refid="jackson"></fileset>
+        <fileset refid="hibernate"></fileset>
+        <fileset refid="spring-mvc"></fileset>
+        <fileset refid="joda-time"></fileset>
+        <fileset refid="quartz"></fileset>
+        <fileset refid="velocity"></fileset>
+        <fileset refid="mail"></fileset>
+        <fileset refid="slf4j"></fileset>
+    </path>
+
+    <path id="tests.buildpath">
+        <path refid="buildpath" />
+        <fileset refid="junit"></fileset>
+        <fileset refid="subethasmtp"></fileset>
+
+        <path location="${core.classes.dir}"></path>
+        <path location="${ejb.classes.dir}"></path>
+        <path location="test_files"></path>
+        <path location="conf"></path>
+    </path>
+    
+    <path id="ejb.buildpath">
+        <path refid="buildpath"></path>
+        <path location="${core.classes.dir}"></path>
+    </path>
+    
+    <path id="web.buildpath">
+        <path refid="ejb.buildpath"></path>
+        <path location="${ejb.classes.dir}"></path>
+        <fileset refid="spring-mvc"></fileset>
+    </path>
+    
+    <target name="clean" description="removes all generated files">
+        <delete dir="${build.dir}">
+        </delete>
+        <delete dir="${dist.dir}">
+        </delete>
+    </target>
+
+    <macrodef name="test.setup">
+        <sequential/>
+    </macrodef>
+
+    <macrodef name="test.execute">
+        <!-- standard test task -->
+        <sequential>
+            <mkdir dir="${tests.log.dir}"/>
+            <junit fork="true" haltonerror="false">
+                <classpath location="${tests.classes.dir}"/>
+                <classpath refid="tests.buildpath"/>
+                <test name="${package}.AllTests" todir="${tests.log.dir}">
+                    <formatter type="plain" usefile="true"/>
+                    <formatter type="xml" usefile="true"/>
+                </test>
+            </junit>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="test.teardown">
+        <sequential/>
+    </macrodef>
+
+    <target name="test" depends="compile_tests">
+        <test.setup/>
+        <test.execute/>
+        <test.teardown/>
+    </target>
+
+    <macrodef name="test.execute.batch.process">
+        <!-- standard test task -->
+        <sequential>
+            <mkdir dir="${tests.log.dir}"/>
+            <junit fork="true" haltonerror="false">
+                <classpath location="${tests.classes.dir}"/>
+                <classpath refid="tests.buildpath"/>
+                <test name="${package}.batchprocessing.jobs.BatchProcessingTests" todir="${tests.log.dir}">
+                    <formatter type="plain" usefile="true"/>
+                    <formatter type="xml" usefile="true"/>
+                </test>
+            </junit>
+        </sequential>
+    </macrodef>
+
+    <target name="test-batch" depends="compile_tests">
+        <test.setup/>
+        <test.execute.batch.process/>
+        <test.teardown/>
+    </target>
+
+    <target name="run-batch" depends="compile-core, compile-ejb">
+    
+        <copy file="conf/batchProcessApplicationContextTemplate.xml" tofile="conf/batchProcessApplicationContext.xml" overwrite="true">
+             <filterset filtersfile="build.properties"></filterset>
+        </copy>
+
+        <copy file="${jpa.conf.dir}/persistence-template.xml" tofile="conf/META-INF/persistence.xml" overwrite="true">
+             <filterset filtersfile="build.properties"></filterset>
+        </copy>
+
+        <copy file="${jpa.conf.dir}/orm.xml" tofile="conf/META-INF/orm.xml" overwrite="true">
+        </copy>
+
+        <java classname="gov.opm.scrd.batchprocessing.jobs.BatchProcessingUtility">
+            <classpath refid="buildpath"/>
+            <classpath location="${core.classes.dir}"/>
+            <classpath location="${ejb.classes.dir}"/>
+            <classpath location="conf"/>
+        </java>
+    </target>
+
+    <target name="compile_tests" depends="compile-core, compile-ejb">
+        <copy file="${jpa.conf.dir}/persistence-template.xml" tofile="test_files/META-INF/persistence.xml" overwrite="true">
+             <filterset filtersfile="build.properties"></filterset>
+        </copy>
+
+        <copy file="${jpa.conf.dir}/orm.xml" tofile="test_files/META-INF/orm.xml" overwrite="true">
+        </copy>
+
+        <delete dir="conf/META-INF">
+        </delete>
+
+        <mkdir dir="${tests.classes.dir}"/>
+        <javac srcdir="${tests.src.dir}"
+               destdir="${tests.classes.dir}"
+               classpathref="tests.buildpath"
+               debug="on"
+               includeantruntime="no" />
+    </target>
+
+    <target name="compile-core" description="compiles shared java sources">
+        <mkdir dir="${core.classes.dir}"/>
+        <javac srcdir="${core.src.dir}"
+             destdir="${core.classes.dir}"
+             classpathref="buildpath"
+             debug="on"
+            includeantruntime="no" />
+    </target>
+    
+    <target name="dist-core" depends="compile-core" description="creates the core distribution">
+        <mkdir dir="${core.dist.dir}"/>
+        <jar destfile="${core.dist.dir}/${core-dist-name}">
+            <fileset dir="${core.classes.dir}"></fileset>
+        </jar>
+    </target>
+    
+    <target name="compile-ejb" depends="compile-core" description="compiles EJB java sources">
+        <mkdir dir="${ejb.classes.dir}"/>
+        <javac srcdir="${ejb.src.dir}"
+             destdir="${ejb.classes.dir}"
+             classpathref="ejb.buildpath"
+             debug="on"
+            includeantruntime="no" />
+    </target>
+
+    <target name="configure-ejb" description="performs replacement of values for EJB configuration files">
+        <mkdir dir="${ejb.classes.dir}"/>
+        
+        <!-- Copy EJB configuration files -->
+        <copy todir="${ejb.classes.dir}/META-INF" filtering="on">
+            <filterset filtersfile="build.properties" /> 
+            <fileset dir="${jpa.conf.dir}">
+            </fileset>
+        </copy>
+        
+        <copy todir="${ejb.classes.dir}">
+            <fileset dir="${ejb.conf.dir}">
+            </fileset>
+            
+          <!-- rule files -->
+            <fileset dir="${rules.conf.dir}">
+            </fileset>
+            
+            <fileset file="conf/deduction-change-set.xml">
+            </fileset>
+            <fileset file="conf/interest-change-set.xml">
+            </fileset>
+            <filterset filtersfile="build.properties" />
+        </copy>
+        <copy todir="${ejb.classes.dir}/rules">
+          <!-- rule files -->
+            <fileset dir="${rules.conf.dir}">
+            </fileset>
+        </copy>
+    </target>
+
+    <target name="dist-ejb" depends="dist-core, compile-ejb, configure-ejb" description="creates the EJB distribution">
+        <mkdir dir="${ejb.dist.dir}"/>
+        <jar destfile="${ejb.dist.dir}/${ejb-dist-name}">
+            <fileset dir="${ejb.classes.dir}"></fileset>
+        </jar>
+    </target>
+
+    <target name="configure-war" description="performs replacement of values for web app configuration files">
+        <mkdir dir="${web.classes.dir}"/>
+        
+        <!-- Copy web configuration files -->
+        <copy todir="${web.classes.dir}" filtering="on">
+            <filterset filtersfile="build.properties" /> 
+            <fileset dir="${web.conf.dir}">
+            </fileset>
+        </copy>
+    </target>
+    
+    <target name="compile-war" depends="compile-ejb" description="compiles web application java sources">
+        <mkdir dir="${web.classes.dir}"/>
+        
+        <javac srcdir="${web.src.dir}"
+             destdir="${web.classes.dir}"
+             classpathref="web.buildpath"
+             debug="on"
+            includeantruntime="no"
+        />
+    </target>
+
+    <target name="dist-war" depends="compile-war, configure-war" description="builds the war file">
+        <mkdir dir="${web.dist.dir}"/>
+        <war warfile="${web.dist.dir}/${web-dist-name}" webxml="${web.dir}/WEB-INF/web.xml">
+            <classes dir="${web.classes.dir}"></classes>
+            <fileset dir="${web.dir}">
+                <include name="**/*.jsp"/>
+            </fileset>
+            <lib refid="spring-mvc">
+            </lib>
+            <webinf dir="${web.dir}/WEB-INF"></webinf>
+        </war>
+    </target>
+
+    <target name="configure-ear" description="performs replacement of values for EAR configuration files">
+        <mkdir dir="${ear.build.dir}"/>
+        <mkdir dir="${ear.build.dir}/lib"/>
+        
+        <!-- Copy EAR configuration files -->
+        <copy todir="${ear.build.dir}" filtering="on">
+            <fileset dir="${ear.conf.dir}">
+            </fileset>
+            <filterset filtersfile="build.properties" />
+        </copy>
+        
+        <!-- Copy EAR libraries -->
+        <copy todir="${ear.build.dir}/lib">
+            <fileset dir="${core.dist.dir}">
+                <include name="${core-dist-name}"/>
+            </fileset>
+            <fileset refid="drools">
+            </fileset>
+            <fileset refid="hibernate">
+            </fileset>
+            <fileset refid="jackson">
+            </fileset>
+            <fileset refid="spring-mvc">
+            </fileset>
+            <fileset refid="joda-time">
+            </fileset>
+        </copy>
+    </target>
+
+    <target name="dist-ear" depends="clean, dist-ejb, dist-war, configure-ear" description="creates the EAR artifact">
+        <ear destfile="${dist.dir}/${ear-file}" appxml="${ear.build.dir}/META-INF/application.xml" >
+            <fileset dir="${ejb.dist.dir}">
+                <include name="${ejb-dist-name}"/>
+            </fileset>
+            <fileset dir="${web.dist.dir}">
+                <include name="${web-dist-name}"/>
+            </fileset>
+            <fileset dir="${ear.build.dir}">
+                <exclude name="META-INF/application.xml"/>
+            </fileset>
+        </ear>
+    </target>
+<!--     
+    <target name="deploy" depends="dist-ear" description="deploys the EAR artifact">
+        <copy todir="${deploy.dir}">
+            <fileset dir="${dist.dir}">
+                <include name="${ear-file}" />
+            </fileset>
+        </copy>
+        <touch file="${deploy.dir}/${ear-file}.dodeploy" />
+    </target>
+
+    <target name="deploy-jdbc-driver" description="copies the jdbc driver module into jboss">
+        <copy todir="${modules.dir}" flatten="false">
+            <fileset dir="${jboss.modules.dir}">
+            </fileset>
+        </copy>
+    </target> -->
+
+    <target name="db-create" description="creates the tables and sequences">
+        <sql driver="${db.driver}" password="${db.pass}" url="${db.url}" userid="${db.user}" 
+             src="${src.dir}/sql/create-schema.sql" classpathref="buildpath"/>
+             
+        <sql driver="${db.driver}" password="${db.pass}" url="${db.url}" userid="${db.user}" 
+             src="${src.dir}/sql/triggers-ant.sql" classpathref="buildpath" delimiter=";;"/>
+
+        <sql driver="${db.driver}" password="${db.pass}" url="${db.url}" userid="${db.user}" 
+             src="${src.dir}/sql/functions.sql" classpathref="buildpath" keepformat="true" delimiter="lineEnding" delimitertype="row" escapeprocessing="false"/>
+    </target>
+
+    <target name="db-drop" description="drops the tables and sequences">
+
+        <sql driver="${db.driver}" password="${db.pass}" url="${db.url}" userid="${db.user}" 
+             src="${src.dir}/sql/drop-schema.sql" classpathref="buildpath"/>
+    </target>
+
+    <target name="db-clear" description="clears the contents of the tables">
+        <sql driver="${db.driver}" password="${db.pass}" url="${db.url}" userid="${db.user}" 
+             src="${src.dir}/sql/clear-data.sql" classpathref="buildpath"/>
+    </target>
+
+    <target name="db-test-data" depends="db-clear" description="recreates the test data">
+        <sql driver="${db.driver}" password="${db.pass}" url="${db.url}" userid="${db.user}" 
+             src="${src.dir}/sql/initial-data.sql" classpathref="buildpath"/>
+    </target>
+
+    <target name="submission">
+        <delete dir="test_files/META-INF"/>
+        <delete dir="conf/META-INF"/>
+        <jar jarfile="${submission.jar}"
+             basedir="."
+             includes="
+                       build.properties,
+                       build.xml,
+                       build-dependencies.xml,
+                       lib/**,
+                       testlib/**,
+                       docs/**,
+                       test_files/**,
+                       ${conf.dir}/**/*,
+                       ${src.dir}/**/*,
+                       ${tests.log.dir}/**"
+            />
+    </target>
+
+</project>

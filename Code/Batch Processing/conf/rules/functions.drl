@@ -1,0 +1,391 @@
+/*
+ * Copyright (C) 2013 TopCoder Inc., All Rights Reserved.
+ */
+package gov.opm.scrd.rules;
+
+import gov.opm.scrd.entities.application.ExtendedServicePeriod;
+import gov.opm.scrd.entities.application.ServicePeriod;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import org.joda.time.DateTime;
+
+/**
+ * <p>
+ * This is the DRL resource file that contains utility functions.
+ * </p>
+ * <p>
+ * <b>Thread Safety:</b> Thread safety is not an issue for drools functions,
+ * because functions are used in a session which is used by only one thread.
+ * </p>
+ * 
+ * Changes:
+ * Version 1.1 - Add the functions for deduction phase.
+ * 
+ * @author albertwang, TCSASSEMBLER
+ * @version 1.1
+ * 
+ * @since OPM Rules Engine Models Exceptions and Interest Calculation v1.0
+ *        Assembly
+ */
+
+
+/**
+ * <p>
+ * Calculates interest for an extended service period. The year to calculate
+ * is determined by ExtendedServicePeriod#interestCalculationYear, the
+ * calculated interest will be accumulated to
+ * ExtendedServicePeriod#balanceWithInterest.
+ * </p>
+ * 
+ * @param esp
+ *            the extended service period to calculate.
+ * @param interestRate
+ *            the interest rate of the year.
+ * @param interestCalculatedToDate
+ *            the interest calculated to date.
+ * 
+ * @return the interest of the calculation year.
+ */
+function BigDecimal calculateInterest(ExtendedServicePeriod esp, double interestRate, Date interestCalculatedToDate) {
+
+    // get the calculation year
+    int year = esp.getInterestCalculationYear();
+
+    // calculate the start date via the mid point year
+    Date startDate = null;
+    int midPointYear = new DateTime(esp.getMidPoint()).year().get();
+
+    if (midPointYear < year) {
+        // if the year is after the mid point year,
+        // the interest will calculated from the first day of the ear
+        startDate = new DateTime(year, 1, 1, 0, 0).toDate();
+    } else if (midPointYear == year) {
+        // if the year is the mid point year (first year to calculate the
+        // interest)
+        // the interest will start from the first day of the mid point
+        startDate = esp.getMidPoint();
+    } else {
+        // if the year is before the mid point year (this will never happen
+        // because
+        // the year is initialize with mid point year, just a safe guard
+        // here)
+        // no interest will be calculate and increase the calculation year
+        // so that
+        // it can calculate the next year
+        esp.setInterestCalculationYear(year + 1);
+
+        return BigDecimal.valueOf(0);
+    }
+
+    // calculate the end date
+    Date endDate = null;
+
+    DateTime interestCalcuatedToDateTime = new DateTime(interestCalculatedToDate);
+    int calculatedToYear = interestCalcuatedToDateTime.year().get();
+    int calculatedToMonth = interestCalcuatedToDateTime.monthOfYear().get();
+    int calculatedToDay = interestCalcuatedToDateTime.dayOfMonth().get();
+
+    if (calculatedToYear == year) {
+        // for the last year of the calculation
+        // according to this thread:
+        // http://apps.topcoder.com/forums/?module=Thread&threadID=802515&start=0&mc=25
+        // if the period is CSRS and pre-10-1-82, the interest should
+        // calculated to the calculation date,
+        // otherwise, we only add the interest for a complete year,
+        // if the year is incomplete, ignore the interests.
+        if (esp.getRetirementType().getName().equals("CSRS")
+                && esp.getBeginDate().before(new DateTime(1982, 10, 1, 0, 0).toDate())) {
+            endDate = interestCalculatedToDate;
+        } else if (calculatedToMonth == 12 && calculatedToDay == 31) {
+            // calculate to the last day of the year (complete year)
+            endDate = interestCalculatedToDate;
+        } else {
+            // if this is not a complete year, ignore all the interests of
+            // the year
+            esp.setInterestCalculationYear(year + 1);
+            return BigDecimal.valueOf(0);
+        }
+    } else {
+        // for a normal year, the whole year should be added
+        endDate = new DateTime(year, 12, 31, 0, 0).toDate();
+    }
+
+    // calculate the days period between the start date and the end date
+    int days = calculatePeriodInDays(startDate, endDate);
+
+    // calculate the start year factor
+    BigDecimal startYearFactor = BigDecimal.valueOf(days * 1.0).divide(BigDecimal.valueOf(30 * 12 * 1.0), 6,
+            RoundingMode.HALF_UP);
+
+    // Calculate interest for the year
+    BigDecimal interest = startYearFactor.multiply(esp.getBalanceWithInterest())
+            .multiply(BigDecimal.valueOf(interestRate)).setScale(26, RoundingMode.HALF_UP);
+
+    // Accumulate to the total balance
+    esp.setBalanceWithInterest(esp.getBalanceWithInterest().add(interest));
+
+    // Increase year to calculate the next year (if necessary)
+    esp.setInterestCalculationYear(year + 1);
+
+    return interest;
+}
+
+/**
+ * Calculates the mid point date of a extended service period. And, the
+ * interestCalculationYear and balanceWithInterest are also initialized in
+ * this function.
+ * 
+ * @param esp
+ *            the extended service period to calculate.
+ * 
+ * @return the mid point date.
+ */
+function Date calculateMidPoint(ExtendedServicePeriod esp) {
+    DateTime beginDate = new DateTime(esp.getBeginDate());
+    DateTime endDate = new DateTime(esp.getEndDate());
+
+    // plus one day to end date
+    endDate = endDate.plusDays(1);
+
+    int startY = beginDate.year().get();
+    int startM = beginDate.monthOfYear().get();
+    int startD = beginDate.dayOfMonth().get();
+
+    int endY = endDate.year().get();
+    int endM = endDate.monthOfYear().get();
+    int endD = endDate.dayOfMonth().get();
+
+    if (endD < startD) {
+        endD += 30;
+        endM -= 1;
+    }
+
+    if (endM < startM) {
+        endM += 12;
+        endY -= 1;
+    }
+
+    int months = 12 * (endY - startY) + (endM - startM);
+
+    int days = (endD - startD);
+
+    // Divide days and months by 2
+    days /= 2;
+    days += (months * 30 / 2) % 30;
+    months = (months * 30 / 2) / 30;
+
+    beginDate = new DateTime(esp.getBeginDate());
+
+    startY = beginDate.year().get();
+    startM = beginDate.monthOfYear().get();
+    startD = beginDate.dayOfMonth().get();
+    if (startD == 31) {
+        // according to this thread, consider 30 days a month:
+        // http://apps.topcoder.com/forums/?module=Thread&threadID=802606&start=0
+        startD = 30;
+    }
+    while (startD + days > 30) {
+        startM += 1;
+        days -= 30;
+    }
+
+    while (startM + months > 12) {
+        startY += 1;
+        months -= 12;
+    }
+
+    DateTime midPointDate = new DateTime(startY, startM + months, startD + days, 0, 0);
+
+    // initialize the interestCalculationYear and the balanceWithInterest
+    esp.setInterestCalculationYear(midPointDate.year().get());
+    esp.setBalanceWithInterest(esp.getTotalDeduction());
+
+    return midPointDate.toDate();
+}
+
+/**
+ * Calculates the period duration in days for given two dates.
+ * 
+ * @param start
+ *            the start date of the period.
+ * @param end
+ *            the end date of the period.
+ * 
+ * @return the duration in days between the start date and the end date.
+ */
+function int calculatePeriodInDays(Date start, Date end) {
+    DateTime startDate = new DateTime(start);
+    DateTime endDate = new DateTime(end);
+
+    int startY = startDate.year().get();
+    int startM = startDate.monthOfYear().get();
+    int startD = startDate.dayOfMonth().get();
+
+    // If the beginning date is on the 31st of the month, you must change
+    // the day to the 30th to ensure that credit is received for the first
+    // day.
+    if (startD == 31) {
+        startD = 30;
+    }
+
+    // Plus one day to the end date
+    endDate = endDate.plusDays(1);
+    int endY = endDate.year().get();
+    int endM = endDate.monthOfYear().get();
+    int endD = endDate.dayOfMonth().get();
+
+    if (endD < startD) {
+        endD += 30;
+        endM -= 1;
+    }
+
+    if (endM < startM) {
+        endM += 12;
+        endY -= 1;
+    }
+    return (endD - startD) + 30 * (endM - startM) + 30 * 12 * (endY - startY);
+}
+
+/**
+ * Tries to continue an existing extended service period with given service period.
+ * 
+ * @param esps existing extended service periods
+ * @param sp the service period
+ * @param breakThresholdInDays the break days threshold
+ */
+function void continueExtendedServicePeriod(List esps, ServicePeriod sp, int breakThresholdInDays) {
+    DateTime spBeginDate = new DateTime(sp.getBeginDate());
+    int spBeginY = spBeginDate.year().get();
+    int spBeginM = spBeginDate.monthOfYear().get();
+    int spBeginD = spBeginDate.dayOfMonth().get();
+
+    for (Object obj : esps) {
+        ExtendedServicePeriod esp = (ExtendedServicePeriod) obj;
+        if (isInExtendedServicePeriod(sp, esp, breakThresholdInDays)) {
+            mergeExtendedServicePeriod(sp, esp);
+            return;
+        }
+    }
+    // returns the result
+    esps.add(newExtendedServicePeriod(sp));
+}
+
+/**
+ * Checks if a service period is in range of extended service period so they can be merged.
+ * 
+ * @param sp the service period to check.
+ * @param esp the extended service period to check.
+ * @param breakThresholdInDays the break threshold in days.
+ * 
+ * @return true if the periods are overlapped (plus the break threshold in days)
+ */
+function boolean isInExtendedServicePeriod(ServicePeriod sp, ExtendedServicePeriod esp, int breakThresholdInDays) {
+    // if two period are not the same retirement type, they should not be merged
+    if (!sp.getRetirementType().getName().equals(esp.getRetirementType().getName())) {
+        return false;
+    }
+    
+    DateTime espBeginDate = new DateTime(esp.getBeginDate().getTime());
+    DateTime espEndDate = new DateTime(esp.getEndDate().getTime());
+    DateTime spBeginDate = new DateTime(sp.getBeginDate().getTime());
+    DateTime spEndDate = new DateTime(sp.getEndDate().getTime());
+
+    boolean result = (spBeginDate.isAfter(espBeginDate.minusDays(breakThresholdInDays)) && spBeginDate
+            .isBefore(espEndDate.plusDays(breakThresholdInDays)))
+            || (spEndDate.isAfter(espBeginDate.minusDays(breakThresholdInDays)) && spEndDate.isBefore(espEndDate
+                    .plusDays(breakThresholdInDays)));
+
+    return result;
+}
+
+/**
+ * Creates the extended service period from a service period.
+ * @param sp the service period.
+ * @return the created the extended service period.
+ */
+function ExtendedServicePeriod newExtendedServicePeriod(ServicePeriod sp) {
+    ExtendedServicePeriod esp = new ExtendedServicePeriod();
+    esp.setServicePeriods(new ArrayList<ServicePeriod>());
+    esp.getServicePeriods().add(sp);
+    esp.setBeginDate(sp.getBeginDate());
+    esp.setEndDate(sp.getEndDate());
+    esp.setTotalEarnings(sp.getEarnings());
+    esp.setTotalDeduction(sp.getDeduction());
+    
+    // the interest phase required the retirement type and the validation errors,
+    // so these two fields must be set
+    esp.setRetirementType(sp.getRetirementType());
+    esp.setValidationErrors(new ArrayList<String>());
+    return esp;
+}
+
+/**
+ * Merges the service period and the extended service period.
+ * @param sp the service period to merge.
+ * @param esp the extended service period to merge into.
+ */
+function void mergeExtendedServicePeriod(ServicePeriod sp, ExtendedServicePeriod esp) {
+    esp.getServicePeriods().add(sp);
+    DateTime espBeginDate = new DateTime(esp.getBeginDate().getTime());
+    DateTime espEndDate = new DateTime(esp.getEndDate().getTime());
+    DateTime spBeginDate = new DateTime(sp.getBeginDate().getTime());
+    DateTime spEndDate = new DateTime(sp.getEndDate().getTime());
+    if (espBeginDate.isAfter(spBeginDate)) {
+        esp.setBeginDate(sp.getBeginDate());
+    }
+    if (spEndDate.isAfter(espEndDate)) {
+        esp.setEndDate(sp.getEndDate());
+    }
+    esp.setTotalEarnings(esp.getTotalEarnings().add(sp.getEarnings()));
+    esp.setTotalDeduction(esp.getTotalDeduction().add(sp.getDeduction()));
+
+}
+
+/**
+ * Calculates the earnings for the annual salary.
+ * After this method, the earnings in the service period will be set.
+ * @param sp the service period to calculate.
+ */
+function void calculateEarningsForAnnualSalary(ServicePeriod sp) {
+    // the formula is: amount * days / 360
+    int days = calculatePeriodInDays(sp.getBeginDate(), sp.getEndDate());
+    BigDecimal years = BigDecimal.valueOf(days * 1.0).divide(BigDecimal.valueOf(30 * 12 * 1.0), 6,
+            RoundingMode.HALF_UP);
+    BigDecimal earnings = sp.getAmount().multiply(years).setScale(6, RoundingMode.HALF_UP);
+    sp.setEarnings(earnings);
+}
+
+/**
+ * Calculates the earnings for the hourly rate.
+ * After this method, the earnings in the service period will be set.
+ * @param sp the service period to calculate.
+ * @param multiplier the multiplier used to calculate the earnings.
+ */
+function void calculateEarningsForHourlyRate(ServicePeriod sp, double multiplier) {
+    // the formula is: amount * days / 360 * multiplier
+    int days = calculatePeriodInDays(sp.getBeginDate(), sp.getEndDate());
+    BigDecimal years = BigDecimal.valueOf(days * 1.0).divide(BigDecimal.valueOf(30 * 12 * 1.0), 6,
+            RoundingMode.HALF_UP);
+    BigDecimal earnings = sp.getAmount().multiply(years).multiply(BigDecimal.valueOf(multiplier))
+            .setScale(6, RoundingMode.HALF_UP);
+    sp.setEarnings(earnings);
+}
+
+/**
+ * Calculates the earnings for the service period.
+ * After this method, the deduction in the service period will be set.
+ * @param sp the service period to calculate.
+ * @param deductionRate the deductionRate used to calculate the earnings.
+ */
+function void calculateDeduction(ServicePeriod sp, double deductionRate) {
+    // the formula is: earnings * deductionRate
+    BigDecimal deduction = sp.getEarnings().multiply(BigDecimal.valueOf(deductionRate))
+            .setScale(2, RoundingMode.HALF_UP);
+    sp.setDeduction(deduction);
+}
+

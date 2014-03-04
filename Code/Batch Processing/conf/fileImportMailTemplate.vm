@@ -1,0 +1,180 @@
+#macro( leftPadNumber $number $size )$StringUtils.leftPad($numberTool.format("0", $number), $size)#end
+#macro( leftPadDecimal $decimal $size )$StringUtils.leftPad($numberTool.format("0.00", $decimal), $size)#end
+#macro( formatDecimal $decimal )$numberTool.format("0.00", $decimal)#end
+#set($empty = '' )
+#set($summary='')
+#if($importStatus.successful == true && $importStatus.paymentsGood == true)
+#set($numberTotalDupePayments = $importStatus.numberDupeAchPayments + $importStatus.numberDupeCheckPayments)
+#if($numberTotalDupePayments == 0)
+#set($summary = "The file import was successful.")
+#else
+#set($summary = "The file import had " + $numberTotalDupePayments  + " duplicate payments.")
+#end
+#else
+#set($summary = "THE FILE IMPORT HAD ERRORS. PLEASE CHECK THE 'Lockbox Import Errors' REPORT IN THE SERVICE CREDIT APPLICATION FOR DETAILS. THE ERROR INVOLVES PAYMENTS SO IT MUST BE FIXED AS SOON AS POSSIBLE.")
+#end
+SUMMARY: $summary
+
+$StringUtils.leftPad("Number", 9) Type  $StringUtils.leftPad("Total", 12)
+#leftPadNumber($importStatus.numberGoodAchPayments, 9) ACH   #leftPadDecimal($importStatus.totalACHPayments, 12)$empty
+#leftPadNumber($importStatus.numberGoodCheckPayments, 9) Check #leftPadDecimal($importStatus.totalCheckPayments, 12)$empty
+============================
+#leftPadNumber($mathTool.add($importStatus.numberGoodAchPayments, $importStatus.numberGoodCheckPayments), 9) All   #leftPadDecimal($mathTool.add($importStatus.totalACHPayments, $importStatus.totalCheckPayments), 12)$empty
+
+#if($importStatus.numberAcceptedAchPayments > 0)
+#leftPadNumber($importStatus.numberAcceptedAchPayments, 9) ACH payments accepted as Posted - Pending
+#end
+#if($importStatus.numberAcceptedCheckPayments > 0)
+#leftPadNumber($importStatus.numberAcceptedCheckPayments, 9) Check payments accepted as Posted - Pending
+#end
+#if($importStatus.numberUnresolvedAchPayments > 0)
+#leftPadNumber($importStatus.numberAcceptedAchPayments, 9) ACH payments accepted as Unresolved
+#end
+#if($importStatus.numberUnresolvedCheckPayments > 0)
+#leftPadNumber($importStatus.numberAcceptedCheckPayments, 9) Check payments accepted as Unresolved
+#end
+#if($importStatus.numberSuspendedAchPayments > 0)
+#leftPadNumber($importStatus.numberAcceptedAchPayments, 9) ACH payments accepted as Suspended
+#end
+#if($importStatus.numberSuspendedCheckPayments > 0)
+#leftPadNumber($importStatus.numberAcceptedCheckPayments, 9) Check payments accepted as Suspended
+#end
+
+######################### Payments error section #########################
+#if($importStatus.successful == false || $importStatus.paymentsGood == false)
+#if($importStatus.numberBadAchPayments > 0)
+#leftPadNumber($importStatus.numberBadAchPayments, 9) BAD ACH PAYMENTS
+#end
+#if($importStatus.numberBadCheckPayments > 0)
+#leftPadNumber($importStatus.numberBadCheckPayments, 9) BAD CHECK PAYMENTS
+#end
+#if($importStatus.numberBadSummaryRecords > 0)
+#leftPadNumber($importStatus.numberBadSummaryRecords, 9) BAD SUMMARY RECORDS
+#end
+#if($importStatus.numberBadDataRecords > 0)
+#leftPadNumber($importStatus.numberBadDataRecords, 9) BAD DATA RECORDS
+#end
+
+#set($totalTransaction = $mathTool.add($importStatus.totalACHPayments, $importStatus.totalCheckPayments))
+#if($importStatus.fileSummaryTotal.doubleValue() == $mathTool.add($totalTransaction, $importStatus.totalDupePayments).doubleValue())
+#leftPadDecimal($importStatus.fileSummaryTotal, 9) = total of the money amounts in the summary (checksum) records
+#leftPadDecimal($totalTransaction, 9) = total of the money amounts in the transaction records
+#leftPadDecimal($importStatus.totalDupePayments, 9) = DISCREPANCY
+
+The bank's file checksum matched the total imported into Service Credit. Total = #formatDecimal($importStatus.fileSummaryTotal).
+#else
+ERROR: THE BANK'S TOTAL WAS #formatDecimal($importStatus.fileSummaryTotal) BUT #formatDecimal($totalTransaction) WAS IMPORTED INTO THE SERVICE CREDIT DATABASE.
+#if($totalTransaction.doubleValue() > $importStatus.fileSummaryTotal.doubleValue())
+THE PROGRAM IMPORTED #formatDecimal($mathTool.sub($totalTransaction, $importStatus.fileSummaryTotal)) MORE THAN THE BANK'S TOTAL.
+#else
+THE PROGRAM IMPORTED #formatDecimal($mathTool.sub($importStatus.fileSummaryTotal, $totalTransaction)) LESS THAN THE BANK'S TOTAL.
+#end
+#end
+#end
+
+######################### Payment records section #########################
+#set($numberTotalGood = $importStatus.numberGoodAchPayments + $importStatus.numberGoodCheckPayments + $importStatus.numberGoodSummaryRecords)
+#set($numberTotalBad = $importStatus.numberBadAchPayments + $importStatus.numberBadCheckPayments + $importStatus.numberBadSummaryRecords + $importStatus.numberBadDataRecords)
+#if($numberTotalBad == 0)
+#if($numberTotalGood == 0)
+SCRD found no payment records in this Lockbox file.
+#else
+$numberTotalGood total Lockbox records and summary totals.
+#end
+#else
+#if($numberTotalGood == 0)
+SCRD COULD NOT READ ANY PAYMENT RECORDS IN THIS LOCKBOX FILE. THEY ARE ALL BAD.
+#else
+$numberTotalBad OUT OF $numberTotalGood LOCKBOX PAYMENT RECORDS ARE CORRUPT!
+#end
+#end
+
+######################### Duplicate records section #########################
+#if($importStatus.numberDupeAchPayments + $importStatus.numberDupeCheckPayments > 0)
+THE FILE IMPORT HAD DUPLICATE RECORDS FROM A PREVIOUS DAY. This is legitimate when ACH records import on a federal holiday. Since the Daily Cycle does not run, those payments are still there the next day.
+This Lockbox file contained payments that were already entered into the Service Credit database.
+
+#if($importStatus.numberDupeAchPayments > 0)
+#leftPadNumber($importStatus.numberDupeAchPayments, 9) Duplicate ACH Payments
+#end
+#if($importStatus.numberDupeCheckPayments > 0)
+#leftPadNumber($importStatus.numberDupeCheckPayments, 9) Duplicate Check Payments
+#end
+Duplicate Payment Total = #leftPadDecimal($importStatus.totalDupePayments, 12)$empty
+#end
+
+######################### Change records section #########################
+#set($numberNonGoodChangeRecords = $importStatus.numberBadChangeRecords + $importStatus.numberNoMatchChangeRecords)
+#set($numberTotalChangeRecords = $numberNonGoodChangeRecords + $importStatus.numberGoodChangeRecords)
+#if($numberNonGoodChangeRecords == 0)
+#if($importStatus.numberGoodChangeRecords == 0)
+There are no change records in this Lockbox file.
+#end
+#if($importStatus.numberGoodChangeRecords == 1)
+SCRD read the one Lockbox change record.
+#end
+#if($importStatus.numberGoodChangeRecords > 1)
+SCRD read all $numberTotalChangeRecords Lockbox change records.
+#end
+#else
+#if($importStatus.numberGoodChangeRecords == 0)
+ALL $numberTotalChangeRecords LOCKBOX ADDRESS CHANGE RECORDS ARE CORRUPT.
+#else
+$numberNonGoodChangeRecords out of $numberTotalChangeRecords Lockbox Change records are corrupt.
+#end
+Either the data format was bad or the CSD & Birth Date did not match an account in the Service Credit database. They could be for Voluntary Contributions or Direct Pay Life Insurance.
+
+#leftPadNumber($numberNonGoodChangeRecords, 9) Bad Name or Address Changes
+#end
+
+######################### Details section #########################
+DETAILS:
+Audit Batch Log ID number is $importStatus.auditBatchId
+File Contents:
+ Number Type Description
+#if($importStatus.numberGoodAchPayments > 0)
+#leftPadNumber($importStatus.numberGoodAchPayments, 7) Good ACH Payments
+#end
+#if($importStatus.numberGoodCheckPayments > 0)
+#leftPadNumber($importStatus.numberGoodCheckPayments, 7) Good Check Payments
+#end
+#if($importStatus.numberGoodChangeRecords > 0)
+#leftPadNumber($importStatus.numberGoodChangeRecords, 7) Good Name or Address Changes
+#end
+#if($importStatus.numberGoodSummaryRecords > 0)
+#leftPadNumber($importStatus.numberGoodSummaryRecords, 7) Good Summary Records
+#end
+#if($importStatus.numberDupeAchPayments > 0)
+#leftPadNumber($importStatus.numberDupeAchPayments, 7) Dupe ACH Payments
+#end
+#if($importStatus.numberDupeCheckPayments > 0)
+#leftPadNumber($importStatus.numberDupeCheckPayments, 7) Dupe Check Payments
+#end
+#if($importStatus.numberBadAchPayments > 0)
+#leftPadNumber($importStatus.numberBadAchPayments, 7) Bad  ACH Payments
+#end
+#if($importStatus.numberBadCheckPayments > 0)
+#leftPadNumber($importStatus.numberBadCheckPayments, 7) Bad  Check Payments
+#end
+#if($importStatus.numberBadChangeRecords > 0)
+#leftPadNumber($importStatus.numberBadChangeRecords, 7) Bad  Name or Address Changes
+#end
+#if($importStatus.numberNoMatchChangeRecords > 0)
+#leftPadNumber($importStatus.numberNoMatchChangeRecords, 7) No Match Changes
+#end
+#if($importStatus.numberBadSummaryRecords > 0)
+#leftPadNumber($importStatus.numberBadSummaryRecords, 7) Bad  Summary Records
+#end
+#if($importStatus.numberBadDataRecords > 0)
+#leftPadNumber($importStatus.numberBadDataRecords, 7) Bad  Data Records
+#end
+#if($importStatus.numberEOFMarkers > 0)
+#leftPadNumber($importStatus.numberEOFMarkers, 7) Good End-of-file markers
+#end
+====================================
+#leftPadNumber($importStatus.numberLinesInFile, 7) Total Lines in Lockbox File
+
+Lockbox File Name:
+$importStatus.inputName
+Backup File Name:
+$importStatus.outputName

@@ -1,0 +1,142 @@
+/*
+    Copyright 2014 OPM.gov
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+*/
+
+package gov.opm.scrd.entities.application;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import gov.opm.scrd.TestsHelper;
+import junit.framework.JUnit4TestAdapter;
+
+import org.junit.Before;
+import org.junit.Test;
+
+/**
+ * <p>
+ * Unit tests for {@link PaymentTransactionNote} class.
+ * </p>
+ *
+ * @author sparemax
+ * @version 1.0
+ * @since OPM - Data Migration - Entities Update Module Assembly 1.0
+ */
+public class PaymentTransactionNoteUnitTests {
+    /**
+     * <p>
+     * Represents the <code>PaymentTransactionNote</code> instance used in tests.
+     * </p>
+     */
+    private PaymentTransactionNote instance;
+
+    /**
+     * <p>
+     * Adapter for earlier versions of JUnit.
+     * </p>
+     *
+     * @return a test suite.
+     */
+    public static junit.framework.Test suite() {
+        return new JUnit4TestAdapter(PaymentTransactionNoteUnitTests.class);
+    }
+
+    /**
+     * <p>
+     * Sets up the unit tests.
+     * </p>
+     *
+     * @throws Exception
+     *             to JUnit.
+     */
+    @Before
+    public void setUp() throws Exception {
+        instance = new PaymentTransactionNote();
+    }
+
+    /**
+     * <p>
+     * Accuracy test for the constructor <code>PaymentTransactionNote()</code>.<br>
+     * Instance should be correctly created.
+     * </p>
+     */
+    @Test
+    public void testCtor() {
+        instance = new PaymentTransactionNote();
+
+        assertNull("'payTransactionKey' should be correct.", TestsHelper.getField(instance, "payTransactionKey"));
+        assertNull("'note' should be correct.", TestsHelper.getField(instance, "note"));
+    }
+
+
+    /**
+     * <p>
+     * Accuracy test for the method <code>getPayTransactionKey()</code>.<br>
+     * The value should be properly retrieved.
+     * </p>
+     */
+    @Test
+    public void test_getPayTransactionKey() {
+        Long value = 1L;
+        instance.setPayTransactionKey(value);
+
+        assertEquals("'getPayTransactionKey' should be correct.",
+            value, instance.getPayTransactionKey());
+    }
+
+    /**
+     * <p>
+     * Accuracy test for the method <code>setPayTransactionKey(Long payTransactionKey)</code>.<br>
+     * The value should be properly set.
+     * </p>
+     */
+    @Test
+    public void test_setPayTransactionKey() {
+        Long value = 1L;
+        instance.setPayTransactionKey(value);
+
+        assertEquals("'setPayTransactionKey' should be correct.",
+            value, TestsHelper.getField(instance, "payTransactionKey"));
+    }
+
+    /**
+     * <p>
+     * Accuracy test for the method <code>getNote()</code>.<br>
+     * The value should be properly retrieved.
+     * </p>
+     */
+    @Test
+    public void test_getNote() {
+        String value = "new_value";
+        instance.setNote(value);
+
+        assertEquals("'getNote' should be correct.",
+            value, instance.getNote());
+    }
+
+    /**
+     * <p>
+     * Accuracy test for the method <code>setNote(String note)</code>.<br>
+     * The value should be properly set.
+     * </p>
+     */
+    @Test
+    public void test_setNote() {
+        String value = "new_value";
+        instance.setNote(value);
+
+        assertEquals("'setNote' should be correct.",
+            value, TestsHelper.getField(instance, "note"));
+    }
+}

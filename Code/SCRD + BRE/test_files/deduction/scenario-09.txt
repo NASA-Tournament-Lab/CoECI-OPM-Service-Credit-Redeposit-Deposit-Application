@@ -1,0 +1,4 @@
+#beginDate, endDate, retirementType, periodType, appointmentType, serviceType, amount, payType, interestAccrualDate, connerCase
+ServicePeriod1=01/19/1986,02/28/1986,FERS,DEPOSIT,TEMPORARY,WAGE GRADE,9.79,HOURLY RATE,null,false
+ServicePeriod2=03/01/1986,03/14/1986,FERS,DEPOSIT,TEMPORARY,WAGE GRADE,9.79,HOURLY RATE,null,false
+ServicePeriod3=03/15/1986,09/15/1990,FERS,REDEPOSIT,CAREER,GS,564.97,REFUND,11/15/1991,false

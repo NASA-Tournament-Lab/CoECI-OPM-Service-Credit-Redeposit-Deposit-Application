@@ -1,0 +1,1114 @@
+2014-02-06 09:16:40,824 INFO  [bill_processor] Total Payment Records: 1
+2014-02-06 09:16:42,788 INFO  [bill_processor] Total Payment Records: 2
+2014-02-06 09:16:44,922 INFO  [bill_processor] Total Payment Records: 0
+2014-02-06 09:16:46,852 INFO  [bill_processor] Total Payment Records: 1
+2014-02-06 09:16:48,553 INFO  [bill_processor] Total Payment Records: 1
+2014-02-06 09:16:50,012 INFO  [bill_processor] Total Payment Records: 1
+2014-02-06 09:16:51,423 ERROR [bill_processor] 45Calculation Failure: gov.opm.scrd.mock.MockWaltRuleService calculating the new amount in the calculation engine.
+2014-02-06 09:16:51,429 INFO  [bill_processor] Total Payment Records: 1
+2014-02-06 09:16:52,801 INFO  [bill_processor] Total Payment Records: 1
+2014-02-06 09:16:54,136 INFO  [bill_processor] Total Payment Records: 1
+2014-02-06 09:16:55,446 INFO  [bill_processor] Total Payment Records: 1
+2014-02-06 09:16:56,826 INFO  [bill_processor] 49 Calculation Failure. calculating the new amount
+2014-02-06 09:16:56,833 INFO  [bill_processor] Total Payment Records: 1
+2014-02-06 09:16:58,038 INFO  [bill_processor] Total Payment Records: 1
+2014-02-06 09:16:59,269 INFO  [bill_processor] 51 processing an adjustment payment.
+2014-02-06 09:16:59,275 INFO  [bill_processor] Total Payment Records: 1
+2014-02-06 09:17:00,456 INFO  [bill_processor] 52 processing an adjustment payment.
+2014-02-06 09:17:00,462 INFO  [bill_processor] Total Payment Records: 1
+2014-02-06 09:17:01,702 ERROR [bill_processor] Error in method BillProcessorImpl.applyManualAdjustment java.lang.IllegalArgumentException: org.hibernate.hql.internal.ast.QuerySyntaxException: unexpected token: * near line 1, column 8 [select * from gov.opm.scrd.entities.application.Payment p where p.claimNumber = :claimNumber and p.transactionDate >= :startDate and p.transactionDate < :endDate]
+	at org.hibernate.jpa.spi.AbstractEntityManagerImpl.convert(AbstractEntityManagerImpl.java:1750)
+	at org.hibernate.jpa.spi.AbstractEntityManagerImpl.convert(AbstractEntityManagerImpl.java:1677)
+	at org.hibernate.jpa.spi.AbstractEntityManagerImpl.convert(AbstractEntityManagerImpl.java:1683)
+	at org.hibernate.jpa.spi.AbstractEntityManagerImpl.createQuery(AbstractEntityManagerImpl.java:350)
+	at sun.reflect.GeneratedMethodAccessor316.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.springframework.orm.jpa.ExtendedEntityManagerCreator$ExtendedEnti
+2014-02-06 09:17:01,702 INFO  [bill_processor] 53 processing an adjustment payment.
+2014-02-06 09:17:01,708 INFO  [bill_processor] Total Payment Records: 1
+2014-02-06 09:17:02,706 INFO  [bill_processor] Total Payment Records: 1
+2014-02-06 09:17:03,651 INFO  [bill_processor] Total Payment Records: 1
+2014-02-06 09:17:04,561 INFO  [bill_processor] Total Payment Records: 1
+2014-02-06 09:17:05,472 INFO  [bill_processor] Total Payment Records: 1
+2014-02-06 09:17:06,351 INFO  [bill_processor] Total Payment Records: 1
+2014-02-06 09:17:07,491 INFO  [bill_processor] Total Payment Records: 1
+2014-02-06 09:17:08,349 INFO  [bill_processor] Total Payment Records: 1
+2014-02-06 09:17:09,179 INFO  [bill_processor] Total Payment Records: 1
+2014-02-06 09:17:09,991 INFO  [bill_processor] Total Payment Records: 1
+2014-02-06 09:17:11,356 INFO  [bill_processor] Service Credit Batch started.
+2014-02-06 09:17:11,362 ERROR [bill_processor] User NotBatchUser is not allowed to run the batch service.
+gov.opm.scrd.services.AuthorizationException: Batch process user [NotBatchUser] is not found
+	at gov.opm.scrd.batchprocessing.jobs.BatchProcessingJob.doExecute(BatchProcessingJob.java:439)
+	at gov.opm.scrd.batchprocessing.jobs.BatchProcessingJob.execute(BatchProcessingJob.java:376)
+	at gov.opm.scrd.batchprocessing.jobs.BatchProcessingJobTests.testCase_BatchUserViolation(BatchProcessingJobTests.java:344)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:45)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:42)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:28)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestMethodCallbacks.evaluate(RunBeforeTestMethodCallbacks.java:74)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:30)
+	at org.springframework.test.context.junit4.statements.RunAfterTestMethodCallbacks.evaluate(RunAfterTestMethodCallbacks.java:83)
+	at org.springframework.test.context.junit4.statements.SpringRepeat.evaluate(SpringRepeat.java:72)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:231)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:88)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:28)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:30)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:71)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:174)
+	at junit.framework.JUnit4TestAdapter.run(JUnit4TestAdapter.java:39)
+	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+	at junit.framework.TestSuite.run(TestSuite.java:238)
+	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner.run(JUnitTestRunner.java:518)
+	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner.launch(JUnitTestRunner.java:1052)
+	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner.main(JUnitTestRunner.java:906)
+2014-02-06 09:17:11,363 INFO  [bill_processor] Send email to general@opm.gov, subject = [Service Credit User Violation]. Message:
+Service Credit Batch started at 9:17:11 AM CST on February 6, 2014. Batch done at 9:17:11 AM CST.
+
+User NotBatchUser is not allowed to run the batch service. He does not exist. This is a serious configuration error. Call the Program Manager or DBA. 
+2014-02-06 09:17:11,443 WARN  [bill_processor] Service Credit Batch has retried max 0 times today. The batch process will exit unsuccessfully.
+2014-02-06 09:17:11,640 INFO  [bill_processor] Service Credit Batch started.
+2014-02-06 09:17:11,661 INFO  [bill_processor] Is today holiday : false
+2014-02-06 09:17:11,662 ERROR [bill_processor] Can not read folder: test_files/lockbox_files
+2014-02-06 09:17:11,662 INFO  [bill_processor] Send email to general@opm.gov, subject = [SERVICE CREDIT BATCH CANNOT ACCESS NETWORK]. Message:
+Service Credit Batch started at 9:17:11 AM CST on February 6, 2014. Batch done at 9:17:11 AM CST.
+
+THE NETWORK IS DOWN! 
+Network Services not Available for Service Credit. Cannot access the test_files/lockbox_files network folder. Please ask the Help Desk to investigate. SERVICE CREDIT IS SHUT DOWN UNTIL THIS ERROR IS FIXED! 
+2014-02-06 09:17:11,667 WARN  [bill_processor] Service Credit Batch has retried max 0 times today. The batch process will exit unsuccessfully.
+2014-02-06 09:17:11,825 INFO  [bill_processor] Service Credit Batch started.
+2014-02-06 09:17:11,833 INFO  [bill_processor] Is today holiday : false
+2014-02-06 09:17:11,834 ERROR [bill_processor] No files arrived today in: test_files/lockbox_files
+2014-02-06 09:17:11,834 INFO  [bill_processor] Send email to general@opm.gov, subject = [SERVICE CREDIT LOCKBOX FILE IS LATE!]. Message:
+Service Credit Batch started at 9:17:11 AM CST on February 6, 2014. Batch done at 9:17:11 AM CST.
+
+Today's Lockbox Bank File has not arrived. Please notify Production Control and BSG that the data file is not in the test_files/lockbox_files network share. The nightly batch process is scheduled to run at 9:17:11 AM CST and today's import should run before that time. 
+2014-02-06 09:17:11,845 WARN  [bill_processor] Service Credit Batch has retried max 0 times today. The batch process will exit unsuccessfully.
+2014-02-06 09:17:12,004 INFO  [bill_processor] Service Credit Batch started.
+2014-02-06 09:17:12,010 INFO  [bill_processor] Is today holiday : true
+2014-02-06 09:17:12,012 INFO  [bill_processor] Start importing files in: test_files/lockbox_files
+2014-02-06 09:17:12,012 INFO  [bill_processor] Start loading file content from: test_files/lockbox_files/lockbox_file_1.txt
+2014-02-06 09:17:12,013 INFO  [bill_processor] 0 lines loaded from lockbox_file_1.txt which is backup to Dupe_SC020514_65.txt
+2014-02-06 09:17:12,013 INFO  [bill_processor] End loading file content from: test_files/lockbox_files/lockbox_file_1.txt
+2014-02-06 09:17:12,013 INFO  [bill_processor] 
+Service Credit imported a data file from the bank lockbox on February 6, 2014 at 9:17:12 AM CST.
+Lockbox data imported into the dbName database on server dbHostName from computer batchProcessHostName.
+
+# Lines in file = 0
+# Duplicate Lines = 0
+
+# Records Processed = 0
+# Check Payments = 0
+# Good Check Payments = 0
+# Bad Check Payments = 0
+# Dupe Check Payments = 0
+# ACH Payments = 0
+# Good ACH Payments = 0
+# Bad ACH Payments = 0
+# Dupe ACH Payments = 0
+# Bad Change Records = 0
+# Good Change Records = 0
+# No Match Change Records = 0
+# Invalid Summary Records = 0
+# Valid Summary Records = 0
+# Successful Transactions = 0
+# Failed Transactions = 0
+# Invalid Lines = 0
+
+Total Check Payments = 0
+Total ACH Payments = 0
+Total of Accepted Payments = 0
+Total in File = 0
+
+No bad records in this batch.
+0 = number of successful calls to the ProcessImportRecord function.
+
+         Accepted Payments: 0
+       Unresolved Payments: 0
+        Suspended Payments: 0
+-----------------------------------
+Pending payments processed: 0
+
+2014-02-06 09:17:12,074 INFO  [bill_processor] Send email to general@opm.gov, subject = [Service Credit Import: OK ]. Message:
+Service Credit Batch started at 9:17:12 AM CST on February 2, 2014. Batch done at 9:17:12 AM CST.
+
+SUMMARY: The file import was successful.
+
+   Number Type         Total
+        0 ACH           0.00
+        0 Check         0.00
+============================
+        0 All           0.00
+
+
+
+SCRD found no payment records in this Lockbox file.
+
+
+There are no change records in this Lockbox file.
+
+DETAILS:
+Audit Batch Log ID number is 65
+File Contents:
+ Number Type Description
+====================================
+      0 Total Lines in Lockbox File
+
+Lockbox File Name:
+lockbox_file_1.txt
+Backup File Name:
+Dupe_SC020514_65.txt
+
+2014-02-06 09:17:12,079 INFO  [bill_processor] End importing files in: test_files/lockbox_files
+2014-02-06 09:17:12,079 INFO  [bill_processor] Start cleaning old files in: test_files/old_files
+2014-02-06 09:17:12,080 INFO  [bill_processor] Old files cleaned: 1
+2014-02-06 09:17:12,080 INFO  [bill_processor] End cleaning old files in: test_files/old_files
+2014-02-06 09:17:12,080 INFO  [bill_processor] Service Credit Batch finished successfully.
+2014-02-06 09:17:12,229 INFO  [bill_processor] Service Credit Batch started.
+2014-02-06 09:17:12,234 INFO  [bill_processor] Is today holiday : true
+2014-02-06 09:17:12,236 INFO  [bill_processor] Start importing files in: test_files/lockbox_files
+2014-02-06 09:17:12,237 INFO  [bill_processor] Start loading file content from: test_files/lockbox_files/lockbox_file_1.txt
+2014-02-06 09:17:12,237 INFO  [bill_processor] 0 lines loaded from lockbox_file_1.txt which is backup to Dupe_SC020514_66.txt
+2014-02-06 09:17:12,237 INFO  [bill_processor] End loading file content from: test_files/lockbox_files/lockbox_file_1.txt
+2014-02-06 09:17:12,237 INFO  [bill_processor] 
+Service Credit imported a data file from the bank lockbox on February 6, 2014 at 9:17:12 AM CST.
+Lockbox data imported into the dbName database on server dbHostName from computer batchProcessHostName.
+
+# Lines in file = 0
+# Duplicate Lines = 0
+
+# Records Processed = 0
+# Check Payments = 0
+# Good Check Payments = 0
+# Bad Check Payments = 0
+# Dupe Check Payments = 0
+# ACH Payments = 0
+# Good ACH Payments = 0
+# Bad ACH Payments = 0
+# Dupe ACH Payments = 0
+# Bad Change Records = 0
+# Good Change Records = 0
+# No Match Change Records = 0
+# Invalid Summary Records = 0
+# Valid Summary Records = 0
+# Successful Transactions = 0
+# Failed Transactions = 0
+# Invalid Lines = 0
+
+Total Check Payments = 0
+Total ACH Payments = 0
+Total of Accepted Payments = 0
+Total in File = 0
+
+No bad records in this batch.
+0 = number of successful calls to the ProcessImportRecord function.
+
+         Accepted Payments: 0
+       Unresolved Payments: 0
+        Suspended Payments: 0
+-----------------------------------
+Pending payments processed: 0
+
+2014-02-06 09:17:12,258 INFO  [bill_processor] Send email to general@opm.gov, subject = [Service Credit Import: OK ]. Message:
+Service Credit Batch started at 9:17:12 AM CST on February 2, 2014. Batch done at 9:17:12 AM CST.
+
+SUMMARY: The file import was successful.
+
+   Number Type         Total
+        0 ACH           0.00
+        0 Check         0.00
+============================
+        0 All           0.00
+
+
+
+SCRD found no payment records in this Lockbox file.
+
+
+There are no change records in this Lockbox file.
+
+DETAILS:
+Audit Batch Log ID number is 66
+File Contents:
+ Number Type Description
+====================================
+      0 Total Lines in Lockbox File
+
+Lockbox File Name:
+lockbox_file_1.txt
+Backup File Name:
+Dupe_SC020514_66.txt
+
+2014-02-06 09:17:12,269 INFO  [bill_processor] End importing files in: test_files/lockbox_files
+2014-02-06 09:17:12,269 INFO  [bill_processor] Start cleaning old files in: test_files/old_files
+2014-02-06 09:17:12,270 INFO  [bill_processor] Old files cleaned: 0
+2014-02-06 09:17:12,270 INFO  [bill_processor] End cleaning old files in: test_files/old_files
+2014-02-06 09:17:12,270 INFO  [bill_processor] Service Credit Batch finished successfully.
+2014-02-06 09:17:12,428 INFO  [bill_processor] Service Credit Batch started.
+2014-02-06 09:17:12,434 INFO  [bill_processor] Is today holiday : true
+2014-02-06 09:17:12,436 INFO  [bill_processor] Start importing files in: test_files/lockbox_files
+2014-02-06 09:17:12,436 INFO  [bill_processor] Start loading file content from: test_files/lockbox_files/lockbox_file_1.txt
+2014-02-06 09:17:12,441 INFO  [bill_processor] 1 lines loaded from lockbox_file_1.txt which is backup to Backup_SC020514_67.txt
+2014-02-06 09:17:12,441 INFO  [bill_processor] End loading file content from: test_files/lockbox_files/lockbox_file_1.txt
+2014-02-06 09:17:12,441 INFO  [bill_processor] Start processing MainframeImport data from: test_files/lockbox_files/lockbox_file_1.txt
+2014-02-06 09:17:12,442 ERROR [bill_processor] Error importing the record from the MainframeImport table in processImportRecord module: NOT_A_RECORD. Text Line is not a valid Transaction Format [CLAIM_NO_MUST_BE_7_DIGITS]: Bad line
+2014-02-06 09:17:12,446 INFO  [bill_processor] End processing MainframeImport data from: test_files/lockbox_files/lockbox_file_1.txt
+2014-02-06 09:17:12,446 INFO  [bill_processor] Start collating new mainframe payments from: test_files/lockbox_files/lockbox_file_1.txt
+2014-02-06 09:17:12,450 INFO  [bill_processor] End collating new mainframe payments from: test_files/lockbox_files/lockbox_file_1.txt
+2014-02-06 09:17:12,450 INFO  [bill_processor] 
+Service Credit imported a data file from the bank lockbox on February 6, 2014 at 9:17:12 AM CST.
+Lockbox data imported into the dbName database on server dbHostName from computer batchProcessHostName.
+
+# Lines in file = 1
+# New Lines = 1
+# Duplicate Lines = 0
+
+# Records Processed = 1
+# Check Payments = 0
+# Good Check Payments = 0
+# Bad Check Payments = 0
+# Dupe Check Payments = 0
+# ACH Payments = 0
+# Good ACH Payments = 0
+# Bad ACH Payments = 0
+# Dupe ACH Payments = 0
+# Bad Change Records = 0
+# Good Change Records = 0
+# No Match Change Records = 0
+# Invalid Summary Records = 0
+# Valid Summary Records = 0
+# Successful Transactions = 0
+# Failed Transactions = 0
+# Invalid Lines = 1
+
+Total Check Payments = 0
+Total ACH Payments = 0
+Total of Accepted Payments = 0
+Total in File = 0
+
+ERROR: 1 RECORDS FAILED PROCESSING.
+0 = number of successful calls to the ProcessImportRecord function.
+
+         Accepted Payments: 0
+       Unresolved Payments: 0
+        Suspended Payments: 0
+-----------------------------------
+Pending payments processed: 0
+
+2014-02-06 09:17:12,475 INFO  [bill_processor] Send email to general@opm.gov, subject = [Service Credit Import: BATCH IMPORT ERROR ]. Message:
+Service Credit Batch started at 9:17:12 AM CST on February 2, 2014. Batch done at 9:17:12 AM CST.
+
+SUMMARY: THE FILE IMPORT HAD ERRORS. PLEASE CHECK THE 'Lockbox Import Errors' REPORT IN THE SERVICE CREDIT APPLICATION FOR DETAILS. THE ERROR INVOLVES PAYMENTS SO IT MUST BE FIXED AS SOON AS POSSIBLE.
+
+   Number Type         Total
+        0 ACH           0.00
+        0 Check         0.00
+============================
+        0 All           0.00
+
+
+        1 BAD DATA RECORDS
+
+     0.00 = total of the money amounts in the summary (checksum) records
+     0.00 = total of the money amounts in the transaction records
+     0.00 = DISCREPANCY
+
+The bank's file checksum matched the total imported into Service Credit. Total = 0.00.
+
+SCRD COULD NOT READ ANY PAYMENT RECORDS IN THIS LOCKBOX FILE. THEY ARE ALL BAD.
+
+
+There are no change records in this Lockbox file.
+
+DETAILS:
+Audit Batch Log ID number is 67
+File Contents:
+ Number Type Description
+      1 Bad  Data Records
+====================================
+      1 Total Lines in Lockbox File
+
+Lockbox File Name:
+lockbox_file_1.txt
+Backup File Name:
+Backup_SC020514_67.txt
+
+2014-02-06 09:17:12,481 INFO  [bill_processor] End importing files in: test_files/lockbox_files
+2014-02-06 09:17:12,481 INFO  [bill_processor] Start cleaning old files in: test_files/old_files
+2014-02-06 09:17:12,481 INFO  [bill_processor] Old files cleaned: 0
+2014-02-06 09:17:12,481 INFO  [bill_processor] End cleaning old files in: test_files/old_files
+2014-02-06 09:17:12,481 INFO  [bill_processor] Service Credit Batch finished successfully.
+2014-02-06 09:17:12,696 INFO  [bill_processor] Service Credit Batch started.
+2014-02-06 09:17:12,702 INFO  [bill_processor] Is today holiday : true
+2014-02-06 09:17:12,704 INFO  [bill_processor] Start importing files in: test_files/lockbox_files
+2014-02-06 09:17:12,704 INFO  [bill_processor] Start loading file content from: test_files/lockbox_files/lockbox_file_1.txt
+2014-02-06 09:17:12,706 INFO  [bill_processor] 1 lines loaded from lockbox_file_1.txt which is backup to Backup_SC020514_68.txt
+2014-02-06 09:17:12,706 INFO  [bill_processor] End loading file content from: test_files/lockbox_files/lockbox_file_1.txt
+2014-02-06 09:17:12,706 INFO  [bill_processor] Start processing MainframeImport data from: test_files/lockbox_files/lockbox_file_1.txt
+2014-02-06 09:17:12,706 ERROR [bill_processor] Error importing the record from the MainframeImport table in processImportRecord module: BAD_R_TRANSACTION. Text Line is not a valid Transaction Format [DOB_MUST_BE_VALID]: R64445566 bad R line
+2014-02-06 09:17:12,709 INFO  [bill_processor] End processing MainframeImport data from: test_files/lockbox_files/lockbox_file_1.txt
+2014-02-06 09:17:12,709 INFO  [bill_processor] Start collating new mainframe payments from: test_files/lockbox_files/lockbox_file_1.txt
+2014-02-06 09:17:12,710 INFO  [bill_processor] End collating new mainframe payments from: test_files/lockbox_files/lockbox_file_1.txt
+2014-02-06 09:17:12,710 INFO  [bill_processor] 
+Service Credit imported a data file from the bank lockbox on February 6, 2014 at 9:17:12 AM CST.
+Lockbox data imported into the dbName database on server dbHostName from computer batchProcessHostName.
+
+# Lines in file = 1
+# New Lines = 1
+# Duplicate Lines = 0
+
+# Records Processed = 1
+# Check Payments = 1
+# Good Check Payments = 0
+# Bad Check Payments = 1
+# Dupe Check Payments = 0
+# ACH Payments = 0
+# Good ACH Payments = 0
+# Bad ACH Payments = 0
+# Dupe ACH Payments = 0
+# Bad Change Records = 0
+# Good Change Records = 0
+# No Match Change Records = 0
+# Invalid Summary Records = 0
+# Valid Summary Records = 0
+# Successful Transactions = 0
+# Failed Transactions = 1
+# Invalid Lines = 0
+
+Total Check Payments = 0
+Total ACH Payments = 0
+Total of Accepted Payments = 0
+Total in File = 0
+
+ERROR: 1 RECORDS FAILED PROCESSING.
+ERROR: 1 TRANSACTIONS COULD NOT BE READ INTO THE DATABASE!
+0 = number of successful calls to the ProcessImportRecord function.
+1 NUMBER OF FAILED CALLS TO THE PROCESSIMPORTRECORD FUNCTION!
+
+         Accepted Payments: 0
+       Unresolved Payments: 0
+        Suspended Payments: 0
+-----------------------------------
+Pending payments processed: 0
+
+2014-02-06 09:17:12,732 INFO  [bill_processor] Send email to general@opm.gov, subject = [Service Credit Import: PAYMENT ERROR ]. Message:
+Service Credit Batch started at 9:17:12 AM CST on February 2, 2014. Batch done at 9:17:12 AM CST.
+
+SUMMARY: THE FILE IMPORT HAD ERRORS. PLEASE CHECK THE 'Lockbox Import Errors' REPORT IN THE SERVICE CREDIT APPLICATION FOR DETAILS. THE ERROR INVOLVES PAYMENTS SO IT MUST BE FIXED AS SOON AS POSSIBLE.
+
+   Number Type         Total
+        0 ACH           0.00
+        0 Check         0.00
+============================
+        0 All           0.00
+
+
+        1 BAD CHECK PAYMENTS
+
+     0.00 = total of the money amounts in the summary (checksum) records
+     0.00 = total of the money amounts in the transaction records
+     0.00 = DISCREPANCY
+
+The bank's file checksum matched the total imported into Service Credit. Total = 0.00.
+
+SCRD COULD NOT READ ANY PAYMENT RECORDS IN THIS LOCKBOX FILE. THEY ARE ALL BAD.
+
+
+There are no change records in this Lockbox file.
+
+DETAILS:
+Audit Batch Log ID number is 68
+File Contents:
+ Number Type Description
+      1 Bad  Check Payments
+====================================
+      1 Total Lines in Lockbox File
+
+Lockbox File Name:
+lockbox_file_1.txt
+Backup File Name:
+Backup_SC020514_68.txt
+
+2014-02-06 09:17:12,738 INFO  [bill_processor] End importing files in: test_files/lockbox_files
+2014-02-06 09:17:12,738 INFO  [bill_processor] Start cleaning old files in: test_files/old_files
+2014-02-06 09:17:12,738 INFO  [bill_processor] Old files cleaned: 0
+2014-02-06 09:17:12,738 INFO  [bill_processor] End cleaning old files in: test_files/old_files
+2014-02-06 09:17:12,738 INFO  [bill_processor] Service Credit Batch finished successfully.
+2014-02-06 09:17:12,911 INFO  [bill_processor] Service Credit Batch started.
+2014-02-06 09:17:12,917 INFO  [bill_processor] Is today holiday : true
+2014-02-06 09:17:12,919 INFO  [bill_processor] Start importing files in: test_files/lockbox_files
+2014-02-06 09:17:12,919 INFO  [bill_processor] Start loading file content from: test_files/lockbox_files/lockbox_file_1.txt
+2014-02-06 09:17:12,921 INFO  [bill_processor] 1 lines loaded from lockbox_file_1.txt which is backup to Backup_SC020514_69.txt
+2014-02-06 09:17:12,921 INFO  [bill_processor] End loading file content from: test_files/lockbox_files/lockbox_file_1.txt
+2014-02-06 09:17:12,921 INFO  [bill_processor] Start processing MainframeImport data from: test_files/lockbox_files/lockbox_file_1.txt
+2014-02-06 09:17:12,921 ERROR [bill_processor] Error importing the record from the MainframeImport table in processImportRecord module: BAD_C_TRANSACTION. Text Line is not a valid Transaction Format [DOB_MUST_BE_VALID]: C64445566 bad C line
+2014-02-06 09:17:12,924 INFO  [bill_processor] End processing MainframeImport data from: test_files/lockbox_files/lockbox_file_1.txt
+2014-02-06 09:17:12,924 INFO  [bill_processor] Start collating new mainframe payments from: test_files/lockbox_files/lockbox_file_1.txt
+2014-02-06 09:17:12,925 INFO  [bill_processor] End collating new mainframe payments from: test_files/lockbox_files/lockbox_file_1.txt
+2014-02-06 09:17:12,925 INFO  [bill_processor] 
+Service Credit imported a data file from the bank lockbox on February 6, 2014 at 9:17:12 AM CST.
+Lockbox data imported into the dbName database on server dbHostName from computer batchProcessHostName.
+
+# Lines in file = 1
+# New Lines = 1
+# Duplicate Lines = 0
+
+# Records Processed = 1
+# Check Payments = 0
+# Good Check Payments = 0
+# Bad Check Payments = 0
+# Dupe Check Payments = 0
+# ACH Payments = 0
+# Good ACH Payments = 0
+# Bad ACH Payments = 0
+# Dupe ACH Payments = 0
+# Bad Change Records = 1
+# Good Change Records = 0
+# No Match Change Records = 0
+# Invalid Summary Records = 0
+# Valid Summary Records = 0
+# Successful Transactions = 0
+# Failed Transactions = 1
+# Invalid Lines = 0
+
+Total Check Payments = 0
+Total ACH Payments = 0
+Total of Accepted Payments = 0
+Total in File = 0
+
+ERROR: 1 RECORDS FAILED PROCESSING.
+ERROR: 1 TRANSACTIONS COULD NOT BE READ INTO THE DATABASE!
+0 = number of successful calls to the ProcessImportRecord function.
+1 NUMBER OF FAILED CALLS TO THE PROCESSIMPORTRECORD FUNCTION!
+
+         Accepted Payments: 0
+       Unresolved Payments: 0
+        Suspended Payments: 0
+-----------------------------------
+Pending payments processed: 0
+
+2014-02-06 09:17:12,944 INFO  [bill_processor] Send email to general@opm.gov, subject = [Service Credit Import: OK except for Change record rejected. ]. Message:
+Service Credit Batch started at 9:17:12 AM CST on February 2, 2014. Batch done at 9:17:12 AM CST.
+
+SUMMARY: The file import was successful.
+
+   Number Type         Total
+        0 ACH           0.00
+        0 Check         0.00
+============================
+        0 All           0.00
+
+
+
+SCRD found no payment records in this Lockbox file.
+
+
+ALL 1 LOCKBOX ADDRESS CHANGE RECORDS ARE CORRUPT.
+Either the data format was bad or the CSD & Birth Date did not match an account in the Service Credit database. They could be for Voluntary Contributions or Direct Pay Life Insurance.
+
+        1 Bad Name or Address Changes
+
+DETAILS:
+Audit Batch Log ID number is 69
+File Contents:
+ Number Type Description
+      1 Bad  Name or Address Changes
+====================================
+      1 Total Lines in Lockbox File
+
+Lockbox File Name:
+lockbox_file_1.txt
+Backup File Name:
+Backup_SC020514_69.txt
+
+2014-02-06 09:17:12,952 INFO  [bill_processor] End importing files in: test_files/lockbox_files
+2014-02-06 09:17:12,952 INFO  [bill_processor] Start cleaning old files in: test_files/old_files
+2014-02-06 09:17:12,952 INFO  [bill_processor] Old files cleaned: 0
+2014-02-06 09:17:12,952 INFO  [bill_processor] End cleaning old files in: test_files/old_files
+2014-02-06 09:17:12,952 INFO  [bill_processor] Service Credit Batch finished successfully.
+2014-02-06 09:17:13,141 INFO  [bill_processor] Service Credit Batch started.
+2014-02-06 09:17:13,147 INFO  [bill_processor] Is today holiday : true
+2014-02-06 09:17:13,149 INFO  [bill_processor] Start importing files in: test_files/lockbox_files
+2014-02-06 09:17:13,149 INFO  [bill_processor] Start loading file content from: test_files/lockbox_files/lockbox_file_1.txt
+2014-02-06 09:17:13,151 INFO  [bill_processor] 1 lines loaded from lockbox_file_1.txt which is backup to Backup_SC020514_70.txt
+2014-02-06 09:17:13,151 INFO  [bill_processor] End loading file content from: test_files/lockbox_files/lockbox_file_1.txt
+2014-02-06 09:17:13,151 INFO  [bill_processor] Start processing MainframeImport data from: test_files/lockbox_files/lockbox_file_1.txt
+2014-02-06 09:17:13,151 ERROR [bill_processor] Error extracting the R Transaction check sum from the bank input file. The transaction record did not have a number in the the expected position: R ZZZ bad Summary line
+java.lang.NumberFormatException
+	at java.math.BigDecimal.<init>(BigDecimal.java:459)
+	at java.math.BigDecimal.<init>(BigDecimal.java:728)
+	at gov.opm.scrd.batchprocessing.jobs.BatchProcessingJob.extractSummaryRecord(BatchProcessingJob.java:1019)
+	at gov.opm.scrd.batchprocessing.jobs.BatchProcessingJob.processMainframeData(BatchProcessingJob.java:939)
+	at gov.opm.scrd.batchprocessing.jobs.BatchProcessingJob.importFile(BatchProcessingJob.java:731)
+	at gov.opm.scrd.batchprocessing.jobs.BatchProcessingJob.importFiles(BatchProcessingJob.java:702)
+	at gov.opm.scrd.batchprocessing.jobs.BatchProcessingJob.doExecute(BatchProcessingJob.java:479)
+	at gov.opm.scrd.batchprocessing.jobs.BatchProcessingJob.execute(BatchProcessingJob.java:376)
+	at gov.opm.scrd.batchprocessing.jobs.BatchProcessingJobTests.testCase_ImportFile_BadSummaryLine(BatchProcessingJobTests.java:539)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:45)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:42)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:28)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestMethodCallbacks.evaluate(RunBeforeTestMethodCallbacks.java:74)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:30)
+	at org.springframework.test.context.junit4.statements.RunAfterTestMethodCallbacks.evaluate(RunAfterTestMethodCallbacks.java:83)
+	at org.springframework.test.context.junit4.statements.SpringRepeat.evaluate(SpringRepeat.java:72)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:231)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:88)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:28)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:30)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:71)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:174)
+	at junit.framework.JUnit4TestAdapter.run(JUnit4TestAdapter.java:39)
+	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+	at junit.framework.TestSuite.run(TestSuite.java:238)
+	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner.run(JUnitTestRunner.java:518)
+	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner.launch(JUnitTestRunner.java:1052)
+	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner.main(JUnitTestRunner.java:906)
+2014-02-06 09:17:13,155 INFO  [bill_processor] End processing MainframeImport data from: test_files/lockbox_files/lockbox_file_1.txt
+2014-02-06 09:17:13,155 INFO  [bill_processor] Start collating new mainframe payments from: test_files/lockbox_files/lockbox_file_1.txt
+2014-02-06 09:17:13,156 INFO  [bill_processor] End collating new mainframe payments from: test_files/lockbox_files/lockbox_file_1.txt
+2014-02-06 09:17:13,156 INFO  [bill_processor] 
+Service Credit imported a data file from the bank lockbox on February 6, 2014 at 9:17:13 AM CST.
+Lockbox data imported into the dbName database on server dbHostName from computer batchProcessHostName.
+
+# Lines in file = 1
+# New Lines = 1
+# Duplicate Lines = 0
+
+# Records Processed = 1
+# Check Payments = 0
+# Good Check Payments = 0
+# Bad Check Payments = 0
+# Dupe Check Payments = 0
+# ACH Payments = 0
+# Good ACH Payments = 0
+# Bad ACH Payments = 0
+# Dupe ACH Payments = 0
+# Bad Change Records = 0
+# Good Change Records = 0
+# No Match Change Records = 0
+# Invalid Summary Records = 1
+# Valid Summary Records = 0
+# Successful Transactions = 0
+# Failed Transactions = 0
+# Invalid Lines = 0
+
+Total Check Payments = 0
+Total ACH Payments = 0
+Total of Accepted Payments = 0
+Total in File = 0
+
+ERROR: 1 RECORDS FAILED PROCESSING.
+ERROR: 1 CHECKSUMS COULD NOT BE PROCESSED!
+0 = number of successful calls to the ProcessImportRecord function.
+
+         Accepted Payments: 0
+       Unresolved Payments: 0
+        Suspended Payments: 0
+-----------------------------------
+Pending payments processed: 0
+
+2014-02-06 09:17:13,169 INFO  [bill_processor] Send email to general@opm.gov, subject = [Service Credit Import: PAYMENT ERROR ]. Message:
+Service Credit Batch started at 9:17:13 AM CST on February 2, 2014. Batch done at 9:17:13 AM CST.
+
+SUMMARY: THE FILE IMPORT HAD ERRORS. PLEASE CHECK THE 'Lockbox Import Errors' REPORT IN THE SERVICE CREDIT APPLICATION FOR DETAILS. THE ERROR INVOLVES PAYMENTS SO IT MUST BE FIXED AS SOON AS POSSIBLE.
+
+   Number Type         Total
+        0 ACH           0.00
+        0 Check         0.00
+============================
+        0 All           0.00
+
+
+        1 BAD SUMMARY RECORDS
+
+     0.00 = total of the money amounts in the summary (checksum) records
+     0.00 = total of the money amounts in the transaction records
+     0.00 = DISCREPANCY
+
+The bank's file checksum matched the total imported into Service Credit. Total = 0.00.
+
+SCRD COULD NOT READ ANY PAYMENT RECORDS IN THIS LOCKBOX FILE. THEY ARE ALL BAD.
+
+
+There are no change records in this Lockbox file.
+
+DETAILS:
+Audit Batch Log ID number is 70
+File Contents:
+ Number Type Description
+      1 Bad  Summary Records
+====================================
+      1 Total Lines in Lockbox File
+
+Lockbox File Name:
+lockbox_file_1.txt
+Backup File Name:
+Backup_SC020514_70.txt
+
+2014-02-06 09:17:13,178 INFO  [bill_processor] End importing files in: test_files/lockbox_files
+2014-02-06 09:17:13,178 INFO  [bill_processor] Start cleaning old files in: test_files/old_files
+2014-02-06 09:17:13,178 INFO  [bill_processor] Old files cleaned: 0
+2014-02-06 09:17:13,178 INFO  [bill_processor] End cleaning old files in: test_files/old_files
+2014-02-06 09:17:13,178 INFO  [bill_processor] Service Credit Batch finished successfully.
+2014-02-06 09:17:13,431 INFO  [bill_processor] Service Credit Batch started.
+2014-02-06 09:17:13,436 INFO  [bill_processor] Is today holiday : true
+2014-02-06 09:17:13,438 INFO  [bill_processor] Start importing files in: test_files/lockbox_files
+2014-02-06 09:17:13,439 INFO  [bill_processor] Start loading file content from: test_files/lockbox_files/lockbox_file_1.txt
+2014-02-06 09:17:13,451 WARN  [bill_processor] Weird character is: [ ]
+2014-02-06 09:17:13,451 INFO  [bill_processor] 7 lines loaded from lockbox_file_1.txt which is backup to Backup_SC020514_71.txt
+2014-02-06 09:17:13,451 INFO  [bill_processor] End loading file content from: test_files/lockbox_files/lockbox_file_1.txt
+2014-02-06 09:17:13,451 INFO  [bill_processor] Start processing MainframeImport data from: test_files/lockbox_files/lockbox_file_1.txt
+2014-02-06 09:17:13,465 INFO  [bill_processor] VALID_C_TRANSACTION: 	C 01      1112233031277  Mark I. Jason, III
+2014-02-06 09:17:13,472 INFO  [bill_processor] VALID_C_TRANSACTION: 	C 02      1112233031277  Chizago, IL 12345-1234
+2014-02-06 09:17:13,476 INFO  [bill_processor] VALID_C_TRANSACTION: 	C 10      1112233031277  new_ssn
+2014-02-06 09:17:13,481 INFO  [bill_processor] SUM_R_VALID: 	R ZZZ     ZZZZZZZ0000012311    
+2014-02-06 09:17:13,485 INFO  [bill_processor] VALID_R_TRANSACTION: 	R64445566 11122330312770008900020314 0    
+2014-02-06 09:17:13,488 INFO  [bill_processor] VALID_R_TRANSACTION: 	R67778899 11122330312770003412020214 1    
+2014-02-06 09:17:13,490 INFO  [bill_processor] End processing MainframeImport data from: test_files/lockbox_files/lockbox_file_1.txt
+2014-02-06 09:17:13,490 INFO  [bill_processor] Start collating new mainframe payments from: test_files/lockbox_files/lockbox_file_1.txt
+2014-02-06 09:17:13,498 INFO  [bill_processor] End collating new mainframe payments from: test_files/lockbox_files/lockbox_file_1.txt
+2014-02-06 09:17:13,498 INFO  [bill_processor] 
+Service Credit imported a data file from the bank lockbox on February 6, 2014 at 9:17:13 AM CST.
+Lockbox data imported into the dbName database on server dbHostName from computer batchProcessHostName.
+
+# Lines in file = 7
+# New Lines = 7
+# Duplicate Lines = 0
+
+# Records Processed = 6
+# Check Payments = 1
+# Good Check Payments = 1
+# Bad Check Payments = 0
+# Dupe Check Payments = 0
+# ACH Payments = 1
+# Good ACH Payments = 1
+# Bad ACH Payments = 0
+# Dupe ACH Payments = 0
+# Bad Change Records = 0
+# Good Change Records = 3
+# No Match Change Records = 0
+# Invalid Summary Records = 0
+# Valid Summary Records = 1
+# Successful Transactions = 5
+# Failed Transactions = 0
+# Invalid Lines = 0
+
+Total Check Payments = 89
+Total ACH Payments = 34.12
+Total of Accepted Payments = 123.12
+Total in File Summary (checksum) = 123.11
+Total of Processed Transactions = 123.12
+
+
+ERROR: THE BANK FILE CONTAINED 123.11 BUT 123.12 WAS IMPORTED INTO THE SERVICE CREDIT DATABASE. THE PROGRAM IMPORTED 0.01 MORE THAN THE BANK TOTAL.
+
+No bad records in this batch.
+5 = number of successful calls to the ProcessImportRecord function.
+
+         Accepted Payments: 2
+       Unresolved Payments: 0
+        Suspended Payments: 0
+-----------------------------------
+Pending payments processed: 2
+
+2014-02-06 09:17:13,512 INFO  [bill_processor] Send email to general@opm.gov, subject = [Service Credit Import: BATCH IMPORT ERROR OUT OF BALANCE! ]. Message:
+Service Credit Batch started at 9:17:13 AM CST on February 2, 2014. Batch done at 9:17:13 AM CST.
+
+SUMMARY: THE FILE IMPORT HAD ERRORS. PLEASE CHECK THE 'Lockbox Import Errors' REPORT IN THE SERVICE CREDIT APPLICATION FOR DETAILS. THE ERROR INVOLVES PAYMENTS SO IT MUST BE FIXED AS SOON AS POSSIBLE.
+
+   Number Type         Total
+        1 ACH          34.12
+        1 Check        89.00
+============================
+        2 All         123.12
+
+        1 ACH payments accepted as Posted - Pending
+        1 Check payments accepted as Posted - Pending
+
+
+ERROR: THE BANK'S TOTAL WAS 123.11 BUT 123.12 WAS IMPORTED INTO THE SERVICE CREDIT DATABASE.
+THE PROGRAM IMPORTED 0.01 MORE THAN THE BANK'S TOTAL.
+
+3 total Lockbox records and summary totals.
+
+
+SCRD read all 3 Lockbox change records.
+
+DETAILS:
+Audit Batch Log ID number is 71
+File Contents:
+ Number Type Description
+      1 Good ACH Payments
+      1 Good Check Payments
+      3 Good Name or Address Changes
+      1 Good Summary Records
+      1 Good End-of-file markers
+====================================
+      7 Total Lines in Lockbox File
+
+Lockbox File Name:
+lockbox_file_1.txt
+Backup File Name:
+Backup_SC020514_71.txt
+
+2014-02-06 09:17:13,519 INFO  [bill_processor] End importing files in: test_files/lockbox_files
+2014-02-06 09:17:13,519 INFO  [bill_processor] Start cleaning old files in: test_files/old_files
+2014-02-06 09:17:13,519 INFO  [bill_processor] Old files cleaned: 0
+2014-02-06 09:17:13,519 INFO  [bill_processor] End cleaning old files in: test_files/old_files
+2014-02-06 09:17:13,519 INFO  [bill_processor] Service Credit Batch finished successfully.
+2014-02-06 09:17:13,753 INFO  [bill_processor] Service Credit Batch started.
+2014-02-06 09:17:13,759 INFO  [bill_processor] Is today holiday : true
+2014-02-06 09:17:13,761 INFO  [bill_processor] Start importing files in: test_files/lockbox_files
+2014-02-06 09:17:13,761 INFO  [bill_processor] Start loading file content from: test_files/lockbox_files/lockbox_file_1.txt
+2014-02-06 09:17:13,772 WARN  [bill_processor] Weird character is: [ ]
+2014-02-06 09:17:13,772 INFO  [bill_processor] 7 lines loaded from lockbox_file_1.txt which is backup to Backup_SC020514_72.txt
+2014-02-06 09:17:13,772 INFO  [bill_processor] End loading file content from: test_files/lockbox_files/lockbox_file_1.txt
+2014-02-06 09:17:13,772 INFO  [bill_processor] Start processing MainframeImport data from: test_files/lockbox_files/lockbox_file_1.txt
+2014-02-06 09:17:13,778 INFO  [bill_processor] VALID_C_TRANSACTION: 	C 01      1112233031277  Mark I. Jason, III
+2014-02-06 09:17:13,784 INFO  [bill_processor] VALID_C_TRANSACTION: 	C 02      1112233031277  Chizago, IL 12345-1234
+2014-02-06 09:17:13,787 INFO  [bill_processor] VALID_C_TRANSACTION: 	C 10      1112233031277  new_ssn
+2014-02-06 09:17:13,790 INFO  [bill_processor] SUM_R_VALID: 	R ZZZ     ZZZZZZZ0000088888    
+2014-02-06 09:17:13,792 INFO  [bill_processor] VALID_R_TRANSACTION: 	R64445566 11122330312770008900020314 0    
+2014-02-06 09:17:13,795 INFO  [bill_processor] VALID_R_TRANSACTION: 	R67778899 11122330312770003412020214 1    
+2014-02-06 09:17:13,797 INFO  [bill_processor] End processing MainframeImport data from: test_files/lockbox_files/lockbox_file_1.txt
+2014-02-06 09:17:13,797 INFO  [bill_processor] Start collating new mainframe payments from: test_files/lockbox_files/lockbox_file_1.txt
+2014-02-06 09:17:13,802 INFO  [bill_processor] End collating new mainframe payments from: test_files/lockbox_files/lockbox_file_1.txt
+2014-02-06 09:17:13,802 INFO  [bill_processor] 
+Service Credit imported a data file from the bank lockbox on February 6, 2014 at 9:17:13 AM CST.
+Lockbox data imported into the dbName database on server dbHostName from computer batchProcessHostName.
+
+# Lines in file = 7
+# New Lines = 7
+# Duplicate Lines = 0
+
+# Records Processed = 6
+# Check Payments = 1
+# Good Check Payments = 1
+# Bad Check Payments = 0
+# Dupe Check Payments = 0
+# ACH Payments = 1
+# Good ACH Payments = 1
+# Bad ACH Payments = 0
+# Dupe ACH Payments = 0
+# Bad Change Records = 0
+# Good Change Records = 3
+# No Match Change Records = 0
+# Invalid Summary Records = 0
+# Valid Summary Records = 1
+# Successful Transactions = 5
+# Failed Transactions = 0
+# Invalid Lines = 0
+
+Total Check Payments = 89
+Total ACH Payments = 34.12
+Total of Accepted Payments = 123.12
+Total in File Summary (checksum) = 888.88
+Total of Processed Transactions = 123.12
+
+
+ERROR: THE BANK FILE CONTAINED 888.88 BUT 123.12 WAS IMPORTED INTO THE SERVICE CREDIT DATABASE. THE PROGRAM IMPORTED 765.76 LESS THAN THE BANK TOTAL.
+
+No bad records in this batch.
+5 = number of successful calls to the ProcessImportRecord function.
+
+         Accepted Payments: 2
+       Unresolved Payments: 0
+        Suspended Payments: 0
+-----------------------------------
+Pending payments processed: 2
+
+2014-02-06 09:17:13,816 INFO  [bill_processor] Send email to general@opm.gov, subject = [Service Credit Import: BATCH IMPORT ERROR OUT OF BALANCE! ]. Message:
+Service Credit Batch started at 9:17:13 AM CST on February 2, 2014. Batch done at 9:17:13 AM CST.
+
+SUMMARY: THE FILE IMPORT HAD ERRORS. PLEASE CHECK THE 'Lockbox Import Errors' REPORT IN THE SERVICE CREDIT APPLICATION FOR DETAILS. THE ERROR INVOLVES PAYMENTS SO IT MUST BE FIXED AS SOON AS POSSIBLE.
+
+   Number Type         Total
+        1 ACH          34.12
+        1 Check        89.00
+============================
+        2 All         123.12
+
+        1 ACH payments accepted as Posted - Pending
+        1 Check payments accepted as Posted - Pending
+
+
+ERROR: THE BANK'S TOTAL WAS 888.88 BUT 123.12 WAS IMPORTED INTO THE SERVICE CREDIT DATABASE.
+THE PROGRAM IMPORTED 765.76 LESS THAN THE BANK'S TOTAL.
+
+3 total Lockbox records and summary totals.
+
+
+SCRD read all 3 Lockbox change records.
+
+DETAILS:
+Audit Batch Log ID number is 72
+File Contents:
+ Number Type Description
+      1 Good ACH Payments
+      1 Good Check Payments
+      3 Good Name or Address Changes
+      1 Good Summary Records
+      1 Good End-of-file markers
+====================================
+      7 Total Lines in Lockbox File
+
+Lockbox File Name:
+lockbox_file_1.txt
+Backup File Name:
+Backup_SC020514_72.txt
+
+2014-02-06 09:17:13,826 INFO  [bill_processor] End importing files in: test_files/lockbox_files
+2014-02-06 09:17:13,826 INFO  [bill_processor] Start cleaning old files in: test_files/old_files
+2014-02-06 09:17:13,826 INFO  [bill_processor] Old files cleaned: 0
+2014-02-06 09:17:13,826 INFO  [bill_processor] End cleaning old files in: test_files/old_files
+2014-02-06 09:17:13,826 INFO  [bill_processor] Service Credit Batch finished successfully.
+2014-02-06 09:17:14,065 INFO  [bill_processor] Service Credit Batch started.
+2014-02-06 09:17:14,071 INFO  [bill_processor] Is today holiday : true
+2014-02-06 09:17:14,073 INFO  [bill_processor] Start importing files in: test_files/lockbox_files
+2014-02-06 09:17:14,073 INFO  [bill_processor] Start loading file content from: test_files/lockbox_files/lockbox_file_1.txt
+2014-02-06 09:17:14,084 WARN  [bill_processor] Weird character is: [ ]
+2014-02-06 09:17:14,085 INFO  [bill_processor] 7 lines loaded from lockbox_file_1.txt which is backup to Backup_SC020514_73.txt
+2014-02-06 09:17:14,085 INFO  [bill_processor] End loading file content from: test_files/lockbox_files/lockbox_file_1.txt
+2014-02-06 09:17:14,085 INFO  [bill_processor] Start processing MainframeImport data from: test_files/lockbox_files/lockbox_file_1.txt
+2014-02-06 09:17:14,090 INFO  [bill_processor] VALID_C_TRANSACTION: 	C 01      1112233031277  Mark I. Jason, III
+2014-02-06 09:17:14,094 INFO  [bill_processor] VALID_C_TRANSACTION: 	C 02      1112233031277  Chizago, IL 12345-1234
+2014-02-06 09:17:14,097 INFO  [bill_processor] VALID_C_TRANSACTION: 	C 10      1112233031277  new_ssn
+2014-02-06 09:17:14,099 INFO  [bill_processor] SUM_R_VALID: 	R ZZZ     ZZZZZZZ0000012312    
+2014-02-06 09:17:14,102 INFO  [bill_processor] VALID_R_TRANSACTION: 	R64445566 11122330312770008900020314 0    
+2014-02-06 09:17:14,105 INFO  [bill_processor] VALID_R_TRANSACTION: 	R67778899 11122330312770003412020214 1    
+2014-02-06 09:17:14,107 INFO  [bill_processor] End processing MainframeImport data from: test_files/lockbox_files/lockbox_file_1.txt
+2014-02-06 09:17:14,107 INFO  [bill_processor] Start collating new mainframe payments from: test_files/lockbox_files/lockbox_file_1.txt
+2014-02-06 09:17:14,112 INFO  [bill_processor] End collating new mainframe payments from: test_files/lockbox_files/lockbox_file_1.txt
+2014-02-06 09:17:14,113 INFO  [bill_processor] 
+Service Credit imported a data file from the bank lockbox on February 6, 2014 at 9:17:14 AM CST.
+Lockbox data imported into the dbName database on server dbHostName from computer batchProcessHostName.
+
+# Lines in file = 7
+# New Lines = 7
+# Duplicate Lines = 0
+
+# Records Processed = 6
+# Check Payments = 1
+# Good Check Payments = 1
+# Bad Check Payments = 0
+# Dupe Check Payments = 0
+# ACH Payments = 1
+# Good ACH Payments = 1
+# Bad ACH Payments = 0
+# Dupe ACH Payments = 0
+# Bad Change Records = 0
+# Good Change Records = 3
+# No Match Change Records = 0
+# Invalid Summary Records = 0
+# Valid Summary Records = 1
+# Successful Transactions = 5
+# Failed Transactions = 0
+# Invalid Lines = 0
+
+Total Check Payments = 89
+Total ACH Payments = 34.12
+Total of Accepted Payments = 123.12
+Total in File = 123.12
+
+No bad records in this batch.
+5 = number of successful calls to the ProcessImportRecord function.
+
+         Accepted Payments: 2
+       Unresolved Payments: 0
+        Suspended Payments: 0
+-----------------------------------
+Pending payments processed: 2
+
+2014-02-06 09:17:14,125 INFO  [bill_processor] Send email to general@opm.gov, subject = [Service Credit Import: OK ]. Message:
+Service Credit Batch started at 9:17:13 AM CST on February 2, 2014. Batch done at 9:17:14 AM CST.
+
+SUMMARY: The file import was successful.
+
+   Number Type         Total
+        1 ACH          34.12
+        1 Check        89.00
+============================
+        2 All         123.12
+
+        1 ACH payments accepted as Posted - Pending
+        1 Check payments accepted as Posted - Pending
+
+
+3 total Lockbox records and summary totals.
+
+
+SCRD read all 3 Lockbox change records.
+
+DETAILS:
+Audit Batch Log ID number is 73
+File Contents:
+ Number Type Description
+      1 Good ACH Payments
+      1 Good Check Payments
+      3 Good Name or Address Changes
+      1 Good Summary Records
+      1 Good End-of-file markers
+====================================
+      7 Total Lines in Lockbox File
+
+Lockbox File Name:
+lockbox_file_1.txt
+Backup File Name:
+Backup_SC020514_73.txt
+
+2014-02-06 09:17:14,131 INFO  [bill_processor] End importing files in: test_files/lockbox_files
+2014-02-06 09:17:14,131 INFO  [bill_processor] Start cleaning old files in: test_files/old_files
+2014-02-06 09:17:14,131 INFO  [bill_processor] Old files cleaned: 0
+2014-02-06 09:17:14,131 INFO  [bill_processor] End cleaning old files in: test_files/old_files
+2014-02-06 09:17:14,131 INFO  [bill_processor] Service Credit Batch finished successfully.
+2014-02-06 09:17:14,464 INFO  [bill_processor] Service Credit Batch started.
+2014-02-06 09:17:14,471 INFO  [bill_processor] Is today holiday : false
+2014-02-06 09:17:14,472 INFO  [bill_processor] Start importing files in: test_files/lockbox_files
+2014-02-06 09:17:14,473 INFO  [bill_processor] Start loading file content from: test_files/lockbox_files/lockbox_file_1.txt
+2014-02-06 09:17:14,483 INFO  [bill_processor] 7 lines loaded from lockbox_file_1.txt which is backup to Backup_SC020514_74.txt
+2014-02-06 09:17:14,483 INFO  [bill_processor] End loading file content from: test_files/lockbox_files/lockbox_file_1.txt
+2014-02-06 09:17:14,483 INFO  [bill_processor] Start processing MainframeImport data from: test_files/lockbox_files/lockbox_file_1.txt
+2014-02-06 09:17:14,488 INFO  [bill_processor] VALID_C_TRANSACTION: 	C 01      1112233031277  Mark I. Jason, III
+2014-02-06 09:17:14,492 INFO  [bill_processor] VALID_C_TRANSACTION: 	C 02      1112233031277  Chizago, IL 12345-1234
+2014-02-06 09:17:14,495 INFO  [bill_processor] VALID_C_TRANSACTION: 	C 10      1112233031277  new_ssn
+2014-02-06 09:17:14,497 INFO  [bill_processor] SUM_R_VALID: 	R ZZZ     ZZZZZZZ0000012312    
+2014-02-06 09:17:14,500 INFO  [bill_processor] VALID_R_TRANSACTION: 	R64445566 11122330312770008900020314 0    
+2014-02-06 09:17:14,502 INFO  [bill_processor] VALID_R_TRANSACTION: 	R67778899 11122330312770003412020214 1    
+2014-02-06 09:17:14,504 INFO  [bill_processor] End processing MainframeImport data from: test_files/lockbox_files/lockbox_file_1.txt
+2014-02-06 09:17:14,504 INFO  [bill_processor] Start collating new mainframe payments from: test_files/lockbox_files/lockbox_file_1.txt
+2014-02-06 09:17:14,508 INFO  [bill_processor] End collating new mainframe payments from: test_files/lockbox_files/lockbox_file_1.txt
+2014-02-06 09:17:14,508 INFO  [bill_processor] 
+Service Credit imported a data file from the bank lockbox on February 6, 2014 at 9:17:14 AM CST.
+Lockbox data imported into the dbName database on server dbHostName from computer batchProcessHostName.
+
+# Lines in file = 7
+# New Lines = 7
+# Duplicate Lines = 0
+
+# Records Processed = 6
+# Check Payments = 1
+# Good Check Payments = 1
+# Bad Check Payments = 0
+# Dupe Check Payments = 0
+# ACH Payments = 1
+# Good ACH Payments = 1
+# Bad ACH Payments = 0
+# Dupe ACH Payments = 0
+# Bad Change Records = 0
+# Good Change Records = 3
+# No Match Change Records = 0
+# Invalid Summary Records = 0
+# Valid Summary Records = 1
+# Successful Transactions = 5
+# Failed Transactions = 0
+# Invalid Lines = 0
+
+Total Check Payments = 89
+Total ACH Payments = 34.12
+Total of Accepted Payments = 123.12
+Total in File = 123.12
+
+No bad records in this batch.
+5 = number of successful calls to the ProcessImportRecord function.
+
+         Accepted Payments: 2
+       Unresolved Payments: 0
+        Suspended Payments: 0
+-----------------------------------
+Pending payments processed: 2
+
+2014-02-06 09:17:14,517 INFO  [bill_processor] Send email to general@opm.gov, subject = [Service Credit Import: OK ]. Message:
+Service Credit Batch started at 9:17:14 AM CST on February 6, 2014. Batch done at 9:17:14 AM CST.
+
+SUMMARY: The file import was successful.
+
+   Number Type         Total
+        1 ACH          34.12
+        1 Check        89.00
+============================
+        2 All         123.12
+
+        1 ACH payments accepted as Posted - Pending
+        1 Check payments accepted as Posted - Pending
+
+
+3 total Lockbox records and summary totals.
+
+
+SCRD read all 3 Lockbox change records.
+
+DETAILS:
+Audit Batch Log ID number is 74
+File Contents:
+ Number Type Description
+      1 Good ACH Payments
+      1 Good Check Payments
+      3 Good Name or Address Changes
+      1 Good Summary Records
+      1 Good End-of-file markers
+====================================
+      7 Total Lines in Lockbox File
+
+Lockbox File Name:
+lockbox_file_1.txt
+Backup File Name:
+Backup_SC020514_74.txt
+
+2014-02-06 09:17:14,522 INFO  [bill_processor] End importing files in: test_files/lockbox_files
+2014-02-06 09:17:14,522 INFO  [bill_processor] Start cleaning old files in: test_files/old_files
+2014-02-06 09:17:14,522 INFO  [bill_processor] Old files cleaned: 0
+2014-02-06 09:17:14,522 INFO  [bill_processor] End cleaning old files in: test_files/old_files
+2014-02-06 09:17:14,522 INFO  [bill_processor] Start Bill Processing.
+2014-02-06 09:17:14,711 INFO  [bill_processor] Total Payment Records: 2
+2014-02-06 09:17:14,715 INFO  [bill_processor] End Bill Processing.
+2014-02-06 09:17:14,715 INFO  [bill_processor] Start daily account updating.
+2014-02-06 09:17:14,725 INFO  [bill_processor] Updated 2 master records to history or ACH Stop status.
+2014-02-06 09:17:14,725 INFO  [bill_processor] End daily account updating.
+2014-02-06 09:17:14,725 INFO  [bill_processor] Start making GL file: test_files/gl_files
+2014-02-06 09:17:14,826 INFO  [bill_processor] General Ledger file created.
+2014-02-06 09:17:14,826 INFO  [bill_processor] End making GL file: test_files/gl_files
+2014-02-06 09:17:14,827 INFO  [bill_processor] Send email to bill@opm.gov, subject = [Service Credit Nightly Batch: Good]. Message:
+Service Credit Batch started at 9:17:14 AM CST on February 6, 2014. Batch done at 9:17:14 AM CST.
+
+
+
+Boyers' printout count:0 RI36-18 Receipt Invoices Printed.0 RI36-23 Initial Invoices Printed.
+0 RI36-18 Reversed Invoices Printed.
+0 Stop ACH Letters Printed.
+
+DC's printout count: 
+0 Refund Memos Printed.
+
+
+Processed Successfully. 
+
+Updated 2 master records to history or ACH Stop status.
+
+General Ledger file created.
+
+2014-02-06 09:17:14,835 INFO  [bill_processor] Service Credit Batch finished successfully.

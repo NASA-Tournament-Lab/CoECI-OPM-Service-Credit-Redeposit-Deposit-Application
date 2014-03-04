@@ -1,0 +1,1071 @@
+2014-02-07 22:01:06,729 WARN  [org.hibernate.ejb.HibernatePersistence] HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; use [org.hibernate.jpa.HibernatePersistenceProvider] instead.
+2014-02-07 22:01:06,729 WARN  [org.hibernate.ejb.HibernatePersistence] HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; use [org.hibernate.jpa.HibernatePersistenceProvider] instead.
+2014-02-07 22:01:06,729 WARN  [org.hibernate.ejb.HibernatePersistence] HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; use [org.hibernate.jpa.HibernatePersistenceProvider] instead.
+2014-02-07 22:01:06,838 INFO  [org.hibernate.jpa.internal.util.LogHelper] HHH000204: Processing PersistenceUnitInfo [
+	name: opmUnitName
+	...]
+2014-02-07 22:01:06,978 INFO  [org.hibernate.Version] HHH000412: Hibernate Core {4.3.1.Final}
+2014-02-07 22:01:06,978 INFO  [org.hibernate.cfg.Environment] HHH000206: hibernate.properties not found
+2014-02-07 22:01:06,978 INFO  [org.hibernate.cfg.Environment] HHH000021: Bytecode provider name : javassist
+2014-02-07 22:01:07,197 INFO  [org.hibernate.annotations.common.Version] HCANN000001: Hibernate Commons Annotations {4.0.4.Final}
+2014-02-07 22:01:07,462 WARN  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000402: Using Hibernate built-in connection pool (not for production use!)
+2014-02-07 22:01:07,478 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000401: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/postgres]
+2014-02-07 22:01:07,478 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000046: Connection properties: {user=postgres, password=****}
+2014-02-07 22:01:07,478 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000006: Autocommit mode: false
+2014-02-07 22:01:07,478 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000115: Hibernate connection pool size: 20 (min=1)
+2014-02-07 22:01:08,117 INFO  [org.hibernate.dialect.Dialect] HHH000400: Using dialect: gov.opm.scrd.entities.common.OPMPostgreSQLDialect
+2014-02-07 22:01:08,148 INFO  [org.hibernate.engine.jdbc.internal.LobCreatorBuilder] HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2014-02-07 22:01:08,944 INFO  [org.hibernate.hql.internal.ast.ASTQueryTranslatorFactory] HHH000397: Using ASTQueryTranslatorFactory
+2014-02-07 22:01:23,046 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000030: Cleaning up connection pool [jdbc:postgresql://localhost:5432/postgres]
+2014-02-07 22:02:58,405 WARN  [org.hibernate.ejb.HibernatePersistence] HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; use [org.hibernate.jpa.HibernatePersistenceProvider] instead.
+2014-02-07 22:02:58,405 WARN  [org.hibernate.ejb.HibernatePersistence] HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; use [org.hibernate.jpa.HibernatePersistenceProvider] instead.
+2014-02-07 22:02:58,405 WARN  [org.hibernate.ejb.HibernatePersistence] HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; use [org.hibernate.jpa.HibernatePersistenceProvider] instead.
+2014-02-07 22:02:58,499 INFO  [org.hibernate.jpa.internal.util.LogHelper] HHH000204: Processing PersistenceUnitInfo [
+	name: opmUnitName
+	...]
+2014-02-07 22:02:58,624 INFO  [org.hibernate.Version] HHH000412: Hibernate Core {4.3.1.Final}
+2014-02-07 22:02:58,624 INFO  [org.hibernate.cfg.Environment] HHH000206: hibernate.properties not found
+2014-02-07 22:02:58,624 INFO  [org.hibernate.cfg.Environment] HHH000021: Bytecode provider name : javassist
+2014-02-07 22:02:58,826 INFO  [org.hibernate.annotations.common.Version] HCANN000001: Hibernate Commons Annotations {4.0.4.Final}
+2014-02-07 22:02:59,060 WARN  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000402: Using Hibernate built-in connection pool (not for production use!)
+2014-02-07 22:02:59,076 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000401: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/postgres]
+2014-02-07 22:02:59,076 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000046: Connection properties: {user=postgres, password=****}
+2014-02-07 22:02:59,076 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000006: Autocommit mode: false
+2014-02-07 22:02:59,076 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000115: Hibernate connection pool size: 20 (min=1)
+2014-02-07 22:02:59,731 INFO  [org.hibernate.dialect.Dialect] HHH000400: Using dialect: gov.opm.scrd.entities.common.OPMPostgreSQLDialect
+2014-02-07 22:02:59,747 INFO  [org.hibernate.engine.jdbc.internal.LobCreatorBuilder] HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2014-02-07 22:03:00,511 INFO  [org.hibernate.hql.internal.ast.ASTQueryTranslatorFactory] HHH000397: Using ASTQueryTranslatorFactory
+2014-02-07 22:03:14,520 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000030: Cleaning up connection pool [jdbc:postgresql://localhost:5432/postgres]
+2014-02-07 22:07:12,288 WARN  [org.hibernate.ejb.HibernatePersistence] HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; use [org.hibernate.jpa.HibernatePersistenceProvider] instead.
+2014-02-07 22:07:12,288 WARN  [org.hibernate.ejb.HibernatePersistence] HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; use [org.hibernate.jpa.HibernatePersistenceProvider] instead.
+2014-02-07 22:07:12,288 WARN  [org.hibernate.ejb.HibernatePersistence] HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; use [org.hibernate.jpa.HibernatePersistenceProvider] instead.
+2014-02-07 22:07:12,398 INFO  [org.hibernate.jpa.internal.util.LogHelper] HHH000204: Processing PersistenceUnitInfo [
+	name: opmUnitName
+	...]
+2014-02-07 22:07:12,522 INFO  [org.hibernate.Version] HHH000412: Hibernate Core {4.3.1.Final}
+2014-02-07 22:07:12,538 INFO  [org.hibernate.cfg.Environment] HHH000206: hibernate.properties not found
+2014-02-07 22:07:12,538 INFO  [org.hibernate.cfg.Environment] HHH000021: Bytecode provider name : javassist
+2014-02-07 22:07:12,741 INFO  [org.hibernate.annotations.common.Version] HCANN000001: Hibernate Commons Annotations {4.0.4.Final}
+2014-02-07 22:07:12,975 WARN  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000402: Using Hibernate built-in connection pool (not for production use!)
+2014-02-07 22:07:12,975 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000401: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/postgres]
+2014-02-07 22:07:12,975 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000046: Connection properties: {user=postgres, password=****}
+2014-02-07 22:07:12,975 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000006: Autocommit mode: false
+2014-02-07 22:07:12,990 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000115: Hibernate connection pool size: 20 (min=1)
+2014-02-07 22:07:13,630 INFO  [org.hibernate.dialect.Dialect] HHH000400: Using dialect: gov.opm.scrd.entities.common.OPMPostgreSQLDialect
+2014-02-07 22:07:13,646 INFO  [org.hibernate.engine.jdbc.internal.LobCreatorBuilder] HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2014-02-07 22:07:14,410 INFO  [org.hibernate.hql.internal.ast.ASTQueryTranslatorFactory] HHH000397: Using ASTQueryTranslatorFactory
+2014-02-07 22:07:28,185 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000030: Cleaning up connection pool [jdbc:postgresql://localhost:5432/postgres]
+2014-02-07 22:08:09,930 WARN  [org.hibernate.ejb.HibernatePersistence] HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; use [org.hibernate.jpa.HibernatePersistenceProvider] instead.
+2014-02-07 22:08:09,930 WARN  [org.hibernate.ejb.HibernatePersistence] HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; use [org.hibernate.jpa.HibernatePersistenceProvider] instead.
+2014-02-07 22:08:09,930 WARN  [org.hibernate.ejb.HibernatePersistence] HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; use [org.hibernate.jpa.HibernatePersistenceProvider] instead.
+2014-02-07 22:08:10,024 INFO  [org.hibernate.jpa.internal.util.LogHelper] HHH000204: Processing PersistenceUnitInfo [
+	name: opmUnitName
+	...]
+2014-02-07 22:08:10,164 INFO  [org.hibernate.Version] HHH000412: Hibernate Core {4.3.1.Final}
+2014-02-07 22:08:10,164 INFO  [org.hibernate.cfg.Environment] HHH000206: hibernate.properties not found
+2014-02-07 22:08:10,164 INFO  [org.hibernate.cfg.Environment] HHH000021: Bytecode provider name : javassist
+2014-02-07 22:08:10,367 INFO  [org.hibernate.annotations.common.Version] HCANN000001: Hibernate Commons Annotations {4.0.4.Final}
+2014-02-07 22:08:10,601 WARN  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000402: Using Hibernate built-in connection pool (not for production use!)
+2014-02-07 22:08:10,617 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000401: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/postgres]
+2014-02-07 22:08:10,617 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000046: Connection properties: {user=postgres, password=****}
+2014-02-07 22:08:10,617 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000006: Autocommit mode: false
+2014-02-07 22:08:10,617 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000115: Hibernate connection pool size: 20 (min=1)
+2014-02-07 22:08:11,241 INFO  [org.hibernate.dialect.Dialect] HHH000400: Using dialect: gov.opm.scrd.entities.common.OPMPostgreSQLDialect
+2014-02-07 22:08:11,272 INFO  [org.hibernate.engine.jdbc.internal.LobCreatorBuilder] HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2014-02-07 22:08:12,052 INFO  [org.hibernate.hql.internal.ast.ASTQueryTranslatorFactory] HHH000397: Using ASTQueryTranslatorFactory
+2014-02-07 22:08:16,888 WARN  [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] SQL Error: 0, SQLState: 23503
+2014-02-07 22:08:16,888 ERROR [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] ERROR: insert or update on table "calculation_result_item" violates foreign key constraint "fk_calculation_result_item_retirement_type"
+  �ԲӡGKey (retirement_type_id)=(1) is not present in table "retirement_type".
+2014-02-07 22:08:27,808 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000030: Cleaning up connection pool [jdbc:postgresql://localhost:5432/postgres]
+2014-02-07 22:12:05,241 WARN  [org.hibernate.ejb.HibernatePersistence] HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; use [org.hibernate.jpa.HibernatePersistenceProvider] instead.
+2014-02-07 22:12:05,241 WARN  [org.hibernate.ejb.HibernatePersistence] HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; use [org.hibernate.jpa.HibernatePersistenceProvider] instead.
+2014-02-07 22:12:05,241 WARN  [org.hibernate.ejb.HibernatePersistence] HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; use [org.hibernate.jpa.HibernatePersistenceProvider] instead.
+2014-02-07 22:12:05,350 INFO  [org.hibernate.jpa.internal.util.LogHelper] HHH000204: Processing PersistenceUnitInfo [
+	name: opmUnitName
+	...]
+2014-02-07 22:12:05,475 INFO  [org.hibernate.Version] HHH000412: Hibernate Core {4.3.1.Final}
+2014-02-07 22:12:05,490 INFO  [org.hibernate.cfg.Environment] HHH000206: hibernate.properties not found
+2014-02-07 22:12:05,490 INFO  [org.hibernate.cfg.Environment] HHH000021: Bytecode provider name : javassist
+2014-02-07 22:12:05,678 INFO  [org.hibernate.annotations.common.Version] HCANN000001: Hibernate Commons Annotations {4.0.4.Final}
+2014-02-07 22:12:05,912 WARN  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000402: Using Hibernate built-in connection pool (not for production use!)
+2014-02-07 22:12:05,927 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000401: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/postgres]
+2014-02-07 22:12:05,927 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000046: Connection properties: {user=postgres, password=****}
+2014-02-07 22:12:05,927 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000006: Autocommit mode: false
+2014-02-07 22:12:05,927 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000115: Hibernate connection pool size: 20 (min=1)
+2014-02-07 22:12:06,567 INFO  [org.hibernate.dialect.Dialect] HHH000400: Using dialect: gov.opm.scrd.entities.common.OPMPostgreSQLDialect
+2014-02-07 22:12:06,582 INFO  [org.hibernate.engine.jdbc.internal.LobCreatorBuilder] HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2014-02-07 22:12:07,362 INFO  [org.hibernate.hql.internal.ast.ASTQueryTranslatorFactory] HHH000397: Using ASTQueryTranslatorFactory
+2014-02-07 22:12:10,732 WARN  [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] SQL Error: 0, SQLState: 23503
+2014-02-07 22:12:10,732 ERROR [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] ERROR: insert or update on table "calculation_version" violates foreign key constraint "fk_calculation_version_account"
+  �ԲӡGKey (account_id)=(0) is not present in table "account".
+2014-02-07 22:12:21,215 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000030: Cleaning up connection pool [jdbc:postgresql://localhost:5432/postgres]
+2014-02-07 22:14:29,603 WARN  [org.hibernate.ejb.HibernatePersistence] HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; use [org.hibernate.jpa.HibernatePersistenceProvider] instead.
+2014-02-07 22:14:29,603 WARN  [org.hibernate.ejb.HibernatePersistence] HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; use [org.hibernate.jpa.HibernatePersistenceProvider] instead.
+2014-02-07 22:14:29,603 WARN  [org.hibernate.ejb.HibernatePersistence] HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; use [org.hibernate.jpa.HibernatePersistenceProvider] instead.
+2014-02-07 22:14:29,712 INFO  [org.hibernate.jpa.internal.util.LogHelper] HHH000204: Processing PersistenceUnitInfo [
+	name: opmUnitName
+	...]
+2014-02-07 22:14:29,837 INFO  [org.hibernate.Version] HHH000412: Hibernate Core {4.3.1.Final}
+2014-02-07 22:14:29,837 INFO  [org.hibernate.cfg.Environment] HHH000206: hibernate.properties not found
+2014-02-07 22:14:29,837 INFO  [org.hibernate.cfg.Environment] HHH000021: Bytecode provider name : javassist
+2014-02-07 22:14:30,040 INFO  [org.hibernate.annotations.common.Version] HCANN000001: Hibernate Commons Annotations {4.0.4.Final}
+2014-02-07 22:14:30,274 WARN  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000402: Using Hibernate built-in connection pool (not for production use!)
+2014-02-07 22:14:30,290 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000401: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/postgres]
+2014-02-07 22:14:30,290 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000046: Connection properties: {user=postgres, password=****}
+2014-02-07 22:14:30,290 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000006: Autocommit mode: false
+2014-02-07 22:14:30,290 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000115: Hibernate connection pool size: 20 (min=1)
+2014-02-07 22:14:30,945 INFO  [org.hibernate.dialect.Dialect] HHH000400: Using dialect: gov.opm.scrd.entities.common.OPMPostgreSQLDialect
+2014-02-07 22:14:30,960 INFO  [org.hibernate.engine.jdbc.internal.LobCreatorBuilder] HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2014-02-07 22:14:31,740 INFO  [org.hibernate.hql.internal.ast.ASTQueryTranslatorFactory] HHH000397: Using ASTQueryTranslatorFactory
+2014-02-07 22:14:45,874 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000030: Cleaning up connection pool [jdbc:postgresql://localhost:5432/postgres]
+2014-02-07 22:16:07,790 WARN  [org.hibernate.ejb.HibernatePersistence] HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; use [org.hibernate.jpa.HibernatePersistenceProvider] instead.
+2014-02-07 22:16:07,790 WARN  [org.hibernate.ejb.HibernatePersistence] HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; use [org.hibernate.jpa.HibernatePersistenceProvider] instead.
+2014-02-07 22:16:07,790 WARN  [org.hibernate.ejb.HibernatePersistence] HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; use [org.hibernate.jpa.HibernatePersistenceProvider] instead.
+2014-02-07 22:16:07,883 INFO  [org.hibernate.jpa.internal.util.LogHelper] HHH000204: Processing PersistenceUnitInfo [
+	name: opmUnitName
+	...]
+2014-02-07 22:16:08,008 INFO  [org.hibernate.Version] HHH000412: Hibernate Core {4.3.1.Final}
+2014-02-07 22:16:08,024 INFO  [org.hibernate.cfg.Environment] HHH000206: hibernate.properties not found
+2014-02-07 22:16:08,024 INFO  [org.hibernate.cfg.Environment] HHH000021: Bytecode provider name : javassist
+2014-02-07 22:16:08,211 INFO  [org.hibernate.annotations.common.Version] HCANN000001: Hibernate Commons Annotations {4.0.4.Final}
+2014-02-07 22:16:08,460 WARN  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000402: Using Hibernate built-in connection pool (not for production use!)
+2014-02-07 22:16:08,460 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000401: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/postgres]
+2014-02-07 22:16:08,460 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000046: Connection properties: {user=postgres, password=****}
+2014-02-07 22:16:08,460 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000006: Autocommit mode: false
+2014-02-07 22:16:08,460 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000115: Hibernate connection pool size: 20 (min=1)
+2014-02-07 22:16:09,100 INFO  [org.hibernate.dialect.Dialect] HHH000400: Using dialect: gov.opm.scrd.entities.common.OPMPostgreSQLDialect
+2014-02-07 22:16:09,116 INFO  [org.hibernate.engine.jdbc.internal.LobCreatorBuilder] HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2014-02-07 22:16:09,880 INFO  [org.hibernate.hql.internal.ast.ASTQueryTranslatorFactory] HHH000397: Using ASTQueryTranslatorFactory
+2014-02-07 22:16:23,670 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000030: Cleaning up connection pool [jdbc:postgresql://localhost:5432/postgres]
+2014-02-07 22:17:34,026 WARN  [org.hibernate.ejb.HibernatePersistence] HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; use [org.hibernate.jpa.HibernatePersistenceProvider] instead.
+2014-02-07 22:17:34,026 WARN  [org.hibernate.ejb.HibernatePersistence] HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; use [org.hibernate.jpa.HibernatePersistenceProvider] instead.
+2014-02-07 22:17:34,026 WARN  [org.hibernate.ejb.HibernatePersistence] HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; use [org.hibernate.jpa.HibernatePersistenceProvider] instead.
+2014-02-07 22:17:34,136 INFO  [org.hibernate.jpa.internal.util.LogHelper] HHH000204: Processing PersistenceUnitInfo [
+	name: opmUnitName
+	...]
+2014-02-07 22:17:34,260 INFO  [org.hibernate.Version] HHH000412: Hibernate Core {4.3.1.Final}
+2014-02-07 22:17:34,260 INFO  [org.hibernate.cfg.Environment] HHH000206: hibernate.properties not found
+2014-02-07 22:17:34,260 INFO  [org.hibernate.cfg.Environment] HHH000021: Bytecode provider name : javassist
+2014-02-07 22:17:34,463 INFO  [org.hibernate.annotations.common.Version] HCANN000001: Hibernate Commons Annotations {4.0.4.Final}
+2014-02-07 22:17:34,697 WARN  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000402: Using Hibernate built-in connection pool (not for production use!)
+2014-02-07 22:17:34,713 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000401: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/postgres]
+2014-02-07 22:17:34,713 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000046: Connection properties: {user=postgres, password=****}
+2014-02-07 22:17:34,713 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000006: Autocommit mode: false
+2014-02-07 22:17:34,713 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000115: Hibernate connection pool size: 20 (min=1)
+2014-02-07 22:17:35,337 INFO  [org.hibernate.dialect.Dialect] HHH000400: Using dialect: gov.opm.scrd.entities.common.OPMPostgreSQLDialect
+2014-02-07 22:17:35,352 INFO  [org.hibernate.engine.jdbc.internal.LobCreatorBuilder] HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2014-02-07 22:17:36,117 INFO  [org.hibernate.hql.internal.ast.ASTQueryTranslatorFactory] HHH000397: Using ASTQueryTranslatorFactory
+2014-02-07 22:17:50,219 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000030: Cleaning up connection pool [jdbc:postgresql://localhost:5432/postgres]
+2014-02-07 22:18:25,584 WARN  [org.hibernate.ejb.HibernatePersistence] HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; use [org.hibernate.jpa.HibernatePersistenceProvider] instead.
+2014-02-07 22:18:25,584 WARN  [org.hibernate.ejb.HibernatePersistence] HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; use [org.hibernate.jpa.HibernatePersistenceProvider] instead.
+2014-02-07 22:18:25,584 WARN  [org.hibernate.ejb.HibernatePersistence] HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; use [org.hibernate.jpa.HibernatePersistenceProvider] instead.
+2014-02-07 22:18:25,694 INFO  [org.hibernate.jpa.internal.util.LogHelper] HHH000204: Processing PersistenceUnitInfo [
+	name: opmUnitName
+	...]
+2014-02-07 22:18:25,834 INFO  [org.hibernate.Version] HHH000412: Hibernate Core {4.3.1.Final}
+2014-02-07 22:18:25,834 INFO  [org.hibernate.cfg.Environment] HHH000206: hibernate.properties not found
+2014-02-07 22:18:25,834 INFO  [org.hibernate.cfg.Environment] HHH000021: Bytecode provider name : javassist
+2014-02-07 22:18:26,037 INFO  [org.hibernate.annotations.common.Version] HCANN000001: Hibernate Commons Annotations {4.0.4.Final}
+2014-02-07 22:18:26,271 WARN  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000402: Using Hibernate built-in connection pool (not for production use!)
+2014-02-07 22:18:26,271 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000401: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/postgres]
+2014-02-07 22:18:26,271 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000046: Connection properties: {user=postgres, password=****}
+2014-02-07 22:18:26,271 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000006: Autocommit mode: false
+2014-02-07 22:18:26,286 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000115: Hibernate connection pool size: 20 (min=1)
+2014-02-07 22:18:26,910 INFO  [org.hibernate.dialect.Dialect] HHH000400: Using dialect: gov.opm.scrd.entities.common.OPMPostgreSQLDialect
+2014-02-07 22:18:26,942 INFO  [org.hibernate.engine.jdbc.internal.LobCreatorBuilder] HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2014-02-07 22:18:27,706 INFO  [org.hibernate.hql.internal.ast.ASTQueryTranslatorFactory] HHH000397: Using ASTQueryTranslatorFactory
+2014-02-07 22:18:31,076 WARN  [org.hibernate.action.internal.UnresolvedEntityInsertActions] HHH000437: Attempting to save one or more entities that have a non-nullable association with an unsaved transient entity. The unsaved transient entity must be saved in an operation prior to saving these dependent entities.
+	Unsaved transient entity: ([gov.opm.scrd.entities.lookup.RetirementType#0])
+	Dependent entities: ([[gov.opm.scrd.entities.application.CalculationResultItem#<null>]])
+	Non-nullable association(s): ([gov.opm.scrd.entities.application.CalculationResultItem.retirementType])
+2014-02-07 22:18:41,512 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000030: Cleaning up connection pool [jdbc:postgresql://localhost:5432/postgres]
+2014-02-07 22:21:38,775 WARN  [org.hibernate.ejb.HibernatePersistence] HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; use [org.hibernate.jpa.HibernatePersistenceProvider] instead.
+2014-02-07 22:21:38,775 WARN  [org.hibernate.ejb.HibernatePersistence] HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; use [org.hibernate.jpa.HibernatePersistenceProvider] instead.
+2014-02-07 22:21:38,775 WARN  [org.hibernate.ejb.HibernatePersistence] HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; use [org.hibernate.jpa.HibernatePersistenceProvider] instead.
+2014-02-07 22:21:38,868 INFO  [org.hibernate.jpa.internal.util.LogHelper] HHH000204: Processing PersistenceUnitInfo [
+	name: opmUnitName
+	...]
+2014-02-07 22:21:39,009 INFO  [org.hibernate.Version] HHH000412: Hibernate Core {4.3.1.Final}
+2014-02-07 22:21:39,009 INFO  [org.hibernate.cfg.Environment] HHH000206: hibernate.properties not found
+2014-02-07 22:21:39,009 INFO  [org.hibernate.cfg.Environment] HHH000021: Bytecode provider name : javassist
+2014-02-07 22:21:39,212 INFO  [org.hibernate.annotations.common.Version] HCANN000001: Hibernate Commons Annotations {4.0.4.Final}
+2014-02-07 22:21:39,446 WARN  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000402: Using Hibernate built-in connection pool (not for production use!)
+2014-02-07 22:21:39,461 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000401: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/postgres]
+2014-02-07 22:21:39,461 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000046: Connection properties: {user=postgres, password=****}
+2014-02-07 22:21:39,461 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000006: Autocommit mode: false
+2014-02-07 22:21:39,461 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000115: Hibernate connection pool size: 20 (min=1)
+2014-02-07 22:21:40,101 INFO  [org.hibernate.dialect.Dialect] HHH000400: Using dialect: gov.opm.scrd.entities.common.OPMPostgreSQLDialect
+2014-02-07 22:21:40,116 INFO  [org.hibernate.engine.jdbc.internal.LobCreatorBuilder] HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2014-02-07 22:21:40,881 INFO  [org.hibernate.hql.internal.ast.ASTQueryTranslatorFactory] HHH000397: Using ASTQueryTranslatorFactory
+2014-02-07 22:21:54,796 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000030: Cleaning up connection pool [jdbc:postgresql://localhost:5432/postgres]
+2014-02-07 22:23:36,617 WARN  [org.hibernate.ejb.HibernatePersistence] HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; use [org.hibernate.jpa.HibernatePersistenceProvider] instead.
+2014-02-07 22:23:36,617 WARN  [org.hibernate.ejb.HibernatePersistence] HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; use [org.hibernate.jpa.HibernatePersistenceProvider] instead.
+2014-02-07 22:23:36,617 WARN  [org.hibernate.ejb.HibernatePersistence] HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; use [org.hibernate.jpa.HibernatePersistenceProvider] instead.
+2014-02-07 22:23:36,711 INFO  [org.hibernate.jpa.internal.util.LogHelper] HHH000204: Processing PersistenceUnitInfo [
+	name: opmUnitName
+	...]
+2014-02-07 22:23:36,851 INFO  [org.hibernate.Version] HHH000412: Hibernate Core {4.3.1.Final}
+2014-02-07 22:23:36,851 INFO  [org.hibernate.cfg.Environment] HHH000206: hibernate.properties not found
+2014-02-07 22:23:36,851 INFO  [org.hibernate.cfg.Environment] HHH000021: Bytecode provider name : javassist
+2014-02-07 22:23:37,054 INFO  [org.hibernate.annotations.common.Version] HCANN000001: Hibernate Commons Annotations {4.0.4.Final}
+2014-02-07 22:23:37,288 WARN  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000402: Using Hibernate built-in connection pool (not for production use!)
+2014-02-07 22:23:37,304 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000401: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/postgres]
+2014-02-07 22:23:37,304 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000046: Connection properties: {user=postgres, password=****}
+2014-02-07 22:23:37,304 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000006: Autocommit mode: false
+2014-02-07 22:23:37,304 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000115: Hibernate connection pool size: 20 (min=1)
+2014-02-07 22:23:37,943 INFO  [org.hibernate.dialect.Dialect] HHH000400: Using dialect: gov.opm.scrd.entities.common.OPMPostgreSQLDialect
+2014-02-07 22:23:37,959 INFO  [org.hibernate.engine.jdbc.internal.LobCreatorBuilder] HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2014-02-07 22:23:38,723 INFO  [org.hibernate.hql.internal.ast.ASTQueryTranslatorFactory] HHH000397: Using ASTQueryTranslatorFactory
+2014-02-07 22:23:52,810 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000030: Cleaning up connection pool [jdbc:postgresql://localhost:5432/postgres]
+2014-02-07 22:25:03,135 WARN  [org.hibernate.ejb.HibernatePersistence] HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; use [org.hibernate.jpa.HibernatePersistenceProvider] instead.
+2014-02-07 22:25:03,135 WARN  [org.hibernate.ejb.HibernatePersistence] HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; use [org.hibernate.jpa.HibernatePersistenceProvider] instead.
+2014-02-07 22:25:03,135 WARN  [org.hibernate.ejb.HibernatePersistence] HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; use [org.hibernate.jpa.HibernatePersistenceProvider] instead.
+2014-02-07 22:25:03,228 INFO  [org.hibernate.jpa.internal.util.LogHelper] HHH000204: Processing PersistenceUnitInfo [
+	name: opmUnitName
+	...]
+2014-02-07 22:25:03,369 INFO  [org.hibernate.Version] HHH000412: Hibernate Core {4.3.1.Final}
+2014-02-07 22:25:03,369 INFO  [org.hibernate.cfg.Environment] HHH000206: hibernate.properties not found
+2014-02-07 22:25:03,369 INFO  [org.hibernate.cfg.Environment] HHH000021: Bytecode provider name : javassist
+2014-02-07 22:25:03,572 INFO  [org.hibernate.annotations.common.Version] HCANN000001: Hibernate Commons Annotations {4.0.4.Final}
+2014-02-07 22:25:03,806 WARN  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000402: Using Hibernate built-in connection pool (not for production use!)
+2014-02-07 22:25:03,821 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000401: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/postgres]
+2014-02-07 22:25:03,821 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000046: Connection properties: {user=postgres, password=****}
+2014-02-07 22:25:03,821 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000006: Autocommit mode: false
+2014-02-07 22:25:03,821 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000115: Hibernate connection pool size: 20 (min=1)
+2014-02-07 22:25:04,445 INFO  [org.hibernate.dialect.Dialect] HHH000400: Using dialect: gov.opm.scrd.entities.common.OPMPostgreSQLDialect
+2014-02-07 22:25:04,476 INFO  [org.hibernate.engine.jdbc.internal.LobCreatorBuilder] HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2014-02-07 22:25:05,241 INFO  [org.hibernate.hql.internal.ast.ASTQueryTranslatorFactory] HHH000397: Using ASTQueryTranslatorFactory
+2014-02-07 22:25:18,953 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000030: Cleaning up connection pool [jdbc:postgresql://localhost:5432/postgres]
+2014-02-07 22:25:54,039 WARN  [org.hibernate.ejb.HibernatePersistence] HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; use [org.hibernate.jpa.HibernatePersistenceProvider] instead.
+2014-02-07 22:25:54,039 WARN  [org.hibernate.ejb.HibernatePersistence] HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; use [org.hibernate.jpa.HibernatePersistenceProvider] instead.
+2014-02-07 22:25:54,039 WARN  [org.hibernate.ejb.HibernatePersistence] HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; use [org.hibernate.jpa.HibernatePersistenceProvider] instead.
+2014-02-07 22:25:54,117 INFO  [org.hibernate.jpa.internal.util.LogHelper] HHH000204: Processing PersistenceUnitInfo [
+	name: opmUnitName
+	...]
+2014-02-07 22:25:54,258 INFO  [org.hibernate.Version] HHH000412: Hibernate Core {4.3.1.Final}
+2014-02-07 22:25:54,258 INFO  [org.hibernate.cfg.Environment] HHH000206: hibernate.properties not found
+2014-02-07 22:25:54,258 INFO  [org.hibernate.cfg.Environment] HHH000021: Bytecode provider name : javassist
+2014-02-07 22:25:54,460 INFO  [org.hibernate.annotations.common.Version] HCANN000001: Hibernate Commons Annotations {4.0.4.Final}
+2014-02-07 22:25:54,710 WARN  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000402: Using Hibernate built-in connection pool (not for production use!)
+2014-02-07 22:25:54,710 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000401: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/postgres]
+2014-02-07 22:25:54,710 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000046: Connection properties: {user=postgres, password=****}
+2014-02-07 22:25:54,710 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000006: Autocommit mode: false
+2014-02-07 22:25:54,710 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000115: Hibernate connection pool size: 20 (min=1)
+2014-02-07 22:25:55,303 INFO  [org.hibernate.dialect.Dialect] HHH000400: Using dialect: gov.opm.scrd.entities.common.OPMPostgreSQLDialect
+2014-02-07 22:25:55,318 INFO  [org.hibernate.engine.jdbc.internal.LobCreatorBuilder] HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2014-02-07 22:25:56,176 INFO  [org.hibernate.hql.internal.ast.ASTQueryTranslatorFactory] HHH000397: Using ASTQueryTranslatorFactory
+2014-02-07 22:25:58,501 WARN  [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] SQL Error: 0, SQLState: 23503
+2014-02-07 22:25:58,501 ERROR [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] ERROR: insert or update on table "calculation_version" violates foreign key constraint "fk_calculation_version_account"
+  �ԲӡGKey (account_id)=(0) is not present in table "account".
+2014-02-07 22:25:59,094 WARN  [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] SQL Error: 0, SQLState: 23503
+2014-02-07 22:25:59,094 ERROR [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] ERROR: insert or update on table "calculation_version" violates foreign key constraint "fk_calculation_version_account"
+  �ԲӡGKey (account_id)=(0) is not present in table "account".
+2014-02-07 22:25:59,671 WARN  [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] SQL Error: 0, SQLState: 23503
+2014-02-07 22:25:59,671 ERROR [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] ERROR: insert or update on table "calculation_version" violates foreign key constraint "fk_calculation_version_account"
+  �ԲӡGKey (account_id)=(0) is not present in table "account".
+2014-02-07 22:26:00,139 WARN  [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] SQL Error: 0, SQLState: 23503
+2014-02-07 22:26:00,139 ERROR [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] ERROR: insert or update on table "calculation_version" violates foreign key constraint "fk_calculation_version_account"
+  �ԲӡGKey (account_id)=(0) is not present in table "account".
+2014-02-07 22:26:00,591 WARN  [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] SQL Error: 0, SQLState: 23503
+2014-02-07 22:26:00,591 ERROR [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] ERROR: insert or update on table "calculation_version" violates foreign key constraint "fk_calculation_version_account"
+  �ԲӡGKey (account_id)=(0) is not present in table "account".
+2014-02-07 22:26:01,044 WARN  [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] SQL Error: 0, SQLState: 23503
+2014-02-07 22:26:01,044 ERROR [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] ERROR: insert or update on table "calculation_version" violates foreign key constraint "fk_calculation_version_account"
+  �ԲӡGKey (account_id)=(0) is not present in table "account".
+2014-02-07 22:26:01,465 WARN  [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] SQL Error: 0, SQLState: 23503
+2014-02-07 22:26:01,465 ERROR [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] ERROR: insert or update on table "calculation_version" violates foreign key constraint "fk_calculation_version_account"
+  �ԲӡGKey (account_id)=(0) is not present in table "account".
+2014-02-07 22:26:01,917 WARN  [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] SQL Error: 0, SQLState: 23503
+2014-02-07 22:26:01,917 ERROR [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] ERROR: insert or update on table "calculation_version" violates foreign key constraint "fk_calculation_version_account"
+  �ԲӡGKey (account_id)=(0) is not present in table "account".
+2014-02-07 22:26:02,323 WARN  [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] SQL Error: 0, SQLState: 23503
+2014-02-07 22:26:02,323 ERROR [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] ERROR: insert or update on table "calculation_version" violates foreign key constraint "fk_calculation_version_account"
+  �ԲӡGKey (account_id)=(0) is not present in table "account".
+2014-02-07 22:26:02,760 WARN  [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] SQL Error: 0, SQLState: 23503
+2014-02-07 22:26:02,760 ERROR [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] ERROR: insert or update on table "calculation_version" violates foreign key constraint "fk_calculation_version_account"
+  �ԲӡGKey (account_id)=(0) is not present in table "account".
+2014-02-07 22:26:03,165 WARN  [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] SQL Error: 0, SQLState: 23503
+2014-02-07 22:26:03,165 ERROR [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] ERROR: insert or update on table "calculation_version" violates foreign key constraint "fk_calculation_version_account"
+  �ԲӡGKey (account_id)=(0) is not present in table "account".
+2014-02-07 22:26:03,602 WARN  [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] SQL Error: 0, SQLState: 23503
+2014-02-07 22:26:03,602 ERROR [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] ERROR: insert or update on table "calculation_version" violates foreign key constraint "fk_calculation_version_account"
+  �ԲӡGKey (account_id)=(0) is not present in table "account".
+2014-02-07 22:26:04,023 WARN  [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] SQL Error: 0, SQLState: 23503
+2014-02-07 22:26:04,023 ERROR [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] ERROR: insert or update on table "calculation_version" violates foreign key constraint "fk_calculation_version_account"
+  �ԲӡGKey (account_id)=(0) is not present in table "account".
+2014-02-07 22:26:04,460 WARN  [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] SQL Error: 0, SQLState: 23503
+2014-02-07 22:26:04,460 ERROR [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] ERROR: insert or update on table "calculation_version" violates foreign key constraint "fk_calculation_version_account"
+  �ԲӡGKey (account_id)=(0) is not present in table "account".
+2014-02-07 22:26:04,881 WARN  [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] SQL Error: 0, SQLState: 23503
+2014-02-07 22:26:04,881 ERROR [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] ERROR: insert or update on table "calculation_version" violates foreign key constraint "fk_calculation_version_account"
+  �ԲӡGKey (account_id)=(0) is not present in table "account".
+2014-02-07 22:26:05,334 WARN  [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] SQL Error: 0, SQLState: 23503
+2014-02-07 22:26:05,334 ERROR [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] ERROR: insert or update on table "calculation_version" violates foreign key constraint "fk_calculation_version_account"
+  �ԲӡGKey (account_id)=(0) is not present in table "account".
+2014-02-07 22:26:05,739 WARN  [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] SQL Error: 0, SQLState: 23503
+2014-02-07 22:26:05,739 ERROR [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] ERROR: insert or update on table "calculation_version" violates foreign key constraint "fk_calculation_version_account"
+  �ԲӡGKey (account_id)=(0) is not present in table "account".
+2014-02-07 22:26:06,129 WARN  [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] SQL Error: 0, SQLState: 23503
+2014-02-07 22:26:06,129 ERROR [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] ERROR: insert or update on table "calculation_version" violates foreign key constraint "fk_calculation_version_account"
+  �ԲӡGKey (account_id)=(0) is not present in table "account".
+2014-02-07 22:26:06,566 WARN  [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] SQL Error: 0, SQLState: 23503
+2014-02-07 22:26:06,566 ERROR [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] ERROR: insert or update on table "calculation_version" violates foreign key constraint "fk_calculation_version_account"
+  �ԲӡGKey (account_id)=(0) is not present in table "account".
+2014-02-07 22:26:07,003 WARN  [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] SQL Error: 0, SQLState: 23503
+2014-02-07 22:26:07,003 ERROR [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] ERROR: insert or update on table "calculation_version" violates foreign key constraint "fk_calculation_version_account"
+  �ԲӡGKey (account_id)=(0) is not present in table "account".
+2014-02-07 22:26:07,580 WARN  [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] SQL Error: 0, SQLState: 23503
+2014-02-07 22:26:07,580 ERROR [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] ERROR: insert or update on table "calculation_version" violates foreign key constraint "fk_calculation_version_account"
+  �ԲӡGKey (account_id)=(0) is not present in table "account".
+2014-02-07 22:26:08,017 WARN  [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] SQL Error: 0, SQLState: 23503
+2014-02-07 22:26:08,017 ERROR [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] ERROR: insert or update on table "calculation_version" violates foreign key constraint "fk_calculation_version_account"
+  �ԲӡGKey (account_id)=(0) is not present in table "account".
+2014-02-07 22:26:08,438 WARN  [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] SQL Error: 0, SQLState: 23503
+2014-02-07 22:26:08,438 ERROR [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] ERROR: insert or update on table "calculation_version" violates foreign key constraint "fk_calculation_version_account"
+  �ԲӡGKey (account_id)=(0) is not present in table "account".
+2014-02-07 22:26:08,890 WARN  [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] SQL Error: 0, SQLState: 23503
+2014-02-07 22:26:08,890 ERROR [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] ERROR: insert or update on table "calculation_version" violates foreign key constraint "fk_calculation_version_account"
+  �ԲӡGKey (account_id)=(0) is not present in table "account".
+2014-02-07 22:26:09,031 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000030: Cleaning up connection pool [jdbc:postgresql://localhost:5432/postgres]
+2014-02-07 22:26:09,031 WARN  [org.hibernate.ejb.HibernatePersistence] HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; use [org.hibernate.jpa.HibernatePersistenceProvider] instead.
+2014-02-07 22:26:09,031 WARN  [org.hibernate.ejb.HibernatePersistence] HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; use [org.hibernate.jpa.HibernatePersistenceProvider] instead.
+2014-02-07 22:26:09,031 WARN  [org.hibernate.ejb.HibernatePersistence] HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; use [org.hibernate.jpa.HibernatePersistenceProvider] instead.
+2014-02-07 22:26:09,046 INFO  [org.hibernate.jpa.internal.util.LogHelper] HHH000204: Processing PersistenceUnitInfo [
+	name: opmUnitName
+	...]
+2014-02-07 22:26:09,124 WARN  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000402: Using Hibernate built-in connection pool (not for production use!)
+2014-02-07 22:26:09,124 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000401: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/postgres]
+2014-02-07 22:26:09,124 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000046: Connection properties: {user=postgres, password=****}
+2014-02-07 22:26:09,124 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000006: Autocommit mode: false
+2014-02-07 22:26:09,124 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000115: Hibernate connection pool size: 20 (min=1)
+2014-02-07 22:26:09,468 INFO  [org.hibernate.dialect.Dialect] HHH000400: Using dialect: gov.opm.scrd.entities.common.OPMPostgreSQLDialect
+2014-02-07 22:26:09,468 INFO  [org.hibernate.engine.jdbc.internal.LobCreatorBuilder] HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2014-02-07 22:26:09,780 INFO  [org.hibernate.hql.internal.ast.ASTQueryTranslatorFactory] HHH000397: Using ASTQueryTranslatorFactory
+2014-02-07 22:26:10,513 INFO  [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] Loading XML bean definitions from class path resource [batchProcessJob_test.xml]
+2014-02-07 22:26:10,544 INFO  [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] Loading XML bean definitions from class path resource [billProcessor_test.xml]
+2014-02-07 22:26:10,747 INFO  [org.springframework.context.support.GenericApplicationContext] Refreshing org.springframework.context.support.GenericApplicationContext@1baa46d: startup date [Fri Feb 07 22:26:10 CST 2014]; root of context hierarchy
+2014-02-07 22:26:10,918 INFO  [org.springframework.beans.factory.support.DefaultListableBeanFactory] Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@149a7: defining beans [RFile,org.springframework.context.annotation.internalConfigurationAnnotationProcessor,org.springframework.context.annotation.internalAutowiredAnnotationProcessor,org.springframework.context.annotation.internalRequiredAnnotationProcessor,org.springframework.context.annotation.internalCommonAnnotationProcessor,org.springframework.context.annotation.internalPersistenceAnnotationProcessor,log4jProvider,logger,entityManagerFactory,entityManager,waltRuleService,reversePaymentRuleService,accountService,minWorkAge,currentUserName,refundTriggerAmount,accountNoteTexts,billProcessor,cache,securityService,velocityEngine,mailSender,retriesNumber,retryInterval,ageToCleanInDays,generalMailRecipient,billMailRecipient,fileImportMailTemplate,inputDirectoryPath,wildCardInput,directoryToClean,wildCardToClean,glDirectory,databaseString,datasourceString,workstationId,batchProcessingJob,org.springframework.context.annotation.ConfigurationClassPostProcessor.importAwareProcessor]; root of factory hierarchy
+2014-02-07 22:26:11,012 INFO  [org.springframework.orm.jpa.LocalEntityManagerFactoryBean] Building JPA EntityManagerFactory for persistence unit 'opmUnitName'
+2014-02-07 22:26:11,012 WARN  [org.hibernate.ejb.HibernatePersistence] HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; use [org.hibernate.jpa.HibernatePersistenceProvider] instead.
+2014-02-07 22:26:11,012 WARN  [org.hibernate.ejb.HibernatePersistence] HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; use [org.hibernate.jpa.HibernatePersistenceProvider] instead.
+2014-02-07 22:26:11,012 WARN  [org.hibernate.ejb.HibernatePersistence] HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; use [org.hibernate.jpa.HibernatePersistenceProvider] instead.
+2014-02-07 22:26:11,028 INFO  [org.hibernate.jpa.internal.util.LogHelper] HHH000204: Processing PersistenceUnitInfo [
+	name: opmUnitName
+	...]
+2014-02-07 22:26:11,090 WARN  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000402: Using Hibernate built-in connection pool (not for production use!)
+2014-02-07 22:26:11,090 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000401: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/postgres]
+2014-02-07 22:26:11,090 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000046: Connection properties: {user=postgres, password=****}
+2014-02-07 22:26:11,090 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000006: Autocommit mode: false
+2014-02-07 22:26:11,090 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000115: Hibernate connection pool size: 20 (min=1)
+2014-02-07 22:26:11,418 INFO  [org.hibernate.dialect.Dialect] HHH000400: Using dialect: gov.opm.scrd.entities.common.OPMPostgreSQLDialect
+2014-02-07 22:26:11,418 INFO  [org.hibernate.engine.jdbc.internal.LobCreatorBuilder] HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2014-02-07 22:26:11,714 INFO  [org.hibernate.hql.internal.ast.ASTQueryTranslatorFactory] HHH000397: Using ASTQueryTranslatorFactory
+2014-02-07 22:26:12,354 WARN  [org.hibernate.jpa.internal.EntityManagerFactoryRegistry] HHH000436: Entity manager factory name (opmUnitName) is already registered.  If entity manager will be clustered or passivated, specify a unique value for property 'hibernate.ejb.entitymanager_factory_name'
+2014-02-07 22:26:13,290 INFO  [org.subethamail.smtp.server.SMTPServer] SMTP server *:2983 starting
+2014-02-07 22:26:13,305 INFO  [bill_processor] Service Credit Batch started.
+2014-02-07 22:26:13,305 INFO  [org.subethamail.smtp.server.ServerThread] SMTP server *:2983 started
+2014-02-07 22:26:13,851 ERROR [bill_processor] User NotBatchUser is not allowed to run the batch service.
+gov.opm.scrd.services.AuthorizationException: Batch process user [NotBatchUser] is not found
+	at gov.opm.scrd.batchprocessing.jobs.BatchProcessingJob.doExecute(BatchProcessingJob.java:439)
+	at gov.opm.scrd.batchprocessing.jobs.BatchProcessingJob.execute(BatchProcessingJob.java:376)
+	at gov.opm.scrd.batchprocessing.jobs.BatchProcessingJobTests.testCase_BatchUserViolation(BatchProcessingJobTests.java:342)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:45)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:42)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:28)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestMethodCallbacks.evaluate(RunBeforeTestMethodCallbacks.java:74)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:30)
+	at org.springframework.test.context.junit4.statements.RunAfterTestMethodCallbacks.evaluate(RunAfterTestMethodCallbacks.java:83)
+	at org.springframework.test.context.junit4.statements.SpringRepeat.evaluate(SpringRepeat.java:72)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:231)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:88)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:28)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:30)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:71)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:174)
+	at junit.framework.JUnit4TestAdapter.run(JUnit4TestAdapter.java:39)
+	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+	at junit.framework.TestSuite.run(TestSuite.java:238)
+	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner.run(JUnitTestRunner.java:518)
+	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner.launch(JUnitTestRunner.java:1052)
+	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner.main(JUnitTestRunner.java:906)
+2014-02-07 22:26:13,851 INFO  [bill_processor] Send email to general@opm.gov, subject = [Service Credit User Violation]. Message:
+Service Credit Batch started at 10:26:13 PM CST on February 7, 2014. Batch done at 10:26:13 PM CST.
+
+User NotBatchUser is not allowed to run the batch service. He does not exist. This is a serious configuration error. Call the Program Manager or DBA. 
+2014-02-07 22:26:13,976 WARN  [bill_processor] Service Credit Batch has retried max 0 times today. The batch process will exit unsuccessfully.
+2014-02-07 22:26:14,101 INFO  [org.subethamail.smtp.server.SMTPServer] SMTP server *:2983 stopping
+2014-02-07 22:26:14,101 INFO  [org.subethamail.smtp.server.ServerThread] SMTP server *:2983 stopped
+2014-02-07 22:26:14,366 INFO  [org.subethamail.smtp.server.SMTPServer] SMTP server *:2983 starting
+2014-02-07 22:26:14,366 INFO  [org.subethamail.smtp.server.ServerThread] SMTP server *:2983 started
+2014-02-07 22:26:14,366 INFO  [bill_processor] Service Credit Batch started.
+2014-02-07 22:26:14,460 INFO  [bill_processor] Is today holiday : false
+2014-02-07 22:26:14,460 ERROR [bill_processor] Can not read folder: test_files\lockbox_files
+2014-02-07 22:26:14,460 INFO  [bill_processor] Send email to general@opm.gov, subject = [SERVICE CREDIT BATCH CANNOT ACCESS NETWORK]. Message:
+Service Credit Batch started at 10:26:14 PM CST on February 7, 2014. Batch done at 10:26:14 PM CST.
+
+THE NETWORK IS DOWN! 
+Network Services not Available for Service Credit. Cannot access the test_files/lockbox_files network folder. Please ask the Help Desk to investigate. SERVICE CREDIT IS SHUT DOWN UNTIL THIS ERROR IS FIXED! 
+2014-02-07 22:26:14,460 WARN  [bill_processor] Service Credit Batch has retried max 0 times today. The batch process will exit unsuccessfully.
+2014-02-07 22:26:14,569 INFO  [org.subethamail.smtp.server.SMTPServer] SMTP server *:2983 stopping
+2014-02-07 22:26:14,569 INFO  [org.subethamail.smtp.server.ServerThread] SMTP server *:2983 stopped
+2014-02-07 22:26:14,818 INFO  [org.subethamail.smtp.server.SMTPServer] SMTP server *:2983 starting
+2014-02-07 22:26:14,818 INFO  [org.subethamail.smtp.server.ServerThread] SMTP server *:2983 started
+2014-02-07 22:26:14,834 INFO  [bill_processor] Service Credit Batch started.
+2014-02-07 22:26:14,850 INFO  [bill_processor] Is today holiday : false
+2014-02-07 22:26:14,850 ERROR [bill_processor] No files arrived today in: test_files\lockbox_files
+2014-02-07 22:26:14,850 INFO  [bill_processor] Send email to general@opm.gov, subject = [SERVICE CREDIT LOCKBOX FILE IS LATE!]. Message:
+Service Credit Batch started at 10:26:14 PM CST on February 7, 2014. Batch done at 10:26:14 PM CST.
+
+Today's Lockbox Bank File has not arrived. Please notify Production Control and BSG that the data file is not in the test_files/lockbox_files network share. The nightly batch process is scheduled to run at 10:26:14 PM CST and today's import should run before that time. 
+2014-02-07 22:26:14,865 WARN  [bill_processor] Service Credit Batch has retried max 0 times today. The batch process will exit unsuccessfully.
+2014-02-07 22:26:14,959 INFO  [org.subethamail.smtp.server.SMTPServer] SMTP server *:2983 stopping
+2014-02-07 22:26:14,959 INFO  [org.subethamail.smtp.server.ServerThread] SMTP server *:2983 stopped
+2014-02-07 22:26:15,224 INFO  [org.subethamail.smtp.server.SMTPServer] SMTP server *:2983 starting
+2014-02-07 22:26:15,224 INFO  [org.subethamail.smtp.server.ServerThread] SMTP server *:2983 started
+2014-02-07 22:26:15,224 INFO  [bill_processor] Service Credit Batch started.
+2014-02-07 22:26:15,255 INFO  [bill_processor] Is today holiday : true
+2014-02-07 22:26:15,255 INFO  [bill_processor] Start importing files in: test_files\lockbox_files
+2014-02-07 22:26:15,255 INFO  [bill_processor] Start loading file content from: test_files\lockbox_files\lockbox_file_1.txt
+2014-02-07 22:26:15,255 INFO  [bill_processor] 0 lines loaded from lockbox_file_1.txt which is backup to Dupe_SC020614_39.txt
+2014-02-07 22:26:15,255 INFO  [bill_processor] End loading file content from: test_files\lockbox_files\lockbox_file_1.txt
+2014-02-07 22:26:15,255 INFO  [bill_processor] 
+Service Credit imported a data file from the bank lockbox on February 7, 2014 at 10:26:15 PM CST.
+Lockbox data imported into the dbName database on server dbHostName from computer batchProcessHostName.
+
+# Lines in file = 0
+# Duplicate Lines = 0
+
+# Records Processed = 0
+# Check Payments = 0
+# Good Check Payments = 0
+# Bad Check Payments = 0
+# Dupe Check Payments = 0
+# ACH Payments = 0
+# Good ACH Payments = 0
+# Bad ACH Payments = 0
+# Dupe ACH Payments = 0
+# Bad Change Records = 0
+# Good Change Records = 0
+# No Match Change Records = 0
+# Invalid Summary Records = 0
+# Valid Summary Records = 0
+# Successful Transactions = 0
+# Failed Transactions = 0
+# Invalid Lines = 0
+
+Total Check Payments = 0
+Total ACH Payments = 0
+Total of Accepted Payments = 0
+Total in File = 0
+
+No bad records in this batch.
+0 = number of successful calls to the ProcessImportRecord function.
+
+         Accepted Payments: 0
+       Unresolved Payments: 0
+        Suspended Payments: 0
+-----------------------------------
+Pending payments processed: 0
+
+2014-02-07 22:26:15,349 INFO  [bill_processor] Send email to general@opm.gov, subject = [Service Credit Import: OK ]. Message:
+Service Credit Batch started at 10:26:15 PM CST on February 2, 2014. Batch done at 10:26:15 PM CST.
+
+SUMMARY: The file import was successful.
+
+   Number Type         Total
+        0 ACH           0.00
+        0 Check         0.00
+============================
+        0 All           0.00
+
+
+
+SCRD found no payment records in this Lockbox file.
+
+
+There are no change records in this Lockbox file.
+
+DETAILS:
+Audit Batch Log ID number is 39
+File Contents:
+ Number Type Description
+====================================
+      0 Total Lines in Lockbox File
+
+Lockbox File Name:
+lockbox_file_1.txt
+Backup File Name:
+Dupe_SC020614_39.txt
+
+2014-02-07 22:26:15,364 INFO  [bill_processor] End importing files in: test_files\lockbox_files
+2014-02-07 22:26:15,364 INFO  [bill_processor] Start cleaning old files in: test_files\old_files
+2014-02-07 22:26:15,364 INFO  [bill_processor] Old files cleaned: 1
+2014-02-07 22:26:15,364 INFO  [bill_processor] End cleaning old files in: test_files\old_files
+2014-02-07 22:26:15,364 INFO  [bill_processor] Service Credit Batch finished successfully.
+2014-02-07 22:26:15,474 INFO  [org.subethamail.smtp.server.SMTPServer] SMTP server *:2983 stopping
+2014-02-07 22:26:15,474 INFO  [org.subethamail.smtp.server.ServerThread] SMTP server *:2983 stopped
+2014-02-07 22:26:15,723 INFO  [org.subethamail.smtp.server.SMTPServer] SMTP server *:2983 starting
+2014-02-07 22:26:15,723 INFO  [org.subethamail.smtp.server.ServerThread] SMTP server *:2983 started
+2014-02-07 22:26:15,723 INFO  [bill_processor] Service Credit Batch started.
+2014-02-07 22:26:15,739 INFO  [bill_processor] Is today holiday : true
+2014-02-07 22:26:15,739 INFO  [bill_processor] Start importing files in: test_files\lockbox_files
+2014-02-07 22:26:15,739 INFO  [bill_processor] Start loading file content from: test_files\lockbox_files\lockbox_file_1.txt
+2014-02-07 22:26:15,754 INFO  [bill_processor] 0 lines loaded from lockbox_file_1.txt which is backup to Dupe_SC020614_40.txt
+2014-02-07 22:26:15,754 INFO  [bill_processor] End loading file content from: test_files\lockbox_files\lockbox_file_1.txt
+2014-02-07 22:26:15,754 INFO  [bill_processor] 
+Service Credit imported a data file from the bank lockbox on February 7, 2014 at 10:26:15 PM CST.
+Lockbox data imported into the dbName database on server dbHostName from computer batchProcessHostName.
+
+# Lines in file = 0
+# Duplicate Lines = 0
+
+# Records Processed = 0
+# Check Payments = 0
+# Good Check Payments = 0
+# Bad Check Payments = 0
+# Dupe Check Payments = 0
+# ACH Payments = 0
+# Good ACH Payments = 0
+# Bad ACH Payments = 0
+# Dupe ACH Payments = 0
+# Bad Change Records = 0
+# Good Change Records = 0
+# No Match Change Records = 0
+# Invalid Summary Records = 0
+# Valid Summary Records = 0
+# Successful Transactions = 0
+# Failed Transactions = 0
+# Invalid Lines = 0
+
+Total Check Payments = 0
+Total ACH Payments = 0
+Total of Accepted Payments = 0
+Total in File = 0
+
+No bad records in this batch.
+0 = number of successful calls to the ProcessImportRecord function.
+
+         Accepted Payments: 0
+       Unresolved Payments: 0
+        Suspended Payments: 0
+-----------------------------------
+Pending payments processed: 0
+
+2014-02-07 22:26:15,770 INFO  [bill_processor] Send email to general@opm.gov, subject = [Service Credit Import: OK ]. Message:
+Service Credit Batch started at 10:26:15 PM CST on February 2, 2014. Batch done at 10:26:15 PM CST.
+
+SUMMARY: The file import was successful.
+
+   Number Type         Total
+        0 ACH           0.00
+        0 Check         0.00
+============================
+        0 All           0.00
+
+
+
+SCRD found no payment records in this Lockbox file.
+
+
+There are no change records in this Lockbox file.
+
+DETAILS:
+Audit Batch Log ID number is 40
+File Contents:
+ Number Type Description
+====================================
+      0 Total Lines in Lockbox File
+
+Lockbox File Name:
+lockbox_file_1.txt
+Backup File Name:
+Dupe_SC020614_40.txt
+
+2014-02-07 22:26:15,770 INFO  [bill_processor] End importing files in: test_files\lockbox_files
+2014-02-07 22:26:15,770 INFO  [bill_processor] Start cleaning old files in: test_files\old_files
+2014-02-07 22:26:15,770 INFO  [bill_processor] Old files cleaned: 0
+2014-02-07 22:26:15,770 INFO  [bill_processor] End cleaning old files in: test_files\old_files
+2014-02-07 22:26:15,770 INFO  [bill_processor] Service Credit Batch finished successfully.
+2014-02-07 22:26:15,879 INFO  [org.subethamail.smtp.server.SMTPServer] SMTP server *:2983 stopping
+2014-02-07 22:26:15,879 INFO  [org.subethamail.smtp.server.ServerThread] SMTP server *:2983 stopped
+2014-02-07 22:26:16,144 INFO  [org.subethamail.smtp.server.SMTPServer] SMTP server *:2983 starting
+2014-02-07 22:26:16,144 INFO  [org.subethamail.smtp.server.ServerThread] SMTP server *:2983 started
+2014-02-07 22:26:16,144 INFO  [bill_processor] Service Credit Batch started.
+2014-02-07 22:26:16,160 INFO  [bill_processor] Is today holiday : true
+2014-02-07 22:26:16,160 INFO  [bill_processor] Start importing files in: test_files\lockbox_files
+2014-02-07 22:26:16,160 INFO  [bill_processor] Start loading file content from: test_files\lockbox_files\lockbox_file_1.txt
+2014-02-07 22:26:16,191 INFO  [bill_processor] 1 lines loaded from lockbox_file_1.txt which is backup to Backup_SC020614_41.txt
+2014-02-07 22:26:16,191 INFO  [bill_processor] End loading file content from: test_files\lockbox_files\lockbox_file_1.txt
+2014-02-07 22:26:16,191 INFO  [bill_processor] Start processing MainframeImport data from: test_files\lockbox_files\lockbox_file_1.txt
+2014-02-07 22:26:16,191 ERROR [bill_processor] Error importing the record from the MainframeImport table in processImportRecord module: NOT_A_RECORD. Text Line is not a valid Transaction Format [CLAIM_NO_MUST_BE_7_DIGITS]: Bad line
+2014-02-07 22:26:16,191 INFO  [bill_processor] End processing MainframeImport data from: test_files\lockbox_files\lockbox_file_1.txt
+2014-02-07 22:26:16,191 INFO  [bill_processor] Start collating new mainframe payments from: test_files\lockbox_files\lockbox_file_1.txt
+2014-02-07 22:26:16,207 INFO  [bill_processor] End collating new mainframe payments from: test_files\lockbox_files\lockbox_file_1.txt
+2014-02-07 22:26:16,207 INFO  [bill_processor] 
+Service Credit imported a data file from the bank lockbox on February 7, 2014 at 10:26:16 PM CST.
+Lockbox data imported into the dbName database on server dbHostName from computer batchProcessHostName.
+
+# Lines in file = 1
+# New Lines = 1
+# Duplicate Lines = 0
+
+# Records Processed = 1
+# Check Payments = 0
+# Good Check Payments = 0
+# Bad Check Payments = 0
+# Dupe Check Payments = 0
+# ACH Payments = 0
+# Good ACH Payments = 0
+# Bad ACH Payments = 0
+# Dupe ACH Payments = 0
+# Bad Change Records = 0
+# Good Change Records = 0
+# No Match Change Records = 0
+# Invalid Summary Records = 0
+# Valid Summary Records = 0
+# Successful Transactions = 0
+# Failed Transactions = 0
+# Invalid Lines = 1
+
+Total Check Payments = 0
+Total ACH Payments = 0
+Total of Accepted Payments = 0
+Total in File = 0
+
+ERROR: 1 RECORDS FAILED PROCESSING.
+0 = number of successful calls to the ProcessImportRecord function.
+
+         Accepted Payments: 0
+       Unresolved Payments: 0
+        Suspended Payments: 0
+-----------------------------------
+Pending payments processed: 0
+
+2014-02-07 22:26:16,222 INFO  [bill_processor] Send email to general@opm.gov, subject = [Service Credit Import: BATCH IMPORT ERROR ]. Message:
+Service Credit Batch started at 10:26:16 PM CST on February 2, 2014. Batch done at 10:26:16 PM CST.
+
+SUMMARY: THE FILE IMPORT HAD ERRORS. PLEASE CHECK THE 'Lockbox Import Errors' REPORT IN THE SERVICE CREDIT APPLICATION FOR DETAILS. THE ERROR INVOLVES PAYMENTS SO IT MUST BE FIXED AS SOON AS POSSIBLE.
+
+   Number Type         Total
+        0 ACH           0.00
+        0 Check         0.00
+============================
+        0 All           0.00
+
+
+        1 BAD DATA RECORDS
+
+     0.00 = total of the money amounts in the summary (checksum) records
+     0.00 = total of the money amounts in the transaction records
+     0.00 = DISCREPANCY
+
+The bank's file checksum matched the total imported into Service Credit. Total = 0.00.
+
+SCRD COULD NOT READ ANY PAYMENT RECORDS IN THIS LOCKBOX FILE. THEY ARE ALL BAD.
+
+
+There are no change records in this Lockbox file.
+
+DETAILS:
+Audit Batch Log ID number is 41
+File Contents:
+ Number Type Description
+      1 Bad  Data Records
+====================================
+      1 Total Lines in Lockbox File
+
+Lockbox File Name:
+lockbox_file_1.txt
+Backup File Name:
+Backup_SC020614_41.txt
+
+2014-02-07 22:26:16,238 INFO  [bill_processor] End importing files in: test_files\lockbox_files
+2014-02-07 22:26:16,238 INFO  [bill_processor] Start cleaning old files in: test_files\old_files
+2014-02-07 22:26:16,238 INFO  [bill_processor] Old files cleaned: 0
+2014-02-07 22:26:16,238 INFO  [bill_processor] End cleaning old files in: test_files\old_files
+2014-02-07 22:26:16,238 INFO  [bill_processor] Service Credit Batch finished successfully.
+2014-02-07 22:26:16,394 INFO  [org.subethamail.smtp.server.SMTPServer] SMTP server *:2983 stopping
+2014-02-07 22:26:16,394 INFO  [org.subethamail.smtp.server.ServerThread] SMTP server *:2983 stopped
+2014-02-07 22:26:16,737 INFO  [org.subethamail.smtp.server.SMTPServer] SMTP server *:2983 starting
+2014-02-07 22:26:16,737 INFO  [org.subethamail.smtp.server.ServerThread] SMTP server *:2983 started
+2014-02-07 22:26:16,737 INFO  [bill_processor] Service Credit Batch started.
+2014-02-07 22:26:16,753 INFO  [bill_processor] Is today holiday : true
+2014-02-07 22:26:16,753 INFO  [bill_processor] Start importing files in: test_files\lockbox_files
+2014-02-07 22:26:16,753 INFO  [bill_processor] Start loading file content from: test_files\lockbox_files\lockbox_file_1.txt
+2014-02-07 22:26:16,753 INFO  [bill_processor] 1 lines loaded from lockbox_file_1.txt which is backup to Backup_SC020614_42.txt
+2014-02-07 22:26:16,753 INFO  [bill_processor] End loading file content from: test_files\lockbox_files\lockbox_file_1.txt
+2014-02-07 22:26:16,753 INFO  [bill_processor] Start processing MainframeImport data from: test_files\lockbox_files\lockbox_file_1.txt
+2014-02-07 22:26:16,753 ERROR [bill_processor] Error importing the record from the MainframeImport table in processImportRecord module: BAD_R_TRANSACTION. Text Line is not a valid Transaction Format [DOB_MUST_BE_VALID]: R64445566 bad R line
+2014-02-07 22:26:16,768 INFO  [bill_processor] End processing MainframeImport data from: test_files\lockbox_files\lockbox_file_1.txt
+2014-02-07 22:26:16,768 INFO  [bill_processor] Start collating new mainframe payments from: test_files\lockbox_files\lockbox_file_1.txt
+2014-02-07 22:26:16,768 INFO  [bill_processor] End collating new mainframe payments from: test_files\lockbox_files\lockbox_file_1.txt
+2014-02-07 22:26:16,768 INFO  [bill_processor] 
+Service Credit imported a data file from the bank lockbox on February 7, 2014 at 10:26:16 PM CST.
+Lockbox data imported into the dbName database on server dbHostName from computer batchProcessHostName.
+
+# Lines in file = 1
+# New Lines = 1
+# Duplicate Lines = 0
+
+# Records Processed = 1
+# Check Payments = 1
+# Good Check Payments = 0
+# Bad Check Payments = 1
+# Dupe Check Payments = 0
+# ACH Payments = 0
+# Good ACH Payments = 0
+# Bad ACH Payments = 0
+# Dupe ACH Payments = 0
+# Bad Change Records = 0
+# Good Change Records = 0
+# No Match Change Records = 0
+# Invalid Summary Records = 0
+# Valid Summary Records = 0
+# Successful Transactions = 0
+# Failed Transactions = 1
+# Invalid Lines = 0
+
+Total Check Payments = 0
+Total ACH Payments = 0
+Total of Accepted Payments = 0
+Total in File = 0
+
+ERROR: 1 RECORDS FAILED PROCESSING.
+ERROR: 1 TRANSACTIONS COULD NOT BE READ INTO THE DATABASE!
+0 = number of successful calls to the ProcessImportRecord function.
+1 NUMBER OF FAILED CALLS TO THE PROCESSIMPORTRECORD FUNCTION!
+
+         Accepted Payments: 0
+       Unresolved Payments: 0
+        Suspended Payments: 0
+-----------------------------------
+Pending payments processed: 0
+
+2014-02-07 22:26:16,768 INFO  [bill_processor] Send email to general@opm.gov, subject = [Service Credit Import: PAYMENT ERROR ]. Message:
+Service Credit Batch started at 10:26:16 PM CST on February 2, 2014. Batch done at 10:26:16 PM CST.
+
+SUMMARY: THE FILE IMPORT HAD ERRORS. PLEASE CHECK THE 'Lockbox Import Errors' REPORT IN THE SERVICE CREDIT APPLICATION FOR DETAILS. THE ERROR INVOLVES PAYMENTS SO IT MUST BE FIXED AS SOON AS POSSIBLE.
+
+   Number Type         Total
+        0 ACH           0.00
+        0 Check         0.00
+============================
+        0 All           0.00
+
+
+        1 BAD CHECK PAYMENTS
+
+     0.00 = total of the money amounts in the summary (checksum) records
+     0.00 = total of the money amounts in the transaction records
+     0.00 = DISCREPANCY
+
+The bank's file checksum matched the total imported into Service Credit. Total = 0.00.
+
+SCRD COULD NOT READ ANY PAYMENT RECORDS IN THIS LOCKBOX FILE. THEY ARE ALL BAD.
+
+
+There are no change records in this Lockbox file.
+
+DETAILS:
+Audit Batch Log ID number is 42
+File Contents:
+ Number Type Description
+      1 Bad  Check Payments
+====================================
+      1 Total Lines in Lockbox File
+
+Lockbox File Name:
+lockbox_file_1.txt
+Backup File Name:
+Backup_SC020614_42.txt
+
+2014-02-07 22:26:16,784 INFO  [bill_processor] End importing files in: test_files\lockbox_files
+2014-02-07 22:26:16,784 INFO  [bill_processor] Start cleaning old files in: test_files\old_files
+2014-02-07 22:26:16,784 INFO  [bill_processor] Old files cleaned: 0
+2014-02-07 22:26:16,784 INFO  [bill_processor] End cleaning old files in: test_files\old_files
+2014-02-07 22:26:16,784 INFO  [bill_processor] Service Credit Batch finished successfully.
+2014-02-07 22:26:16,924 INFO  [org.subethamail.smtp.server.SMTPServer] SMTP server *:2983 stopping
+2014-02-07 22:26:16,924 INFO  [org.subethamail.smtp.server.ServerThread] SMTP server *:2983 stopped
+2014-02-07 22:26:17,236 INFO  [org.subethamail.smtp.server.SMTPServer] SMTP server *:2983 starting
+2014-02-07 22:26:17,236 INFO  [org.subethamail.smtp.server.ServerThread] SMTP server *:2983 started
+2014-02-07 22:26:17,236 INFO  [bill_processor] Service Credit Batch started.
+2014-02-07 22:26:17,252 INFO  [bill_processor] Is today holiday : true
+2014-02-07 22:26:17,252 INFO  [bill_processor] Start importing files in: test_files\lockbox_files
+2014-02-07 22:26:17,252 INFO  [bill_processor] Start loading file content from: test_files\lockbox_files\lockbox_file_1.txt
+2014-02-07 22:26:17,252 INFO  [bill_processor] 1 lines loaded from lockbox_file_1.txt which is backup to Backup_SC020614_43.txt
+2014-02-07 22:26:17,252 INFO  [bill_processor] End loading file content from: test_files\lockbox_files\lockbox_file_1.txt
+2014-02-07 22:26:17,252 INFO  [bill_processor] Start processing MainframeImport data from: test_files\lockbox_files\lockbox_file_1.txt
+2014-02-07 22:26:17,252 ERROR [bill_processor] Error importing the record from the MainframeImport table in processImportRecord module: BAD_C_TRANSACTION. Text Line is not a valid Transaction Format [DOB_MUST_BE_VALID]: C64445566 bad C line
+2014-02-07 22:26:17,252 INFO  [bill_processor] End processing MainframeImport data from: test_files\lockbox_files\lockbox_file_1.txt
+2014-02-07 22:26:17,252 INFO  [bill_processor] Start collating new mainframe payments from: test_files\lockbox_files\lockbox_file_1.txt
+2014-02-07 22:26:17,252 INFO  [bill_processor] End collating new mainframe payments from: test_files\lockbox_files\lockbox_file_1.txt
+2014-02-07 22:26:17,252 INFO  [bill_processor] 
+Service Credit imported a data file from the bank lockbox on February 7, 2014 at 10:26:17 PM CST.
+Lockbox data imported into the dbName database on server dbHostName from computer batchProcessHostName.
+
+# Lines in file = 1
+# New Lines = 1
+# Duplicate Lines = 0
+
+# Records Processed = 1
+# Check Payments = 0
+# Good Check Payments = 0
+# Bad Check Payments = 0
+# Dupe Check Payments = 0
+# ACH Payments = 0
+# Good ACH Payments = 0
+# Bad ACH Payments = 0
+# Dupe ACH Payments = 0
+# Bad Change Records = 1
+# Good Change Records = 0
+# No Match Change Records = 0
+# Invalid Summary Records = 0
+# Valid Summary Records = 0
+# Successful Transactions = 0
+# Failed Transactions = 1
+# Invalid Lines = 0
+
+Total Check Payments = 0
+Total ACH Payments = 0
+Total of Accepted Payments = 0
+Total in File = 0
+
+ERROR: 1 RECORDS FAILED PROCESSING.
+ERROR: 1 TRANSACTIONS COULD NOT BE READ INTO THE DATABASE!
+0 = number of successful calls to the ProcessImportRecord function.
+1 NUMBER OF FAILED CALLS TO THE PROCESSIMPORTRECORD FUNCTION!
+
+         Accepted Payments: 0
+       Unresolved Payments: 0
+        Suspended Payments: 0
+-----------------------------------
+Pending payments processed: 0
+
+2014-02-07 22:26:17,268 INFO  [bill_processor] Send email to general@opm.gov, subject = [Service Credit Import: OK except for Change record rejected. ]. Message:
+Service Credit Batch started at 10:26:17 PM CST on February 2, 2014. Batch done at 10:26:17 PM CST.
+
+SUMMARY: The file import was successful.
+
+   Number Type         Total
+        0 ACH           0.00
+        0 Check         0.00
+============================
+        0 All           0.00
+
+
+
+SCRD found no payment records in this Lockbox file.
+
+
+ALL 1 LOCKBOX ADDRESS CHANGE RECORDS ARE CORRUPT.
+Either the data format was bad or the CSD & Birth Date did not match an account in the Service Credit database. They could be for Voluntary Contributions or Direct Pay Life Insurance.
+
+        1 Bad Name or Address Changes
+
+DETAILS:
+Audit Batch Log ID number is 43
+File Contents:
+ Number Type Description
+      1 Bad  Name or Address Changes
+====================================
+      1 Total Lines in Lockbox File
+
+Lockbox File Name:
+lockbox_file_1.txt
+Backup File Name:
+Backup_SC020614_43.txt
+
+2014-02-07 22:26:17,283 INFO  [bill_processor] End importing files in: test_files\lockbox_files
+2014-02-07 22:26:17,283 INFO  [bill_processor] Start cleaning old files in: test_files\old_files
+2014-02-07 22:26:17,283 INFO  [bill_processor] Old files cleaned: 0
+2014-02-07 22:26:17,283 INFO  [bill_processor] End cleaning old files in: test_files\old_files
+2014-02-07 22:26:17,283 INFO  [bill_processor] Service Credit Batch finished successfully.
+2014-02-07 22:26:17,408 INFO  [org.subethamail.smtp.server.SMTPServer] SMTP server *:2983 stopping
+2014-02-07 22:26:17,408 INFO  [org.subethamail.smtp.server.ServerThread] SMTP server *:2983 stopped
+2014-02-07 22:26:17,720 INFO  [org.subethamail.smtp.server.SMTPServer] SMTP server *:2983 starting
+2014-02-07 22:26:17,720 INFO  [org.subethamail.smtp.server.ServerThread] SMTP server *:2983 started
+2014-02-07 22:26:17,720 INFO  [bill_processor] Service Credit Batch started.
+2014-02-07 22:26:17,736 INFO  [bill_processor] Is today holiday : true
+2014-02-07 22:26:17,736 INFO  [bill_processor] Start importing files in: test_files\lockbox_files
+2014-02-07 22:26:17,736 INFO  [bill_processor] Start loading file content from: test_files\lockbox_files\lockbox_file_1.txt
+2014-02-07 22:26:17,736 INFO  [bill_processor] 1 lines loaded from lockbox_file_1.txt which is backup to Backup_SC020614_44.txt
+2014-02-07 22:26:17,736 INFO  [bill_processor] End loading file content from: test_files\lockbox_files\lockbox_file_1.txt
+2014-02-07 22:26:17,736 INFO  [bill_processor] Start processing MainframeImport data from: test_files\lockbox_files\lockbox_file_1.txt
+2014-02-07 22:26:17,751 ERROR [bill_processor] Error extracting the R Transaction check sum from the bank input file. The transaction record did not have a number in the the expected position: R ZZZ bad Summary line
+java.lang.NumberFormatException
+	at java.math.BigDecimal.<init>(BigDecimal.java:368)
+	at java.math.BigDecimal.<init>(BigDecimal.java:647)
+	at gov.opm.scrd.batchprocessing.jobs.BatchProcessingJob.extractSummaryRecord(BatchProcessingJob.java:1019)
+	at gov.opm.scrd.batchprocessing.jobs.BatchProcessingJob.processMainframeData(BatchProcessingJob.java:939)
+	at gov.opm.scrd.batchprocessing.jobs.BatchProcessingJob.importFile(BatchProcessingJob.java:731)
+	at gov.opm.scrd.batchprocessing.jobs.BatchProcessingJob.importFiles(BatchProcessingJob.java:702)
+	at gov.opm.scrd.batchprocessing.jobs.BatchProcessingJob.doExecute(BatchProcessingJob.java:479)
+	at gov.opm.scrd.batchprocessing.jobs.BatchProcessingJob.execute(BatchProcessingJob.java:376)
+	at gov.opm.scrd.batchprocessing.jobs.BatchProcessingJobTests.testCase_ImportFile_BadSummaryLine(BatchProcessingJobTests.java:537)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:45)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:42)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:28)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestMethodCallbacks.evaluate(RunBeforeTestMethodCallbacks.java:74)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:30)
+	at org.springframework.test.context.junit4.statements.RunAfterTestMethodCallbacks.evaluate(RunAfterTestMethodCallbacks.java:83)
+	at org.springframework.test.context.junit4.statements.SpringRepeat.evaluate(SpringRepeat.java:72)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:231)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:88)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:28)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:30)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:71)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:174)
+	at junit.framework.JUnit4TestAdapter.run(JUnit4TestAdapter.java:39)
+	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+	at junit.framework.TestSuite.run(TestSuite.java:238)
+	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner.run(JUnitTestRunner.java:518)
+	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner.launch(JUnitTestRunner.java:1052)
+	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner.main(JUnitTestRunner.java:906)
+2014-02-07 22:26:17,767 INFO  [bill_processor] End processing MainframeImport data from: test_files\lockbox_files\lockbox_file_1.txt
+2014-02-07 22:26:17,767 INFO  [bill_processor] Start collating new mainframe payments from: test_files\lockbox_files\lockbox_file_1.txt
+2014-02-07 22:26:17,767 INFO  [bill_processor] End collating new mainframe payments from: test_files\lockbox_files\lockbox_file_1.txt
+2014-02-07 22:26:17,767 INFO  [bill_processor] 
+Service Credit imported a data file from the bank lockbox on February 7, 2014 at 10:26:17 PM CST.
+Lockbox data imported into the dbName database on server dbHostName from computer batchProcessHostName.
+
+# Lines in file = 1
+# New Lines = 1
+# Duplicate Lines = 0
+
+# Records Processed = 1
+# Check Payments = 0
+# Good Check Payments = 0
+# Bad Check Payments = 0
+# Dupe Check Payments = 0
+# ACH Payments = 0
+# Good ACH Payments = 0
+# Bad ACH Payments = 0
+# Dupe ACH Payments = 0
+# Bad Change Records = 0
+# Good Change Records = 0
+# No Match Change Records = 0
+# Invalid Summary Records = 1
+# Valid Summary Records = 0
+# Successful Transactions = 0
+# Failed Transactions = 0
+# Invalid Lines = 0
+
+Total Check Payments = 0
+Total ACH Payments = 0
+Total of Accepted Payments = 0
+Total in File = 0
+
+ERROR: 1 RECORDS FAILED PROCESSING.
+ERROR: 1 CHECKSUMS COULD NOT BE PROCESSED!
+0 = number of successful calls to the ProcessImportRecord function.
+
+         Accepted Payments: 0
+       Unresolved Payments: 0
+        Suspended Payments: 0
+-----------------------------------
+Pending payments processed: 0
+
+2014-02-07 22:26:17,767 INFO  [bill_processor] Send email to general@opm.gov, subject = [Service Credit Import: PAYMENT ERROR ]. Message:
+Service Credit Batch started at 10:26:17 PM CST on February 2, 2014. Batch done at 10:26:17 PM CST.
+
+SUMMARY: THE FILE IMPORT HAD ERRORS. PLEASE CHECK THE 'Lockbox Import Errors' REPORT IN THE SERVICE CREDIT APPLICATION FOR DETAILS. THE ERROR INVOLVES PAYMENTS SO IT MUST BE FIXED AS SOON AS POSSIBLE.
+
+   Number Type         Total
+        0 ACH           0.00
+        0 Check         0.00
+============================
+        0 All           0.00
+
+
+        1 BAD SUMMARY RECORDS
+
+     0.00 = total of the money amounts in the summary (checksum) records
+     0.00 = total of the money amounts in the transaction records
+     0.00 = DISCREPANCY
+
+The bank's file checksum matched the total imported into Service Credit. Total = 0.00.
+
+SCRD COULD NOT READ ANY PAYMENT RECORDS IN THIS LOCKBOX FILE. THEY ARE ALL BAD.
+
+
+There are no change records in this Lockbox file.
+
+DETAILS:
+Audit Batch Log ID number is 44
+File Contents:
+ Number Type Description
+      1 Bad  Summary Records
+====================================
+      1 Total Lines in Lockbox File
+
+Lockbox File Name:
+lockbox_file_1.txt
+Backup File Name:
+Backup_SC020614_44.txt
+
+2014-02-07 22:26:17,782 INFO  [bill_processor] End importing files in: test_files\lockbox_files
+2014-02-07 22:26:17,782 INFO  [bill_processor] Start cleaning old files in: test_files\old_files
+2014-02-07 22:26:17,782 INFO  [bill_processor] Old files cleaned: 0
+2014-02-07 22:26:17,782 INFO  [bill_processor] End cleaning old files in: test_files\old_files
+2014-02-07 22:26:17,782 INFO  [bill_processor] Service Credit Batch finished successfully.
+2014-02-07 22:26:17,907 INFO  [org.subethamail.smtp.server.SMTPServer] SMTP server *:2983 stopping
+2014-02-07 22:26:17,907 INFO  [org.subethamail.smtp.server.ServerThread] SMTP server *:2983 stopped
+2014-02-07 22:26:18,219 INFO  [org.subethamail.smtp.server.SMTPServer] SMTP server *:2983 starting
+2014-02-07 22:26:18,219 INFO  [org.subethamail.smtp.server.ServerThread] SMTP server *:2983 started
+2014-02-07 22:26:18,313 WARN  [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] SQL Error: 0, SQLState: 23503
+2014-02-07 22:26:18,313 ERROR [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] ERROR: insert or update on table "calculation_version" violates foreign key constraint "fk_calculation_version_account"
+  �ԲӡGKey (account_id)=(0) is not present in table "account".
+2014-02-07 22:26:18,422 INFO  [org.subethamail.smtp.server.SMTPServer] SMTP server *:2983 stopping
+2014-02-07 22:26:18,422 INFO  [org.subethamail.smtp.server.ServerThread] SMTP server *:2983 stopped
+2014-02-07 22:26:18,750 INFO  [org.subethamail.smtp.server.SMTPServer] SMTP server *:2983 starting
+2014-02-07 22:26:18,750 INFO  [org.subethamail.smtp.server.ServerThread] SMTP server *:2983 started
+2014-02-07 22:26:18,859 WARN  [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] SQL Error: 0, SQLState: 23503
+2014-02-07 22:26:18,859 ERROR [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] ERROR: insert or update on table "calculation_version" violates foreign key constraint "fk_calculation_version_account"
+  �ԲӡGKey (account_id)=(0) is not present in table "account".
+2014-02-07 22:26:18,952 INFO  [org.subethamail.smtp.server.SMTPServer] SMTP server *:2983 stopping
+2014-02-07 22:26:18,952 INFO  [org.subethamail.smtp.server.ServerThread] SMTP server *:2983 stopped
+2014-02-07 22:26:19,218 INFO  [org.subethamail.smtp.server.SMTPServer] SMTP server *:2983 starting
+2014-02-07 22:26:19,218 INFO  [org.subethamail.smtp.server.ServerThread] SMTP server *:2983 started
+2014-02-07 22:26:19,296 WARN  [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] SQL Error: 0, SQLState: 23503
+2014-02-07 22:26:19,296 ERROR [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] ERROR: insert or update on table "calculation_version" violates foreign key constraint "fk_calculation_version_account"
+  �ԲӡGKey (account_id)=(0) is not present in table "account".
+2014-02-07 22:26:19,405 INFO  [org.subethamail.smtp.server.SMTPServer] SMTP server *:2983 stopping
+2014-02-07 22:26:19,405 INFO  [org.subethamail.smtp.server.ServerThread] SMTP server *:2983 stopped
+2014-02-07 22:26:19,701 INFO  [org.subethamail.smtp.server.SMTPServer] SMTP server *:2983 starting
+2014-02-07 22:26:19,701 INFO  [org.subethamail.smtp.server.ServerThread] SMTP server *:2983 started
+2014-02-07 22:26:19,779 WARN  [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] SQL Error: 0, SQLState: 23503
+2014-02-07 22:26:19,779 ERROR [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] ERROR: insert or update on table "calculation_version" violates foreign key constraint "fk_calculation_version_account"
+  �ԲӡGKey (account_id)=(0) is not present in table "account".
+2014-02-07 22:26:19,888 INFO  [org.subethamail.smtp.server.SMTPServer] SMTP server *:2983 stopping
+2014-02-07 22:26:19,888 INFO  [org.subethamail.smtp.server.ServerThread] SMTP server *:2983 stopped
+2014-02-07 22:26:19,888 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000030: Cleaning up connection pool [jdbc:postgresql://localhost:5432/postgres]
+2014-02-07 22:26:19,920 INFO  [org.springframework.context.support.GenericApplicationContext] Closing org.springframework.context.support.GenericApplicationContext@1baa46d: startup date [Fri Feb 07 22:26:10 CST 2014]; root of context hierarchy
+2014-02-07 22:26:19,920 INFO  [org.springframework.beans.factory.support.DefaultListableBeanFactory] Destroying singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@149a7: defining beans [RFile,org.springframework.context.annotation.internalConfigurationAnnotationProcessor,org.springframework.context.annotation.internalAutowiredAnnotationProcessor,org.springframework.context.annotation.internalRequiredAnnotationProcessor,org.springframework.context.annotation.internalCommonAnnotationProcessor,org.springframework.context.annotation.internalPersistenceAnnotationProcessor,log4jProvider,logger,entityManagerFactory,entityManager,waltRuleService,reversePaymentRuleService,accountService,minWorkAge,currentUserName,refundTriggerAmount,accountNoteTexts,billProcessor,cache,securityService,velocityEngine,mailSender,retriesNumber,retryInterval,ageToCleanInDays,generalMailRecipient,billMailRecipient,fileImportMailTemplate,inputDirectoryPath,wildCardInput,directoryToClean,wildCardToClean,glDirectory,databaseString,datasourceString,workstationId,batchProcessingJob,org.springframework.context.annotation.ConfigurationClassPostProcessor.importAwareProcessor]; root of factory hierarchy
+2014-02-07 22:26:19,920 INFO  [org.springframework.orm.jpa.LocalEntityManagerFactoryBean] Closing JPA EntityManagerFactory for persistence unit 'opmUnitName'
+2014-02-07 22:26:19,920 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000030: Cleaning up connection pool [jdbc:postgresql://localhost:5432/postgres]

@@ -1,0 +1,5 @@
+INSERT INTO opm.summary_data(id, deleted, total_payments_required, total_initial_interest, total_payments_applied, total_balance) VALUES(1, false, 26216.36, 23053.6, 26940.78, 22329.18);
+INSERT INTO opm.summary_data(id, deleted, total_payments_required, total_initial_interest, total_payments_applied, total_balance) VALUES(2, false, 39413.12, 24728.85, 23671.6, 40470.37);
+INSERT INTO opm.summary_data(id, deleted, total_payments_required, total_initial_interest, total_payments_applied, total_balance) VALUES(3, false, 16897.69, 30597.15, 17977.43, 29517.40);
+INSERT INTO opm.summary_data(id, deleted, total_payments_required, total_initial_interest, total_payments_applied, total_balance) VALUES(4, false, 9694.7, 43446.95, 20113.74, 33027.90);
+ALTER SEQUENCE opm.summary_data_id_seq RESTART WITH 5;

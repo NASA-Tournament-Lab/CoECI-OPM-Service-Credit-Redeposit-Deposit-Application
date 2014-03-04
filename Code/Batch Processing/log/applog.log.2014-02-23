@@ -1,0 +1,19 @@
+2014-02-23 12:44:13,619 WARN  [org.hibernate.ejb.HibernatePersistence] HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; use [org.hibernate.jpa.HibernatePersistenceProvider] instead.
+2014-02-23 12:44:13,620 WARN  [org.hibernate.ejb.HibernatePersistence] HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; use [org.hibernate.jpa.HibernatePersistenceProvider] instead.
+2014-02-23 12:44:13,620 WARN  [org.hibernate.ejb.HibernatePersistence] HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; use [org.hibernate.jpa.HibernatePersistenceProvider] instead.
+2014-02-23 12:44:13,732 INFO  [org.hibernate.jpa.internal.util.LogHelper] HHH000204: Processing PersistenceUnitInfo [
+	name: opmUnitName
+	...]
+2014-02-23 12:44:13,845 INFO  [org.hibernate.Version] HHH000412: Hibernate Core {4.3.1.Final}
+2014-02-23 12:44:13,848 INFO  [org.hibernate.cfg.Environment] HHH000206: hibernate.properties not found
+2014-02-23 12:44:13,850 INFO  [org.hibernate.cfg.Environment] HHH000021: Bytecode provider name : javassist
+2014-02-23 12:44:14,020 INFO  [org.hibernate.annotations.common.Version] HCANN000001: Hibernate Commons Annotations {4.0.4.Final}
+2014-02-23 12:44:14,340 WARN  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000402: Using Hibernate built-in connection pool (not for production use!)
+2014-02-23 12:44:14,346 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000401: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/postgres]
+2014-02-23 12:44:14,346 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000046: Connection properties: {user=postgres, password=****}
+2014-02-23 12:44:14,347 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000006: Autocommit mode: false
+2014-02-23 12:44:14,348 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000115: Hibernate connection pool size: 20 (min=1)
+2014-02-23 12:44:15,034 INFO  [org.hibernate.dialect.Dialect] HHH000400: Using dialect: gov.opm.scrd.entities.common.OPMPostgreSQLDialect
+2014-02-23 12:44:15,051 INFO  [org.hibernate.engine.jdbc.internal.LobCreatorBuilder] HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2014-02-23 12:44:15,850 INFO  [org.hibernate.hql.internal.ast.ASTQueryTranslatorFactory] HHH000397: Using ASTQueryTranslatorFactory
+2014-02-23 12:44:27,097 INFO  [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl] HHH000030: Cleaning up connection pool [jdbc:postgresql://localhost:5432/postgres]

@@ -1,0 +1,6034 @@
+/* Base Components */
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent;
+	-webkit-text-size-adjust: none;
+	-ms-text-size-adjust: none;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+input, textarea, select, pre {
+	font-family: Arial, Helvetica, sans-serif;
+	margin: 0;
+	padding: 0;
+	font-size: 12px;
+}
+textarea{
+	resize: none;
+	overflow: auto;
+}
+select{
+	border: 1px solid #ababab;
+	height: 22px;
+	padding: 1px;
+}
+input.text, textarea{
+	border: 1px solid #ababab;
+	background: #ffffff url(../i/input-inner-shadow.png) 0 0 repeat-x;
+}
+input.text {
+	padding: 2px 6px;
+	line-height: 16px;
+	height: 16px;
+	color: #5c5c5c;
+}
+
+input.text:focus, input.focus,
+textarea:focus, textarea.focus {
+	border: 1px solid #5587c8;
+	box-shadow: 0px 0px 2px 1px #dde7f4;
+}
+textarea.showPlaceholder{
+	color: #5c5c5c;
+}
+input.error{
+	border: 1px solid #ca0404;
+	color: #ca0404;
+}
+input.showPlaceholder{
+	color: #7f7f7f;	
+}
+select.error{
+	border: 1px solid #ca0404;
+	color: #ca0404;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+/* clear floats */
+.group:after {
+	content: "\0020";
+	display: block;
+	height: 0;
+	overflow: hidden;
+}
+.group:after {
+	clear: both;
+}
+.group {
+	zoom: 1;
+}
+/* remember to define focus styles! */
+:focus{
+	outline: 0;
+	quotes: none;
+}
+
+/* remember to highlight inserts somehow! */
+ins {
+	text-decoration: none;
+}
+del {
+	text-decoration: line-through;
+}
+
+/* tables still need 'cellspacing="0"' in the markup */
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* OPM CSS */
+html{
+	height: 100%;
+}
+body{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	height: 100%;
+	color: #000000;
+}
+
+/* link */
+a {
+	color: #214f8b;
+	font-weight: bold;
+	text-decoration: none;
+}
+a:hover, a:focus { 
+	text-decoration: underline; 
+}
+.clear{
+	clear: both;
+}
+.fRight{
+	float: right;	
+}
+.fLeft{
+	float: left;	
+}
+.aLeft{
+	text-align: left;	
+}
+.aRight{
+	text-align: right;	
+}
+.aCenter{
+	text-align: center;	
+}
+.vMiddle{
+	vertical-align: middle;	
+}
+.bold{
+	font-weight: bold;	
+}
+.grayTxt{
+	color: #5c5c5c;
+}
+.priBtn{
+	display: inline-block;
+	height: 25px;
+	padding: 0 0 0 4px;
+	background: url(../i/pri-btn.png) 0 0 no-repeat;
+}
+	.priBtn span{
+		display: block;
+		height: 25px;
+		padding: 0 4px 0 0;
+		background: url(../i/pri-btn.png) 100% -25px no-repeat;
+	}
+		.priBtn span span{
+			display: block;
+			height: 25px;
+			line-height: 24px;
+			padding: 0;
+			text-align: center;
+			background: url(../i/pri-btn.png) 0 -50px repeat-x;
+			color: #5c5c5c;
+			text-shadow: 0px 1px #ffffff;
+		}
+.priBtn:hover, .priBtn:focus{
+	background-position: 0 -75px;
+	text-decoration: none;
+	cursor: pointer;
+}
+	.priBtn:hover span, .priBtn:focus span{
+		background-position: 100% -100px;
+		text-decoration: none;
+		cursor: pointer;
+	}
+		.priBtn:hover span span, .priBtn:focus span span{
+			background-position: 0 -125px;
+			text-decoration: none;
+			cursor: pointer;
+		}
+.priBtnActive, .priBtnActive:hover, .priBtnActive:focus{
+	background-position: 0 -150px;
+	text-decoration: none;
+	cursor: pointer;
+}
+	.priBtnActive span, .priBtnActive:hover span, .priBtnActive:focus span{
+		background-position: 100% -175px;
+		text-decoration: none;
+		cursor: pointer;
+	}
+		.priBtnActive span span, .priBtnActive:hover span span, .priBtnActive:focus span span{
+			background-position: 0 -200px;
+			text-decoration: none;
+			cursor: pointer;
+		}
+.priBtnDisabled, .priBtnDisabled:hover, .priBtnDisabled:focus {
+	background-position: 0 -225px;
+	text-decoration: none;
+	cursor: default;
+}
+	.priBtnDisabled span, .priBtnDisabled:hover span, .priBtnDisabled:focus span{
+		background-position: 100% -250px;
+		text-decoration: none;
+		cursor: default;
+	}
+		.priBtnDisabled span span, .priBtnDisabled:hover span span, .priBtnDisabled:focus span span{
+			color: #a3a3a3;
+			background-position: 0 -275px;
+			text-decoration: none;
+			cursor: default;
+		}
+.priHighBtn {
+	display: inline-block;
+	height: 39px;
+	padding: 0 0 0 4px;
+	background: url(../i/pri-btn.png) 0 -300px no-repeat;
+	overflow: hidden;
+}
+	.priHighBtn span{
+		display: block;
+		height: 39px;
+		padding: 0 4px 0 0;
+		background: url(../i/pri-btn.png) 100% -340px no-repeat;
+	}
+		.priHighBtn span span{
+			display: block;
+			height: 39px;
+			line-height: 39px;
+			padding: 0;
+			text-align: center;
+			background: url(../i/pri-btn.png) 0 -380px repeat-x;
+			color: #5c5c5c;
+			text-shadow: 0px 1px #ffffff;
+		}
+		.priHighBtnTwoRow  span span{
+			line-height: 14px;
+			height: 28px;
+			padding-top: 6px;
+			padding-bottom: 5px;	
+		}
+.priHighBtn:hover, .priHighBtn:focus{
+	background-position: 0 -420px;
+	text-decoration: none;
+	cursor: pointer;
+}
+	.priHighBtn:hover span, .priHighBtn:focus span{
+		background-position: 100% -460px;
+		text-decoration: none;
+		cursor: pointer;
+	}
+		.priHighBtn:hover span span, .priHighBtn:focus span span{
+			background-position: 0 -500px;
+			text-decoration: none;
+			cursor: pointer;
+		}
+.priHighBtnActive , .priHighBtnActive:hover, .priHighBtnActive:focus{
+	background-position: 0 -540px;
+	text-decoration: none;
+	cursor: pointer;
+}
+	.priHighBtnActive span, .priHighBtnActive:hover span, .priHighBtnActive:focus span{
+		background-position: 100% -580px;
+		text-decoration: none;
+		cursor: pointer;
+	}
+		.priHighBtnActive span span, .priHighBtnActive:hover span span, .priHighBtnActive:focus span span{
+			background-position: 0 -620px;
+			text-decoration: none;
+			cursor: pointer;
+		}
+.priHighBtnDisabled, .priHighBtnDisabled:hover, .priHighBtnDisabled:focus {
+	background-position: 0 -660px;
+	text-decoration: none;
+	cursor: default;
+}
+	.priHighBtnDisabled span, .priHighBtnDisabled:hover span, .priHighBtnDisabled:focus span{
+		background-position: 100% -700px;
+		text-decoration: none;
+		cursor: default;
+	}
+		.priHighBtnDisabled span span, .priHighBtnDisabled:hover span span, .priHighBtnDisabled:focus span span{
+			color: #a3a3a3;
+			background-position: 0 -740px;
+			text-decoration: none;
+			cursor: default;
+		}
+.paginationBtn{
+	display: inline-block;
+	height: 21px;
+	padding: 0 0 0 4px;
+	background: url(../i/pagination-btn.png) 0 0 no-repeat;
+}
+	.paginationBtn span{
+		display: block;
+		height: 21px;
+		padding: 0 4px 0 0;
+		background: url(../i/pagination-btn.png) 100% -21px no-repeat;
+	}
+		.paginationBtn span span{
+			display: block;
+			height: 21px;
+			line-height: 20px;
+			padding: 0;
+			text-align: center;
+			background: url(../i/pagination-btn.png) 0 -42px repeat-x;
+			color: #5c5c5c;
+			text-shadow: 0px 1px #ffffff;
+		}
+.paginationBtn:hover, .paginationBtn:focus{
+	background-position: 0 -63px;
+	text-decoration: none;
+	cursor: pointer;
+}
+	.paginationBtn:hover span, .paginationBtn:focus span{
+		background-position: 100% -84px;
+		text-decoration: none;
+		cursor: pointer;
+	}
+		.paginationBtn:hover span span, .paginationBtn:focus span span{
+			background-position: 0 -105px;
+			text-decoration: none;
+			cursor: pointer;
+		}
+.paginationBtnActive, .paginationBtnActive:hover, .paginationBtnActive:focus{
+	background-position: 0 -126px;
+	text-decoration: none;
+	cursor: pointer;
+}
+	.paginationBtnActive span, .paginationBtnActive:hover span, .paginationBtnActive:focus span{
+		background-position: 100% -147px;
+		text-decoration: none;
+		cursor: pointer;
+	}
+		.paginationBtnActive span span, .paginationBtnActive:hover span span, .paginationBtnActive:focus span span{
+			background-position: 0 -168px;
+			text-decoration: none;
+			cursor: pointer;
+		}
+.paginationBtnDisabled, .paginationBtnDisabled:hover, .paginationBtnDisabled:focus {
+	background-position: 0 -189px;
+	text-decoration: none;
+	cursor: default;
+}
+	.paginationBtnDisabled span, .paginationBtnDisabled:hover span, .paginationBtnDisabled:focus span{
+		background-position: 100% -210px;
+		text-decoration: none;
+		cursor: default;
+	}
+		.paginationBtnDisabled span span, .paginationBtnDisabled:hover span span, .paginationBtnDisabled:focus span span{
+			color: #a3a3a3;
+			background-position: 0 -231px;
+			text-decoration: none;
+			cursor: default;
+		}
+.isHidden{
+	display: none;
+}
+/* Layout */
+#loadingOverlay  {
+	opacity: 0.5;
+	z-index: 9950;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	position: fixed;
+	background: #fff;
+}
+
+#loadingOverlay img {
+	position: fixed;
+	top: 45%;
+	left: 48%;
+	display: block;
+	margin: 0 auto;
+}
+#wrapper{
+	min-height: 100%;
+	min-width: 1000px;
+	position: relative;
+}
+	#content{
+		padding: 0 5px 73px 5px;
+		width: 980px;
+		margin: 0 auto;
+		min-height: 280px;
+	}
+	#footer{
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		height: 48px;
+		background-color: #b3b3b3; 	
+	}
+/* Header */
+#header{
+	background: #5587c8 url(../i/banner.png) center 0 no-repeat;
+	height: 190px;
+}
+	#header .banner{
+		height: 150px;
+		width: 990px;
+		margin: 0 auto;	
+		position: relative;
+	}
+		#header .banner h1{
+			height: 0;
+			padding: 130px 0 0 0;
+			overflow: hidden;
+			width: 454px;
+			position: absolute;
+			top: 11px;
+			left: 6px;
+			background: url(../i/site-title.png) 100% 50% no-repeat;
+		}
+			#header .banner h1 img{
+				position: absolute;
+				top: 0;
+				left: 0;
+			}
+	#header .banner .headerUserInfo{
+		float: right;
+		color: #b7d1f3;
+		line-height: 20px;
+	}
+		#header .banner .headerUserInfo a{
+			color: #ffffff;
+		}
+		#header .banner .headerUserInfo .jsShowNotifications{
+			font-weight: normal;	
+		}
+		#header .banner .headerUserInfo label{
+			color: #ffffff;
+			font-weight: bold;
+		}
+		#header .banner .headerUserInfo .welcomeMsg{
+			font-size: 14px;
+			padding: 17px 0 9px 0;
+		}
+		#header .banner .headerUserInfo .userMeta{
+			padding: 0 0 20px 0;
+		}
+		#header .banner .headerUserInfo .notifications{
+			font-size: 14px;
+			vertical-align: middle;
+		}
+			#header .banner .headerUserInfo .notifications .notificationNum, #header .banner .headerUserInfo .notifications .notificationNum:hover, #header .banner .headerUserInfo .notifications .notificationNum:focus{
+				margin-right: 4px;
+				text-decoration: none;
+				vertical-align: middle;
+				cursor: pointer;
+			}
+	#header .topNav{
+		width: 990px;
+		margin: 0 auto;
+	}
+		#header .topNav li{
+			float: left;
+			background: url(../i/top-nav-sep.png) 0 center no-repeat;
+		}
+		#header .topNav li:first-child, #header .topNav li.noSep{
+			background: none;
+		}
+			#header .topNav li a{
+				color: #ffffff;
+				font-weight: normal;
+				padding: 10px 8px;
+				height: 20px;
+				line-height: 20px;
+				display: block;
+			}
+			#header .topNav li a:hover, #header .topNav li a:focus{
+				text-decoration: none;
+				background-color: #42699c;
+			}
+			#header .topNav li.current a, #header .topNav li.current a:hover, #header .topNav li.current a:focus{
+				background-color: #ffffff;
+				color: #000000;
+			}
+			#header .showingSearchAccountPanel li.current a{
+				background-color: transparent;
+				color: #ffffff;
+			}
+			#header .showingSearchAccountPanel li.current a:hover, #header .showingSearchAccountPanel li.current a:focus{
+				background-color: #42699c;
+				color: #ffffff;
+			}
+.notificationNum{
+	display: inline-block;
+	line-height: 18px;
+	margin-bottom: 2px;
+	padding: 0 0 0 4px;
+	background: url(../i/notification.png) 0 0 no-repeat;
+}
+	.notificationNum span{
+		display: block;
+		font-style: normal;
+		font-weight: bold;
+		color: #ffffff;
+		line-height: 18px;
+		padding: 0 4px 0 0;
+		background: url(../i/notification.png) 100% -18px no-repeat;
+	}
+		.notificationNum span span{
+			padding: 0;
+			background: url(../i/notification.png) 0 -36px repeat-x;
+		}
+			#header .topNav li a .notificationNum{
+				vertical-align: top;
+				color: #ffffff;
+				font-weight: bold;
+				cursor: pointer;
+			}
+/*Search Account Form*/
+.viewAccountSearchFormWrapper{
+	z-index: 990;
+	position: absolute;
+	top: 190px;
+	left: 0;
+	right: 0;
+	padding-bottom: 6px;
+	background: url(../i/searchFormShadow.png) 0 100% repeat-x;
+	border-top: 1px solid #ffffff;
+}
+.viewAccountSearchFormInner{
+	background-color: #e7e7e7;	
+	padding-top: 18px;
+
+}
+.viewAccountSearchForm{
+	width: 990px;
+	margin: 0 auto;
+	position: relative;
+}
+	.viewAccountSearchForm .jsCloseViewAccount{
+		position: absolute;
+		top: -59px;
+		left: 0;
+		display: block;
+		line-height: 20px;
+		padding: 9px 7px 11px 7px;
+		border: 1px solid #ffffff;
+		border-bottom: 0;
+		font-weight: normal;
+		background-color: #E7E7E7;
+		color: #000000;
+	}
+	.viewAccountSearchForm .jsCloseViewAccount:hover, .viewAccountSearchForm .jsCloseViewAccount:focus{
+		text-decoration: none;
+		cursor: pointer;
+	}
+	.viewAccountSearchForm .noRecordMsg {
+		padding: 4px 0 0 0;
+		line-height: 32px;
+		font-size: 14px;
+		color: #5c5c5c;
+		background: url(../i/sepLine.png) 0 0 repeat-x;
+	}
+	.viewAccountSearchForm .btnWrapper {
+		padding: 14px 0 11px 0;
+		background: url(../i/sepLine.png) 0 0 repeat-x;
+		height: 25px;
+	}
+		.viewAccountSearchForm .btnWrapper .priBtn{
+			width: 74px;
+			margin-right: 10px;
+			float: left;
+		}
+		.viewAccountSearchForm .btnWrapper .jsClearSearchAccount{
+			width: 93px;
+		}
+	.viewAccountSearchForm .fieldRow{
+		padding-bottom: 8px;
+		height: 22px;
+		clear: both;
+	}
+	.viewAccountSearchForm .birthRow{
+		overflow: hidden;		
+	}
+	.viewAccountSearchForm .checkRow{
+		padding: 5px 0 13px 0;
+		height: 14px;
+		line-height: 14px;
+	}
+		.viewAccountSearchForm .checkRow input{
+			vertical-align: top;
+			width: 14px;
+			height: 14px;
+			margin-right: 2px;
+		}
+		.viewAccountSearchForm .checkRow label{
+			vertical-align: top;
+			cursor: pointer;
+			font-weight: bold;
+		}
+		.viewAccountSearchForm .fieldRow .fieldLabel{
+			width: 131px;
+			float: left;
+			line-height: 22px;
+			font-weight: bold;
+			position: relative;
+		}
+			.viewAccountSearchForm .fieldRow .fieldLabel span{
+				display: inline-block;
+				width: 22px;
+				position: absolute;
+				top: 0;
+				right: 0;
+			}
+		.viewAccountSearchForm .fieldRow .birthLable{
+			display: inline-block;
+			width: 100px;
+			text-indent: 8px;
+			line-height: 22px;
+			font-weight: bold;
+			vertical-align: top;
+		}
+		.viewAccountSearchForm .fieldRow .orSep{
+			display: inline-block;
+			padding: 0 9px;
+			line-height: 22px;
+			font-weight: bold;
+			vertical-align: top;
+		}
+		.viewAccountSearchForm .fieldRow .sep{
+			display: inline-block;
+			width: 16px;
+			line-height: 22px;
+			font-weight: bold;
+			text-align: center;
+			vertical-align: top;
+		}
+		.viewAccountSearchForm .fieldRow .dateFieldNote{
+			display: inline-block;
+			color: #3e3e3e;
+			font-style: italic;
+			margin-left: 10px;
+			vertical-align: top;
+			line-height: 22px;		
+		}
+		.viewAccountSearchForm .fieldRow .birthSep{
+			width: 23px;
+		}
+		.viewAccountSearchForm .fieldRow input.text{
+			width: 260px;
+			vertical-align: top;
+		}
+		.viewAccountSearchForm .fieldRow input.searchMName{
+			width: 177px;
+		}
+		.viewAccountSearchForm .fieldRow input.searchSsn1{
+			width: 50px;
+		}
+		.viewAccountSearchForm .fieldRow input.searchSsn2{
+			width: 50px;
+		}
+		.viewAccountSearchForm .fieldRow input.searchSsn3{
+			width: 100px;
+		}
+		.viewAccountSearchForm .fieldRow input.dpMonth{
+			width: 29px;
+		}
+		.viewAccountSearchForm .fieldRow input.dpDay{
+			width: 29px;
+		}
+		.viewAccountSearchForm .fieldRow input.dpYear{
+			width: 45px;
+		}
+		.viewAccountSearchForm .fieldRow input.datePickerInput{
+			display: none;	
+		}
+/* Footer */
+.footerInner{
+	width: 980px;
+	padding: 14px 5px;
+	margin: 0 auto;
+	color: #ffffff;
+	line-height: 20px;
+	height: 20px;
+}
+	.footerInner strong{
+		font-weight: bold;
+		float: left;
+	}
+	.footerInner ul {
+		float: left;	
+	}
+		.footerInner ul li{
+			float: left;
+			margin-left: 15px;
+		}
+			.footerInner ul li a{
+				color: #ffffff;
+				text-decoration: underline;
+				font-weight: normal;
+			}
+			.footerInner ul li a:hover, .footerInner ul li a:focus{
+				text-decoration: none;
+			}
+			
+/* Content */
+.breadcurmb{
+	padding: 14px 0 16px 0;
+	line-height: 14px;
+	height: 14px;
+	color: #8c8c8c;
+}
+	.breadcurmb span, .breadcurmb a{
+		float: left;
+		padding-right: 14px;
+		background: url(../i/breadcrumb-arrow.png) 100% 50% no-repeat;
+		font-weight: normal;
+	}
+.pageTitleArea{
+	height: 35px;
+	border-bottom: 1px solid #cccccc;
+	position: relative;
+	margin-bottom: 12px;
+}
+	.pageTitleArea h2.pageTitle{
+		line-height: 35px;
+		font-size: 24px;
+		color: #000000;
+	}
+	.pageTitleArea .setHomeLink{
+		position: absolute;
+		top: 9px;
+		right: 0;
+		height: 16px;
+		line-height: 16px;
+		vertical-align: middle;
+	}
+	.pageTitleArea .setHomeLink input{
+		vertical-align: middle;
+		width: 14px;
+		height: 14px;
+	}
+	.pageTitleArea .setHomeLink label{
+		display: inline-block;
+		padding-left: 4px;
+		color: #5c5c5c;
+		vertical-align: middle;
+	}
+	.pageTitleArea .setHomeLink label:hover, .pageTitleArea .setHomeLink label:focus{
+		cursor: pointer;
+	}
+	.pageTitleArea .setHomeLink .jsShowTips {
+		display: inline-block;
+		width: 14px;
+		height: 0;
+		padding: 14px 0 0 0;
+		overflow: hidden;
+		background: url(../i/icon-hint.png) 0 0 no-repeat;
+		vertical-align: middle;
+	}
+	.pageTitleArea .setHomeLink .accountBtns{
+		height: 25px;
+		margin-right: 10px;
+		position: absolute;
+		top: -5px;
+		right: 100%;
+		width: 360px;
+		border-right: 1px solid #b7b7b7;
+	}
+		.pageTitleArea .setHomeLink .accountBtns .priBtn {
+			width: 102px;
+			margin-right: 10px;
+		}
+		.pageTitleArea .setHomeLink .accountBtns .jsRefreshAccountDetails {
+			width: 72px;
+		}
+/*Gray Panel*/
+.grayPanel .panelHeader{
+	padding: 2px 0 0 0;
+	line-height: 33px;
+	height: 33px;
+	background-color: #e7e7e7;
+	text-indent: 15px;
+	font-size: 12px;
+	font-weight: bold;
+	color: #5c5c5c;
+	text-shadow: 0px 1px #ffffff;
+	position: relative;
+}
+.corner{
+	display: block;
+	position: absolute;
+	width: 4px;
+	height: 4px;
+	overflow: hidden;
+	background-repeat: no-repeat;	
+}
+.cornerTl{
+	top: 0;
+	left: 0;
+	background-position: 0 0;
+}
+.cornerTr{
+	top: 0;
+	right: 0;
+	background-position: -4px 0;
+}
+.cornerBl{
+	bottom: 0;
+	left: 0;
+	background-position: 0 -4px;
+}
+.cornerBr{
+	bottom: 0;
+	right: 0;
+	background-position: -4px -4px;
+}
+	.grayPanel .panelHeader .corner{
+		background-image: url(../i/corner-white.png);
+	}
+.grayPanel .grayBorder{
+	border: 1px solid #e7e7e7;
+	border-top-width: 0;
+}
+.casesPanel{
+	margin-bottom: 28px;	
+}
+	.casesPanel .caseOptions {
+		padding: 19px 0 18px 16px;
+		line-height: 16px;
+		height: 16px;
+		vertical-align: middle;
+	}
+		.casesPanel .caseOptions input {
+			vertical-align: middle;
+			width: 14px;
+			height: 14px;
+		}
+		.casesPanel .caseOptions label {
+			vertical-align: middle;
+			margin: 0 57px 0 4px;
+			font-weight: bold;
+			cursor: pointer;
+			display: inline-block;
+		}
+	.casesPanel .tblWrapper {
+		min-height: 127px;
+		position: relative;
+	}
+		.casesPanel .tblWrapper .tblWrapperBorder{
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			border: 1px solid #e7e7e7;
+			z-index: -1;
+		}
+	.casesPanel .panelBody  {
+		padding: 0 15px 15px 15px;
+	}
+		.casesPanel .panelBody .blockNote{
+			line-height: 35px;
+		}
+	#assignedCasesTbl .col1,
+	#assignedCasesTbl .col2,
+	#assignedCasesTbl .col3,
+	#assignedCasesTbl .col4,
+	#assignedCasesTbl .col5{
+		width: 175px;	
+	}
+	#allPendingCasesTbl .col1,
+	#allPendingCasesTbl .col2,
+	#allPendingCasesTbl .col3,
+	#allPendingCasesTbl .col4,
+	#allProcessedCasesTbl .col1,
+	#allProcessedCasesTbl .col2,
+	#allProcessedCasesTbl .col3,
+	#allProcessedCasesTbl .col4{
+		width: 215px;	
+	}
+.stdTbl th{
+	background-color: #f8e7c1;
+	border: 1px solid #e09c06;
+	text-indent: 12px;
+	line-height: 18px;
+	padding: 3px 0;
+	text-align: left;
+	/* Bug Fix 153 */
+	word-wrap: break-word;
+}
+.sortable th{
+	cursor: pointer;	
+}
+.sortable th.unsortable {
+	cursor: default;	
+}
+	.stdTbl .blankCol{
+		width: 44px;
+	}
+	.stdTbl th .sortheader{
+		display: block;	
+		vertical-align: middle;
+		padding-right: 18px;
+		position: relative;
+	}
+	.stdTbl th .sortarrow {
+		position: absolute;
+		display: inline-block;
+		width: 12px;
+		height: 18px;
+		top: -2px;
+		right: 6px;
+		margin: 0;
+		background: url(../i/sort-arrow.png) -12px 0 no-repeat;
+	}	
+	.stdTbl th .sort-down {
+		background-position: 0 0;
+	}
+	.stdTbl th.current{
+		background-color: #e09c06;
+	}
+	.stdTbl th.current .sortarrow {
+		background-position: -12px -18px;
+	}
+	.stdTbl th.current .sort-down {
+		background-position: 0 -18px;
+	}
+	.stdTbl th .sortheader{
+		color: #00664e;
+	}
+	.stdTbl th .sortheader:hover, .stdTbl th .sortheader:focus{
+		text-decoration: none;
+	}
+	.stdTbl th.current .sortheader{
+		color: #ffffff;
+	}
+.stdTbl td{
+	background-color: #ffffff;
+	border: 1px solid #e09c06;
+	text-indent: 12px;
+	line-height: 18px;
+	padding: 3px 0;
+	/* Bug Fix 153 */
+	word-wrap: break-word;
+}
+.stdTbl td.blankCell{
+	background-color: #f8e7c1;
+}
+.stdTbl .valErrorRow td{
+	border-color:#d00000;
+}
+.stdTbl .valErrorRowBefore td{
+	border-bottom-color:#d00000;
+}
+.stdTbl .valErrorRowAfter td{
+	border-top-color:#d00000;
+}
+.stdTbl .valErrorRow td.blankCell, .stdTbl .valErrorRowBefore td.blankCell, .stdTbl .valErrorRowAfter td.blankCell{
+	border-top-color:#e09c06;
+	border-bottom-color:#e09c06;
+}
+.stdTbl td.valErrorRowCell{
+	background-color: #ffe5e5;
+	box-shadow: inset 0px 0px 3px 0px #f65151;
+}
+.stdTbl .valErrorRow td.blankCell{
+	background-image: url(../i/row-error.png);
+	background-position: center center;
+	background-repeat: no-repeat;
+}
+.entriesTbl tbody td{
+	cursor: pointer;	
+}
+.entriesEditRow td{
+	text-indent: 0;
+	text-align: center;
+	height: 24px;
+	padding: 0;
+	vertical-align: middle;
+	background-color: #fec038;
+}
+.entriesEditRow td.blankCell{
+	background: #fec038 url(../i/row-arrow.png) center center no-repeat;
+}
+#depTbl .entriesEditRow input.text{
+	width: 76px;
+	padding: 0 3px;      vertical-align: middle;      color: #000000;
+}
+.entriesEditRow input.datePicker {
+	width: 70px;
+	padding: 0 6px;
+	vertical-align: middle;
+}
+.entriesEditRow .ui-datepicker-trigger {
+	width: 18px;
+	height: 18px;
+	vertical-align: middle;
+	margin: 0;
+}
+.entriesEditRow td.editingCell{
+	background-color: #c44a09;
+}
+.entriesEditRow td.newRowCellHidden *{
+	visibility: hidden;	
+}
+.entriesEditRow td.editingCell input.focus{
+	box-shadow: none;
+	border-color: #b5b5b5;
+}
+#depTbl .entriesEditRow select{
+	/* height: 18px; */
+	width: 80px; /* Bug Fix 153 */
+	/* font-size: 11px; */
+	vertical-align: middle;
+}
+.entriesEditRow select.aType{
+	width: 130px;
+}
+.entriesEditRow select.sType{
+	width: 106px;
+}
+.entriesEditRow select.payType{
+	width: 116px;
+}
+
+.casesPanel tbody tr{
+	cursor: pointer;	
+}
+.stdTbl .selectedRow td{
+	background-color: #fec038;
+}
+.stdTbl .selectedRow td.blankCell{
+	background: #fec038 url(../i/row-arrow.png) center center no-repeat;
+}
+.stdTbl td.starMark{
+	background-image: url(../i/row-star.png);
+	background-position: center center;
+	background-repeat: no-repeat;
+}
+.stdTbl td.arrowMark{
+	background-image: url(../i/row-arrow-l.png);
+	background-position: center center;
+	background-repeat: no-repeat;
+}
+.grayPanel .panelBtnWrapper{
+	height: 25px;
+	padding: 8px 14px 7px 14px;	
+}
+.grayPanel .panelBtnWrapper .priBtn {
+	margin-left: 10px;
+	width: 118px;
+}
+.statusInfoBar{
+	border: 1px solid #e09c06;
+	background-color: #f8e7c1;
+	line-height: 20px;
+	position: relative;
+}
+.statusInfoBar:hover, .statusInfoBar:focus{
+	border: 1px solid #e09c06;
+	background-color: #ffc84e;
+}
+	.statusInfoBar a{
+		padding: 7px 7px 8px 37px;
+		display: block;
+		color: #00664e;
+		background: url(../i/icon-add.png) 7px 7px no-repeat;
+	}
+	.statusInfoBar a:hover, .statusInfoBar a:focus{
+		color: #ffffff;
+		text-shadow: 0px 1px #edae24;
+		text-decoration: none;
+	}
+		.statusInfoBar a .sep{
+			padding: 0 10px 0px 12px;
+		}
+	.statusInfoBar .corner{
+		background-image: url(../i/corner-orange.png);	
+	}
+	.statusInfoBar .cornerTl{
+		top: -1px;
+		left: -1px;
+	}
+	.statusInfoBar .cornerTr{
+		top: -1px;
+		right: -1px;
+	}
+	.statusInfoBar .cornerBl{
+		bottom: -1px;
+		left: -1px;
+	}
+	.statusInfoBar .cornerBr{
+		bottom: -1px;
+		right: -1px;
+	}
+/* alpha */
+.alpha, .alpha2{
+	position: fixed;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	display: none;
+	background: url(../i/alpha.png) 0 0 repeat;
+	z-index: 999;
+}
+.alpha2{
+	z-index: 1999;
+}
+.alphaTrans{
+	background: url(../i/alpha-trans.png) 0 0 repeat;
+}
+
+/* popup */
+.popup {
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	display: none;
+	z-index: 1000;
+	width: 400px;
+}
+.popup2{
+	z-index: 2000;
+}
+.popupHeader {
+	display: block;
+	padding: 0 0 0 5px;
+	background: url(../i/popup-corner.png) 0 0 no-repeat;
+	height: 5px;
+	overflow: hidden;
+}
+.popupHeaderRight {
+	display: block;
+	padding: 0 5px 0 0;
+	background: url(../i/popup-corner.png) 100% -5px no-repeat;
+	height: 5px;
+	overflow: hidden;
+}
+.popupHeaderInner {
+	display: block;
+	padding: 0;
+	background: url(../i/popup-corner.png) 0 -10px repeat-x;
+	height: 5px;
+	overflow: hidden;
+}
+.popupBody {
+	display: block;
+	padding: 0 0 0 3px;
+	background: url(../i/pop-border.png) 0 0 repeat-y;
+	overflow: hidden;
+}
+.popupBodyRight {
+	display: block;
+	padding: 0 3px 0 0;
+	background: url(../i/pop-border.png) 100% 0 repeat-y;
+}
+.popupBodyInner {
+	display: block;
+	padding: 0;
+	background: #ffffff;
+}
+.popupFooter {
+	display: block;
+	padding: 0 0 0 5px;
+	background: url(../i/popup-corner.png) 0 -15px no-repeat;
+	height: 5px;
+	overflow: hidden;
+}
+.popupFooterRight {
+	display: block;
+	padding: 0 5px 0 0;
+	background: url(../i/popup-corner.png) 100% -20px no-repeat;
+	height: 5px;
+	overflow: hidden;
+}
+.popupFooterInner {
+	display: block;
+	padding: 0;
+	background: url(../i/popup-corner.png) 0 -25px repeat-x;
+	height: 5px;
+	overflow: hidden;
+}
+.popupTitleWrapper {
+	height: 33px;
+	border-bottom: 1px solid #e09c06;
+	position: relative;
+}
+	.popupTitleWrapper .popupTitle{
+		line-height: 33px;
+		font-size: 14px;
+		font-weight: bold;
+		text-indent: 12px;
+	}
+	.popupTitleWrapper .popupClose {
+		display: block;
+		width: 33px;
+		height: 0;
+		padding: 19px 0 0 0;
+		overflow: hidden;
+		background: url(../i/popup-close.png) 0 0 no-repeat;
+		border-left: 1px solid #aac3e3;
+		position: absolute;
+		right: 0;
+		top: 6px;
+	}
+	.popupTitleWrapper .popupClose:hover, .popupTitleWrapper .popupClose:focus {
+		background-position: 0 -19px;
+	}
+	.popupTitleWrapper .popupCloseX{
+		background-position: 0 -38px;
+	}
+	.popupTitleWrapper .popupCloseX:hover, .popupTitleWrapper .popupCloseX:focus{
+		background-position: 0 -57px;
+	}
+.wqAssignmentPopup, .wqUnassignmentPopup, .delAccountNotePopup{
+	width: 390px;	
+}
+.confirmDeletionPopup, .confirmPaymentDeletionPopup, .confirmSaveEmployeePopup{
+	width: 510px;	
+}
+.wqAssignmentPopup .popupBodyInner p, 
+.wqUnassignmentPopup .popupBodyInner p,
+.confirmDeletionPopup .popupBodyInner p,
+.confirmPaymentDeletionPopup .popupBodyInner p,
+.confirmSaveEmployeePopup .popupBodyInner p,
+.delAccountNotePopup  .popupBodyInner p,
+.popupBodyInner p.popMsg{
+	padding: 10px 12px;
+	line-height: 20px;
+	color: #5c5c5c;
+}
+.popupBtnWrapper{
+	padding: 0 10px 7px 10px;
+}
+.popupBtnWrapper .priBtn{
+	width: 95px;
+	margin-right: 9px;
+}
+.accountAssignmentPopup {
+	width: 510px;	
+}
+	.accountAssignmentPopup .leftAccountList{
+		padding: 12px 0 14px 14px;
+	}
+		.accountAssignmentPopup .leftAccountList .accountList{
+			display: block;
+			width: 350px;
+			height: 270px;
+			padding: 1px;
+			border: 1px solid #c6c6c6;
+			line-height: 20px;
+			overflow-y: auto;
+		}
+		.accountAssignmentPopup .leftAccountList .accountList li{
+			line-height: 20px;
+			text-indent: 7px;
+			display: block;
+			cursor: pointer;
+		}
+		.accountAssignmentPopup .leftAccountList .accountList li.selected{
+			background-color: #e09c06;
+			color: #ffffff;
+		}
+	.accountAssignmentPopup .rightBtnWrapper{
+		padding: 11px 15px 0 0;
+		width: 110px;
+	}
+		.accountAssignmentPopup .rightBtnWrapper .priBtn{
+			width: 106px;
+			margin-bottom: 12px;
+		}
+.notificationPopup{
+	width: 511px;
+}
+	.notificationPopup .popupArrow{
+		width: 16px;
+		height: 11px;
+		display: block;
+		background: url(../i/noti-arrow.png) 0 0 no-repeat;
+		position: absolute;
+		top: -8px;
+	}
+.popupLinksWrapper{
+	position: absolute;
+	top: 6px;
+	right: 5px;
+	overflow: hidden;
+}
+.popupLinksWrapper a{
+	display: inline-block;
+	float: left;
+	line-height: 16px;
+	padding: 3px 6px 0 6px;
+	border-left: 1px solid #aac3e3;
+	color: #204f8b;
+	font-size: 14px;
+	font-weight: normal;
+}
+.popupLinksWrapper a:first-child{
+	border-left-width: 0;
+}
+#notificationsTbl .col1{
+	width: 86px;
+}
+#notificationsTbl .col2{
+	width: 81px;
+}
+#notificationsTbl .col3{
+	width: 305px;
+}
+#notificationsTbl th{
+	line-height: 16px;
+	padding: 3px 0 5px 11px;
+	border-bottom: 1px solid #e09c06;
+	background-color: #f8e7c1;
+	text-align: left;
+	font-weight: bold;
+	color: #00664e;
+}
+#notificationsTbl td{
+	line-height: 14px;
+	text-align: left;
+	padding: 6px 0 7px 11px;
+	border-top: 1px solid #efcd82;
+	background-color: #ffffff;
+	vertical-align: middle;
+	color: #212121;
+}
+#notificationsTbl tbody tr:first-child td{
+	border-top-width: 0;
+}
+.infoNotiPopup{
+	width: 511px;
+}
+	.infoNotiPopup .popupBody{
+		overflow: visible;
+	}
+	.infoNotiPopup .popupBodyInner{
+		height: 256px;
+		padding-bottom: 29px;
+		position: relative;
+	}
+	.infoNotiPopup .infoTblWrapper{
+		height: 222px;
+		overflow-y: auto;
+		overflow-x: hidden;
+	}
+		.infoNotiPopup .popupBodyInner .filerTab{
+			position: absolute;
+			bottom: -2px;
+			left: 0;
+			right: 0;
+			height: 31px;
+			background-color: #e7e7e7;
+			overflow: hidden;
+		}
+			.infoNotiPopup .popupBodyInner .filerTab .corner {
+				background-image: url(../i/corner-blue.png);				
+			}
+			.infoNotiPopup .popupBodyInner .filerTab li{
+				float: left;
+				display: block;
+			}
+				.infoNotiPopup .popupBodyInner .filerTab li a{
+					display: block;
+					line-height: 31px;
+					padding: 0 27px;
+					font-weight: normal;
+					color: #5c5c5c;
+				}
+				.infoNotiPopup .popupBodyInner .filerTab li a:hover, .infoNotiPopup .popupBodyInner .filerTab li a:focus{
+					text-decoration: none;
+					background-color: #dcdcdc;
+				}
+				.infoNotiPopup .popupBodyInner .filerTab li a.current, .infoNotiPopup .popupBodyInner .filerTab li a.current:hover, .infoNotiPopup .popupBodyInner .filerTab li a.current:focus{
+					background-color: #ffffff;
+					font-weight: bold;
+					color: #000000;
+				}
+#infoTbl{
+	margin-bottom: 10px;	
+}
+#infoTbl .col1{
+	width: 95px;
+}
+#infoTbl .col2{
+	width: 88px;
+}
+#infoTbl .col3{
+	width: 270px;
+}
+#infoTbl td{
+	line-height: 14px;
+	text-align: left;
+	padding: 9px 0 8px 11px;
+	border-bottom: 1px solid #efcd82;
+	background-color: #ffffff;
+	vertical-align: top;
+	color: #212121;
+}
+#infoTbl td.lastCol{
+	padding-right: 20px;	
+}
+#infoTbl .rowNoti,
+#infoTbl .rowInfo,
+#infoTbl .rowErr{
+	display: inline-block;
+	width: 17px;
+	height: 14px;
+	background-image: url(../i/info-type-icon.png);
+	background-repeat: no-repeat;
+	vertical-align: top;
+	margin-right: 7px;
+}
+#infoTbl .rowNoti{
+	background-position: 0 0;
+}
+#infoTbl .rowInfo{
+	background-position: 0 -20px;
+}
+#infoTbl .rowErr{
+	background-position: 0 -40px;
+}
+
+/*Create New Account Pages*/
+.progressStepsBar{
+	height: 37px;
+	overflow: hidden;
+	background: #e7e7e7;
+	position: relative;	
+}
+	.progressStepsBar li{
+		float: left;
+		width: 230px;
+		padding-right: 10px;
+		display: block;
+		height: 37px;
+		line-height: 37px;
+		text-align: center;
+		background:url(../i/progress-step-arrow.png) 100% 0 no-repeat;
+		color: #aaaaaa;
+		text-shadow: 0px 1px #ffffff;
+	}
+	.progressStepsBar li a{
+		color: #aaaaaa;	
+	}
+	.progressStepsBar li a:hover, .progressStepsBar li a:focus{
+		color: #214F8B;	
+	}
+	.progressStepsBar li.firstStep {
+		width: 240px;
+		padding-right: 0;
+	}
+	.progressStepsBar li.step3{
+		width: 220px;
+	}
+	.progressStepsBar li.currentStep{
+		background-position: 100% -37px;
+		background-color: #e09c06;
+		font-weight: bold;
+		color: #ffffff;
+		text-shadow: none;
+	}
+	.progressStepsBar li.finishedStep{
+		background-position: 100% -74px;
+		background-color: #5587c8;
+		font-weight: bold;
+		color: #ffffff;
+		text-shadow: none;
+	}
+	.progressStepsBar li.justFinishedStep{
+		background-position: 100% -111px;
+	}
+	.progressStepsBar li.finishedStep a, .progressStepsBar li.finishedStep a:hover, .progressStepsBar li.finishedStep a:focus{
+		color: #ffffff;
+	}
+	.progressStepsBar li.lastStep{
+		background-position: 0 37px;
+		width: 270px; /* Bug Fix 2 */
+		padding-right: 0px; /* Bug Fix 2 */
+	}
+	.progressStepsBar .corner{
+		background-image: url(../i/corner-white.png);
+	}
+
+.stepsBtnWrapper{
+	height: 25px;
+	padding: 17px 0 21px 0;
+}
+	.stepsBtnWrapper .priBtn{
+		width: 95px;
+	}
+	.stepsBtnWrapper a.fRight{
+		margin-left: 14px;
+	}
+	.stepsBtnWrapper .nextBtn{
+		position: relative;	
+	}
+		.stepsBtnWrapper .nextBtn .nextArrow{
+			position: absolute;
+			top: 8px;
+			right: 11px;
+			display: block;
+			width: 5px;
+			height: 0;
+			padding: 9px 0 0 0;
+			background: url(../i/next-btn-arrow.png) 0 0 no-repeat;
+		}
+.basicInfoPanel{
+	border: 1px solid #e7e7e7;
+	border-top-width: 0;
+	position: relative;
+	padding-bottom: 26px;
+}
+	.basicInfoPanel .halfCol{
+		width: 400px;
+		float: left;
+		padding-left: 10px;
+	}
+	.basicInfoPanel .rightHalfCol{
+		padding-left: 0;
+	}
+		.basicInfoPanel .halfCol .sectionTitle{
+			font-weight: bold;
+			padding: 12px 0 0 162px;
+			line-height: 38px;
+		}
+.fullRowField{
+	overflow:hidden;
+	height: 22px;
+	padding: 22px 0 8px 0;
+	vertical-align: middle;
+	line-height: 22px;
+	margin-left: 10px;
+}
+	.fullRowField input{
+		vertical-align: middle;
+		width: 14px;
+		height: 14px;
+	}
+	.fullRowField .radioLabel{
+		vertical-align: middle;
+		margin-right: 6px;
+		cursor: pointer;
+		color: #5c5c5c;
+	}
+.halfRowField{
+	padding-bottom: 8px;
+}
+	.fullRowField .fieldLabel, .halfRowField .fieldLabel{
+		float: left;
+		width: 150px;
+		padding-right: 12px;
+		text-align: right;
+		line-height: 20px;
+		padding-top: 2px;
+	}
+	.halfRowField input.text{
+		width: 192px;
+	}
+	.halfRowField input.midLength{
+		width: 78px;
+	}
+	.halfRowField input.ssn1, .halfRowField input.ssn2{
+		width: 43px;
+	}
+	.halfRowField input.ssn3{
+		width: 53px;
+	}
+	.halfRowField input.phoneInput{
+		width: 135px;
+	}
+	.halfRowField input.phoneExt{
+		width: 31px;
+	}
+	.halfRowField .sep{
+		width: 12px;
+		display: inline-block;
+		text-align: center;
+		font-size: 14px;
+		font-weight: bold;
+		color: #5c5c5c;
+		vertical-align: top;
+		line-height: 22px;
+	}
+	.halfRowField .lBracket{
+		width: 10px;
+		color: #7d7d7d;
+	}
+	.halfRowField .rBracket{
+		width: 15px;
+		color: #7d7d7d;
+	}
+	
+	.reqMark{
+		color: #d70000;
+	}
+	.phoneField{
+		position: relative;
+		padding-top: 10px;
+	}
+	.phoneField .acNote, .phoneField .extNote{
+		position: absolute;
+		top: -2px;
+		left: 172px;
+		font-size: 10px;
+		color: #7d7d7d;
+		line-height: 10px;
+		display: inline-block;
+	}
+	.phoneField .extNote{
+		left: 325px;
+	}
+	.halfRowField select{
+		width: 206px;
+	}
+	.halfRowField select.midLength{
+		width: 92px;
+	}
+	.ui-datepicker-trigger{
+		vertical-align: top;
+		margin-left: 4px;
+		cursor: pointer;
+	}
+	.halfRowField .errorIcon{
+		display: inline-block;
+		height: 22px;
+		width: 22px;
+		background: url(../i/icon-error.png) 0 0 no-repeat;
+		vertical-align: top;
+	}
+	.selectWrapper {
+		display: inline-block;
+	}
+	.dateCalculator {
+		width: 359px;
+		height: 140px;
+		border-right: 1px solid #e7e7e7;
+		position: relative;
+	}
+	.calReuslts {
+		width: 588px;
+		height: 140px;
+	}
+	.dateCalculator .blocktitle, .calReuslts .blocktitle{
+		background-color: #e7e7e7;
+		height: 33px;
+		line-height: 33px;
+		padding: 2px 0 0 20px;
+		font-size: 12px;
+		color: #5c5c5c;
+		font-weight: bold;
+		text-shadow: 0px 1px #ffffff;
+	}
+	.dateCalculator .blockInner{
+		padding: 18px 0 0 20px;
+	}
+		.dateCalculator .blockInner .errorMask{
+			background: url(../i/alpha-b70.png) 0 0 repeat;
+			position: absolute;
+			top: 35px;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			text-align: center;	
+			line-height: 18px;
+			font-size: 14px;
+			font-weight: bold;
+			color: #ffffff;
+		}
+			.dateCalculator .blockInner .errorMask a{
+				font-size: 12px;
+				font-weight: normal;
+				color: #ffffff;
+			}
+		.errorMark{
+			display: block;
+			height: 22px;
+			background: url(../i/icon-error.png) center 0 no-repeat;
+			margin: 20px 0 5px 0;
+		}
+	.dateCalculator .fieldWrapper{
+		float: left;
+		width: 110px;
+	}
+		.dateCalculator .fieldWrapper .fieldLabel{
+			line-height: 29px;
+		}
+		.dateCalculator .fieldWrapper input.text{
+			width: 65px;
+			padding: 2px;
+		}
+	.calReuslts .blockInner{
+		padding: 19px 19px 0 18px;
+	}
+	#calResultsTbl .col6{
+		width: 55px;	
+	}
+	#calResultsTbl th{
+		line-height: 17px;
+		padding: 5px 2px;
+		font-weight: normal;
+		border-bottom: 1px solid #e7e7e7;
+		text-align: left;
+	}
+	#calResultsTbl td{
+		line-height: 17px;
+		padding: 5px 2px;
+		text-align: left;
+		color: #5c5c5c;	
+	}
+	.dateCalculator .btnWrapper{
+		float: left;
+		width: 99px;
+		padding-top: 28px;
+	}
+		.dateCalculator .btnWrapper .jsCalBtn{
+			width: 95px;
+		}
+.serviceHistoryPanel {
+	border: 1px solid #e7e7e7;
+	border-top-width: 0;
+	padding-top: 20px;
+}
+.accountDetailsTabsArea .serviceHistoryPanel, .accountDetailsTabsArea .serviceHistoryPanel .tabsBlock {
+	border-width: 0;	
+}
+.tabsBar{
+	height: 35px;
+	background: url(../i/gray-border.png) 0 100% repeat-x;
+	overflow: hidden;
+}
+.serviceHistoryTabs {
+	/* Bug Fix 2 OPMBH-821 0 0 0 6px */
+	padding: 0 0 0 0px;
+}
+	.tabsBar li{
+		float: left;
+		margin-right: 7px;
+		display: block;
+		width: 145px;
+	}
+		.tabsBar li a{
+			border: 1px solid #e7e7e7;
+			line-height: 33px;
+			display: block;
+			text-align: center;
+			background-color: #e7e7e8;
+			color: #606060;
+			font-weight: bold;			
+		}
+		.tabsBar li a:hover, .tabsBar li a:focus{
+			border: 1px solid #cdcdcd;
+			background-color: #cdcdce;
+			text-decoration: none;		
+		}
+		.tabsBar li a.current, .tabsBar li a.current:hover, .tabsBar li a.current:focus{
+			border: 1px solid #e7e7e7;
+			border-bottom-color: #f6f6f6;
+			background-color: #f6f6f7;
+			text-decoration: none;
+			cursor: default;
+			color: #000000;
+		}
+		.whiteTabsBar li a.current, .whiteTabsBar li a.current:hover, .whiteTabsBar li a.current:focus{
+			border-bottom-color: #ffffff;
+			background-color: #fffffe;
+		}
+.versionBar{
+	background-color: #f6f6f6;
+	padding: 7px 16px 5px 20px;
+	height: 25px;
+	line-height: 25px;
+}
+	.versionBar select {
+		margin: 1px 12px 0 12px;
+		min-width: 70px;
+	}
+	.versionBar .checkboxInput{
+		width: 14px;
+		height: 14px;
+		margin: 5px 7px 0 12px;	
+	}
+	.versionBar label{
+		cursor: pointer;
+		color: #5c5c5c;
+	}
+	.versionBar .priBtn {
+		width: 125px;
+	}
+.scrollTblArea{
+	/*min-height: 140px;*/
+	/* Bug Fix 2 OPMBH-821 */
+	/*width: 948px;*/
+	overflow-y: hidden;
+	overflow-x: auto;
+	border-bottom: 1px solid #E7E7E7;
+	position: relative;
+}
+	.expandCalScreen{
+		width: 100%;	
+		min-height: 20px;
+		min-width: 990px;
+	}
+	.expandCalScreen .stdTbl th .sortarrow {
+		margin-right: 3px;
+	}
+	.noValidMask{
+		position: absolute;
+		width: 948px;
+		background: url(../i/alpha-w50.png) 0 0 repeat;
+	}
+	.scrollTblArea .stdTbl .firstCol{
+		border-left-width: 0;	
+	}
+	.scrollTblArea .stdTbl .lastCol{
+		border-right-width: 1px;	
+	}
+.funtionArea{
+	padding: 17px 18px 0 18px;
+}
+	.funtionArea p{
+		overflow: hidden;
+		height: 25px;
+		padding-bottom: 7px;
+	}
+	.funtionArea p .fLeft{
+		margin-right: 12px;
+	}
+	.funtionArea p .fRight{
+		margin-left: 15px;
+	}
+	.jsValidateEntries {
+		width: 125px;
+	}
+	.jsRunCalculation {
+		width: 135px;
+	}
+	.jsSaveCalculation {
+		width: 135px;
+	}
+	.jsCancelFunction {
+		width: 95px;
+	}
+	.jsTriggerBill {
+		width: 95px;
+	}
+	.jsShowCalculation {
+		width: 135px;
+	}
+	.jsRefreshGrid  {
+		width: 117px;
+	}
+	.funtionArea p input{
+		vertical-align: middle;
+		width: 14px;
+		height: 14px;
+		margin-right: 3px;
+	}
+	.funtionArea p label{
+		vertical-align: middle;
+		line-height: 25px;
+		cursor: pointer;
+		color: #5c5c5c;
+	}
+.validationStatusBar{
+	background-color: #f6f6f6;
+	padding: 5px 16px 5px 20px;
+	height: 25px;
+	line-height: 25px;
+	border-top: 1px solid #E7E7E7;
+}
+	.validationStatusBar > span{
+		display: inline-block;	
+		line-height: 25px;
+	}
+	.validationStatusBar .fieldLabel  {
+		font-weight: bold;
+		color: #626262;
+		text-shadow: 0px 1px #ffffff;
+	}
+	.validationStatusBar .fieldVal {
+		font-weight: bold;
+		color: #000000;
+		text-shadow: 0px 1px #ffffff;
+		margin-right: 25px;
+		margin-left: 4px;
+	}
+	.validationStatusBar .statusVal, .validationStatusBar .resultsVal{
+		padding-right: 25px;
+	}
+	.validationStatusBar .successLabel{
+		background: url(../i/validate-icon.png) 100% 0 no-repeat;
+		color: #0e9107;
+	}
+	.validationStatusBar .failLabel{
+		background: url(../i/validate-icon.png) 100% -25px no-repeat;
+		color: #ca0404;
+	}
+	.validationStatusBar .fRight{
+		margin-right: 0;
+	}
+	.jsExpandCalculation {
+		width: 145px;
+		margin-left: 10px;
+	}
+h3.jsTogglePanel {
+	cursor: pointer;
+	line-height: 35px;
+	height: 35px;
+	color: #626262;
+	font-weight: bold;
+	text-shadow: 0px 1px #ffffff;
+	padding: 0 0 0 40px;
+	background-color: #f6f6f6;
+	background-image: url(../i/toggle-icon.png);
+	background-position: 9px -35px;
+	background-repeat: no-repeat;
+}
+h3.panelExpanded{
+	background-position: 9px 0;
+}
+.chartCalArea .panelBody{
+	border-top: 1px solid #e7e7e7;
+	overflow: hidden;
+}
+.chartCalAreaBox1{
+	border-bottom: 1px solid #e7e7e7;
+	border-right: 1px solid #e7e7e7;
+	float: left;
+	width: 417px;
+	height: 61px;
+	padding: 10px 0 0 20px;
+}
+	.chartCalAreaBox1 select{
+		width: 392px;
+	}
+.chartCalAreaBox2{
+	border-bottom: 1px solid #e7e7e7;	
+	border-right: 1px solid #e7e7e7;
+	float: left;
+	width: 258px;
+	height: 61px;
+	padding: 10px 0 0 30px;
+}
+	.chartCalAreaBox2 input.text{
+		width: 100px;
+		vertical-align: middle;
+	}
+	.chartCalAreaBox2 .priBtn{
+		width: 95px;
+		margin-left: 11px;
+		vertical-align: middle;
+	}
+	.chartCalAreaBox1 .boxTitle, .chartCalAreaBox2 .boxTitle{
+		line-height: 20px;
+		color: #333333;
+	}
+.chartCalAreaBox3{
+	border-bottom: 1px solid #e7e7e7;	
+	float: left;
+	width: 221px;
+	height: 71px;
+	line-height: 71px;
+	text-align: center;
+	background-color: #fefbf6;
+}
+.chartCalAreaBox4{
+	/* border-bottom: 1px solid #e7e7e7;  Bug Fix 153 */
+	border-right: 1px solid #e7e7e7;
+	float: left;
+	width: 291px;
+	/* height: 117px;   Bug Fix 153 */
+	padding: 16px 15px 0 16px;
+}
+.chartCalAreaBox5{
+	/* border-bottom: 1px solid #e7e7e7;   Bug Fix 153 */
+	border-right: 1px solid #e7e7e7;
+	float: left;
+	width: 291px;
+	/* height: 117px;   Bug Fix 153 */
+	padding: 16px 12px 0 13px;
+}
+	.chartCalAreaBox4 .tableTitle, .chartCalAreaBox5 .tableTitle{
+		height: 25px;
+		line-height: 25px;
+		background-color: #e09c06;
+		text-align: center;
+		font-weight: bold;
+		color: #ffffff;
+	}
+	.chartCalAreaBox4 .stdTbl td, .chartCalAreaBox5 .stdTbl td, .chartCalAreaBox6 .stdTbl td{
+		padding: 0 0 0 6px;
+		text-indent: 0;
+		vertical-align: middle;
+		height: 24px;
+	}
+	.chartCalAreaBox4 .stdTbl th, .chartCalAreaBox5 .stdTbl th{
+		color: #00664e;
+		font-weight: bold;
+		text-align: left;
+		padding-left: 6px;
+		text-indent: 0;
+	}
+	.chartCalAreaBox4 .stdTbl td.rowTitle, .chartCalAreaBox5 .stdTbl td.rowTitle, .chartCalAreaBox6 .stdTbl td.rowTitle{
+		background-color: #F8E7C1;
+		color: #00664e;
+		font-weight: bold;
+	}
+	.chartCalAreaBox6 .stdTbl .col2{
+		width: 100px;
+	}
+	.chartCalAreaBox6 .stdTbl td.rowTitle{
+		padding-right: 8px;
+		text-indent: 0;
+		text-align: right;
+	}
+	.chartCalAreaBox5 .stdTbl td.twoLineRowTitle{
+		line-height: 11px;
+		font-size: 12px;
+	}
+		.chartCalAreaBox5 .stdTbl td.twoLineRowTitle span{
+			font-size: 11px;
+			font-weight: normal
+		}
+.chartCalAreaBox6{
+	/* border-bottom: 1px solid #e7e7e7;   Bug Fix 153 */
+	float: left;
+	width: 278px;
+	/* height: 117px;   Bug Fix 153 */
+	padding: 16px 15px 0 15px;
+}
+
+.showSampleBtnWrapper{
+	padding: 6px 15px;
+	height: 25px;
+	text-align: right;
+}
+	.showSampleBtnWrapper .jsShowSample{
+		width: 155px;
+	}
+
+.notesPanel{
+	padding: 14px 24px 26px 28px;
+	border: 1px solid #e7e7e7;
+	border-top-width: 0;
+	position: relative;
+}
+	.notesPanel > p{
+		line-height: 37px;
+	}
+	.notesPanel > textarea{
+		width: 856px;
+		height: 502px;
+		font-size: 14px;
+		color: #5c5c5c;
+		line-height: 24px;
+		padding: 12px 19px;
+	}
+.roundedGrayPanel{
+	position: relative;	
+}
+.roundedGrayPanel .corner{
+	background-image: url(../i/corner-gray.png);
+}
+.roundedGrayPanel .cornerBl{
+	bottom: -1px;
+	left: -1px;
+}
+.roundedGrayPanel .cornerBr{
+	bottom: -1px;
+	right: -1px;
+}
+.toolTips{
+	position: absolute;
+	top: -1000px;
+	left: -1000px;
+	z-index: 90;
+	line-height: 14px;
+	padding: 12px 10px 12px 11px;
+	background: url(../i/alpha-tooltip.png) 0 0 repeat;
+	border: 1px solid #e2a113;
+	width: 232px;
+	color: #33302b;
+}
+.toolTips i{
+	display: block;
+	width: 	13px;
+	height: 9px;
+	overflow: hidden;
+	background-image: url(../i/tooltip-arrow.png);
+	background-repeat: no-repeat;
+	position: absolute;
+	bottom: -9px;
+	background-position: 0 0;
+	right: 9px;
+}
+.finishPanel .basicInfoPanel{
+	border-top: 1px solid #ffffff;
+}
+	.finishPanel .basicInfoPanel .stepBlockTitle{
+		margin-bottom: 20px;
+	}
+	.finishPanel .halfRowField{
+		min-height: 22px;	
+	}
+	.finishPanel .halfRowField{
+		min-height: 22px;	
+	}
+	.finishPanel .fieldVal{
+		display: inline-block;
+		width: 230px;
+		line-height: 22px;
+		color: #5c5c5c;	
+	}
+.stepBlockTitle{
+	height: 25px;
+	overflow: hidden;
+	background-color: #e7e7e7;
+	padding: 5px 17px 5px 21px; 
+}
+	.stepBlockTitle h3{
+		float: left;
+		color: #5c5c5c;
+		line-height: 25px;
+		text-shadow: 0px 1px #FFFFFF;
+	}
+.finishPanel .serviceHistoryPanel{
+	padding-top: 9px; 
+}
+	.finishPanel .tabsBar li a{
+		border: 1px solid #e7e7e7;
+		line-height: 33px;
+		display: block;
+		text-align: center;
+		background-color: #f6f6f6;
+		color: #606060;
+		font-weight: bold;			
+	}
+	.finishPanel .tabsBar li a:hover, .finishPanel .tabsBar li a:focus{
+		border: 1px solid #cdcdcd;
+		background-color: #cdcdce;
+		text-decoration: none;		
+	}
+	.finishPanel .versionBar{
+		background-color: #e7e7e7;
+	}
+	.finishPanel .tabsBar li a.current, .finishPanel .tabsBar li a.current:hover, .finishPanel .tabsBar li a.current:focus{
+		border: 1px solid #e7e7e7;
+		border-bottom-color: #e7e7e7;
+		background-color: #e7e7e8;
+		text-decoration: none;
+		cursor: default;	
+	}
+	.finishPanel .editBtn{
+		width: 45px;
+	}
+.finishPanel .notesPanel{
+	padding: 0;	
+	margin-top: 16px;
+}
+	.finishPanel .notesPanel .notes{
+		padding: 12px 10px 17px 16px;
+		line-height: 18px;	
+		color: #5c5c5c;
+		word-wrap: break-word;
+		overflow: hidden;
+	}
+/*Account Search Results Page*/
+.accountSearchSummary{
+	height: 17px;
+	line-height: 17px;
+	padding: 9px 15px;
+	background-color: #E7E7E7;
+	position: relative;
+	font-size: 12px;
+	font-weight: bold;
+	color: #5c5c5c;
+	text-shadow: 0px 1px #ffffff;
+}
+	.accountSearchSummary .corner{
+		background-image: url(../i/corner-white.png);
+	}
+.accountSearchResultsWrapper{
+	margin-bottom: 36px;	
+}
+#accountSearchResultTbl .col1,
+#accountSearchResultTbl .col2,
+#accountSearchResultTbl .col3,
+#accountSearchResultTbl .col4,
+#accountSearchResultTbl .col5,
+#accountSearchResultTbl .col6{
+	width: 158px;
+}
+#accountSearchResultTbl .firstCol{
+	border-left-color: #e7e7e7;
+}
+#accountSearchResultTbl .lastCol{
+	border-right-color: #e7e7e7;
+}
+#accountSearchResultTbl td, #accountSearchResultTbl th{
+	text-indent: 17px;
+}
+.stdTbl tr.rowHover td{
+	background-color: #F8E7C1;
+	cursor: pointer;	
+}
+.pagination{
+	height: 20px;
+	line-height: 20px;
+	padding: 9px 14px 10px 14px;
+	border: 1px solid #e7e7e7;
+	border-top-width: 0;
+}
+.perPage span{
+	vertical-align: middle;
+}
+.perPage select{
+	margin: 0 3px;
+	height: 18px;
+	vertical-align: middle;
+	min-width: 45px;
+}
+.paginationLabel {
+	padding: 0 8px;
+	margin: 0 10px;
+	display: inline-block;
+	border-right: 1px solid #cccccc;
+}
+.paginationLinks a{
+	padding: 0 3px;
+	display: inline-block;
+}
+.paginationLinks a.toPrev {
+	padding-left: 10px;
+	background: url(../i/pagination-arrow.png) 0 -40px no-repeat;
+}
+.paginationLinks a.toNext {
+	padding-right: 10px;
+	background: url(../i/pagination-arrow.png) 100% -60px no-repeat;
+}
+.paginationLinks a.toPrevDisabled {
+	background-position: 0 0;
+}
+.paginationLinks a.toNextDisabled {
+	background-position: 100% -20px;
+}
+.paginationLinks a.current, .paginationLinks a.current:hover, .paginationLinks a.current:focus,
+.paginationLinks a.toPrevDisabled, .paginationLinks a.toPrevDisabled:hover, .paginationLinks a.toPrevDisabled:focus,
+.paginationLinks a.toNextDisabled, .paginationLinks a.toNextDisabled:hover, .paginationLinks a.toNextDisabled:focus{
+	color: #959595;
+	text-decoration: none;
+	cursor: default;
+}
+/*Account Details Page*/
+.accountSummaryPanel{
+	margin-bottom: 18px;
+}
+.accountNotesPanel{
+	margin-bottom: 21px;
+	position: relative;	
+}
+.accountSummaryPanel .panelHeader , .accountNotesPanel .panelHeader {
+	background-color: #e7e7e7;
+}
+.accountSummaryPanel .panelBody, .accountNotesPanel .panelBody{
+	border: 1px solid #e7e7e7;
+	border-top-width: 0;
+}
+.accountSummaryPanel .panelBody{
+	overflow: hidden;	
+}
+	.accountSummaryPanel .column  h4{
+		font-size: 14px;
+		font-weight: bold;
+		line-height: 28px;
+	}
+.accountSummaryPanel .column1{
+	width: 200px;
+	padding: 9px 8px 17px 28px;
+	float: left;
+}
+.accountSummaryPanel .column2{
+	width: 305px;
+	padding: 9px 8px 17px 0;
+	float: left;
+}
+.accountSummaryPanel .column3{
+	width: 180px;
+	padding: 9px 8px 17px 0;
+	float: left;
+}
+.accountSummaryPanel .column .fieldRow{
+	line-height: 18px;
+	overflow: hidden;
+}
+.accountSummaryPanel .column .fieldRow .fieldTitle{
+	width: 75px;
+	padding-right: 14px;
+	position: relative;
+	float: left;
+}
+.accountSummaryPanel .column .fieldRow .fieldTitle span{
+	display: inline-block;
+	width: 14px;
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+.accountSummaryPanel .column4{
+	width: 180px;
+	padding: 11px 8px 17px 0;
+	float: left;
+}
+.accountSummaryPanel .column4 .fieldRow .fieldTitle{
+	width: 109px;
+	font-size: 14px;
+	font-weight: bold;
+}
+.accountSummaryPanel .column4 .fieldRow{
+	line-height: 24px;	
+}
+
+.accountNotesPanel .panelBody{
+	padding: 17px 15px 15px 15px;
+}
+.accountNotesPanel .stdTbl th{
+	color: #00664e;
+	font-weight: bold;
+}
+.accountNotesPanel .stdTbl th, .accountNotesPanel .stdTbl td{
+	text-indent: 0;
+	text-align: center;
+	overflow: hidden;
+	word-wrap: break-word;
+	vertical-align: middle;
+	padding-left: 16px;
+	padding-right: 16px;
+	
+}
+.accountNotesPanel .stdTbl td.aLeft{
+	padding-left: 16px;
+	text-align: left;
+}
+.checkCol{
+	width: 28px;	
+}
+.stdTbl .checkCell{
+	text-align: center;
+	vertical-align: middle;
+	text-indent: 0;
+}
+.checkCell input{
+	display: inline-block;
+	width: 14px;
+	height: 14px;
+	vertical-align: middle;	
+}
+.accountNotesPanel .panelBtnWrapper{
+	position: absolute;
+	top: 6px;
+	right: 16px;
+}
+	.accountNotesPanel .panelBtnWrapper .priBtn {
+		width: 74px;
+		margin-left: 4px;
+	}
+.accountDetailsTabsArea{
+	margin-bottom: 36px;	
+}
+.accountDetailsTabsArea .tabsBlock {
+	border: 1px solid #e7e7e7;
+	border-top-width: 0;
+}
+.tabBtnsWrapper{
+	height: 25px;
+	padding: 8px 14px 7px 14px;
+	border-top: 1px solid #e7e7e7;
+}
+.tabBtnsWrapper .priBtn {
+	margin-left: 9px;	
+}
+.tabBtnsWrapper .priBtn span span{
+	padding: 0 8px;
+}
+.accountDetailsTabsArea .tabsBar li a.current, .accountDetailsTabsArea .tabsBar li a.current:hover, .accountDetailsTabsArea .tabsBar li a.current:focus{
+	border-bottom-color: #ffffff;
+	background-color: #fffffe;
+}
+.accountDetailsTabsArea .serviceHistoryPanel  .tabsBar li a.current, .serviceHistoryPanel  .accountDetailsTabsArea .tabsBar li a.current:hover, .serviceHistoryPanel  .accountDetailsTabsArea .tabsBar li a.current:focus{
+	border-bottom-color: #F6F6F6;
+	background-color: #F6F6F7;
+}
+.accountNotesPopup, .accountNotesEditPopup, .rejectAccountPopup, .paymentNotePopup, .addPaymentPopup, .confirmDatePopup, .accountNotesAddPopup, .noAccountNoteSelectedPopup, .updateInterestPopup, .reversePayementPopup, .periodErrorPopup, .lastUpdatePopup, .noAccountNoteSelectedEditPopup, .refundCreditBalancePopup, .pendingPaymentDisapprovePopup, .interestAdjustmentsDisapprovePopup, .paymentMovesDisapprovePopup, .editUserPermissionsPopup, .changeAccountInterestNotesPopup  {
+	width: 510px;	
+}
+.accountNoteCopyPopup{
+	width: 400px;	
+}
+.reversePayementPopup .popupPadding select{
+	margin: 10px 0;
+	width: 300px;
+}
+.reversePayementPopup .popupPadding label{
+	margin: 0 0 0 8px;
+	cursor: pointer;
+}
+.paymentNotePopup .popupBtnWrapper{
+	padding: 10px 0px 6px 14px;
+	border-top: 1px solid #edc771;
+}
+	.paymentNotePopup .popupBtnWrapper .priBtn{
+		width: 68px;
+	}
+.popup .popupBody .paymentNoteHint{
+	line-height: 12px;
+	height: auto;
+	padding: 0 0 10px 17px;
+	color: #5c5c5c;	
+}
+.popupBody .notesRecord{
+	min-height: 216px;
+}
+	.popupBody .notesRecord h5{
+		line-height: 28px;
+		padding: 6px 18px 0 18px;
+	}
+	.popupBody .notesRecord p{
+		line-height: 15px;
+		padding: 6px 18px;
+		height: 170px;
+	}
+	.popupBody .notesRecord .viewNotesArea{
+		margin: 6px 18px;
+		padding: 0;
+		height: 170px;
+		max-height: 170px;
+		overflow: auto;
+	}
+	.popupBody .notesRecord .viewNotesArea p{
+		padding: 0;
+		height: auto;
+	}
+	.popupBody .notesRecord .col1{
+		display: inline-block;
+		width: 100px
+	}
+	.popupBody .notesRecord .col2{
+		display: inline-block;
+		width: 40px
+	}
+	.popupBody .notesRecord .col3{
+		display: inline-block;
+		width: 40px
+	}
+	.popupBody .notesRecord .textaareaWrapper{
+		padding: 0 14px 10px 14px;
+	}
+	.popupBody .notesRecord textarea{
+		line-height: 15px;
+		min-height: 160px;
+		width: 454px;
+		padding: 5px 10px;
+		color: #5c5c5c;
+	}
+	.popupBody .notesRecord .ui-resizable-e{
+		cursor: default;	
+	}
+	.popupBody .notesRecord .ui-resizable-handle{
+		bottom: 0;
+		right: -1px;	
+	}
+	.popup .notesNav{
+		padding: 8px 0 6px 0;
+		height: 25px;
+		border-top: 1px solid #E09C06;
+		text-align: center;
+	}
+		.popup .notesNav .priBtn{
+			margin: 0 4px;
+		}
+			.popup .notesNav .priBtn i{
+				display: block;
+				width: 16px;
+				height: 25px;
+				background-image: url(../i/notes-nav.png);
+				background-position: 0 0;
+				background-repeat: no-repeat;	
+			}
+			.popup .notesNav .notesToFirst i{
+				background-position: 0 0;
+			}
+			.popup .notesNav .notesToPrev i{
+				background-position: -20px 0;
+			}
+			.popup .notesNav .notesToNext i{
+				background-position: -40px 0;
+			}
+			.popup .notesNav .notesToLast i{
+				background-position: -60px 0;
+			}
+			.popup .notesNav .notesToFirstDisabled i{
+				background-position: 0 -25px;
+			}
+			.popup .notesNav .notesToPrevDisabled i{
+				background-position: -20px -25px;
+			}
+			.popup .notesNav .notesToNextDisabled i{
+				background-position: -40px -25px;
+			}
+			.popup .notesNav .notesToLastDisabled i{
+				background-position: -60px -25px;
+			}
+	.popup .notesPopupBtnWrapper{
+		text-align: center;
+		padding: 10px 0 5px 0;
+		margin: 0 14px;
+		border-top: 1px solid #f9edd2;
+	}
+		.popup .notesPopupBtnWrapper .priBtn{
+			width: 68px;
+			margin: 0 4px;
+		}
+		.popup .notesPopupBtnWrapper .jsClipboardCopy{
+			width: 106px;
+		}
+.popupPadding{
+	padding: 15px;
+	line-height: 18px;
+}
+.rejectAccountPopup  .popupBtnWrapper{
+	border-top: 1px solid #E09C06;
+	padding-top: 10px;
+	padding-left: 14px;
+}
+	.rejectAccountPopup  .popupBtnWrapper .priBtn{
+		width: 68px;
+	}
+		.rejectAccountPopup .popupBody .notesRecord textarea{
+			min-height: 155px;
+		}
+.printPaymentReceiptPopup, .printSummaryPopup, .printStatementPopup, .printFinalStatementPopup, .sampleInitialPopup, .updateInterestReportPopup, .sampleReportPlaceholderPopup, .reportPlaceHolderPopup, .currentSuspensePrintPopup, .suspenseHistoryPrintPopup, .iaViewAuditTrailPopup, .apViewAuditTrailPopup, .pmViewAuditTrailPopup, .chargeCardPopup, .initStatementPopup, .stopACHPopup, .reversalInvoicesPopup, .paymentInvoicesPopup, .initialBillInvoicesPopup, .refundMemosPopup, .adminHolidayPrintPopup{
+	width: 904px;	
+}
+.printScrollArea{
+	overflow-y: auto;	
+}
+.printPopupBtnWrapper{
+	height: 28px;
+	padding: 4px 3px 3px 12px;
+	border-top: 1px solid #efcd82;
+	line-height: 28px;
+	vertical-align: middle;
+}
+	.pdfLink, .printPopupBtnWrapper .pdfLink,
+	.rtfLink, .printPopupBtnWrapper .rtfLink,
+	.docLink, .printPopupBtnWrapper .docLink,
+	.printPopupBtnWrapper .printLink{
+		width: 18px;
+		height: 28px;
+		display: inline-block;
+		background: url(../i/print-icons.png) center 0 no-repeat;
+		vertical-align: middle;
+	}
+	.pdfLink, .printPopupBtnWrapper .pdfLink{
+		background-position: center 0;
+	}
+	.rtfLink, .printPopupBtnWrapper .rtfLink{
+		background-position: center -30px;
+	}
+	.docLink, .printPopupBtnWrapper .docLink{
+		background-position: center -60px;
+	}
+		.pdfLink:hover, .printPopupBtnWrapper .pdfLink:hover, .pdfLink:focus, .printPopupBtnWrapper .pdfLink:focus{
+			background-position: center -1px;
+		}
+		.rtfLink:hover, .printPopupBtnWrapper .rtfLink:hover, .rtfLink:focus, .printPopupBtnWrapper .rtfLink:focus{
+			background-position: center -31px;
+		}
+		.docLink:hover, .printPopupBtnWrapper .docLink:hover, .docLink:focus, .printPopupBtnWrapper .docLink:focus{
+			background-position: center -61px;
+		}
+	.printPopupBtnWrapper .printLink{
+		background-position: 100% -90px;
+		display: inline-block;
+		border-left: 1px solid #d3d3d3;
+		padding: 0 24px 0 8px;
+		width: auto;
+		font-weight: normal;
+		color: #000000;
+		margin-left: 4px;
+	}
+		.printPopupBtnWrapper .printLink:hover, .printPopupBtnWrapper .printLink:focus{
+			background-position: 100% -91px;
+		}
+	.printPopupBtnWrapper .priBtn {
+		width: 95px;
+		margin-top: 2px;
+	}
+/*Print Area*/
+.printPageWrapper{
+	padding: 20px 0;	
+}
+.printPreviewArea {
+	width: 650px;
+	padding: 40px 125px 20px 125px;
+	margin: 0 auto;
+	border: 1px solid #214f8b;
+	overflow: hidden;
+}
+.printPreviewPage{
+	position: relative;
+	overflow: visible;
+}
+	.printPreviewPage .corner{
+		width: 8px;
+		height: 8px;
+		background-image: url(../i/corner-print-preview.png);
+	}
+	.printPreviewPage .corner-tl{
+		background-position: 0 0;
+		top: -1px;
+		left: -1px;
+	}
+	.printPreviewPage .corner-tr{
+		background-position: -8px 0;
+		top: -1px;
+		right: -1px;
+	}
+	.printPreviewPage .corner-bl{
+		background-position: 0 -8px;
+		bottom: -1px;
+		left: -1px;
+	}
+	.printPreviewPage .corner-br{
+		background-position: -8px -8px;
+		bottom: -1px;
+		right: -1px;
+	}
+.popup .printPreviewArea {
+	width: 650px;
+	padding: 10px 115px 10px 115px;
+	margin: 0 auto;
+	border-width: 0;
+}
+.placeholderPrintPreview{
+	font-size: 20px;
+	line-height: 200px;
+	text-align: center;
+}
+
+.printHeader{
+	text-align: center;
+	line-height: 13px;
+	padding-bottom: 8px;
+	font-size: 11px;
+}
+	.accountDetailsPrintPreview .printHeader{
+		padding-bottom: 20px;
+	}
+	.printHeader h1{
+		font-size: 14px;
+		font-weight: bold;
+		line-height: 17px;
+	}
+	.printHeader h1 span{
+		font-size: 12px;
+	}
+.printMetaLeft{
+	width: 231px;
+	height: 41px;
+	float: left;
+	margin: 0 0 33px 34px;
+}
+	.printNum{
+		width: 102px;
+		height: 30px;
+		border: 1px solid #000000;
+		float: left;
+	}
+	.printBirth{
+		width: 126px;
+		height: 30px;
+		border: 1px solid #000000;
+		border-left-width: 0;
+		float: left;
+	}
+	.printNum , .printBirth{
+		padding: 6px 0 5px 0;
+		line-height: 15px;
+		text-align:center;
+	}
+		.printNum label, .printBirth label{
+			display: block;
+			text-align: left;
+			font-weight: bold;
+			text-indent: 11px;
+		}
+		.printBirth label{
+			text-indent: 15px;
+		}
+	.printAcount{
+		width: 225px;
+		height: 30px;
+		padding: 5px 0 6px 4px;
+		line-height: 15px;
+		clear: both;
+		border: 1px solid #000000;
+		font-weight: bold;
+	}
+	.accountDetailsPrintPreview .printAcount{
+		border-top-width: 0;
+	}
+	.printFormTitle{
+		line-height: 20px;
+		font-size: 16px;
+		font-weight: bold;
+		clear: both;
+		text-align: right;
+		width: 231px;
+	}
+		.billingSummaryPrintPreview  .printFormTitle{
+			padding: 33px 0 20px 0;
+		}
+		.accountDetailsPrintPreview  .printFormTitle{
+			padding: 12px 0 0 0;
+		}
+	.printFormTitleNote{
+		text-align: right;
+		font-weight: bold;
+		width: 231px;
+	}
+.printMetaRight{
+	width: 231px;
+	float: right;	
+}
+.printFormTitle, .printFormTitleNote{
+	float: right;
+	clear: right;
+}
+.printAddress{
+	float: left;
+	clear: left;
+	width: 328px;
+	margin-left: 30px;
+}
+	.printAddress > p{
+		line-height: 22px;
+		text-indent: 6px;
+	}
+	.accountDetailsPrintPreview .printAddress > p{
+		padding-top: 53px;
+	}
+	.printAddressHeader{
+		height: 5px;
+		overflow: hidden;
+		background: url(../i/print-address-bg.png) 0 0 no-repeat;
+	}
+	.printAddressBody{
+		width: 300px;
+		padding: 8px 14px 12px 14px;
+		background:url(../i/print-address-bg.png) -330px 0 repeat-y;
+		line-height: 14px;
+		font-weight: bold;
+	}
+	.printAddressFooter{
+		height: 5px;
+		overflow: hidden;
+		background: url(../i/print-address-bg.png) -660px 0 no-repeat;
+	}
+.printDetachLine {
+	height: 14px;
+	line-height: 14px;
+	margin: 0 4px 6px 4px;
+	padding-top: 7px;
+	background: url(../i/print-detach-line.png) 0 100% repeat-x;
+	text-align: center;
+}
+.printDetachLineAbove  {
+	background-position: 0 7px;
+}
+.printDataArea{
+	border: 1px solid #000000;
+	overflow: hidden;
+}
+	.printDataArea h3{
+		line-height: 16px;
+		padding: 0 0 4px 0;
+		text-align: center;
+		border-bottom: 1px solid #000000;
+		font-size: 11px;
+	}
+.printFooter .legend{
+	line-height: 26px;
+	text-align: center;
+	padding-bottom: 4px;
+	font-size: 12px;
+	font-weight: bold;
+}
+	.printFooter .legend span{
+		padding: 0 19px;
+	}
+	.printFooter .footerNote{
+		margin: 0 15px 20px 15px;
+		line-height: 13px;
+		font-size: 11px;
+	}
+	.printFooter .footerNote{
+		margin: 0 15px 20px 15px;
+		line-height: 13px;
+		font-size: 11px;
+	}
+	.printFooter .otherSideNote{
+		font-size: 12px;
+		font-weight: bold;
+		text-align: center;
+		line-height: 22px;
+	}
+	.printFooter .leftNote, .printFooter .rightNote{
+		font-size: 11px;
+		width: 110px;	
+	}
+	.printFooter .rightNote{
+		font-size: 11px;
+		width: 100px;	
+	}
+	.printFooter .leftNote, .printFooter .rightNote{
+		margin-top: 15px;
+	}
+	.printFooter .middleNote{
+		margin-top: 3px;
+		width: 440px;
+		text-align: center;
+		line-height: 12px;
+		font-size: 10px;
+	}
+	.printFooter .middleNote strong{
+		font-size: 12px;
+		font-weight: bold;
+		line-height: 20px;		
+	}
+.printPersonalData {
+	height: 32px;
+	overflow: hidden;
+}
+	.printPersonalData > div{
+		padding-bottom: 1px;
+		line-height: 15px;
+		text-align: center;
+		font-weight: bold;
+		float: left;
+	}
+		.printPersonalData > div label{
+			display: block;
+			text-align: left;
+		}
+	.billingSummaryPrintPreview .printPersonalData  .name{
+		width: 237px;
+		border-right: 1px solid #000000;
+		border-bottom: 1px solid #000000;
+	}
+	.billingSummaryPrintPreview .printPersonalData  .date{
+		width: 82px;
+		border-right: 1px solid #000000;
+		border-bottom: 1px solid #000000;
+	}
+	.billingSummaryPrintPreview .printPersonalData  .coveredBy{
+		width: 186px;
+		border-right: 1px solid #000000;
+		border-bottom: 1px solid #000000;
+	}
+	.billingSummaryPrintPreview .printPersonalData  .claimNum{
+		width: 140px;
+		border-bottom: 1px solid #000000;
+	}
+		.billingSummaryPrintPreview .printPersonalData > div label{
+			text-indent: 5px;
+		}
+	.accountDetailsPrintPreview .printPersonalData  .name{
+		width: 201px;
+		border-right: 1px solid #000000;
+		border-bottom: 1px solid #000000;
+		margin-right: 1px;
+	}
+	.accountDetailsPrintPreview .printPersonalData  .date{
+		width: 113px;
+		border-left: 1px solid #000000;
+		border-right: 1px solid #000000;
+		border-bottom: 1px solid #000000;
+		margin-right: 3px;
+	}
+	.accountDetailsPrintPreview .printPersonalData  .coveredBy{
+		width: 207px;
+		border-left: 1px solid #000000;
+		border-right: 1px solid #000000;
+		border-bottom: 1px solid #000000;
+		margin-right: 1px;
+	}
+	.accountDetailsPrintPreview .printPersonalData  .claimNum{
+		width: 116px;
+		border-left: 1px solid #000000;
+		border-bottom: 1px solid #000000;
+	}
+		.accountDetailsPrintPreview .printPersonalData > div label{
+			text-indent: 7px;
+		}
+	.accountDetailsPrintPreview .leftPart {
+		width: 303px;
+		padding: 13px 0 7px 7px;
+	}
+		.accountDetailsPrintPreview .leftPart p{
+			overflow: hidden;
+		}
+		.accountDetailsPrintPreview .leftPart p.emLine{
+			font-weight: bold;
+			line-height: 21px;
+		}
+		.accountDetailsPrintPreview .leftPart .detailsLine{
+			line-height: 14px;
+			padding: 19px 0 10px 0;
+		}
+			.accountDetailsPrintPreview .leftPart p label{
+				float: left;
+			}
+			.accountDetailsPrintPreview .leftPart p span{
+				float: right;
+			}
+	.accountDetailsPrintPreview .rightPart {
+		width: 268px;
+		padding: 7px 0;
+	}
+		.accountDetailsPrintPreview .rightPart .paymentNote{
+			padding: 82px 0 0 0;
+		}
+	.billingLeftPart {
+		width: 227px;
+		padding: 0 5px;
+		border-right: 1px solid #000000;
+	}
+	.printTbl {
+		line-height: 14px;
+	}
+	.printTbl .titleRow{
+		font-weight: bold;
+		padding: 3px 0 7px 0;
+	}
+	.printTbl .totalArea td{
+		font-weight: bold;
+	}
+	.printTbl .subtotalRow td{
+		padding: 0 0 14px 0;
+		font-weight: bold;
+		border-top: 1px solid #000000;
+	}
+	.printTbl .subtotalRow td.sep{
+		width: 5px;
+		border-top: 1px solid #ffffff;
+	}
+	.billingRightPart  {
+		width: 385px;
+		padding: 17px 0 0 15px;
+		overflow: hidden;
+	}
+	.billingTblWrapper{
+		min-height: 265px;
+	}
+	.printListTbl td, .printListTbl th{
+		line-height: 22px;
+		text-align: center;
+	}
+	.billingRightPart td{
+		width: 17%;
+	}
+	.billingRightPart .paymentExplanation{
+		padding: 0 0 7px 0;
+	}
+	.paymentExplanation{
+		line-height: 15px;
+	}
+	.numberList , .numberList li{
+		list-style: decimal outside;
+	}
+	.numberList{
+		padding: 0 0 0 28px;
+	}
+.accountSummaryPrintPreview .printDate{
+	padding-top: 60px;
+	line-height: 25px;
+	color: #5c5c5c;
+}
+.accountSummaryPrintPreview h3.accountSummaryPrintTitle{
+	font-size: 18px;
+	font-weight: bold;
+	line-height: 44px;
+	padding-bottom: 8px;
+	text-align: center;
+}
+.accountSummaryPrintPreview .accountSummaryPrintTbl{
+	margin-bottom: 60px;	
+}
+.accountSummaryPrintPreview .accountSummaryPrintTbl th{
+	line-height: 20px;
+	font-weight: bold;
+	text-align: left;
+	font-size: 14px;
+}
+.accountSummaryPrintPreview .accountSummaryPrintTbl td{
+	line-height: 18px;
+	font-weight: normal;
+	text-align: left;
+	font-size: 12px;
+}
+.addPaymentPopup .currentAccountInfo{
+	overflow: hidden;
+	margin: 0 14px 12px 14px;
+	padding: 11px 0 9px 0;
+	border-bottom: 1px solid #edc771;
+	line-height: 18px;
+}
+	.addPaymentPopup .currentAccountInfo .accountField{
+		width: 230px;
+		overflow: hidden;
+	}
+		.addPaymentPopup .currentAccountInfo .accountField .fieldLabel{
+			width: 114px;
+			padding-right: 16px;
+			float: left;
+			text-align: right;
+			font-weight: bold;
+		}
+		.addPaymentPopup .currentAccountInfo .accountField .fieldVal{
+			width: 100px;
+			float: left;	
+		}
+	.addPaymentPopup .paymentField{
+		margin: 0 14px 8px 14px;
+		min-height: 22px;
+		overflow: hidden;
+		line-height: 22px;
+	}
+	.addPaymentPopup .paymentDateField{
+		height: 22px;	
+	}
+		.addPaymentPopup .paymentField .fieldLabel{
+			width: 114px;
+			padding-right: 16px;
+			float: left;
+			text-align: right;
+			font-weight: bold;
+			line-height: 22px;
+		}
+			.addPaymentPopup .paymentField .datenote{
+				display: inline-block;
+				font-size: 11px;
+				color: #636363;
+				line-height: 11px;
+				margin-left: 6px;
+			}
+			.addPaymentPopup .paymentField input.text{
+				vertical-align: top;
+				width: 146px;
+			}
+			.addPaymentPopup .paymentField input.datePicker{
+				width: 121px;
+			}
+			.addPaymentPopup .paymentField .paymentApplyTo{
+				width: 160px;
+			}
+			.addPaymentPopup .paymentField input.checkboxInput, .addPaymentPopup .paymentField .radioWrapper input{
+				vertical-align: middle;	
+				width: 14px;
+				height: 14px;
+			} 
+			.addPaymentPopup .paymentField label{
+				vertical-align: middle;	
+				cursor: pointer;
+				
+			}
+		.addPaymentPopup .paymentField .radioWrapper{
+			width: 340px;
+			float: left;	
+		}
+			.addPaymentPopup .paymentField .radioWrapper label{
+				width: 135px;
+				display: inline-block;
+				margin-left: 4px;
+			}
+			.addPaymentPopup .paymentField .radioWrapper label.longLabel{
+				width: 155px;
+				margin-right: 4px;
+				margin-left: 4px;
+			}
+.addPaymentNote{
+	padding: 0 14px 6px 14px;
+	line-height: 11px;
+	font-size: 11px;
+	color: #636363;
+}
+.addPaymentPopup .popupBtnWrapper{
+	padding: 10px 14px 8px 14px;
+	border-top: 1px solid #edc771;
+}
+	.addPaymentPopup .popupBtnWrapper .priBtn{
+		margin-right: 6px;
+	}
+	.addPaymentPopup .popupBtnWrapper .jsDoAddPHTransaction{
+		width: 118px;
+	}
+	.addPaymentPopup .popupBtnWrapper .jsClosePopup{
+		width: 68px;
+	}
+.accountDetailsTabsArea .titleRow {
+	height: 24px;
+	line-height: 24px;
+	background-color: #f6f6f6;
+	border-top: 1px solid #e7e7e7;	
+	border-bottom: 1px solid #e7e7e7;
+}
+.accountDetailsTabsArea .titleRow h3{
+	float: left;
+	margin-left: 14px;
+}
+.accountDetailsTabsArea .paymentHistoryTab {
+	padding-top: 17px;
+}
+	.accountDetailsTabsArea .paymentHistoryTab .paymentHistoryFields{
+		padding: 9px 0 9px 14px;
+		border-bottom: 1px solid #e7e7e7;
+	}
+		.accountDetailsTabsArea .paymentHistoryTab .paymentHistoryField{
+			height: 30px;
+			line-height: 30px;
+		}
+			.accountDetailsTabsArea .paymentHistoryTab .paymentHistoryField .fieldStatus{
+				float: left;
+				width: 350px;
+			}
+			.accountDetailsTabsArea .paymentHistoryTab .paymentHistoryField .fieldLabel{
+				float: left;
+				width: 110px;
+				padding-right: 14px;
+				text-align: right;
+			}
+			.accountDetailsTabsArea .paymentHistoryTab .paymentHistoryField .fieldVal{
+				font-weight: bold;
+			}
+			.accountDetailsTabsArea .paymentHistoryTab .paymentBtnsWrapper{
+				padding: 10px 15px 9px 15px;
+				height: 25px;
+			}
+				.accountDetailsTabsArea .paymentHistoryTab .paymentBtnsWrapper .priBtn{
+					width: 97px;
+				}
+				.accountDetailsTabsArea .paymentHistoryTab .paymentBtnsWrapper .fRight{
+					margin-left: 9px;
+				}
+				.accountDetailsTabsArea .paymentHistoryTab .paymentBtnsWrapper .jsPHReceipt{
+					width: 120px;
+				}
+				.accountDetailsTabsArea .paymentHistoryTab .paymentHistoryTblWrapper{
+					margin: 0 15px 15px 15px;	
+				}
+			#paymentHistoryTbl .lastCol{
+				text-indent: 0;
+				text-align: center;
+				width: 42px;
+				vertical-align: middle;
+			}
+			#paymentHistoryTbl th.lastCol{
+				color: #00664E;
+			}
+				#paymentHistoryTbl .lastCol input{
+					vertical-align: middle;
+				}
+.rowActions {
+	position: absolute;	
+	display: none;
+	z-index: 200;
+	width: 106px;
+}
+.rowActionHeader {
+	display: block;
+	padding: 0 0 0 4px;
+	background: url(../i/row-menu-bg.png) 0 0 no-repeat;
+	height: 3px;
+	overflow: hidden;
+}
+.rowActionHeaderRight {
+	display: block;
+	padding: 0 4px 0 0;
+	background: url(../i/row-menu-bg.png) 100% -3px no-repeat;
+	height: 3px;
+	overflow: hidden;
+}
+.rowActionHeaderInner {
+	display: block;
+	padding: 0;
+	background: url(../i/row-menu-bg.png) 0 -6px repeat-x;
+	height: 3px;
+	overflow: hidden;
+}
+.rowActionBody {
+	display: block;
+	padding: 0 0 0 2px;
+	background: url(../i/pop-border.png) 0 0 repeat-y;
+	overflow: hidden;
+}
+.rowActionBodyRight {
+	display: block;
+	padding: 0 2px 0 0;
+	background: url(../i/pop-border.png) 100% 0 repeat-y;
+}
+.rowActionBodyInner {
+	display: block;
+	padding: 0 1px;
+	background: #ffffff;
+}
+.rowActionFooter {
+	display: block;
+	padding: 0 0 0 4px;
+	background: url(../i/row-menu-bg.png) 0 -9px no-repeat;
+	height: 3px;
+	overflow: hidden;
+}
+.rowActionFooterRight {
+	display: block;
+	padding: 0 4px 0 0;
+	background: url(../i/row-menu-bg.png) 100% -12px no-repeat;
+	height: 3px;
+	overflow: hidden;
+}
+.rowActionFooterInner {
+	display: block;
+	padding: 0;
+	background: url(../i/row-menu-bg.png) 0 -15px repeat-x;
+	height: 3px;
+	overflow: hidden;
+}
+.rowActionBody li{
+	display: block;
+	width: 100px;
+	height: 17px;
+	line-height: 17px;
+}
+	.rowActionBody li a{
+		font-size: 11px;
+		font-weight: normal;
+		color: #000000;
+		display: block;
+		padding: 0 5px
+	}
+	.rowActionBody li a:hover, .rowActionBody li a:focus{
+		color: #ffffff;
+		background-color: #e09c06;
+		text-decoration: none;
+	}
+#paymentHistoryTbl .jsShowRowAction{
+	cursor: pointer;	
+}
+#paymentHistoryTbl .jsShowRowActionCellHover, #paymentHistoryTbl .jsShowRowActionCellFocus{
+	background-color: #fec038;	
+}
+
+
+/*Account Details Employee tab*/
+.accountDetailsTabsArea .employeeTab, .accountDetailsTabsArea .billingSummaryTab  {
+    padding-top: 17px;
+	overflow: hidden;
+}
+.accountDetailsTabsArea .employeeTab .halfCol{
+	float: left;
+	width: 474px;
+}
+.accountDetailsTabsArea .employeeTab .rightHalfCol{
+	width: 503px;
+	border-left: 1px solid #E7E7E7;
+}
+.accountDetailsTabsArea .employeeTab .titleRow  > span{
+	float: right;
+	display: block;
+	min-width: 160px;
+	padding-right: 16px;
+	font-weight: bold;
+}
+.accountDetailsTabsArea .employeeTab .halfRowField{
+	height: 22px;
+	padding: 4px 0;
+}
+.mb3{
+	margin-bottom: 3px;	
+}
+.locationTitleRow {
+	margin: 14px 0 3px 0;	
+}
+	.accountDetailsTabsArea .employeeTab .halfRowField .fieldLabel{
+		line-height: 22px;
+		padding-top: 0;
+		width: 135px;
+	}
+	.accountDetailsTabsArea .employeeTab .halfRowField .fieldVal{
+		display: inline-block;
+		width: 300px;
+		float: left;
+		line-height: 22px;
+		min-height: 22px;
+		color: #5c5c5c;
+	}
+	.accountDetailsTabsArea .employeeTab .radioRow,
+	.accountDetailsTabsArea .employeeTab .radioRow label,
+	.accountDetailsTabsArea .employeeTab .radioRow input{
+		vertical-align: middle;
+	}
+	.accountDetailsTabsArea .employeeTab .radioRow label{
+		line-height: 22px;
+		margin-right: 6px; 
+		cursor: pointer;
+	}
+.accountDetailsTabsArea .employeeTab .titleRow  > span{
+	float: right;
+	display: block;
+	min-width: 160px;
+	padding-right: 16px;
+	font-weight: bold;
+}
+.accountDetailsTabsArea .employeeTab .titleRow .checker{
+	font-weight: normal;
+}
+.accountDetailsTabsArea .employeeTab .halfRowField select{
+		width: 293px;
+	}
+	.accountDetailsTabsArea .employeeTab .halfRowField select.midLength{
+		width: 93px;
+	}
+	.accountDetailsTabsArea .employeeTab .halfRowField select.midLength2{
+		width: 230px;  /* Bug Fix 153 */
+	}
+	.accountDetailsTabsArea .employeeTab .halfRowField input.text{
+		width: 279px;
+	}
+	.accountDetailsTabsArea .employeeTab .halfRowField input.midLength{
+		width: 78px;
+	}
+	.accountDetailsTabsArea .employeeTab .halfRowField input.phoneInput{
+		width: 135px;
+	}
+	.accountDetailsTabsArea .employeeTab .halfRowField input.phoneExt{
+		width: 31px;
+	}
+	.accountDetailsTabsArea .employeeTab .phoneField .acNote{
+		top: 2px;
+		left: 147px;
+		font-size: 9px;
+	}
+	.accountDetailsTabsArea .employeeTab .phoneField .extNote{
+		top: 2px;
+		left: 307px;
+		font-size: 9px;
+	}
+	.accountDetailsTabsArea .employeeTab .phoneField{
+		padding-top: 14px;	
+	}
+	.employeeTab .titleRow span.jsCheckStatus{
+		color: #959595;	
+	}
+	.employeeTab .titleRow span.checkRejected{
+		color: #ca0404;	
+	}
+	.employeeTab .titleRow span.checkApproved{
+		color: #008917;	
+	}
+	.accountBasicInfoPanelEdit .tabBtnsWrapper .priBtn{
+		width: 74px;
+	}
+	.employeeTab .halfRowField .checkValidateInputBox{
+		display: none;	
+		width: 14px;
+		height: 14px;
+		vertical-align: top;
+		margin: 5px 0 0 6px;
+	}
+	.employeeTab .radioRow .checkValidateInputBox{
+		margin: 0 0 0 13px;
+	}
+	.rowCheckStatus {
+		display: none;
+		width: 18px;
+		height: 22px;
+		overflow: hidden;
+		background-image: url(../i/validate-icon.png);
+		background-repeat: no-repeat;
+		float: left;
+	}
+	.rowCheckShow {
+		display: inline-block;
+	}
+	.rowCheckPassed {
+		background-position: 0 -51px;
+	}
+	.rowCheckFailed {
+		background-position: 0 -26px;
+	}
+/*Account Details Billing tab*/
+.accountDetailsTabsArea .billingSummaryTab .billingFields {
+	padding: 8px 0 7px 15px;
+	overflow: hidden;
+}
+.accountDetailsTabsArea .billingSummaryTab .billingField{
+	width: 305px;
+	height: 30px;
+	line-height: 30px;
+	float: left;
+	overflow: hidden;
+}
+.accountDetailsTabsArea .billingSummaryTab .billingField .fieldLabel{
+	float: left;
+	width: 154px;
+	text-align: right;
+	padding-right: 11px;
+}
+.accountDetailsTabsArea .billingSummaryTab .billingField .fieldVal{
+	float: left;
+	width: 135px;
+	color: #5c5c5c;
+}
+.billingSummaryTab  .tblWrapper{
+	padding: 0 15px 16px 15px;
+}
+.billingSummaryTab .billingTbl .col1,
+.billingSummaryTab .billingTbl .col2,
+.billingSummaryTab .billingTbl .col3{
+	width: 141px;
+}
+.billingSummaryTab .billingTbl th, .billingSummaryTab .billingTbl td{
+	text-indent: 0;
+	text-align: center;
+	padding: 0;
+	line-height: 24px;
+}
+.billingSummaryTab .billingTbl th, .billingSummaryTab .billingTbl .titleCol{
+	background-color: #F8E7C1;
+	color: #00664E;
+	font-weight: bold;
+}
+.billingSummaryTab .billingTbl .titleCol{
+	text-align: right;
+	padding-right: 16px;
+}
+.billingSummaryTab .billingTbl .totalRow td{
+	background-color: #e09c06;
+	color: #ffffff;
+	font-weight: bold;
+}
+.billingSummaryTab .billingTbl .totalRow td .checkboxInput {
+	vertical-align: middle;
+	width: 14px;
+	height: 14px;
+}
+.billingSummaryTab .billingTbl .totalRow td label{
+	font-weight: normal;
+	vertical-align: middle;
+	cursor: pointer;
+}
+.billingSummaryTab .billingTbl .totalRow td label.checkboxDisabled{
+	cursor: default;
+	color: #000000;
+	font-weight: bold;
+}
+.billingSummaryTab .billingTbl .text{
+	width: 116px;
+	padding: 0 6px;
+}
+.billingSummaryTab .billingTbl select{
+	width: 130px;
+	height: 18px;
+	padding: 0;
+}
+.billingSummaryPanel .tabBtnsWrapper .priBtn{
+	width: 130px;
+}
+.billingSummaryPanel .tabBtnsWrapper .jsPrintFinalStatement{
+	width: 143px;
+}
+.billingSummaryPanelEdit .tabBtnsWrapper .priBtn{
+	width: 74px;
+}
+.billingSummaryPanelEdit .billingField input.text{
+	width: 78px;
+}
+.billingSummaryPanelEdit .billingField .ui-datepicker-trigger{
+	margin-top: 4px;	
+}
+
+/*OPM Contest 2*/
+/*Report Pages*/
+.reportsTab {
+	position: relative;	
+}
+	.reportsTab .tabsBar li a{
+		color: #5c5c5c;
+	}
+	.reportsTab .tabsBar li a.current, .reportsTab .tabsBar li a.current:hover, , .reportsTab .tabsBar li a.current:focus{
+		color: #000000;
+	}
+	.reportsTab .reportsActionsWrapper{
+		position: absolute;
+		top: -1px;
+		right: 0;
+	}
+.reportTabsBlock{
+	border: 1px solid #e7e7e7;
+	border-top-width: 0;
+	margin-bottom: 36px;
+	padding: 17px 10px 14px 15px;
+}
+	.reportTabsBlock .leftTreeWrapper{
+		width: 248px;
+		background: #f6f6f6;
+		border: 1px solid #e7e7e7;
+		padding: 11px 3px 11px 11px;
+		float: left;
+	}
+	.reportTabsBlock .rightReportWrapper{
+		width: 640px;
+		float: left;
+		padding-left: 18px;
+	}
+	.rightReportWrapper .reportTitle{
+		line-height: 18px;
+		padding-bottom: 8px;
+		font-size: 16px;
+		font-weight: bold;
+		color: #000000;
+	}
+	.viewReportWrapper p{
+		line-height: 18px;
+		padding-bottom: 18px;
+		font-size: 12px;
+		color: #5c5c5c;
+	}
+	.viewReportWrapper p.lastParagraph{
+		padding-bottom: 8px;
+	}
+	.reportsActionsWrapper .priBtn{
+		width: 68px;
+		margin-left: 9px;
+	}
+	.reportsActionsWrapper .downloadLinks {
+		height: 28px;
+		border-right: 1px solid #d3d3d3;
+		padding-right: 5px;
+		position: relative;
+		top: -2px;
+	}
+	.reportsActionsWrapper .downloadLinks .downloadLabel{
+		display: inline-block;
+		line-height: 28px;
+		padding-right: 2px;
+		vertical-align: top;
+	}
+.richEditorWrapper{
+	border: 1px solid #e7e7e7;
+}
+	.richEditorWrapper .richEditorBarPlaceholder{
+		border-bottom: 1px solid #e7e7e7;
+		height: 35px;
+		background: #f6f6f6 url(../i/placeholder-richeditor.png) 0 0 no-repeat;
+	}
+	.richEditorWrapper textarea{
+		padding: 0 0 0 12px;	
+		border-width: 0;
+		width: 626px;
+		height: 496px;
+		color: #5c5c5c;
+		line-height: 18px;
+		background: none;
+		box-shadow: none;
+	}
+	.richEditorWrapper .richEditorFooterPlaceholder{
+		border-top: 1px solid #e7e7e7;
+		height: 21px;
+		background-color: #f6f6f6;
+	}
+		.richEditorWrapper .richEditorFooterPlaceholder .limitationHint{
+			font-size: 11px;
+			color: #7f7f7f;
+			line-height: 20px;
+			display: inline-block;
+			margin: 1px 0 0 11px;
+		}
+		.richEditorWrapper .richEditorFooterPlaceholder .resizor{
+			display: block;
+			width: 21px;
+			height: 21px;
+			background: url(../i/resizor.png) 0 0 no-repeat;
+			cursor:se-resize;
+		}
+	
+.reportTblWrapper{
+	padding-top: 12px;	
+}
+	.reportTblWrapper .dailyReconciliationTbl th{
+		color: #00664e;
+		text-indent: 0; 
+		text-align: center;
+	}
+	.reportTblWrapper .dailyReconciliationTbl .col1, 
+	.reportTblWrapper .dailyReconciliationTbl .col2, 
+	.reportTblWrapper .dailyReconciliationTbl .col3, 
+	.reportTblWrapper .dailyReconciliationTbl .col4, 
+	.reportTblWrapper .dailyReconciliationTbl .col5{
+		width: 95px;
+	}
+	.reportTblWrapper .dailyReconciliationTbl .titleCol{
+		color: #00664e;
+		background-color: #F8E7C1;
+		text-align: right;
+		padding-right: 8px;
+		text-indent: 0;
+	}
+	.reportTblWrapper .dailyReconciliationTbl td{
+		text-indent: 8px;
+	}
+	.reportTblWrapper .dailyReconciliationTbl .totalRow td{
+		color: #ffffff;
+		background-color: #e09c06;
+		font-weight: bold;
+	}
+	.reportTblWrapper .dailyReconciliationTbl .itemCountCol{
+		text-indent: 14px;
+	}
+	.editReportWrapper  .dailyReconciliationTbl .inputCell{
+		text-indent: 0;
+		text-align: center;
+		height: 24px;
+		padding: 0;
+		vertical-align: middle;
+	}
+	.reportTblWrapper .dailyReconciliationTbl input.text{
+		width: 75px;
+		padding: 0 5px;
+		color: #000000;
+	}
+/*Suspense Page*/
+.suspensePanel .panelBody{
+	border: 1px solid #e7e7e7;	
+}
+.suspensePanel .accountSummaryPanel {
+	margin: 0;
+}
+.suspensePanel .suspenseTblWrapper {
+	padding: 0 15px 15px 15px;	
+}
+.suspenseTblBtnWrapper {
+	padding: 8px 14px 7px 14px;
+	border: 1px solid #e7e7e7;
+	border-top-width: 0;
+}
+#suspenseTbl{
+	/* Bug Fix 2 */
+	table-layout: fixed;	
+}
+	#suspenseTbl th{
+		text-indent: 6px;
+		color: #00664E;
+		text-indent: 0;
+		line-height: 14px;
+		padding: 5px 0;
+		vertical-align: top;
+		/* Bug Fix 2 */
+		word-wrap: break-word;
+		overflow: hidden;
+	}
+		#suspenseTbl th a{
+			padding: 0 16px 0 6px;
+			position: relative;
+		}
+			#suspenseTbl th a .sortarrow{
+				position: absolute;
+				top: -2px;
+				right: 4px;
+				margin: 0;
+			}
+		#suspenseTbl .sortArrowCloseToBorder a{
+				padding-right: 12px;	
+			}
+			#suspenseTbl .sortArrowCloseToBorder a .sortarrow{
+				right: 0;	
+			}
+	#suspenseTbl .checkBoxCell{
+		text-indent: 0;
+		padding: 0;
+		vertical-align: middle;
+		text-align: center;
+	}
+		#suspenseTbl .checkBoxCell input{
+			vertical-align: middle;
+		}
+	#suspenseTbl td{
+		/* Bug Fix 2 */
+		text-indent: 0;
+		padding-left: 4px;
+		overflow: hidden;
+		padding-right: 4px;
+		word-wrap: break-word;
+	}
+	#suspenseTbl .blankCol{
+		width: 25px;
+	}
+	#suspenseTbl .col1, #suspenseTbl .col6{
+		width: 33px;
+	}
+	#suspenseTbl .col2{
+		width: 165px;
+	}
+	#suspenseTbl .col3{
+		width: 95px;
+	}
+	#suspenseTbl .col4{
+		width: 83px;
+	}
+	#suspenseTbl .col5{
+		width: 68px;
+	}
+	#suspenseTbl .col7{
+		width: 64px;
+	}
+	#suspenseTbl .col8{
+		width: 86px;
+	}
+	#suspenseTbl .col9{
+		width: 98px;
+	}
+	#suspenseTbl .col10, #suspenseTbl .col11{
+		width: 78px;
+	}
+		#suspenseTbl tfoot td{
+			cursor: pointer;
+		}
+		#suspenseTbl tfoot td.blankCell {
+			background-image: url(../i/row-star.png);
+			background-position: center center;
+			background-repeat: no-repeat;
+		}	
+			#suspenseTbl tfoot td input{
+				display: none;
+			}
+			#suspenseTbl .hovered td{
+				background-color: #F8E7C1;
+				cursor: pointer;
+			}
+			#suspenseTbl tbody td{
+				cursor: pointer;
+			}
+			#suspenseTbl tbody td.checkBoxCell, #suspenseTbl tbody .editing td{
+				cursor: default;
+			}
+			#suspenseTbl tbody .highlighted td{
+				background-color: #fec038;
+			}
+			#suspenseTbl tbody .highlighted .blankCell {
+				background-image: url(../i/row-arrow.png);
+				background-position: center center;
+				background-repeat: no-repeat;
+			}
+		#suspenseTbl .editing{
+			height: 18px;
+			text-indent: 0;
+			text-align: center;
+		}
+			#suspenseTbl .editing td{
+				text-indent: 0;
+				text-align: center;
+				background-color: #fec038;
+				height: 24px;
+				padding: 0;
+				vertical-align: middle;
+			}
+			#suspenseTbl tbody .editing .blankCell {
+				background-image: url(../i/row-edit.png);
+				background-position: center center;
+				background-repeat: no-repeat;
+			}
+			#suspenseTbl tbody .editing input.text{
+				padding: 0 3px;
+				vertical-align: middle;
+				color: #000000;
+			}
+			#suspenseTbl tbody .editing input.datePicker, #suspenseTbl tbody .editing input.depositDate2, #suspenseTbl tbody .editing input.birthDate2{
+				padding: 0;
+				display: inline-block;
+			}
+			#suspenseTbl tbody .editing .ui-datepicker-trigger{
+				width: 16px;
+				height: 16px;
+				vertical-align: middle;
+				margin: 0;
+			}
+			#suspenseTbl tbody .editing td.editingCell{
+				background-color: #c44a09;
+			}
+			#suspenseTbl tbody .editing td.editingCell input.focus{
+				box-shadow: none;
+				border-color: #b5b5b5;
+			}
+	.suspenseTblBtnWrapper .priBtn{
+		margin-left: 10px;
+		width: 118px;	
+	}
+	.suspenseTblBtnWrapper .jsPostCheckedPaymentsSuspense{
+		width: 169px;
+	}
+	.suspenseTblBtnWrapper .jsResetSelectedPaymentSuspense{
+		width: 178px;	
+	}	
+.accountPanymentsWrapper{
+	margin-bottom: 30px;	
+}
+	.accountPanymentsWrapper .leftBox{
+		/*width: 661px; Bug Fix 2 */
+		width: 680px;
+		border: 1px solid #e7e7e7;
+		border-top-width: 0;
+		float: left;
+	}
+	.accountPanymentsWrapper .boxTitle{
+		height: 35px;
+		background-color: #f6f6f6;
+		border-bottom: 1px solid #e7e7e7;
+		line-height: 35px;
+		padding-left: 20px;
+		color: #626262;
+		text-shadow: 0px 1px #ffffff;
+	}
+	.accountPanymentsWrapper .boxInner{
+		min-height: 282px;
+	}
+		.accountPanymentsWrapper .leftBox .boxInner{
+			padding-left: 20px;
+		}
+		.accountPanymentsWrapper .leftBox .halfCol{
+			width: 320px;
+			float: left;
+			padding: 26px 0 16px 0;
+		}
+		.accountPanymentsWrapper .leftBox .halfRowField{
+			height: 22px;	
+		}
+			.accountPanymentsWrapper .leftBox .halfRowField .fieldLabel{
+				width: 162px;
+				padding: 0 12px 0 0;
+				line-height: 22px;	
+			}
+			.accountPanymentsWrapper .leftBox .halfCol input.text, .accountPanymentsWrapper .leftBox .halfCol input.focus{
+				width: 102px;
+				color: #000000;
+				border: 1px solid #ababab;
+				box-shadow: none;
+			}
+			.accountPanymentsWrapper .leftBox .halfCol input.error{
+				border: 1px solid #CA0404;
+			}
+	.accountPanymentsWrapper .rightBox{
+		/*width: 286px; Bug Fix 2 */
+		width: 297px;
+		border-right: 1px solid #e7e7e7;
+		border-bottom: 1px solid #e7e7e7;
+		float: left;
+	}
+		.accountPanymentsWrapper .rightBox .textareaWrapper{
+			padding: 21px 0 22px 23px;
+			overflow: hidden;
+		}
+		.accountPanymentsWrapper .rightBox  .ui-resizable-handle{
+			right: -1px;
+			bottom: -1px;	
+		}
+		.accountPanymentsWrapper .rightBox textarea{
+			width: 221px;
+			min-height: 221px;
+			padding: 6px 8px;
+			line-height: 16px;
+			display: block;
+			float: left;
+		}
+		.accountPanymentsWrapper .rightBox .ui-resizable-e{
+			cursor: default;	
+		}
+	.accountPanymentsWrapper .boxBtnWrapper{
+		border-top: 1px solid #e7e7e7;
+		height: 46px;
+	}
+		.accountPanymentsWrapper .leftBox .boxBtnWrapper{
+			padding: 8px 0 0 14px;
+		}
+		.accountPanymentsWrapper .rightBox .boxBtnWrapper{
+			padding: 8px 0 0 19px;
+		}
+		.accountPanymentsWrapper .boxBtnWrapper .priHighBtn {
+			margin-right: 5px;
+			width: 117px;
+			vertical-align: top;
+		}
+		.accountPanymentsWrapper .boxBtnWrapper .jsLinkPaymentToCurrent{
+			width: 149px;
+		}
+.transferSuspensePopup {
+	width: 420px;	
+}
+	.transferSuspensePopup .tranferTypeWrapper{
+		padding: 20px 17px 22px 17px;
+	}
+		.transferSuspensePopup .tranferTypeWrapper h5{
+			background-color: #e7e7e7;
+			height: 33px;
+			padding: 0 17px;
+			line-height: 33px;
+			color: #5c5c5c;
+			font-weight: bold;
+			text-shadow: 0px 1px 0px #ffffff;
+		}
+		.transferSuspensePopup .tranferTypeWrapper ul{
+			border: 1px solid #e7e7e7;
+			display: block;
+			padding: 8px 0 9px 15px;
+		}
+		.transferSuspensePopup .tranferTypeWrapper li{
+			padding: 5px 0;
+			line-height: 20px;
+			font-weight: bold;
+			color: #000000;
+			vertical-align: middle;
+			overflow: hidden;
+		}
+			.transferSuspensePopup .tranferTypeWrapper li input {
+				float: left;
+				width: 14px;
+				height: 14px;
+				margin: 3px 4px 0 0 ;
+			}
+			.transferSuspensePopup .tranferTypeWrapper li label {
+				float: left;
+				cursor: pointer;
+				display: inline-block;
+				height: 20px;
+			}
+	.transferSuspensePopup .popupBtnWrapper{
+		padding: 10px 0 7px 16px;
+		border-top: 1px solid #edc771;	
+	}
+		.transferSuspensePopup .popupBtnWrapper .priBtn{
+			width: 106px;
+			margin-right: 6px;
+		}
+	.refundCreditBalancePopup .popupBodyInner p{
+		padding: 12px 12px 14px 12px;	
+		line-height: 14px;
+		color: #5c5c5c;
+	}
+	.refundCreditBalancePopup .popupBtnWrapper .priBtn{
+		margin-right: 5px;
+	}
+
+/*Payments Page*/
+.paymentsPanel{
+	margin-bottom: 37px;	
+}
+	.paymentsPanel .panelBody{
+		border: 1px solid #e7e7e7;
+	}
+	.paymentsPanel .paymentSearchBox{
+		padding: 20px 0 0 0;	
+	}
+		.paymentsPanel .paymentSearchBox .halfCol {
+			width: 467px;
+			float: left;
+			padding-bottom: 12px;
+		}
+		.paymentsPanel .paymentSearchBox .leftCol {
+			padding-left: 14px;
+		}
+		.paymentsPanel .paymentSearchBox .fieldRow {
+			padding-bottom: 8px;
+			height: 22px;
+		}
+			.paymentsPanel .paymentSearchBox .fieldRow .fieldLabel{
+				width: 113px;
+				float: left;
+				line-height: 22px;
+				text-align: right;
+				padding-right: 20px;
+			}
+			.paymentsPanel .paymentSearchBox .fieldRow .halfFieldLabel	{
+				float: none;
+				display: inline-block;
+				width: 66px;
+				padding-right: 16px;
+				vertical-align: top;
+				line-height: 22px;
+			}
+			.paymentsPanel .paymentSearchBox .fieldRow select{
+				width: 292px;
+			}
+			.paymentsPanel .paymentSearchBox .fieldRow input.text{
+				width: 278px;
+			}
+			.paymentsPanel .paymentSearchBox .fieldRow input.psBatch, 
+			.paymentsPanel .paymentSearchBox .fieldRow input.psBlock,
+			.paymentsPanel .paymentSearchBox .fieldRow input.psSeq{
+				width: 88px;
+			}
+			.paymentsPanel .paymentSearchBox .fieldRow #psResolved{
+				vertical-align: top;
+				margin: 5px 0 0 5px;
+				width: 14px;
+				height: 14px;	
+			}
+			.paymentsPanel .paymentSearchBox .fieldRow .chkbxLabel{
+				vertical-align: top;
+				cursor: pointer;
+				color: #5c5c5c;
+				line-height: 20px;
+				padding: 2px 0 0 0;
+				display: inline-block;
+			}
+			.paymentsPanel .paymentSearchBox .fieldRow select.psDepositedType{
+				width: 102px;
+			}
+			.paymentsPanel .paymentSearchBox .fieldRow .singleDate,
+			.paymentsPanel .paymentSearchBox .fieldRow .betweenDate {
+				display: inline-block;
+				margin-left: 5px;
+				position: relative;
+			}
+			.paymentsPanel .paymentSearchBox .fieldRow .amountInput{
+				position: relative;
+				display: inline-block;
+			}
+				.paymentsPanel .paymentSearchBox .fieldRow .fieldMask {
+					display: none;
+					position: absolute;
+					top: 0;
+					left: 0;
+					bottom: 0;
+					right: 0;
+					background: url(../i/alpha-w50.png) 0 0 repeat;
+				}
+				.paymentsPanel .paymentSearchBox .fieldDisabled .fieldMask {
+					display: block;
+				}
+			.paymentsPanel .paymentSearchBox .fieldRow .isHidden {
+				display: none;	
+			}
+				.paymentsPanel .paymentSearchBox .fieldRow .singleDate input.datePicker, .paymentsPanel .paymentSearchBox .fieldRow .singleDate input.depositDate2{
+					width: 168px;
+				}
+				.paymentsPanel .paymentSearchBox .fieldRow .betweenDate input.text{
+					padding: 2px 0;
+					width: 68px;
+				}
+				.paymentsPanel .paymentSearchBox .fieldRow .betweenDate .toLabel{
+					line-height: 22px;
+					display: inline-block;
+					vertical-align: top;
+				}
+			.paymentsPanel .paymentSearchBox .longSelect select.psDepositedType{
+				width: 152px;
+			}
+				.paymentsPanel .paymentSearchBox .longSelect .singleDate input.datePicker, .paymentsPanel .paymentSearchBox .longSelect .singleDate input.depositDate2{
+					width: 118px;
+				}
+	.paymentsPanel .paymentSearchBtnWrapper{
+		padding: 8px 14px 7px 14px;	
+		border-top: 1px solid #e7e7e7;
+		border-bottom: 1px solid #e7e7e7;
+	}
+		.paymentsPanel .paymentSearchBtnWrapper .priBtn{
+			width: 118px;
+			margin-left: 10px;
+		}
+	.paymentsPanel .paymentSearchResultsSummary{
+		background-color: #f6f6f6;
+		height: 35px;
+		line-height: 35px;
+		color: #626262;
+		text-shadow: 0px 1px #ffffff;
+		padding-left: 20px;
+		font-weight: bold;
+		width: 958px;
+	}
+		.paymentsPanel .paymentSearchResultsSummary strong{
+			color: #000000;
+			font-weight: bold;
+		}
+	.paymentsPanel .paymentSearchResults{
+		border-top: 1px solid #e7e7e7;
+	}
+	.paymentsPanel .paymentSearchResultsBtnWrapper{
+		padding: 8px 14px 7px 14px;	
+	}
+		.paymentsPanel .paymentSearchResultsBtnWrapper .priBtn{
+			width: 148px;
+			margin-left: 10px;
+		}
+.paymentSearchResultsWrapper{
+	min-height: 367px;	
+}
+#paymentSearchResultsTbl .firstCol{
+	border-left-width: 0;
+}
+#paymentSearchResultsTbl .lastCol{
+	border-right-width: 0;
+}
+
+#paymentSearchResultsTbl th{
+	text-indent: 0;
+	line-height: 14px;
+	padding: 5px 0;
+}
+	#paymentSearchResultsTbl th a{
+		padding: 0 15px 0 6px;
+		position: relative;
+	}
+		#paymentSearchResultsTbl th .sortarrow{
+			position: absolute;
+			top: -2px;
+			right: 3px;
+			margin: 0;
+		}
+#paymentSearchResultsTbl .blankCol{
+	width: 26px;
+}
+#paymentSearchResultsTbl .col1{
+	width: 67px;
+}
+#paymentSearchResultsTbl .col2{
+	width: 85px;
+}
+#paymentSearchResultsTbl .col3{
+	width: 57px;
+}
+#paymentSearchResultsTbl .col4{
+	width: 76px;
+}
+#paymentSearchResultsTbl .col5{
+	width: 108px;
+}
+#paymentSearchResultsTbl .col6{
+	width: 84px;
+}
+#paymentSearchResultsTbl .col7{
+	width: 53px;
+}
+#paymentSearchResultsTbl .col8{
+	width: 117px;
+}
+#paymentSearchResultsTbl .col9{
+	width: 81px;
+}
+#paymentSearchResultsTbl .col10{
+	width: 100px;
+}
+#paymentSearchResultsTbl .col11{
+	width: 83px;
+}
+	#paymentSearchResultsTbl tbody td{
+		padding-left: 5px;
+		text-indent: 0;
+		cursor: pointer;
+	}
+		#paymentSearchResultsTbl .hovered td{
+			background-color: #F8E7C1;
+			cursor: pointer;
+		}
+		#paymentSearchResultsTbl tbody .highlighted td{
+			cursor: default;
+			background-color: #fec038;
+		}
+		#paymentSearchResultsTbl tbody .highlighted .blankCell {
+			cursor: default;
+			background: #F8E7C1 url(../i/row-arrow.png) center center no-repeat;
+		}
+
+/*Current Suspense Print Preview*/
+.currentSuspensePrintPreview{
+	width: 860px;
+	padding: 40px 20px;
+} 
+	.currentSuspensePrintPreview .reportHeader{
+		margin-right: 8px;
+		border-bottom: 1px solid #000000;
+		line-height: 32px;
+		padding: 20px 0 28px 0;
+		overflow: hidden;
+	}
+		.currentSuspensePrintPreview .reportHeader h1{
+			text-align: center;
+			font-weight: bold;
+			font-size: 17px;
+			width: 532px;
+			float: left;
+		}
+		.currentSuspensePrintPreview .reportHeader .reportDate{
+			display: block;
+			line-height: 20px;
+			margin-top: 8px;
+			width: 160px;
+			float: left;
+		}
+	.currentSuspensePrintPreview .reportTblWrapper{
+		padding-top: 3px;
+	}
+		.currentSuspensePrintPreview .reportTblWrapper > p{
+			line-height: 17px;
+		}
+.suspenseReportTbl .col4{
+	width: 72px;
+}
+.suspenseReportTbl th{
+	line-height: 20px;
+	text-align: left;
+	font-weight: normal;
+	text-decoration: underline;
+	text-indent: 2px;
+}
+.suspenseReportTbl th{
+	border-left: 6px solid #ffffff;
+}
+.suspenseReportTbl td{
+	line-height: 13px;
+	border-left: 6px solid #ffffff;
+	border-top: 1px solid #ffffff;
+	text-indent: 2px;
+}
+.suspenseReportTbl .aCenter{
+	text-align: center;
+	text-indent: 0;
+}
+.suspenseReportTbl .aRight{
+	text-align: right;
+	text-indent: 0;
+}
+
+.suspenseReportTbl tr th:first-child,
+.suspenseReportTbl tr td:first-child{
+	border-left-width: 0;
+	text-indent: 0;
+}
+.suspenseReportTbl .blackCell{
+	background: #000000;
+	color: #ffffff;
+}
+.suspenseReportTbl  .amountCell{
+	padding-right: 4px;
+	text-indent: 0;
+}
+.currentSuspensePrintPopup .printPreviewArea{
+	padding: 4px 3px 43px 17px;
+    width: 860px;
+}
+
+/*Suspense History Print Preview*/
+.suspenseHistoryPrintPreview {
+	padding-bottom: 40px;	
+}
+	.suspenseHistoryPrintPreview .reportHeader h1{
+		padding-top: 28px;
+		font-size: 14px;
+		font-weight: bold;
+		text-align: center;
+		line-height: 28px;
+	}
+	.suspenseHistoryPrintPreview .reportHeader .leftCol{
+		padding-top: 25px;
+		padding-bottom: 15px;
+		float: left;
+		width: 210px;
+		margin-right: 20px;
+		line-height: 15px;
+	}
+	.suspenseHistoryPrintPreview .reportHeader .midCol {
+		text-align: center;
+		float: left;
+		width: 190px;
+		line-height: 15px;
+		padding-bottom: 15px;
+	}
+	.suspenseHistoryPrintPreview .reportHeader .rightCol{
+		padding-top: 26px;
+		padding-bottom: 15px;
+		float: right;
+		text-align: right;
+		width: 210px;
+		line-height: 15px;
+	}
+	.suspenseHistoryPrintPreview .reportHeader .suspenseStatus{
+		line-height: 18px;
+		padding-bottom: 10px;
+		border-bottom: 1px solid #000000;
+	}
+.suspenseHistoryPrintPreview .reportTblWrapper{
+	padding-top: 3px;
+}
+	.suspenseHistoryPrintPreview .reportTblWrapper > p{
+		line-height: 38px;
+		font-weight: bold;
+		font-size: 18px;
+		text-align: center;
+	}
+.suspenseHistoryPrintPopup .printPreviewArea{
+	padding: 3px 115px 60px 115px;
+}
+
+/*Approval pages*/
+/*View Audit Trail Report*/
+.viewAuditTrailPrintPreview {
+	padding-bottom: 40px;	
+}
+	.viewAuditTrailPrintPreview  .reportHeader{
+		line-height: 32px;
+		padding: 20px 0 25px 0;
+		overflow: hidden;
+	}
+		.viewAuditTrailPrintPreview  .reportHeader h1{
+			line-height: 32px;
+			text-align: center;
+			font-size: 17px;
+			font-weight: bold;
+			color: #000000;
+			float: left;
+			width: 450px;
+		}
+		.viewAuditTrailPrintPreview  .reportHeader .reportSCNo{
+			display: block;
+			line-height: 20px;
+			margin-top: 7px;
+			width: 96px;
+			padding-left: 4px;
+			float: left;
+			font-size: 13px;
+		}
+		.viewAuditTrailPrintPreview  .reportHeader .reportDate{
+			display: block;
+			line-height: 20px;
+			margin-top: 7px;
+			width: 99px;
+			float: left;
+			text-align: right;
+			font-size: 13px;
+		}
+	.viewAuditTrailPrintPreview .reportTblWrapper{
+		padding: 0;
+	}
+.csdInfoTbl{
+	border: 1px solid #000000;
+}
+	.csdInfoTbl td{
+		border: 1px solid #000000;
+		line-height: 18px;
+		font-weight: bold;
+		padding: 1px 0 0 5px;
+	}
+	.csdInfoTbl .col1{
+		width: 265px;
+	}
+	.csdInfoTbl .col2{
+		width: 150px;
+	}
+	.csdInfoTbl .col3{
+		width: 230px;
+	}
+.auditTrailPrintTbl {
+	border-collapse: separate;
+}
+	.auditTrailPrintTbl .col1{
+		width: 245px;
+	}
+	.auditTrailPrintTbl .col2{
+		width: 400px;
+	}
+	.auditTrailPrintTbl th{
+		padding-top: 14px;
+		line-height: 16px;
+		border-bottom: 1px solid #000000;
+		text-align: left;
+		font-weight: bold;
+	}
+	.auditTrailPrintTbl td{
+		border-top: 1px solid #ffffff;
+		border-bottom: 2px solid #ffffff;
+		line-height: 15px;
+	}
+	.auditTrailPrintTbl .yellowCell{
+		background-color: #ffff00;
+	}
+	.auditTrailPrintTbl .greyCell{
+		background-color: #bdbdc6;
+	}
+	.auditTrailPrintTbl .greenCell{
+		background-color: #00ff00;
+	}
+	.printPreviewPage  .auditTrailPrintTbl .yellowCell, .printPreviewPage .auditTrailPrintTbl .greyCell, .printPreviewPage .auditTrailPrintTbl .greenCell{
+		background-color: #000000;
+		color: #ffffff;
+	}
+	.printPreviewArea .pl18{
+		padding-left: 18px;
+	}
+	.printPreviewArea .pl25{
+		padding-left: 25px;
+	}
+.iaViewAuditTrailPopup .printPreviewArea,
+.apViewAuditTrailPopup .printPreviewArea,
+.pmViewAuditTrailPopup .printPreviewArea{
+	padding: 3px 115px 30px 115px;
+}
+/*Disapproval Popup*/
+.pendingPaymentDisapprovePopup .popupBtnWrapper, 
+.interestAdjustmentsDisapprovePopup .popupBtnWrapper, 
+.paymentMovesDisapprovePopup .popupBtnWrapper{
+	border-top: 1px solid #edc771;
+	padding: 10px 14px 6px 14px;
+}
+	.pendingPaymentDisapprovePopup .popupBtnWrapper .priBtn, 
+	.interestAdjustmentsDisapprovePopup .popupBtnWrapper .priBtn, 
+	.paymentMovesDisapprovePopup .popupBtnWrapper .priBtn{
+		width: 99px;
+		margin-right: 6px;
+	}
+	.pendingPaymentDisapprovePopup .popupBtnWrapper .jsClosePopup, 
+	.interestAdjustmentsDisapprovePopup .popupBtnWrapper .jsClosePopup, 
+	.paymentMovesDisapprovePopup .popupBtnWrapper .jsClosePopup{
+		width: 68px;
+	}
+
+.approvalTab .tabsBar li{
+	width: 165px;
+}
+.approvalTab .tabsBar li a.current, .approvalTab .tabsBar li a.current:hover, , .approvalTab .tabsBar li a.current:focus {
+    color: #5c5c5c;
+}
+.approvalTab .tabsBar li a .notificationNum {
+	margin-left: 1px;
+	vertical-align: middle;
+}
+.approvalTab .tabsBlock{
+	border: 1px solid #e7e7e7;
+	border-top-width: 0;
+	padding-top: 15px;
+	margin-bottom: 32px;
+}
+.approvalTab .approvalPageBtnWrapper{
+	padding: 5px 16px;
+	background-color: #e7e7e7;
+}
+	.approvalTab .approvalPageBtnWrapper .viewLabel {
+		vertical-align: top;
+		line-height: 25px;
+		display: inline-block;
+		font-weight: bold;
+		color: #5c5c5c;
+		text-shadow: 0px 1px 0px #ffffff;
+	}
+	.approvalTab .approvalPageBtnWrapper .viewFilter  {
+		vertical-align: top;
+		margin: 2px 0 0 10px;
+		width: 160px;
+	}
+	.approvalTab .approvalPageBtnWrapper .priBtn{
+		width: 145px;
+		margin-left: 10px;
+	}
+	.approvalTab .approvalPageBtnWrapper .jsPendingPaymentsViewAuditTrail,
+	.approvalTab .approvalPageBtnWrapper .jsInterestAdjustmentViewAuditTrail,
+	.approvalTab .approvalPageBtnWrapper .jsPaymentMovesViewAuditTrail{
+		width: 135px;
+	}
+.approvalTab .tblWrapper{
+	min-height: 91px;
+}
+.approvalTab .stdTbl .firstCol{
+	border-left-width: 0;	
+}
+.approvalTab .stdTbl .lastCol{
+	border-right-width: 0;	
+}
+.approvalTab .csdNoteArea{
+	border: 1px solid #e7e7e7;
+	margin-bottom: 32px;
+	padding-top: 19px;
+}
+	.approvalTab .csdNoteArea .noteAreaTitle{
+		height: 35px;
+		line-height: 35px;
+		border-top: 1px solid #e7e7e7;
+		border-bottom: 1px solid #e7e7e7;
+		background: #f6f6f6;
+		font-weight: bold;
+		color: #626262;
+		padding: 0 19px;
+		text-shadow: 0px 1px 0px #ffffff;
+	}
+		.approvalTab .csdNoteArea .noteAreaTitle strong{
+			font-weight: bold;
+			color: #000000;
+		}
+		.approvalTab .csdNoteArea .noteWrapper{
+			padding: 22px 17px 19px 18px;
+		}
+			.approvalTab .csdNoteArea .noteWrapper textarea{
+				padding: 7px;
+				width: 897px;
+				height: 91px;
+			}
+		.approvalTab .csdNoteArea .noteAreaBtnWrapper {
+			border-top: 1px solid #e7e7e7;
+			padding: 10px 17px 8px 17px;	
+		}
+			.approvalTab .csdNoteArea .noteAreaBtnWrapper .priBtn{
+				width: 117px;
+				margin-left: 10px;
+			}
+
+.approvalTab .noRecordTxt{
+	line-height: 14px;
+	text-align: center;
+	font-weight: bold;
+	color: #00664e;
+	padding-top: 46px;
+}
+.csdNoteArea .noRecordTxt {
+	padding-top: 49px;
+	padding-bottom: 130px;
+}
+.csdNoteAareaNoSelection form, .csdNoteAareaNoSelection .noteAreaTitle .hasNotes, .approvalTab  .noApprovalRecords .stdTbl{
+	display: none;
+}
+.csdNoteAareaNoSelection .noRecordTxt, .approvalTab  .noApprovalRecords .noRecordTxt{
+	display: block;
+}
+	.approvalTab .stdTbl th{
+		text-indent: 6px;
+		color: #00664E;
+		text-indent: 0;
+		line-height: 14px;
+		padding: 5px 0;
+		vertical-align: top;
+	}
+	.approvalTab .stdTbl .aCenter{
+		padding-left: 4px;
+		padding-right: 4px;
+		text-align: center;
+		
+	}
+		.approvalTab .stdTbl th a{
+			padding: 0 16px 0 6px;
+			position: relative;
+		}
+			.approvalTab .stdTbl th a .sortarrow{
+				position: absolute;
+				display: inline-block;
+				top: -2px;
+				right: 1px;
+				margin: 0;
+			}
+		.approvalTab .stdTbl .sortArrowCloseToBorder a{
+				padding-right: 9px;
+				padding-left: 2px;
+			}
+			.approvalTab .stdTbl .sortArrowCloseToBorder a .sortarrow{
+				right: 0;	
+			}
+	.approvalTab .stdTbl .checkBoxCell{
+		text-indent: 0;
+		padding: 0;
+		vertical-align: middle;
+		text-align: center;
+	}
+		.approvalTab .stdTbl .checkBoxCell input{
+			vertical-align: middle;
+		}
+	.approvalTab .stdTbl td{
+		text-indent: 0;
+		padding-left: 4px;
+		overflow: hidden;
+	}
+	.approvalTab .stdTbl .hovered td{
+		background-color: #F8E7C1;
+		cursor: pointer;
+	}
+	.approvalTab .stdTbl tbody td{
+		cursor: pointer;
+		/* Bug Fix 2*/
+		padding-left: 4px;
+		padding-right: 4px;
+	}
+	.approvalTab .stdTbl tbody td.checkBoxCell{
+		cursor: default;
+	}
+	.approvalTab .stdTbl tbody .highlighted td{
+		background-color: #fec038;
+	}
+	.approvalTab .stdTbl tbody .highlighted .blankCell {
+		background-image: url(../i/row-arrow.png);
+		background-position: center center;
+		background-repeat: no-repeat;
+	}
+	.approvalTab .stdTbl .blankCol{
+		width: 33px;
+	}
+#pendingPaymentsTbl .col1{
+	width: 43px;
+}
+#pendingPaymentsTbl .col2{
+	width: 183px;
+}
+#pendingPaymentsTbl .col3{
+	width: 76px;
+}
+#pendingPaymentsTbl .col4{
+	width: 77px;
+}
+#pendingPaymentsTbl .col5{
+	width: 90px;
+}
+#pendingPaymentsTbl .col6{
+	width: 69px;
+}
+#pendingPaymentsTbl .col7{
+	width: 27px;
+}
+#pendingPaymentsTbl .col8{
+	width: 55px;
+}
+#pendingPaymentsTbl .col9{
+	width: 73px;
+}
+#pendingPaymentsTbl .col10{
+	width: 63px;
+}
+#pendingPaymentsTbl .col11{
+	width: 104px;
+}
+
+#interestAdjustementTbl .col1, #paymentMovesTbl .col1{
+	width: 47px;
+}
+#interestAdjustementTbl .col2, #paymentMovesTbl .col2{
+	width: 68px;
+}
+#interestAdjustementTbl .col3, #paymentMovesTbl .col3{
+	width: 70px;
+}
+#interestAdjustementTbl .col4, #paymentMovesTbl .col4{
+	width: 86px;
+}
+#interestAdjustementTbl .col5, #paymentMovesTbl .col5{
+	width: 79px;
+}
+#interestAdjustementTbl .col6, #paymentMovesTbl .col6{
+	width: 91px;
+}
+#interestAdjustementTbl .col7, #paymentMovesTbl .col7{
+	width: 64px;
+}
+#interestAdjustementTbl .col8, #paymentMovesTbl .col8{
+	width: 118px;
+}
+#interestAdjustementTbl .col9, #paymentMovesTbl .col9{
+	width: 94px;
+}
+#interestAdjustementTbl .col10, #paymentMovesTbl .col10{
+	width: 104px;
+}
+#interestAdjustementTbl .col11, #paymentMovesTbl .col11{
+	width: 92px;
+}
+
+
+
+/*OPM3*/
+/*Charge Card*/
+.chargeCardPrintPreview {
+	padding-top: 47px; 
+}
+.chargeCardTitle{
+	overflow: hidden;
+	height: 137px;
+	border: 1px solid #000000;
+}
+	.chargeCardTitle .leftCol{
+		width: 310px;
+		height: 110px;
+		border-right: 1px solid #000000;
+		float: left;
+		padding: 27px 20px 0 27px;
+		font-size: 14px;
+		line-height: 24px;
+	}
+		.chargeCardTitle .leftCol .date{
+			display: inline-block;
+			width: 177px;
+		}
+		.chargeCardTitle .leftCol .csdNo{
+			padding: 24px 0 0 0;
+		}
+	.chargeCardTitle .rightCol{
+		width: 285px;
+		height: 127px;
+		float: left;
+		padding: 10px 5px 0 0;
+		text-align: center;
+	}
+		.chargeCardTitle .rightCol h1{
+			font-size: 24px;
+			line-height: 35px;
+			font-weight: bold;
+		}
+		.chargeCardTitle .rightCol h2{
+			font-size: 18px;
+			line-height: 20px;
+			padding: 0 0 20px 0;
+			font-weight: bold;
+		}
+.chargeCardBody{
+	padding: 10px 0 0 38px;
+	height: 403px;
+	position: relative;
+}
+	.chargeCardBody .leftSideInfo{
+		display: block;
+		position: absolute;
+		left: 5px;
+		bottom: 0;
+		line-height: 14px;
+		-webkit-transform: rotate(-90deg);	
+		-moz-transform: rotate(-90deg);
+		-ms-transform: rotate(-90deg);
+		-o-transform: rotate(-90deg);
+		transform: rotate(-90deg);
+		-webkit-transform-origin: 14px 14px;
+		-moz-transform-origin: 14px 14px;
+		-ms-transform-origin: 14px 14px;
+		-o-transform-origin: 14px 14px;
+		transform-origin: 14px 14px;
+
+	}
+			
+	.chargeCardBody .leftSideInfo > div{
+		float: left;
+		margin-right: 32px;
+	}
+	.chargeCardBody .chargeCardContent .summaryTxt{
+		padding-left: 150px;
+		line-height: 30px;
+		font-size: 14px;
+	}
+	.chargeCardBody .chargeCardContent .boxes {
+		display: block;
+		padding: 33px 141px 0 125px;
+		width: 19px;
+	}
+		.chargeCardBody .chargeCardContent .boxes li{
+			display: block;
+			width: 17px;
+			height: 17px;
+			border: 1px solid #000000;
+			margin-bottom: 11px;
+		}
+	.chargeCardBody .chargeCardContent .comments {
+		width: 327px;
+	}
+		.chargeCardBody .chargeCardContent .comments  h3{
+			line-height: 48px;
+			font-weight: normal;
+			font-size: 14px;
+		}
+		.chargeCardBody .chargeCardContent .comments  p{
+			border-top: 1px solid #000000;
+			height: 28px;
+			line-height: 28px;
+		}
+.chargeCardFooter{
+	padding-top: 36px;
+	line-height: 18px;
+	font-size: 14px;
+	font-weight: bold;
+	color: #848484;
+	text-align: center;
+}
+
+/*Initial Bill Invoices*/
+.coverPagePrintPreview  {
+	text-align: center;
+}
+	.coverPagePrintPreview  h1{
+		line-height: 100px;
+		padding: 50px 0 75px 0;
+		font-size: 44px;
+		font-weight: bold;
+		text-transform: uppercase;
+	}
+	.coverPagePrintPreview  h2{
+		line-height: 46px;
+		padding-bottom: 15px;
+		font-size: 30px;
+		font-weight: bold;
+		text-transform: uppercase;
+	}
+	.coverPagePrintPreview  .deliverInfo{
+		padding: 2px 13px 14px 13px;
+		width: 500px;
+		line-height: 24px;
+		font-size: 20px;
+		font-weight: bold;
+		margin: 0 auto;
+	}
+	.coverPagePrintPreview  .initialInvoiceCover .deliverInfo{
+		border: 2px solid #ffffff;
+	}
+	.coverPagePrintPreview  .paymentInvoiceCover .deliverInfo{
+		border: 2px solid #000000;
+	}
+		.coverPagePrintPreview  .deliverInfo span{
+			font-size: 30px;
+			line-height: 50px;
+			display: inline-block;
+			padding-top: 15px;
+		}
+	.coverPagePrintPreview  .printInfo{
+		line-height: 52px;
+		font-size: 20px;
+	}
+
+/*Edit User Permissions Popup*/
+.editUserPermissionsPopup .userPermissionWrapper {
+	margin: 22px 20px 23px 20px;
+	border: 1px solid #e7e7e7;
+	padding-bottom: 12px;
+}
+	.editUserPermissionsPopup .userPermissionWrapper h5{
+		height: 33px;
+		line-height: 33px;
+		background-color: #e7e7e7;
+		padding: 0 16px;
+		color: #5c5c5c;
+		font-weight: bold;
+		text-shadow: 0px 1px #ffffff;
+		margin-bottom: 23px;
+	}
+	.editUserPermissionsPopup .userPermissionWrapper .fieldRow{
+		height: 22px;
+		padding: 0 0 8px 0;
+	}
+		.editUserPermissionsPopup .userPermissionWrapper .fieldRow .fieldLabel{
+			float: left;
+			width: 106px;
+			padding-right: 16px;
+			text-align: right;
+			font-weight: bold;
+			line-height: 22px;
+		}
+		.editUserPermissionsPopup .userPermissionWrapper .fieldRow select{
+			width: 200px;
+		}
+		.editUserPermissionsPopup .userPermissionWrapper .fieldRow input.text{
+			width: 186px;
+		}
+		.editUserPermissionsPopup .userPermissionWrapper .fieldRow .fieldNote{
+			display: inline-block;
+			line-height: 22px;
+			font-size: 11px;
+			color: #999999;
+			margin-left: 8px;
+		}
+.editUserPermissionsPopup .popupBtnWrapper{
+	border-top: 1px solid #edc771;
+	padding: 10px 14px 8px 14px;
+}
+	.editUserPermissionsPopup .popupBtnWrapper .priBtn{
+		margin-right: 6px;
+		width: 99px;
+	}
+	.editUserPermissionsPopup .popupBtnWrapper .jsSaveUserPermission{
+		width: 104px;
+	}
+
+/*PAYMENT INSTRUCTIONS*/
+.paymentsInstructionsPrintPreview {
+	height: 928px;
+	line-height: 14px;
+}
+	.paymentsInstructionsPrintPreview h1{
+		line-height: 18px;
+		padding: 12px 0 9px 0;
+		font-size: 16px;
+		font-weight: bold;
+		text-transform: uppercase;
+		text-align: center;
+	}
+	.paymentsInstructionsPrintPreview p{
+		padding: 0 0 15px 0;
+	}
+	.paymentsInstructionsPrintPreview .indent{
+		padding-left: 72px;
+	}
+	.paymentsInstructionsPrintPreview h1.notice{
+		padding: 15px 0;
+	}
+	.paymentsInstructionsPrintPreview .printFooter .leftNote{
+		margin: 12px 0 0 0;
+		width: 200px;
+	}
+	.paymentsInstructionsPrintPreview .printFooter .rightNote{
+		margin: 12px 18px 0 0;
+		width: 200px;
+	}
+.letterReport  .reportTitle{
+	padding-bottom: 30px;
+}
+	.letterReport  .reportTitle  h1{
+		width: 420px;
+		padding: 42px 0 0 0;
+		text-align: right;
+		line-height: 22px;
+		font-size: 18px;
+		height: 104px;
+		font-weight: bold;
+		background: url(../i/logo-opm-gray.png) 62px 24px no-repeat;
+	}
+		.letterReport  .reportTitle  h1 span{
+			font-size: 12px;
+		}
+	.letterReport  .reportTitle  .address {
+		width: 190px;
+		padding: 89px 0 0 8px;
+		line-height: 22px;
+		font-size: 12px;
+		font-weight: bold;
+	}
+	.letterReport  .reportTitle  .date {
+		line-height: 22px;
+		font-size: 12px;
+		padding: 0 32px;
+		font-weight: bold;
+	}
+.stopACHLettersPrintPreview .letterArea{
+	padding: 0 30px;
+	line-height: 15px;
+}
+	.stopACHLettersPrintPreview .letterArea .letterTitle{
+		font-weight: bold;
+		padding: 0 0 15px 0;
+	}
+	.stopACHLettersPrintPreview .letterArea .letterBody{
+		padding: 0 0 20px 0;
+	}
+	.stopACHLettersPrintPreview h2.stopACHTitle{
+		line-height: 22px;
+		padding-bottom: 16px;
+		font-size: 18px;
+		font-weight: bold;
+		text-align: center;		
+	}
+	.stopACHLettersPrintPreview .faxTbl{
+		width: 554px;
+		margin: 0 auto 17px auto;
+	}
+		.stopACHLettersPrintPreview .faxTbl td{
+			border: 1px solid #000000;
+			font-size: 14px;
+			text-indent: 9px;
+			line-height: 22px;
+			padding: 2px 0 0 0;
+		}
+		.stopACHLettersPrintPreview .faxTbl .col1{
+			width: 238px;
+		}
+		.stopACHLettersPrintPreview .faxTbl .col2{
+			width: 313px;
+		}
+		.stopACHLettersPrintPreview .faxTbl .tblTitle{
+			padding: 4px 0 0 0;
+		}
+		.stopACHLettersPrintPreview .faxTbl .tblToTitle{
+			font-size: 16px;
+		}
+		.stopACHLettersPrintPreview .faxTbl .lastCol{
+			text-indent: 22px;
+		}
+	.stopACHLettersPrintPreview .achPaymentList{
+		margin-top: 22px;
+	}
+		.stopACHLettersPrintPreview .achPaymentList .col1{
+			width: 28px;
+		}
+		.stopACHLettersPrintPreview .achPaymentList .col2{
+			width: 184px;
+		}
+		.stopACHLettersPrintPreview .achPaymentList .col3{
+			width: 95px;
+		}
+		.stopACHLettersPrintPreview .achPaymentList .col4{
+			width: 91px;
+		}
+		.stopACHLettersPrintPreview .achPaymentList .col5{
+			width: 121px;
+		}
+		.stopACHLettersPrintPreview .achPaymentList .col6{
+			width: 121px;
+		}
+		.stopACHLettersPrintPreview .achPaymentList th, .stopACHLettersPrintPreview .achPaymentList td{
+			border: 1px solid #000000;
+		}
+		.stopACHLettersPrintPreview .achPaymentList th, .stopACHLettersPrintPreview .achPaymentList td {
+			line-height: 17px;
+			vertical-align: middle;	
+			padding: 3px 0 5px 0;
+			font-size: 14px;
+			font-weight: normal;
+			text-align: left;
+			text-indent: 7px;
+		}
+		.stopACHLettersPrintPreview .achPaymentList td {
+			padding: 2px 0;
+		}
+		.stopACHLettersPrintPreview .achPaymentList .aCenter{
+			text-align: center;
+			text-indent: 0;
+		}
+	.stopACHLettersPrintPreview .reportNote{
+		line-height: 26px;
+		font-size: 14px;
+		font-weight: bold;
+		text-align: center;
+	}
+.printsubPage{
+	min-height: 908px;	
+}
+.printPageSepLine{
+	margin: 40px 0;
+	border-top: 1px solid #000000;
+	height: 0;
+	overflow: hidden;	
+}
+.reversalInvoicesPrintPreview .reportTitle .date{
+	line-height: 25px;
+	padding-top: 65px;
+}
+.reversalInvoicesPrintPreview .letterArea{
+	padding: 0 75px;
+}
+	.reversalInvoicesPrintPreview .letterArea .letterTitle{
+		padding: 270px 0 0 0;
+		line-height: 24px;
+		font-weight: bold;
+	}
+	.popup .reversalInvoicesPrintPreview .letterArea .letterTitle{
+		padding-bottom: 50px;
+	}
+		.reversalInvoicesPrintPreview .letterArea .letterTitle .subjectLabel{
+			display: inline-block;
+			width: 60px;
+			font-weight: normal;
+		}
+.sampleInitialStatementPrintPreview .printHeader{
+	padding-bottom: 35px;
+}
+	.sampleInitialStatementPrintPreview .printMetaRight .printNum, .sampleInitialStatementPrintPreview .printMetaRight .printBirth{
+		border-bottom-width: 0;
+	}
+	.sampleInitialStatementPrintPreview .printAddress > p {
+		padding-top: 53px;
+	}
+.sampleInitialStatementPrintPreview .printFormTitle {
+    padding: 12px 0 0;
+}
+	.sampleInitialStatementPrintPreview .printPersonalData  .name{
+		width: 237px;
+		border-right: 1px solid #000000;
+		border-bottom: 1px solid #000000;
+	}
+	.sampleInitialStatementPrintPreview .printPersonalData  .date{
+		width: 102px;
+		border-right: 1px solid #000000;
+		border-bottom: 1px solid #000000;
+	}
+	.sampleInitialStatementPrintPreview .printPersonalData  .coveredBy{
+		width: 186px;
+		border-right: 1px solid #000000;
+		border-bottom: 1px solid #000000;
+	}
+	.sampleInitialStatementPrintPreview .printPersonalData  .claimNum{
+		width: 110px;
+		padding-right: 10px;
+		border-bottom: 1px solid #000000;
+		text-align: right;
+	}
+	.sampleInitialStatementPrintPreview .printPersonalData  .claimNum label{
+		text-align: left;
+	}
+		.sampleInitialStatementPrintPreview .printPersonalData > div label{
+			text-indent: 5px;
+		}
+	.sampleInitialStatementPrintPreview .leftPart {
+		width: 303px;
+		padding: 13px 0 7px 7px;
+	}
+		.sampleInitialStatementPrintPreview .leftPart p{
+			overflow: hidden;
+		}
+		.sampleInitialStatementPrintPreview .leftPart p.emLine{
+			font-weight: bold;
+			line-height: 21px;
+		}
+		.sampleInitialStatementPrintPreview .leftPart .detailsLine{
+			line-height: 14px;
+			padding: 19px 0 10px 0;
+		}
+			.sampleInitialStatementPrintPreview .leftPart p label{
+				float: left;
+			}
+			.sampleInitialStatementPrintPreview .leftPart p span{
+				float: right;
+			}
+	.sampleInitialStatementPrintPreview .rightPart {
+		width: 268px;
+		padding: 7px 0;
+	}
+		.sampleInitialStatementPrintPreview .rightPart .paymentNote{
+			padding: 82px 0 0 0;
+		}
+	
+	.sampleInitialStatementPrintPreview .printTbl .totalArea:first-child td {
+		padding-top: 2px;
+		padding-bottom: 7px;
+	}
+	.printTbl .heightRow td{
+		line-height: 18px;
+	}
+	.sampleInitialStatementPrintPreview  .billingTblWrapper{
+		min-height: 280px;	
+	}
+	.sampleInitialStatementPrintPreview  .printFooter .rightNote{
+		width: 200px;
+	}
+	
+/*Refund Memo*/
+.refundMemoPrintPreview .reportTitle {
+	padding-bottom: 20px;
+}
+.refundMemoPrintPreview .reportSubject{
+	line-height: 24px;
+	padding: 0 50px 24px 132px;
+	font-weight: bold;
+}
+	.refundMemoPrintPreview .reportSubject span{
+		display: block;
+		width: 110px;
+		float: left;
+		font-weight: normal;
+	}
+.refundMemoPrintPreview .reportNote{
+	line-height: 14px;
+	padding: 0 50px 24px 132px;
+}
+/*.leftFields + rightFields > .field > .fieldLabel + .fieldVal*/
+.refundMemoPrintPreview .leftFields{
+	width: 360px;
+	margin-left: 16px;
+}
+	.refundMemoPrintPreview .leftFields .field{
+		height: 22px;
+		line-height: 14px;
+	}
+		.refundMemoPrintPreview .leftFields .field .fieldLabel{
+			width: 115px;
+			float: left;
+			height: 14px;
+			padding-top: 8px;
+		}
+		.refundMemoPrintPreview .leftFields .field .fieldVal{
+			width: 245px;
+			float: left;
+			height: 14px;
+			padding-top: 4px;
+			border-bottom: 1px solid #000000;
+		}
+		.refundMemoPrintPreview .leftFields .field .shortFieldVal{
+			width: 165px;
+		}
+.refundMemoPrintPreview .rightFields{
+	width: 260px;
+	margin-left: 10px;
+}
+	.refundMemoPrintPreview .rightFields .field{
+		height: 22px;
+		line-height: 14px;
+	}
+		.refundMemoPrintPreview .rightFields .field .fieldLabel{
+			width: 108px;
+			float: left;
+			height: 14px;
+			padding-top: 8px;
+		}
+		.refundMemoPrintPreview .rightFields .field .fieldVal{
+			width: 152px;
+			float: left;
+			height: 14px;
+			padding-top: 8px;
+		}
+.refundMemoPrintPreview .paymentIdField {
+		height: 16px;
+		line-height: 16px;
+		padding: 30px 16px 40px 16px;
+}
+.refundMemoPrintPreview .chargeAccountNote {
+		line-height: 17px;
+		padding: 0 16px 15px 16px;
+		font-weight: bold;
+		font-size: 14px;
+}
+.refundMemoPrintPreview .sepRow{
+	line-height: 28px;
+	padding: 2px 0 0 16px;
+	clear: both;
+	/*1212 TODO*/
+}
+.refundMemoPrintPreview .leftField {
+	height: 30px;
+	width: 380px;
+	padding: 0 0 0 16px;
+	clear: left;
+	float: left;
+}
+.refundMemoPrintPreview .rightField {
+	height: 30px;
+	padding: 0 0 0 16px;
+	float: left;
+	width: 190px;
+}
+.refundMemoPrintPreview .fullField {
+	height: 30px;
+	padding: 0 0 0 16px;
+	clear: both;
+	width: 588px;
+}
+	.refundMemoPrintPreview .leftField .fieledLabel, .refundMemoPrintPreview .rightField .fieledLabel, .refundMemoPrintPreview .fullField .fieledLabel{
+		padding: 9px 0 0 0;
+		line-height: 14px;
+		float: left;
+	}
+	.refundMemoPrintPreview .leftField .underline, .refundMemoPrintPreview .rightField .underline, .refundMemoPrintPreview .fullField .underline{
+		padding: 5px 0 0 0;
+		line-height: 14px;
+		height: 14px;
+		float: left;
+		border-bottom: 1px solid #000000;
+	}
+	.refundMemoPrintPreview .vDateField .fieledLabel{
+		width: 84px;
+	}
+	.refundMemoPrintPreview .vNoField .fieledLabel{
+		width: 76px;
+	}
+	.refundMemoPrintPreview .authorizedField .fieledLabel{
+		width: 127px;
+	}
+	.refundMemoPrintPreview .vDateField .underline{
+		width: 246px;
+	}
+	.refundMemoPrintPreview .vNoField .underline{
+		width: 109px;
+	}
+	.refundMemoPrintPreview .authorizedField .underline{
+		width: 454px;
+	}
+	.refundMemoPrintPreview .signatureField .fieledLabel{
+		position: relative;
+		top: -12px;
+	}
+.refundMemoPrintPreview .approvalTblHeader{
+	height: 14px;
+	line-height: 14px;
+	padding: 20px 0 0 28px;
+	font-size: 14px;
+	font-weight: bold;
+	clear: both;
+}
+.refundMemoPrintPreview .approvalTblWrapper{
+	margin: 0 0 36px 17px;
+	width: 574px;
+	border: 1px solid #000000;
+	padding: 1px;
+
+}
+	.refundMemoPrintPreview .approvalTblWrapper table th, .refundMemoPrintPreview .approvalTblWrapper table td{
+		border: 1px solid #000000;
+		padding: 3px 10px;
+		line-height: 18px;
+		font-size: 13px;
+		font-weight: normal;
+		text-align: left;
+	}
+	.refundMemoPrintPreview .approvalTblWrapper table th.aCenter{
+		text-align: center;
+	}
+	.refundMemoPrintPreview .approvalTblWrapper table .col1{
+		width: 237px;
+	}
+	.refundMemoPrintPreview .approvalTblWrapper table .col2{
+		width: 338px;
+	}
+
+.holidayPrintPreview h1{
+	padding: 20px 0 10px 0;
+	line-height: 20px;
+	font-size: 14px;
+}
+.popup .holidayPrintPreview h1{
+	padding: 8px 0 1px 0;
+}
+.holidayTblPrint{
+	border: 1px solid #000000;
+	margin-bottom: 20px;
+}
+.holidayTblPrint th{
+	border: 1px solid #000000;
+	text-indent: 10px;
+	text-align: left;
+	font-size: 14px;
+	font-weight: normal;	
+	line-height: 40px;
+}
+.holidayTblPrint td{
+	border-top: 1px solid #cccccc;
+	border-left: 1px solid #000000;
+	line-height: 18px;
+	padding-top: 3px;
+	text-indent: 10px;
+	text-align: left;
+}
+.holidayTblPrint tbody tr:first-child td{
+	border-top: 1px solid #000000;
+}
+.holidayTblPrint .col1{
+	width: 175px;
+}
+.holidayTblPrint .col2{
+	width: 80px;
+}
+.holidayTblPrint .col3{
+	width: 80px;
+}
+.holidayTblPrint .col4{
+	width: 80px;
+}
+.holidayTblPrint .col5{
+	width: 85px;
+}
+.holidayTblPrint .col6{
+	width: 146px;
+}
+.holidayTblPrint th{
+
+}
+
+/*Tools Page*/
+.toolsTab .tabsBar li{
+	width: 192px;
+}
+	.toolsTab .tabsBar li a, .toolsTab .tabsBar li a.current, .toolsTab .tabsBar li a.current:hover, , .toolsTab .tabsBar li a.current:focus {
+		color: #5c5c5c;
+	}
+.toolsTab .tabsBlock{
+	padding-top: 18px;
+	border: 1px solid #e7e7e7;
+	border-top-width: 0;
+	margin-bottom: 32px;
+}
+	.toolsTab .tabsBlock .preferenceArea{
+		margin: 0 16px 20px;
+		border: 1px solid #E09C06;
+		border-top-width: 0;
+	}
+	.toolsTab .tabsBlock .preferenceItemTitle{
+		height: 22px;
+		line-height: 22px;
+		background-color: #F8E7C1;
+		border-top: 1px solid #E09C06;
+		border-bottom: 1px solid #E09C06;
+		padding: 7px 20px 6px 20px;
+		color: #000000;
+		font-weight: bold;
+		overflow: hidden;
+	}
+		.toolsTab .tabsBlock .preferenceItemTitle .vMiddle{
+			height: 22px;
+			line-height: 22px;
+			display: inline-block;
+			vertical-align: top;
+			float: left;
+		}
+		.toolsTab .tabsBlock .preferenceItemTitle .settingInput{
+			width: 146px;
+			margin-left: 10px;
+			vertical-align: top;
+			display: inline-block;
+			float: left;
+		}
+	.toolsTab .tabsBlock .userMsgOptions{
+		padding: 10px 28px;
+	}
+		.toolsTab .tabsBlock .userMsgOptions li{
+			height: 18px;
+			line-height: 18px;
+			padding: 6px 0;
+		}
+			.toolsTab .tabsBlock .userMsgOptions li input{
+				margin-right: 7px;
+				vertical-align: middle;
+			}
+			.toolsTab .tabsBlock .userMsgOptions li label{
+				color: #5c5c5c;
+				cursor: pointer;
+				vertical-align: middle;
+			}
+	.toolsTab .preferenceArea .boxBtnWrapper {
+		height: 25px;	
+		padding: 9px 20px;
+	}
+		.toolsTab .preferenceArea .boxBtnWrapper .priBtn{
+			margin-right: 5px;
+			width: 116px;
+		}
+.toolsTab .printingToolsList{
+	line-height: 16px;
+	padding: 0 30px 10px 30px;
+}
+	.toolsTab .printingToolsList li{
+		line-height: 16px;
+		padding-bottom: 8px;
+	}
+		.toolsTab .printingToolsList li a{
+			display: inline-block;
+			padding-left: 18px;
+			background: url(../i/printing-tools-list-dot.png) 0 0 no-repeat;
+		}
+.toolsTab .bpaTblWrapper{
+	margin: 0 16px 20px 16px;
+}
+#batchPrintoutArchiveTbl .col1{
+	width: 585px;
+}
+#batchPrintoutArchiveTbl .col2{
+	width: 332px;
+}
+#batchPrintoutArchiveTbl th, #batchPrintoutArchiveTbl td{
+	text-indent: 0;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+#batchPrintoutArchiveTbl th{
+	text-align: center;
+	color: #00664e;
+}
+	#batchPrintoutArchiveTbl .hovered td{
+		background-color: #F8E7C1;
+		cursor: pointer;
+	}
+
+/*Admin Page*/
+
+
+/*Tools Page*/
+.adminTab .tabsBar li{
+	width: auto;
+}
+	.adminTab .tabsBar li a, .adminTab .tabsBar li a.current, .adminTab .tabsBar li a.current:hover, .adminTab .tabsBar li a.current:focus {
+		color: #5c5c5c;
+		padding: 0 15px;
+	}
+.adminTab .tabsBlock{
+	padding-top: 15px;
+	border: 1px solid #e7e7e7;
+	border-top-width: 0;
+	margin-bottom: 32px;
+}
+	.adminTab .tabsBlock .currentUserRights{
+		height: 35px;
+		line-height: 35px;
+		background-color: #e7e7e7;
+		padding: 0 18px 0 21px;
+		color: #626262;
+		font-weight: bold;
+		text-shadow: 0px 1px #ffffff;
+		margin-bottom: 20px;
+	}
+		.adminTab .tabsBlock .currentUserRights a{
+			color: #0e9107;
+		}
+		.adminTab .tabsBlock .currentUserRights strong{
+			color: #000000;
+			font-weight: bold;
+		}
+#latestReportsTbl .col1{
+	width: 181px;
+}
+#latestReportsTbl .col2{
+	width: 768px;
+}
+#latestReportsTbl td{
+	border-top: 1px solid #e7e7e7;
+	border-left: 1px solid #e7e7e7;
+	border-right: 1px solid #e7e7e7;
+}
+#latestReportsTbl td.firstCol{
+	border-left-width: 0;
+	padding: 8px 0 7px 0;
+}
+	#latestReportsTbl td.firstCol .priBtn{
+		width: 135px;
+		margin-left: 21px;
+	}
+#latestReportsTbl td.lastCol{
+	border-right-width: 0;
+	padding: 7px 18px;
+	font-weight: bold;
+	line-height: 25px;
+}
+	.adminTab .tabsBlock .doubleClickHint{
+		height: 35px;
+		line-height: 35px;
+		background-color: #e7e7e7;
+		padding: 0 18px 0 21px;
+		color: #626262;
+		font-weight: bold;
+		text-shadow: 0px 1px #ffffff;
+	}
+#userPermissionsTbl {
+	margin-bottom: 10px;	
+}
+	#userPermissionsTbl .col1{
+		width: 280px;
+	}
+	#userPermissionsTbl .col2{
+		width: 180px;
+	}
+	#userPermissionsTbl .col3{
+		width: 210px;
+	}
+	#userPermissionsTbl .col4{
+		width: 276px;
+	}
+	#userPermissionsTbl .firstCol{
+		border-left-width: 0;
+	}
+	#userPermissionsTbl .lastCol{
+		border-right-width: 0;
+	}
+	#userPermissionsTbl th{
+		text-indent: 0;
+		text-align: center;
+	}
+	#userPermissionsTbl td{
+		text-indent: 10px;
+	}
+	#userPermissionsTbl .hovered td{
+		background-color: #f8e7c1;
+		cursor: pointer;
+	}
+	#userPermissionsTbl .highlighted td{
+		background-color: #fec038;
+	}
+.holidayTblWrapper {
+    margin: 20px 16px;
+}
+	#holidayTbl .col1{
+		width: 200px;
+	}
+	#holidayTbl .col2, #holidayTbl .col3, #holidayTbl .col4{
+		width: 80px;
+	}
+	#holidayTbl .col5{
+		width: 120px;
+	}
+	#holidayTbl .col6{
+		width: 355px;
+	}
+	#holidayTbl th, #holidayTbl td{
+		text-indent: 0;
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+	#holidayTbl th{
+		color: #00664e;
+	}
+	#holidayTbl th.aCenter, .holidayTblPrint th.aCenter{
+		text-align: center;
+		text-indent: 0;
+	}
+	#holidayTbl td.aCenter, #holidayTbl td.aCenter input, .holidayTblPrint td.aCenter, .holidayTblPrint td.aCenter input{
+		vertical-align: middle;
+		text-align: center;
+		text-indent: 0;
+	}
+
+/*Notification Log Page*/
+.notiLogTab .tabsBar li{
+	width: 135px;
+}
+	.notiLogTab .tabsBar li a, .notiLogTab .tabsBar li a.current, .notiLogTab .tabsBar li a.current:hover, .notiLogTab .tabsBar li a.current:focus {
+		color: #5c5c5c;
+	}
+	.notiLogTab .tabsBar .jsPrintNoti, .tabsBar .jsPrintHoliday {
+		width: 127px;
+	}
+	.priBtn .printIcon{
+		display: inline-block;
+		width: 21px;
+		height: 25px;
+		background: url(../i/icon-print-btn.png) 0 0 no-repeat;
+		vertical-align: middle;
+		margin-right: 4px;
+		cursor: pointer;
+	}
+.notiLogTab .tabsBlock{
+	padding-top: 15px;
+	border: 1px solid #e7e7e7;
+	border-top-width: 0;
+	margin-bottom: 32px;
+}
+	.notiLogTab .tabsBlock .notiLogTblSummary{
+		height: 35px;
+		line-height: 35px;
+		background-color: #e7e7e7;
+		padding: 0 21px;
+		color: #626262;
+		text-shadow: 0px 1px #FFFFFF;
+		font-weight: bold;
+	}
+		.notiLogTab .tabsBlock .notiLogTblSummary strong{
+			font-weight: bold;
+			color: #000000;
+		}
+	.notiLogTab .stdTbl .firstCol{
+		border-left-width: 0;
+	}
+	.notiLogTab .stdTbl .lastCol{
+		border-right-width: 0;
+	}
+		.notiLogTab .stdTbl th .sortarrow{
+			margin-right: 7px;	
+		}
+	.notiLogTab .stdTbl th{
+		text-indent: 0;
+		padding: 3px 0;
+		text-align: center;
+	}
+	.notiLogTab .stdTbl td{
+		text-indent: 0;
+		padding: 7px 10px;
+		line-height: 14px;
+	}
+.notiLogTab #notiTbl .col1{
+	width: 174px;
+}
+.notiLogTab #notiTbl .col2{
+	width: 197px;
+}
+.notiLogTab #notiTbl .col3{
+	width: 578px;
+}
+.notiLogTab #notiErrorsTbl .col1, .notiLogTab #notiInfoTbl .col1{
+	width: 174px;
+}
+.notiLogTab #notiErrorsTbl .col2, .notiLogTab #notiInfoTbl .col2{
+	width: 775px;
+}
+	.notiLogTab .tabsBlock .paginationWrapper{
+		height: 21px;
+		background-color: #f6f6f6;
+		padding: 8px 15px 6px 20px;
+	}
+		.notiLogTab .tabsBlock .paginationWrapper .fLeft{
+			font-weight: bold;
+			color: #5c5c5c;
+			text-shadow: 0px 1px #ffffff;
+		}
+			.notiLogTab .tabsBlock .paginationWrapper .fLeft select{
+				width: 70px;
+				height: 21px;
+				margin: 0 3px 0 6px;
+				font-weight: normal;
+			}
+.paginationWrapper .fRight a{
+	margin-left: 4px;
+	width: 18px;
+}
+.paginationWrapper .fRight .jsGoPrev, .paginationWrapper .fRight .jsGoNext{
+	width: 53px;
+}
+.paginationWrapper .fRight span.fLeft{
+	display: inline-block;
+	text-align: center;
+	margin-left: 4px;
+	width: 14px;
+	line-height: 21px;
+}
+.paginationWrapper .fRight .currentPage, .paginationWrapper .fRight .currentPage:hover, .paginationWrapper .fRight .currentPage:focus{
+	display: inline-block;
+	text-align: center;
+	margin: 1px 0 0 4px;
+	width: 16px;
+	line-height: 18px;
+	height: 18px;
+	padding: 0 0 0 4px;
+	background: url(../i/notification.png) 0 0 no-repeat;
+	text-decoration: none;
+	cursor: default;
+}
+	.paginationWrapper .fRight .currentPage span, .paginationWrapper .fRight .currentPage:hover span, .paginationWrapper .fRight .currentPage:focus span{
+		display: block;
+		font-style: normal;
+		font-weight: bold;
+		color: #ffffff;
+		line-height: 18px;
+		height: 18px;
+		padding: 0 4px 0 0;
+		background: url(../i/notification.png) 100% -18px no-repeat;
+		text-decoration: none;
+		cursor: default;
+	}
+		.paginationWrapper .fRight .currentPage span span, .paginationWrapper .fRight .currentPage:hover span span, .paginationWrapper .fRight .currentPage:focus span span{
+			padding: 0;
+			height: 18px;
+			background: url(../i/notification.png) 0 -36px repeat-x;
+			text-decoration: none;
+			cursor: default;
+		}
+
+
+
+
+
+/*Help*/
+.helpPanel .panelHeader {
+	height: 34px;	
+}
+	.helpPanel .panelHeader .helpSearchSummary strong,
+	.helpPanel .panelHeader .helpArticleTitle{
+		font-weight: bold;
+		color: #000000;
+	}
+	.helpPanel .panelHeader .helpArticleTitle{
+		font-size: 14px;
+	}
+	.helpPanel .panelHeader .helpSearchBox {
+		height: 25px;
+		margin: 5px 0 0 0;
+		width: 333px;
+	}
+		.helpPanel .panelHeader .helpSearchBox input{
+			display: block;
+			padding: 3px 6px;
+			margin-right: 9px;
+			width: 194px;
+			color: #000000;
+			border-color: #b9b9b9;
+			float: left;
+		}
+		.helpPanel .panelHeader .helpSearchBox input.focus{
+			border-color: #5587C8;
+		}
+		.helpPanel .panelHeader .helpSearchBox input.showPlaceholder{
+			color: #7f7f7f;
+		}
+		.helpPanel .panelHeader .helpSearchBox .priBtn{
+			display: block;
+			width: 95px;
+			text-indent: 0;
+			float: left;
+		}
+.helpPanel .panelBody{
+	border: 1px solid #e7e7e7;
+	margin-bottom: 10px;
+}
+	.helpPanel .panelBody .helpItemList{
+		display: block;
+		padding: 28px 28px 43px 28px;
+		line-height: 14px;
+	}
+		.helpPanel .panelBody .helpItemList li{
+			padding: 0 22px 14px 0;
+		}
+			.helpPanel .panelBody .helpItemList li .helpTitleLink{
+				margin-bottom: 6px;
+				display: inline-block;
+			}
+				.helpPanel .panelBody .helpItemList li .helpTitleLink .helpArrowIcon{
+					display: inline-block;
+					width: 8px;
+					height: 14px;
+					background: url(../i/help-arrow.png) 0 0 no-repeat;
+					vertical-align: text-top
+				}
+	.helpPanel .panelBody .helpArticleWrapper{
+		padding: 4px 40px 0 28px;
+		line-height: 18px;
+		color: #5c5c5c;
+	}
+		.helpPanel .panelBody .helpArticleWrapper h1{
+			padding-top: 8px;
+			line-height: 36px;
+			font-size: 16px;
+			color: #000000;
+			font-weight: bold;
+		}
+		.helpPanel .panelBody .helpArticleWrapper h2{
+			padding-top: 8px;
+			line-height: 28px;
+			font-size: 14px;
+			color: #000000;
+			font-weight: bold;
+		}
+		.helpPanel .panelBody .helpArticleWrapper p{
+			padding-bottom: 18px;	
+		}
+		.helpPanel .panelBody .helpArticleWrapper ul{
+			padding-bottom: 18px;
+			padding-left: 23px;
+			display: block;
+		}
+			.helpPanel .panelBody .helpArticleWrapper ul li{
+				padding-left: 12px;
+				display: block;
+				background: url(../i/list-arrow.png) 0 0 no-repeat;
+			}
+		.helpPanel .panelBody .helpArticleWrapper p.noPaddingBottom{
+			padding-bottom: 0;	
+		}
+		.helpPanel .panelBody .helpArticleWrapper .indent{
+			padding-left: 36px;	
+		}
+		.helpPanel .panelBody .helpArticleWrapper strong{
+			color: #000000;
+			font-weight: bold;
+		}
+	.helpPanel .panelBody .relatedTopicsWrapper{
+		padding: 0 40px 89px 28px;
+		line-height: 18px;
+		color: #5c5c5c;
+		font-weight: bold;
+	}
+		.helpPanel .panelBody .relatedTopicsWrapper strong{
+			color: #000000;
+			font-weight: bold;
+		}
+
+		.accountDetailsTabsArea .employeeTab .accountBasicInfoPanelEdit .halfRowField input.searchSsn1B{
+			width: 50px;
+		}
+		.accountDetailsTabsArea .employeeTab .accountBasicInfoPanelEdit .halfRowField input.searchSsn2B{
+			width: 50px;
+		}
+		.accountDetailsTabsArea .employeeTab .accountBasicInfoPanelEdit .halfRowField input.searchSsn3B{
+			width: 100px;
+		}
+
+		#paymentSearchResultsTbl {
+    		width: 100%;
+    		table-layout: fixed;
+		}
+		#paymentSearchResultsTbl td,#paymentSearchResultsTbl th {
+    		overflow: hidden;
+    		width: 100%;
+    		word-wrap: break-word;
+		}
+
+		#depTbl {
+			table-layout: fixed;
+		}
+
+		#depTbl td{
+		/* Bug Fix 2 */
+		text-indent: 0;
+		padding-left: 4px;
+		overflow: hidden;
+		padding-right: 4px;
+		word-wrap: break-word;
+	}
+
+	#depTbl .entriesEditRow {
+    	height: 18px;     text-indent: 0;     text-align: center;
+	}
+
+	#depTbl .entriesEditRow{
+			height: 18px;
+			text-indent: 0;
+			text-align: center;
+		}
+			#depTbl .entriesEditRow td{
+				text-indent: 0;
+				text-align: center;
+				background-color: #fec038;
+				height: 24px;
+				padding: 0;
+				vertical-align: middle;
+			}
+			#depTbl tbody .entriesEditRow .blankCell {
+				background-image: url(../i/row-arrow.png);
+				background-position: center center;
+				background-repeat: no-repeat;
+			}
+			#depTbl tbody .entriesEditRow input.text{
+				padding: 0 3px;
+				vertical-align: middle;
+				color: #000000;
+			}
+			#depTbl tbody .entriesEditRow input.sDate, #suspenseTbl tbody .entriesEditRow input.eDate, #depTbl tbody .editing input.datePicker{
+				padding: 0;
+				display: inline-block;
+			}
+			#depTbl tbody .entriesEditRow .ui-datepicker-trigger{
+				width: 16px;
+				height: 16px;
+				vertical-align: middle;entriesEditRow
+				margin: 0;
+			}
+
+			#depTbl .entriesEditRow input.text{
+				width: 56px; /* Bug Fix 153 */
+				padding: 0 3px;      vertical-align: middle;      color: #000000;
+}
+
+#depTbl th{
+		text-indent: 6px;
+		color: #00664E;
+		text-indent: 0;
+		line-height: 14px;
+		padding: 5px 0;
+		vertical-align: top;
+		/* Bug Fix 2 */
+		word-wrap: break-word;
+		overflow: hidden;
+	}
+		#depTbl th a{
+			padding: 0 16px 0 6px;
+			position: relative;
+		}
+			#depTbl th a .sortarrow{
+				position: absolute;
+				top: -2px;
+				right: 4px;
+				margin: 0;
+			}
+		#depTbl .sortArrowCloseToBorder a{
+				padding-right: 12px;	
+			}
+			#depTbl .sortArrowCloseToBorder a .sortarrow{
+				right: 0;	
+			}
+
+			#suspenseTbl .editing .lastCol select {
+    width: 70px;
+    vertical-align: middle;
+}
+#suspenseTbl .editing select {
+    width: 160px;  vertical-align: middle;
+}
+
+.accountSummaryPanel .panelHeader:focus, .accountNotesPanel .panelHeader:focus {
+    text-decoration: underline;
+}
+
+
+#loadingOverlay2  {
+	opacity: 0.5;
+	z-index: 9950;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	position: fixed;
+	background: #fff;
+}
+
+#loadingOverlay2 img {
+	position: fixed;
+	top: 45%;
+	left: 48%;
+	display: block;
+	margin: 0 auto;
+}
+
+input.interestCalculatedToDate {
+width: 78px;
+}
+
+#accountNoteTbl {
+    table-layout: fixed;
+}
+.accountNotesPanel .stdTbl th.checkCell, .accountNotesPanel .stdTbl td.checkCell {
+    padding-left: 0px;  
+    padding-right: 0px;
+}
+
+.employeeTab .fullRowField .fieldLabel, .employeeTab .halfRowField .fieldLabel{
+		padding-left: 12px; /* Bug Fix 153 */
+	}
+
+
+	.stdTbl {
+    table-layout: fixed;
+}
+
+.validationStatusBar .fieldVal.dateVal {
+    margin-right: 2px;
+    margin-left: 2px;
+}
+	

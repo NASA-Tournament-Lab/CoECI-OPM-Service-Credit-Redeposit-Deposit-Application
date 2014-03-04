@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<process xmlns="http://drools.org/drools-5.0/process"
+         xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
+         xs:schemaLocation="http://drools.org/drools-5.0/process drools-processes-5.0.xsd"
+         type="RuleFlow" name="Interest" id="Interest" package-name="gov.opm.scrd.rules" >
+
+  <header>
+  </header>
+
+  <nodes>
+    <start id="1" name="Start" x="133" y="42" width="48" height="48" />
+    <ruleSet id="2" name="Calculate Interest Accrual Date" x="73" y="189" width="180" height="43" ruleFlowGroup="Calculate Interest Accrual Date" />
+    <ruleSet id="3" name="Calculate Interest" x="81" y="266" width="156" height="50" ruleFlowGroup="Calculate Interest" />
+    <end id="7" name="End" x="133" y="368" width="48" height="48" />
+    <ruleSet id="8" name="Perform Validation" x="80" y="112" width="161" height="48" ruleFlowGroup="Perform Validation" />
+  </nodes>
+
+  <connections>
+    <connection from="8" to="2" />
+    <connection from="2" to="3" />
+    <connection from="3" to="7" />
+    <connection from="1" to="8" />
+  </connections>
+
+</process>

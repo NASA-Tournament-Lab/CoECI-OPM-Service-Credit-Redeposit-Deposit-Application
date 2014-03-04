@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<!--
+    Copyright 2014 OPM.gov
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+
+<project default="war" basedir=".">
+	<property name="javadoc.locale" value="en_US" />
+	<property name="javac.encoding" value="UTF-8" />
+	<property name="libdir" value="${basedir}/lib" />
+	<property name="testlibdir" value="${basedir}/testlib" />
+	<property name="debug" value="off" />
+	<property name="verbose" value="no" />
+
+	<property name="srcdir" value="src" />
+	<property name="confdir" value="${basedir}/conf" />
+	<property name="sqldir" value="${srcdir}/sql" />
+	<property name="webdir" value="${srcdir}/webapp" />
+
+	<property file="${basedir}/build.properties" />
+
+	<property name="javasrc" value="${srcdir}/java" />
+	<property name="javamain" value="${javasrc}/main" />
+
+	<property name="builddir" value="build" />
+	<property name="build_classdir" value="${builddir}/classes" />
+	<property name="build_distdir" value="${builddir}/dist" />
+	<property name="modulesdir" value="${jboss_home}/modules/system/layers/base" />
+
+	<path id="buildlibs">
+		<pathelement location="${modulesdir}/org/picketbox/main/picketbox-4.0.17.Final-redhat-1.jar" />
+		<pathelement location="${modulesdir}/org/jboss/logging/main/jboss-logging-3.1.2.GA-redhat-1.jar" />
+		<pathelement location="${modulesdir}/org/hibernate/main/hibernate-core-4.2.0.Final-redhat-1.jar" />
+		<pathelement location="${modulesdir}/javax/ejb/api/main/jboss-ejb-api_3.1_spec-1.0.2.Final-redhat-2.jar" />
+		<pathelement location="${modulesdir}/javax/inject/api/main/javax.inject-1-redhat-3.jar" />
+		<pathelement location="${modulesdir}/javax/servlet/api/main/jboss-servlet-api_3.0_spec-1.0.2.Final-redhat-1.jar" />
+		<pathelement location="${modulesdir}/javax/persistence/api/main/hibernate-jpa-2.0-api-1.0.1.Final-redhat-2.jar" />
+	</path>
+
+	<target name="compile" depends="clean">
+		<mkdir dir="${build_classdir}" />
+		<javac srcdir="${javamain}" destdir="${build_classdir}" debug="true" verbose="${verbose}" includeAntRuntime="no" encoding="${javac.encoding}">
+			<classpath refid="buildlibs" />
+		</javac>
+	</target>
+
+
+	<target name="clean">
+		<delete dir="${builddir}" />
+	</target>
+
+	<target name="war" depends="compile">
+		<mkdir dir="${build_distdir}" />
+		<copy todir="${build_classdir}" overwrite="yes">
+			<fileset dir="${confdir}"/>
+		</copy>
+		<copy todir="${build_classdir}" overwrite="yes">
+			<fileset dir="${confdir}"/>
+		</copy>
+		<copy todir="${build_classdir}" overwrite="yes">
+			<fileset dir="${sqldir}"/>
+		</copy>
+		<war destfile="${build_distdir}/${war.dist.name}">
+			<classes dir="${build_classdir}" />
+			<fileset dir="${webdir}" />
+		</war>
+	</target>
+
+	<target name="deploy"  depends="war">
+		<delete file="${jboss_home}/standalone/deployments/${war.dist.name}" />
+		<copy todir="${jboss_home}/standalone/deployments" overwrite="yes" file="${build_distdir}/${war.dist.name}"/>
+		<touch file="${jboss_home}/standalone/deployments/${war.dist.name}.dodeploy"/>
+	</target>
+</project>
