@@ -216,7 +216,7 @@ public class CalculationExecutionServiceImpl extends BaseService implements Calc
                 item.setStartDate(period.getBeginDate());
                 item.setEndDate(period.getEndDate());
                 item.setMidDate(period.getMidPoint());
-                item.setRefundDate(period.getRefundDate());
+                item.setEffectiveDate(period.getRefundDate());
                 item.setPeriodType(period.getServicePeriods().get(0).getPeriodType());
                 item.setRetirementType(period.getRetirementType());
                 item.setDeductionAmount(period.getTotalDeduction());
@@ -406,7 +406,7 @@ public class CalculationExecutionServiceImpl extends BaseService implements Calc
                 period.setServiceType(calculation.getServiceType());
                 period.setPayType(calculation.getPayType());
                 period.setAmount(calculation.getAmount());
-                period.setRefundDate(calculation.getRefundDate());
+                period.setRefundDate(calculation.getInterestAccrualDate());
                 period.setValidationErrors(new ArrayList<String>());
                 servicePeriods.add(period);
             }

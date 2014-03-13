@@ -312,7 +312,7 @@ CREATE TABLE opm.address (
   street3 VARCHAR(128) NULL ,
   street4 VARCHAR(128) NULL ,
   street5 VARCHAR(128) NULL ,
-  city VARCHAR(128) NULL ,
+  city VARCHAR(128) NOT NULL ,
   state_id BIGINT NULL,
   zip_code VARCHAR(128) NULL ,
   country_id BIGINT NULL,
@@ -339,7 +339,7 @@ CREATE TABLE opm.account_holder (
   middle_initial VARCHAR(128) NULL ,
   suffix_id BIGINT NULL,
   birth_date TIMESTAMP NOT NULL ,
-  ssn VARCHAR(128) NOT NULL ,
+  ssn VARCHAR(128) UNIQUE NOT NULL ,
   telephone VARCHAR(128) NULL ,
   email VARCHAR(128) NULL ,
   title VARCHAR(128) NULL ,
@@ -560,9 +560,9 @@ CREATE TABLE opm.calculation_version (
   id BIGSERIAL NOT NULL,
   deleted BOOLEAN NOT NULL,
   name VARCHAR(128) NOT NULL ,
-  calculation_date TIMESTAMP NOT NULL ,
+  calculation_date TIMESTAMP NULL ,
   calculation_result_id BIGINT NULL,
-  account_id BIGINT NULL,
+  account_id BIGINT NOT NULL,
   version INTEGER NULL,
   line_number INTEGER NULL,
   PRIMARY KEY (id) ,
@@ -570,12 +570,12 @@ CREATE TABLE opm.calculation_version (
     FOREIGN KEY (calculation_result_id )
     REFERENCES opm.calculation_result (id )
     ON DELETE CASCADE
-    ON UPDATE NO ACTION ,
+    ON UPDATE NO ACTION,
   CONSTRAINT fk_calculation_version_account
     FOREIGN KEY (account_id )
     REFERENCES opm.account (id )
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+    ON UPDATE NO ACTION );
 
 -- -----------------------------------------------------
 -- Table calculation
@@ -597,9 +597,10 @@ CREATE TABLE opm.calculation (
   date_entered TIMESTAMP NULL,
   entered_by BIGINT NULL,
   calculation_version_id BIGINT NULL,
-  frozen BOOLEAN NULL,
-  refund_date TIMESTAMP NOT NULL,
   interest_rate DECIMAL(10,2) NULL,
+  conner_case BOOLEAN NULL,
+  interest_accrual_date TIMESTAMP NULL,
+  frozen BOOLEAN NULL,
   PRIMARY KEY (id) ,
   CONSTRAINT fk_calculation_retirement_type
     FOREIGN KEY (retirement_type_id )
@@ -645,30 +646,30 @@ CREATE TABLE opm.calculation_result_item (
   deleted BOOLEAN NOT NULL,
   start_date TIMESTAMP NOT NULL ,
   end_date TIMESTAMP NOT NULL ,
-  mid_date TIMESTAMP NOT NULL ,
-  refund_date TIMESTAMP NOT NULL ,
-  service_category VARCHAR(128) NOT NULL,
+  mid_date TIMESTAMP NULL ,
+  effective_date TIMESTAMP NULL ,
   period_type_id BIGINT NOT NULL,
-  retirement_type_id BIGINT NOT NULL,
   deduction_amount DECIMAL(10,2) NOT NULL ,
   total_interest DECIMAL(10,2) NOT NULL ,
   payment_applied DECIMAL(10,2) NOT NULL ,
   balance DECIMAL(10,2) NOT NULL ,
   calculation_result_id BIGINT NULL,
+  service_category VARCHAR(128) NULL,
+  retirement_type_id BIGINT NOT NULL,
   PRIMARY KEY (id) ,
   CONSTRAINT fk_calculation_result_item_period_type
     FOREIGN KEY (period_type_id )
     REFERENCES opm.period_type (id )
     ON DELETE CASCADE
     ON UPDATE NO ACTION,
-  CONSTRAINT fk_calculation_result_item_retirement_type
-    FOREIGN KEY (retirement_type_id )
-    REFERENCES opm.retirement_type (id )
-    ON DELETE CASCADE
-    ON UPDATE NO ACTION,
   CONSTRAINT fk_calculation_result_item_calculation_result
     FOREIGN KEY (calculation_result_id )
     REFERENCES opm.calculation_result (id )
+    ON DELETE CASCADE
+    ON UPDATE NO ACTION,
+  CONSTRAINT fk_calculation_result_item_retirement_type
+    FOREIGN KEY (retirement_type_id )
+    REFERENCES opm.retirement_type (id )
     ON DELETE CASCADE
     ON UPDATE NO ACTION);
 
@@ -729,8 +730,8 @@ CREATE TABLE opm.audit_parameter_record (
   item_id BIGINT NOT NULL ,
   item_type VARCHAR(128) NOT NULL ,
   property_name VARCHAR(128) NOT NULL ,
-  previous_value VARCHAR(2048) NULL ,
-  new_value VARCHAR(2048) NULL ,
+  previous_value VARCHAR(20000) NULL ,
+  new_value VARCHAR(20000) NULL ,
   audit_record_id BIGINT NOT NULL,
   PRIMARY KEY (id) ,
   CONSTRAINT fk_audit_parameter_record_audit_record
@@ -745,7 +746,7 @@ CREATE TABLE opm.audit_parameter_record (
 CREATE TABLE opm.refund_transaction (
   id BIGSERIAL NOT NULL,
   deleted BOOLEAN NOT NULL,
-  transaction_key BIGINT NULL ,
+  transaction_key VARCHAR(128) NULL ,
   amount DECIMAL(10,2) NOT NULL ,
   claim_number VARCHAR(128) NOT NULL ,
   refund_date TIMESTAMP NOT NULL ,
@@ -1547,7 +1548,7 @@ CREATE TABLE opm.address_history (
   street3 VARCHAR(128) NULL ,
   street4 VARCHAR(128) NULL ,
   street5 VARCHAR(128) NULL ,
-  city VARCHAR(128) NULL ,
+  city VARCHAR(128) NOT NULL ,
   state_id BIGINT NULL,
   zip_code VARCHAR(128) NULL ,
   country_id BIGINT NULL,
@@ -1608,13 +1609,14 @@ CREATE TABLE opm.calculation_version_history (
   id BIGINT NOT NULL,
   deleted BOOLEAN NOT NULL,
   name VARCHAR(128) NOT NULL ,
-  calculation_date TIMESTAMP NOT NULL ,
+  calculation_date TIMESTAMP NULL ,
   calculation_result_id BIGINT NULL,
   version INTEGER NULL,
   line_number INTEGER NULL,
-  account_id INTEGER NULL,
+  account_id BIGINT NULL,
   action_timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   action VARCHAR(1) NOT NULL CHECK (action IN ('I','D','U')) );
+
 
 -- -----------------------------------------------------
 -- Table calculation_history
@@ -1637,8 +1639,6 @@ CREATE TABLE opm.calculation_history (
   entered_by BIGINT NULL,
   calculation_version_id BIGINT NULL ,
   frozen BOOLEAN NULL,
-  refund_date TIMESTAMP NOT NULL,
-  interest_rate DECIMAL(10,2) NULL,
   action_timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   action VARCHAR(1) NOT NULL CHECK (action IN ('I','D','U')) );
 
@@ -1665,16 +1665,16 @@ CREATE TABLE opm.calculation_result_item_history (
   deleted BOOLEAN NOT NULL,
   start_date TIMESTAMP NOT NULL ,
   end_date TIMESTAMP NOT NULL ,
-  mid_date TIMESTAMP NOT NULL ,
-  refund_date TIMESTAMP NOT NULL ,
-  service_category VARCHAR(128) NOT NULL,
+  mid_date TIMESTAMP NULL ,
+  effective_date TIMESTAMP NULL ,
   period_type_id BIGINT NOT NULL,
-  retirement_type_id BIGINT NOT NULL,
   deduction_amount DECIMAL(10,2) NOT NULL ,
   total_interest DECIMAL(10,2) NOT NULL ,
   payment_applied DECIMAL(10,2) NOT NULL ,
   balance DECIMAL(10,2) NOT NULL ,
   calculation_result_id BIGINT NULL ,
+  service_category VARCHAR(128) NULL,
+  retirement_type_id BIGINT NOT NULL,
   action_timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   action VARCHAR(1) NOT NULL CHECK (action IN ('I','D','U')) );
 
@@ -1725,7 +1725,7 @@ CREATE TABLE opm.summary_data_history (
 CREATE TABLE opm.refund_transaction_history (
   id BIGINT NOT NULL,
   deleted BOOLEAN NOT NULL,
-  transaction_key BIGINT NULL ,
+  transaction_key VARCHAR(128) NULL ,
   amount DECIMAL(10,2) NOT NULL ,
   claim_number VARCHAR(128) NOT NULL ,
   refund_date TIMESTAMP NOT NULL ,
@@ -2258,43 +2258,7 @@ CREATE TABLE opm.batch_daily_payments_history (
   error_processing BOOLEAN NULL ,
   action_timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   action VARCHAR(1) NOT NULL CHECK (action IN ('I','D','U')) );
-
--- -----------------------------------------------------
--- Table report_generation_data
--- -----------------------------------------------------
-CREATE TABLE opm.report_generation_data (
-  id BIGSERIAL NOT NULL,
-  deleted BOOLEAN NOT NULL,
-  payment_invoices_processed INT NULL ,
-  bills_printed INT NULL ,
-  reveals_printed INT NULL ,
-  letters_printed INT NULL ,
-  refunds_printed INT NULL ,
-  PRIMARY KEY (id) );
-
-
--- -----------------------------------------------------
--- Table report_generation_data_history
--- -----------------------------------------------------
-CREATE TABLE opm.report_generation_data_history (
-  id BIGINT NOT NULL,
-  deleted BOOLEAN NOT NULL,
-  payment_invoices_processed INT NULL ,
-  bills_printed INT NULL ,
-  reveals_printed INT NULL ,
-  letters_printed INT NULL ,
-  refunds_printed INT NULL ,
-  action_timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  action VARCHAR(1) NOT NULL CHECK (action IN ('I','D','U')));
--- -----------------------------------------------------
--- Table payment_statement_print
--- -----------------------------------------------------
-CREATE TABLE opm.payment_statement_print (
-  id BIGSERIAL NOT NULL,
-  deleted BOOLEAN NOT NULL,
-  message VARCHAR(8192) NOT NULL,
-  message_date TIMESTAMP NOT NULL,
-  PRIMARY KEY (id));
+  
 -- -----------------------------------------------------
 -- Table mainframe_import
 -- -----------------------------------------------------
@@ -2348,3 +2312,41 @@ CREATE TABLE opm.payment_transaction (
   disapprove BOOLEAN NULL,
   pay_trans_key INTEGER NULL,
   PRIMARY KEY (id));
+
+-- -----------------------------------------------------
+-- Table payment_statement_print
+-- -----------------------------------------------------
+CREATE TABLE opm.payment_statement_print (
+  id BIGSERIAL NOT NULL,
+  deleted BOOLEAN NOT NULL,
+  message VARCHAR(8192) NOT NULL,
+  message_date TIMESTAMP NOT NULL,
+  PRIMARY KEY (id));
+
+-- -----------------------------------------------------
+-- Table report_generation_data
+-- -----------------------------------------------------
+CREATE TABLE opm.report_generation_data (
+  id BIGSERIAL NOT NULL,
+  deleted BOOLEAN NOT NULL,
+  payment_invoices_processed INT NULL ,
+  bills_printed INT NULL ,
+  reveals_printed INT NULL ,
+  letters_printed INT NULL ,
+  refunds_printed INT NULL ,
+  PRIMARY KEY (id) );
+
+
+-- -----------------------------------------------------
+-- Table report_generation_data_history
+-- -----------------------------------------------------
+CREATE TABLE opm.report_generation_data_history (
+  id BIGINT NOT NULL,
+  deleted BOOLEAN NOT NULL,
+  payment_invoices_processed INT NULL ,
+  bills_printed INT NULL ,
+  reveals_printed INT NULL ,
+  letters_printed INT NULL ,
+  refunds_printed INT NULL ,
+  action_timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  action VARCHAR(1) NOT NULL CHECK (action IN ('I','D','U')));

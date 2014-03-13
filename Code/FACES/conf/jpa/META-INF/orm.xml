@@ -448,7 +448,7 @@
                 <column name="street5" nullable="true" length="128"/>
             </basic>
             <basic name="city">
-                <column name="city" nullable="true" length="128"/>
+                <column name="city" nullable="false" length="128"/>
             </basic>
             <basic name="zipCode">
                 <column name="zip_code" nullable="true" length="128"/>
@@ -478,7 +478,7 @@
                 <column name="birth_date" nullable="false"/>
             </basic>
             <basic name="ssn">
-                <column name="ssn" nullable="false" length="128"/>
+                <column name="ssn" nullable="false" length="128" unique="true"/>
             </basic>
             <basic name="telephone">
                 <column name="telephone" nullable="true" length="128"/>
@@ -570,7 +570,7 @@
             <basic name="stopACHPayments">
                 <column name="stop_ach_payments" nullable="true"/>
             </basic>
-            <one-to-many name="billings" target-entity="gov.opm.scrd.entities.application.Billing" fetch="LAZY">
+            <one-to-many name="billings" target-entity="gov.opm.scrd.entities.application.Billing" fetch="LAZY" orphan-removal="true">
                 <join-column name="billing_summary_id" referenced-column-name="id" nullable="false" />
                 <cascade>
                   <cascade-all/>
@@ -717,7 +717,7 @@
             <many-to-one name="payCode" target-entity="gov.opm.scrd.entities.lookup.PayCode" fetch="EAGER">
                 <join-column name="pay_code_id" referenced-column-name="id" nullable="true" />
             </many-to-one>
-            <one-to-many name="calculationVersions" target-entity="gov.opm.scrd.entities.application.CalculationVersion" fetch="LAZY">
+            <one-to-many name="calculationVersions" target-entity="gov.opm.scrd.entities.application.CalculationVersion" fetch="LAZY" orphan-removal="true">
                 <join-column name="account_id" referenced-column-name="id"/>
                 <cascade>
                   <cascade-all/>
@@ -729,7 +729,7 @@
             <one-to-many name="paymentHistory" target-entity="gov.opm.scrd.entities.application.Payment" fetch="EAGER">
                 <join-column name="account_id" referenced-column-name="id" nullable="true" />
             </one-to-many>
-            <one-to-one name="billingSummary" target-entity="gov.opm.scrd.entities.application.BillingSummary" fetch="LAZY">
+            <one-to-one name="billingSummary" target-entity="gov.opm.scrd.entities.application.BillingSummary" fetch="LAZY" orphan-removal="true">
                 <join-column name="billing_summary_id" referenced-column-name="id" />
                 <cascade>
                   <cascade-all/>
@@ -891,7 +891,7 @@
                 <column name="name" nullable="false" length="128"/>
             </basic>
             <basic name="calculationDate">
-                <column name="calculation_date" nullable="false"/>
+                <column name="calculation_date" nullable="true"/>
             </basic>
             <basic name="version">
                 <column name="version" nullable="true"/>
@@ -902,13 +902,13 @@
             <basic name="accountId">
                 <column name="account_id" nullable="false"/>
             </basic>
-            <one-to-many name="calculations" target-entity="gov.opm.scrd.entities.application.Calculation" fetch="LAZY">
+            <one-to-many name="calculations" target-entity="gov.opm.scrd.entities.application.Calculation" fetch="LAZY" orphan-removal="true">
                 <join-column name="calculation_version_id" referenced-column-name="id" nullable="false" />
                 <cascade>
                   <cascade-all/>
                 </cascade>
             </one-to-many>
-            <one-to-one name="calculationResult" target-entity="gov.opm.scrd.entities.application.CalculationResult" fetch="LAZY">
+            <one-to-one name="calculationResult" target-entity="gov.opm.scrd.entities.application.CalculationResult" fetch="LAZY" orphan-removal="true">
                 <join-column name="calculation_result_id" referenced-column-name="id" nullable="true" />
                 <cascade>
                   <cascade-all/>
@@ -944,12 +944,17 @@
             <basic name="frozen">
                 <column name="frozen" nullable="true"/>
             </basic>
-            <basic name="refundDate">
-                <column name="refund_date" nullable="false"/>
-            </basic>
             <basic name="interestRate">
                 <column name="interest_rate" nullable="true"/>
             </basic>
+            
+            <basic name="connerCase">
+                <column name="conner_case" nullable="false"/>
+            </basic>
+            <basic name="interestAccrualDate">
+                <column name="interest_accrual_date" nullable="true"/>
+            </basic>
+            
             <many-to-one name="retirementType" target-entity="gov.opm.scrd.entities.lookup.RetirementType" fetch="EAGER">
                 <join-column name="retirement_type_id" referenced-column-name="id" nullable="true" />
             </many-to-one>
@@ -1026,13 +1031,13 @@
                 <column name="end_date" nullable="false"/>
             </basic>
             <basic name="midDate">
-                <column name="mid_date" nullable="false"/>
+                <column name="mid_date" nullable="true"/>
             </basic>
-            <basic name="refundDate">
-                <column name="refund_date" nullable="false"/>
+            <basic name="effectiveDate">
+                <column name="effective_date" nullable="false"/>
             </basic>
             <basic name="serviceCategory">
-                <column name="service_category" nullable="false"/>
+                <column name="service_category" nullable="true"/>
                 <enumerated>STRING</enumerated>
             </basic>
             <basic name="deductionAmount">

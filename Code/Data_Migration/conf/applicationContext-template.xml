@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!--
+    Copyright 2014 OPM.gov
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"  
+    xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"  
+    xmlns:p="http://www.springframework.org/schema/p"  
+    xmlns:drools="http://drools.org/schema/drools-spring"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+        http://drools.org/schema/drools-spring http://anonsvn.jboss.org/repos/labs/labs/jbossrules/trunk/drools-container/drools-spring/src/main/resources/org/drools/container/spring/drools-spring-1.0.0.xsd">
+        
+        <context:annotation-config/>
+        
+        <!-- DataMigrationProcessor -->
+        <bean id="dataMigrationProcessor" class="gov.opm.scrd.migration.impl.DataMigrationProcessorImpl">
+            <property name="destinationEntityManager" ref="entityManager" />
+            <property name="logger" ref="logger" />
+            <property name="countryName" value="US" />
+            <property name="redepositPeriodTypeName" value="R" />
+            <property name="depositPeriodTypeName" value="D" />
+            <property name="sourceDatabaseDriverName" value="@db.sourceDatabaseDriverName@" />
+            <property name="sourceDatabaseUrl" value="@db.sourceDatabaseUrl@" />
+            <property name="sourceDatabaseUsername" value="@db.sourceDatabaseUsername@" />
+            <property name="sourceDatabasePassword" value="@db.sourceDatabasePassword@" />
+        </bean>
+        
+        <bean id="logger" class="org.jboss.logging.Logger" factory-method="getLogger">
+          <constructor-arg type="java.lang.String" value="gov.opm.scrd.migration" />
+        </bean>
+        
+        <bean id="entityManager" factory-bean="entityManagerFactory" factory-method="createEntityManager">
+        </bean>
+        
+        <bean id="entityManagerFactory"
+          class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean" >
+            <property name="persistenceUnitName" value="opmUnitName" />
+        </bean>
+        
+        <!-- knowledgeAgent configurations -->
+        <drools:kagent id="interestKnowledgeAgent" kbase="interestKnowledgeBase" new-instance="true" />
+        <drools:kagent id="deductionKnowledgeAgent" kbase="deductionKnowledgeBase" new-instance="true" />
+
+        <!-- knowledgeBase configurations for interest -->
+        <drools:kbase id="interestKnowledgeBase">
+            <drools:resources>
+                <drools:resource type="CHANGE_SET" source="classpath:interest-change-set.xml" />
+            </drools:resources>
+        </drools:kbase>
+        
+        <!-- knowledgeBase configurations for deduction -->
+        <drools:kbase id="deductionKnowledgeBase">
+            <drools:resources>
+                <drools:resource type="CHANGE_SET" source="classpath:deduction-change-set.xml" />
+            </drools:resources>
+        </drools:kbase>
+        
+        <!-- InterestCalculationRuleService -->
+        <bean id="interestCalculationRuleService" class="gov.opm.scrd.services.impl.InterestCalculationRuleServiceImpl">
+             <property name="knowledgeLogFileName" value="log/Ineterest" />
+            <property name="knowledgeAgent" ref="interestKnowledgeAgent" />
+        </bean>
+        
+        <!-- DeductionCalculationRuleServiceImpl -->
+        <bean id="deductionCalculationRuleService" class="gov.opm.scrd.services.impl.DeductionCalculationRuleServiceImpl">
+             <property name="knowledgeLogFileName" value="log/Deduction" />
+            <property name="knowledgeAgent" ref="deductionKnowledgeAgent" />
+        </bean>
+        
+</beans>  

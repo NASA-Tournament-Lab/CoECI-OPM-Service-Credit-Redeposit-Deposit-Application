@@ -1,0 +1,339 @@
+<ejb-jar xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/ejb-jar_3_1.xsd"
+    version="3.1">
+    <enterprise-beans>
+        <session>
+            <ejb-name>AccountBalanceReportService</ejb-name>
+            <local-bean></local-bean>
+            <ejb-class>gov.opm.scrd.services.impl.reporting.AccountBalanceReportService</ejb-class>
+            <env-entry>
+                <env-entry-name>gov.opm.scrd.services.impl.BaseReportService/reportName</env-entry-name>
+                <env-entry-type>java.lang.String</env-entry-type>
+                <env-entry-value>Account Balance History</env-entry-value>
+            </env-entry>
+        </session>
+		<session>
+            <ejb-name>UserAuditTrailReportService</ejb-name>
+            <local-bean></local-bean>
+            <ejb-class>gov.opm.scrd.services.impl.reporting.UserAuditTrailReportService</ejb-class>
+            <env-entry>
+                <env-entry-name>gov.opm.scrd.services.impl.BaseReportService/reportName</env-entry-name>
+                <env-entry-type>java.lang.String</env-entry-type>
+                <env-entry-value>Audit Trail by User</env-entry-value>
+            </env-entry>
+        </session>
+        <session>
+            <ejb-name>AccountTypeTotalsReportService</ejb-name>
+            <local-bean></local-bean>
+            <ejb-class>gov.opm.scrd.services.impl.reporting.AccountTypeTotalsReportService</ejb-class>
+            <env-entry>
+                <env-entry-name>gov.opm.scrd.services.impl.BaseReportService/reportName</env-entry-name>
+                <env-entry-type>java.lang.String</env-entry-type>
+                <env-entry-value>Account Type Totals</env-entry-value>
+            </env-entry>
+        </session>
+		<session>
+            <ejb-name>ActiveCreditBalancesReportService</ejb-name>
+            <local-bean></local-bean>
+            <ejb-class>gov.opm.scrd.services.impl.reporting.ActiveCreditBalancesReportService</ejb-class>
+            <env-entry>
+                <env-entry-name>gov.opm.scrd.services.impl.BaseReportService/reportName</env-entry-name>
+                <env-entry-type>java.lang.String</env-entry-type>
+                <env-entry-value>Active Credit Balances Over Twenty-Five Dollars</env-entry-value>
+            </env-entry>
+        </session>
+        <session>
+            <ejb-name>BalancedScorecardAccountReportService</ejb-name>
+            <local-bean></local-bean>
+            <ejb-class>gov.opm.scrd.services.impl.reporting.BalancedScorecardAccountReportService</ejb-class>
+            <env-entry>
+                <env-entry-name>gov.opm.scrd.services.impl.BaseReportService/reportName</env-entry-name>
+                <env-entry-type>java.lang.String</env-entry-type>
+                <env-entry-value>Balanced Scorecard Account Processing</env-entry-value>
+            </env-entry>
+        </session>
+        <session>
+            <ejb-name>BalancedLockboxReportService</ejb-name>
+            <local-bean></local-bean>
+            <ejb-class>gov.opm.scrd.services.impl.reporting.BalancedLockboxReportService</ejb-class>
+            <env-entry>
+                <env-entry-name>gov.opm.scrd.services.impl.BaseReportService/reportName</env-entry-name>
+                <env-entry-type>java.lang.String</env-entry-type>
+                <env-entry-value>Balanced Scorecard Lockbox Imports</env-entry-value>
+            </env-entry>
+        </session>
+        <session>
+            <ejb-name>BalancedScorecardPaymentReportService</ejb-name>
+            <local-bean></local-bean>
+            <ejb-class>gov.opm.scrd.services.impl.reporting.BalancedScorecardPaymentReportService</ejb-class>
+            <env-entry>
+                <env-entry-name>gov.opm.scrd.services.impl.BaseReportService/reportName</env-entry-name>
+                <env-entry-type>java.lang.String</env-entry-type>
+                <env-entry-value>Balanced Scorecard Payment Processing</env-entry-value>
+            </env-entry>
+        </session>
+        <session>
+            <ejb-name>CalculationAuditTrailReportService</ejb-name>
+            <local-bean></local-bean>
+            <ejb-class>gov.opm.scrd.services.impl.reporting.CalculationAuditTrailReportService</ejb-class>
+            <env-entry>
+                <env-entry-name>gov.opm.scrd.services.impl.BaseReportService/reportName</env-entry-name>
+                <env-entry-type>java.lang.String</env-entry-type>
+                <env-entry-value>Calculation Log for FERS</env-entry-value>
+            </env-entry>
+        </session>
+        <session>
+            <ejb-name>CurrentSuspenseReportService</ejb-name>
+            <local-bean></local-bean>
+            <ejb-class>gov.opm.scrd.services.impl.reporting.CurrentSuspenseReportService</ejb-class>
+            <env-entry>
+                <env-entry-name>gov.opm.scrd.services.impl.BaseReportService/reportName</env-entry-name>
+                <env-entry-type>java.lang.String</env-entry-type>
+                <env-entry-value>Current Suspense</env-entry-value>
+            </env-entry>
+        </session>
+        <session>
+            <ejb-name>DailyCashflowReportService</ejb-name>
+            <local-bean></local-bean>
+            <ejb-class>gov.opm.scrd.services.impl.reporting.DailyCashflowReportService</ejb-class>
+            <env-entry>
+                <env-entry-name>gov.opm.scrd.services.impl.BaseReportService/reportName</env-entry-name>
+                <env-entry-type>java.lang.String</env-entry-type>
+                <env-entry-value>Daily Cashflow Report</env-entry-value>
+            </env-entry>
+        </session>
+        <session>
+            <ejb-name>DailyReconciliationReportService</ejb-name>
+            <local-bean></local-bean>
+            <ejb-class>gov.opm.scrd.services.impl.reporting.DailyReconciliationReportService</ejb-class>
+            <env-entry>
+                <env-entry-name>gov.opm.scrd.services.impl.BaseReportService/reportName</env-entry-name>
+                <env-entry-type>java.lang.String</env-entry-type>
+                <env-entry-value>Daily Reconciliation Report</env-entry-value>
+            </env-entry>
+        </session>
+        <session>
+            <ejb-name>DailySuspenseReportService</ejb-name>
+            <local-bean></local-bean>
+            <ejb-class>gov.opm.scrd.services.impl.reporting.DailySuspenseReportService</ejb-class>
+            <env-entry>
+                <env-entry-name>gov.opm.scrd.services.impl.BaseReportService/reportName</env-entry-name>
+                <env-entry-type>java.lang.String</env-entry-type>
+                <env-entry-value>Daily Suspense Report</env-entry-value>
+            </env-entry>
+        </session>
+        <session>
+            <ejb-name>DeductionRatesReportService</ejb-name>
+            <local-bean></local-bean>
+            <ejb-class>gov.opm.scrd.services.impl.reporting.DeductionRatesReportService</ejb-class>
+            <env-entry>
+                <env-entry-name>gov.opm.scrd.services.impl.BaseReportService/reportName</env-entry-name>
+                <env-entry-type>java.lang.String</env-entry-type>
+                <env-entry-value>Service Credit Deduction Rates</env-entry-value>
+            </env-entry>
+        </session>
+
+	<session>
+		<ejb-name>LockboxImportErrorsReportService</ejb-name>
+		<local-bean></local-bean>
+		<ejb-class>gov.opm.scrd.services.impl.reporting.LockboxImportErrorsReportService</ejb-class>
+		<env-entry>
+			<env-entry-name>gov.opm.scrd.services.impl.BaseReportService/reportName</env-entry-name>
+			<env-entry-type>java.lang.String</env-entry-type>
+			<env-entry-value>Lock Box Import Errors</env-entry-value>
+		</env-entry>
+	</session>
+	<session>
+		<ejb-name>LockboxFileImportReportService</ejb-name>
+		<local-bean></local-bean>
+		<ejb-class>gov.opm.scrd.services.impl.reporting.LockboxFileImportReportService</ejb-class>
+		<env-entry>
+			<env-entry-name>gov.opm.scrd.services.impl.BaseReportService/reportName</env-entry-name>
+			<env-entry-type>java.lang.String</env-entry-type>
+			<env-entry-value>Lockbox Bank File Import Totals</env-entry-value>
+		</env-entry>
+	</session>
+	<session>
+		<ejb-name>ManualPaymentReportService</ejb-name>
+		<local-bean></local-bean>
+		<ejb-class>gov.opm.scrd.services.impl.reporting.ManualPaymentReportService</ejb-class>
+		<env-entry>
+			<env-entry-name>gov.opm.scrd.services.impl.BaseReportService/reportName</env-entry-name>
+			<env-entry-type>java.lang.String</env-entry-type>
+			<env-entry-value>Manual Payments</env-entry-value>
+		</env-entry>
+	</session>
+	<session>
+		<ejb-name>MonthlySuspenseListReportService</ejb-name>
+		<local-bean></local-bean>
+		<ejb-class>gov.opm.scrd.services.impl.reporting.MonthlySuspenseListReportService</ejb-class>
+		<env-entry>
+			<env-entry-name>gov.opm.scrd.services.impl.BaseReportService/reportName</env-entry-name>
+			<env-entry-type>java.lang.String</env-entry-type>
+			<env-entry-value>Suspense Report</env-entry-value>
+		</env-entry>
+	</session>
+	<session>
+		<ejb-name>PaymentHistoryReportService</ejb-name>
+		<local-bean></local-bean>
+		<ejb-class>gov.opm.scrd.services.impl.reporting.PaymentHistoryReportService</ejb-class>
+		<env-entry>
+			<env-entry-name>gov.opm.scrd.services.impl.BaseReportService/reportName</env-entry-name>
+			<env-entry-type>java.lang.String</env-entry-type>
+			<env-entry-value>Payment Transaction History</env-entry-value>
+		</env-entry>
+	</session>
+	<session>
+		<ejb-name>PaymentByTypeRangeReportService</ejb-name>
+		<local-bean></local-bean>
+		<ejb-class>gov.opm.scrd.services.impl.reporting.PaymentByTypeRangeReportService</ejb-class>
+		<env-entry>
+			<env-entry-name>gov.opm.scrd.services.impl.BaseReportService/reportName</env-entry-name>
+			<env-entry-type>java.lang.String</env-entry-type>
+			<env-entry-value>Payments</env-entry-value>
+		</env-entry>
+	</session>
+	<session>
+		<ejb-name>PaymentPendingApprovalReportService</ejb-name>
+		<local-bean></local-bean>
+		<ejb-class>gov.opm.scrd.services.impl.reporting.PaymentPendingApprovalReportService</ejb-class>
+		<env-entry>
+			<env-entry-name>gov.opm.scrd.services.impl.BaseReportService/reportName</env-entry-name>
+			<env-entry-type>java.lang.String</env-entry-type>
+			<env-entry-value>Payments Pending Supervisor Approval</env-entry-value>
+		</env-entry>
+	</session>
+	<session>
+		<ejb-name>RefundSectionAccountAssignmentsReportService</ejb-name>
+		<local-bean></local-bean>
+		<ejb-class>gov.opm.scrd.services.impl.reporting.RefundSectionAccountAssignmentsReportService</ejb-class>
+		<env-entry>
+			<env-entry-name>gov.opm.scrd.services.impl.BaseReportService/reportName</env-entry-name>
+			<env-entry-type>java.lang.String</env-entry-type>
+			<env-entry-value>Refund Section Account Assignments</env-entry-value>
+		</env-entry>
+	</session>
+	<session>
+		<ejb-name>ResolvedSuspenseHistoryReportService</ejb-name>
+		<local-bean></local-bean>
+		<ejb-class>gov.opm.scrd.services.impl.reporting.ResolvedSuspenseHistoryReportService</ejb-class>
+		<env-entry>
+			<env-entry-name>gov.opm.scrd.services.impl.BaseReportService/reportName</env-entry-name>
+			<env-entry-type>java.lang.String</env-entry-type>
+			<env-entry-value>Resolved Suspense History</env-entry-value>
+		</env-entry>
+	</session>
+	<session>
+		<ejb-name>ClosedAccountReportService</ejb-name>
+		<local-bean></local-bean>
+		<ejb-class>gov.opm.scrd.services.impl.reporting.ClosedAccountReportService</ejb-class>
+		<env-entry>
+			<env-entry-name>gov.opm.scrd.services.impl.BaseReportService/reportName</env-entry-name>
+			<env-entry-type>java.lang.String</env-entry-type>
+			<env-entry-value>CLOSED ACCOUNT STATEMENT</env-entry-value>
+		</env-entry>
+	</session>
+	<session>
+		<ejb-name>TotalPaymentSummaryReportService</ejb-name>
+		<local-bean></local-bean>
+		<ejb-class>gov.opm.scrd.services.impl.reporting.TotalPaymentSummaryReportService</ejb-class>
+		<env-entry>
+			<env-entry-name>gov.opm.scrd.services.impl.BaseReportService/reportName</env-entry-name>
+			<env-entry-type>java.lang.String</env-entry-type>
+			<env-entry-value>SC-007-001B - Summary of Total Payments</env-entry-value>
+		</env-entry>
+	</session>
+	<session>
+		<ejb-name>MonthlyAdjustmentReportService</ejb-name>
+		<local-bean></local-bean>
+		<ejb-class>gov.opm.scrd.services.impl.reporting.MonthlyAdjustmentReportService</ejb-class>
+		<env-entry>
+			<env-entry-name>gov.opm.scrd.services.impl.BaseReportService/reportName</env-entry-name>
+			<env-entry-type>java.lang.String</env-entry-type>
+			<env-entry-value>Adjustments Report</env-entry-value>
+		</env-entry>
+	</session>
+	<session>
+		<ejb-name>ChangeHistoryReportService</ejb-name>
+		<local-bean></local-bean>
+		<ejb-class>gov.opm.scrd.services.impl.reporting.ChangeHistoryReportService</ejb-class>
+		<env-entry>
+			<env-entry-name>gov.opm.scrd.services.impl.BaseReportService/reportName</env-entry-name>
+			<env-entry-type>java.lang.String</env-entry-type>
+			<env-entry-value>Service Credit Change History Report</env-entry-value>
+		</env-entry>
+	</session>
+	<session>
+		<ejb-name>GeneralLedgerReportService</ejb-name>
+		<local-bean></local-bean>
+		<ejb-class>gov.opm.scrd.services.impl.reporting.GeneralLedgerReportService</ejb-class>
+		<env-entry>
+			<env-entry-name>gov.opm.scrd.services.impl.BaseReportService/reportName</env-entry-name>
+			<env-entry-type>java.lang.String</env-entry-type>
+			<env-entry-value>SYBAC Payments to General Ledger Report</env-entry-value>
+		</env-entry>
+	</session>
+	<session>
+		<ejb-name>TransactionRegisterNewReceiptsReportService</ejb-name>
+		<local-bean></local-bean>
+		<ejb-class>gov.opm.scrd.services.impl.reporting.TransactionRegisterNewReceiptsReportService</ejb-class>
+		<env-entry>
+			<env-entry-name>gov.opm.scrd.services.impl.BaseReportService/reportName</env-entry-name>
+			<env-entry-type>java.lang.String</env-entry-type>
+			<env-entry-value>SYBAC Transaction Register</env-entry-value>
+		</env-entry>
+	</session>
+	<session>
+		<ejb-name>SuspenseResolutionReportService</ejb-name>
+		<local-bean></local-bean>
+		<ejb-class>gov.opm.scrd.services.impl.reporting.SuspenseResolutionReportService</ejb-class>
+		<env-entry>
+			<env-entry-name>gov.opm.scrd.services.impl.BaseReportService/reportName</env-entry-name>
+			<env-entry-type>java.lang.String</env-entry-type>
+			<env-entry-value>Suspense Resolution Report</env-entry-value>
+		</env-entry>
+	</session>
+	<session>
+		<ejb-name>AccountStatisticsReportService</ejb-name>
+		<local-bean></local-bean>
+		<ejb-class>gov.opm.scrd.services.impl.reporting.AccountStatisticsReportService</ejb-class>
+		<env-entry>
+			<env-entry-name>gov.opm.scrd.services.impl.BaseReportService/reportName</env-entry-name>
+			<env-entry-type>java.lang.String</env-entry-type>
+			<env-entry-value>Account Statistics</env-entry-value>
+		</env-entry>
+	</session>
+	<session>
+		<ejb-name>AccountSummaryReportService</ejb-name>
+		<local-bean></local-bean>
+		<ejb-class>gov.opm.scrd.services.impl.reporting.AccountSummaryReportService</ejb-class>
+		<env-entry>
+			<env-entry-name>gov.opm.scrd.services.impl.BaseReportService/reportName</env-entry-name>
+			<env-entry-type>java.lang.String</env-entry-type>
+			<env-entry-value>Accounting Summary Report</env-entry-value>
+		</env-entry>
+	</session>
+	<session>
+		<ejb-name>UserPermissionsRolesReportService</ejb-name>
+		<local-bean></local-bean>
+		<ejb-class>gov.opm.scrd.services.impl.reporting.UserPermissionsRolesReportService</ejb-class>
+		<env-entry>
+			<env-entry-name>gov.opm.scrd.services.impl.BaseReportService/reportName</env-entry-name>
+			<env-entry-type>java.lang.String</env-entry-type>
+			<env-entry-value>User Permission Roles in Service Credit</env-entry-value>
+		</env-entry>
+	</session>    
+	<session>
+		<ejb-name>UserRolePermissionsReportService</ejb-name>
+		<local-bean></local-bean>
+		<ejb-class>gov.opm.scrd.services.impl.reporting.UserRolePermissionsReportService</ejb-class>
+		<env-entry>
+			<env-entry-name>gov.opm.scrd.services.impl.BaseReportService/reportName</env-entry-name>
+			<env-entry-type>java.lang.String</env-entry-type>
+			<env-entry-value>Service Credit Role Permissions</env-entry-value>
+		</env-entry>
+	</session>
+
+        
+    </enterprise-beans>
+</ejb-jar>

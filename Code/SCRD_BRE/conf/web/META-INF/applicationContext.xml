@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Copyright 2014 OPM.gov
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jee="http://www.springframework.org/schema/jee" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+        http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.2.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd">
+
+  <context:annotation-config />
+
+  <bean id="urlPathHelper" class="org.springframework.web.util.UrlPathHelper"></bean>
+
+  <bean id="ajaxExceptionResolver"
+          class="gov.opm.scrd.web.exceptionresolvers.AJAXExceptionResolver">
+  </bean>
+    
+  <util:list id="widgetIds" value-type="java.lang.String" list-class="java.util.ArrayList">
+    <value>VIEW_ACCOUNT</value>
+        <value>CREATE_NEW_ACCOUNT</value>
+        <value>WORK_QUEUE</value>
+        <value>REPORTS</value>
+        <value>SUSPENSE</value>
+        <value>APPROVAL</value>
+        <value>PAYMENTS</value>
+        <value>TOOLS</value>
+        <value>ADMIN</value>
+        <value>NOTIFICATION_LOG</value>
+        <value>HELP</value>
+  </util:list>
+	
+  <bean id="paymentReversalReasonLookupName" class="java.lang.String">
+    <constructor-arg value="PaymentReversalReason"/>
+  </bean>
+  <bean id="suffixLookupName" class="java.lang.String">
+    <constructor-arg value="Suffix"/>
+  </bean>
+  <bean id="applicationDesignationLookupName" class="java.lang.String">
+    <constructor-arg value="ApplicationDesignation"/>
+  </bean>
+  <bean id="stateLookupName" class="java.lang.String">
+    <constructor-arg value="State"/>
+  </bean>
+  <bean id="paymentStatusLookupName" class="java.lang.String">
+    <constructor-arg value="PaymentStatus"/>
+  </bean>
+  <bean id="serviceTypeLookupName" class="java.lang.String">
+    <constructor-arg value="ServiceType"/>
+  </bean>
+  <bean id="formTypeLookupName" class="java.lang.String">
+    <constructor-arg value="FormType"/>
+  </bean>
+  <bean id="claimOfficerLookupName" class="java.lang.String">
+    <constructor-arg value="ClaimOfficer"/>
+  </bean>
+  <bean id="payTypeLookupName" class="java.lang.String">
+    <constructor-arg value="PayType"/>
+  </bean>
+  <bean id="accountStatusLookupName" class="java.lang.String">
+    <constructor-arg value="AccountStatus"/>
+  </bean>
+  <bean id="roleLookupName" class="java.lang.String">
+    <constructor-arg value="Role"/>
+  </bean>
+  <bean id="retirementTypeLookupName" class="java.lang.String">
+    <constructor-arg value="RetirementType"/>
+  </bean>
+  <bean id="appointmentTypeLookupName" class="java.lang.String">
+    <constructor-arg value="AppointmentType"/>
+  </bean>
+  <bean id="transferTypeLookupName" class="java.lang.String">
+    <constructor-arg value="TransferType"/>
+  </bean>
+  <bean id="periodTypeLookupName" class="java.lang.String">
+    <constructor-arg value="PeriodType"/>
+  </bean>
+  <bean id="userStatusLookupName" class="java.lang.String">
+    <constructor-arg value="UserStatus"/>
+  </bean>
+  <bean id="countryLookupName" class="java.lang.String">
+    <constructor-arg value="Country"/>
+  </bean>
+  <bean id="paymentReleaseTypeLookupName" class="java.lang.String">
+    <constructor-arg value="PaymentReleaseType"/>
+  </bean>
+  <bean id="paymentApplianceLookupName" class="java.lang.String">
+        <constructor-arg value="PaymentAppliance" />
+    </bean>
+  
+  <bean id="userSessionKey" class="java.lang.String">
+    <constructor-arg value="opmUserSessionKey"/>
+  </bean>
+  <bean id="searchHistorySessionKey" class="java.lang.String">
+    <constructor-arg value="opmSearchHistorySessionKey"/>
+  </bean>
+  
+  <bean id="dateFormat" class="java.text.SimpleDateFormat">
+    <constructor-arg type="java.lang.String" value="MM/dd/yyyy" />
+  </bean>
+  
+  <bean id="currentSelectedAccountIdKey" class="java.lang.String">
+        <constructor-arg value="accountId" />
+  </bean>
+
+
+  <jee:jndi-lookup id="accountBalanceReportService" jndi-name="java:app/opm-scrd-ejb/AccountBalanceReportService!gov.opm.scrd.services.impl.reporting.AccountBalanceReportService"/>
+  <jee:jndi-lookup id="userAuditTrailReportService" jndi-name="java:app/opm-scrd-ejb/UserAuditTrailReportService!gov.opm.scrd.services.impl.reporting.UserAuditTrailReportService"/>
+  <jee:jndi-lookup id="accountTypeTotalsReportService" jndi-name="java:app/opm-scrd-ejb/AccountTypeTotalsReportService!gov.opm.scrd.services.impl.reporting.AccountTypeTotalsReportService"/>
+  <jee:jndi-lookup id="activeCreditBalancesReportService" jndi-name="java:app/opm-scrd-ejb/ActiveCreditBalancesReportService!gov.opm.scrd.services.impl.reporting.ActiveCreditBalancesReportService"/>
+  <jee:jndi-lookup id="balancedScorecardAccountReportService" jndi-name="java:app/opm-scrd-ejb/BalancedScorecardAccountReportService!gov.opm.scrd.services.impl.reporting.BalancedScorecardAccountReportService"/>
+  <jee:jndi-lookup id="balancedLockboxReportService" jndi-name="java:app/opm-scrd-ejb/BalancedLockboxReportService!gov.opm.scrd.services.impl.reporting.BalancedLockboxReportService"/>
+  <jee:jndi-lookup id="balancedScorecardPaymentReportService" jndi-name="java:app/opm-scrd-ejb/BalancedScorecardPaymentReportService!gov.opm.scrd.services.impl.reporting.BalancedScorecardPaymentReportService"/>
+  <jee:jndi-lookup id="calculationAuditTrailReportService" jndi-name="java:app/opm-scrd-ejb/CalculationAuditTrailReportService!gov.opm.scrd.services.impl.reporting.CalculationAuditTrailReportService"/>
+  <jee:jndi-lookup id="currentSuspenseReportService" jndi-name="java:app/opm-scrd-ejb/CurrentSuspenseReportService!gov.opm.scrd.services.impl.reporting.CurrentSuspenseReportService"/>
+  <jee:jndi-lookup id="dailyCashflowReportService" jndi-name="java:app/opm-scrd-ejb/DailyCashflowReportService!gov.opm.scrd.services.impl.reporting.DailyCashflowReportService"/>
+  <jee:jndi-lookup id="dailyReconciliationReportService" jndi-name="java:app/opm-scrd-ejb/DailyReconciliationReportService!gov.opm.scrd.services.impl.reporting.DailyReconciliationReportService"/>
+  <jee:jndi-lookup id="dailySuspenseReportService" jndi-name="java:app/opm-scrd-ejb/DailySuspenseReportService!gov.opm.scrd.services.impl.reporting.DailySuspenseReportService"/>
+  <jee:jndi-lookup id="deductionRatesReportService" jndi-name="java:app/opm-scrd-ejb/DeductionRatesReportService!gov.opm.scrd.services.impl.reporting.DeductionRatesReportService"/>
+  
+  <jee:jndi-lookup id="lockboxImportErrorsReportService" jndi-name="java:app/opm-scrd-ejb/LockboxImportErrorsReportService!gov.opm.scrd.services.impl.reporting.LockboxImportErrorsReportService"/>
+	<jee:jndi-lookup id="lockboxFileImportReportService" jndi-name="java:app/opm-scrd-ejb/LockboxFileImportReportService!gov.opm.scrd.services.impl.reporting.LockboxFileImportReportService"/>
+	<jee:jndi-lookup id="manualPaymentReportService" jndi-name="java:app/opm-scrd-ejb/ManualPaymentReportService!gov.opm.scrd.services.impl.reporting.ManualPaymentReportService"/>
+	<jee:jndi-lookup id="monthlySuspenseListReportService" jndi-name="java:app/opm-scrd-ejb/MonthlySuspenseListReportService!gov.opm.scrd.services.impl.reporting.MonthlySuspenseListReportService"/>
+	<jee:jndi-lookup id="paymentHistoryReportService" jndi-name="java:app/opm-scrd-ejb/PaymentHistoryReportService!gov.opm.scrd.services.impl.reporting.PaymentHistoryReportService"/>
+	<jee:jndi-lookup id="paymentByTypeRangeReportService" jndi-name="java:app/opm-scrd-ejb/PaymentByTypeRangeReportService!gov.opm.scrd.services.impl.reporting.PaymentByTypeRangeReportService"/>
+	<jee:jndi-lookup id="paymentPendingApprovalReportService" jndi-name="java:app/opm-scrd-ejb/PaymentPendingApprovalReportService!gov.opm.scrd.services.impl.reporting.PaymentPendingApprovalReportService"/>
+	<jee:jndi-lookup id="refundSectionAccountAssignmentsReportService" jndi-name="java:app/opm-scrd-ejb/RefundSectionAccountAssignmentsReportService!gov.opm.scrd.services.impl.reporting.RefundSectionAccountAssignmentsReportService"/>
+	<jee:jndi-lookup id="resolvedSuspenseHistoryReportService" jndi-name="java:app/opm-scrd-ejb/ResolvedSuspenseHistoryReportService!gov.opm.scrd.services.impl.reporting.ResolvedSuspenseHistoryReportService"/>
+	<jee:jndi-lookup id="closedAccountReportService" jndi-name="java:app/opm-scrd-ejb/ClosedAccountReportService!gov.opm.scrd.services.impl.reporting.ClosedAccountReportService"/>
+	<jee:jndi-lookup id="totalPaymentSummaryReportService" jndi-name="java:app/opm-scrd-ejb/TotalPaymentSummaryReportService!gov.opm.scrd.services.impl.reporting.TotalPaymentSummaryReportService"/>
+	<jee:jndi-lookup id="monthlyAdjustmentReportService" jndi-name="java:app/opm-scrd-ejb/MonthlyAdjustmentReportService!gov.opm.scrd.services.impl.reporting.MonthlyAdjustmentReportService"/>
+	<jee:jndi-lookup id="changeHistoryReportService" jndi-name="java:app/opm-scrd-ejb/ChangeHistoryReportService!gov.opm.scrd.services.impl.reporting.ChangeHistoryReportService"/>
+	<jee:jndi-lookup id="generalLedgerReportService" jndi-name="java:app/opm-scrd-ejb/GeneralLedgerReportService!gov.opm.scrd.services.impl.reporting.GeneralLedgerReportService"/>
+	<jee:jndi-lookup id="transactionRegisterNewReceiptsReportService" jndi-name="java:app/opm-scrd-ejb/TransactionRegisterNewReceiptsReportService!gov.opm.scrd.services.impl.reporting.TransactionRegisterNewReceiptsReportService"/>
+	<jee:jndi-lookup id="suspenseResolutionReportService" jndi-name="java:app/opm-scrd-ejb/SuspenseResolutionReportService!gov.opm.scrd.services.impl.reporting.SuspenseResolutionReportService"/>
+	<jee:jndi-lookup id="accountStatisticsReportService" jndi-name="java:app/opm-scrd-ejb/AccountStatisticsReportService!gov.opm.scrd.services.impl.reporting.AccountStatisticsReportService"/>
+	<jee:jndi-lookup id="accountSummaryReportService" jndi-name="java:app/opm-scrd-ejb/AccountSummaryReportService!gov.opm.scrd.services.impl.reporting.AccountSummaryReportService"/>
+	<jee:jndi-lookup id="userRolePermissionsReportService" jndi-name="java:app/opm-scrd-ejb/UserRolePermissionsReportService!gov.opm.scrd.services.impl.reporting.UserRolePermissionsReportService"/>
+	<jee:jndi-lookup id="userPermissionsRolesReportService" jndi-name="java:app/opm-scrd-ejb/UserPermissionsRolesReportService!gov.opm.scrd.services.impl.reporting.UserPermissionsRolesReportService"/>
+
+
+	
+  	<util:map id="reportServices" map-class="java.util.HashMap">
+  		<entry key="AccountsBalanceHistory">
+  			<ref bean="accountBalanceReportService"></ref>
+  		</entry>
+  		<entry key="AccountNotesByUser">
+  			<ref bean="userAuditTrailReportService"></ref>
+  		</entry>
+  		<entry key="AccountTypeTotals">
+  			<ref bean="accountTypeTotalsReportService"></ref>
+  		</entry>
+  		<entry key="ActiveCreditBalancesOver25Dollars">
+  			<ref bean="activeCreditBalancesReportService"></ref>
+  		</entry>
+  		<entry key="BalancedScorecard">
+  			<ref bean="balancedScorecardAccountReportService"></ref>
+  		</entry>
+  		<entry key="BalancedLockboxScorecard">
+  			<ref bean="balancedLockboxReportService"></ref>
+  		</entry>
+  		<entry key="BalancedScorecardPayment">
+  			<ref bean="balancedScorecardPaymentReportService"></ref>
+  		</entry>
+  		<entry key="CalculationAuditTrail">
+  			<ref bean="calculationAuditTrailReportService"></ref>
+  		</entry>
+  		<entry key="CurrentSuspense">
+  			<ref bean="currentSuspenseReportService"></ref>
+  		</entry>
+  		<entry key="DailyCashflowReport">
+  			<ref bean="dailyCashflowReportService"></ref>
+  		</entry>
+  		<entry key="DailyReconciliationReport">
+  			<ref bean="dailyReconciliationReportService"></ref>
+  		</entry>
+  		<entry key="DailySuspenseReport">
+  			<ref bean="dailySuspenseReportService"></ref>
+  		</entry>
+  		<entry key="DeductionRates">
+  			<ref bean="deductionRatesReportService"></ref>
+  		</entry>
+
+	
+		<entry key="LockBoxImportErrors">
+			<ref bean="lockboxImportErrorsReportService"></ref>
+		</entry>
+		<entry key="LockboxBankFileImportTotals">
+			<ref bean="lockboxFileImportReportService"></ref>
+		</entry>
+		<entry key="ManualPayments">
+			<ref bean="manualPaymentReportService"></ref>
+		</entry>
+		<entry key="MonthlySuspenseList">
+			<ref bean="monthlySuspenseListReportService"></ref>
+		</entry>
+		<entry key="PaymentHistory">
+			<ref bean="paymentHistoryReportService"></ref>
+		</entry>
+		<entry key="PaymentsbyTypeandDateRange">
+			<ref bean="paymentByTypeRangeReportService"></ref>
+		</entry>
+		<entry key="PaymentsPendingApproval">
+			<ref bean="paymentPendingApprovalReportService"></ref>
+		</entry>
+		<entry key="RefundSectionAccountAssignments">
+			<ref bean="refundSectionAccountAssignmentsReportService"></ref>
+		</entry>
+		<entry key="ResolvedSuspenseHistory">
+			<ref bean="resolvedSuspenseHistoryReportService"></ref>
+		</entry>
+		<entry key="ClosedAccountReport">
+			<ref bean="closedAccountReportService"></ref>
+		</entry>
+		<entry key="SummaryofTotalPayments">
+			<ref bean="totalPaymentSummaryReportService"></ref>
+		</entry>
+		<entry key="MonthlyAdjustmentsReports">
+			<ref bean="monthlyAdjustmentReportService"></ref>
+		</entry>
+		<entry key="ChangeHistoryReport">
+			<ref bean="changeHistoryReportService"></ref>
+		</entry>
+		<entry key="GLReportDailyDetailed">
+			<ref bean="generalLedgerReportService"></ref>
+		</entry>
+		<entry key="GLReportDailyReport">
+			<ref bean="generalLedgerReportService"></ref>
+		</entry>
+		<entry key="ReceiptSuspenseItemsReport">
+			<ref bean="transactionRegisterNewReceiptsReportService"></ref>
+		</entry>
+		<entry key="SuspenseResolutionReport">
+			<ref bean="suspenseResolutionReportService"></ref>
+		</entry>
+		<entry key="AccountStatisticsReport">
+			<ref bean="accountStatisticsReportService"></ref>
+		</entry>
+		<entry key="AccountingSummaryReport">
+			<ref bean="accountSummaryReportService"></ref>
+		</entry>
+		<entry key="UserAndRoleList">
+			<ref bean="userPermissionsRolesReportService"></ref>
+		</entry>
+		<entry key="UserRolePermissions">
+			<ref bean="userRolePermissionsReportService"></ref>
+		</entry>
+
+  	</util:map>
+  
+  	<util:map id="reportDownloadFilenames" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.String">
+  		<entry key="AccountsBalanceHistory" value="AccountsBalanceHistory" />
+  		<entry key="AccountNotesByUser" value="AccountNotesByUser" />
+  		<entry key="AccountTypeTotals" value="AccountTypeTotals" />
+  		<entry key="ActiveCreditBalancesOver25Dollars" value="ActiveCreditBalancesOver25Dollars" />
+  		<entry key="BalancedScorecard" value="BalancedScorecard" />
+  		<entry key="BalancedLockboxScorecard" value="BalancedLockboxScorecard" />
+  		<entry key="BalancedScorecardPayment" value="BalancedScorecardPayment" />
+  		<entry key="CalculationAuditTrail" value="CalculationAuditTrail" />
+  		<entry key="CurrentSuspense" value="CurrentSuspense" />
+  		<entry key="DailyCashflowReport" value="DailyCashflowReport" />
+  		<entry key="DailyReconciliationReport" value="DailyReconciliationReport" />
+  		<entry key="DailySuspenseReport" value="DailySuspenseReport" />
+  		<entry key="DeductionRates" value="DeductionRates" />
+  		
+  		<entry key="LockBoxImportErrors" value="LockBoxImportErrors" />
+  		<entry key="LockboxBankFileImportTotals" value="LockboxBankFileImportTotals" />
+  		<entry key="ManualPayments" value="ManualPayments" />
+  		<entry key="MonthlySuspenseList" value="MonthlySuspenseList" />
+  		<entry key="PaymentHistory" value="PaymentHistory" />
+  		<entry key="PaymentsbyTypeandDateRange" value="PaymentsbyTypeandDateRange" />
+  		<entry key="PaymentsPendingApproval" value="PaymentsPendingApproval" />
+  		<entry key="RefundSectionAccountAssignments" value="RefundSectionAccountAssignments" />
+  		<entry key="ResolvedSuspenseHistory" value="ResolvedSuspenseHistory" />
+  		<entry key="ClosedAccountReport" value="ClosedAccountReport" />
+  		<entry key="SummaryofTotalPayments" value="SummaryofTotalPayments" />
+  		<entry key="MonthlyAdjustmentsReports" value="MonthlyAdjustmentsReports" />
+  		<entry key="ChangeHistoryReport" value="ChangeHistoryReport" />
+  		<entry key="GLReportDailyDetailed" value="GLReportDailyDetailed" />
+  		<entry key="GLReportDailyReport" value="GLReportDailyReport" />
+  		<entry key="ReceiptSuspenseItemsReport" value="ReceiptSuspenseItemsReport" />
+  		<entry key="SuspenseResolutionReport" value="SuspenseResolutionReport" />
+  		<entry key="AccountStatisticsReport" value="AccountStatisticsReport" />
+  		<entry key="AccountingSummaryReport" value="AccountingSummaryReport" />
+  		<entry key="UserAndRoleList" value="UserAndRoleList" />
+  		<entry key="UserRolePermissions" value="UserRolePermissions" />
+  		
+  	</util:map>
+  	
+  	<util:map id="reportContentTypes" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.String">
+  		<entry key="pdf" value="application/pdf" />
+  		<entry key="rtf" value="application/rtf" />
+  		<entry key="doc" value="application/msword" />
+  	</util:map>
+  	
+  <!-- Use JTA transaction manager. This will delegate to JBoss server's JTA provider. -->
+  <bean id="transactionManager" class="org.springframework.transaction.jta.JtaTransactionManager" />
+
+  <tx:annotation-driven />
+</beans>

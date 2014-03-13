@@ -40,6 +40,8 @@
                 <user name="user1" password="123456" authorities="ROLE_USER,ROLE_SUPERVISOR" />
                 <user name="user2" password="123456" authorities="ROLE_USER" />
                 <user name="user3" password="123456" authorities="ROLE_USER,ROLE_SUPERVISOR" />
+                <user name="user4" password="123456" authorities="ROLE_USER,ROLE_SUPERVISOR" />
+                <user name="user5" password="123456" authorities="ROLE_USER,ROLE_SUPERVISOR" />
             </user-service>
         </authentication-provider>
     </authentication-manager>

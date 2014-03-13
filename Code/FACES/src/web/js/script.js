@@ -637,7 +637,7 @@ $(document).ready(function() {
                     id: 0,
                     beginDate: Date.parse($(ntds).eq(1).html()),
                     endDate: Date.parse($(ntds).eq(2).html()),
-                    refundDate: Date.parse($(ntds).eq(3).html()),
+                    interestAccrualDate: Date.parse($(ntds).eq(3).html()),
                     retirementType: {
                         id: $(ntds).eq(4).next('input:hidden').val()
                     },
@@ -810,7 +810,7 @@ $(document).ready(function() {
                     startDate: Date.parse($(ntds).eq(1).html()),
                     endDate: Date.parse($(ntds).eq(2).html()),
                     midDate: Date.parse($(ntds).eq(3).html()),
-                    refundDate: Date.parse($(ntds).eq(4).html()),
+                    effectiveDate: Date.parse($(ntds).eq(4).html()),
                     periodType: {
                         id: $(ntds).eq(5).next('input:hidden').val()
                     },
@@ -1914,7 +1914,7 @@ function populateCalculationItem(data, tab) {
         template.find('td').eq(1).html(parseDateToString(this.startDate));
         template.find('td').eq(2).html(parseDateToString(this.endDate));
         template.find('td').eq(3).html(parseDateToString(this.midDate));
-        template.find('td').eq(4).html(parseDateToString(this.refundDate));
+        template.find('td').eq(4).html(parseDateToString(this.effectiveDate));
         template.find('td').eq(5).html(this.periodType.name);
         template.find('td').eq(5).next('input:hidden').val(this.periodType.id);
         template.find('td').eq(6).html(this.deductionAmount);
@@ -2001,7 +2001,7 @@ function addNewVersion(button, copy) {
                     rowTemplate.prop('id', 'cal-' + this.id);
                     rowTemplate.children('td').eq(1).html(parseDateToString(new Date(this.beginDate)));
                     rowTemplate.children('td').eq(2).html(parseDateToString(new Date(this.endDate)));
-                    rowTemplate.children('td').eq(3).html(parseDateToString(new Date(this.refundDate)));
+                    rowTemplate.children('td').eq(3).html(parseDateToString(new Date(this.interestAccrualDate)));
                     rowTemplate.children('td').eq(4).html(this.retirementType.name);
                     rowTemplate.children('input:hidden').eq(0).val(this.retirementType.id);
                     rowTemplate.children('td').eq(5).html(this.periodType.name);
@@ -2093,7 +2093,7 @@ function populateCalculationVersion(account) {
                 rowTemplate.prop('id', 'cal-' + this.id);
                 rowTemplate.children('td').eq(1).html(parseDateToString(new Date(this.beginDate)));
                 rowTemplate.children('td').eq(2).html(parseDateToString(new Date(this.endDate)));
-                rowTemplate.children('td').eq(3).html(parseDateToString(new Date(this.refundDate)));
+                rowTemplate.children('td').eq(3).html(parseDateToString(new Date(this.interestAccrualDate)));
                 rowTemplate.children('td').eq(4).html(this.retirementType.name);
                 rowTemplate.children('input:hidden').eq(0).val(this.retirementType.id);
                 rowTemplate.children('td').eq(5).html(this.periodType.name);
@@ -2142,7 +2142,7 @@ function populateCalculationVersion(account) {
                     rowTemplate.prop('id', 'cal-' + this.id);
                     rowTemplate.children('td').eq(1).html(parseDateToString(new Date(this.beginDate)));
                     rowTemplate.children('td').eq(2).html(parseDateToString(new Date(this.endDate)));
-                    rowTemplate.children('td').eq(3).html(parseDateToString(new Date(this.refundDate)));
+                    rowTemplate.children('td').eq(3).html(parseDateToString(new Date(this.interestAccrualDate)));
                     rowTemplate.children('td').eq(4).html(this.retirementType.name);
                     rowTemplate.children('input:hidden').eq(0).val(this.retirementType.id);
                     rowTemplate.children('td').eq(5).html(this.periodType.name);

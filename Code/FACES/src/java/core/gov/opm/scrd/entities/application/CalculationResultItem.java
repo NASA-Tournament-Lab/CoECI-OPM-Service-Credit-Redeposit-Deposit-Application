@@ -30,10 +30,6 @@ import java.util.Date;
  * </p>
  *
  * <p>
- * <strong>Thread Safety: </strong> This class is mutable and not thread safe.
- * </p>
- *
- * <p>
  * <em>Changes in 1.1 (OPM - Release I Assembly 1.0):</em>
  * <ul>
  * <li>add field retirementType, serviceCategeory</li>
@@ -41,8 +37,12 @@ import java.util.Date;
  * </ul>
  * </p>
  *
+ * <p>
+ * <strong>Thread Safety: </strong> This class is mutable and not thread safe.
+ * </p>
+ *
  * @author faeton, sparemax, bannie2492
- * @version 1.1
+ * @version 1.0
  */
 public class CalculationResultItem extends IdentifiableEntity {
     /**
@@ -72,7 +72,7 @@ public class CalculationResultItem extends IdentifiableEntity {
      * value. It is fully mutable.
      * </p>
      */
-    private Date refundDate;
+    private Date effectiveDate;
     /**
      * <p>
      * Represents the period type of calculation result item. It is managed with a getter and setter. It may have any
@@ -190,22 +190,22 @@ public class CalculationResultItem extends IdentifiableEntity {
     }
 
     /**
-     * Gets the refund date of calculation result item.
+     * Gets the effective date of calculation result item.
      *
-     * @return the refund date of calculation result item.
+     * @return the effective date of calculation result item.
      */
-    public Date getRefundDate() {
-        return refundDate;
+    public Date getEffectiveDate() {
+        return effectiveDate;
     }
 
     /**
-     * Sets the refund date of calculation result item.
+     * Sets the effective date of calculation result item.
      *
-     * @param refundDate
-     *            the refund date of calculation result item.
+     * @param effectiveDate
+     *            the effective date of calculation result item.
      */
-    public void setRefundDate(Date refundDate) {
-        this.refundDate = refundDate;
+    public void setEffectiveDate(Date effectiveDate) {
+        this.effectiveDate = effectiveDate;
     }
 
     /**

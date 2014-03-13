@@ -698,11 +698,11 @@ public class PaymentUnitTests {
      */
     @Test
     public void test_getTransactionKey() {
-        long value = 1L;
+        String value = "KEY";
         instance.setTransactionKey(value);
 
         assertEquals("'getTransactionKey' should be correct.",
-            value, (long) instance.getTransactionKey());
+            value, instance.getTransactionKey());
     }
 
     /**
@@ -713,7 +713,7 @@ public class PaymentUnitTests {
      */
     @Test
     public void test_setTransactionKey() {
-        long value = 1L;
+        String value = "KEY";
         instance.setTransactionKey(value);
 
         assertEquals("'setTransactionKey' should be correct.",

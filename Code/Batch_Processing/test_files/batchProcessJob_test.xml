@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Copyright 2014 OPM.gov
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:p="http://www.springframework.org/schema/p" xmlns:util="http://www.springframework.org/schema/util"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+
+    <import resource="billProcessor_test.xml"/>
+
+    <bean id="cache"
+        class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetObject" ref="entityManagerFactory" />
+        <property name="targetMethod" value="getCache" />
+    </bean>
+
+    <bean id="securityService" class="gov.opm.scrd.services.impl.SecurityServiceImpl">
+        <property name="entityManager" ref="entityManager"></property>
+        <property name="logger" ref="logger"></property>
+        <property name="cache" ref="cache"></property>
+    </bean>
+
+    <!-- The velocity engine, with class-path resource loader -->
+    <bean id="velocityEngine"
+        class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
+        <property name="velocityProperties">
+            <value>
+                resource.loader=class
+                class.resource.loader.class=org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+            </value>
+        </property>
+    </bean>
+
+    <!-- The mail sender -->
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="localhost" />
+        <property name="port" value="2983" />
+        <property name="username" value="user" />
+        <property name="password" value="pass" />
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.transport.protocol">smtp</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="retriesNumber" class="java.lang.Integer">
+        <constructor-arg value="0" />
+    </bean>
+
+    <bean id="retryInterval" class="java.lang.Integer">
+        <constructor-arg value="60000" />
+    </bean>
+
+    <bean id="ageToCleanInDays" class="java.lang.Integer">
+        <constructor-arg value="30" />
+    </bean>
+
+    <bean id="generalMailRecipient" class="java.lang.String">
+        <constructor-arg value="general@opm.gov" />
+    </bean>
+
+    <bean id="billMailRecipient" class="java.lang.String">
+        <constructor-arg value="bill@opm.gov" />
+    </bean>
+
+    <bean id="fileImportMailTemplate" class="java.lang.String">
+        <constructor-arg value="fileImportMailTemplate.vm" />
+    </bean>
+
+    <bean id="inputDirectoryPath" class="java.lang.String">
+        <constructor-arg value="test_files/lockbox_files" />
+    </bean>
+
+    <bean id="wildCardInput" class="java.lang.String">
+        <constructor-arg value="lockbox*\.txt" />
+    </bean>
+
+    <bean id="directoryToClean" class="java.lang.String">
+        <constructor-arg value="test_files/old_files" />
+    </bean>
+
+    <bean id="wildCardToClean" class="java.lang.String">
+        <constructor-arg value="old?\.txt" />
+    </bean>
+
+    <bean id="glDirectory" class="java.lang.String">
+        <constructor-arg value="test_files/gl_files" />
+    </bean>
+
+    <bean id="databaseString" class="java.lang.String">
+        <constructor-arg value="dbName" />
+    </bean>
+
+    <bean id="datasourceString" class="java.lang.String">
+        <constructor-arg value="dbHostName" />
+    </bean>
+
+    <bean id="workstationId" class="java.lang.String">
+        <constructor-arg value="batchProcessHostName" />
+    </bean>
+
+    <bean id="batchProcessingJob"
+        class="gov.opm.scrd.batchprocessing.jobs.BatchProcessingJob">
+    </bean>
+
+    <bean id="alwaysWorkDayBatchProcessingJob"
+        class="gov.opm.scrd.batchprocessing.jobs.AlwaysWorkDayBatchProcessingJob">
+    </bean>
+
+    <bean id="alwaysHolidayBatchProcessingJob"
+        class="gov.opm.scrd.batchprocessing.jobs.AlwaysHolidayBatchProcessingJob">
+    </bean>
+<!--
+    <bean id="jobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="batchProcessingJob" />
+        <property name="targetMethod" value="execute" />
+        <property name="concurrent" value="false" />
+    </bean>
+
+    <bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail" ref="exampleJob" />
+        run every night at 8 PM
+        <property name="cronExpression" value="0 0 20 * * ?" />
+    </bean>
+
+    <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="triggers">
+            <list>
+                <ref bean="cronTrigger" />
+            </list>
+        </property>
+    </bean> -->
+
+</beans>

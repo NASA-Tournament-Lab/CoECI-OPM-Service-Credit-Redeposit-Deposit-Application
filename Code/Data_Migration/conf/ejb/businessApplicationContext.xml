@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Copyright 2014 OPM.gov
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jee="http://www.springframework.org/schema/jee" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:drools="http://drools.org/schema/drools-spring"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+        http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+    http://drools.org/schema/drools-spring
+    http://anonsvn.jboss.org/repos/labs/labs/jbossrules/trunk/drools-container/drools-spring/src/main/resources/org/drools/container/spring/drools-spring-1.0.0.xsd">
+
+  <bean id="logger" class="org.jboss.logging.Logger" factory-method="getLogger">
+    <constructor-arg type="java.lang.String" value="@loggerName@" />
+  </bean>
+
+  <bean id="supervisorRoleName" class="java.lang.String">
+    <constructor-arg value="@supervisorRoleName@" />
+  </bean>
+
+  <bean id="adminRoleName" class="java.lang.String">
+    <constructor-arg value="@adminRoleName@" />
+  </bean>
+
+  <bean id="defaultPreferenceId" class="java.lang.Long">
+    <constructor-arg value="@defaultPreferenceId@" />
+  </bean>
+
+  <bean id="defaultDataId" class="java.lang.Long">
+    <constructor-arg value="@defaultReportGenerationDataId@" />
+  </bean>
+
+  <bean id="cache"
+          class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+    <property name="targetObject" ref="entityManagerFactory" />
+    <property name="targetMethod" value="getCache" />
+  </bean>
+
+  <bean id="pendingPaymentStatusIds" class="java.lang.String">
+    <constructor-arg value="@pendingPaymentStatusIds@" />
+  </bean>
+
+  <bean id="approvedPaymentStatus" class="gov.opm.scrd.entities.lookup.PaymentStatus">
+    <property name="id" value="@approvedPaymentStatusId@" />
+  </bean>
+
+  <bean id="disapprovedPaymentStatus" class="gov.opm.scrd.entities.lookup.PaymentStatus">
+    <property name="id" value="@disapprovedPaymentStatusId@" />
+  </bean>
+
+  <bean id="postedPendingApprovalStatus" class="gov.opm.scrd.entities.lookup.PaymentStatus">
+    <property name="id" value="@postedPendingApprovalStatus.id@" />
+    <property name="name" value="@postedPendingApprovalStatus.name@" />
+  </bean>
+  
+  <bean id="suspendedStatus" class="gov.opm.scrd.entities.lookup.PaymentStatus">
+        <property name="id" value="@suspendedStatus.id@" />
+        <property name="name" value="@suspendedStatus.name@" />
+    </bean>
+
+  <bean id="redepositPeriodType" class="gov.opm.scrd.entities.lookup.PeriodType">
+    <property name="id" value="@redepositPeriodType.id@" />
+    <property name="name" value="@redepositPeriodType.name@" />
+  </bean>
+  <bean id="dedepositPeriodType" class="gov.opm.scrd.entities.lookup.PeriodType">
+    <property name="id" value="@dedepositPeriodType.id@" />
+    <property name="name" value="@dedepositPeriodType.name@" />
+  </bean>
+  <bean id="csrsRetirementType" class="gov.opm.scrd.entities.lookup.RetirementType">
+    <property name="id" value="@csrsRetirementType.id@" />
+    <property name="name" value="@csrsRetirementType.name@" />
+  </bean>
+  <bean id="dateFormat" class="java.text.SimpleDateFormat">
+    <constructor-arg type="java.lang.String" value="MM/dd/yyyy HH:mm:ss SSS" />
+  </bean>
+  <bean id="depositTypeChangeDate"
+          class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+    <property name="targetObject" ref="dateFormat" />
+    <property name="targetMethod" value="parse" />
+    <property name="arguments">
+      <list>
+        <value>10/01/1982 00:00:00 001</value>
+      </list>
+    </property>
+  </bean>
+
+  <bean id="successCalculationStatus" class="gov.opm.scrd.entities.lookup.CalculationStatus">
+    <property name="id" value="@successCalculationStatus.id@" />
+    <property name="name" value="@successCalculationStatus.name@" />
+  </bean>
+
+
+        <!-- InterestCalculationRuleService -->
+        <bean id="interestCalculationRuleService" class="gov.opm.scrd.services.impl.InterestCalculationRuleServiceImpl">
+            <property name="knowledgeLogFileName" value="@log_dir@/Interest" />
+            <property name="csrsInterestTemplate" ref="csrsInterestTemplate" />
+            <property name="csrsPeaceCorpsInterestTemplate" ref="csrsPeaceCorpsInterestTemplate" />
+            <property name="csrsRedepositInterestTemplate" ref="csrsRedepositInterestTemplate" />
+            <property name="fersInterestTemplate" ref="fersInterestTemplate" />
+            <property name="fersPeaceCorpsInterestTemplate" ref="fersPeaceCorpsInterestTemplate" />
+            <property name="fersRedepositInterestTemplate" ref="fersRedepositInterestTemplate" />
+        </bean>
+        <bean id="csrsInterestTemplate" class="gov.opm.scrd.services.impl.DecisionTableTemplate">
+            <property name="templateFile" value="@opm.drools.rules.directory@/csrs_interest_template.xls" />
+            <property name="decisionTableFile" value="@opm.drools.rules.directory@/csrs_interest.xls" />
+            <property name="startCellRow" value="29" />
+            <property name="startCellColumn" value="2" />
+        </bean>
+        <bean id="csrsPeaceCorpsInterestTemplate" class="gov.opm.scrd.services.impl.DecisionTableTemplate">
+            <property name="templateFile" value="@opm.drools.rules.directory@/csrs_peacecorps_interest_template.xls" />
+            <property name="decisionTableFile" value="@opm.drools.rules.directory@/csrs_peacecorps_interest.xls" />
+            <property name="startCellRow" value="14" />
+            <property name="startCellColumn" value="2" />
+        </bean>
+        <bean id="csrsRedepositInterestTemplate" class="gov.opm.scrd.services.impl.DecisionTableTemplate">
+            <property name="templateFile" value="@opm.drools.rules.directory@/csrs_redeposit_interest_template.xls" />
+            <property name="decisionTableFile" value="@opm.drools.rules.directory@/csrs_redeposit_interest.xls" />
+            <property name="startCellRow" value="29" />
+            <property name="startCellColumn" value="2" />
+        </bean>
+        <bean id="fersInterestTemplate" class="gov.opm.scrd.services.impl.DecisionTableTemplate">
+            <property name="templateFile" value="@opm.drools.rules.directory@/fers_interest_template.xls" />
+            <property name="decisionTableFile" value="@opm.drools.rules.directory@/fers_interest.xls" />
+            <property name="startCellRow" value="20" />
+            <property name="startCellColumn" value="2" />
+        </bean>
+        <bean id="fersPeaceCorpsInterestTemplate" class="gov.opm.scrd.services.impl.DecisionTableTemplate">
+            <property name="templateFile" value="@opm.drools.rules.directory@/fers_peacecorps_interest_template.xls" />
+            <property name="decisionTableFile" value="@opm.drools.rules.directory@/fers_peacecorps_interest.xls" />
+            <property name="startCellRow" value="14" />
+            <property name="startCellColumn" value="2" />
+        </bean>
+        <bean id="fersRedepositInterestTemplate" class="gov.opm.scrd.services.impl.DecisionTableTemplate">
+            <property name="templateFile" value="@opm.drools.rules.directory@/fers_redeposit_interest_template.xls" />
+            <property name="decisionTableFile" value="@opm.drools.rules.directory@/fers_redeposit_interest.xls" />
+            <property name="startCellRow" value="27" />
+            <property name="startCellColumn" value="2" />
+        </bean>
+        
+        <!-- DeductionValidationRuleServiceImpl -->
+        <bean id="deductionValidationRuleService" class="gov.opm.scrd.services.impl.DeductionValidationRuleServiceImpl">
+            <property name="knowledgeLogFileName" value="@log_dir@/Deduction" />
+        </bean>
+        
+        <!-- DeductionCalculationRuleServiceImpl -->
+        <bean id="deductionCalculationRuleService" class="gov.opm.scrd.services.impl.DeductionCalculationRuleServiceImpl">
+            <property name="knowledgeLogFileName" value="@log_dir@/Deduction" />
+            <property name="servicePeriodSplitDates">
+                <list>
+                    <value>10-01-1982</value>
+                </list>
+            </property>
+            <property name="deductionTableTemplate" ref="deductionTableTemplate" />
+        </bean>
+        <bean id="deductionTableTemplate" class="gov.opm.scrd.services.impl.DecisionTableTemplate">
+            <property name="templateFile" value="@opm.drools.rules.directory@/deduction_table_template.xls" />
+            <property name="decisionTableFile" value="@opm.drools.rules.directory@/deduction_table.xls" />
+            <property name="startCellRow" value="11" />
+            <property name="startCellColumn" value="2" />
+        </bean>
+        
+        
+        
+        
+        <!-- CustomEditorConfigurer for parsing dates -->
+        <bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
+          <property name="customEditors">
+            <map>
+              <entry key="java.util.Date"> <ref local="customDateEditor" /> 
+              </entry> 
+            </map>
+          </property> 
+        </bean>
+        
+        <!-- CustomDateEditor for parsing dates -->
+        <bean id="customDateEditor" class="org.springframework.beans.propertyeditors.CustomDateEditor">
+            <constructor-arg>
+              <bean class="java.text.SimpleDateFormat">
+                  <constructor-arg value="MM-dd-yyyy" />
+               </bean>
+            </constructor-arg>
+            <constructor-arg value="true" /> 
+        </bean>
+        
+        <!-- Set Drools locale settings -->
+        <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+            <property name="targetClass" value="java.lang.System"/>
+            <property name="targetMethod" value="setProperty"/>
+            <property name="arguments">
+                <list>
+                    <value>drools.defaultlanguage</value>
+                    <value>en</value>
+                </list>
+            </property>
+        </bean>
+        <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+            <property name="targetClass" value="java.lang.System"/>
+            <property name="targetMethod" value="setProperty"/>
+            <property name="arguments">
+                <list>
+                    <value>drools.defaultcountry</value>
+                    <value>US</value>
+                </list>
+            </property>
+        </bean>
+ 
+
+
+ 
+
+      
+        
+      
+        
+  <!-- Lookup EntityManagerFactory from JNDI. See conf/jpa/META-INF/persistence.xml for the JNDI define. -->
+  <jee:jndi-lookup id="entityManagerFactory" jndi-name="java:/EntityManagerFactory"/>
+
+  <context:annotation-config />
+</beans>

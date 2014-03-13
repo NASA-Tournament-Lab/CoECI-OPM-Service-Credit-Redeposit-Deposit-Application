@@ -1,0 +1,151 @@
+/*
+ * Copyright (C) 2013 TopCoder Inc., All Rights Reserved.
+ */
+package gov.opm.scrd.rules
+
+import gov.opm.scrd.entities.application.ServicePeriod;
+
+import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+/**
+ * <p>
+ * This is the DSLR rule resource for deduction validation (validating service periods).
+ * </p>
+ * <p>
+ * <b>Thread Safety:</b>
+ * Thread safety is not an issue for drools rules.
+ * </p>
+ * 
+ * @author albertwang, TCSASSEMBLER
+ * @version 1.0
+ *
+ * @since OPM - Rules Engine - Scenarios Conversion 2 - Deduction Update Assembly
+ */
+
+/**
+ * Represents the expander for the rules
+ */
+expander common_deduction.dsl
+
+/**
+ * Represents the ExtendedServicePeriod that is used for outputting calculation result
+ */
+//global List<ExtendedServicePeriod> extendedServicePeriods;
+ 
+/**
+ * Represents the service period split dates
+ */
+//global List<Date> servicePeriodSplitDates;
+
+/**
+ * Validates if the begin date is set.
+ */
+rule "Require begin date for Service Period"
+    when
+        There is a Service Period that has no begin date
+        // check this to avoid the infinite loop
+        The message "Begin date is required." has not been reported yet
+    then
+        Report error "Begin date is required." on "beginDate"
+end
+
+/**
+ * Validates if the end date is set.
+ */
+rule "Require end date for Service Period"
+    when
+        There is a Service Period that has no end date
+        // check this to avoid the infinite loop
+        The message "End date is required." has not been reported yet
+    then
+        Report error "End date is required." on "endDate"
+end
+
+/**
+ * Validates if the amount is set.
+ */
+rule "Require amount for Service Period"
+    when
+        There is a Service Period that has no amount
+        // check this to avoid the infinite loop
+        The message "Amount is required." has not been reported yet
+    then
+        Report error "Amount is required." on "amount"
+end
+
+/**
+ * Validates if the pay type is set.
+ */
+rule "Require PayType for Service Period"
+    when
+        There is a Service Period that has no payType
+        // check this to avoid the infinite loop
+        The message "PayType is required." has not been reported yet
+    then
+        Report error "PayType is required." on "payType"
+end
+
+/**
+ * Validates if the retirement type is set.
+ */
+rule "Require RetirementType for Service Period"
+    when
+        There is a Service Period that has no retirementType
+        // check this to avoid the infinite loop
+        The message "RetirementType is required." has not been reported yet
+    then
+        
+        Report error "RetirementType is required." on "retirementType"
+end
+
+/**
+ * Validates if the service type is set.
+ */
+rule "Require ServiceType for Service Period"
+    when
+        There is a Service Period that has no serviceType
+        // check this to avoid the infinite loop
+        The message "ServiceType is required." has not been reported yet
+    then
+        Report error "ServiceType is required." on "serviceType"
+end
+
+/**
+ * Validates if the period type is set.
+ */
+rule "Require PeriodType for Service Period"
+    when
+        There is a Service Period that has no periodType
+        // check this to avoid the infinite loop
+        The message "PeriodType is required." has not been reported yet
+    then
+        Report error "PeriodType is required." on "periodType"
+end
+
+
+/**
+ * Validates if the begin date is not later than the end date.
+ */
+rule "Begin date must not be later than end date"
+    when
+        There is a Service Period that has begin date later than end date
+        // check this to avoid the infinite loop
+        The message "Begin date must not be later than End date." has not been reported yet
+    then
+        Report error "Begin date must not be later than End date." on "beginDate"
+end
+
+/**
+ * Validates if redeposit service period has IAD set
+ */
+rule "Redeposit service period must have Interest Accrual Date"
+    when
+        There is a Service Period that has period type as "REDEPOSIT" and does not have Interest Accrual Date
+        // check this to avoid the infinite loop
+        The message "Redeposit service period must have Interest Accrual Date." has not been reported yet
+    then
+        Report error "Redeposit service period must have Interest Accrual Date." on "interestAccrualDate"
+end

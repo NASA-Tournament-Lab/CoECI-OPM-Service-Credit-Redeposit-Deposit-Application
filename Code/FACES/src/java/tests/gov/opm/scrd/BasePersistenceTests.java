@@ -431,7 +431,7 @@ public class BasePersistenceTests {
 
         entity.setApplyToGL(true);
         entity.setNote("note1");
-        entity.setTransactionKey(1L);
+        entity.setTransactionKey("KEY");
         entity.setAch(true);
         entity.setAccountBalance(BigDecimal.ONE);
 

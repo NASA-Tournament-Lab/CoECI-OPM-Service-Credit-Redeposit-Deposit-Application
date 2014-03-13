@@ -1,0 +1,4 @@
+#beginDate, endDate, retirementType, periodType, appointmentType, serviceType, amount, payType, interestAccrualDate, connerCase
+ServicePeriod1=05/20/1980,06/01/1981,CSRS,DEPOSIT,TEMPORARY,DC GOVERNMENT,3.91,HOURLY RATE,null,false
+ServicePeriod2=05/06/1985,10/01/1986,CSRS,DEPOSIT,TEMPORARY,DC GOVERNMENT,5.05,HOURLY RATE,null,false
+ServicePeriod3=10/02/1986,12/31/1987,CSRS,DEPOSIT,TEMPORARY,GS,7.35,HOURLY RATE,null,false

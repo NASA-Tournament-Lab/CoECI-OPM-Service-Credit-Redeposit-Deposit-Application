@@ -1,0 +1,2 @@
+#beginDate, endDate, retirementType, periodType, appointmentType, serviceType, amount, payType, interestAccrualDate, connerCase
+ServicePeriod1=09/30/1974,08/08/1975,CSRS,DEPOSIT,TEMPORARY,PEACE CORPS/VISTA,75.00,MONTHLY SALARY,10/01/1995,false

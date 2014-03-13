@@ -1,0 +1,160 @@
+/*
+ * Copyright (C) 2013 TopCoder Inc., All Rights Reserved.
+ */
+package gov.opm.scrd.rules;
+
+import gov.opm.scrd.entities.application.ExtendedServicePeriod;
+
+import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+
+
+/**
+ * <p>
+ * This is the DSLR rule resource for interest calculation request validation and pre-processing
+ * (mid-point calculation).
+ * It currently supports rules that are applicable(extracted from) in Scenario #1, Scenario #2 and Scenario #3.
+ * </p>
+ * <p>
+ * <b>Thread Safety:</b>
+ * Thread safety is not an issue for drools rules.
+ * </p>
+ * <p>
+ * version 1.1 - OPM - Rules Engine - Scenarios Conversion 2 - Interest Update Assembly 
+ * <ul>
+ * <li>For all validation rules, replace "salience 100" with the "Perform Validation" ruleflow-group</li>
+ * <li>"Calculate Mid-point" rule is replaced with "Redeposit Calculate Interest Accrual Date" and 
+ *     "Deposit Calculate Interest Accrual Date"</li>
+ * <li>A new rule is added for setting IAD for CSRS Conner Case</li>
+ * </p>
+ * 
+ * @author albertwang, TCSASSEMBLER
+ * @version 1.1
+ * @since OPM Rules Engine Models Exceptions and Interest Calculation v1.0 Assembly
+ */
+
+/**
+ * Uses the common_interest.dsl to expands the rules.
+ */
+expander common_interest.dsl
+
+/**
+ * Represents the target year the interest will be calculated to.
+ */
+global Date interestCalculatedToDate;
+
+/**
+ * Validates if the begin date is set.
+ */
+rule "Require begin date for Extended Service Period"
+    ruleflow-group "Perform Validation"
+    when
+        There is an Extended Service Period that has no begin date
+        // check this to avoid the infinite loop
+        The message "Begin date is required." has not been reported yet
+    then
+        Report error "Begin date is required."
+end
+
+/**
+ * Validates if the end date is set.
+ */
+rule "Require end date for Extended Service Period"
+    ruleflow-group "Perform Validation"
+    when
+        There is an Extended Service Period that has no end date
+        // check this to avoid the infinite loop
+        The message "End date is required." has not been reported yet
+    then
+        Report error "End date is required."
+end
+
+/**
+ * Validates if the total earnings is set.
+ */
+rule "Require total earnings for Extended Service Period"
+    ruleflow-group "Perform Validation"
+    when
+        There is an Extended Service Period that has no total earnings
+        // check this to avoid the infinite loop
+        The message "Total earnings is required." has not been reported yet
+    then
+        Report error "Total earnings is required."
+end
+
+/**
+ * Validates if the total deduction is set.
+ */
+rule "Require total deduction for Extended Service Period"
+    ruleflow-group "Perform Validation"
+    when
+        There is an Extended Service Period that has no total deduction
+        // check this to avoid the infinite loop
+        The message "Total deduction is required." has not been reported yet
+    then
+        Report error "Total deduction is required."
+end
+
+/**
+ * Validates if the retirement type is set.
+ */
+rule "Require retirement type for Extended Service Period"
+    ruleflow-group "Perform Validation"
+    when
+        There is an Extended Service Period that has no retirement type
+        // check this to avoid the infinite loop
+        The message "Retirement type is required." has not been reported yet
+    then
+        Report error "Retirement type is required."
+end
+
+/**
+ * Validates if the begin date is not later than the end date.
+ */
+rule "Begin date must not be later than end date"
+    ruleflow-group "Perform Validation"
+    when
+        There is an Extended Service Period that has begin date later than end date
+        // check this to avoid the infinite loop
+        The message "Begin date must not be later than End date." has not been reported yet
+    then
+        Report error "Begin date must not be later than End date."
+end
+
+/**
+ * Calculates the Interest Accural Date for Extended Service Period with REDEPOSIT period type.
+ * It seems this rule is never used, as we set the Interest Accural Date directly right now.
+ */
+rule "Redeposit Calculate Interest Accrual Date"
+    ruleflow-group "Calculate Interest Accrual Date"
+    when
+        There is an Extended Service Period that interest accrual date has not calculated yet and has period type as "REDEPOSIT"
+    then
+        Calculate mid-point
+end
+
+/**
+ * Calculates the Interest Accural Date for Extended Service Period with DEPOSIT period type.
+ */
+rule "Deposit Calculate Interest Accrual Date"
+    ruleflow-group "Calculate Interest Accrual Date"
+    when
+        There is an Extended Service Period that interest accrual date has not calculated yet and has period type as "DEPOSIT"
+    then
+        Calculate mid-point
+end
+
+/**
+ * Set Interest Accural Date for CSRS Conner Case after 12-31-1988
+ */
+rule "CSRS Conner Case Calculate Interest Accrual Date after 12-31-1988"
+    ruleflow-group "Calculate Interest Accrual Date"
+    when
+        There is an Extended Service Period that interest accrual date has not calculated yet and has period type as "DEPOSIT" and has retirement type as "CSRS" and is Conner Case and is after "31-Dec-1988"
+    then
+        Set Interest Accrual Date as "01-Jan-1999"
+end

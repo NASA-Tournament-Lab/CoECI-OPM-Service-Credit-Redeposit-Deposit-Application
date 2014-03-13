@@ -1,0 +1,78 @@
+<fivestarwy>
+
+[2.2.2]
+Response 1: Recommended
+Fixed.
+
+[2.2.3]
+Response 1:
+Fixed.
+
+Response 2:
+Fixed.
+Changed them to be nullable: http://apps.topcoder.com/forums/?module=Thread&threadID=808222&start=0
+
+-------------------------------
+
+<jpy>
+[1.1.2]
+Response 1:
+Fixed.
+
+Response 2:
+Not fixed.
+Refer to: http://apps.topcoder.com/forums/?module=Thread&threadID=808269&start=0
+
+Response 3:
+Fixed.
+Changed them to be nullable: http://apps.topcoder.com/forums/?module=Thread&threadID=808222&start=0
+
+
+-------------------------------
+
+<zaixiang>
+[1.1.2]
+Response 1:
+Fixed.
+
+Response 2:
+Fixed.
+
+Response 4:
+Fixed.
+Changed them to be nullable: http://apps.topcoder.com/forums/?module=Thread&threadID=808222&start=0
+
+Response 5:
+Fixed.
+
+Response 6:
+Fixed.
+Changed them to be nullable: http://apps.topcoder.com/forums/?module=Thread&threadID=808222&start=0
+
+Response 7:
+Not fixed.
+Refer to: http://apps.topcoder.com/forums/?module=Thread&threadID=808544&start=0
+
+Response 8:
+Not fixed.
+Refer to:http://apps.topcoder.com/forums/?module=Thread&threadID=808269&start=0
+
+Response 9:
+Not fixed.
+Refer to: http://apps.topcoder.com/forums/?module=Thread&threadID=808139&start=0
+
+Response 10:
+Fixed.
+
+[2.2.3]
+Response 1:
+Fixed.
+
+[2.2.9]
+Response 1:
+Fixed.
+
+Response 2:
+Fixed.
+
+-------------------------------

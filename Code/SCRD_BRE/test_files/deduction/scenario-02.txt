@@ -1,0 +1,15 @@
+#beginDate, endDate, retirementType, periodType, appointmentType, serviceType, amount, payType, interestAccrualDate, connerCase
+ServicePeriod1=07/10/1966,10/01/1967,CSRS,DEPOSIT,TEMPORARY,GS,3925.00,ANNUAL SALARY,null,false
+ServicePeriod2=05/17/1971,09/02/1971,CSRS,REDEPOSIT,CAREER,WAGE GRADE,109.89,REFUND,11/09/1971,false
+ServicePeriod3=10/03/1975,06/01/1976,CSRS,REDEPOSIT,CAREER,WAGE GRADE,504.49,REFUND,07/02/1976,false
+ServicePeriod4=05/13/1981,09/09/1983,CSRS,REDEPOSIT,CAREER,WAGE GRADE,2459.79,REFUND,11/02/1983,false
+ServicePeriod5=07/27/1987,09/26/1987,CSRS,DEPOSIT,TEMPORARY,GS,11802.00,ANNUAL SALARY,null,false
+ServicePeriod6=09/27/1987,04/29/1988,CSRS,REDEPOSIT,CAREER,GS,74.02,REFUND,07/27/1994,false
+ServicePeriod7=02/25/1990,04/30/1994,CSRS,REDEPOSIT,CAREER,GS,571.12,REFUND,07/27/1994,false
+ServicePeriod8=11/30/1999,01/01/2000,CSRS,DEPOSIT,TEMPORARY,GS,26998.00,ANNUAL SALARY,null,false
+# NOTE that the PDF Ret Scenario- CSRS mixed red and dep.pdf contains a mistake:
+# It misses the last service period (01/14/2001-07/14/2001), and mislabeled the amount for
+# period (01/02/2000 - 01/13/2001) which should be 28265 but was incorrectly specified as 29273
+# you can reveal it from the first a few lines of page 3 "annual salary of 28,265"
+ServicePeriod9=01/02/2000,01/13/2001,CSRS,DEPOSIT,TEMPORARY,GS,28265.00,ANNUAL SALARY,null,false
+ServicePeriod10=01/14/2001,07/14/2001,CSRS,DEPOSIT,TEMPORARY,GS,29273.00,ANNUAL SALARY,null,false
