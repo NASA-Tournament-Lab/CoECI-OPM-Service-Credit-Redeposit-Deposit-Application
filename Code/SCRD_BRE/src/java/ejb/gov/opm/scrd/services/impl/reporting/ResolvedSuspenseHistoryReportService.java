@@ -135,7 +135,7 @@ public class ResolvedSuspenseHistoryReportService extends BaseReportService impl
                 item.setCsd(tx.getCsd());
                 item.setDepositDate(tx.getPayTransStatusDate());
                 item.setSequenceNumber(tx.getPayTransSequenceNumber());
-                item.setTechnician(tx.getTechnicianUserKey());
+                item.setTechnician(tx.getTechnicianUserKey().toString());
                 item.setAmount(tx.getPayTransPaymentAmount());
                 InvoiceData invoice = ReportHelper.getInvoiceData(getEntityManager(), getLogger(), tx);
                 if (invoice != null) {

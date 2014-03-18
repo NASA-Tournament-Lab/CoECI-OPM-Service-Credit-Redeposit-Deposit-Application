@@ -48,9 +48,9 @@ public class AccountSummaryReportServiceUnitTests extends BasePersistenceTests {
         super.setUp();
         service = new AccountSummaryReportService();
         TestsHelper.initService(service, getEntityManager());
-        service.setReceiptPaymentTypeName("ACCEPTED");
-        service.setReplacementAdjustmentPaymentTypeName("POSTED_PENDING");
-        service.setDebitVoucherAdjustmentPaymentTypeName("REVERSE_PENDING");
+        service.setReceiptPaymentTypeId(1L);
+        service.setReplacementAdjustmentPaymentTypeId(2L);
+        service.setDebitVoucherAdjustmentPaymentTypeId(3L);
         super.createAccountReportData();
     }
 
@@ -75,13 +75,13 @@ public class AccountSummaryReportServiceUnitTests extends BasePersistenceTests {
         assertEquals("The receipts is incorrect.", response.getReceipts().setScale(2).toString(), "200.00");
         assertEquals("The suspense is incorrect.", response.getSuspense().setScale(2).toString(), "100.00");
         assertEquals("The replacedAccounts is incorrect.", response.getReplacedAccounts().setScale(2).toString(), "50.00");
-        assertEquals("The adjustmentPlus is incorrect.", response.getAdjustmentPlus().setScale(2).toString(), "80.00");
-        assertEquals("The debitVouchers is incorrect.", response.getDebitVouchers().setScale(2).toString(), "30.00");
+        assertEquals("The adjustmentPlus is incorrect.", response.getAdjustmentPlus().setScale(2).toString(), "0.00");
+        assertEquals("The debitVouchers is incorrect.", response.getDebitVouchers().setScale(2).toString(), "50.00");
         assertEquals("The adjustmentMinus is incorrect.", response.getAdjustmentMinus().setScale(2).toString(), "40.00");
         assertEquals("The totalReceipts is incorrect.", response.getTotalReceipts().setScale(2).toString(), "300.00");
-        assertEquals("The totalAdditions is incorrect.", response.getTotalAdditions().setScale(2).toString(), "130.00");
-        assertEquals("The totalDeductions is incorrect.", response.getTotalDeductions().setScale(2).toString(), "70.00");
-        assertEquals("The netChange is incorrect.", response.getNetChange().setScale(2).toString(), "360.00");
+        assertEquals("The totalAdditions is incorrect.", response.getTotalAdditions().setScale(2).toString(), "50.00");
+        assertEquals("The totalDeductions is incorrect.", response.getTotalDeductions().setScale(2).toString(), "90.00");
+        assertEquals("The netChange is incorrect.", response.getNetChange().setScale(2).toString(), "260.00");
     }
 
     /**

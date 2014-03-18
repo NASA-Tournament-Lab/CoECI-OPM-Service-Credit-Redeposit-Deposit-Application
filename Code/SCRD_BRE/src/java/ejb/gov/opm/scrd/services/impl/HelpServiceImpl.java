@@ -82,7 +82,7 @@ public class HelpServiceImpl extends BaseService implements HelpService {
      * @since OPM - Frontend - Miscellaneous Module Assembly
      */
     private static final String JPQL_QUERY_ALL_HELP_ITEMS = "SELECT e.id, e.title, e.summary FROM HelpItem e"
-        + " WHERE e.deleted = false";
+        + " WHERE e.deleted = false ORDER BY e.id";
 
     /**
      * <p>
@@ -98,7 +98,7 @@ public class HelpServiceImpl extends BaseService implements HelpService {
      * </p>
      */
     private static final String JPQL_QUERY_HELP_ITEM_BY_TERM = "SELECT e.id, e.title, e.summary FROM HelpItem e"
-        + " WHERE e.deleted = false AND (e.title LIKE :term OR e.summary LIKE :term OR e.content LIKE :term)";
+        + " WHERE e.deleted = false AND (e.title LIKE :term OR e.summary LIKE :term OR e.content LIKE :term) ORDER BY e.id";
 
     /**
      * Creates an instance of HelpServiceImpl.

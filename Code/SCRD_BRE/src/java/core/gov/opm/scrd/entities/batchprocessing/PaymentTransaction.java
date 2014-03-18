@@ -6,14 +6,13 @@ package gov.opm.scrd.entities.batchprocessing;
 import gov.opm.scrd.entities.common.IdentifiableEntity;
 
 import java.math.BigDecimal;
-import java.util.Date;
 
+import java.util.Date;
 
 /**
  * <p>This class is simply a POJO containing payment transaction information.</p>
- *  <p>Thread - safety. The class is mutable and not thread - safe, but is expected to be used in a thread - safe
+ * <p>Thread - safety. The class is mutable and not thread - safe, but is expected to be used in a thread - safe
  * manner.</p>
- *
  * <p>
  * <em>Changes in 1.1 (OPM - SCRD - Reporting Payment Module Assembly):</em>
  * <ol>
@@ -25,114 +24,97 @@ import java.util.Date;
  */
 public class PaymentTransaction extends IdentifiableEntity {
     /**
-     * Represents the pay transaction key. It is accessible by getter and modified by setter. It can be any
-     * value. The default value is null.
+     * Represents the pay transaction key. It is accessible by getter and modified by setter. It can be any value. The
+     * default value is null.
+     *
      * @since 1.1
      */
     private Integer payTransactionKey;
-
     /**
-     * Represents the pay trans batch number. It is accessible by getter and modified by setter. It can be any
-     * value. The default value is null.
+     * Represents the pay trans batch number. It is accessible by getter and modified by setter. It can be any value.
+     * The default value is null.
      */
     private String payTransBatchNumber;
-
     /**
-     * Represents the pay trans block number. It is accessible by getter and modified by setter. It can be any
-     * value. The default value is null.
+     * Represents the pay trans block number. It is accessible by getter and modified by setter. It can be any value.
+     * The default value is null.
      */
     private String payTransBlockNumber;
-
     /**
-     * Represents the pay trans sequence number. It is accessible by getter and modified by setter. It can be
-     * any value. The default value is null.
+     * Represents the pay trans sequence number. It is accessible by getter and modified by setter. It can be any value.
+     * The default value is null.
      */
     private String payTransSequenceNumber;
-
     /**
-     * Represents the scm claim number. It is accessible by getter and modified by setter. It can be any value.
-     * The default value is null.
-     */
-    private String scmClaimNumber;
-
-    /**
-     * Represents the scm date of birth. It is accessible by getter and modified by setter. It can be any
-     * value. The default value is null.
-     */
-    private Date scmDateOfBirth;
-
-    /**
-     * Represents the pay trans payment amount. It is accessible by getter and modified by setter. It can be
-     * any value. The default value is null.
-     */
-    private BigDecimal payTransPaymentAmount;
-
-    /**
-     * Represents the pay trans transaction date. It is accessible by getter and modified by setter. It can be
-     * any value. The default value is null.
-     */
-    private Date payTransTransactionDate;
-
-    /**
-     * Represents the pay trans status code. It is accessible by getter and modified by setter. It can be any
-     * value. The default value is null.
-     */
-    private String payTransStatusCode;
-
-    /**
-     * Represents the pay trans status date. It is accessible by getter and modified by setter. It can be any
-     * value. The default value is null.
-     */
-    private Date payTransStatusDate;
-
-    /**
-     * Represents the technician user key. It is accessible by getter and modified by setter. It can be any
-     * value. The default value is null.
-     */
-    private String technicianUserKey;
-
-    /**
-     * Represents the payment applied order code. It is accessible by getter and modified by setter. It can be
-     * any value. The default value is null.
-     */
-    private String paymentAppliedOrderCode;
-
-    /**
-     * Represents the post flag. It is accessible by getter and modified by setter. It can be any value. The
+     * Represents the scm claim number. It is accessible by getter and modified by setter. It can be any value. The
      * default value is null.
      */
-    private Boolean postFlag;
-
+    private String scmClaimNumber;
     /**
-     * Represents the csd. It is accessible by getter and modified by setter. It can be any value. The default
-     * value is null.
+     * Represents the scm date of birth. It is accessible by getter and modified by setter. It can be any value. The
+     * default value is null.
      */
-    private String csd;
-
+    private Date scmDateOfBirth;
     /**
-     * Represents if user inserted. It is accessible by getter and modified by setter. It can be any value.
+     * Represents the pay trans payment amount. It is accessible by getter and modified by setter. It can be any value.
      * The default value is null.
      */
+    private BigDecimal payTransPaymentAmount;
+    /**
+     * Represents the pay trans transaction date. It is accessible by getter and modified by setter. It can be any
+     * value. The default value is null.
+     */
+    private Date payTransTransactionDate;
+    /**
+     * Represents the pay trans status code. It is accessible by getter and modified by setter. It can be any value. The
+     * default value is null.
+     */
+    private Long payTransStatusCode;
+    /**
+     * Represents the pay trans status date. It is accessible by getter and modified by setter. It can be any value. The
+     * default value is null.
+     */
+    private Date payTransStatusDate;
+    /**
+     * Represents the technician user key. It is accessible by getter and modified by setter. It can be any value. The
+     * default value is null.
+     */
+    private Long technicianUserKey;
+    /**
+     * Represents the payment applied order code. It is accessible by getter and modified by setter. It can be any
+     * value. The default value is null.
+     */
+    private String paymentAppliedOrderCode;
+    /**
+     * Represents the post flag. It is accessible by getter and modified by setter. It can be any value. The default
+     * value is null.
+     */
+    private Boolean postFlag;
+    /**
+     * Represents the csd. It is accessible by getter and modified by setter. It can be any value. The default value is
+     * null.
+     */
+    private String csd;
+    /**
+     * Represents if user inserted. It is accessible by getter and modified by setter. It can be any value. The default
+     * value is null.
+     */
     private Boolean userInserted;
-
     /**
      * Represents if it is ach payment or not. It is accessible by getter and modified by setter. It can be any value.
      * The default value is null.
      */
     private Boolean achPayment;
-
     /**
-     * Represents the payment status code. It is accessible by getter and modified by setter. It can be any
-     * value. The default value is null.
+     * Represents the payment status code. It is accessible by getter and modified by setter. It can be any value. The
+     * default value is null.
      */
     private Integer paymentStatusCode;
-
     /**
-     * Represents if resolved suspense or not. It is accessible by getter and modified by setter. It can be any
-     * value. The default value is null.
+     * Represents if resolved suspense or not. It is accessible by getter and modified by setter. It can be any value.
+     * The default value is null.
      */
     private Boolean resolvedSuspense;
-
     /**
      * Represents if the transaction is update to completed or not. It is accessible by getter and modified by setter.
      * It can be any value. The default value is null.
@@ -276,7 +258,7 @@ public class PaymentTransaction extends IdentifiableEntity {
      *
      * @return the pay trans status code
      */
-    public String getPayTransStatusCode() {
+    public Long getPayTransStatusCode() {
         return payTransStatusCode;
     }
 
@@ -285,7 +267,7 @@ public class PaymentTransaction extends IdentifiableEntity {
      *
      * @param payTransStatusCode the new pay trans status code
      */
-    public void setPayTransStatusCode(String payTransStatusCode) {
+    public void setPayTransStatusCode(Long payTransStatusCode) {
         this.payTransStatusCode = payTransStatusCode;
     }
 
@@ -312,7 +294,7 @@ public class PaymentTransaction extends IdentifiableEntity {
      *
      * @return the technician user key
      */
-    public String getTechnicianUserKey() {
+    public Long getTechnicianUserKey() {
         return technicianUserKey;
     }
 
@@ -321,7 +303,7 @@ public class PaymentTransaction extends IdentifiableEntity {
      *
      * @param technicianUserKey the new technician user key
      */
-    public void setTechnicianUserKey(String technicianUserKey) {
+    public void setTechnicianUserKey(Long technicianUserKey) {
         this.technicianUserKey = technicianUserKey;
     }
 
@@ -468,7 +450,7 @@ public class PaymentTransaction extends IdentifiableEntity {
     public void setUpdateToCompleted(Boolean updateToCompleted) {
         this.updateToCompleted = updateToCompleted;
     }
-
+    
     /**
      * Gets the value of the field <code>payTransactionKey</code>.
      * @return the payTransactionKey

@@ -1,0 +1,120 @@
+Click this button to add a payment manually. This was called an "R3" payment. Only a Financial
+Technician can add an over-the-counter payment. Refunds Sections workers can add "Prior Payment
+Recorded" records that are never treated as payments except for initial calculations. Receivables
+Technicians can add adjustments. Over-the-counter payment and adjustments must be approved by
+supervisors before taking effect. What the user sees on their screen and the choices for payment
+type depends upon their role.
+
+<figure>
+  <img src="i/help/AddPaymentButton.png" alt="AddPaymentButton" width="700px">
+  <figcaption>Add Payment Button.</figcaption>
+</figure>
+
+
+
+
+<h2>Financial Technician</h2>
+Funds Control enters "over-the-counter" payments that may or may not hit the GL. If the "Block
+Number" starts with "9" then the payment will not go into the GL.
+<p></p>
+Financial Technician cannot make a payment to an account that has a credit balance.
+<figure>
+  <img src="i/help/FinancialTechnicianCannotAddPaymentWithCreditBalance.png" alt="FinancialTechnicianCannotAddPaymentWithCreditBalance" width="700px">
+  <figcaption>Financial Technician Canno tAdd Payment With Credit Balance.</figcaption>
+</figure>
+<p></p>
+Financial Technician cannot make a payment to an account with a zero balance.
+
+<figure>
+  <img src="i/help/FinancialTechnicianCannotAddPaymentWithZeroBalance.png" alt="FinancialTechnicianCannotAddPaymentWithZeroBalance" width="700px">
+  <figcaption>Financial Technician Cannot Add Payment With Zero Balance.</figcaption>
+</figure>
+
+<p></p>
+Financial Technician cannot also make a payment to an inactive account.
+
+<figure>
+  <img src="i/help/FinancialTechnicianCannotAddPaymentForInactiveAccount.png" alt="FinancialTechnicianCannotAddPaymentForInactiveAccount" width="700px">
+  <figcaption>Financial Technician Cannot Add Payment For Inactive Account.</figcaption>
+</figure>
+<p></p>
+Financial Technician can make a payment to an active account with a balance due.
+
+<figure>
+  <img src="i/help/FinancialTechnicianCanAddPaymentWithDueBalanceAccount.png" alt="FinancialTechnicianCanAddPaymentWithDueBalanceAccount" width="700px">
+  <figcaption>Financial Technician Can Add Payment With Due Balance Account.</figcaption>
+</figure>
+
+<figure>
+  <img src="i/help/FinancialTechnicianCanAddPaymentPopup.png" alt="FinancialTechnicianCanAddPaymentPopup" width="700px">
+  <figcaption>Financial Technician Can Add Payment Popup.</figcaption>
+</figure>
+
+
+
+
+
+<h2>Receivables Technician</h2>
+Receivables Technicians enter corrections that do not hit the GL for one of two reasons. The money
+might be adjusted or "written-off" so that there is no cash. The money came from another system
+that already posted the cash to the GL.
+<p></p>
+Receivables can refund a credit balance. This amount must match the balance at the time of the
+nightly batch process or else it will be rejected.
+<figure>
+  <img src="i/help/ReceivablesTechniciansCanAddPayment.png" alt="ReceivablesTechniciansCanAddPayment" width="700px">
+  <figcaption>Receivables Technicians Can Refund Credit Balance.</figcaption>
+</figure>
+
+<figure>
+  <img src="i/help/CanAddPaymentPopupForReceivableTechnician.png" alt="CanAddPaymentPopupForReceivableTechnician" width="700px">
+  <figcaption>Receivables Technicians Can Refund Credit Balance Popup.</figcaption>
+</figure>
+
+
+
+<p></p>
+
+Receivables Technicians can adjust an account's payment total. This is allowed regardless of the
+balance (zero, positive, or negative). It is also allowed if the status is active or history. The date of
+this adjustment determines how it will update the master record. When the nightly batch processes
+
+this adjustment, it will first get the master record payment balance on the adjustment date from the
+audit trail. Then it will add up all the payments from that date to the present. It will add the value of
+this adjustment (subtract if negative) to the sum and apply it to the account. This allows the users to
+adjust accounts that were recalculated after being paid off. The adjustment done during the
+recalculation can be shown in the payment list and the sum of all payments will match the master
+record.
+
+<figure>
+  <img src="i/help/ReceivablesTechniciansCanAdjustPayment.png" alt="ReceivablesTechniciansCanAdjustPayment" width="700px">
+  <figcaption>Receivables Technicians Can Adjust Payment.</figcaption>
+</figure>
+
+
+
+<p></p>
+Receivables Technicians can also "write-off" balances of $25 or less. It does not matter if the account
+is active or history.
+<figure>
+  <img src="i/help/ReceivablesTechniciansCanWriteOffPayment.png" alt="ReceivablesTechniciansCanWriteOffPayment" width="700px">
+  <figcaption>Receivables Technicians Can Write-Off Payment.</figcaption>
+</figure>
+
+
+
+<h2>Refunds Specialists</h2>
+Boyers can enter "payment" records that will never be processed as money. They are only for
+entering payments prior to the new system and will only be used for initial billing calculations.
+<figure>
+  <img src="i/help/RefundsSpecialistsCanAddPaymentPopup.png" alt="RefundsSpecialistsCanAddPaymentPopup" width="700px">
+  <figcaption>Refunds Specialists Can Add Payment Popup.</figcaption>
+</figure>
+
+
+<h2> All Other User Types</h2>
+All other users cannot enter payments. The button is not present.
+<figure>
+  <img src="i/help/AllOtherUserRolesCannotAddPayment.png" alt="AllOtherUserRolesCannotAddPayment" width="700px">
+  <figcaption>All Other User Roles Cannot Add Payment.</figcaption>
+</figure>

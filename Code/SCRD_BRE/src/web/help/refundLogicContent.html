@@ -1,0 +1,59 @@
+
+<h2>Suspended Payment</h2>
+A Suspended Payment is one from somebody without a Service Credit account. Since Service Credit
+received the funds in error, they must refund them. The Receivables Technician determines that the
+payment should not have been cashed for Service Credit and changes its state from "Suspended" to
+"Suspense Refund Pending Approval." <br>The supervisor approves this action and changes the payment
+status from "Suspense Refund Pending Approval" to "Suspense Refund Pending." Now it's ready for
+the Nightly Batch Process to finish the job. The Nightly Batch Process will mark the payment as
+"Suspense Refund Complete" and make the offsetting "Batch Auto Refund." Now there is credit
+entry as well as a debit entry on the ledger.
+
+<figure>
+  <img src="i/help/SuspendedPaymentRefundLogic.png" alt="SuspendedPaymentRefundLogic" width="700px">
+  <figcaption>Suspended Payment Refund Logic.</figcaption>
+</figure>
+
+
+
+
+<h2>Unresolved Payment</h2>
+An Unresolved Payment is one from somebody with a Service Credit account but there is something
+wrong with either the payment or the account. Since Service Credit received the funds in error, they
+must refund them. The Receivables Technician determines that the payment should not have been
+cashed for Service Credit and changes its state from "Suspended" to "Suspense Refund Pending
+Approval." The supervisor approves this action and changes the payment status from "Suspense
+Refund Pending Approval" to "Suspense Refund Pending." Now it's ready for the Nightly Batch
+Process to finish the job. The Nightly Batch Process will mark the payment as "Suspense Refund
+Complete" and make the offsetting "Batch Auto Refund." Now there is credit entry as well as a debit
+entry on the ledger.
+
+
+<h2>Credit Balance</h2>
+If a payment comes in for an account with a credit balance, the payment will be unresolved and the
+Receivables Technician has the option to refund the account's credit balance at the same time when
+they refund the overpayment. If the technician clicks "Yes" for the additional refund, the refund
+amount on the Refund Memo will equal the sum of the account's credit balance and the refunded
+payment. The supervisor will see this sum on the approval screen as well.<p></p>
+
+The process is different from the Suspended Payment refund only in that there is the optional refund
+of the pre-existing credit balance.
+<figure>
+  <img src="i/help/CreditBalanceRefund.png" alt="CreditBalanceRefund" width="700px">
+  <figcaption>Credit Balance Refund.</figcaption>
+</figure>
+
+<figure>
+  <img src="i/help/CreditBalanceRefundLogic.png" alt="CreditBalanceRefundLogic" width="700px">
+  <figcaption>Credit Balance Refund Logic.</figcaption>
+</figure>
+
+
+
+
+
+This chart shows the logic flow for the Receivables Branch.
+<figure>
+  <img src="i/help/LogicFlowforReceivableBranch.png" alt="LogicFlowforReceivableBranch" width="700px">
+  <figcaption>Logic Flow for Receivable Branch.</figcaption>
+</figure>

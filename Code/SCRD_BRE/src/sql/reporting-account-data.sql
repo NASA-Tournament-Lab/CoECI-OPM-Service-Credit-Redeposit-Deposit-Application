@@ -740,15 +740,15 @@ VALUES (8, false, 'service type 3', 1, '01/01/2014', '02/01/2014', 10, 99.99, 's
 -----   payment_transaction table
 ---------------------------------------------------
 INSERT INTO opm.payment_transaction (id, deleted, pay_trans_batch_number, pay_trans_block_number, pay_trans_sequence_number, scm_claim_number, scm_date_of_birth, pay_trans_payment_amount, pay_trans_transaction_date, pay_trans_status_code, pay_trans_status_date, technician_user_key, payment_applied_order_code, post_flag, csd, user_inserted, ach_payment, payment_status_code, resolved_suspense, update_to_completed)
-VALUES (1, false, '123', '123', '123', '123', '01/01/2014', '200.00', '01/01/2014', 'ACCEPTED', '01/01/2014', 'key', '123', true, '1', false, true, 1, true, true);
+VALUES (1, false, '123', '123', '123', '123', '01/01/2014', '200.00', '01/01/2014', 1, '01/01/2014', 1, '123', true, '1', false, true, 1, true, true);
 INSERT INTO opm.payment_transaction (id, deleted, pay_trans_batch_number, pay_trans_block_number, pay_trans_sequence_number, scm_claim_number, scm_date_of_birth, pay_trans_payment_amount, pay_trans_transaction_date, pay_trans_status_code, pay_trans_status_date, technician_user_key, payment_applied_order_code, post_flag, csd, user_inserted, ach_payment, payment_status_code, resolved_suspense, update_to_completed)
-VALUES (2, false, '123', '123', '123', '123', '01/01/2014', '50.00', '01/01/2014', 'NONE', '01/01/2014', 'key', '123', true, '1', false, true, 1, false, true);
+VALUES (2, false, '123', '123', '123', '123', '01/01/2014', '50.00', '01/01/2014', 2, '01/01/2014', 1, '123', true, '1', false, true, 1, false, true);
 INSERT INTO opm.payment_transaction (id, deleted, pay_trans_batch_number, pay_trans_block_number, pay_trans_sequence_number, scm_claim_number, scm_date_of_birth, pay_trans_payment_amount, pay_trans_transaction_date, pay_trans_status_code, pay_trans_status_date, technician_user_key, payment_applied_order_code, post_flag, csd, user_inserted, ach_payment, payment_status_code, resolved_suspense, update_to_completed)
-VALUES (3, false, '123', '123', '123', '123', '01/01/2014', '50.00', '01/01/2014', 'POSTED_PENDING', '01/01/2014', 'key', '123', true, '1', false, true, 1, false, true);
+VALUES (3, false, '123', '123', '123', '123', '01/01/2014', '50.00', '01/01/2014', 3, '01/01/2014', 1, '123', true, '1', false, true, 1, false, true);
 INSERT INTO opm.payment_transaction (id, deleted, pay_trans_batch_number, pay_trans_block_number, pay_trans_sequence_number, scm_claim_number, scm_date_of_birth, pay_trans_payment_amount, pay_trans_transaction_date, pay_trans_status_code, pay_trans_status_date, technician_user_key, payment_applied_order_code, post_flag, csd, user_inserted, ach_payment, payment_status_code, resolved_suspense, update_to_completed)
-VALUES (4, false, '123', '123', '123', '123', '01/01/2014', '80.00', '01/01/2014', 'POSTED_PENDING', '01/01/2014', 'key', '123', true, '1', true, true, 1, true, true);
+VALUES (4, false, '123', '123', '123', '123', '01/01/2014', '80.00', '01/01/2014', 4, '01/01/2014', 1, '123', true, '1', true, true, 1, true, true);
 INSERT INTO opm.payment_transaction (id, deleted, pay_trans_batch_number, pay_trans_block_number, pay_trans_sequence_number, scm_claim_number, scm_date_of_birth, pay_trans_payment_amount, pay_trans_transaction_date, pay_trans_status_code, pay_trans_status_date, technician_user_key, payment_applied_order_code, post_flag, csd, user_inserted, ach_payment, payment_status_code, resolved_suspense, update_to_completed)
-VALUES (5, false, '123', '123', '123', '123', '01/01/2014', '30.00', '01/01/2014', 'REVERSE_PENDING', '01/01/2014', 'key', '123', true, '1', true, true, 1, true, true);
+VALUES (5, false, '123', '123', '123', '123', '01/01/2014', '30.00', '01/01/2014', 5, '01/01/2014', 1, '123', true, '1', true, true, 1, true, true);
 
 ---------------------------------------------------
 -----   refund_transaction table

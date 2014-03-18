@@ -1893,9 +1893,9 @@ CREATE TABLE opm.payment_transaction (
   scm_date_of_birth TIMESTAMP NULL,
   pay_trans_payment_amount DECIMAL(10,6) NULL,
   pay_trans_transaction_date TIMESTAMP NULL,
-  pay_trans_status_code VARCHAR(256) NULL,
+  pay_trans_status_code BIGINT NULL,
   pay_trans_status_date TIMESTAMP NULL,
-  technician_user_key VARCHAR(256) NULL,
+  technician_user_key BIGINT NULL,
   payment_applied_order_code VARCHAR(256) NULL,
   post_flag BOOLEAN NULL,
   csd VARCHAR(256) NULL,
@@ -1904,6 +1904,9 @@ CREATE TABLE opm.payment_transaction (
   payment_status_code INTEGER NULL,
   resolved_suspense BOOLEAN NULL,
   update_to_completed BOOLEAN NULL,
+  history_payment BOOLEAN NULL,
+  gov_refund BOOLEAN NULL,
+  disapprove BOOLEAN NULL,
   pay_transaction_key INTEGER NULL,
   PRIMARY KEY (id));
 
@@ -2006,7 +2009,15 @@ CREATE TABLE opm.mainframe_import (
   file_name VARCHAR(256),
   audit_batch_log_id VARCHAR(256),
   pay_transaction_key INT,
-  payment_type INT,
+  payment_type VARCHAR(128),
+  deleted BOOLEAN NULL,
+  audit_batch_id BIGINT NULL,
+  suspended_flag BOOLEAN NULL,
+  unresolved_flag BOOLEAN NULL,
+  postedPending_flag BOOLEAN NULL,
+  ach_status_checked BOOLEAN NULL,
+  batch_daily_payments BIGINT NULL,
+  pay_trans_key BIGINT NULL,
   PRIMARY KEY (id));
 
 

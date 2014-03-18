@@ -96,8 +96,8 @@ INSERT INTO opm.payment_transaction (id, deleted, pay_trans_batch_number, pay_tr
 	pay_trans_status_date, technician_user_key, payment_applied_order_code, post_flag, csd, 
 	user_inserted, ach_payment, payment_status_code, resolved_suspense, update_to_completed, pay_transaction_key)
 VALUES (1, false, '111', '11', '11', 
-		'1111111', '1982-01-01', 101.01, '2014-01-01', '10', 
-		'2014-01-01', 'userkey1', 'DEFAULT_USER_ORDER', true, '1111111', 
+		'1111111', '1982-01-01', 101.01, '2014-01-01', 1, 
+		'2014-01-01', 1, 'DEFAULT_USER_ORDER', true, '1111111', 
 		false, false, 10, false, false, 1);
 		
 INSERT INTO opm.invoice_data (id, deleted, pay_transaction_key, scm_claimnumber, scm_date_of_birth, 
@@ -120,8 +120,8 @@ INSERT INTO opm.payment_transaction (id, deleted, pay_trans_batch_number, pay_tr
 	pay_trans_status_date, technician_user_key, payment_applied_order_code, post_flag, csd, 
 	user_inserted, ach_payment, payment_status_code, resolved_suspense, update_to_completed, pay_transaction_key)
 VALUES (2, false, '111', '22', '11', 
-		'1111111', '1982-01-02', 101.01, '2014-01-02', '2', 
-		'2014-01-02', 'userkey2', 'DEFAULT_USER_ORDER', true, '2222222', 
+		'1111111', '1982-01-02', 101.01, '2014-01-02', 2, 
+		'2014-01-02', 2, 'DEFAULT_USER_ORDER', true, '2222222', 
 		false, false, 2, false, false, 2);
 
 INSERT INTO opm.invoice_data (id, deleted, pay_transaction_key, scm_claimnumber, scm_date_of_birth, 
@@ -144,8 +144,8 @@ INSERT INTO opm.payment_transaction (id, deleted, pay_trans_batch_number, pay_tr
 	pay_trans_status_date, technician_user_key, payment_applied_order_code, post_flag, csd, 
 	user_inserted, ach_payment, payment_status_code, resolved_suspense, update_to_completed, pay_transaction_key)
 VALUES (3, false, '111', '22', '12', 
-		'1111111', '1982-01-02', 101.01, '2014-01-02', '11', 
-		'2014-01-02', 'userkey2', 'DEFAULT_USER_ORDER', true, '2222222', 
+		'1111111', '1982-01-02', 101.01, '2014-01-02', 1, 
+		'2014-01-02', 2, 'DEFAULT_USER_ORDER', true, '2222222', 
 		false, false, 11, false, false, 3);
 
 INSERT INTO opm.invoice_data (id, deleted, pay_transaction_key, scm_claimnumber, scm_date_of_birth, 
@@ -168,8 +168,8 @@ INSERT INTO opm.payment_transaction (id, deleted, pay_trans_batch_number, pay_tr
 	pay_trans_status_date, technician_user_key, payment_applied_order_code, post_flag, csd, 
 	user_inserted, ach_payment, payment_status_code, resolved_suspense, update_to_completed, pay_transaction_key)
 VALUES (4, false, '111', '22', '23', 
-		'1111111', '1982-01-03', 101.01, '2014-01-02', '59', 
-		'2014-01-02', 'userkey2', 'DEFAULT_USER_ORDER', true, '3333333', 
+		'1111111', '1982-01-03', 101.01, '2014-01-02', 4, 
+		'2014-01-02', 2, 'DEFAULT_USER_ORDER', true, '3333333', 
 		false, false, 59, false, false, 4);
 
 INSERT INTO opm.invoice_data (id, deleted, pay_transaction_key, scm_claimnumber, scm_date_of_birth, 
@@ -192,8 +192,8 @@ INSERT INTO opm.payment_transaction (id, deleted, pay_trans_batch_number, pay_tr
 	pay_trans_status_date, technician_user_key, payment_applied_order_code, post_flag, csd, 
 	user_inserted, ach_payment, payment_status_code, resolved_suspense, update_to_completed, pay_transaction_key)
 VALUES (5, false, '111', '22', '24', 
-		'1111111', '1982-01-03', 101.01, '2014-01-02', '34', 
-		'2014-01-02', 'userkey2', 'DEFAULT_USER_ORDER', true, '3333333', 
+		'1111111', '1982-01-03', 101.01, '2014-01-02', 3, 
+		'2014-01-02', 2, 'DEFAULT_USER_ORDER', true, '3333333', 
 		false, true, 34, false, false, 5);
 
 INSERT INTO opm.invoice_data (id, deleted, pay_transaction_key, scm_claimnumber, scm_date_of_birth, 
@@ -216,8 +216,8 @@ INSERT INTO opm.payment_transaction (id, deleted, pay_trans_batch_number, pay_tr
 	pay_trans_status_date, technician_user_key, payment_applied_order_code, post_flag, csd, 
 	user_inserted, ach_payment, payment_status_code, resolved_suspense, update_to_completed, pay_transaction_key)
 VALUES (6, false, '111', '11', '12', 
-		'1111111', '1982-01-01', 101.01, '2014-01-01', '10', 
-		'2014-01-01', 'userkey1', 'DEFAULT_USER_ORDER', true, '1111111', 
+		'1111111', '1982-01-01', 101.01, '2014-01-01', 1, 
+		'2014-01-01', 1, 'DEFAULT_USER_ORDER', true, '1111111', 
 		false, true, 10, false, false, 6);
 		
 INSERT INTO opm.invoice_data (id, deleted, pay_transaction_key, scm_claimnumber, scm_date_of_birth, 
@@ -241,8 +241,8 @@ INSERT INTO opm.payment_transaction (id, deleted, pay_trans_batch_number, pay_tr
 	pay_trans_status_date, technician_user_key, payment_applied_order_code, post_flag, csd, 
 	user_inserted, ach_payment, payment_status_code, resolved_suspense, update_to_completed, pay_transaction_key)
 VALUES (7, false, '111', '07', '01', 
-		'1111111', '1982-01-01', 101.01, '2014-01-01', '19', 
-		'2014-01-01', 'userkey1', 'DEFAULT_USER_ORDER', true, '1111111', 
+		'1111111', '1982-01-01', 101.01, '2014-01-01', 1, 
+		'2014-01-01', 1, 'DEFAULT_USER_ORDER', true, '1111111', 
 		false, false, 19, true, false, 7);
 		
 INSERT INTO opm.invoice_data (id, deleted, pay_transaction_key, scm_claimnumber, scm_date_of_birth, 
@@ -265,8 +265,8 @@ INSERT INTO opm.payment_transaction (id, deleted, pay_trans_batch_number, pay_tr
 	pay_trans_status_date, technician_user_key, payment_applied_order_code, post_flag, csd, 
 	user_inserted, ach_payment, payment_status_code, resolved_suspense, update_to_completed, pay_transaction_key)
 VALUES (8, false, '111', '08', '01', 
-		'1111111', '1982-01-02', 101.01, '2014-01-02', '27', 
-		'2014-01-02', 'userkey2', 'DEFAULT_USER_ORDER', true, '2222222', 
+		'1111111', '1982-01-02', 101.01, '2014-01-02', 2, 
+		'2014-01-02', 2, 'DEFAULT_USER_ORDER', true, '2222222', 
 		false, false, 27, true, false, 8);
 
 INSERT INTO opm.invoice_data (id, deleted, pay_transaction_key, scm_claimnumber, scm_date_of_birth, 
@@ -289,8 +289,8 @@ INSERT INTO opm.payment_transaction (id, deleted, pay_trans_batch_number, pay_tr
 	pay_trans_status_date, technician_user_key, payment_applied_order_code, post_flag, csd, 
 	user_inserted, ach_payment, payment_status_code, resolved_suspense, update_to_completed, pay_transaction_key)
 VALUES (9, false, '111', '09', '01', 
-		'1111111', '1982-01-02', 101.01, '2014-01-02', '23', 
-		'2014-01-02', 'userkey2', 'DEFAULT_USER_ORDER', true, '2222222', 
+		'1111111', '1982-01-02', 101.01, '2014-01-02', 2, 
+		'2014-01-02', 2, 'DEFAULT_USER_ORDER', true, '2222222', 
 		false, false, 23, true, false, 9);
 
 INSERT INTO opm.invoice_data (id, deleted, pay_transaction_key, scm_claimnumber, scm_date_of_birth, 
@@ -313,8 +313,8 @@ INSERT INTO opm.payment_transaction (id, deleted, pay_trans_batch_number, pay_tr
 	pay_trans_status_date, technician_user_key, payment_applied_order_code, post_flag, csd, 
 	user_inserted, ach_payment, payment_status_code, resolved_suspense, update_to_completed, pay_transaction_key)
 VALUES (10, false, '111', '10', '01', 
-		'1111111', '1982-01-03', 101.01, '2014-01-02', '73', 
-		'2014-01-02', 'userkey2', 'DEFAULT_USER_ORDER', true, '3333333', 
+		'1111111', '1982-01-03', 101.01, '2014-01-02', 7, 
+		'2014-01-02', 2, 'DEFAULT_USER_ORDER', true, '3333333', 
 		false, false, 73, true, false, 10);
 
 INSERT INTO opm.invoice_data (id, deleted, pay_transaction_key, scm_claimnumber, scm_date_of_birth, 
@@ -337,8 +337,8 @@ INSERT INTO opm.payment_transaction (id, deleted, pay_trans_batch_number, pay_tr
 	pay_trans_status_date, technician_user_key, payment_applied_order_code, post_flag, csd, 
 	user_inserted, ach_payment, payment_status_code, resolved_suspense, update_to_completed, pay_transaction_key)
 VALUES (11, false, '111', '11', '01', 
-		'1111111', '1982-01-03', 101.01, '2014-01-02', '21', 
-		'2014-01-02', 'userkey2', 'DEFAULT_USER_ORDER', true, '3333333', 
+		'1111111', '1982-01-03', 101.01, '2014-01-02', 2, 
+		'2014-01-02', 2, 'DEFAULT_USER_ORDER', true, '3333333', 
 		false, true, 21, true, false, 11);
 
 INSERT INTO opm.invoice_data (id, deleted, pay_transaction_key, scm_claimnumber, scm_date_of_birth, 
@@ -361,8 +361,8 @@ INSERT INTO opm.payment_transaction (id, deleted, pay_trans_batch_number, pay_tr
 	pay_trans_status_date, technician_user_key, payment_applied_order_code, post_flag, csd, 
 	user_inserted, ach_payment, payment_status_code, resolved_suspense, update_to_completed, pay_transaction_key)
 VALUES (12, false, '111', '12', '01', 
-		'1111111', '1982-01-01', 101.01, '2014-01-01', '19', 
-		'2014-01-01', 'userkey1', 'DEFAULT_USER_ORDER', true, '1111111', 
+		'1111111', '1982-01-01', 101.01, '2014-01-01', 1, 
+		'2014-01-01', 1, 'DEFAULT_USER_ORDER', true, '1111111', 
 		false, true, 19, true, false, 12);
 		
 INSERT INTO opm.invoice_data (id, deleted, pay_transaction_key, scm_claimnumber, scm_date_of_birth, 
@@ -385,8 +385,8 @@ INSERT INTO opm.payment_transaction (id, deleted, pay_trans_batch_number, pay_tr
 	pay_trans_status_date, technician_user_key, payment_applied_order_code, post_flag, csd, 
 	user_inserted, ach_payment, payment_status_code, resolved_suspense, update_to_completed, pay_transaction_key)
 VALUES (13, false, '999', '00', '00', 
-		'1111111', '1982-01-01', 101.01, '2014-01-01', '12', 
-		'2014-01-01', 'userkey1', 'DEFAULT_USER_ORDER', true, '1111111', 
+		'1111111', '1982-01-01', 101.01, '2014-01-01', 1, 
+		'2014-01-01', 1, 'DEFAULT_USER_ORDER', true, '1111111', 
 		true, false, 12, false, false, 13);
 		
 INSERT INTO opm.invoice_data (id, deleted, pay_transaction_key, scm_claimnumber, scm_date_of_birth, 
@@ -409,8 +409,8 @@ INSERT INTO opm.payment_transaction (id, deleted, pay_trans_batch_number, pay_tr
 	pay_trans_status_date, technician_user_key, payment_applied_order_code, post_flag, csd, 
 	user_inserted, ach_payment, payment_status_code, resolved_suspense, update_to_completed, pay_transaction_key)
 VALUES (14, false, '999', '01', '01', 
-		'1111111', '1982-01-02', 101.01, '2014-01-02', '54', 
-		'2014-01-02', 'userkey2', 'DEFAULT_USER_ORDER', true, '2222222', 
+		'1111111', '1982-01-02', 101.01, '2014-01-02', 5, 
+		'2014-01-02', 2, 'DEFAULT_USER_ORDER', true, '2222222', 
 		true, false, 54, false, false, 14);
 
 INSERT INTO opm.invoice_data (id, deleted, pay_transaction_key, scm_claimnumber, scm_date_of_birth, 
@@ -433,8 +433,8 @@ INSERT INTO opm.payment_transaction (id, deleted, pay_trans_batch_number, pay_tr
 	pay_trans_status_date, technician_user_key, payment_applied_order_code, post_flag, csd, 
 	user_inserted, ach_payment, payment_status_code, resolved_suspense, update_to_completed, pay_transaction_key)
 VALUES (15, false, '999', '01', '02', 
-		'1111111', '1982-01-02', 101.01, '2014-01-02', '54', 
-		'2014-01-02', 'userkey2', 'DEFAULT_USER_ORDER', true, '2222222', 
+		'1111111', '1982-01-02', 101.01, '2014-01-02', 5, 
+		'2014-01-02', 2, 'DEFAULT_USER_ORDER', true, '2222222', 
 		true, false, 54, false, false, 15);
 
 INSERT INTO opm.invoice_data (id, deleted, pay_transaction_key, scm_claimnumber, scm_date_of_birth, 
@@ -457,8 +457,8 @@ INSERT INTO opm.payment_transaction (id, deleted, pay_trans_batch_number, pay_tr
 	pay_trans_status_date, technician_user_key, payment_applied_order_code, post_flag, csd, 
 	user_inserted, ach_payment, payment_status_code, resolved_suspense, update_to_completed, pay_transaction_key)
 VALUES (16, false, '999', '01', '03', 
-		'1111111', '1982-01-03', 101.01, '2014-01-02', '12', 
-		'2014-01-02', 'userkey2', 'DEFAULT_USER_ORDER', true, '3333333', 
+		'1111111', '1982-01-03', 101.01, '2014-01-02', 1, 
+		'2014-01-02', 2, 'DEFAULT_USER_ORDER', true, '3333333', 
 		true, false, 12, false, false, 16);
 
 INSERT INTO opm.invoice_data (id, deleted, pay_transaction_key, scm_claimnumber, scm_date_of_birth, 

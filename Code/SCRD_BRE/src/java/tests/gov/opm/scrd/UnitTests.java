@@ -197,37 +197,37 @@ public class UnitTests extends TestCase {
     public static Test suite() {
         final TestSuite suite = new TestSuite();
 
-        // Add service tests
-        addServiceTests(suite);
-
-        suite.addTest(PersistenceTests.suite());
-
-        // Added in OPM - Data Migration - Entities Update Module Assembly 1.0
-        suite.addTest(DescriptiveNamedEntityUnitTests.suite());
-        suite.addTest(OrderedNamedEntityUnitTests.suite());
-
-        suite.addTest(IdentifiableEntityUnitTests.suite());
-        suite.addTest(NamedEntityUnitTests.suite());
-        suite.addTest(BaseSearchParametersUnitTests.suite());
-        suite.addTest(BasicSearchFilterUnitTests.suite());
-        suite.addTest(BasePagedSearchParametersUnitTests.suite());
-        suite.addTest(BasicPagedSearchFilterUnitTests.suite());
-        suite.addTest(SearchResultUnitTests.suite());
-
-        // Add application tests
-        addApplicationTests(suite);
-
-        // Add lookup tests
-        addLookupTests(suite);
+//        // Add service tests
+//        addServiceTests(suite);
+//
+//        suite.addTest(PersistenceTests.suite());
+//
+//        // Added in OPM - Data Migration - Entities Update Module Assembly 1.0
+//        suite.addTest(DescriptiveNamedEntityUnitTests.suite());
+//        suite.addTest(OrderedNamedEntityUnitTests.suite());
+//
+//        suite.addTest(IdentifiableEntityUnitTests.suite());
+//        suite.addTest(NamedEntityUnitTests.suite());
+//        suite.addTest(BaseSearchParametersUnitTests.suite());
+//        suite.addTest(BasicSearchFilterUnitTests.suite());
+//        suite.addTest(BasePagedSearchParametersUnitTests.suite());
+//        suite.addTest(BasicPagedSearchFilterUnitTests.suite());
+//        suite.addTest(SearchResultUnitTests.suite());
+//
+//        // Add application tests
+//        addApplicationTests(suite);
+//
+//        // Add lookup tests
+//        addLookupTests(suite);
         
         // add reporting tests
         addReportTests(suite);
         // Exceptions
         
-        suite.addTest(OPMExceptionUnitTests.suite());
-        suite.addTest(AuthorizationExceptionUnitTests.suite());
-        suite.addTest(EntityNotFoundExceptionUnitTests.suite());
-        suite.addTest(OPMConfigurationExceptionUnitTests.suite());
+//        suite.addTest(OPMExceptionUnitTests.suite());
+//        suite.addTest(AuthorizationExceptionUnitTests.suite());
+//        suite.addTest(EntityNotFoundExceptionUnitTests.suite());
+//        suite.addTest(OPMConfigurationExceptionUnitTests.suite());
         
         return suite;
     }
@@ -371,46 +371,46 @@ public class UnitTests extends TestCase {
      * @param suite the test suite.
      */
     private static void addReportTests(TestSuite suite) {
-        // lock box reporting
-        suite.addTest(ActiveCreditBalancesReportServiceTests.suite());
-        suite.addTest(GeneralLedgerReportServiceTests.suite());
-        suite.addTest(TransactionRegisterNewReceiptsReportServiceTests.suite());
-        suite.addTest(LockboxImportErrorsReportServiceTests.suite());
-        suite.addTest(LockboxFileImportReportServiceTests.suite());
-        suite.addTest(MonthlyAdjustmentReportServiceTests.suite());
-        suite.addTest(ChangeHistoryReportServiceTests.suite());
-        suite.addTest(SuspenseResolutionReportServiceTests.suite());
-
-        // payment reporing
-        suite.addTest(CurrentSuspenseReportServiceTests.suite());
-        suite.addTest(TotalPaymentSummaryReportServiceTests.suite());
-        suite.addTest(ResolvedSuspenseHistoryReportServiceTests.suite());
-        suite.addTest(ManualPaymentReportServiceTests.suite());
-        suite.addTest(PaymentHistoryReportServiceTests.suite());
-        suite.addTest(PaymentByTypeRangeReportServiceTests.suite());
-        suite.addTest(PaymentPendingApprovalReportServiceTests.suite());
-        suite.addTest(MonthlySuspenseListReportServiceTests.suite());
-        
-        // daily reporting
-        suite.addTest(BalancedLockboxReportServiceUnitTests.suite());
-        suite.addTest(BalancedScorecardAccountReportServiceUnitTests.suite());
-        suite.addTest(BalancedScorecardPaymentReportServiceUnitTests.suite());
-        suite.addTest(DailyBatchProcessingReportServiceUnitTests.suite());
-        suite.addTest(DailyCashflowReportServiceUnitTests.suite());
-        suite.addTest(DailyReconciliationReportServiceUnitTests.suite());
-        suite.addTest(DailySuspenseReportServiceUnitTests.suite());
-        
-        // account reporting
-        suite.addTest(AccountBalanceReportServiceUnitTests.suite());
-        suite.addTest(AccountStatisticsReportServiceUnitTests.suite());
+//        // lock box reporting
+//        suite.addTest(ActiveCreditBalancesReportServiceTests.suite());
+//        suite.addTest(GeneralLedgerReportServiceTests.suite());
+//        suite.addTest(TransactionRegisterNewReceiptsReportServiceTests.suite());
+//        suite.addTest(LockboxImportErrorsReportServiceTests.suite());
+//        suite.addTest(LockboxFileImportReportServiceTests.suite());
+//        suite.addTest(MonthlyAdjustmentReportServiceTests.suite());
+//        suite.addTest(ChangeHistoryReportServiceTests.suite());
+//        suite.addTest(SuspenseResolutionReportServiceTests.suite());
+//
+//        // payment reporing
+//        suite.addTest(CurrentSuspenseReportServiceTests.suite());
+//        suite.addTest(TotalPaymentSummaryReportServiceTests.suite());
+//        suite.addTest(ResolvedSuspenseHistoryReportServiceTests.suite());
+//        suite.addTest(ManualPaymentReportServiceTests.suite());
+//        suite.addTest(PaymentHistoryReportServiceTests.suite());
+//        suite.addTest(PaymentByTypeRangeReportServiceTests.suite());
+//        suite.addTest(PaymentPendingApprovalReportServiceTests.suite());
+//        suite.addTest(MonthlySuspenseListReportServiceTests.suite());
+//        
+//        // daily reporting
+//        suite.addTest(BalancedLockboxReportServiceUnitTests.suite());
+//        suite.addTest(BalancedScorecardAccountReportServiceUnitTests.suite());
+//        suite.addTest(BalancedScorecardPaymentReportServiceUnitTests.suite());
+//        suite.addTest(DailyBatchProcessingReportServiceUnitTests.suite());
+//        suite.addTest(DailyCashflowReportServiceUnitTests.suite());
+//        suite.addTest(DailyReconciliationReportServiceUnitTests.suite());
+//        suite.addTest(DailySuspenseReportServiceUnitTests.suite());
+//        
+//        // account reporting
+//        suite.addTest(AccountBalanceReportServiceUnitTests.suite());
+//        suite.addTest(AccountStatisticsReportServiceUnitTests.suite());
         suite.addTest(AccountSummaryReportServiceUnitTests.suite());
-        suite.addTest(CalculationAuditTrailReportServiceUnitTests.suite());
-        suite.addTest(ClosedAccountReportServiceUnitTests.suite());
-        suite.addTest(RefundSectionAccountAssignmentsReportServiceUnitTests.suite());
-        suite.addTest(UserAuditTrailReportServiceUnitTests.suite());
-        suite.addTest(UserPermissionsRolesReportServiceUnitTests.suite());
-        suite.addTest(UserRolePermissionsReportServiceUnitTests.suite());
-        suite.addTest(DeductionRatesReportServiceUnitTests.suite());
-        suite.addTest(RefundSectionAccountAssignmentsReportServiceUnitTests.suite());
+//        suite.addTest(CalculationAuditTrailReportServiceUnitTests.suite());
+//        suite.addTest(ClosedAccountReportServiceUnitTests.suite());
+//        suite.addTest(RefundSectionAccountAssignmentsReportServiceUnitTests.suite());
+//        suite.addTest(UserAuditTrailReportServiceUnitTests.suite());
+//        suite.addTest(UserPermissionsRolesReportServiceUnitTests.suite());
+//        suite.addTest(UserRolePermissionsReportServiceUnitTests.suite());
+//        suite.addTest(DeductionRatesReportServiceUnitTests.suite());
+//        suite.addTest(RefundSectionAccountAssignmentsReportServiceUnitTests.suite());
     }
 }

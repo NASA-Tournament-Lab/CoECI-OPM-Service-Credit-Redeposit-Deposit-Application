@@ -24,10 +24,10 @@
       <mapping-file>META-INF/orm.xml</mapping-file>
       <shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
       <properties>
-        <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/scrd_merge"/>
+        <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/postgres"/>
         <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
         <property name="javax.persistence.jdbc.user" value="postgres"/>
-        <property name="javax.persistence.jdbc.password" value="kingkong"/>
+        <property name="javax.persistence.jdbc.password" value="123@ewss"/>
         <property name="hibernate.show_sql" value="true" />
         <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
 

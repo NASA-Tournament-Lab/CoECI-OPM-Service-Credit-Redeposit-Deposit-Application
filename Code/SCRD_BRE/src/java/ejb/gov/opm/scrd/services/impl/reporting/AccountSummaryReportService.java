@@ -45,25 +45,25 @@ public class AccountSummaryReportService extends BaseReportService
             .getName();
 
     /**
-     * Represents the name of CSRS retirement type. It is modified by setter. It is injected by Spring. It can not be
+     * Represents the id of CSRS retirement type. It is modified by setter. It is injected by Spring. It can not be
      * null after injected.
      */
     @Autowired
-    private String receiptPaymentTypeName;
+    private Long receiptPaymentTypeId;
 
     /**
-     * Represents the name of CSRS debit voucher adjustment payment type. It is modified by setter. It is injected by
+     * Represents the id of CSRS debit voucher adjustment payment type. It is modified by setter. It is injected by
      * Spring. It can not be null after injected.
      */
     @Autowired
-    private String debitVoucherAdjustmentPaymentTypeName;
+    private Long debitVoucherAdjustmentPaymentTypeId;
 
     /**
-     * Represents the name of CSRS replacement adjustment payment type. It is modified by setter. It is injected by
+     * Represents the id of CSRS replacement adjustment payment type. It is modified by setter. It is injected by
      * Spring. It can not be null after injected.
      */
     @Autowired
-    private String replacementAdjustmentPaymentTypeName;
+    private Long replacementAdjustmentPaymentTypeId;
 
     /**
      * Creates a new instance of the {@link AccountSummaryReportService} class.
@@ -174,7 +174,7 @@ public class AccountSummaryReportService extends BaseReportService
                             "SELECT COALESCE(SUM(p.payTransPaymentAmount), 0) FROM PaymentTransaction p WHERE "
                                     + "p.csd = :csd AND p.payTransStatusCode = :payTransStatusCode",
                             BigDecimal.class).setParameter("csd", request.getCsd()).setParameter
-                            ("payTransStatusCode", receiptPaymentTypeName).getSingleResult());
+                            ("payTransStatusCode", receiptPaymentTypeId).getSingleResult());
             response.setSuspense(getEntityManager()
                     .createQuery(
                             "SELECT COALESCE(SUM(p.payTransPaymentAmount), 0) FROM PaymentTransaction p WHERE "
@@ -191,7 +191,7 @@ public class AccountSummaryReportService extends BaseReportService
                     .setParameter("resolvedSuspense", false)
                     .setParameter("csd", request.getCsd())
                     .setParameter("payTransStatusCode",
-                            replacementAdjustmentPaymentTypeName)
+                            replacementAdjustmentPaymentTypeId)
                     .getSingleResult());
             response.setAdjustmentPlus(getEntityManager()
                     .createQuery(
@@ -202,7 +202,7 @@ public class AccountSummaryReportService extends BaseReportService
                     .setParameter("userInserted", true)
                     .setParameter("csd", request.getCsd())
                     .setParameter("payTransStatusCode",
-                            replacementAdjustmentPaymentTypeName)
+                            replacementAdjustmentPaymentTypeId)
                     .getSingleResult());
             response.setDebitVouchers(getEntityManager()
                     .createQuery(
@@ -211,7 +211,7 @@ public class AccountSummaryReportService extends BaseReportService
                                     + "p.csd = :csd", BigDecimal.class)
                     .setParameter("csd", request.getCsd())
                     .setParameter("payTransStatusCode",
-                            debitVoucherAdjustmentPaymentTypeName)
+                            debitVoucherAdjustmentPaymentTypeId)
                     .getSingleResult());
             response.setAdjustmentMinus(getEntityManager()
                     .createQuery(
@@ -384,35 +384,35 @@ public class AccountSummaryReportService extends BaseReportService
     }
 
     /**
-     * Sets the name of receipt payment type.
+     * Sets the id of receipt payment type.
      *
-     * @param receiptPaymentTypeName
-     *         the name of receipt payment type.
+     * @param receiptPaymentTypeId
+     *         the id of receipt payment type.
      */
-    public void setReceiptPaymentTypeName(String receiptPaymentTypeName) {
-        this.receiptPaymentTypeName = receiptPaymentTypeName;
+    public void setReceiptPaymentTypeId(Long receiptPaymentTypeId) {
+        this.receiptPaymentTypeId = receiptPaymentTypeId;
     }
 
     /**
-     * Sets the name of debit voucher adjustment retirement type.
+     * Sets the id of debit voucher adjustment retirement type.
      *
-     * @param debitVoucherAdjustmentPaymentTypeName
+     * @param debitVoucherAdjustmentPaymentTypeId
      *         the name of debit voucher adjustment retirement type.
      */
-    public void setDebitVoucherAdjustmentPaymentTypeName(
-            String debitVoucherAdjustmentPaymentTypeName) {
-        this.debitVoucherAdjustmentPaymentTypeName = debitVoucherAdjustmentPaymentTypeName;
+    public void setDebitVoucherAdjustmentPaymentTypeId(
+            Long debitVoucherAdjustmentPaymentTypeId) {
+        this.debitVoucherAdjustmentPaymentTypeId = debitVoucherAdjustmentPaymentTypeId;
     }
 
     /**
-     * Sets the name of replacement adjustment retirement type.
+     * Sets the Id of replacement adjustment retirement type.
      *
-     * @param replacementAdjustmentPaymentTypeName
-     *         the name of replacement adjustment retirement type.
+     * @param replacementAdjustmentPaymentTypeId
+     *         the id of replacement adjustment retirement type.
      */
-    public void setReplacementAdjustmentPaymentTypeName(
-            String replacementAdjustmentPaymentTypeName) {
-        this.replacementAdjustmentPaymentTypeName = replacementAdjustmentPaymentTypeName;
+    public void setReplacementAdjustmentPaymentTypeId(
+            Long replacementAdjustmentPaymentTypeId) {
+        this.replacementAdjustmentPaymentTypeId = replacementAdjustmentPaymentTypeId;
     }
 
     /**
@@ -425,13 +425,13 @@ public class AccountSummaryReportService extends BaseReportService
     @Override
     protected void checkInit() {
         super.checkInit();
-        Helper.checkState(Helper.isNullOrEmpty(receiptPaymentTypeName),
-                "The receiptPaymentTypeName cannot be null or empty.");
+        Helper.checkState(receiptPaymentTypeId == null,
+                "The receiptPaymentTypeId cannot be null.");
         Helper.checkState(
-                Helper.isNullOrEmpty(debitVoucherAdjustmentPaymentTypeName),
+                debitVoucherAdjustmentPaymentTypeId == null,
                 "The debitVoucherAdjustmentPaymentTypeName cannot be null or empty.");
         Helper.checkState(
-                Helper.isNullOrEmpty(replacementAdjustmentPaymentTypeName),
+                replacementAdjustmentPaymentTypeId == null,
                 "The replacementAdjustmentPaymentTypeName cannot be null or empty.");
     }
 

@@ -1,0 +1,225 @@
+<p>The new Service Credit Redeposit &amp; Deposit (SCRD) web application is developed to manage Service
+Credit accounts, a process that was formerly handled by a Windows application. Accounts are
+established for federal employees for periods of federal employment that are either not covered by
+retirement deductions (deposits), or were covered and later refunded (re-deposits). There are two
+primary groups that perform operations in the service credit system: "Refunds and Deposits" and
+"Funds Management" Division.</p>
+
+<h2>Web Application Sections</h2>
+The users interact with the Service Credit System via the SCRD web site. This
+web application updates the global database for the user.
+The Batch Service is installed on one application server. It is the back end of the web application. The
+administrators may monitor its progress via the front end using the notifications logs. This back end
+reads in the Lockbox bank data and performs the nightly processing.
+
+
+<h2>General Work Flow</h2>
+When federal employees apply to make a deposit or redeposit, they submit Standard form 2803, or
+Standard Form 3108 depending on whether they are currently enrolled in the Civil Service
+Retirement System (CSRS) or Federal Employees Retirement System (FERS). In either case, the
+employee completes part A of the application, then requests that the employing agency complete
+part B of the application. The employing agency then sends the application to the Refunds Section in
+Boyers. That office determines eligibility, calculates the amount due, and mails an initial bill (RI36-
+23) to the claimant.
+<p>
+After receiving the bill, the claimant will send payments and changes of address through the Lockbox
+bank. If the Lockbox data has no errors, the payment will be transmitted from the bank to OPM.
+Every business day, OPM receives a file with Service Credit, Voluntary Contributions, and Direct Pay
+Life Insurance. This file is split and distributed to these three systems. As soon as the Service Credit
+file is available, the "batch" process will read it into the database. Users may notice this increase in
+"Pending" payments in the late morning. There will be from 100 to 200 new payments per day.
+Some of these will be "Suspense" so a user could be working on the last suspended payment, hit the
+"Refresh" button and see twenty new suspense payments appear.</p>
+
+
+The Batch Service processes payments immediately in order to post the good ones. The logic is
+shown in the following diagram.
+
+<figure>
+  <img src="i/help/paymentProcessingLogic.png" alt="payment Processing Logic" width="700px">
+  <figcaption>Payment Processing Logic.</figcaption>
+</figure>
+
+
+<h2>Nightly Payment Updates</h2>
+Every night around 8:30 PM, the "Batch" process will process all the "Pending" payments. This
+process will post all payments from the lockbox as well as post any payments corrected or redirected
+to their proper account. After posting, new balances are calculated for the claimants and new bills
+generated in Boyers.
+This table shows the posting states from 'Pending' to 'Complete'. General Ledger (GL) entries are
+only made after a payment is 'Complete'. This is different from the previous system that entered
+the GLs as the payments came in. Suspense amounts went to GL 0504.
+
+<table class="helpTbl stdTbl" border="1" cellspacing="0" cellpadding="0">
+
+    <thead> 
+
+       <tr><th >
+          Before Batch
+      </th>
+      <th >
+          After Batch
+      </th>
+        <th >
+          GL Code
+      </th>
+        </tr>
+    </thead>
+
+<tbody>
+   <tr><td >
+      Posted - Pending
+  </td>
+  <td >
+      Posted - Complete
+  </td>
+  <td >
+      GL 0501 Debit
+  </td>
+</tr><tr><td >
+Reversed - Pending
+</td>
+<td >
+  Reversed - Complete
+</td>
+<td >
+  GL 0501 Credit
+</td>
+</tr><tr><td >
+Voluntary Contributions - Pending
+</td>
+<td >
+  Voluntary Contributions - Complete
+</td>
+<td >
+  GL 0504 Credit</p>
+</td>
+</tr><tr><td >
+Direct Pay Life - Pending
+</td>
+<td >
+  Direct Pay Life - Complete
+</td>
+<td >
+  GL 0504 Credit
+</td>
+</tr><tr><td >
+Refund Pending
+</td>
+<td >
+  Refund Complete
+</td>
+<td >
+  GL 0504 Credit<span>  </span>&amp; GL 0801 Debit
+</td>
+</tr></tbody>
+<caption>Payment Posting states.</caption>
+</table>
+<p></p>
+
+
+<h2>Nightly Reports</h2>
+These reports are printed every night. Four reports are printed in Boyers while the fifth is printed in
+DC
+
+<table class="helpTbl stdTbl" border="1" cellspacing="0" cellpadding="0">
+
+    <thead>
+        <tr><th >
+  Location
+  </th>
+  <th >
+  Report
+  </th>
+  <th >
+  Action
+  </th>
+  <th >
+  Description
+  </th>
+ </tr>
+    </thead>
+
+
+<tbody><tr><td >
+  Boyers
+  </td>
+  <td >
+  Payment Invoices
+  </td>
+  <td >
+  Mail
+  </td>
+  <td >
+  RI36-18 receipt for a payment and updated balance and
+  interest for the account
+  </td>
+ </tr><tr><td >
+  Boyers
+  </td>
+  <td >
+  Initial Bill Invoices
+  </td>
+  <td >
+  Mail
+  </td>
+  <td >
+  RI36-23 first bill on account
+  </td>
+ </tr><tr><td >
+  Boyers
+  </td>
+  <td >
+  Reversal Notices
+  </td>
+  <td >
+  Mail
+  </td>
+  <td >
+  RI36-18 showing payment removed from account
+  </td>
+ </tr><tr><td >
+  Boyers
+  </td>
+  <td >
+  Stop ACH Letters
+  </td>
+  <td >
+  Mail
+  </td>
+  <td >
+  RI16-28 Direct Payment Authorization
+  </td>
+ </tr><tr><td >
+  DC
+  </td>
+  <td >
+  Refund Memos
+  </td>
+  <td >
+  Authorize
+  </td>
+  <td >
+  Voucher for Refund of
+  Excess Recovery Payment
+  </td>
+ </tr></tbody>
+<caption> Generated Reports.</caption>
+</table>
+
+<p></p>
+<h2>Bank Input</h2>
+The bank input process that was established with the former mainframe-based service credit system
+(SCRD) still remains in effect. On a daily basis the lockbox (US Bank in St. Louis) sends bank data via
+host-to-host transmission to OPM's Data Center Group for three systems (Service Credit, Voluntary
+Contributions, and Life Insurance). The reports that are generated in this process will continue to be
+produced showing the bank input, as well as the totals and errors that occurred during host-to-host
+and initial processing. Rather than send the service credit bank data to another mainframe
+procedure as in the past, this file is converted to a text file format for processing in the new system.
+
+<h2>Interfacing with Other Systems</h2>
+Transferring money from the Service Credit System to Voluntary Contribution and Direct Pay Lift
+Insurance is still done manually. The application will generate the proper paperwork but must be
+signed and delivered to the correct office.
+The GL File is made automatically by the batch service and loads data indirectly via a daily
+ConnectDirect upload.

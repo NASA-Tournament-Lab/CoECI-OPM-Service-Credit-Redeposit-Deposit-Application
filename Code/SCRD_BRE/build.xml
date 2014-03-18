@@ -297,6 +297,8 @@
       <fileset dir="${core.dist.dir}">
         <include name="${core-dist-name}"/>
       </fileset>
+      <fileset refid="spring-security-kerberos">
+      </fileset>
       <fileset refid="drools">
       </fileset>
       <fileset refid="hibernate">
@@ -450,7 +452,289 @@
              src="${src.dir}/sql/clear-data.sql" classpathref="buildpath"/>
   </target>
 
-  <target name="db-test-data" depends="db-clear" description="recreates the test data">
+
+  <loadfile srcfile="${web.dir}/help/gettingStartedSubject.html" property="helpgettingStartedSubject">
+ </loadfile>
+
+ <loadfile srcfile="${web.dir}/help/gettingStartedContent.html" property="helpgettingStartedContent">
+ </loadfile>
+
+ <loadfile srcfile="${web.dir}/help/generalInformationSubject.html" property="helpgeneralInformationSubject">
+ </loadfile>
+
+ <loadfile srcfile="${web.dir}/help/generalInformationContent.html" property="helpgeneralInformationContent">
+ </loadfile>
+
+ <loadfile srcfile="${web.dir}/help/accountDetailsPageContent.html" property="helpaccountDetailsPageContent">
+ </loadfile>
+
+ <loadfile srcfile="${web.dir}/help/accountDetailsPageSubject.html" property="helpaccountDetailsPageSubject">
+ </loadfile>
+
+ <loadfile srcfile="${web.dir}/help/accountNotesContent.html" property="helpaccountNotesContent">
+ </loadfile>
+
+
+ <loadfile srcfile="${web.dir}/help/accountNotesSubject.html" property="helpaccountNotesSubject">
+ </loadfile>
+
+ <loadfile srcfile="${web.dir}/help/employeeTabSubject.html" property="helpemployeeTabSubject">
+ </loadfile>
+
+ <loadfile srcfile="${web.dir}/help/employeeTabContent.html" property="helpemployeeTabContent">
+ </loadfile>
+
+ <loadfile srcfile="${web.dir}/help/billingSummaryTabSubject.html" property="helpbillingSummaryTabSubject">
+ </loadfile>
+
+ <loadfile srcfile="${web.dir}/help/billingSummaryTabContent.html" property="helpbillingSummaryTabContent">
+ </loadfile>
+
+ <loadfile srcfile="${web.dir}/help/updateInterestSubject.html" property="helpupdateInterestSubject">
+ </loadfile>
+
+
+ <loadfile srcfile="${web.dir}/help/updateInterestContent.html" property="helpupdateInterestContent">
+ </loadfile>
+
+ <loadfile srcfile="${web.dir}/help/serviceHistoryTabSubject.html" property="helpserviceHistoryTabSubject">
+ </loadfile>
+
+ <loadfile srcfile="${web.dir}/help/serviceHistoryTabContent.html" property="helpserviceHistoryTabContent">
+ </loadfile>
+
+ <loadfile srcfile="${web.dir}/help/paymentHistoryTabContent.html" property="helppaymentHistoryTabContent">
+ </loadfile>
+
+ <loadfile srcfile="${web.dir}/help/paymentHistoryTabSubject.html" property="helppaymentHistoryTabSubject">
+ </loadfile>
+
+ <loadfile srcfile="${web.dir}/help/paymentsNotesSubject.html" property="helppaymentsNotesSubject">
+ </loadfile>
+
+
+ <loadfile srcfile="${web.dir}/help/paymentsNotesContent.html" property="helppaymentsNotesContent">
+ </loadfile>
+
+ <loadfile srcfile="${web.dir}/help/paymentReversalSubject.html" property="helppaymentReversalSubject">
+ </loadfile>
+
+ <loadfile srcfile="${web.dir}/help/paymentReversalContent.html" property="helppaymentReversalContent">
+ </loadfile>
+
+ <loadfile srcfile="${web.dir}/help/addPaymentContent.html" property="helpaddPaymentContent">
+ </loadfile>
+
+ <loadfile srcfile="${web.dir}/help/addPaymentSubject.html" property="helpaddPaymentSubject">
+ </loadfile>
+
+ <loadfile srcfile="${web.dir}/help/approvalPageSubject.html" property="helpapprovalPageSubject">
+ </loadfile>
+
+
+ <loadfile srcfile="${web.dir}/help/approvalPageContent.html" property="helpapprovalPageContent">
+ </loadfile>
+
+ <loadfile srcfile="${web.dir}/help/approveInterestContent.html" property="helpapproveInterestContent">
+ </loadfile>
+
+ <loadfile srcfile="${web.dir}/help/approveInterestSubject.html" property="helpapproveInterestSubject">
+ </loadfile>
+
+ <loadfile srcfile="${web.dir}/help/approvePaymentMovesSubject.html" property="helpapprovePaymentMovesSubject">
+ </loadfile>
+
+ <loadfile srcfile="${web.dir}/help/approvePaymentMovesContent.html" property="helpapprovePaymentMovesContent">
+ </loadfile>
+
+ <loadfile srcfile="${web.dir}/help/approvePendingPaymentContent.html" property="helpapprovePendingPaymentContent">
+ </loadfile>
+
+
+
+
+
+
+<loadfile srcfile="${web.dir}/help/approvePendingPaymentSubject.html" property="helpapprovePendingPaymentSubject">
+ </loadfile>
+
+
+<loadfile srcfile="${web.dir}/help/suspensePageSubject.html" property="helpsuspensePageSubject">
+ </loadfile>
+<loadfile srcfile="${web.dir}/help/suspensePageContent.html" property="helpsuspensePageContent">
+ </loadfile>
+
+<loadfile srcfile="${web.dir}/help/transferPaymentContent.html" property="helptransferPaymentContent">
+ </loadfile>
+<loadfile srcfile="${web.dir}/help/transferPaymentSubject.html" property="helptransferPaymentSubject">
+ </loadfile>
+
+
+<loadfile srcfile="${web.dir}/help/paymentsPageSubject.html" property="helppaymentsPageSubject">
+ </loadfile>
+<loadfile srcfile="${web.dir}/help/paymentsPageContent.html" property="helppaymentsPageContent">
+ </loadfile>
+
+<loadfile srcfile="${web.dir}/help/searchPaymentsSubject.html" property="helpsearchPaymentsSubject">
+ </loadfile>
+<loadfile srcfile="${web.dir}/help/searchPaymentsContent.html" property="helpsearchPaymentsContent">
+ </loadfile>
+
+<loadfile srcfile="${web.dir}/help/paymentsResultsContent.html" property="helppaymentsResultsContent">
+ </loadfile>
+<loadfile srcfile="${web.dir}/help/paymentsResultsSubject.html" property="helppaymentsResultsSubject">
+ </loadfile>
+
+
+<loadfile srcfile="${web.dir}/help/searchAccountsSubject.html" property="helpsearchAccountsSubject">
+ </loadfile>
+<loadfile srcfile="${web.dir}/help/searchAccountsContent.html" property="helpsearchAccountsContent">
+ </loadfile>
+
+
+<loadfile srcfile="${web.dir}/help/newAccountPageSubject.html" property="helpnewAccountPageSubject">
+ </loadfile>
+<loadfile srcfile="${web.dir}/help/newAccountPageContent.html" property="helpnewAccountPageContent">
+ </loadfile>
+
+<loadfile srcfile="${web.dir}/help/newAccountBasicInformationSubject.html" property="helpnewAccountBasicInformationSubject">
+ </loadfile>
+<loadfile srcfile="${web.dir}/help/newAccountBasicInformationContent.html" property="helpnewAccountBasicInformationContent">
+ </loadfile>
+
+<loadfile srcfile="${web.dir}/help/newAccountServiceHistorySubject.html" property="helpnewAccountServiceHistorySubject">
+ </loadfile>
+<loadfile srcfile="${web.dir}/help/newAccountServiceHistoryContent.html" property="helpnewAccountServiceHistoryContent">
+ </loadfile>
+
+<loadfile srcfile="${web.dir}/help/newAccountNotesContent.html" property="helpnewAccountNotesContent">
+ </loadfile>
+<loadfile srcfile="${web.dir}/help/newAccountNotesSubject.html" property="helpnewAccountNotesSubject">
+ </loadfile>
+
+<loadfile srcfile="${web.dir}/help/newAccountFinishContent.html" property="helpnewAccountFinishContent">
+ </loadfile>
+<loadfile srcfile="${web.dir}/help/newAccountFinishSubject.html" property="helpnewAccountFinishSubject">
+ </loadfile>
+
+
+<loadfile srcfile="${web.dir}/help/workQueuePageSubject.html" property="helpworkQueuePageSubject">
+ </loadfile>
+<loadfile srcfile="${web.dir}/help/workQueuePageContent.html" property="helpworkQueuePageContent">
+ </loadfile>
+
+
+<loadfile srcfile="${web.dir}/help/reportsPageSubject.html" property="helpreportsPageSubject">
+ </loadfile>
+<loadfile srcfile="${web.dir}/help/reportsPageContent.html" property="helpreportsPageContent">
+ </loadfile>
+
+<loadfile srcfile="${web.dir}/help/reportsTabContent.html" property="helpreportsTabContent">
+ </loadfile>
+<loadfile srcfile="${web.dir}/help/reportsTabSubject.html" property="helpreportsTabSubject">
+ </loadfile>
+
+<loadfile srcfile="${web.dir}/help/correspondenceTabSubject.html" property="helpcorrespondenceTabSubject">
+ </loadfile>
+<loadfile srcfile="${web.dir}/help/correspondenceTabContent.html" property="helpcorrespondenceTabContent">
+ </loadfile>
+
+<loadfile srcfile="${web.dir}/help/referenceTabSubject.html" property="helpreferenceTabSubject">
+ </loadfile>
+<loadfile srcfile="${web.dir}/help/referenceTabContent.html" property="helpreferenceTabContent">
+ </loadfile>
+
+
+<loadfile srcfile="${web.dir}/help/toolsPageContent.html" property="helptoolsPageContent">
+ </loadfile>
+<loadfile srcfile="${web.dir}/help/toolsPageSubject.html" property="helptoolsPageSubject">
+ </loadfile>
+
+<loadfile srcfile="${web.dir}/help/creditPreferencesSubject.html" property="helpcreditPreferencesSubject">
+ </loadfile>
+<loadfile srcfile="${web.dir}/help/creditPreferencesContent.html" property="helpcreditPreferencesContent">
+ </loadfile>
+
+<loadfile srcfile="${web.dir}/help/printingToolsSubject.html" property="helpprintingToolsSubject">
+ </loadfile>
+<loadfile srcfile="${web.dir}/help/printingToolsContent.html" property="helpprintingToolsContent">
+ </loadfile>
+
+<loadfile srcfile="${web.dir}/help/printoutArchiveContent.html" property="helpprintoutArchiveContent">
+ </loadfile>
+<loadfile srcfile="${web.dir}/help/printoutArchiveSubject.html" property="helpprintoutArchiveSubject">
+ </loadfile>
+
+<loadfile srcfile="${web.dir}/help/adminPageSubject.html" property="helpadminPageSubject">
+ </loadfile>
+<loadfile srcfile="${web.dir}/help/adminPageContent.html" property="helpadminPageContent">
+ </loadfile>
+
+<loadfile srcfile="${web.dir}/help/latestReportsContent.html" property="helplatestReportsContent">
+ </loadfile>
+<loadfile srcfile="${web.dir}/help/latestReportsSubject.html" property="helplatestReportsSubject">
+ </loadfile>
+
+<loadfile srcfile="${web.dir}/help/userPermissionsSubject.html" property="helpuserPermissionsSubject">
+ </loadfile>
+<loadfile srcfile="${web.dir}/help/userPermissionsContent.html" property="helpuserPermissionsContent">
+ </loadfile>
+
+
+<loadfile srcfile="${web.dir}/help/notificationLogPageContent.html" property="helpnotificationLogPageContent">
+ </loadfile>
+<loadfile srcfile="${web.dir}/help/notificationLogPageSubject.html" property="helpnotificationLogPageSubject">
+ </loadfile>
+
+
+<loadfile srcfile="${web.dir}/help/notificationsSubject.html" property="helpnotificationsSubject">
+ </loadfile>
+<loadfile srcfile="${web.dir}/help/notificationsContent.html" property="helpnotificationsContent">
+ </loadfile>
+
+<loadfile srcfile="${web.dir}/help/notificationsErrorsContent.html" property="helpnotificationsErrorsContent">
+ </loadfile>
+<loadfile srcfile="${web.dir}/help/notificationsErrorsSubject.html" property="helpnotificationsErrorsSubject">
+ </loadfile>
+
+
+<loadfile srcfile="${web.dir}/help/notificationsInformationSubject.html" property="helpnotificationsInformationSubject">
+ </loadfile>
+<loadfile srcfile="${web.dir}/help/notificationsInformationContent.html" property="helpnotificationsInformationContent">
+ </loadfile>
+
+<loadfile srcfile="${web.dir}/help/helpPageSubject.html" property="helphelpPageSubject">
+ </loadfile>
+<loadfile srcfile="${web.dir}/help/helpPageContent.html" property="helphelpPageContent">
+ </loadfile>
+
+<loadfile srcfile="${web.dir}/help/refundLogicContent.html" property="helprefundLogicContent">
+ </loadfile>
+<loadfile srcfile="${web.dir}/help/refundLogicSubject.html" property="helprefundLogicSubject">
+ </loadfile>
+
+
+<loadfile srcfile="${web.dir}/help/reportsViewerSubject.html" property="helpreportsViewerSubject">
+ </loadfile>
+<loadfile srcfile="${web.dir}/help/reportsViewerContent.html" property="helpreportsViewerContent">
+ </loadfile>
+
+<target name="db-help-data"  depends="db-clear" description="insert help data">
+
+ <copy file="${src.dir}/sql/help-content-template.sql" tofile="${src.dir}/sql/help-content.sql" overwrite="true">
+      <filterset>
+        <propertyset>
+          <propertyref prefix="help"/>
+        </propertyset>
+
+      </filterset>
+</copy>
+
+
+    <sql driver="${db.driver}" password="${db.pass}" url="${db.url}" userid="${db.user}" src="${src.dir}/sql/help-content.sql" classpathref="buildpath" delimiter=";;"/>
+  </target>
+
+  <target name="db-test-data" depends="db-clear, db-help-data" description="recreates the test data">
     <sql driver="${db.driver}" password="${db.pass}" url="${db.url}" userid="${db.user}" src="${src.dir}/sql/initial-data.sql" classpathref="buildpath"/>
     <sql driver="${db.driver}" password="${db.pass}" url="${db.url}" userid="${db.user}" src="${src.dir}/sql/address.sql" classpathref="buildpath"/>
     <sql driver="${db.driver}" password="${db.pass}" url="${db.url}" userid="${db.user}" src="${src.dir}/sql/account_holder.sql" classpathref="buildpath"/>

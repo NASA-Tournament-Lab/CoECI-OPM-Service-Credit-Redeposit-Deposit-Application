@@ -6975,4 +6975,27 @@ div.doubleLineSep{
 	overflow-y:auto;
 }
 
+
+.helpTbl.stdTbl td, .helpTbl.stdTbl th{
+	
+	text-align: center;
+	padding: 3px 3px;
+
+}
+
+.helpTbl caption {
+	
+	text-align: center;
+	caption-side: bottom;
+}
+
+figcaption {
+    text-align: center;
+}
+
+.helpTbl.stdTbl {
+    margin-top: 10px;
+    
+}
+
 	

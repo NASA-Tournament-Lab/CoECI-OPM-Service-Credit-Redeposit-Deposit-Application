@@ -103,6 +103,7 @@ $(document).ready(function() {
 
         var helpItemId = $(this).data('helpItemId');
         window.location.hash = '#' + helpItemId;
+        onLocationHashChanged();
     });
     
     function goToHelpItem(helpItemId) {

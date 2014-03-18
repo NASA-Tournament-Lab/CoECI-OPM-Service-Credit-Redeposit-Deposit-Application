@@ -87,7 +87,7 @@ public class DailySuspenseReportService extends BaseReportService implements
                 item.setPayDate(paymentTransaction.getPayTransTransactionDate());
                 item.setBirthDate(paymentTransaction.getScmDateOfBirth());
                 item.setCsd(paymentTransaction.getCsd());
-                item.setTechnician(paymentTransaction.getTechnicianUserKey());
+                item.setTechnician(paymentTransaction.getTechnicianUserKey().toString());
                 item.setChangedOn(paymentTransaction.getPayTransStatusDate());
                 item.setPaymentStatus(paymentTransaction.getPayTransStatusCode().toString());
                 response.getItems().add(item);

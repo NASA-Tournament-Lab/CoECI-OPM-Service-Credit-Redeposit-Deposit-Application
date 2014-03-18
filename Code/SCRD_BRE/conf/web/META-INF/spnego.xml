@@ -71,7 +71,7 @@
         class="org.springframework.security.core.userdetails.memory.InMemoryDaoImpl">
         <property name="userProperties">
                 <value>
-                        aduser@TCTEST.COM=notUsed,ROLE_USER,ROLE_SUPERVISOR
+                        ScrdAdmin@OPM.EC2.INTERNAL=notUsed,ROLE_USER,ROLE_SUPERVISOR
                 </value>
         </property>
  	</bean>

@@ -1,0 +1,649 @@
+On the "Suspense" page a Receivables Technician can see at a glance the status of the latest bank
+input. Payment transaction details are displayed in the bottom tier that apply to the highlighted
+payment.
+
+<figure>
+  <img src="i/help/SuspensePage.png" alt="SuspensePage" width="700px">
+  <figcaption>Suspense Page.</figcaption>
+</figure>
+
+
+<h2>Data Grid</h2>
+When you enter the Suspense Grid or click the "Refresh" button, the program loads the current data
+from the database. This "snapshot" of data will be neither automatically updated to show changes
+by other users nor will update the database unless you tell it to. You may not edit any cell in this grid
+except the "Post" checkboxes in rows where the payment state is "Unresolved."
+<p></p>
+The following information is displayed in columns for every payment in the grid.
+
+<table class="helpTbl stdTbl" border="1" cellspacing="0" cellpadding="0">
+<caption> Information Displayed for every Payment in Suspense Page.</caption>
+<thead><tr><th >
+   <p class="MsoNormal"><b><span>Column</span></b></p><p><b></b></p><b></b>
+   </th>
+   <th >
+   <p class="MsoNormal"><b><span>Description</span></b></p><p><b></b></p><b></b>
+   </th>
+  </tr></thead><tbody><tr><td >
+  <p class="MsoNormal"><span>Post</span></p><p></p>
+  </td>
+  <td >
+  <p class="MsoNormal"><span>Check this box if
+  you want to approve the unresolved payment</span></p><p></p>
+  </td>
+ </tr><tr><td >
+  <p class="MsoNormal"><span>Payment Status</span></p><p></p>
+  </td>
+  <td >
+  <p class="MsoNormal"><span>One of the states in
+  the previous table</span></p><p></p>
+  </td>
+ </tr><tr><td >
+  <p class="MsoNormal"><span>Deposit Date</span></p><p></p>
+  </td>
+  <td >
+  <p class="MsoNormal"><span>The Deposit Date is
+  the date the check or ACH payment was received at the lockbox bank</span></p><p></p>
+  </td>
+ </tr><tr><td >
+  <p class="MsoNormal"><span>BatBlkSeq</span></p><p></p>
+  </td>
+  <td >
+  <p class="MsoNormal"><span>A contraction of the
+  Batch, Block and Sequence strings that identify the payment</span></p><p></p>
+  </td>
+ </tr><tr><td >
+  <p class="MsoNormal"><span>CSD</span></p><p></p>
+  </td>
+  <td >
+  <p class="MsoNormal"><span>The Claim Number
+  (1111111 if unknown)</span></p><p></p>
+  </td>
+ </tr><tr><td >
+  <p class="MsoNormal"><span>ACH</span></p><p></p>
+  </td>
+  <td >
+  <p class="MsoNormal"><span>If checked, this is
+  an ACH payment</span></p><p></p>
+  </td>
+ </tr><tr><td >
+  <p class="MsoNormal"><span>Amount</span></p><p></p>
+  </td>
+  <td >
+  <p class="MsoNormal"><span>Dollar amount of
+  payment</span></p><p></p>
+  </td>
+ </tr><tr><td >
+  <p class="MsoNormal"><span>Birth Date</span></p><p></p>
+  </td>
+  <td >
+  <p class="MsoNormal"><span>The birth date on
+  the payment</span></p><p></p>
+  </td>
+ </tr><tr><td >
+  <p class="MsoNormal"><span>Name</span></p><p></p>
+  </td>
+  <td >
+  <p class="MsoNormal"><span>The Claimant, blank
+  if a suspense payment</span></p><p></p>
+  </td>
+ </tr><tr><td >
+  <p class="MsoNormal"><span>Balance</span></p><p></p>
+  </td>
+  <td >
+  <p class="MsoNormal"><span>The remaining
+  balance for this claimant, zero if suspense</span></p><p></p>
+  </td>
+ </tr><tr><td >
+  <p class="MsoNormal"><span>Account</span></p><p></p>
+  </td>
+  <td >
+  <p class="MsoNormal"><span>The status of this account, blank if a suspense payment.</span></p><p></p>
+  </td>
+ </tr></tbody></table>
+
+
+<h2>Sorting Rows</h2>
+To sort the rows by any column, click the header for the column. The grid is now sorted in ascending
+order by that column. To sort it in descending order, click the column header again. For example, to
+sort the table by the CSD number, click the column header right on the word "CSD." An upwards
+pointing triangle shows that the grid is now sorted in ascending order by CSD. Click it again to sort it
+descending order and the triangle points down.
+
+<figure>
+  <img src="i/help/SortingTable.png" alt="SortingTable" width="700px">
+  <figcaption>Sorting Table.</figcaption>
+</figure>
+
+
+<h2>Payment Transaction Details</h2>
+Click in the grid to select it and use the up and down arrow keys to move around. A right-pointing
+triangle appears in the left grid border to show the current row. The boxes at the bottom of the
+screen show information about the selected record. On the left are details about the payment while
+information about the claimant appears on the right. Information highlighted in bold and yellow
+quickly shows the problem with the record. For example all of the "Suspended" payments have the
+"Payment CSD Number" and "Payment Date of Birth" highlighted because we cannot match them to
+
+any claimant. A "Posted - Pending" payment will not have any fields highlighted. "Unresolved"
+payments will show at a glance why they are unresolved. The birth dates might not match or
+payment is for a history account. Highlighting makes the discrepancies easy to spot. In this example,
+the payment is unresolved because the date of birth on the check is different from the account and
+the account is paid off.
+<figure>
+  <img src="i/help/PaymentTransactionDetails.png" alt="PaymentTransactionDetails" width="700px">
+  <figcaption>Payment Transaction Details.</figcaption>
+</figure>
+
+
+
+<h2>Resolving Suspense Payments</h2>
+To resolve a payment, the payment must be corrected, the account must be corrected, or the
+payment must be returned or transferred.
+
+
+<h2>Post Checkbox</h2>
+Only one column of the data grid can be modified by the user. Initially, the "Post" checkboxes are all
+unchecked because this column is for the application user to select payments for processing. Users
+may check the "Post" box for "Unresolved" payments if they want the program to correct the
+payment's birth date and the account status. The account status will only change if the account
+balance is greater than zero and is set to "History." Click the check boxes of all the "Unresolved"
+payments that may be posted. When done, click the "Post Checked Payments" button. If you do not
+click the "Post Checked Payments" button the checked records will not be updated. The application
+processes these payments using this logic:
+<ul>
+ <li>If the payment's date of birth does not match the account's date, update the date of birth on
+   the payment to match the account. Apply the payment.</li>
+<li>If this account is in "History" status and also has a balance due, then set the account to
+   "Active" status and apply the payment.</li>
+<li>If these logical tests fail, then the payment reverts to the unresolved state.</li>
+
+</ul>
+
+
+
+<h2>Buttons</h2>
+To work with the payments on the Suspense Page, select one in the grid by clicking anywhere in the
+row and then click a button.
+<figure>
+  <img src="i/help/SuspensePageButtons.png" alt="SuspensePageButtons" width="700px">
+  <figcaption>Suspense Page Buttons.</figcaption>
+</figure>
+
+
+
+
+<h3>Refresh List</h3>
+Select a payment and then click this button to throw away your recent changes or to update your
+screen with changes that other users have made.
+<h3> Reset Selected Payment</h3>
+Selecting a payment and clicking this button will reset that payment to its earliest known state. This
+is a way to undo all the work done by the analysts. The payment will be reset to its state as it came
+from the lockbox bank.
+<h3>Post Checked Payments</h3>
+To avoid errors when resolving payments, the application requires a second step to apply the
+changes. Clicking the "Post" checkboxes does not complete the task. Clicking buttons for "Refund
+Payment," "Refer to Voluntary Contribution," or "Refer to Direct Pay Life Insurance" will not save
+your changes. On your screen the payment status is "Ready for..." the new status.
+
+
+<p></p>
+The payments in the following states are NOT saved and can be lost. You must either click the "Post
+Checked Payments" button or the "Refresh List" button.
+<table class="helpTbl stdTbl" border="1" cellspacing="0" cellpadding="0">
+	<caption>Payment Type Not Saved.</caption>
+	<thead> <tr>
+		<th>Post</th>
+		<th>Payment Status</th>
+	</tr></thead>
+
+	<tbody>
+
+		<tr>
+
+			<td>Checked</td>
+			<td>Ready For Life Insurance </td>
+
+		</tr>
+
+		<tr>
+
+			<td>Checked</td>
+			<td>Ready For VC </td>
+
+		</tr>
+
+
+		<tr>
+
+			<td>Checked</td>
+			<td>Ready For Refund </td>
+
+		</tr>
+
+
+		<tr>
+
+			<td>Checked</td>
+			<td>Unresolved </td>
+
+		</tr>
+
+
+	</tbody>
+</table>
+
+
+
+<p></p>
+The payments in the following states have been saved and are ready to be approved by a supervisor.
+If the supervisor approves them, they will change from the "Pending Approval" state to the
+"Pending" state. If the supervisor disapproves them, they will revert to their original state from the
+lockbox.
+
+<table class="helpTbl stdTbl" border="1" cellspacing="0" cellpadding="0">
+	<caption>Payment Saved and Ready to be Approved.</caption>
+	<thead> <tr>
+		<th>Post</th>
+		<th>Payment Status</th>
+	</tr></thead>
+
+	<tbody>
+
+		<tr>
+
+			<td>UnChecked</td>
+			<td>Direct Pay Life - Pending Approval</td>
+
+		</tr>
+
+		<tr>
+
+			<td>UnChecked</td>
+			<td>Voluntary Contributions - Pending Approval </td>
+
+		</tr>
+
+
+		<tr>
+
+			<td>UnChecked</td>
+			<td>Refund Pending Approval</td>
+
+		</tr>
+
+
+		<tr>
+
+			<td>UnChecked</td>
+			<td>Posted - Pending Approval </td>
+
+		</tr>
+
+
+	</tbody>
+</table>
+
+<p></p>
+The payments in the following states have been approved and will be processed overnight unless a
+supervisor "resets" them to their original state.
+
+
+<table class="helpTbl stdTbl" border="1" cellspacing="0" cellpadding="0">
+	<caption>Payment Type Approved.</caption>
+	<thead> <tr>
+		<th>Post</th>
+		<th>Payment Status</th>
+	</tr></thead>
+
+	<tbody>
+
+		<tr>
+
+			<td>UnChecked</td>
+			<td>Direct Pay Life - Pending</td>
+
+		</tr>
+
+		<tr>
+
+			<td>UnChecked</td>
+			<td>Voluntary Contributions - Pending </td>
+
+		</tr>
+
+
+		<tr>
+
+			<td>UnChecked</td>
+			<td>Refund Pending</td>
+
+		</tr>
+
+
+		<tr>
+
+			<td>UnChecked</td>
+			<td>Posted - Pending </td>
+
+		</tr>
+
+
+	</tbody>
+</table>
+
+
+
+<p></p>
+Every few minutes or after you have completed a few payments, click on the "Post Checked
+Payments" button to save your work. Alternatively, you can forego clicking this button to "undo"
+your previous actions.
+<h3> Print</h3>
+This button will produce a printable list of the payments in the Reports Viewer.
+<figure>
+  <img src="i/help/PaymentsListPrint.png" alt="PaymentsListPrint" width="700px">
+  <figcaption>Payments List Print.</figcaption>
+</figure>
+
+
+
+<h3> Link Payment to Current Employee</h3>
+This box is used to resolve suspense items. A suspense item has to match a data base account at a
+minimum on the CSD and birth date fields. This box will facilitate the resolution of a suspense item.
+The Receivables technician would perform the following:
+<ul>
+<li> Look up the suspense item and note the name or address.</li>
+<li> Go to the employee tab.</li>
+<li>Search on the name and address.</li>
+<li> Find the claimant.</li>
+<li>Click the Link Payment to Current Employee button so the suspense item's CSD number and
+     birth date are corrected and the payment becomes "posted - pending".</li>
+ </ul>
+<h3> Make this Employee Current</h3>
+This button is used to resolve an unresolved payment as follows:
+<ul>
+<li>Select an unresolved payment on the Suspense tab. Let's say the birth date is 1/2/1943.</li>
+<li>Click the Make This Employee Current button.</li>
+<li>Let's say that we view the Account Summary window and notice that the claimant's birth
+       date is 1/1/1800 (obviously incorrect).</li>
+<li>Go to the employee tab.</li>
+<li>Correct the birth date.</li>
+<li> Return to the Suspense tab.</li>
+<li> Click the Post Checked Items button.</li>
+ </ul>
+
+The unresolved payment will be a match on both CSD number and birth date.
+<h3>Transfer</h3>
+Clicking on the "Transfer" button will pop up a window of transfer type choices. Select one and click
+the "OK". See section 6.4 for more information.
+<h3> Note</h3>
+The "Note" button puts a payment note on the selected payment. It is a simple text annotation that
+attaches to a single payment. It follows that payment even if it is linked to another claimant.
+<h3> History</h3>
+The "History" opens a printable audit trail of the selected payment in a Crystal Reports Viewer.
+
+
+
+<h2> Payment States </h2>	
+	The data grid shows all the payments in the following states.
+
+
+
+<table class="helpTbl stdTbl" border="1" cellspacing="0" cellpadding="0">
+	<caption>Payment Type Approved.</caption>
+	<thead> <tr>
+		<th>Status</th>
+		<th>Description</th>
+	</tr></thead>
+
+	<tbody>
+
+		<tr>
+
+			<td>Adjustment - Pending</td>
+			<td>Adjust (debit or credit) the payment total. Approved &amp; ready for nightly batch processing.</td>
+
+		</tr>
+
+		<tr>
+
+			<td>Adjustment - Pending Approval</td>
+			<td>Adjust (debit or credit) the payment total. Needs supervisor's approval.</td>
+
+		</tr>
+
+
+		<tr>
+
+			<td>Annuity - Pending</td>
+			<td>This should have gone to the annuity adjusters. Approved &amp; ready for nightly batch processing.</td>
+
+		</tr>
+
+
+		<tr>
+
+			<td>Annuity - Pending Approval</td>
+			<td>This should have gone to the annuity adjusters. Needs supervisor's approval. </td>
+
+		</tr>
+
+
+		<tr>
+
+			<td>Batch Auto Refund - Pending</td>
+			<td>Batch process triggered this refund of an overpayment. Approved &amp; ready for nightly batch processing.</td>
+
+		</tr>
+
+		<tr>
+
+			<td>Batch Auto Refund - Pending Approval</td>
+			<td>Batch process triggered this refund of an overpayment. Needs supervisor's approval.</td>
+
+		</tr>
+
+
+		<tr>
+
+			<td>Batch Auto Refund Canceled - Pending </td>
+			<td>Batch process triggered this refund of an overpayment but OPM does not want to refund the money. Approved &amp; ready for nightly batch processing.</td>
+
+		</tr>
+
+
+		<tr>
+
+			<td>Batch Auto Refund Canceled - Pending Approval</td>
+			<td>Batch process triggered this refund of an overpayment but OPM does not want to refund the money. Needs supervisor's approval. </td>
+
+		</tr>
+
+
+		<tr>
+
+			<td>Credit Balance Refund - Pending</td>
+			<td>Refund of a credit balance. Approved &amp; ready for nightly batch processing.</td>
+
+		</tr>
+
+		<tr>
+
+			<td>Credit Balance Refund - Pending Approval</td>
+			<td>Refund of a credit balance. Needs supervisor's approval.</td>
+
+		</tr>
+
+
+		<tr>
+
+			<td>Debit Voucher - Pending </td>
+			<td>Payment cancelled before it was applied to an account. Approved &amp; ready for nightly batch processing.</td>
+
+		</tr>
+
+
+		<tr>
+
+			<td>Debit Voucher - Pending Approval</td>
+			<td>Payment cancelled before it was applied to an account. Needs supervisor's approval. </td>
+
+		</tr>
+
+		<tr>
+
+			<td>Direct Pay Life - Pending </td>
+			<td>This should have gone to the DPLI Group. Approved &amp; ready for nightly batch processing.</td>
+
+		</tr>
+
+		<tr>
+
+			<td>Direct Pay Life - Pending Approval</td>
+			<td>This should have gone to the DPLI Group. Needs supervisor's approval. </td>
+
+		</tr>
+
+
+		<tr>
+
+			<td>Health Benefits - Pending</td>
+			<td>This should have gone to the Health Benefits Group. Approved &amp; ready for nightly batch processing.</td>
+
+		</tr>
+
+
+		<tr>
+
+			<td>Health Benefits - Pending Approval</td>
+			<td>This should have gone to the Health Benefits Group. Needs supervisor's approval. </td>
+
+		</tr>
+
+
+
+		<tr>
+
+			<td>Manual Adjustment Cancelled - Pending</td>
+			<td>Credit Refund, Adjustment, or Write-Off cancelled. Approved &amp; ready for nightly batch processing.</td>
+
+		</tr>
+
+		<tr>
+
+			<td>Manual Adjustment Cancelled - Pending Approval</td>
+			<td>Credit Refund, Adjustment, or Write-Off cancelled. Needs supervisor's approval.</td>
+
+		</tr>
+
+
+		<tr>
+
+			<td>Posted - Pending Approval</td>
+			<td>Manual payment must be approved prior to Nightly Batch Process. Needs supervisor's approval.</td>
+
+		</tr>
+
+
+		<tr>
+
+			<td>Reset to Original - Pending</td>
+			<td>Ready to be set when the user clicks the button.</td>
+
+		</tr>
+
+
+		<tr>
+
+			<td>Reversed - Pending</td>
+			<td>Payment cancelled after it was applied to an account. Approved &amp; ready for nightly batch processing.</td>
+
+		</tr>
+
+		<tr>
+
+			<td>Reversed - Pending Approval</td>
+			<td>Payment cancelled after it was applied to an account. Needs supervisor's approval. </td>
+
+		</tr>
+
+
+		<tr>
+
+			<td>Suspended</td>
+			<td>Not matched to any claimant</td>
+
+		</tr>
+
+
+		<tr>
+
+			<td>Suspense Debit Voucher - Pending </td>
+			<td>Payment reversed by the Lockbox Bank before it was posted to an account. Approved &amp; ready for nightly batch processing. </td>
+
+		</tr>
+
+
+		<tr>
+
+			<td>Suspense Debit Voucher - Pending Approval</td>
+			<td>Payment reversed by the Lockbox Bank before it was posted to an account. Needs supervisor's approval.</td>
+
+		</tr>
+
+		<tr>
+
+			<td>Suspense Refund Pending</td>
+			<td>Unprocessed payment must return to the sender. Approved &amp; ready for nightly batch processing.</td>
+
+		</tr>
+
+
+		<tr>
+
+			<td>Suspense Refund Pending Approval</td>
+			<td>Unprocessed payment must return to the sender. Needs supervisor's approval.</td>
+
+		</tr>
+
+
+		<tr>
+
+			<td>Unresolved</td>
+			<td>Matched to a claimant but the account is not active or date of birth on the payment is wrong.</td>
+
+		</tr>
+
+
+		<tr>
+
+			<td>Voluntary Contributions - Pending</td>
+			<td>This should have gone to the VC Group. Approved &amp; ready for nightly batch processing.</td>
+
+		</tr>
+
+		<tr>
+
+			<td>Voluntary Contributions - Pending Approval</td>
+			<td>This should have gone to the VC Group. Needs supervisor's approval. </td>
+
+		</tr>
+
+
+		<tr>
+
+			<td>Write-Off - Pending </td>
+			<td>Forgive small amounts due. Approved &amp; ready for nightly batch processing.</td>
+
+		</tr>
+
+
+		<tr>
+
+			<td>Write-Off - Pending Approval</td>
+
+			<td>Forgive small amounts due. Needs supervisor's approval.</td>
+
+		</tr>
+	</tbody>
+</table>
+

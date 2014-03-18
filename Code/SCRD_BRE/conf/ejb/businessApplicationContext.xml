@@ -150,14 +150,14 @@
     	<constructor-arg value="Closed" />
    </bean>
    
-      <bean id="receiptPaymentTypeName" class="java.lang.String">
-    	<constructor-arg value="ACCEPTED" />
+      <bean id="receiptPaymentTypeId" class="java.lang.Long">
+    	<constructor-arg value="1" />
    </bean>
-         <bean id="debitVoucherAdjustmentPaymentTypeName" class="java.lang.String">
-    	<constructor-arg value="REVERSE_PENDING" />
+         <bean id="debitVoucherAdjustmentPaymentTypeId" class="java.lang.String">
+    	<constructor-arg value="2" />
    </bean>
-         <bean id="replacementAdjustmentPaymentTypeName" class="java.lang.String">
-    	<constructor-arg value="POSTED_PENDING" />
+         <bean id="replacementAdjustmentPaymentTypeId" class="java.lang.String">
+    	<constructor-arg value="3" />
    </bean>   
    
 

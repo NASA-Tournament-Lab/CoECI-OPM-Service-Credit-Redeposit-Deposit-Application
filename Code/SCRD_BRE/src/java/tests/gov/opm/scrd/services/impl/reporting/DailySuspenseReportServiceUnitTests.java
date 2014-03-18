@@ -80,7 +80,7 @@ public class DailySuspenseReportServiceUnitTests extends BasePersistenceTests {
             assertEquals("The amount is incorrect.", item.getAmount().setScale(2).toString(), "100.00");
             assertEquals("The payDate is incorrect.", dateFormat.format(item.getPayDate()), "01/01/2014");
             assertEquals("The birthDate is incorrect.", dateFormat.format(item.getBirthDate()), "01/01/2014");
-            assertEquals("The technician is incorrect.", item.getTechnician(), "key");
+            assertEquals("The technician is incorrect.", item.getTechnician(), "1");
             assertEquals("The changedOn is incorrect.", dateFormat.format(item.getChangedOn()), "01/01/2014");
             PaymentTransaction paymentTransaction = getEntityManager().createQuery("SELECT p FROM " +
                     "PaymentTransaction p WHERE p.csd = :csd", PaymentTransaction.class).setParameter(

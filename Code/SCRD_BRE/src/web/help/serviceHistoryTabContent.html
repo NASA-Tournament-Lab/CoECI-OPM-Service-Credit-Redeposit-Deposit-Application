@@ -1,0 +1,83 @@
+You can access the Service History tab in the Account Details page, when clicking on "Service
+History".
+This tab is used by Boyers but DC users have permissions to view it. Information about the claimant's
+service is typed into the upper table. The lower part of the screen is filled after the calculation is
+done.
+
+<figure>
+  <img src="i/help/ServiceHistoryTab.png" alt="Service History Tab" width="700px">
+  <figcaption>Service History Tab.</figcaption>
+</figure>
+
+
+<h2>Service History Versions</h2>
+An account can have many calculation versions but only one may be the "official" billing. Users may
+try different scenarios for a claimant. Each scenario is a Calculation Version. Choose one from the
+drop-down list or click the "New Version" button. To copy the displayed information into a new
+version, first check the "Copy Current" box.
+
+<figure>
+  <img src="i/help/ServiceHistoryVersion.png" alt="Service History Version" width="700px">
+  <figcaption>Service History Version.</figcaption>
+</figure>
+
+
+<h2>Service History Data Grid</h2>
+Each line of service is a date range and a description of the service performed during that time
+period. Each of the "Type" fields is a drop-down box as shown to the right. Choose the correct value
+for each field. You can also enter the amount for the period.
+
+<figure>
+  <img src="i/help/ServiceHistoryDataGridInput.png" alt="Service History Data Grid Input" width="700px">
+  <figcaption>Service History Data Grid Input.</figcaption>
+</figure>
+
+
+
+
+<h2> Calculation Buttons</h2>
+
+<figure>
+  <img src="i/help/CalculationButtons.png" alt="Calculation Buttons" width="700px">
+  <figcaption>Calculation Buttons.</figcaption>
+</figure>
+After the service history is entered, click on the "Validate Entries" button to check the dates. If there
+is a Refund or Lump Sum, then a dialog box pops up to ask for the date of the actual payment.
+This "Validate Entries" button will check the service periods and place a warning icon <img src="i/icon-error.png" alt="error" width="22" height="22" class="vMiddle" />
+when there is an issue. Double-click the icon to get help solving the problem.
+next to each line
+<p></p>
+If this claimant has already sent payments to Service Credit, click the "Apply Real Payments" check
+box. The payments from the Payment Tab will be applied to the bill. If this box is unchecked, then
+only payments entered by the Boyers Refund Section will be applied to the bill. Refund Section
+"payment" records are labeled as "Prior Payment Recorded" and do not appear to other groups.
+<p></p>
+When the service history is ready, enter the correct date in the "Calculate As Of" box and click on the
+"Run Calculation" button. The program will calculate the amounts but not save them. It will also
+insert account notes with a detailed explanation of the calculation. The "Show Calculation" button
+will open a Microsoft Word file with this explanation.<p></p>
+Nothing is saved until the "Save Calculation" button is clicked. Click on the "Save Calculation" button
+to save the calculation results in the database so others can see them. The "Trigger Bill" button will
+be enabled once the results are stored. Only a supervisor can trigger a new initial bill for an active
+account.
+
+<figure>
+  <img src="i/help/CalculationValidationResults.png" alt="Calculation Validation Results" width="700px">
+  <figcaption>Calculation Validation Results.</figcaption>
+</figure>
+
+
+
+
+When a bill is initiated, the user will trigger it by clicking this button. Once triggered, it will print out
+overnight from the batch service.
+
+
+<h2> Calculation Results</h2>
+<figure>
+  <img src="i/help/CalculationResults.png" alt="Calculation Results" width="700px">
+  <figcaption>Calculation Results.</figcaption>
+</figure>
+The service histories are aggregated and the billable service periods shown in the results table. The
+payments are applied by type and date. Clicking the "Show Sample Initial Bill" button will display an
+initial bill for these results in the Reports Viewer.
