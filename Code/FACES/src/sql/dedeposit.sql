@@ -6,6 +6,5 @@ INSERT INTO opm.redeposit (id, deleted, label, deposit, interest, total, calcula
 INSERT INTO opm.redeposit (id, deleted, label, deposit, interest, total, calculation_result_id) VALUES (2, false, 'CSRS_POST_3_91_REDEPOSIT', 3347.44, 6747.18, 50094.62, 1);
 INSERT INTO opm.redeposit (id, deleted, label, deposit, interest, total, calculation_result_id) VALUES (3, false, 'CSRS_POST_82_PRE_91_REDEPOSIT', 1668.6, 9575.8, 244.39, 1);
 INSERT INTO opm.redeposit (id, deleted, label, deposit, interest, total, calculation_result_id) VALUES (4, false, 'CSRS_PRE_10_82_REDEPOSIT', 23998.16, 9659.09, 3657.25, 1);
-INSERT INTO opm.dedeposit (id, deleted, label, deposit, interest, total, calculation_result_id) VALUES (5, false, 'CSRS_PEACE_CORPS', 13998.16, 29659.09, 43657.25, 1);
-ALTER SEQUENCE opm.dedeposit_id_seq RESTART WITH 6;
+ALTER SEQUENCE opm.dedeposit_id_seq RESTART WITH 5;
 ALTER SEQUENCE opm.redeposit_id_seq RESTART WITH 5;

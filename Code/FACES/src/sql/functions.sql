@@ -1118,7 +1118,7 @@ BEGIN
             -- PayTransStatusDescription Refund Pending Refund Complete Refund Pending Approval
             IF l_CalculatedStatusCode NOT IN ('SuspenseRefundPending', 'SuspenseRefundComplete',
                 'SuspenseRefundPendingApproval') THEN-- Expect this will always be true.
-                DELETE FROM opm.refund_transaction WHERE transaction_key = l_PayTransactionKey;
+                DELETE FROM opm.refund_transaction WHERE to_number(transaction_key, '99G999D9S') = l_PayTransactionKey;
             END IF;
            
             /************ Add the note to the payment **************************/ 
@@ -1171,7 +1171,7 @@ BEGIN
         P.pay_trans_payment_amount, P.scm_date_of_birth, P.pay_trans_transaction_date, 
         P.pay_trans_status_date, P.technician_user_key, P.id
     FROM opm.refund_transaction R
-        INNER JOIN opm.payment_transaction P ON R.transaction_key = P.id AND P.deleted=false
+        INNER JOIN opm.payment_transaction P ON to_number(R.transaction_key, '99G999D9S') = P.id AND P.deleted=false
     WHERE (P.pay_trans_status_code = l_PayTransStatusCodeId) -- Suspense Refund Pending
         AND R.deleted=false
     ORDER BY P.pay_trans_transaction_date;
@@ -1273,20 +1273,20 @@ BEGIN
       S.total_fers_w, 
       OPM.GetTotalInterest(S.claim_number,'CSRS_POST_10_82_DEPOSIT', 'opm.dedeposit', 'interest') AS SCMAccIntDep, 
       OPM.GetTotalInterest(S.claim_number,'CSRS_POST_10_82_DEPOSIT', 'opm.redeposit', 'interest') AS SCMAccIntRdep, 
-      OPM.GetTotalInterest(S.claim_number,'POST_10_82', 'opm.dedeposit', 'interest') AS SCMAccIntNonDed, 
-      OPM.GetTotalInterest(S.claim_number,'POST_10_82', 'opm.redeposit', 'interest') AS SCMAccIntVarRdep, 
+      OPM.GetTotalInterest(S.claim_number,'CSRS_POST_10_82_DEPOSIT', 'opm.dedeposit', 'interest') AS SCMAccIntNonDed, 
+      OPM.GetTotalInterest(S.claim_number,'CSRS_POST_10_82_DEPOSIT', 'opm.redeposit', 'interest') AS SCMAccIntVarRdep, 
       (OPM.GetTotalInterest(S.claim_number,'CSRS_POST_10_82_DEPOSIT', 'opm.dedeposit', 'interest') +
       OPM.GetTotalInterest(S.claim_number,'CSRS_POST_10_82_DEPOSIT', 'opm.redeposit', 'interest') +
-      OPM.GetTotalInterest(S.claim_number,'POST_10_82', 'opm.dedeposit', 'interest') +
-      OPM.GetTotalInterest(S.claim_number,'POST_10_82', 'opm.redeposit', 'interest')) AS SCMAccIntFers, 
+      OPM.GetTotalInterest(S.claim_number,'CSRS_POST_10_82_DEPOSIT', 'opm.dedeposit', 'interest') +
+      OPM.GetTotalInterest(S.claim_number,'CSRS_POST_10_82_DEPOSIT', 'opm.redeposit', 'interest')) AS SCMAccIntFers, 
       OPM.GetTotalInterest(S.claim_number,'CSRS_POST_10_82_DEPOSIT', 'opm.dedeposit', 'total') AS SCMTotPayd, 
       OPM.GetTotalInterest(S.claim_number,'CSRS_POST_10_82_DEPOSIT', 'opm.redeposit', 'total') AS SCMTotPayr, 
-      OPM.GetTotalInterest(S.claim_number,'POST_10_82', 'opm.dedeposit', 'total') AS SCMTotPayn, 
-      OPM.GetTotalInterest(S.claim_number,'POST_10_82', 'opm.redeposit', 'total') AS SCMTotPayvr, 
+      OPM.GetTotalInterest(S.claim_number,'CSRS_POST_10_82_DEPOSIT', 'opm.dedeposit', 'total') AS SCMTotPayn, 
+      OPM.GetTotalInterest(S.claim_number,'CSRS_POST_10_82_DEPOSIT', 'opm.redeposit', 'total') AS SCMTotPayvr, 
       (OPM.GetTotalInterest(S.claim_number,'CSRS_POST_10_82_DEPOSIT', 'opm.dedeposit', 'total') +
       OPM.GetTotalInterest(S.claim_number,'CSRS_POST_10_82_DEPOSIT', 'opm.redeposit', 'total') +
-      OPM.GetTotalInterest(S.claim_number,'POST_10_82', 'opm.dedeposit', 'total') +
-      OPM.GetTotalInterest(S.claim_number,'POST_10_82', 'opm.redeposit', 'total')) AS SCMTotPayfers, 
+      OPM.GetTotalInterest(S.claim_number,'CSRS_POST_10_82_DEPOSIT', 'opm.dedeposit', 'total') +
+      OPM.GetTotalInterest(S.claim_number,'CSRS_POST_10_82_DEPOSIT', 'opm.redeposit', 'total')) AS SCMTotPayfers, 
       S.last_pay,
       0 AS PreviousInvoiceID
     FROM opm.batch_daily_payments B
@@ -1551,7 +1551,7 @@ BEGIN
     FROM opm.payment_transaction P
         LEFT JOIN opm.pay_trans_status_code status1 ON status1.id = P.pay_trans_status_code And status1.deleted=false
         LEFT JOIN opm.pay_trans_status_code status2 ON status2.id = status1.next_state_link And status2.deleted=false
-        LEFT JOIN opm.refund_transaction R ON P.id = R.transaction_key And R.deleted=false
+        LEFT JOIN opm.refund_transaction R ON P.id = to_number(R.transaction_key, '99G999D9S') And R.deleted=false
     WHERE P.id = pPayTransactionKey And P.deleted=false;
 
     /*
@@ -2202,7 +2202,7 @@ BEGIN
     FROM opm.audit_batch A 
       INNER JOIN opm.batch_daily_payments B ON A.id = B.audit_batch_id AND B.deleted=false
       INNER JOIN opm.payment_transaction P ON B.pay_transaction_key = P.id AND P.deleted=false 
-      LEFT OUTER JOIN opm.refund_transaction R ON P.id = R.transaction_key AND R.deleted=false
+      LEFT OUTER JOIN opm.refund_transaction R ON P.id = to_number(R.transaction_key, '99G999D9S') AND R.deleted=false
       INNER JOIN opm.payment_refund_link L ON L.payment_needing_refund = B.pay_transaction_key AND L.deleted=false
       INNER JOIN opm.payment_transaction Refund ON L.refund_for_payment = Refund.id AND Refund.deleted=false
       LEFT JOIN opm.pay_trans_status_code sc ON sc.id = Refund.pay_trans_status_code AND sc.deleted=false
@@ -2249,7 +2249,7 @@ BEGIN
       ah.birth_date
     FROM opm.audit_batch  A 
       INNER JOIN opm.batch_daily_payments  B ON A.id = B.audit_batch_id AND B.deleted=false-- DEBITS
-      INNER JOIN opm.refund_transaction R ON R.transaction_key = B.pay_transaction_key AND R.deleted=false
+      INNER JOIN opm.refund_transaction R ON to_number(R.transaction_key, '99G999D9S') = B.pay_transaction_key AND R.deleted=false
       LEFT JOIN opm.pay_trans_status_code sc ON sc.id = B.pay_trans_status_code AND sc.deleted=false
       LEFT JOIN opm.account S ON S.claim_number = B.claim_number AND S.deleted=false
       LEFT JOIN opm.account_holder ah ON S.account_holder_id=ah.id AND ah.deleted=false

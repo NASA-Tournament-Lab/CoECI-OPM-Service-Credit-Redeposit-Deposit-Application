@@ -97,7 +97,7 @@ public class RefundTransactionUnitTests {
      */
     @Test
     public void test_getTransactionKey() {
-        Long value = 1L;
+        String value = "1";
         instance.setTransactionKey(value);
 
         assertEquals("'getTransactionKey' should be correct.",
@@ -112,7 +112,7 @@ public class RefundTransactionUnitTests {
      */
     @Test
     public void test_setTransactionKey() {
-        Long value = 1L;
+        String value = "1";
         instance.setTransactionKey(value);
 
         assertEquals("'setTransactionKey' should be correct.",

@@ -1089,7 +1089,7 @@ $(document).ready(function() {
 
     var editRowHTML = $(".entriesTbl tfoot").html();
     var viewRowHTML = '<tr class="even"><td class="blankCell firstCol">&nbsp;</td><td>01/01/2001</td><td>01/11/2012</td><td>CSRS</td><td>Deposit</td><td>Career</td><td>Wage Grade</td><td>$ 20,000.00</td><td class="lastCol">Refund/Lump Sum</td></tr>';
-    var emptyRowHTML = '<tr class="even newEntryRow unsortable"><td class="blankCell firstCol">&nbsp;</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td class="lastCol"></td></tr>';
+    var emptyRowHTML = '<tr class="even newEntryRow unsortable"><td class="blankCell firstCol">&nbsp;</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td class="withHoldDisabled"></td><td></td><td class="lastCol"></td></tr>';
     //var emptyRowHTML = '<tr class="even2 newEntryRow unsortable"><td class="blankCell firstCol">&nbsp;</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td class="lastCol"></td></tr>';
 
     $(".jsNewVersionBtn").click(function() {
@@ -1191,7 +1191,7 @@ $(document).ready(function() {
             $(".jsShowCalculation", tab).hide();
             $(".jsTriggerBill", tab).hide();
             var validTbl = $(".validateResultTbl", tab);
-            
+            emptyCalculationResult(tab);
             $("tbody", validTbl).html(vEmpty);
             $(".valErrorRowCell", tab).removeClass("valErrorRowCell");
             $(".valErrorRowBefore", tab).removeClass("valErrorRowBefore");
@@ -3127,6 +3127,50 @@ function validateCalculationEntry(button) {
         status.html("Success").addClass("successLabel").removeClass("failLabel");
     }
     return validated;
+}
+
+
+
+function emptyCalculationResult(tab){
+
+
+    var reTable = $('.chartCalAreaBox4 table tbody', tab);
+    reTable.find('tr').eq(0).children('td').eq(1).html('');
+    reTable.find('tr').eq(0).children('td').eq(2).html('');
+    reTable.find('tr').eq(0).children('td').eq(3).html('');
+    reTable.find('tr').eq(1).children('td').eq(1).html('');
+    reTable.find('tr').eq(1).children('td').eq(2).html('');
+    reTable.find('tr').eq(1).children('td').eq(3).html('');
+    reTable.find('tr').eq(2).children('td').eq(1).html('');
+    reTable.find('tr').eq(2).children('td').eq(2).html('');
+    reTable.find('tr').eq(2).children('td').eq(3).html('');
+    reTable.find('tr').eq(3).children('td').eq(1).html('');
+    reTable.find('tr').eq(3).children('td').eq(2).html('');
+    reTable.find('tr').eq(3).children('td').eq(3).html('');
+
+    var deTable = $('.chartCalAreaBox5 table tbody', tab);
+    deTable.find('tr').eq(0).children('td').eq(1).html('');
+    deTable.find('tr').eq(0).children('td').eq(2).html('');
+    deTable.find('tr').eq(0).children('td').eq(3).html('');
+    deTable.find('tr').eq(1).children('td').eq(1).html('');
+    deTable.find('tr').eq(1).children('td').eq(2).html('');
+    deTable.find('tr').eq(1).children('td').eq(3).html('');
+    deTable.find('tr').eq(2).children('td').eq(1).html('');
+    deTable.find('tr').eq(2).children('td').eq(2).html('');
+    deTable.find('tr').eq(2).children('td').eq(3).html('');
+    deTable.find('tr').eq(3).children('td').eq(1).html('');
+    deTable.find('tr').eq(3).children('td').eq(2).html('');
+    deTable.find('tr').eq(3).children('td').eq(3).html('');
+    deTable.find('tr').eq(4).children('td').eq(1).html('');
+    deTable.find('tr').eq(4).children('td').eq(2).html('');
+    deTable.find('tr').eq(4).children('td').eq(3).html('');
+
+    $('.chartCalAreaBox6 .dollar', tab).eq(0).html('');
+    $('.chartCalAreaBox6 .dollar', tab).eq(1).html('');
+    $('.chartCalAreaBox6 .dollar', tab).eq(2).html('');
+    $('.chartCalAreaBox6 .dollar', tab).eq(3).html('');
+
+
 }
 
 function populateCalculationResult(result, tab) {

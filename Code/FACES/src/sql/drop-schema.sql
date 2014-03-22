@@ -1,4 +1,5 @@
-
+DROP TABLE IF EXISTS opm.letter;
+DROP TABLE IF EXISTS opm.reference;
 DROP TABLE IF EXISTS opm.payment_statement_print;
 DROP TABLE IF EXISTS opm.batch_daily_payments;
 DROP TABLE IF EXISTS opm.payment_transaction;
@@ -25,6 +26,12 @@ DROP TABLE IF EXISTS opm.invoice;
 DROP TABLE IF EXISTS opm.a01_print_suppression_case;
 DROP TABLE IF EXISTS opm.user_account_assignment;
 DROP TABLE IF EXISTS opm.payment_refund_link;
+
+
+DROP TABLE IF EXISTS opm.audit_batch_log_id;
+DROP TABLE IF EXISTS opm.all_details;
+DROP TABLE IF EXISTS opm.invoice_data;
+
 
 DROP TABLE IF EXISTS opm.role_permission;
 DROP TABLE IF EXISTS opm.user_permission;
@@ -175,8 +182,6 @@ DROP FUNCTION IF EXISTS opm.redeposit_func();
 DROP FUNCTION IF EXISTS opm.calculation_result_item_func();
 DROP FUNCTION IF EXISTS opm.calculation_result_func();
 DROP FUNCTION IF EXISTS opm.calculation_func();
-DROP FUNCTION IF EXISTS opm.fers_redeposit_func();
-DROP FUNCTION IF EXISTS opm.fers_deposit_func();
 DROP FUNCTION IF EXISTS opm.calculation_version_func();
 DROP FUNCTION IF EXISTS opm.billing_func();
 DROP FUNCTION IF EXISTS opm.billing_summary_func();
@@ -193,4 +198,4 @@ DROP TABLE IF EXISTS opm.report_generation_data;
 DROP TABLE IF EXISTS opm.report_generation_data_history;
 DROP FUNCTION IF EXISTS opm.report_generation_data_func();
 
-DROP SCHEMA opm;
+DROP SCHEMA opm CASCADE;

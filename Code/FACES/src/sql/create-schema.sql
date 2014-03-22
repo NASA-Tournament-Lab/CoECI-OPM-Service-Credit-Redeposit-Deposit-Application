@@ -656,6 +656,9 @@ CREATE TABLE opm.calculation_result_item (
   calculation_result_id BIGINT NULL,
   service_category VARCHAR(128) NULL,
   retirement_type_id BIGINT NOT NULL,
+  version INT NULL,
+  line INT NULL,
+  status VARCHAR(120) NULL,
   PRIMARY KEY (id) ,
   CONSTRAINT fk_calculation_result_item_period_type
     FOREIGN KEY (period_type_id )
@@ -717,6 +720,7 @@ CREATE TABLE opm.audit_record (
   deleted BOOLEAN NOT NULL,
   username VARCHAR(120) NOT NULL ,
   ip_address VARCHAR(120) NOT NULL ,
+  description VARCHAR(120) NULL,
   action VARCHAR(120) NOT NULL ,
   date TIMESTAMP NOT NULL ,
   PRIMARY KEY (id) );
@@ -1877,6 +1881,148 @@ CREATE TABLE opm.service_credit_preference_history (
   action VARCHAR(1) NOT NULL CHECK (action IN ('I','D','U')) );
 
 -- -----------------------------------------------------
+-- Table payment_transaction
+-- -----------------------------------------------------
+CREATE TABLE opm.payment_transaction (
+  id BIGSERIAL NOT NULL,
+  deleted BOOLEAN NOT NULL,
+  pay_trans_batch_number VARCHAR(256) NULL,
+  pay_trans_block_number VARCHAR(256) NULL,
+  pay_trans_sequence_number VARCHAR(256) NULL,
+  scm_claim_number VARCHAR(256) NULL,
+  scm_date_of_birth TIMESTAMP NULL,
+  pay_trans_payment_amount DECIMAL(10,6) NULL,
+  pay_trans_transaction_date TIMESTAMP NULL,
+  pay_trans_status_code BIGINT NULL,
+  pay_trans_status_date TIMESTAMP NULL,
+  technician_user_key BIGINT NULL,
+  payment_applied_order_code VARCHAR(256) NULL,
+  post_flag BOOLEAN NULL,
+  csd VARCHAR(256) NULL,
+  user_inserted BOOLEAN NULL,
+  ach_payment BOOLEAN NULL,
+  payment_status_code INTEGER NULL,
+  resolved_suspense BOOLEAN NULL,
+  update_to_completed BOOLEAN NULL,
+  history_payment BOOLEAN NULL,
+  gov_refund BOOLEAN NULL,
+  disapprove BOOLEAN NULL,
+  pay_transaction_key INTEGER NULL,
+  PRIMARY KEY (id));
+
+
+
+  
+-- -----------------------------------------------------
+-- Table invoice_data
+-- -----------------------------------------------------
+CREATE TABLE opm.invoice_data (
+  id BIGSERIAL NOT NULL,
+  deleted BOOLEAN NOT NULL,
+  pay_transaction_key INTEGER NULL,
+  scm_claimnumber VARCHAR(256) NULL,
+  scm_date_of_birth TIMESTAMP NULL,
+  scm_name VARCHAR(256) NULL,
+  account_status INTEGER NULL,
+  account_status_description VARCHAR(256) NULL,
+  account_balance DECIMAL(10,6) NULL,
+  account_payment_total DECIMAL(10,6) NULL,
+  account_balance_new DECIMAL(10,6) NULL,
+  todays_payment_total DECIMAL(10,6) NULL,
+  pay_trans_status_code INTEGER NULL,
+  pay_trans_status_description VARCHAR(256) NULL,
+  pay_trans_payment_amount DECIMAL(10,6) NULL,
+  over_payment_amount DECIMAL(10,6) NULL,
+  pay_trans_transaction_date TIMESTAMP NULL,
+  retirement_type_code INTEGER NULL,
+  retirement_type_description VARCHAR(256) NULL,
+  ach_payment BOOLEAN NULL,
+  payment_application_order VARCHAR(256) NULL,
+  note VARCHAR(256) NULL,
+  pre_1082_deposit_total_payment DECIMAL(10,6) NULL,
+  pre_1082_redeposit_total_payment DECIMAL(10,6) NULL,
+  post_1082_deposit_total_payment DECIMAL(10,6) NULL,
+  post_1082_redeposit_total_payment DECIMAL(10,6) NULL,
+  fers_total_payment DECIMAL(10,6) NULL,
+  ach_stop_letter BOOLEAN NULL,
+  print_initial_bill BOOLEAN NULL,
+  update_completed BOOLEAN NULL,
+  reversed_payment BOOLEAN NULL,
+  print_invoice BOOLEAN NULL,
+  refund_required BOOLEAN NULL,
+  update_to_completed BOOLEAN NULL,
+  over_the_payment_amount DECIMAL(10,6) NULL,
+  number_payments_today INTEGER NULL,
+  account_note_type VARCHAR(256) NULL,
+  PRIMARY KEY (id));
+
+ -- -----------------------------------------------------
+-- Table all_details
+-- -----------------------------------------------------
+CREATE TABLE opm.all_details (
+  id BIGSERIAL NOT NULL,
+  deleted BOOLEAN NOT NULL,
+  payment_type VARCHAR(256) NULL,
+  payment_date TIMESTAMP NULL,
+  julian_date INTEGER NULL,
+  julian_date_report INTEGER NULL,
+  gl_filler VARCHAR(256) NULL,
+  gl_code VARCHAR(256) NULL,
+  fiscal_year INTEGER NULL,
+  gl_accounting_code VARCHAR(256) NULL,
+  recipient_amount DECIMAL(10,6) NULL,
+  revenue_source_code VARCHAR(256) NULL,
+  agency VARCHAR(256) NULL,
+  pay_transaction_key VARCHAR(256) NULL,
+  scm_claim_number VARCHAR(256) NULL,
+  scm_date_of_birth VARCHAR(256) NULL,
+  scm_retirement_type_description VARCHAR(256) NULL,
+  claimant_name VARCHAR(256) NULL,
+  print_date TIMESTAMP NULL,
+  total_non_postal_fers DECIMAL(10,6) NULL,
+  total_postal_fers DECIMAL(10,6) NULL,
+  total_csrs DECIMAL(10,6) NULL,
+  julian_now INTEGER NULL,
+  PRIMARY KEY (id));
+
+-- -----------------------------------------------------
+-- Table audit_batch_log_id
+-- -----------------------------------------------------
+CREATE TABLE opm.audit_batch_log_id (
+  id BIGSERIAL NOT NULL,
+  deleted BOOLEAN NOT NULL,
+  audit_batch_log_id VARCHAR(256),
+  batch_date TIMESTAMP,
+  batch_number INT,
+  PRIMARY KEY (id));
+
+-- -----------------------------------------------------
+-- Table mainframe_import
+-- -----------------------------------------------------
+CREATE TABLE opm.mainframe_import (
+  id BIGSERIAL NOT NULL,
+  record_string VARCHAR(256),
+  import_date TIMESTAMP,
+  processing_flag BOOLEAN,
+  error_flag BOOLEAN,
+  ach_flag BOOLEAN,
+  file_name VARCHAR(256),
+  audit_batch_log_id VARCHAR(256),
+  pay_transaction_key INT,
+  payment_type VARCHAR(128),
+  deleted BOOLEAN NULL,
+  audit_batch_id BIGINT NULL,
+  suspended_flag BOOLEAN NULL,
+  unresolved_flag BOOLEAN NULL,
+  postedPending_flag BOOLEAN NULL,
+  ach_status_checked BOOLEAN NULL,
+  batch_daily_payments BIGINT NULL,
+  pay_trans_key BIGINT NULL,
+  PRIMARY KEY (id));
+
+
+
+-- -----------------------------------------------------
 -- Table payments_applied_order_code_history
 -- -----------------------------------------------------
 CREATE TABLE opm.payments_applied_order_code_history (
@@ -2259,59 +2405,6 @@ CREATE TABLE opm.batch_daily_payments_history (
   action_timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   action VARCHAR(1) NOT NULL CHECK (action IN ('I','D','U')) );
   
--- -----------------------------------------------------
--- Table mainframe_import
--- -----------------------------------------------------
-CREATE TABLE opm.mainframe_import (
-	id BIGSERIAL NOT NULL,
-    deleted BOOLEAN NOT NULL,
-	audit_batch_id BIGINT NULL,
-	pay_transaction_key BIGINT NULL,
-	import_date TIMESTAMP NULL,
-	record_string VARCHAR(120) NULL,
-	file_name VARCHAR(50) NULL,
-	processing_flag BOOLEAN NULL,
-	error_flag BOOLEAN NULL,
-	ach_flag BOOLEAN NULL,
-	suspended_flag BOOLEAN NULL,
-	unresolved_flag BOOLEAN NULL,
-	postedPending_flag BOOLEAN NULL,
-	ach_status_checked BOOLEAN NULL,
-    audit_batch_log_id VARCHAR(120) NULL,
-    pay_trans_key INTEGER NULL,
-    payment_type VARCHAR(50) NULL,
-    batch_daily_payments BIGINT NULL,
-  PRIMARY KEY (id));
-  
--- -----------------------------------------------------
--- Table payment_transaction
--- -----------------------------------------------------
-CREATE TABLE opm.payment_transaction (
-  id BIGSERIAL NOT NULL,
-  deleted BOOLEAN NOT NULL,
-  pay_trans_batch_number VARCHAR(256) NULL,
-  pay_trans_block_number VARCHAR(256) NULL,
-  pay_trans_sequence_number VARCHAR(256) NULL,
-  scm_claim_number VARCHAR(256) NULL,
-  scm_date_of_birth TIMESTAMP NULL,
-  pay_trans_payment_amount DECIMAL(10,6) NULL,
-  pay_trans_transaction_date TIMESTAMP NULL,
-  pay_trans_status_code BIGINT NULL,
-  pay_trans_status_date TIMESTAMP NULL,
-  technician_user_key BIGINT NULL,
-  payment_applied_order_code VARCHAR(256) NULL,
-  post_flag BOOLEAN NULL,
-  csd VARCHAR(256) NULL,
-  user_inserted BOOLEAN NULL,
-  ach_payment BOOLEAN NULL,
-  payment_status_code INTEGER NULL,
-  resolved_suspense BOOLEAN NULL,
-  update_to_completed BOOLEAN NULL,
-  history_payment BOOLEAN NULL,
-  gov_refund BOOLEAN NULL,
-  disapprove BOOLEAN NULL,
-  pay_trans_key INTEGER NULL,
-  PRIMARY KEY (id));
 
 -- -----------------------------------------------------
 -- Table payment_statement_print
@@ -2350,3 +2443,24 @@ CREATE TABLE opm.report_generation_data_history (
   refunds_printed INT NULL ,
   action_timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   action VARCHAR(1) NOT NULL CHECK (action IN ('I','D','U')));
+  
+  -- -----------------------------------------------------
+-- Table letter
+-- -----------------------------------------------------
+CREATE TABLE opm.letter (
+  id BIGSERIAL NOT NULL,
+  deleted BOOLEAN NOT NULL,
+  name VARCHAR(128) NOT NULL ,
+  content TEXT NULL ,
+  PRIMARY KEY (id) );
+  
+    
+  -- -----------------------------------------------------
+-- Table reference
+-- -----------------------------------------------------
+CREATE TABLE opm.reference (
+  id BIGSERIAL NOT NULL,
+  deleted BOOLEAN NOT NULL,
+  name VARCHAR(128) NOT NULL ,
+  content TEXT NULL ,
+  PRIMARY KEY (id) );

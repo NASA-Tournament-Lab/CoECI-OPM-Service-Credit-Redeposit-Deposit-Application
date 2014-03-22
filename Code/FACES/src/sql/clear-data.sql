@@ -1,4 +1,5 @@
-
+DELETE FROM opm.letter;
+DELETE FROM opm.reference;
 DELETE FROM opm.batch_daily_payments;
 DELETE FROM opm.payment_transaction;
 DELETE FROM opm.mainframe_import;
@@ -24,6 +25,12 @@ DELETE FROM opm.invoice;
 DELETE FROM opm.a01_print_suppression_case;
 DELETE FROM opm.user_account_assignment;
 DELETE FROM opm.payment_refund_link;
+
+DELETE FROM opm.audit_batch_log_id;
+
+DELETE FROM opm.all_details;
+
+DELETE FROM opm.invoice_data;
 
 DELETE FROM opm.role_permission;
 DELETE FROM opm.user_permission;

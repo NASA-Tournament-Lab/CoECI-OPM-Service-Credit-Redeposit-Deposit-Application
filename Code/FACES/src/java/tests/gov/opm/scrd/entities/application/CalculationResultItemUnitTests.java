@@ -190,10 +190,10 @@ public class CalculationResultItemUnitTests {
     @Test
     public void test_getEffectiveDate() {
         Date value = new Date();
-        instance.setRefundDate(value);
+        instance.setEffectiveDate(value);
 
         assertSame("'getEffectiveDate' should be correct.",
-            value, instance.getRefundDate());
+            value, instance.getEffectiveDate());
     }
 
     /**
@@ -205,10 +205,10 @@ public class CalculationResultItemUnitTests {
     @Test
     public void test_setEffectiveDate() {
         Date value = new Date();
-        instance.setRefundDate(value);
+        instance.setEffectiveDate(value);
 
         assertSame("'setEffectiveDate' should be correct.",
-            value, TestsHelper.getField(instance, "refundDate"));
+            value, TestsHelper.getField(instance, "effectiveDate"));
     }
 
     /**

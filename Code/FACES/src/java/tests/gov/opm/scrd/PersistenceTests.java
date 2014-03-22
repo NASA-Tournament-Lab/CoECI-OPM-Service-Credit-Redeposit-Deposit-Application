@@ -685,7 +685,7 @@ public class PersistenceTests extends BasePersistenceTests {
         assertNotNull("The result should be correct.", retrievedCalculationResultItem.getStartDate());
         assertNotNull("The result should be correct.", retrievedCalculationResultItem.getEndDate());
         assertNotNull("The result should be correct.", retrievedCalculationResultItem.getMidDate());
-        assertNotNull("The result should be correct.", retrievedCalculationResultItem.getRefundDate());
+        assertNotNull("The result should be correct.", retrievedCalculationResultItem.getEffectiveDate());
         assertEquals("The result should be correct.",
             calculationResultItem.getPeriodType().getId(), retrievedCalculationResultItem.getPeriodType().getId());
         assertEquals("The result should be correct.",

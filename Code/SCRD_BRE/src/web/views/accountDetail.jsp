@@ -940,7 +940,7 @@
                       <col class="col6"/>
                       <col class="col7"/>
                       <col class="col8"/>
-                      <col class="col9"/>
+                      <col class="col9 withHoldDisabled"/>
                       <col class="col10"/>
                       <col class="col11"/>
                     </colgroup>
@@ -955,7 +955,7 @@
                         <th class="asString">Service Type</th>
                         <th class="asNumeric">Amount</th>
                         <th class="asString">Pay Type</th>
-                        <th class="asNumeric">Withholding Rate</th>
+                        <th class="asNumeric withHoldDisabled unsortable">Withholding Rate</th>
                         <th class="asString">Interest Waved</th>
                         <th class="lastCol asDate">Interest Begins</th>
                       </tr>
@@ -977,7 +977,7 @@
                         <td><select class="payType" typeName="payTypes">
                           </select></td>
 
-                         <td>
+                         <td class="withHoldDisabled">
                           <select>
                             <option selected></option>
                             <option>7</option>
@@ -2752,7 +2752,7 @@
             <td class="dollar">20000.00</td>
             <td></td>
             <input type="hidden"/>
-            <td></td>
+            <td class="withHoldDisabled"></td>
             <td></td>
             <td class="lastCol"></td>
           </tr>
@@ -2775,7 +2775,7 @@
             <td><input name="amount" type="text" class="text amount" value=""/></td>
             <td><select class="payType" typeName="payTypes">
               </select></td>
-      <td>
+      <td class="withHoldDisabled">
         <select>
                             <option selected></option>
                             <option>7</option>
@@ -2814,7 +2814,7 @@
             <td class="dollar"></td>
             <td></td>
             <input type="hidden"/>
-            <td></td>
+            <td class="withHoldDisabled"></td>
             <td></td>
             <td class="lastCol"></td>
           </tr>

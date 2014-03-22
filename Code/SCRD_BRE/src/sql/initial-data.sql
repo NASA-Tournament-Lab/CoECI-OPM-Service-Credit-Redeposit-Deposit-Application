@@ -922,6 +922,7 @@ INSERT INTO opm.role (id, deleted, name, description) VALUES (13, false, 'Refund
 INSERT INTO opm.role (id, deleted, name, description) VALUES (14, false, 'Refunds Specialist', 'Refunds Specialist');
 INSERT INTO opm.role (id, deleted, name, description) VALUES (15, false, 'Refunds Supervisor', 'Refunds Supervisor');
 INSERT INTO opm.role (id, deleted, name, description) VALUES (16, false, 'RIO  User', 'RIO  User');
+INSERT INTO opm.role (id, deleted, name, description) VALUES (17, false, 'Batch Processing', 'Batch Processing');
 
 INSERT INTO opm.application_designation(id, deleted, name) VALUES(1, false, 'Default User Order');
 INSERT INTO opm.application_designation(id, deleted, name) VALUES(2, false, 'Pre Deposit');
@@ -936,6 +937,7 @@ INSERT INTO opm.app_user (id, deleted, username, default_tab, network_id, role_i
 INSERT INTO opm.app_user (id, deleted, username, default_tab, network_id, role_id, first_name, last_name, email, telephone, user_status_id, default_tab_account_id) VALUES (4, false, 'user4', 'VIEW_ACCOUNT', 'networkId4', 4, 'Mesh', 'Winchester', 'mesh@topcoder.com', '212-999-0982', 1, 1);
 INSERT INTO opm.app_user (id, deleted, username, default_tab, network_id, role_id, first_name, last_name, email, telephone, user_status_id, default_tab_account_id) VALUES (5, false, 'user5', 'VIEW_ACCOUNT', 'networkId5', 3, 'Bannie', 'Lai', 'email3@topcoder.com', '212-999-0982', 1, 1);
 INSERT INTO opm.app_user (id, deleted, username, default_tab, network_id, role_id, first_name, last_name, email, telephone, user_status_id, default_tab_account_id) VALUES (6, false, 'ScrdAdmin@OPM.EC2.INTERNAL', 'VIEW_ACCOUNT', 'networkId5', 1, 'Windows', 'User', 'email3@topcoder.com', '212-999-0982', 1, 1);
+INSERT INTO opm.app_user (id, deleted, username, default_tab, network_id, role_id, first_name, last_name, email, telephone, user_status_id, default_tab_account_id) VALUES (7, false, 'BatchUser', 'VIEW_ACCOUNT', 'networkId5', 17, 'Batch', 'User', 'email3@topcoder.com', '212-999-0982', 1, 1);
 
 INSERT INTO opm.user_permission (id, deleted, username, action) VALUES (1, false, 'user1', 'link');
 INSERT INTO opm.user_permission (id, deleted, username, action) VALUES (2, false, 'user1', 'button');
@@ -1022,3 +1024,5 @@ INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (55, fals
 INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (56, false, 'Faces', 'POST /faces');
 INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (57, false, 'Faces', 'PUT /faces');
 INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (58, false, 'Faces', 'DELETE /faces');
+
+INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (59, false, 'Batch Processing', 'batchProcessingJob');

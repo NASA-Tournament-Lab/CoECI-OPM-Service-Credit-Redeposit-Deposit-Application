@@ -6998,4 +6998,8 @@ figcaption {
     
 }
 
+#depTbl .withHoldDisabled {
+    display: none;
+}
+
 	

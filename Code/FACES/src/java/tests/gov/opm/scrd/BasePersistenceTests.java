@@ -546,7 +546,7 @@ public class BasePersistenceTests {
         entity.setStartDate(new Date());
         entity.setEndDate(new Date());
         entity.setMidDate(new Date());
-        entity.setRefundDate(new Date());
+        entity.setEffectiveDate(new Date());
 
         entity.setPeriodType(getPeriodType());
         create(entity.getPeriodType());
@@ -560,7 +560,7 @@ public class BasePersistenceTests {
         create(rt);
         entity.setRetirementType(rt);
         entity.setServiceCategory(DepositType.CSRS_POST_10_82_DEPOSIT);
-        entity.setRefundDate(new Date());
+        entity.setEffectiveDate(new Date());
 
         return entity;
     }
@@ -651,7 +651,7 @@ public class BasePersistenceTests {
 
         entity.setDateEntered(new Date());
         entity.setEnteredBy(1L);
-        entity.setRefundDate(new Date());
+        entity.setInterestAccrualDate(new Date());
         return entity;
     }
 
@@ -779,7 +779,7 @@ public class BasePersistenceTests {
     protected RefundTransaction getRefundTransaction() {
         RefundTransaction entity = new RefundTransaction();
 
-        entity.setTransactionKey(1L);
+        entity.setTransactionKey("1");
         entity.setAmount(BigDecimal.ONE);
         entity.setClaimNumber("claimNumber1");
         entity.setRefundDate(new Date());
