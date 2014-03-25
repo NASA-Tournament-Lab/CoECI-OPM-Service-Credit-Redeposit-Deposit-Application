@@ -1,3 +1,0 @@
-#beginDate, endDate, retirementType, periodType, appointmentType, serviceType, amount, payType, interestAccrualDate, connerCase
-ServicePeriod1=01/13/1974,07/16/1988,CSRS,REDEPOSIT,CAREER,GS,17689.87,REFUND,11/07/1989,false
-ServicePeriod2=01/13/1974,07/16/1988,CSRS,REDEPOSIT,CAREER,GS,500.00,REFUND,02/15/1990,false

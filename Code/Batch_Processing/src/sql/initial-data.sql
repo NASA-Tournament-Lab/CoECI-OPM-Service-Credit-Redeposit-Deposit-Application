@@ -136,33 +136,33 @@ ALTER SEQUENCE opm.user_status_id_seq RESTART WITH 1000;
 ----------------------------------------------------
 --      payment_status table
 ----------------------------------------------------
-INSERT INTO opm.payment_status(id, deleted, name) VALUES(1, false, 'Posted ??Pending');
+INSERT INTO opm.payment_status(id, deleted, name) VALUES(1, false, 'Posted – Pending');
 INSERT INTO opm.payment_status(id, deleted, name) VALUES(2, false, 'Reversed - Pending Approval');
-INSERT INTO opm.payment_status(id, deleted, name) VALUES(3, false, 'Reversed ??Pending');
+INSERT INTO opm.payment_status(id, deleted, name) VALUES(3, false, 'Reversed – Pending');
 INSERT INTO opm.payment_status(id, deleted, name) VALUES(4, false, 'Voluntary Contributions - Pending Approval');
-INSERT INTO opm.payment_status(id, deleted, name) VALUES(5, false, 'Voluntary Contributions ??Pending');
+INSERT INTO opm.payment_status(id, deleted, name) VALUES(5, false, 'Voluntary Contributions – Pending');
 INSERT INTO opm.payment_status(id, deleted, name) VALUES(6, false, 'Direct Pay Life - Pending Approval');
-INSERT INTO opm.payment_status(id, deleted, name) VALUES(7, false, 'Direct Pay Life ??Pending');
+INSERT INTO opm.payment_status(id, deleted, name) VALUES(7, false, 'Direct Pay Life – Pending');
 INSERT INTO opm.payment_status(id, deleted, name) VALUES(8, false, 'Suspense Refund Pending Approval');
 INSERT INTO opm.payment_status(id, deleted, name) VALUES(9, false, 'Suspense Refund Pending');
 INSERT INTO opm.payment_status(id, deleted, name) VALUES(10, false, 'Annuity - Pending Approval');
-INSERT INTO opm.payment_status(id, deleted, name) VALUES(11, false, 'Annuity ??Pending');
+INSERT INTO opm.payment_status(id, deleted, name) VALUES(11, false, 'Annuity – Pending');
 INSERT INTO opm.payment_status(id, deleted, name) VALUES(12, false, 'Debit Voucher - Pending Approval');
-INSERT INTO opm.payment_status(id, deleted, name) VALUES(13, false, 'Debit Voucher ??Pending');
+INSERT INTO opm.payment_status(id, deleted, name) VALUES(13, false, 'Debit Voucher – Pending');
 INSERT INTO opm.payment_status(id, deleted, name) VALUES(14, false, 'Health Benefits - Pending Approval');
-INSERT INTO opm.payment_status(id, deleted, name) VALUES(15, false, 'Health Benefits ??Pending');
+INSERT INTO opm.payment_status(id, deleted, name) VALUES(15, false, 'Health Benefits – Pending');
 INSERT INTO opm.payment_status(id, deleted, name) VALUES(16, false, 'Adjustment - Pending Approval');
-INSERT INTO opm.payment_status(id, deleted, name) VALUES(17, false, 'Adjustment ??Pending');
+INSERT INTO opm.payment_status(id, deleted, name) VALUES(17, false, 'Adjustment – Pending');
 INSERT INTO opm.payment_status(id, deleted, name) VALUES(18, false, 'Write-Off - Pending Approval');
-INSERT INTO opm.payment_status(id, deleted, name) VALUES(19, false, 'Write-Off ??Pending');
+INSERT INTO opm.payment_status(id, deleted, name) VALUES(19, false, 'Write-Off – Pending');
 INSERT INTO opm.payment_status(id, deleted, name) VALUES(20, false, 'Credit Balance Refund - Pending Approval');
-INSERT INTO opm.payment_status(id, deleted, name) VALUES(21, false, 'Credit Balance Refund ??Pending');
+INSERT INTO opm.payment_status(id, deleted, name) VALUES(21, false, 'Credit Balance Refund – Pending');
 INSERT INTO opm.payment_status(id, deleted, name) VALUES(22, false, 'Batch Auto Refund Canceled - Pending Approval');
-INSERT INTO opm.payment_status(id, deleted, name) VALUES(23, false, 'Batch Auto Refund Canceled ??Pending');
+INSERT INTO opm.payment_status(id, deleted, name) VALUES(23, false, 'Batch Auto Refund Canceled – Pending');
 INSERT INTO opm.payment_status(id, deleted, name) VALUES(24, false, 'Manual Adjustment Cancelled - Pending Approval');
-INSERT INTO opm.payment_status(id, deleted, name) VALUES(25, false, 'Manual Adjustment Cancelled ??Pending');
+INSERT INTO opm.payment_status(id, deleted, name) VALUES(25, false, 'Manual Adjustment Cancelled – Pending');
 INSERT INTO opm.payment_status(id, deleted, name) VALUES(26, false, 'Batch Auto Refund - Pending Approval');
-INSERT INTO opm.payment_status(id, deleted, name) VALUES(27, false, 'Batch Auto Refund ??Pending');
+INSERT INTO opm.payment_status(id, deleted, name) VALUES(27, false, 'Batch Auto Refund – Pending');
 ALTER SEQUENCE opm.payment_status_id_seq RESTART WITH 1000;
 
 ----------------------------------------------------
@@ -246,13 +246,13 @@ INSERT INTO opm.service_type(id, deleted, name) VALUES(3, false, 'ES-Executive S
 INSERT INTO opm.service_type(id, deleted, name) VALUES(4, false, 'SES-Senior Executive Schedule');
 INSERT INTO opm.service_type(id, deleted, name) VALUES(5, false, 'Senior Official');
 INSERT INTO opm.service_type(id, deleted, name) VALUES(6, false, 'Legislators');
-INSERT INTO opm.service_type(id, deleted, name) VALUES(7, false, 'Legislators ?�SS Max');
-INSERT INTO opm.service_type(id, deleted, name) VALUES(8, false, 'Postal Service ??PTF');
-INSERT INTO opm.service_type(id, deleted, name) VALUES(9, false, 'Postal Service ??LT (and FT)');
+INSERT INTO opm.service_type(id, deleted, name) VALUES(7, false, 'Legislators –SS Max');
+INSERT INTO opm.service_type(id, deleted, name) VALUES(8, false, 'Postal Service – PTF');
+INSERT INTO opm.service_type(id, deleted, name) VALUES(9, false, 'Postal Service – LT (and FT)');
 INSERT INTO opm.service_type(id, deleted, name) VALUES(10, false, 'Legislative Employee');
 INSERT INTO opm.service_type(id, deleted, name) VALUES(11, false, 'Senate Child Care');
 INSERT INTO opm.service_type(id, deleted, name) VALUES(12, false, 'Library of Congress Child Care');
-INSERT INTO opm.service_type(id, deleted, name) VALUES(13, false, 'Legislative Employee ?�SS Max');
+INSERT INTO opm.service_type(id, deleted, name) VALUES(13, false, 'Legislative Employee –SS Max');
 INSERT INTO opm.service_type(id, deleted, name) VALUES(14, false, 'D.C. Government');
 INSERT INTO opm.service_type(id, deleted, name) VALUES(15, false, 'Firefighter');
 INSERT INTO opm.service_type(id, deleted, name) VALUES(16, false, 'Air Traffic Controller');
@@ -261,9 +261,9 @@ INSERT INTO opm.service_type(id, deleted, name) VALUES(18, false, 'Capitol Polic
 INSERT INTO opm.service_type(id, deleted, name) VALUES(19, false, 'Customs Border Prot Officer');
 INSERT INTO opm.service_type(id, deleted, name) VALUES(20, false, 'Supreme Ct Police');
 INSERT INTO opm.service_type(id, deleted, name) VALUES(21, false, 'Bankruptcy Judge');
-INSERT INTO opm.service_type(id, deleted, name) VALUES(22, false, 'Bankruptcy Judge ??SS Max');
+INSERT INTO opm.service_type(id, deleted, name) VALUES(22, false, 'Bankruptcy Judge – SS Max');
 INSERT INTO opm.service_type(id, deleted, name) VALUES(23, false, 'Ct of Fed Claims');
-INSERT INTO opm.service_type(id, deleted, name) VALUES(24, false, 'Ct of Fed Claims ?�SS Max');
+INSERT INTO opm.service_type(id, deleted, name) VALUES(24, false, 'Ct of Fed Claims –SS Max');
 INSERT INTO opm.service_type(id, deleted, name) VALUES(25, false, 'Military Appeals Judge');
 INSERT INTO opm.service_type(id, deleted, name) VALUES(26, false, 'Military Appeals Judge- SS Max');
 INSERT INTO opm.service_type(id, deleted, name) VALUES(27, false, 'US Magistrate');
@@ -326,4 +326,8 @@ ALTER SEQUENCE opm.country_id_seq RESTART WITH 1000;
 INSERT INTO opm.role_permission(id, deleted, rolename, action) VALUES(1, false, 'Batch', 'batchProcessingJob');
 INSERT INTO opm.app_user(id, deleted, first_name, last_name, email, telephone, username, default_tab, role_id, user_status_id, network_id) VALUES(1, false,'Jacqueline','Hill','jhill@quimba.com','046-44-6641','BatchUser',null, 1, 1,'AMAZONA-20SVSGC\\Batch');
 
+--INSERT INTO opm.address(id, deleted, street1, city, state_id, zip_code, country_id) VALUES(1, false, 'Street1', 'City 1', 1, 'Zip 1', 1);
+--INSERT INTO opm.address(id, deleted, street1, city, state_id, zip_code, country_id) VALUES(2, false, 'Street2', 'City 2', 2, 'Zip 2', 2);
 
+--INSERT INTO opm.account_holder(id, deleted, last_name, first_name, suffix_id, birth_date, ssn, email, city_of_employment, state_of_employment_id, address_id) VALUES(1, false, 'Hughes', 'Jack', 1, CURRENT_TIMESTAMP, 'SSN 1', 'Email 1', 'City 1', 1, 1);
+--INSERT INTO opm.account_holder(id, deleted, last_name, first_name, suffix_id, birth_date, ssn, email, city_of_employment, state_of_employment_id, address_id) VALUES(2, false, 'Zuckerberg', 'Mark', 2, CURRENT_TIMESTAMP, 'SSN 2', 'Email 2', 'City 2', 2, 2);

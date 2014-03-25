@@ -29,18 +29,11 @@ import java.util.Date;
  * </p>
  *
  * <p>
- * <em>Changes in 1.1 (OPM - SCRD - Batch Process Assembly 1.0):</em>
- * <ul>
- * <li>Changed transactionKey to type of Long</li>
- * </ul>
- * </p>
- *
- * <p>
  * <strong>Thread Safety: </strong> This class is mutable and not thread safe.
  * </p>
  *
- * @author faeton, sparemax, liuliquan
- * @version 1.1
+ * @author faeton, sparemax
+ * @version 1.0
  */
 public class RefundTransaction extends IdentifiableEntity {
     /**
@@ -49,7 +42,7 @@ public class RefundTransaction extends IdentifiableEntity {
      * value. It is fully mutable.
      * </p>
      */
-    private Long transactionKey;
+    private String transactionKey;
     /**
      * <p>
      * Represents the amount of refund transaction. It is managed with a getter and setter. It may have any value. It is
@@ -98,7 +91,7 @@ public class RefundTransaction extends IdentifiableEntity {
      *
      * @return the transaction key of refund transaction.
      */
-    public Long getTransactionKey() {
+    public String getTransactionKey() {
         return transactionKey;
     }
 
@@ -108,7 +101,7 @@ public class RefundTransaction extends IdentifiableEntity {
      * @param transactionKey
      *            the transaction key of refund transaction.
      */
-    public void setTransactionKey(Long transactionKey) {
+    public void setTransactionKey(String transactionKey) {
         this.transactionKey = transactionKey;
     }
 

@@ -581,7 +581,7 @@
                 <column name="street5" nullable="true" length="128"/>
             </basic>
             <basic name="city">
-                <column name="city" nullable="true" length="128"/>
+                <column name="city" nullable="false" length="128"/>
             </basic>
             <basic name="zipCode">
                 <column name="zip_code" nullable="true" length="128"/>
@@ -611,7 +611,7 @@
                 <column name="birth_date" nullable="false"/>
             </basic>
             <basic name="ssn">
-                <column name="ssn" nullable="false" length="128"/>
+                <column name="ssn" nullable="false" length="128" unique="true"/>
             </basic>
             <basic name="telephone">
                 <column name="telephone" nullable="true" length="128"/>
@@ -703,7 +703,7 @@
             <basic name="stopACHPayments">
                 <column name="stop_ach_payments" nullable="true"/>
             </basic>
-            <one-to-many name="billings" target-entity="gov.opm.scrd.entities.application.Billing" fetch="LAZY">
+            <one-to-many name="billings" target-entity="gov.opm.scrd.entities.application.Billing" fetch="LAZY" orphan-removal="true">
                 <join-column name="billing_summary_id" referenced-column-name="id" nullable="false" />
                 <cascade>
                   <cascade-all/>
@@ -847,7 +847,7 @@
             <many-to-one name="payCode" target-entity="gov.opm.scrd.entities.lookup.PayCode" fetch="EAGER">
                 <join-column name="pay_code_id" referenced-column-name="id" nullable="true" />
             </many-to-one>
-            <one-to-many name="calculationVersions" target-entity="gov.opm.scrd.entities.application.CalculationVersion" fetch="LAZY">
+            <one-to-many name="calculationVersions" target-entity="gov.opm.scrd.entities.application.CalculationVersion" fetch="LAZY" orphan-removal="true">
                 <join-column name="account_id" referenced-column-name="id"/>
                 <cascade>
                   <cascade-all/>
@@ -859,7 +859,7 @@
             <one-to-many name="paymentHistory" target-entity="gov.opm.scrd.entities.application.Payment" fetch="EAGER">
                 <join-column name="account_id" referenced-column-name="id" nullable="true" />
             </one-to-many>
-            <one-to-one name="billingSummary" target-entity="gov.opm.scrd.entities.application.BillingSummary" fetch="LAZY">
+            <one-to-one name="billingSummary" target-entity="gov.opm.scrd.entities.application.BillingSummary" fetch="LAZY" orphan-removal="true">
                 <join-column name="billing_summary_id" referenced-column-name="id" />
                 <cascade>
                   <cascade-all/>
@@ -966,7 +966,7 @@
                 <column name="approval_reason" nullable="true" length="255"/>
             </basic>
             <basic name="paymentType">
-                <column name="payment_type" nullable="false" length="128"/>
+                <column name="payment_type" nullable="false"/>
                 <enumerated>STRING</enumerated>
             </basic>
             <basic name="accountId">
@@ -1021,7 +1021,7 @@
                 <column name="name" nullable="false" length="128"/>
             </basic>
             <basic name="calculationDate">
-                <column name="calculation_date" nullable="false"/>
+                <column name="calculation_date" nullable="true"/>
             </basic>
             <basic name="version">
                 <column name="version" nullable="true"/>
@@ -1032,13 +1032,13 @@
             <basic name="accountId">
                 <column name="account_id" nullable="false"/>
             </basic>
-            <one-to-many name="calculations" target-entity="gov.opm.scrd.entities.application.Calculation" fetch="LAZY">
+            <one-to-many name="calculations" target-entity="gov.opm.scrd.entities.application.Calculation" fetch="LAZY" orphan-removal="true">
                 <join-column name="calculation_version_id" referenced-column-name="id" nullable="false" />
                 <cascade>
                   <cascade-all/>
                 </cascade>
             </one-to-many>
-            <one-to-one name="calculationResult" target-entity="gov.opm.scrd.entities.application.CalculationResult" fetch="LAZY">
+            <one-to-one name="calculationResult" target-entity="gov.opm.scrd.entities.application.CalculationResult" fetch="LAZY" orphan-removal="true">
                 <join-column name="calculation_result_id" referenced-column-name="id" nullable="true" />
                 <cascade>
                   <cascade-all/>
@@ -1074,12 +1074,17 @@
             <basic name="frozen">
                 <column name="frozen" nullable="true"/>
             </basic>
-            <basic name="refundDate">
-                <column name="refund_date" nullable="false"/>
-            </basic>
             <basic name="interestRate">
                 <column name="interest_rate" nullable="true"/>
             </basic>
+            
+            <basic name="connerCase">
+                <column name="conner_case" nullable="false"/>
+            </basic>
+            <basic name="interestAccrualDate">
+                <column name="interest_accrual_date" nullable="true"/>
+            </basic>
+            
             <many-to-one name="retirementType" target-entity="gov.opm.scrd.entities.lookup.RetirementType" fetch="EAGER">
                 <join-column name="retirement_type_id" referenced-column-name="id" nullable="true" />
             </many-to-one>
@@ -1156,13 +1161,13 @@
                 <column name="end_date" nullable="false"/>
             </basic>
             <basic name="midDate">
-                <column name="mid_date" nullable="false"/>
+                <column name="mid_date" nullable="true"/>
             </basic>
-            <basic name="refundDate">
-                <column name="refund_date" nullable="false"/>
+            <basic name="effectiveDate">
+                <column name="effective_date" nullable="false"/>
             </basic>
             <basic name="serviceCategory">
-                <column name="service_category" nullable="false"/>
+                <column name="service_category" nullable="true"/>
                 <enumerated>STRING</enumerated>
             </basic>
             <basic name="deductionAmount">
@@ -2087,7 +2092,7 @@
                 <column name="update_to_completed" nullable="true"/>
             </basic>
             <basic name="payTransactionKey">
-                <column name="pay_trans_key" nullable="true"/>
+                <column name="pay_transaction_key" nullable="true"/>
             </basic>
         </attributes>
     </entity>
@@ -2145,222 +2150,4 @@
             </basic>
         </attributes>
     </entity>
-<!-- 
-
-    <entity class="gov.opm.scrd.entities.batchprocessing.AllDetails">
-        <table name="all_details"/>
-        <attributes>
-            <basic name="paymentType">
-                <column name="payment_type" nullable="true"/>
-            </basic>
-            <basic name="paymentDate">
-                <column name="payment_date" nullable="true"/>
-            </basic>
-            <basic name="julianDate">
-                <column name="julian_date" nullable="true"/>
-            </basic>
-            <basic name="julianDateReport">
-                <column name="julian_date_report" nullable="true"/>
-            </basic>
-            <basic name="glFiller">
-                <column name="gl_filler" nullable="true"/>
-            </basic>
-            <basic name="glCode">
-                <column name="gl_code" nullable="true"/>
-            </basic>
-            <basic name="fiscalYear">
-                <column name="fiscal_year" nullable="true"/>
-            </basic>
-            <basic name="glAccountingCode">
-                <column name="gl_accounting_code" nullable="true"/>
-            </basic>
-            <basic name="recipientAmount">
-                <column name="recipient_amount" nullable="true"/>
-            </basic>
-            <basic name="revenueSourceCode">
-                <column name="revenue_source_code" nullable="true"/>
-            </basic>
-            <basic name="agency">
-                <column name="agency" nullable="true"/>
-            </basic>
-            <basic name="payTransactionKey">
-                <column name="pay_transaction_key" nullable="true"/>
-            </basic>
-            <basic name="scmClaimNumber">
-                <column name="scm_claim_number" nullable="true"/>
-            </basic>
-            <basic name="scmDateOfBirth">
-                <column name="scm_date_of_birth" nullable="true"/>
-            </basic>
-            <basic name="scmRetirementTypeDescription">
-                <column name="scm_retirement_type_description" nullable="true"/>
-            </basic>
-            <basic name="claimantName">
-                <column name="claimant_name" nullable="true"/>
-            </basic>
-            <basic name="printDate">
-                <column name="print_date" nullable="true"/>
-            </basic>
-            <basic name="totalNonPostalFers">
-                <column name="total_non_postal_fers" nullable="true"/>
-            </basic>
-            <basic name="totalPostalFers">
-                <column name="total_postal_fers" nullable="true"/>
-            </basic>
-            <basic name="totalCsrs">
-                <column name="total_csrs" nullable="true"/>
-            </basic>
-            <basic name="julianNow">
-                <column name="julian_now" nullable="true"/>
-            </basic>
-        </attributes>
-    </entity>
-
-    <entity class="gov.opm.scrd.entities.batchprocessing.PerformBankChange">
-        <table name="perform_bank_change"/>
-        <attributes>
-            <basic name="scmClaimNumber">
-                <column name="scm_claim_number" nullable="true"/>
-            </basic>
-            <basic name="scmDateOfBirth">
-                <column name="scm_date_of_birth" nullable="true"/>
-            </basic>
-            <basic name="fieldNumber">
-                <column name="field_number" nullable="true"/>
-            </basic>
-            <basic name="dataElement">
-                <column name="data_element" nullable="true"/>
-            </basic>
-            <basic name="scmCity">
-                <column name="scm_city" nullable="true"/>
-            </basic>
-            <basic name="scmState">
-                <column name="scm_state" nullable="true"/>
-            </basic>
-            <basic name="scmZipCode">
-                <column name="scm_zip_code" nullable="true"/>
-            </basic>
-            <basic name="scmFName">
-                <column name="scmf_name" nullable="true"/>
-            </basic>
-            <basic name="scmMInitial">
-                <column name="scmm_initial" nullable="true"/>
-            </basic>
-            <basic name="scmLastName">
-                <column name="scm_last_name" nullable="true"/>
-            </basic>
-            <basic name="scmSuffix">
-                <column name="scm_suffix" nullable="true"/>
-            </basic>
-        </attributes>
-    </entity>
-
-    <entity class="gov.opm.scrd.entities.batchprocessing.InvoiceData">
-        <table name="invoice_data"/>
-        <attributes>
-            <basic name="payTransactionKey">
-                <column name="pay_transaction_key" nullable="true"/>
-            </basic>
-            <basic name="scmClaimNumber">
-                <column name="scm_claimnumber" nullable="true"/>
-            </basic>
-            <basic name="scmDateOfBirth">
-                <column name="scm_date_of_birth" nullable="true"/>
-            </basic>
-            <basic name="scmName">
-                <column name="scm_name" nullable="true"/>
-            </basic>
-            <basic name="accountStatusDescription">
-                <column name="account_status_description" nullable="true"/>
-            </basic>
-            <basic name="accountBalance">
-                <column name="account_balance" nullable="true"/>
-            </basic>
-            <basic name="accountPaymentTotal">
-                <column name="account_payment_total" nullable="true"/>
-            </basic>
-            <basic name="accountBalanceNew">
-                <column name="account_balance_new" nullable="true"/>
-            </basic>
-            <basic name="todaysPaymentTotal">
-                <column name="todays_payment_total" nullable="true"/>
-            </basic>
-            <basic name="payTransStatusCode">
-                <column name="pay_trans_status_code" nullable="true"/>
-            </basic>
-            <basic name="payTransStatusDescription">
-                <column name="pay_trans_status_description" nullable="true"/>
-            </basic>
-            <basic name="payTransPaymentAmount">
-                <column name="pay_trans_payment_amount" nullable="true"/>
-            </basic>
-            <basic name="overPaymentAmount">
-                <column name="over_payment_amount" nullable="true"/>
-            </basic>
-            <basic name="payTransTransactionDate">
-                <column name="pay_trans_transaction_date" nullable="true"/>
-            </basic>
-            <basic name="retirementTypeCode">
-                <column name="retirement_type_code" nullable="true"/>
-            </basic>
-            <basic name="retirementTypeDescription">
-                <column name="retirement_type_description" nullable="true"/>
-            </basic>
-            <basic name="numberPaymentsToday">
-                <column name="number_payments_today" nullable="true"/>
-            </basic>
-            <basic name="achPayment">
-                <column name="ach_payment" nullable="true"/>
-            </basic>
-            <basic name="paymentApplicationOrder">
-                <column name="payment_application_order" nullable="true"/>
-                <enumerated>STRING</enumerated>
-            </basic>
-            <basic name="note">
-                <column name="note" nullable="true"/>
-            </basic>
-            <basic name="pre1082DepositTotalPayment">
-                <column name="pre_1082_deposit_total_payment" nullable="true"/>
-            </basic>
-            <basic name="pre1082RedepositTotalPayment">
-                <column name="pre_1082_redeposit_total_payment" nullable="true"/>
-            </basic>
-            <basic name="post1082DepositTotalPayment">
-                <column name="post_1082_deposit_total_payment" nullable="true"/>
-            </basic>
-            <basic name="post1082RedepositTotalPayment">
-                <column name="post_1082_redeposit_total_payment" nullable="true"/>
-            </basic>
-            <basic name="fersTotalPayment">
-                <column name="fers_total_payment" nullable="true"/>
-            </basic>
-            <basic name="achStopLetter">
-                <column name="ach_stop_letter" nullable="true"/>
-            </basic>
-            <basic name="printInitialBill">
-                <column name="print_initial_bill" nullable="true"/>
-            </basic>
-            <basic name="updateCompleted">
-                <column name="update_completed" nullable="true"/>
-            </basic>
-            <basic name="accountStatus">
-                <column name="account_status" nullable="true"/>
-            </basic>
-            <basic name="reversedPayment">
-                <column name="reversed_payment" nullable="true"/>
-            </basic>
-            <basic name="printInvoice">
-                <column name="print_invoice" nullable="true"/>
-            </basic>
-            <basic name="refundRequired">
-                <column name="refund_required" nullable="true"/>
-            </basic>
-            <basic name="updateToCompleted">
-                <column name="update_to_completed" nullable="true"/>
-            </basic>
-            <basic name="overThePaymentAmount">
-                <column name="over_the_payment_amount" nullable="true"/>
-            </basic>
-        </attributes>
-    </entity> -->
 </entity-mappings>

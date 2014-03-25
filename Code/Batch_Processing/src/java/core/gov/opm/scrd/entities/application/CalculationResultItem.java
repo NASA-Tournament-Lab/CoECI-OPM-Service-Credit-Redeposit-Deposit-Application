@@ -17,6 +17,7 @@
 package gov.opm.scrd.entities.application;
 
 import gov.opm.scrd.entities.common.IdentifiableEntity;
+import gov.opm.scrd.entities.lookup.CalculationResultItemUpdateStatus;
 import gov.opm.scrd.entities.lookup.DepositType;
 import gov.opm.scrd.entities.lookup.PeriodType;
 import gov.opm.scrd.entities.lookup.RetirementType;
@@ -30,10 +31,6 @@ import java.util.Date;
  * </p>
  *
  * <p>
- * <strong>Thread Safety: </strong> This class is mutable and not thread safe.
- * </p>
- *
- * <p>
  * <em>Changes in 1.1 (OPM - Release I Assembly 1.0):</em>
  * <ul>
  * <li>add field retirementType, serviceCategeory</li>
@@ -41,8 +38,12 @@ import java.util.Date;
  * </ul>
  * </p>
  *
+ * <p>
+ * <strong>Thread Safety: </strong> This class is mutable and not thread safe.
+ * </p>
+ *
  * @author faeton, sparemax, bannie2492
- * @version 1.1
+ * @version 1.0
  */
 public class CalculationResultItem extends IdentifiableEntity {
     /**
@@ -72,7 +73,7 @@ public class CalculationResultItem extends IdentifiableEntity {
      * value. It is fully mutable.
      * </p>
      */
-    private Date refundDate;
+    private Date effectiveDate;
     /**
      * <p>
      * Represents the period type of calculation result item. It is managed with a getter and setter. It may have any
@@ -108,6 +109,21 @@ public class CalculationResultItem extends IdentifiableEntity {
      * </p>
      */
     private BigDecimal balance;
+
+    /**
+     * Represents the update status.
+     */
+    private CalculationResultItemUpdateStatus status;
+
+    /**
+     * Represents the version.
+     */
+    private Integer version;
+
+    /**
+     * Represents the line.
+     */
+    private Integer line;
 
     /**
      * <p>
@@ -190,22 +206,22 @@ public class CalculationResultItem extends IdentifiableEntity {
     }
 
     /**
-     * Gets the refund date of calculation result item.
+     * Gets the effective date of calculation result item.
      *
-     * @return the refund date of calculation result item.
+     * @return the effective date of calculation result item.
      */
-    public Date getRefundDate() {
-        return refundDate;
+    public Date getEffectiveDate() {
+        return effectiveDate;
     }
 
     /**
-     * Sets the refund date of calculation result item.
+     * Sets the effective date of calculation result item.
      *
-     * @param refundDate
-     *            the refund date of calculation result item.
+     * @param effectiveDate
+     *            the effective date of calculation result item.
      */
-    public void setRefundDate(Date refundDate) {
-        this.refundDate = refundDate;
+    public void setEffectiveDate(Date effectiveDate) {
+        this.effectiveDate = effectiveDate;
     }
 
     /**
@@ -301,6 +317,64 @@ public class CalculationResultItem extends IdentifiableEntity {
      */
     public void setBalance(BigDecimal balance) {
         this.balance = balance;
+    }
+
+
+    /**
+     * Gets the update status.
+     *
+     * @return the update status.
+     */
+    public CalculationResultItemUpdateStatus getStatus() {
+        return status;
+    }
+
+    /**
+     * Sets the update status.
+     *
+     * @param status
+     *         the update status.
+     */
+    public void setStatus(CalculationResultItemUpdateStatus status) {
+        this.status = status;
+    }
+
+    /**
+     * Gets the version.
+     *
+     * @return the version.
+     */
+    public Integer getVersion() {
+        return version;
+    }
+
+    /**
+     * Sets the version.
+     *
+     * @param version
+     *         the version.
+     */
+    public void setVersion(Integer version) {
+        this.version = version;
+    }
+
+    /**
+     * Gets the line.
+     *
+     * @return the line.
+     */
+    public Integer getLine() {
+        return line;
+    }
+
+    /**
+     * Sets the line.
+     *
+     * @param line
+     *         the line.
+     */
+    public void setLine(Integer line) {
+        this.line = line;
     }
 
     /**

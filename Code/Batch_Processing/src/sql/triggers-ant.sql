@@ -194,7 +194,7 @@ CREATE OR REPLACE FUNCTION opm.billing_func() RETURNS TRIGGER AS $$$$
     BEGIN
     	  IF (TG_OP = 'UPDATE') OR (TG_OP = 'INSERT') THEN
             INSERT INTO opm.billing_history(id, deleted, name, initial_billing, additional_interest, total_payments, balance, payment_order, billing_summary_id, frozen, action)
-            VALUES (NEW.id, NEW.deleted, NEW.name, NEW.initial_billing, NEW.additional_interest, NEW.total_payments, NEW.balance, NEW.payment_order, NEW.billing_summary_id ,NEW.frozen, substring(TG_OP,1,1));
+            VALUES (NEW.id, NEW.deleted, NEW.name, NEW.initial_billing, NEW.additional_interest, NEW.total_payments, NEW.balance, NEW.payment_order, NEW.billing_summary_id, NEW.frozen, substring(TG_OP,1,1));
             RETURN NEW;
         ELSIF (TG_OP = 'DELETE') THEN
             INSERT INTO opm.billing_history(id, deleted, name, initial_billing, additional_interest, total_payments, balance, payment_order, billing_summary_id, frozen, action)
@@ -228,19 +228,21 @@ $$$$ LANGUAGE plpgsql;;
 CREATE TRIGGER calculation_version_trigger 
   AFTER INSERT OR UPDATE OR DELETE ON opm.calculation_version
   FOR EACH ROW EXECUTE PROCEDURE opm.calculation_version_func();;
- 
+  
+
+  
 -- -----------------------------------------------------
 -- Table calculation trigger
 -- -----------------------------------------------------
 CREATE OR REPLACE FUNCTION opm.calculation_func() RETURNS TRIGGER AS $$$$
     BEGIN
     	  IF (TG_OP = 'UPDATE') OR (TG_OP = 'INSERT') THEN
-            INSERT INTO opm.calculation_history(id, deleted, begin_date, end_date, retirement_type_id, period_type_id, appointment_type_id, service_type_id, amount, pay_type_id, agency_code_id, hours_in_year, annualized_amount, date_entered, entered_by, calculation_version_id, frozen, refund_date, interest_rate, action)
-            VALUES (NEW.id, NEW.deleted, NEW.begin_date, NEW.end_date, NEW.retirement_type_id, NEW.period_type_id, NEW.appointment_type_id, NEW.service_type_id, NEW.amount, NEW.pay_type_id, NEW.agency_code_id, NEW.hours_in_year, NEW.annualized_amount, NEW.date_entered, NEW.entered_by, NEW.calculation_version_id, NEW.frozen, NEW.refund_date, NEW.interest_rate, substring(TG_OP,1,1));
+            INSERT INTO opm.calculation_history(id, deleted, begin_date, end_date, retirement_type_id, period_type_id, appointment_type_id, service_type_id, amount, pay_type_id, agency_code_id, hours_in_year, annualized_amount, date_entered, entered_by, calculation_version_id, frozen, action)
+            VALUES (NEW.id, NEW.deleted, NEW.begin_date, NEW.end_date, NEW.retirement_type_id, NEW.period_type_id, NEW.appointment_type_id, NEW.service_type_id, NEW.amount, NEW.pay_type_id, NEW.agency_code_id, NEW.hours_in_year, NEW.annualized_amount, NEW.date_entered, NEW.entered_by, NEW.calculation_version_id, NEW.frozen, substring(TG_OP,1,1));
             RETURN NEW;
         ELSIF (TG_OP = 'DELETE') THEN
-            INSERT INTO opm.calculation_history(id, deleted, begin_date, end_date, retirement_type_id, period_type_id, appointment_type_id, service_type_id, amount, pay_type_id, agency_code_id, hours_in_year, annualized_amount, date_entered, entered_by, calculation_version_id, frozen, refund_date, interest_rate, action)
-            VALUES (OLD.id, OLD.deleted, OLD.begin_date, OLD.end_date, OLD.retirement_type_id, OLD.period_type_id, OLD.appointment_type_id, OLD.service_type_id, OLD.amount, OLD.pay_type_id, OLD.agency_code_id, OLD.hours_in_year, OLD.annualized_amount, OLD.date_entered, OLD.entered_by, OLD.calculation_version_id, OLD.frozen, OLD.refund_date, OLD.interest_rate, substring(TG_OP,1,1));
+            INSERT INTO opm.calculation_history(id, deleted, begin_date, end_date, retirement_type_id, period_type_id, appointment_type_id, service_type_id, amount, pay_type_id, agency_code_id, hours_in_year, annualized_amount, date_entered, entered_by, calculation_version_id, frozen, action)
+            VALUES (OLD.id, OLD.deleted, OLD.begin_date, OLD.end_date, OLD.retirement_type_id, OLD.period_type_id, OLD.appointment_type_id, OLD.service_type_id, OLD.amount, OLD.pay_type_id, OLD.agency_code_id, OLD.hours_in_year, OLD.annualized_amount, OLD.date_entered, OLD.entered_by, OLD.calculation_version_id, OLD.frozen, substring(TG_OP,1,1));
             RETURN OLD;
         END IF;
     END;
@@ -277,12 +279,12 @@ CREATE TRIGGER calculation_result_trigger
 CREATE OR REPLACE FUNCTION opm.calculation_result_item_func() RETURNS TRIGGER AS $$$$
     BEGIN
     	  IF (TG_OP = 'UPDATE') OR (TG_OP = 'INSERT') THEN
-            INSERT INTO opm.calculation_result_item_history(id, deleted, start_date, end_date, mid_date, refund_date, service_category, period_type_id, retirement_type_id, deduction_amount, total_interest, payment_applied, balance, calculation_result_id, action)
-            VALUES (NEW.id, NEW.deleted, NEW.start_date, NEW.end_date, NEW.mid_date, NEW.refund_date, NEW.service_category, NEW.period_type_id, NEW.retirement_type_id, NEW.deduction_amount, NEW.total_interest, NEW.payment_applied, NEW.balance, NEW.calculation_result_id, substring(TG_OP,1,1));
+            INSERT INTO opm.calculation_result_item_history(id, deleted, start_date, end_date, mid_date, effective_date, period_type_id, deduction_amount, total_interest, payment_applied, balance, calculation_result_id, service_category, retirement_type_id, action)
+            VALUES (NEW.id, NEW.deleted, NEW.start_date, NEW.end_date, NEW.mid_date, NEW.effective_date, NEW.period_type_id, NEW.deduction_amount, NEW.total_interest, NEW.payment_applied, NEW.balance, NEW.calculation_result_id, NEW.service_category, NEW.retirement_type_id, substring(TG_OP,1,1));
             RETURN NEW;
         ELSIF (TG_OP = 'DELETE') THEN
-            INSERT INTO opm.calculation_result_item_history(id, deleted, start_date, end_date, mid_date, refund_date, service_category, period_type_id, retirement_type_id, deduction_amount, total_interest, payment_applied, balance, calculation_result_id, action)
-            VALUES (OLD.id, OLD.deleted, OLD.start_date, OLD.end_date, OLD.mid_date, OLD.refund_date, OLD.service_category, OLD.period_type_id, OLD.retirement_type_id, OLD.deduction_amount, OLD.total_interest, OLD.payment_applied, OLD.balance, OLD.calculation_result_id, substring(TG_OP,1,1));
+            INSERT INTO opm.calculation_result_item_history(id, deleted, start_date, end_date, mid_date, effective_date, period_type_id, deduction_amount, total_interest, payment_applied, balance, calculation_result_id, service_category, retirement_type_id, action)
+            VALUES (OLD.id, OLD.deleted, OLD.start_date, OLD.end_date, OLD.mid_date, OLD.effective_date, OLD.period_type_id, OLD.deduction_amount, OLD.total_interest, OLD.payment_applied, OLD.balance, OLD.calculation_result_id, OLD.service_category, OLD.retirement_type_id, substring(TG_OP,1,1));
             RETURN OLD;
         END IF;
     END;
@@ -1026,3 +1028,24 @@ $$$$ LANGUAGE plpgsql;;
 CREATE TRIGGER batch_daily_payments_trigger 
   AFTER INSERT OR UPDATE OR DELETE ON opm.batch_daily_payments
   FOR EACH ROW EXECUTE PROCEDURE opm.batch_daily_payments_func();;
+
+-- -----------------------------------------------------
+-- Table report_generation_data trigger
+-- -----------------------------------------------------
+CREATE OR REPLACE FUNCTION opm.report_generation_data_func() RETURNS TRIGGER AS $$$$
+    BEGIN
+    	  IF (TG_OP = 'UPDATE') OR (TG_OP = 'INSERT') THEN
+            INSERT INTO opm.report_generation_data_history(id, deleted, payment_invoices_processed, bills_printed, reveals_printed, letters_printed, refunds_printed, action)
+            VALUES (NEW.id, NEW.deleted, NEW.payment_invoices_processed, NEW.bills_printed, NEW.reveals_printed, NEW.letters_printed, NEW.refunds_printed, substring(TG_OP,1,1));
+            RETURN NEW;
+        ELSIF (TG_OP = 'DELETE') THEN
+            INSERT INTO opm.report_generation_data_history(id, deleted, payment_invoices_processed, bills_printed, reveals_printed, letters_printed, refunds_printed, action)
+            VALUES (OLD.id, OLD.deleted, OLD.payment_invoices_processed, OLD.bills_printed, OLD.reveals_printed, OLD.letters_printed, OLD.refunds_printed, substring(TG_OP,1,1));
+            RETURN OLD;
+        END IF;
+    END;
+$$$$ LANGUAGE plpgsql;;
+
+CREATE TRIGGER report_generation_data_trigger 
+  AFTER INSERT OR UPDATE OR DELETE ON opm.report_generation_data
+  FOR EACH ROW EXECUTE PROCEDURE opm.report_generation_data_func();;

@@ -19,7 +19,6 @@ package gov.opm.scrd.web.interceptors;
 import gov.opm.scrd.LoggingHelper;
 import gov.opm.scrd.entities.application.User;
 import gov.opm.scrd.entities.common.Helper;
-import gov.opm.scrd.services.AuthorizationException;
 import gov.opm.scrd.services.OPMConfigurationException;
 import gov.opm.scrd.services.SecurityService;
 import gov.opm.scrd.services.UserService;
@@ -128,8 +127,10 @@ public class AuthorizationInterceptor extends BaseInterceptor {
             User user = userService.getByUsername(loggedUsername);
 
             if (user == null) {
-                throw LoggingHelper.logException(
-                        logger, signature, new AuthorizationException("You are not logged in."));
+                // redirect to the login page
+                response.sendRedirect(request.getContextPath() + "/login.html");
+                LoggingHelper.logExit(logger, signature, new Object[] {false});
+                return false;
             } else {
                 // Note: the request parameter can be faked by client user with arbitrary value
                 // So should use the request path to determine the action

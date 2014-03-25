@@ -216,7 +216,7 @@ public class CalculationExecutionServiceImpl extends BaseService implements Calc
                 item.setStartDate(period.getBeginDate());
                 item.setEndDate(period.getEndDate());
                 item.setMidDate(period.getMidPoint());
-                item.setRefundDate(period.getMidPoint());
+                item.setEffectiveDate(period.getMidPoint());
                 item.setPeriodType(period.getServicePeriods().get(0).getPeriodType());
                 /* Unclear: item.setRetirementType(period.getServicePeriods().get(0).getRetirementType()); */
                 item.setDeductionAmount(period.getTotalDeduction());

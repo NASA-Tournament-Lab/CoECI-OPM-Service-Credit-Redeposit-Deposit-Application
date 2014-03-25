@@ -16,6 +16,14 @@
 -->
 
 <project name="opm dependencies">
+
+	<fileset id="spring-security-kerberos" dir="lib/spring-security-kerberos">
+		<include name="*.jar" />
+	</fileset>
+	
+	<fileset id="poi" dir="lib/poi-3.9">
+		<include name="*.jar" />
+	</fileset>
 	
 	<fileset id="junit" dir="testlib/junit-4.10">
 		<include name="junit-4.10.jar" />

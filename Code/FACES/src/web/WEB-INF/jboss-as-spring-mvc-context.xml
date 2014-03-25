@@ -12,10 +12,14 @@
 	<mvc:interceptors>
 		<mvc:interceptor>
         <mvc:mapping path="/**" />
+        <mvc:exclude-mapping path="/j_spring_security_check*"/>
+        <mvc:exclude-mapping path="/login*"/>
         <bean class="gov.opm.scrd.web.interceptors.UserDataInterceptor" />
     </mvc:interceptor>
 		<mvc:interceptor>
         <mvc:mapping path="/**" />
+        <mvc:exclude-mapping path="/j_spring_security_check*"/>
+        <mvc:exclude-mapping path="/login*"/>
         <mvc:exclude-mapping path="/error.jsp"/>
         <mvc:exclude-mapping path="/css/**"/>
         <mvc:exclude-mapping path="/js/**"/>

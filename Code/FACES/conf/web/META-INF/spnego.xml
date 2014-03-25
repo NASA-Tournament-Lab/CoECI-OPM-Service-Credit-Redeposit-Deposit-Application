@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:sec="http://www.springframework.org/schema/security"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+
+	
+	<sec:http pattern="/login.html*" security="none"/>
+	
+	<sec:http entry-point-ref="spnegoEntryPoint">
+		<sec:intercept-url pattern="/**" access="IS_AUTHENTICATED_FULLY" />
+		<sec:custom-filter ref="spnegoAuthenticationProcessingFilter"
+			position="BASIC_AUTH_FILTER" />
+		<sec:form-login login-page="/login.html" default-target-url="/" always-use-default-target="true"/>
+	</sec:http>
+
+	<bean id="spnegoEntryPoint"
+		class="gov.opm.scrd.web.entrypoint.KerberosEntryPoint" />
+
+	<bean id="spnegoAuthenticationProcessingFilter"
+		class="org.springframework.security.extensions.kerberos.web.SpnegoAuthenticationProcessingFilter">
+			<property name="failureHandler">
+				<bean class="org.springframework.security.web.authentication.ExceptionMappingAuthenticationFailureHandler">
+					<property name="defaultFailureUrl" value="/login.html" />
+					<property name="allowSessionCreation" value="true"/>
+				</bean>
+			</property>
+			<property name="authenticationManager" ref="authenticationManager" />
+	</bean>
+
+	<sec:authentication-manager alias="authenticationManager">
+		<sec:authentication-provider ref="kerberosServiceAuthenticationProvider" />
+		<sec:authentication-provider user-service-ref="configuredUserService"/> <!-- Used with form login -->
+	</sec:authentication-manager>
+	
+	<bean id="kerberosServiceAuthenticationProvider"
+		class="org.springframework.security.extensions.kerberos.KerberosServiceAuthenticationProvider">
+		<property name="ticketValidator">
+			<bean
+				class="org.springframework.security.extensions.kerberos.SunJaasKerberosTicketValidator">
+				<property name="servicePrincipal" value="@krb.service.prinicipal@" />
+				<!-- Setting keyTabLocation to a classpath resource will most likely not work in a Java EE application Server -->
+				<!-- See the Javadoc for more information on that -->
+				<property name="keyTabLocation" value="@krb.keytab.location@" />
+				<property name="debug" value="@krb.debug@" />
+			</bean>
+		</property>
+		<property name="userDetailsService" ref="spnegoUserService" />
+	</bean>
+	
+	<!-- This bean definition enables a very detailed Kerberos logging -->
+	<bean
+		class="org.springframework.security.extensions.kerberos.GlobalSunJaasKerberosConfig">
+		<property name="debug" value="@krb.debug@" />
+		<property name="krbConfLocation" value="@krb.conf.location@"/>
+	</bean>
+
+	<!--
+		Just returns the User authenticated by Kerberos and gives him the
+		ROLE_USER
+	-->
+	<sec:user-service id="configuredUserService">
+		<sec:user name="user1" password="123456" authorities="ROLE_USER,ROLE_SUPERVISOR" />
+		<sec:user name="user2" password="123456" authorities="ROLE_USER" />
+		<sec:user name="user3" password="123456" authorities="ROLE_USER,ROLE_SUPERVISOR" />
+		<sec:user name="user4" password="123456" authorities="ROLE_USER,ROLE_SUPERVISOR" />
+		<sec:user name="user5" password="123456" authorities="ROLE_USER,ROLE_SUPERVISOR" />
+		<sec:user name="faces@OPM.EC2.INTERNAL" password="123456" authorities="ROLE_USER,ROLE_SUPERVISOR" />
+	</sec:user-service>
+  
+   <bean id="spnegoUserService"
+		class="org.springframework.security.core.userdetails.memory.InMemoryDaoImpl">
+		<property name="userProperties">
+			<value>
+				faces@OPM.EC2.INTERNAL=notUsed,ROLE_USER,ROLE_SUPERVISOR
+			</value>
+		</property>
+	</bean>
+</beans>

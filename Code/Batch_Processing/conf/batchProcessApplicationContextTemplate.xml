@@ -151,7 +151,7 @@
     </bean>
 
     <bean id="inputDirectoryPath" class="java.lang.String">
-        <constructor-arg value="test_files/lockbox_files" />
+        <constructor-arg value="@lockbox_files@" />
     </bean>
 
     <bean id="wildCardInput" class="java.lang.String">
@@ -159,7 +159,7 @@
     </bean>
 
     <bean id="directoryToClean" class="java.lang.String">
-        <constructor-arg value="test_files/old_files" />
+        <constructor-arg value="@old_files@" />
     </bean>
 
     <bean id="wildCardToClean" class="java.lang.String">
@@ -167,7 +167,7 @@
     </bean>
 
     <bean id="glDirectory" class="java.lang.String">
-        <constructor-arg value="test_files/gl_files" />
+        <constructor-arg value="@gl_files@" />
     </bean>
 
     <bean id="databaseString" class="java.lang.String">
@@ -195,7 +195,7 @@
     <bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
         <property name="jobDetail" ref="jobDetail" />
         <!-- run every night at 8:00:00 PM -->
-        <property name="cronExpression" value="0 * * * * ?" />
+        <property name="cronExpression" value="@cronExpression@" />
     </bean>
 
     <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">

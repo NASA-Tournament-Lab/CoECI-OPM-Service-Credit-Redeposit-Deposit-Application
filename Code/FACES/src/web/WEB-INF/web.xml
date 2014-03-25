@@ -20,7 +20,7 @@
 	<param-name>contextConfigLocation</param-name>
 	<param-value>
 		classpath:/META-INF/applicationContext.xml
-		classpath:/META-INF/applicationContext-security.xml
+		classpath:/META-INF/spnego.xml
 	</param-value>
   </context-param>
 

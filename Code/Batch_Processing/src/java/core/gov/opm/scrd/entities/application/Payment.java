@@ -52,18 +52,14 @@ import java.util.Date;
  * </p>
  *
  * <p>
- * <em>Changes in 1.3 (OPM - SCRD - Batch Process Assembly 1.0):</em>
- * <ul>
- * <li>Changed transactionKey to type of Long</li>
- * </ul>
- * </p>
- *
- * <p>
  * <strong>Thread Safety: </strong> This class is mutable and not thread safe.
  * </p>
+ * 
+ * Changed in OPM - Frontend - Payments Module Assembly
+ * Add the PaymentAppliance field.
  *
- * @author faeton, sparemax, liuliquan
- * @version 1.3
+ * @author faeton, sparemax, woodjhon
+ * @version 1.2
  */
 public class Payment extends IdentifiableEntity {
     /**
@@ -198,7 +194,7 @@ public class Payment extends IdentifiableEntity {
      * is fully mutable.
      * </p>
      */
-    private Long transactionKey;
+    private String transactionKey;
     /**
      * <p>
      * Represents the flag specifying whether this payment is ACH. It is managed with a getter and setter. It may have
@@ -393,7 +389,7 @@ public class Payment extends IdentifiableEntity {
     
     /**
      * The payment appliance field.
-     *
+     * 
      */
     private PaymentAppliance paymentAppliance;
 
@@ -406,7 +402,7 @@ public class Payment extends IdentifiableEntity {
     
     /**
      * Get the payment appliance.
-     *
+     * 
      * @return the payment appliance
      */
     public PaymentAppliance getPaymentAppliance() {
@@ -769,7 +765,7 @@ public class Payment extends IdentifiableEntity {
      *
      * @return the transaction key of the payment.
      */
-    public Long getTransactionKey() {
+    public String getTransactionKey() {
         return transactionKey;
     }
 
@@ -779,7 +775,7 @@ public class Payment extends IdentifiableEntity {
      * @param transactionKey
      *            the transaction key of the payment.
      */
-    public void setTransactionKey(Long transactionKey) {
+    public void setTransactionKey(String transactionKey) {
         this.transactionKey = transactionKey;
     }
 

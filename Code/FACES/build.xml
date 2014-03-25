@@ -106,6 +106,7 @@
     <path location="${ejb.classes.dir}"></path>
     <fileset refid="spring-mvc"></fileset>
     <fileset refid="spring-security"></fileset>
+  	<fileset refid="spring-security-kerberos"></fileset>
   </path>
 	
   <target name="clean" description="removes all generated files">
@@ -252,6 +253,7 @@
       <fileset dir="${web.dir}">
         <include name="index.jsp"/>
         <include name="error.jsp"/>
+	<include name="login.html"/>
         <include name="css/**/*"/>
         <include name="i/**/*"/>
         <include name="js/**/*"/>
@@ -261,6 +263,8 @@
       </lib>
       <lib refid="spring-security">
       </lib>
+        <lib refid="spring-security-kerberos">
+        </lib>
       <webinf dir="${web.dir}/WEB-INF"></webinf>
     </war>
   </target>
@@ -280,6 +284,8 @@
     <copy todir="${ear.build.dir}/lib">
       <fileset dir="${core.dist.dir}">
         <include name="${core-dist-name}"/>
+      </fileset>
+      <fileset refid="spring-security-kerberos">
       </fileset>
       <fileset refid="drools">
       </fileset>
@@ -357,6 +363,7 @@
       <fileset dir="${web.dir}">
         <include name="index.jsp"/>
         <include name="error.jsp"/>
+      	<include name="login.html"/>
         <include name="css/**/*"/>
         <include name="i/**/*"/>
         <include name="js/**/*"/>
@@ -366,6 +373,8 @@
       </lib>
       <lib refid="spring-security">
       </lib>
+    	<lib refid="spring-security-kerberos">
+    	</lib>
       <webinf dir="${web.dir}/WEB-INF"></webinf>
     </war>
     <ear destfile="${dist.dir}/${ear-file}" appxml="${ear.build.dir}/META-INF/application.xml" >

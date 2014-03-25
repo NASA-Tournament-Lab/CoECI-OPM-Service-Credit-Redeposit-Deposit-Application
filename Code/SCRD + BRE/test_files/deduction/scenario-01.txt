@@ -1,4 +1,0 @@
-#beginDate, endDate, retirementType, periodType, appointmentType, serviceType, amount, payType, interestAccrualDate, connerCase
-ServicePeriod1=05/30/1978,02/19/1983,CSRS,DEPOSIT,TEMPORARY,GS,5861.08,EARNINGS,null,false
-
-

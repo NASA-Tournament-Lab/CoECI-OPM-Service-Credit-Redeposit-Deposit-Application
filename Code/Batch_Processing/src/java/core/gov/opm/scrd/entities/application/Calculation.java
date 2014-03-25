@@ -40,18 +40,25 @@ import java.util.Date;
  * </p>
  *
  * <p>
- * <em>Changes in 1.2 (OPM - Release I Assembly 1.0):</em>
+ * <em>Changes in 1.2 (OPM - Rules Engine - Integrate with Web App Assembly v1.0 ):</em>
  * <ul>
- * <li>Added fields: frozen, refundDate, interestRate</li>
+ * <li>Added fields: interestAccrualDate, connerCase</li>
  * </ul>
  * </p>
  *
  * <p>
+ * <em>Changes in 1.3 (OPM - Release I Assembly 1.0):</em>
+ * <ul>
+ * <li>Added fields: frozen</li>
+ * </ul>
+ * </p>
+ * 
+ * <p>
  * <strong>Thread Safety: </strong> This class is mutable and not thread safe.
  * </p>
  *
- * @author faeton, sparemax, bannie2492
- * @version 1.2
+ * @author faeton, sparemax, bannie2492, TCSASSEMBLER
+ * @version 1.3
  */
 public class Calculation extends IdentifiableEntity {
     /**
@@ -156,26 +163,7 @@ public class Calculation extends IdentifiableEntity {
      */
     private Long enteredBy;
 
-    /**
-     * <p>
-     * Represents whether this calculation is frozen. It is managed with a getter and setter. It may have any
-     * value. It is fully mutable.
-     * </p>
-     *
-     * @since 1.2 (OPM - Release I Assembly 1.0)
-     */
-    private boolean frozen;
-
-    /**
-     * <p>
-     * Represents the refund date. It is managed with a getter and setter. It may have any
-     * value. It is fully mutable.
-     * </p>
-     *
-     * @since 1.2 (OPM - Release I Assembly 1.0)
-     */
-    private Date refundDate;
-
+    
     /**
      * <p>
      * Represents the interest rate. It is managed with a getter and setter. It may have any
@@ -186,6 +174,38 @@ public class Calculation extends IdentifiableEntity {
      */
     private BigDecimal interestRate;
 
+
+    /**
+     * <p>
+     * Represents the interest accrual date of the calculation.
+     * It is managed with a getter and setter. It may have any value. It is fully mutable.
+     * </p>
+     * 
+     * @since 1.2 (OPM - Rules Engine - Integrate with Web App Assembly v1.0)
+     */
+    private Date interestAccrualDate;
+    
+    /**
+     * <p>
+     * Represents the flag indicating whether the calculation is a Conner case.
+     * It is managed with a getter and setter. It may have any value. It is fully mutable.
+     * </p>
+     * 
+     * @since 1.2 (OPM - Rules Engine - Integrate with Web App Assembly v1.0)
+     */
+    private boolean connerCase;
+
+
+    /**
+     * <p>
+     * Represents whether this calculation is frozen. It is managed with a getter and setter. It may have any
+     * value. It is fully mutable.
+     * </p>
+     *
+     * @since 1.3 (OPM - Release I Assembly 1.0)
+     */
+    private boolean frozen;
+    
     /**
      * Creates an instance of Calculation.
      */
@@ -454,56 +474,10 @@ public class Calculation extends IdentifiableEntity {
      * @param enteredBy
      *            the id of user who entered calculation item.
      *
-     * @since 1.2 (OPM - Release I Assembly 1.0)
+     * @since 1.1 (OPM - Data Migration - Entities Update Module Assembly 1.0)
      */
     public void setEnteredBy(Long enteredBy) {
         this.enteredBy = enteredBy;
-    }
-
-    /**
-     * Gets the frozen state of the entered calculation item.
-     *
-     * @return the frozen state of the entered calculation item.
-     *
-     * @since 1.2 (OPM - Release I Assembly 1.0)
-     */
-    public boolean isFrozen() {
-        return frozen;
-    }
-
-    /**
-     * Sets the frozen state of the entered calculation item.
-     *
-     * @param frozen
-     *            the frozen state of the entered calculation item.
-     *
-     * @since 1.2 (OPM - Release I Assembly 1.0)
-     */
-    public void setFrozen(boolean frozen) {
-        this.frozen = frozen;
-    }
-
-    /**
-     * Gets the refund date of the entered calculation item.
-     *
-     * @return the refund date of the entered calculation item.
-     *
-     * @since 1.2 (OPM - Release I Assembly 1.0)
-     */
-    public Date getRefundDate() {
-        return refundDate;
-    }
-
-    /**
-     * Sets the refund date of the entered calculation item.
-     *
-     * @param refundDate
-     *            the refund date of the entered calculation item.
-     *
-     * @since 1.2 (OPM - Release I Assembly 1.0)
-     */
-    public void setRefundDate(Date refundDate) {
-        this.refundDate = refundDate;
     }
 
     /**
@@ -527,5 +501,72 @@ public class Calculation extends IdentifiableEntity {
      */
     public void setInterestRate(BigDecimal interestRate) {
         this.interestRate = interestRate;
+    }
+
+    /**
+     * Gets the interest accrual date of the calculation.
+     * 
+     * @return the interestAccrualDate
+     * 
+     * @since 1.2 (OPM - Rules Engine - Integrate with Web App Assembly v1.0)
+     */
+    public Date getInterestAccrualDate() {
+        return interestAccrualDate;
+    }
+
+    /**
+     * Sets the accrual date of the calculation.
+     * 
+     * @param interestAccrualDate the interestAccrualDate to set
+     * 
+     * @since 1.2 (OPM - Rules Engine - Integrate with Web App Assembly v1.0 )
+     */
+    public void setInterestAccrualDate(Date interestAccrualDate) {
+        this.interestAccrualDate = interestAccrualDate;
+    }
+
+    /**
+     * Gets the flag indicating whether the calculation is a Conner case.
+     * 
+     * @return the connerCase
+     * 
+     * @since 1.2 (OPM - Rules Engine - Integrate with Web App Assembly v1.0)
+     */
+    public boolean getConnerCase() {
+        return connerCase;
+    }
+
+    /**
+     * Sets the flag indicating whether the calculation is a Conner case.
+     * 
+     * @param connerCase the connerCase to set
+     * 
+     * @since 1.2 (OPM - Rules Engine - Integrate with Web App Assembly v1.0 )
+     */
+    public void setConnerCase(boolean connerCase) {
+        this.connerCase = connerCase;
+    }
+
+    /**
+     * Gets the frozen state of the entered calculation item.
+     *
+     * @return the frozen state of the entered calculation item.
+     *
+     * @since 1.3 (OPM - Release I Assembly 1.0)
+     */
+    public boolean isFrozen() {
+        return frozen;
+    }
+
+    /**
+     * Sets the frozen state of the entered calculation item.
+     *
+     * @param frozen
+     *            the frozen state of the entered calculation item.
+     *
+     * @since 1.3 (OPM - Release I Assembly 1.0)
+     */
+    public void setFrozen(boolean frozen) {
+        this.frozen = frozen;
     }
 }

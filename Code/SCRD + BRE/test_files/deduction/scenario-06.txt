@@ -1,3 +1,0 @@
-#beginDate, endDate, retirementType, periodType, appointmentType, serviceType, amount, payType, interestAccrualDate, connerCase
-ServicePeriod1=04/07/1986,07/24/1987,CSRS,DEPOSIT,TEMPORARY,POSTAL PART TIME FLEX,7.50,HOURLY RATE,null,false
-ServicePeriod2=10/11/1990,07/02/1991,CSRS,DEPOSIT,TEMPORARY,POSTAL LIMITED TOUR,11.50,HOURLY RATE,null,false
