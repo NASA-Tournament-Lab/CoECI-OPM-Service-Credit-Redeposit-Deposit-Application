@@ -1716,9 +1716,64 @@ $(document).ready(function() {
             showPopup(".sampleInitialPopup");
         }
     });
+    //$(".jsShowCalculation").click(function(e) {
+        //showPopup(".confirmDatePopup");
+    //});
+
     $(".jsShowCalculation").click(function(e) {
-        showPopup(".confirmDatePopup");
+        if (!$(this).hasClass("priBtnDisabled")) {
+            var tab = $(this).parents('.tabsBlock').eq(0);
+
+            var selectId = $('.versionBar select option:selected', tab).val();
+
+            var w = window.open(context + '/account/intermediateResult', '', 'width=1000,height=300,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=0,top=0');
+            
+            var html = '';
+
+            if (results['r-' + selectId] && results['r-' + selectId].result && results['r-' + selectId].result.items &&  results['r-' + selectId].result.items.length > 0) {
+
+                for(var i=0; i<results['r-' + selectId].result.items.length; i++){
+
+                    html += '<tr>';
+                    html += '<td class="blankCell firstCol">&nbsp;</td>';
+                    html += '<td> ' + parseDateToString(results['r-' + selectId].result.items[i].startDate) + '</td>';
+                    html += '<td> ' + parseDateToString(results['r-' + selectId].result.items[i].endDate) + '</td>';
+                    html += '<td> ' + '</td>';
+                    html += '<td> ' + '</td>';
+                    html += '<td> ' + '</td>';
+                    html += '</tr>';
+
+                    
+
+                    for(var j=0; j<results['r-' + selectId].result.items[i].intermediateResults.length; j++){
+
+                        var obj = results['r-' + selectId].result.items[i].intermediateResults[j];
+                        html += '<tr>';
+
+                        html += '<td class="blankCell firstCol">&nbsp;</td>';
+                        html += '<td> ' + parseDateToString(obj.intermediateBeginDate) + '</td>';
+                        html += '<td> ' + parseDateToString(obj.intermediateEndDate) + '</td>';
+                        html += '<td> ' + obj.intermediateAmount + '</td>';
+                        html += '<td> ' + obj.intermediateRate + '</td>';
+                        html += '<td> ' + obj.balanceWithInterest + '</td>';
+
+                        html += '</tr>';
+                    }
+
+                    html += '<tr><td class="blankCell firstCol">&nbsp;</td> <td></td> <td></td> <td></td> <td></td><td></td></tr><tr><td class="blankCell firstCol">&nbsp;</td> <td></td> <td></td> <td></td> <td></td><td></td></tr>';
+                }
+
+            }
+
+            function test(){
+                w.document.getElementById('depTblBody').innerHTML = html;
+            }
+            addEvent(w, 'load', test);
+            return false;
+        }
     });
+
+
     $(".jsShowPeriodErrorPopup").click(function(e) {
         if(!isDate($('.confirmDatePopup .popupPadding .actualPayment2').val())){
             alert('The actual payment date is not in correct format mm/dd/yyyy.');

@@ -133,6 +133,14 @@ public class ExtendedServicePeriod {
      */
     private List<String> validationErrors;
 
+
+    /**
+     * Represents the intermediate result.
+     */
+    private List<IntermediateResult> intermediateResults;
+
+   
+
     /**
      * Creates the instance of ExtendedServicePeriod.
      */
@@ -380,6 +388,23 @@ public class ExtendedServicePeriod {
      */
     public void setServiceType(ServiceType serviceType) {
         this.serviceType = serviceType;
+    }
+
+
+    /**
+     * Gets the intermediateResults.
+     * @return the intermediateResults.
+     */
+    public List<IntermediateResult> getIntermediateResults() {
+        return intermediateResults;
+    }
+
+    /**
+     * Sets the intermediateResults.
+     * @param intermediateResults the intermediateResults.
+     */
+    public void setIntermediateResults(List<IntermediateResult> intermediateResults) {
+        this.intermediateResults = intermediateResults;
     }
 
     /**

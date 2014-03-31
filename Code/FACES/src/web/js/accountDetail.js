@@ -1,18 +1,18 @@
 /*
-    Copyright 2014 OPM.gov
-
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
-*/
+ Copyright 2014 OPM.gov
+ 
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+ 
+ http://www.apache.org/licenses/LICENSE-2.0
+ 
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ */
 
 var currentNote = null;
 var currentDeleteMode = null;
@@ -35,17 +35,6 @@ $(function() {
     populateCalculationVersion(account, 'depositTab');
     populateCalculationVersion(account, 'redepositTab');
 
-    // check homeTab
-    if (user.defaultTab == 'VIEW_ACCOUNT') {
-        $('#setHome').prop('checked', true);
-    }
-    $('#setHome').click(function() {
-        if ($(this).prop('checked') == true) {
-            makeHomeTab(context, 'VIEW_ACCOUNT', accountId);
-        } else {
-            makeHomeTab(context);
-        }
-    });
     // button trigger begin
     $('.notesToFirst').click(function() {
         if ($(this).hasClass('priBtnDisabled')) {
@@ -74,7 +63,7 @@ $(function() {
             }
         });
     });
-    
+
     $('.jsReopenAccount').click(function() {
         $.ajax({
             url: context + '/faces/reopen',
@@ -206,6 +195,7 @@ $(function() {
         populateBillingSummary(account.billingSummary);
         $('.jsRefreshGrid').trigger('click');
         refreshNotes(context, accountId);
+        
     });
 
     $(".jsShowLastUpdateBtn").click(function(e) {
@@ -360,20 +350,20 @@ $(function() {
     // note deletion
     $(".jsDoDelAccountNote").click(function() {
         var id = currentNote.find('input:hidden').val();
-            deleteNote(context, id);
-            currentNote.remove();
+        deleteNote(context, id);
+        currentNote.remove();
 
         closePopup();
     });
     $(".jsDoDelAllAccountNote").click(function() {
         var checked = $("#accountNoteTbl tbody input:checked");
-            checked.parents("tr").remove();
-            $.each(checked, function() {
-                var id = $(this).parents('td').prev('input:hidden').val();
-                deleteNote(context, id);
-            });
-            $('.checkAllRow').prop('checked', false);
-            closePopup();
+        checked.parents("tr").remove();
+        $.each(checked, function() {
+            var id = $(this).parents('td').prev('input:hidden').val();
+            deleteNote(context, id);
+        });
+        $('.checkAllRow').prop('checked', false);
+        closePopup();
     });
 
     // click on the note and show the notes pop up

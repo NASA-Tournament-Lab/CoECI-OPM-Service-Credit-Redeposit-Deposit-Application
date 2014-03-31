@@ -5,6 +5,7 @@ package gov.opm.scrd.rules;
 
 import gov.opm.scrd.entities.application.ExtendedServicePeriod;
 import gov.opm.scrd.entities.application.ServicePeriod;
+import gov.opm.scrd.entities.application.IntermediateResult;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
@@ -84,6 +85,7 @@ function BigDecimal calculateInterest(ExtendedServicePeriod esp, double interest
 
     // get the calculation year
     int year = esp.getInterestCalculationYear();
+    IntermediateResult intermediateResult = new IntermediateResult();
 
     Date startDate = null;
 
@@ -159,6 +161,18 @@ function BigDecimal calculateInterest(ExtendedServicePeriod esp, double interest
     // Increase year to calculate the next year (if necessary)
     esp.setInterestCalculationYear(year + 1);
 
+    
+    intermediateResult.setIntermediateAmount(interest);
+    intermediateResult.setIntermediateRate(Double.valueOf(interestRate));
+    intermediateResult.setIntermediateBeginDate(startDate);
+    intermediateResult.setIntermediateEndDate(endDate);
+    intermediateResult.setBalanceWithInterest(esp.getBalanceWithInterest());
+    if(esp.getIntermediateResults() == null){
+        esp.setIntermediateResults(new ArrayList<IntermediateResult>());
+    }
+    esp.getIntermediateResults().add(intermediateResult);
+
+
     return interest;
 }
 
@@ -178,6 +192,7 @@ function BigDecimal calculatePeaceCorpsInterest(ExtendedServicePeriod esp, doubl
     int year = esp.getInterestCalculationYear();
 
     Date startDate = null;
+    IntermediateResult intermediateResult = new IntermediateResult();
 
     // calculate the start date via the IAD year
     DateTime iadDateTime = new DateTime(esp.getInterestAccrualDate());
@@ -235,6 +250,17 @@ function BigDecimal calculatePeaceCorpsInterest(ExtendedServicePeriod esp, doubl
 
     // Increase year to calculate the next year (if necessary)
     esp.setInterestCalculationYear(year + 1);
+
+    
+    intermediateResult.setIntermediateAmount(interest);
+    intermediateResult.setIntermediateRate(Double.valueOf(interestRate1));
+    intermediateResult.setIntermediateBeginDate(startDate);
+    intermediateResult.setIntermediateEndDate(endDate);
+    intermediateResult.setBalanceWithInterest(esp.getBalanceWithInterest());
+    if(esp.getIntermediateResults() == null){
+        esp.setIntermediateResults(new ArrayList<IntermediateResult>());
+    }
+    esp.getIntermediateResults().add(intermediateResult);
 
     return interest;
 }
@@ -553,6 +579,9 @@ function ExtendedServicePeriod newExtendedServicePeriod(ServicePeriod sp) {
     esp.setRetirementType(sp.getRetirementType());
     esp.setValidationErrors(new ArrayList<String>());
 
+
+    esp.setIntermediateResults(new ArrayList<IntermediateResult>());
+
     // Set other fields
     esp.setPeriodType(sp.getPeriodType());
     esp.setServiceType(sp.getServiceType());
@@ -631,6 +660,12 @@ function void mergeTwoExtendedServicePeriods(ExtendedServicePeriod esp1, Extende
     esp2.setTotalEarnings(esp2.getTotalEarnings().add(esp1.getTotalEarnings()));
     esp2.setTotalDeduction(esp2.getTotalDeduction().add(esp1.getTotalDeduction()));
     esp2.setBalanceWithInterest(esp2.getBalanceWithInterest().add(esp1.getBalanceWithInterest()));
+
+
+    if(esp2.getIntermediateResults() == null){
+        esp2.setIntermediateResults(new ArrayList<IntermediateResult>());
+    }
+    esp2.getIntermediateResults().addAll(esp1.getIntermediateResults());
     
     // Reset the period type if the ESP2 has NO EARNINGS period type but ESP1 doesn't
     if (!"NO EARNINGS".equals(esp1.getPeriodType().getName())

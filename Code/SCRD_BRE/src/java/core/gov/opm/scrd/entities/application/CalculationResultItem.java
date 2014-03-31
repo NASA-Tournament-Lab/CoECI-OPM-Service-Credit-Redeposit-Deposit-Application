@@ -24,6 +24,7 @@ import gov.opm.scrd.entities.lookup.RetirementType;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <p>
@@ -126,6 +127,11 @@ public class CalculationResultItem extends IdentifiableEntity {
     private Integer line;
 
     /**
+     * Represents the intermediate result.
+     */
+    private List<IntermediateResult> intermediateResults;
+
+    /**
      * <p>
      * Represents the balance of calculation result item. It is managed with a getter and setter. It may have any value.
      * It is fully mutable.
@@ -140,6 +146,7 @@ public class CalculationResultItem extends IdentifiableEntity {
      * @since 1.1 (OPM - Release I Assembly 1.0)
      */
     private DepositType serviceCategory;
+
 
     /**
      * Creates an instance of CalculationResultItem.
@@ -416,4 +423,22 @@ public class CalculationResultItem extends IdentifiableEntity {
     public void setServiceCategory(DepositType serviceCategory) {
         this.serviceCategory = serviceCategory;
     }
+
+    /**
+     * Gets the intermediateResults.
+     * @return the intermediateResults.
+     */
+    public List<IntermediateResult> getIntermediateResults() {
+        return intermediateResults;
+    }
+
+    /**
+     * Sets the intermediateResults.
+     * @param intermediateResults the intermediateResults.
+     */
+    public void setIntermediateResults(List<IntermediateResult> intermediateResults) {
+        this.intermediateResults = intermediateResults;
+    }
+
+    
 }

@@ -41,9 +41,6 @@
         <p class="breadcurmb"><span>Account Search Results</span></p>
         <div class="pageTitleArea">
           <h2 class="pageTitle">Account Search</h2>
-          <div class="setHomeLink">
-            <a href="javascript:;" class="jsShowTips">?</a>
-          </div>
         </div>
 
         <div class="accountSearchSummary">
@@ -95,29 +92,18 @@
           </div>
         </div>
 
-
-        <div class="statusInfoBar">
-          <a href="javascript:;" class="jsShowStatusInfoPopup">Status Information: Lorem Ipsum dolor sit amet...</a>
-          <div class="corner cornerTl"></div>
-          <div class="corner cornerTr"></div>
-          <div class="corner cornerBl"></div>
-          <div class="corner cornerBr"></div>
-        </div>
-
       </div>
       <!-- #content --> 
 
       <div id="footer">
         <div class="footerInner">
           <strong>&copy; Copyright OPM</strong>
-          <ul>
-            <li><a href="javascript:;">Contact us</a></li>
-            <li><a href="javascript:;">Privacy Policy</a></li>
-            <li><a href="javascript:;">Terms &amp; Conditions</a></li>
-          </ul>
         </div>
       </div>
       <!-- #footer -->
+      <div id="loadingOverlay" class="isHidden">
+        <img src="<c:url value="/i/loader.gif"/>" alt="Loading..." />
+      </div>
     </div>
     <!-- #wrapper -->
 

@@ -75,11 +75,10 @@
 	<entity class="gov.opm.scrd.entities.lookup.FormType" cacheable="true">
 	    <table name="form_type"/>
 	</entity>
-
-    <entity class="gov.opm.scrd.entities.lookup.PaymentAppliance" cacheable="true">
+	<entity class="gov.opm.scrd.entities.lookup.PaymentAppliance" cacheable="true">
 	    <table name="payment_appliance"/>
 	</entity>
-	
+
     <entity class="gov.opm.scrd.entities.lookup.Suffix" cacheable="true">
         <table name="suffix"/>
     </entity>
@@ -343,7 +342,7 @@
             <basic name="content">
                 <column name="content" nullable="false"/>
             </basic>
-            <one-to-many name="related" target-entity="gov.opm.scrd.entities.application.HelpItem" fetch="EAGER">
+            <one-to-many name="related" target-entity="gov.opm.scrd.entities.application.HelpItem" fetch="LAZY">
                 <join-table name="related_help_items">
                     <join-column name="help_item_id1" referenced-column-name="id"/>
                     <inverse-join-column name="help_item_id2" referenced-column-name="id"/>
@@ -467,7 +466,7 @@
                 <column name="birth_date" nullable="false"/>
             </basic>
             <basic name="ssn">
-                <column name="ssn" nullable="false" length="128" unique="true"/>
+                <column name="ssn" nullable="false" length="128"/>
             </basic>
             <basic name="telephone">
                 <column name="telephone" nullable="true" length="128"/>
@@ -691,16 +690,13 @@
             <many-to-one name="formType" target-entity="gov.opm.scrd.entities.lookup.FormType" fetch="EAGER">
                 <join-column name="form_type_id" referenced-column-name="id" nullable="true" />
             </many-to-one>
-            <many-to-one name="holder" target-entity="gov.opm.scrd.entities.application.AccountHolder" fetch="EAGER">
+            <many-to-one name="holder" target-entity="gov.opm.scrd.entities.application.AccountHolder" fetch="LAZY">
                 <join-column name="account_holder_id" referenced-column-name="id" nullable="false" />
-                <cascade>
-                  <cascade-all/>
-                </cascade>
             </many-to-one>
             <many-to-one name="status" target-entity="gov.opm.scrd.entities.lookup.AccountStatus" fetch="EAGER">
                 <join-column name="account_status_id" referenced-column-name="id" nullable="false" />
             </many-to-one>
-            <many-to-one name="payCode" target-entity="gov.opm.scrd.entities.lookup.PayCode" fetch="EAGER">
+            <many-to-one name="payCode" target-entity="gov.opm.scrd.entities.lookup.PayCode" fetch="LAZY">
                 <join-column name="pay_code_id" referenced-column-name="id" nullable="true" />
             </many-to-one>
             <one-to-many name="calculationVersions" target-entity="gov.opm.scrd.entities.application.CalculationVersion" fetch="LAZY" orphan-removal="true">
@@ -709,11 +705,10 @@
                   <cascade-all/>
                 </cascade>
             </one-to-many>
-            
             <one-to-many name="notes" target-entity="gov.opm.scrd.entities.application.AccountNote" fetch="LAZY">
                 <join-column name="account_id" referenced-column-name="id"/>
             </one-to-many>
-            <one-to-many name="paymentHistory" target-entity="gov.opm.scrd.entities.application.Payment" fetch="EAGER">
+            <one-to-many name="paymentHistory" target-entity="gov.opm.scrd.entities.application.Payment" fetch="LAZY">
                 <join-column name="account_id" referenced-column-name="id" nullable="true" />
             </one-to-many>
             <one-to-one name="billingSummary" target-entity="gov.opm.scrd.entities.application.BillingSummary" fetch="LAZY">
@@ -837,7 +832,7 @@
             </basic>
             <basic name="historyPayment">
                 <column name="history_payment" nullable="true"/>
-            </basic>
+            </basic> 
             <basic name="resolvedSuspense">
                 <column name="resolve_suspense" nullable="true"/>
             </basic>
@@ -914,7 +909,7 @@
                 <column name="end_date" nullable="false"/>
             </basic>
             <basic name="amount">
-                <column name="amount" nullable="true"/>
+                <column name="amount" nullable="false"/>
             </basic>
             <basic name="hoursInYear">
                 <column name="hours_in_year" nullable="true"/>
@@ -928,17 +923,15 @@
             <basic name="enteredBy">
                 <column name="entered_by" nullable="true"/>
             </basic>
-            <basic name="interestRate">
+			<basic name="interestRate">
                 <column name="interest_rate" nullable="true"/>
-            </basic>
-            
-            <basic name="connerCase">
-                <column name="conner_case" nullable="false"/>
             </basic>
             <basic name="interestAccrualDate">
                 <column name="interest_accrual_date" nullable="true"/>
             </basic>
-            
+            <basic name="connerCase">
+                <column name="conner_case" nullable="false"/>
+            </basic>
             <many-to-one name="retirementType" target-entity="gov.opm.scrd.entities.lookup.RetirementType" fetch="EAGER">
                 <join-column name="retirement_type_id" referenced-column-name="id" nullable="true" />
             </many-to-one>
@@ -1015,7 +1008,7 @@
                 <column name="end_date" nullable="false"/>
             </basic>
             <basic name="midDate">
-                <column name="mid_date" nullable="true"/>
+                <column name="mid_date" nullable="false"/>
             </basic>
             <basic name="effectiveDate">
                 <column name="effective_date" nullable="false"/>
@@ -1822,7 +1815,7 @@
         <table name="batch_daily_payments"/>
         <attributes>
             <basic name="auditBatchLogId">
-                <column name="audit_batch_log_id" nullable="true"/>
+                <column name="audit_batch_id" nullable="true"/>
             </basic>
             <basic name="payTransactionKey">
                 <column name="pay_transaction_key" nullable="true"/>

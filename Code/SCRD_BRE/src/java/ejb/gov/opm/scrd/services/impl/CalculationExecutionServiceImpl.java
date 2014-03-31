@@ -369,6 +369,8 @@ public class CalculationExecutionServiceImpl extends BaseService implements Calc
                 //item.setBalance(period.getTotalDeduction().add(period.getBalanceWithInterest()));
                 item.setBalance(period.getBalanceWithInterest());
 
+                item.setIntermediateResults(period.getIntermediateResults());
+
                 items.add(item);
 
                 String periodType = item.getPeriodType().getName();

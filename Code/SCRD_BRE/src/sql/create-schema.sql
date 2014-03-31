@@ -401,15 +401,15 @@ CREATE TABLE opm.account (
   id BIGSERIAL NOT NULL,
   deleted BOOLEAN NOT NULL,
   claim_number VARCHAR(128) NOT NULL ,
-  plan_type VARCHAR(128) NOT NULL ,
-  form_type_id BIGINT NOT NULL,
+  plan_type VARCHAR(128) NULL ,
+  form_type_id BIGINT NULL,
   account_holder_id BIGINT NOT NULL,
   account_status_id BIGINT NOT NULL,
   grace BOOLEAN NOT NULL ,
   frozen BOOLEAN NOT NULL ,
   claim_officer VARCHAR(128) NULL ,
   claim_officer_assignment_date TIMESTAMP NULL ,
-  returned_from_record_date TIMESTAMP NOT NULL ,
+  returned_from_record_date TIMESTAMP NULL ,
   claimant_birthdate TIMESTAMP NULL ,
   balance DECIMAL(10,2) NULL ,
   billing_summary_id BIGINT NULL,
@@ -509,7 +509,7 @@ CREATE TABLE opm.billing (
   balance DECIMAL(10,2) NOT NULL ,
   payment_order INT  NOT NULL ,
   billing_summary_id BIGINT NULL,
-  frozen BOOLEAN NOT NULL,
+  frozen BOOLEAN NOT NULL DEFAULT FALSE,
   PRIMARY KEY (id) ,
   CONSTRAINT fk_billing_billing_summary
     FOREIGN KEY (billing_summary_id )
@@ -535,7 +535,7 @@ CREATE TABLE opm.summary_data (
 CREATE TABLE opm.calculation_result (
   id BIGSERIAL NOT NULL,
   deleted BOOLEAN NOT NULL,
-  calculation_status_id BIGINT NOT NULL,
+  calculation_status_id BIGINT NULL,
   official BOOLEAN NULL ,
   apply_to_real_payment BOOLEAN NULL ,
   summary_data_id BIGINT NULL,
@@ -559,7 +559,7 @@ CREATE TABLE opm.calculation_result (
 CREATE TABLE opm.calculation_version (
   id BIGSERIAL NOT NULL,
   deleted BOOLEAN NOT NULL,
-  name VARCHAR(128) NOT NULL ,
+  name VARCHAR(128) NULL ,
   calculation_date TIMESTAMP NULL ,
   calculation_result_id BIGINT NULL,
   account_id BIGINT NOT NULL,
@@ -587,10 +587,10 @@ CREATE TABLE opm.calculation (
   end_date TIMESTAMP NOT NULL ,
   retirement_type_id BIGINT NULL,
   period_type_id BIGINT NOT NULL,
-  appointment_type_id BIGINT NOT NULL,
-  service_type_id BIGINT NOT NULL,
+  appointment_type_id BIGINT NULL,
+  service_type_id BIGINT NULL,
   amount DECIMAL(10,2) NOT NULL ,
-  pay_type_id BIGINT NOT NULL,
+  pay_type_id BIGINT NULL,
   agency_code_id BIGINT NULL,
   hours_in_year INTEGER NULL,
   annualized_amount DECIMAL(10,2) NULL,
@@ -600,7 +600,7 @@ CREATE TABLE opm.calculation (
   interest_rate DECIMAL(10,2) NULL,
   conner_case BOOLEAN NULL,
   interest_accrual_date TIMESTAMP NULL,
-  frozen BOOLEAN NULL,
+  frozen BOOLEAN NULL DEFAULT FALSE,
   PRIMARY KEY (id) ,
   CONSTRAINT fk_calculation_retirement_type
     FOREIGN KEY (retirement_type_id )
@@ -638,6 +638,20 @@ CREATE TABLE opm.calculation (
     ON DELETE CASCADE
     ON UPDATE NO ACTION);
 
+
+-- -----------------------------------------------------
+-- Table calculation_result_item
+-- -----------------------------------------------------
+CREATE TABLE opm.intermediate_result (
+  id BIGSERIAL NOT NULL,
+  deleted BOOLEAN NOT NULL,
+  intermediate_amount DECIMAL(10,2) NULL,
+  intermediate_rate DOUBLE PRECISION NULL,
+  intermediate_begin_date TIMESTAMP NULL ,
+  intermediate_end_date TIMESTAMP NULL,
+  balance_with_interest DECIMAL(10,2) NULL,
+  PRIMARY KEY (id));
+
 -- -----------------------------------------------------
 -- Table calculation_result_item
 -- -----------------------------------------------------
@@ -655,7 +669,7 @@ CREATE TABLE opm.calculation_result_item (
   balance DECIMAL(10,2) NOT NULL ,
   calculation_result_id BIGINT NULL,
   service_category VARCHAR(128) NULL,
-  retirement_type_id BIGINT NOT NULL,
+  retirement_type_id BIGINT NULL,
   version INT NULL,
   line INT NULL,
   status VARCHAR(120) NULL,
@@ -755,7 +769,7 @@ CREATE TABLE opm.refund_transaction (
   claim_number VARCHAR(128) NOT NULL ,
   refund_date TIMESTAMP NOT NULL ,
   refund_username VARCHAR(128) NULL ,
-  transfer_type_id BIGINT NOT NULL,
+  transfer_type_id BIGINT NULL,
   PRIMARY KEY (id) ,
   CONSTRAINT fk_refund_transaction_transfer_type
     FOREIGN KEY (transfer_type_id )
@@ -878,7 +892,7 @@ CREATE TABLE opm.payment (
   claim_number VARCHAR(128) NULL ,
   payment_status_id BIGINT NULL,
   account_holder_birthdate TIMESTAMP NULL ,
-  deposit_date TIMESTAMP NOT NULL ,
+  deposit_date TIMESTAMP NULL ,
   amount DECIMAL(10,2) NOT NULL ,
   ssn VARCHAR(128) NULL ,
   claimant VARCHAR(128) NULL ,
@@ -906,7 +920,7 @@ CREATE TABLE opm.payment (
   approval_user VARCHAR(128) NULL ,
   approval_status VARCHAR(128) NULL,
   approval_reason VARCHAR(255) NULL,
-  payment_type VARCHAR(128) NOT NULL ,
+  payment_type VARCHAR(128) NULL ,
   account_id BIGINT NULL,
   gov_refund BOOLEAN NULL,
   disapprove BOOLEAN NULL,
@@ -1493,15 +1507,15 @@ CREATE TABLE opm.account_history (
   id BIGINT NOT NULL,
   deleted BOOLEAN NOT NULL,
   claim_number VARCHAR(128) NOT NULL ,
-  plan_type VARCHAR(128) NOT NULL ,
-  form_type_id BIGINT NOT NULL,
+  plan_type VARCHAR(128) NULL ,
+  form_type_id BIGINT NULL,
   account_holder_id BIGINT NOT NULL,
   account_status_id BIGINT NOT NULL,
   grace BOOLEAN NOT NULL ,
   frozen BOOLEAN NOT NULL ,
   claim_officer VARCHAR(128) NULL ,
   claim_officer_assignment_date TIMESTAMP NULL ,
-  returned_from_record_date TIMESTAMP NOT NULL ,
+  returned_from_record_date TIMESTAMP NULL ,
   claimant_birthdate TIMESTAMP NULL ,
   balance DECIMAL(10,2) NULL ,
   billing_summary_id BIGINT NULL,
@@ -1612,7 +1626,7 @@ CREATE TABLE opm.billing_history (
 CREATE TABLE opm.calculation_version_history (
   id BIGINT NOT NULL,
   deleted BOOLEAN NOT NULL,
-  name VARCHAR(128) NOT NULL ,
+  name VARCHAR(128) NULL ,
   calculation_date TIMESTAMP NULL ,
   calculation_result_id BIGINT NULL,
   version INTEGER NULL,
@@ -1632,10 +1646,10 @@ CREATE TABLE opm.calculation_history (
   end_date TIMESTAMP NOT NULL ,
   retirement_type_id BIGINT NULL,
   period_type_id BIGINT NOT NULL,
-  appointment_type_id BIGINT NOT NULL,
-  service_type_id BIGINT NOT NULL,
+  appointment_type_id BIGINT NULL,
+  service_type_id BIGINT NULL,
   amount DECIMAL(10,2) NOT NULL ,
-  pay_type_id BIGINT NOT NULL,
+  pay_type_id BIGINT NULL,
   agency_code_id BIGINT NULL,
   hours_in_year INTEGER NULL,
   annualized_amount DECIMAL(10,2) NULL,
@@ -1652,7 +1666,7 @@ CREATE TABLE opm.calculation_history (
 CREATE TABLE opm.calculation_result_history (
   id BIGINT NOT NULL,
   deleted BOOLEAN NOT NULL,
-  calculation_status_id BIGINT NOT NULL,
+  calculation_status_id BIGINT NULL,
   official BOOLEAN NULL ,
   apply_to_real_payment BOOLEAN NULL ,
   summary_data_id BIGINT NULL,
@@ -1678,7 +1692,7 @@ CREATE TABLE opm.calculation_result_item_history (
   balance DECIMAL(10,2) NOT NULL ,
   calculation_result_id BIGINT NULL ,
   service_category VARCHAR(128) NULL,
-  retirement_type_id BIGINT NOT NULL,
+  retirement_type_id BIGINT NULL,
   action_timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   action VARCHAR(1) NOT NULL CHECK (action IN ('I','D','U')) );
 
@@ -1734,7 +1748,7 @@ CREATE TABLE opm.refund_transaction_history (
   claim_number VARCHAR(128) NOT NULL ,
   refund_date TIMESTAMP NOT NULL ,
   refund_username VARCHAR(128) NULL ,
-  transfer_type_id BIGINT NOT NULL ,
+  transfer_type_id BIGINT NULL ,
   action_timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   action VARCHAR(1) NOT NULL CHECK (action IN ('I','D','U')) );
 
@@ -1787,7 +1801,7 @@ CREATE TABLE opm.payment_history (
   claim_number VARCHAR(128) NULL ,
   payment_status_id BIGINT NULL,
   account_holder_birthdate TIMESTAMP NULL ,
-  deposit_date TIMESTAMP NOT NULL ,
+  deposit_date TIMESTAMP NULL ,
   amount DECIMAL(10,2) NOT NULL ,
   ssn VARCHAR(128) NULL ,
   claimant VARCHAR(128) NULL ,
@@ -1815,7 +1829,7 @@ CREATE TABLE opm.payment_history (
   approval_user VARCHAR(128) NULL ,
   approval_status VARCHAR(128) NULL,
   approval_reason VARCHAR(255) NULL,
-  payment_type VARCHAR(128) NOT NULL ,
+  payment_type VARCHAR(128) NULL ,
   account_id BIGINT NULL,
   gov_refund BOOLEAN NULL,
   disapprove BOOLEAN NULL,

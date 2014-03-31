@@ -1815,7 +1815,7 @@
         <table name="batch_daily_payments"/>
         <attributes>
             <basic name="auditBatchLogId">
-                <column name="audit_batch_log_id" nullable="true"/>
+                <column name="audit_batch_id"  nullable="true"/>
             </basic>
             <basic name="payTransactionKey">
                 <column name="pay_transaction_key" nullable="true"/>

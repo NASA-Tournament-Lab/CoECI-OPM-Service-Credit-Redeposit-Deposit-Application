@@ -193,12 +193,12 @@ CREATE TRIGGER billing_summary_trigger
 CREATE OR REPLACE FUNCTION opm.billing_func() RETURNS TRIGGER AS $$
     BEGIN
     	  IF (TG_OP = 'UPDATE') OR (TG_OP = 'INSERT') THEN
-            INSERT INTO opm.billing_history(id, deleted, name, initial_billing, additional_interest, total_payments, balance, payment_order, billing_summary_id, action)
-            VALUES (NEW.id, NEW.deleted, NEW.name, NEW.initial_billing, NEW.additional_interest, NEW.total_payments, NEW.balance, NEW.payment_order, NEW.billing_summary_id, substring(TG_OP,1,1));
+            INSERT INTO opm.billing_history(id, deleted, name, initial_billing, additional_interest, total_payments, balance, payment_order, billing_summary_id, frozen, action)
+            VALUES (NEW.id, NEW.deleted, NEW.name, NEW.initial_billing, NEW.additional_interest, NEW.total_payments, NEW.balance, NEW.payment_order, NEW.billing_summary_id, NEW.frozen, substring(TG_OP,1,1));
             RETURN NEW;
         ELSIF (TG_OP = 'DELETE') THEN
-            INSERT INTO opm.billing_history(id, deleted, name, initial_billing, additional_interest, total_payments, balance, payment_order, billing_summary_id, action)
-            VALUES (OLD.id, OLD.deleted, OLD.name, OLD.initial_billing, OLD.additional_interest, OLD.total_payments, OLD.balance, OLD.payment_order, OLD.billing_summary_id, substring(TG_OP,1,1));
+            INSERT INTO opm.billing_history(id, deleted, name, initial_billing, additional_interest, total_payments, balance, payment_order, billing_summary_id, frozen, action)
+            VALUES (OLD.id, OLD.deleted, OLD.name, OLD.initial_billing, OLD.additional_interest, OLD.total_payments, OLD.balance, OLD.payment_order, OLD.billing_summary_id, OLD.frozen, substring(TG_OP,1,1));
             RETURN OLD;
         END IF;
     END;
@@ -237,12 +237,12 @@ CREATE TRIGGER calculation_version_trigger
 CREATE OR REPLACE FUNCTION opm.calculation_func() RETURNS TRIGGER AS $$
     BEGIN
     	  IF (TG_OP = 'UPDATE') OR (TG_OP = 'INSERT') THEN
-            INSERT INTO opm.calculation_history(id, deleted, begin_date, end_date, retirement_type_id, period_type_id, appointment_type_id, service_type_id, amount, pay_type_id, agency_code_id, hours_in_year, annualized_amount, date_entered, entered_by, calculation_version_id, action)
-            VALUES (NEW.id, NEW.deleted, NEW.begin_date, NEW.end_date, NEW.retirement_type_id, NEW.period_type_id, NEW.appointment_type_id, NEW.service_type_id, NEW.amount, NEW.pay_type_id, NEW.agency_code_id, NEW.hours_in_year, NEW.annualized_amount, NEW.date_entered, NEW.entered_by, NEW.calculation_version_id, substring(TG_OP,1,1));
+            INSERT INTO opm.calculation_history(id, deleted, begin_date, end_date, retirement_type_id, period_type_id, appointment_type_id, service_type_id, amount, pay_type_id, agency_code_id, hours_in_year, annualized_amount, date_entered, entered_by, calculation_version_id, frozen, action)
+            VALUES (NEW.id, NEW.deleted, NEW.begin_date, NEW.end_date, NEW.retirement_type_id, NEW.period_type_id, NEW.appointment_type_id, NEW.service_type_id, NEW.amount, NEW.pay_type_id, NEW.agency_code_id, NEW.hours_in_year, NEW.annualized_amount, NEW.date_entered, NEW.entered_by, NEW.calculation_version_id, NEW.frozen, substring(TG_OP,1,1));
             RETURN NEW;
         ELSIF (TG_OP = 'DELETE') THEN
-            INSERT INTO opm.calculation_history(id, deleted, begin_date, end_date, retirement_type_id, period_type_id, appointment_type_id, service_type_id, amount, pay_type_id, agency_code_id, hours_in_year, annualized_amount, date_entered, entered_by, calculation_version_id, action)
-            VALUES (OLD.id, OLD.deleted, OLD.begin_date, OLD.end_date, OLD.retirement_type_id, OLD.period_type_id, OLD.appointment_type_id, OLD.service_type_id, OLD.amount, OLD.pay_type_id, OLD.agency_code_id, OLD.hours_in_year, OLD.annualized_amount, OLD.date_entered, OLD.entered_by, OLD.calculation_version_id, substring(TG_OP,1,1));
+            INSERT INTO opm.calculation_history(id, deleted, begin_date, end_date, retirement_type_id, period_type_id, appointment_type_id, service_type_id, amount, pay_type_id, agency_code_id, hours_in_year, annualized_amount, date_entered, entered_by, calculation_version_id, frozen, action)
+            VALUES (OLD.id, OLD.deleted, OLD.begin_date, OLD.end_date, OLD.retirement_type_id, OLD.period_type_id, OLD.appointment_type_id, OLD.service_type_id, OLD.amount, OLD.pay_type_id, OLD.agency_code_id, OLD.hours_in_year, OLD.annualized_amount, OLD.date_entered, OLD.entered_by, OLD.calculation_version_id, OLD.frozen, substring(TG_OP,1,1));
             RETURN OLD;
         END IF;
     END;
@@ -279,12 +279,12 @@ CREATE TRIGGER calculation_result_trigger
 CREATE OR REPLACE FUNCTION opm.calculation_result_item_func() RETURNS TRIGGER AS $$
     BEGIN
     	  IF (TG_OP = 'UPDATE') OR (TG_OP = 'INSERT') THEN
-            INSERT INTO opm.calculation_result_item_history(id, deleted, start_date, end_date, mid_date, effective_date, period_type_id, deduction_amount, total_interest, payment_applied, balance, calculation_result_id, action)
-            VALUES (NEW.id, NEW.deleted, NEW.start_date, NEW.end_date, NEW.mid_date, NEW.effective_date, NEW.period_type_id, NEW.deduction_amount, NEW.total_interest, NEW.payment_applied, NEW.balance, NEW.calculation_result_id, substring(TG_OP,1,1));
+            INSERT INTO opm.calculation_result_item_history(id, deleted, start_date, end_date, mid_date, effective_date, period_type_id, deduction_amount, total_interest, payment_applied, balance, calculation_result_id, service_category, retirement_type_id, action)
+            VALUES (NEW.id, NEW.deleted, NEW.start_date, NEW.end_date, NEW.mid_date, NEW.effective_date, NEW.period_type_id, NEW.deduction_amount, NEW.total_interest, NEW.payment_applied, NEW.balance, NEW.calculation_result_id, NEW.service_category, NEW.retirement_type_id, substring(TG_OP,1,1));
             RETURN NEW;
         ELSIF (TG_OP = 'DELETE') THEN
-            INSERT INTO opm.calculation_result_item_history(id, deleted, start_date, end_date, mid_date, effective_date, period_type_id, deduction_amount, total_interest, payment_applied, balance, calculation_result_id, action)
-            VALUES (OLD.id, OLD.deleted, OLD.start_date, OLD.end_date, OLD.mid_date, OLD.effective_date, OLD.period_type_id, OLD.deduction_amount, OLD.total_interest, OLD.payment_applied, OLD.balance, OLD.calculation_result_id, substring(TG_OP,1,1));
+            INSERT INTO opm.calculation_result_item_history(id, deleted, start_date, end_date, mid_date, effective_date, period_type_id, deduction_amount, total_interest, payment_applied, balance, calculation_result_id, service_category, retirement_type_id, action)
+            VALUES (OLD.id, OLD.deleted, OLD.start_date, OLD.end_date, OLD.mid_date, OLD.effective_date, OLD.period_type_id, OLD.deduction_amount, OLD.total_interest, OLD.payment_applied, OLD.balance, OLD.calculation_result_id, OLD.service_category, OLD.retirement_type_id, substring(TG_OP,1,1));
             RETURN OLD;
         END IF;
     END;
@@ -993,12 +993,12 @@ CREATE TRIGGER new_claim_number_trigger
 CREATE OR REPLACE FUNCTION opm.audit_batch_func() RETURNS TRIGGER AS $$
     BEGIN
     	  IF (TG_OP = 'UPDATE') OR (TG_OP = 'INSERT') THEN
-            INSERT INTO opm.audit_batch_history(id, deleted, event_year, event_month, event_day, file_received, daily_action, manual_batch, error_importing, error_processing, latest_batch, amount_imported, amount_processed, number_accepted, number_unresolved, number_suspended, number_ach_accepted, number_ach_unresolved, number_ach_suspended, number_change_requests, payments_processed, initial_bills_processed, reversed_processed, ach_stop_letters, refund_memos, error_count_processing, user_key, batch_time, action)
-            VALUES (NEW.id, NEW.deleted, NEW.event_year, NEW.event_month, NEW.event_day, NEW.file_received, NEW.daily_action, NEW.manual_batch, NEW.error_importing, NEW.error_processing, NEW.latest_batch, NEW.amount_imported, NEW.amount_processed, NEW.number_accepted, NEW.number_unresolved, NEW.number_suspended, NEW.number_ach_accepted, NEW.number_ach_unresolved, NEW.number_ach_suspended, NEW.number_change_requests, NEW.payments_processed, NEW.initial_bills_processed, NEW.reversed_processed, NEW.ach_stop_letters, NEW.refund_memos, NEW.error_count_processing, NEW.user_key, NEW.batch_time, substring(TG_OP,1,1));
+            INSERT INTO opm.audit_batch_history(id, deleted, event_year, event_month, event_day, file_received, daily_action, manual_batch, error_importing, error_processing, latest_batch, amount_imported, amount_processed, number_accepted, number_unresolved, number_suspended, number_ach_accepted, number_ach_unresolved, number_ach_suspended, number_change_requests, payments_processed, initial_bills_processed, reversed_processed, ach_stop_letters, refund_memos, error_count_processing, error_count_importing, user_key, batch_time, action)
+            VALUES (NEW.id, NEW.deleted, NEW.event_year, NEW.event_month, NEW.event_day, NEW.file_received, NEW.daily_action, NEW.manual_batch, NEW.error_importing, NEW.error_processing, NEW.latest_batch, NEW.amount_imported, NEW.amount_processed, NEW.number_accepted, NEW.number_unresolved, NEW.number_suspended, NEW.number_ach_accepted, NEW.number_ach_unresolved, NEW.number_ach_suspended, NEW.number_change_requests, NEW.payments_processed, NEW.initial_bills_processed, NEW.reversed_processed, NEW.ach_stop_letters, NEW.refund_memos, NEW.error_count_processing, NEW.error_count_importing, NEW.user_key, NEW.batch_time, substring(TG_OP,1,1));
             RETURN NEW;
         ELSIF (TG_OP = 'DELETE') THEN
-            INSERT INTO opm.audit_batch_history(id, deleted, event_year, event_month, event_day, file_received, daily_action, manual_batch, error_importing, error_processing, latest_batch, amount_imported, amount_processed, number_accepted, number_unresolved, number_suspended, number_ach_accepted, number_ach_unresolved, number_ach_suspended, number_change_requests, payments_processed, initial_bills_processed, reversed_processed, ach_stop_letters, refund_memos, error_count_processing, user_key, batch_time, action)
-            VALUES (OLD.id, OLD.deleted, OLD.event_year, OLD.event_month, OLD.event_day, OLD.file_received, OLD.daily_action, OLD.manual_batch, OLD.error_importing, OLD.error_processing, OLD.latest_batch, OLD.amount_imported, OLD.amount_processed, OLD.number_accepted, OLD.number_unresolved, OLD.number_suspended, OLD.number_ach_accepted, OLD.number_ach_unresolved, OLD.number_ach_suspended, OLD.number_change_requests, OLD.payments_processed, OLD.initial_bills_processed, OLD.reversed_processed, OLD.ach_stop_letters, OLD.refund_memos, OLD.error_count_processing, OLD.user_key, OLD.batch_time, substring(TG_OP,1,1));
+            INSERT INTO opm.audit_batch_history(id, deleted, event_year, event_month, event_day, file_received, daily_action, manual_batch, error_importing, error_processing, latest_batch, amount_imported, amount_processed, number_accepted, number_unresolved, number_suspended, number_ach_accepted, number_ach_unresolved, number_ach_suspended, number_change_requests, payments_processed, initial_bills_processed, reversed_processed, ach_stop_letters, refund_memos, error_count_processing, error_count_importing, user_key, batch_time, action)
+            VALUES (OLD.id, OLD.deleted, OLD.event_year, OLD.event_month, OLD.event_day, OLD.file_received, OLD.daily_action, OLD.manual_batch, OLD.error_importing, OLD.error_processing, OLD.latest_batch, OLD.amount_imported, OLD.amount_processed, OLD.number_accepted, OLD.number_unresolved, OLD.number_suspended, OLD.number_ach_accepted, OLD.number_ach_unresolved, OLD.number_ach_suspended, OLD.number_change_requests, OLD.payments_processed, OLD.initial_bills_processed, OLD.reversed_processed, OLD.ach_stop_letters, OLD.refund_memos, OLD.error_count_processing, OLD.error_count_importing, OLD.user_key, OLD.batch_time, substring(TG_OP,1,1));
             RETURN OLD;
         END IF;
     END;
@@ -1014,12 +1014,12 @@ CREATE TRIGGER audit_batch_trigger
 CREATE OR REPLACE FUNCTION opm.batch_daily_payments_func() RETURNS TRIGGER AS $$
     BEGIN
     	  IF (TG_OP = 'UPDATE') OR (TG_OP = 'INSERT') THEN
-            INSERT INTO opm.batch_daily_payments_history(id, deleted, audit_batch_log_id, pay_transaction_key, number_payment_today, batch_time, account_status_id, pay_trans_status_code, claim_number, account_balance, over_payment_amount, ach_payment, ach_stop_letter, print_invoice, refund_required, reversed_payment, update_to_completed, print_initial_bill, latest_batch, error_processing, action)
-            VALUES (NEW.id, NEW.deleted, NEW.audit_batch_log_id, NEW.pay_transaction_key, NEW.number_payment_today, NEW.batch_time, NEW.account_status_id, NEW.pay_trans_status_code, NEW.claim_number, NEW.account_balance, NEW.over_payment_amount, NEW.ach_payment, NEW.ach_stop_letter, NEW.print_invoice, NEW.refund_required, NEW.reversed_payment, NEW.update_to_completed, NEW.print_initial_bill, NEW.latest_batch, NEW.error_processing, substring(TG_OP,1,1));
+            INSERT INTO opm.batch_daily_payments_history(id, deleted, audit_batch_id, pay_transaction_key, number_payment_today, batch_time, account_status_id, pay_trans_status_code, claim_number, account_balance, over_payment_amount, ach_payment, ach_stop_letter, print_invoice, refund_required, reversed_payment, update_to_completed, print_initial_bill, latest_batch, error_processing, action)
+            VALUES (NEW.id, NEW.deleted, NEW.audit_batch_id, NEW.pay_transaction_key, NEW.number_payment_today, NEW.batch_time, NEW.account_status_id, NEW.pay_trans_status_code, NEW.claim_number, NEW.account_balance, NEW.over_payment_amount, NEW.ach_payment, NEW.ach_stop_letter, NEW.print_invoice, NEW.refund_required, NEW.reversed_payment, NEW.update_to_completed, NEW.print_initial_bill, NEW.latest_batch, NEW.error_processing, substring(TG_OP,1,1));
             RETURN NEW;
         ELSIF (TG_OP = 'DELETE') THEN
-            INSERT INTO opm.batch_daily_payments_history(id, deleted, audit_batch_log_id, pay_transaction_key, number_payment_today, batch_time, account_status_id, pay_trans_status_code, claim_number, account_balance, over_payment_amount, ach_payment, ach_stop_letter, print_invoice, refund_required, reversed_payment, update_to_completed, print_initial_bill, latest_batch, error_processing, action)
-            VALUES (OLD.id, OLD.deleted, OLD.audit_batch_log_id, OLD.pay_transaction_key, OLD.number_payment_today, OLD.batch_time, OLD.account_status_id, OLD.pay_trans_status_code, OLD.claim_number, OLD.account_balance, OLD.over_payment_amount, OLD.ach_payment, OLD.ach_stop_letter, OLD.print_invoice, OLD.refund_required, OLD.reversed_payment, OLD.update_to_completed, OLD.print_initial_bill, OLD.latest_batch, OLD.error_processing, substring(TG_OP,1,1));
+            INSERT INTO opm.batch_daily_payments_history(id, deleted, audit_batch_id, pay_transaction_key, number_payment_today, batch_time, account_status_id, pay_trans_status_code, claim_number, account_balance, over_payment_amount, ach_payment, ach_stop_letter, print_invoice, refund_required, reversed_payment, update_to_completed, print_initial_bill, latest_batch, error_processing, action)
+            VALUES (OLD.id, OLD.deleted, OLD.audit_batch_id, OLD.pay_transaction_key, OLD.number_payment_today, OLD.batch_time, OLD.account_status_id, OLD.pay_trans_status_code, OLD.claim_number, OLD.account_balance, OLD.over_payment_amount, OLD.ach_payment, OLD.ach_stop_letter, OLD.print_invoice, OLD.refund_required, OLD.reversed_payment, OLD.update_to_completed, OLD.print_initial_bill, OLD.latest_batch, OLD.error_processing, substring(TG_OP,1,1));
             RETURN OLD;
         END IF;
     END;

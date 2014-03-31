@@ -1,18 +1,18 @@
 /*
-    Copyright 2014 OPM.gov
-
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
-*/
+ Copyright 2014 OPM.gov
+ 
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+ 
+ http://www.apache.org/licenses/LICENSE-2.0
+ 
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ */
 
 // The interval to retrieve notifications in seconds
 var notificationsInterval = 50;
@@ -58,7 +58,7 @@ $(document).ready(function() {
         async: false,
         global: false,
         success: function(userObj) {
-            $('.welcomeMsg > a').text(userObj['firstName'] + ' ' + userObj['lastName']);
+            $('.welcomeMsg').text('Welcome ' + userObj['firstName'] + ' ' + userObj['lastName']);
             $('.roleDesc').text(userObj['role']['description']);
 
             window.globalUserRoleName = userObj['role']['name'];
@@ -114,9 +114,6 @@ $(document).ready(function() {
                 alert("Failed to get notifications: " + request.responseText);
             }
         });
-
-        // Call getNotifications repeatedly
-        setTimeout(getNotifications, notificationsInterval * 1000);
     }
 
     function getErrors() {
@@ -152,9 +149,6 @@ $(document).ready(function() {
         setTimeout(getErrors, notificationsInterval * 1000);
     }
 
-
-    // activate auto search
-    setTimeout(autoSearch, autoSearchInterval * 1000);
 
     $('.viewAccountSearchForm input:text').click(function() {
         filterEnabled = true;
@@ -510,7 +504,7 @@ $(document).ready(function() {
 
     //Show tooltips
     $(".jsShowTips").hover(function() {
-        showTooltips("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ac euismod augue. Maecenas tristique sit amet leo ut ullamcorper. Donec aliquam elementum erat sit amet fringilla.", $(this));
+        showTooltips("", $(this));
     }, function() {
         hideTooltips();
     });
@@ -826,7 +820,7 @@ $(document).ready(function() {
                 if (tr.prop('id').indexOf('ri-') != -1) {
                     resultItem.id = tr.prop('id').replace('ri-', '');
                 }
-                
+
                 $.ajax({
                     url: context + "/faces/calculationResult/" + resultId + "/calculationResultItem",
                     async: false,
@@ -1586,7 +1580,7 @@ function validateZipInput(evt) {
 //input phone only
 function validatePhoneInput(evt) {
     var charCode = (evt.which) ? evt.which : event.keyCode;
-    
+
     return !(charCode > 31 && (charCode < 48 || charCode > 57));
 }
 
@@ -1730,6 +1724,9 @@ function refreshAccountSummary(account) {
         $('.jsCloseAccount').removeClass('isHidden');
         $('.jsReopenAccount').addClass('isHidden');
     }
+    $('.dollar').formatCurrency({
+        negativeFormat: '%s-%n'
+    });
 }
 
 function getAccount(context, accountId) {
@@ -1930,31 +1927,7 @@ function populateCalculationItem(data, tab) {
 
 function decorateCalculationResult(tab) {
     var result = $('.resultsVal', tab);
-    var validation = $('.statusVal', tab);
-    if (result.html() == 'Success' || result.html() == 'Status Calculation Saved' || result.html() == 'Status Calculation Triggered Pending') {
-        result.addClass('successLabel');
-        result.removeClass('failLabel');
-    } else if (result.html() == 'Unknown') {
-        result.removeClass('successLabel');
-        result.removeClass('failLabel');
-    } else {
-        result.removeClass('successLabel');
-        result.addClass('failLabel');
-    }
-
-
-    if (validation.html() == 'Success') {
-        validation.addClass('successLabel');
-        validation.removeClass('failLabel');
-    } else if (validation.html() == 'Unknown') {
-        validation.removeClass('successLabel');
-        validation.removeClass('failLabel');
-    } else {
-        validation.removeClass('successLabel');
-        validation.addClass('failLabel');
-    }
-
-
+    result.addClass('successLabel');
 }
 
 function addNewVersion(button, copy) {

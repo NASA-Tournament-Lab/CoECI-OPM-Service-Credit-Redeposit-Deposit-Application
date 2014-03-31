@@ -1,5 +1,9 @@
-
+DROP TABLE IF EXISTS opm.letter;
+DROP TABLE IF EXISTS opm.reference;
+DROP TABLE IF EXISTS opm.payment_statement_print;
 DROP TABLE IF EXISTS opm.batch_daily_payments;
+DROP TABLE IF EXISTS opm.payment_transaction;
+DROP TABLE IF EXISTS opm.mainframe_import CASCADE;
 DROP TABLE IF EXISTS opm.audit_batch;
 DROP TABLE IF EXISTS opm.new_claim_number;
 DROP TABLE IF EXISTS opm.annuitant_list;
@@ -22,6 +26,12 @@ DROP TABLE IF EXISTS opm.invoice;
 DROP TABLE IF EXISTS opm.a01_print_suppression_case;
 DROP TABLE IF EXISTS opm.user_account_assignment;
 DROP TABLE IF EXISTS opm.payment_refund_link;
+
+
+DROP TABLE IF EXISTS opm.audit_batch_log_id;
+DROP TABLE IF EXISTS opm.all_details;
+DROP TABLE IF EXISTS opm.invoice_data;
+
 
 DROP TABLE IF EXISTS opm.role_permission;
 DROP TABLE IF EXISTS opm.user_permission;
@@ -188,4 +198,4 @@ DROP TABLE IF EXISTS opm.report_generation_data;
 DROP TABLE IF EXISTS opm.report_generation_data_history;
 DROP FUNCTION IF EXISTS opm.report_generation_data_func();
 
-DROP SCHEMA opm;
+DROP SCHEMA opm CASCADE;

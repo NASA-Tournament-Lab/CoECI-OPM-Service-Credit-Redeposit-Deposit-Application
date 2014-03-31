@@ -11,12 +11,9 @@
             <div class="banner">
               <h1><img src="<c:url value="/i/opm.png"/>" alt="United States Office of Personnel Management" width="130" height="129" />Service Credit Deposit/Redeposit System</h1>
                 <div class="headerUserInfo aRight">
-                  <p class="welcomeMsg">Welcome <a href="javascript:;"> </a></p>
+                  <p class="welcomeMsg"></p>
                     <p class="userMeta">
                         <label>Your Role:</label> <span class="roleDesc"> </span><br />
-                    </p>
-                    <p class="notifications">
-                        <label>Notifications:</label> You have <a href="javascript:;" class="jsShowNotifications"><span class="notificationNum"><span><span>0</span></span></span>New Notifications</a>
                     </p>
                 </div>
             </div>

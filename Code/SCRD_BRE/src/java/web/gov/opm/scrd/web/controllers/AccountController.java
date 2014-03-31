@@ -910,6 +910,29 @@ public class AccountController extends BaseAuditController {
         return mav;
     }
 
+
+    /**
+     * Populates the expanded intermediate result.
+     * @param session the http session
+     * @return the model and view object
+     * @throws OPMException if there is any error from the backend
+     */
+    @RequestMapping(value = "intermediateResult")
+    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
+    public ModelAndView viewIntermediateResult(HttpSession session) throws OPMException {
+        String signature = CLASS_NAME + "#viewIntermediateResult(HttpSession session)";
+        Logger logger = getLogger();
+        LoggingHelper.logEntrance(logger, signature,
+                new String[]{"session"},
+                new Object[]{session});
+
+        ModelAndView mav = populateModelAndView(session, new ModelAndView("intermediateResult"));
+
+
+        LoggingHelper.logExit(logger, signature, null);
+        return mav;
+    }
+
     /**
      * Gets payments information for an account.
      *

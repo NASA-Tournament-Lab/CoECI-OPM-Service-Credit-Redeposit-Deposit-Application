@@ -1023,6 +1023,29 @@
         </attributes>
     </entity>
 
+    <entity class="gov.opm.scrd.entities.application.IntermediateResult">
+        <table name="intermediate_result"/>
+        <attributes>
+            <basic name="intermediateAmount">
+                <column name="intermediate_amount" nullable="true"/>
+            </basic>
+            <basic name="intermediateRate">
+                <column name="intermediate_rate" nullable="true"/>
+            </basic>
+            <basic name="intermediateBeginDate">
+                <column name="intermediate_begin_date" nullable="true"/>
+            </basic>
+            <basic name="intermediateEndDate">
+                <column name="intermediate_end_date" nullable="true"/>
+            </basic>
+            <basic name="balanceWithInterest">
+                <column name="balance_with_interest" nullable="true"/>
+            </basic>
+
+        </attributes>
+
+    </entity>
+
     <entity class="gov.opm.scrd.entities.application.CalculationResultItem">
         <table name="calculation_result_item"/>
         <attributes>
@@ -1070,6 +1093,12 @@
             <many-to-one name="retirementType" target-entity="gov.opm.scrd.entities.lookup.RetirementType" fetch="EAGER">
                 <join-column name="retirement_type_id" referenced-column-name="id" nullable="false" />
             </many-to-one>
+            <one-to-many name="intermediateResults" target-entity="gov.opm.scrd.entities.application.IntermediateResult" fetch="LAZY">
+                <join-column name="intermediate_result_id" referenced-column-name="id" nullable="true" />
+                <cascade>
+                  <cascade-all/>
+                </cascade>
+            </one-to-many>
         </attributes>
     </entity>
 
