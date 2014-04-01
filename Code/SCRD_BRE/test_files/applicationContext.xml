@@ -31,7 +31,7 @@
 
         <!-- InterestCalculationRuleService -->
         <bean id="interestCalculationRuleService" class="gov.opm.scrd.services.impl.InterestCalculationRuleServiceImpl">
-            <property name="knowledgeLogFileName" value="C:/Downloads/opm_log/Interest" />
+            <property name="knowledgeLogFileName" value="H:/tmp/Interest" />
             <property name="csrsInterestTemplate" ref="csrsInterestTemplate" />
             <property name="csrsPeaceCorpsInterestTemplate" ref="csrsPeaceCorpsInterestTemplate" />
             <property name="csrsRedepositInterestTemplate" ref="csrsRedepositInterestTemplate" />
@@ -40,50 +40,50 @@
             <property name="fersRedepositInterestTemplate" ref="fersRedepositInterestTemplate" />
         </bean>
         <bean id="csrsInterestTemplate" class="gov.opm.scrd.services.impl.DecisionTableTemplate">
-            <property name="templateFile" value="F:/contests/OPM/check/conf/rules/csrs_interest_template.xls" />
-            <property name="decisionTableFile" value="F:/contests/OPM/check/conf/rules/csrs_interest.xls" />
+            <property name="templateFile" value="C:/Users/yedtoss/Documents/Projects/OPM_Inter/inter/conf/rules/csrs_interest_template.xls" />
+            <property name="decisionTableFile" value="C:/Users/yedtoss/Documents/Projects/OPM_Inter/inter/conf/rules/csrs_interest.xls" />
             <property name="startCellRow" value="29" />
             <property name="startCellColumn" value="2" />
         </bean>
         <bean id="csrsPeaceCorpsInterestTemplate" class="gov.opm.scrd.services.impl.DecisionTableTemplate">
-            <property name="templateFile" value="F:/contests/OPM/check/conf/rules/csrs_peacecorps_interest_template.xls" />
-            <property name="decisionTableFile" value="F:/contests/OPM/check/conf/rules/csrs_peacecorps_interest.xls" />
+            <property name="templateFile" value="C:/Users/yedtoss/Documents/Projects/OPM_Inter/inter/conf/rules/csrs_peacecorps_interest_template.xls" />
+            <property name="decisionTableFile" value="C:/Users/yedtoss/Documents/Projects/OPM_Inter/inter/conf/rules/csrs_peacecorps_interest.xls" />
             <property name="startCellRow" value="14" />
             <property name="startCellColumn" value="2" />
         </bean>
         <bean id="csrsRedepositInterestTemplate" class="gov.opm.scrd.services.impl.DecisionTableTemplate">
-            <property name="templateFile" value="F:/contests/OPM/check/conf/rules/csrs_redeposit_interest_template.xls" />
-            <property name="decisionTableFile" value="F:/contests/OPM/check/conf/rules/csrs_redeposit_interest.xls" />
+            <property name="templateFile" value="C:/Users/yedtoss/Documents/Projects/OPM_Inter/inter/conf/rules/csrs_redeposit_interest_template.xls" />
+            <property name="decisionTableFile" value="C:/Users/yedtoss/Documents/Projects/OPM_Inter/inter/conf/rules/csrs_redeposit_interest.xls" />
             <property name="startCellRow" value="29" />
             <property name="startCellColumn" value="2" />
         </bean>
         <bean id="fersInterestTemplate" class="gov.opm.scrd.services.impl.DecisionTableTemplate">
-            <property name="templateFile" value="F:/contests/OPM/check/conf/rules/fers_interest_template.xls" />
-            <property name="decisionTableFile" value="F:/contests/OPM/check/conf/rules/fers_interest.xls" />
+            <property name="templateFile" value="C:/Users/yedtoss/Documents/Projects/OPM_Inter/inter/conf/rules/fers_interest_template.xls" />
+            <property name="decisionTableFile" value="C:/Users/yedtoss/Documents/Projects/OPM_Inter/inter/conf/rules/fers_interest.xls" />
             <property name="startCellRow" value="20" />
             <property name="startCellColumn" value="2" />
         </bean>
         <bean id="fersPeaceCorpsInterestTemplate" class="gov.opm.scrd.services.impl.DecisionTableTemplate">
-            <property name="templateFile" value="F:/contests/OPM/check/conf/rules/fers_peacecorps_interest_template.xls" />
-            <property name="decisionTableFile" value="F:/contests/OPM/check/conf/rules/fers_peacecorps_interest.xls" />
+            <property name="templateFile" value="C:/Users/yedtoss/Documents/Projects/OPM_Inter/inter/conf/rules/fers_peacecorps_interest_template.xls" />
+            <property name="decisionTableFile" value="C:/Users/yedtoss/Documents/Projects/OPM_Inter/inter/conf/rules/fers_peacecorps_interest.xls" />
             <property name="startCellRow" value="14" />
             <property name="startCellColumn" value="2" />
         </bean>
         <bean id="fersRedepositInterestTemplate" class="gov.opm.scrd.services.impl.DecisionTableTemplate">
-            <property name="templateFile" value="F:/contests/OPM/check/conf/rules/fers_redeposit_interest_template.xls" />
-            <property name="decisionTableFile" value="F:/contests/OPM/check/conf/rules/fers_redeposit_interest.xls" />
+            <property name="templateFile" value="C:/Users/yedtoss/Documents/Projects/OPM_Inter/inter/conf/rules/fers_redeposit_interest_template.xls" />
+            <property name="decisionTableFile" value="C:/Users/yedtoss/Documents/Projects/OPM_Inter/inter/conf/rules/fers_redeposit_interest.xls" />
             <property name="startCellRow" value="27" />
             <property name="startCellColumn" value="2" />
         </bean>
         
         <!-- DeductionValidationRuleServiceImpl -->
         <bean id="deductionValidationRuleService" class="gov.opm.scrd.services.impl.DeductionValidationRuleServiceImpl">
-            <property name="knowledgeLogFileName" value="C:/Downloads/opm_log/Deduction" />
+            <property name="knowledgeLogFileName" value="H:/tmp/Deduction" />
         </bean>
         
         <!-- DeductionCalculationRuleServiceImpl -->
         <bean id="deductionCalculationRuleService" class="gov.opm.scrd.services.impl.DeductionCalculationRuleServiceImpl">
-            <property name="knowledgeLogFileName" value="C:/Downloads/opm_log/Deduction" />
+            <property name="knowledgeLogFileName" value="H:/tmp/Deduction" />
             <property name="servicePeriodSplitDates">
                 <list>
                     <value>10-01-1982</value>
@@ -92,8 +92,8 @@
             <property name="deductionTableTemplate" ref="deductionTableTemplate" />
         </bean>
         <bean id="deductionTableTemplate" class="gov.opm.scrd.services.impl.DecisionTableTemplate">
-            <property name="templateFile" value="F:/contests/OPM/check/conf/rules/deduction_table_template.xls" />
-            <property name="decisionTableFile" value="F:/contests/OPM/check/conf/rules/deduction_table.xls" />
+            <property name="templateFile" value="C:/Users/yedtoss/Documents/Projects/OPM_Inter/inter/conf/rules/deduction_table_template.xls" />
+            <property name="decisionTableFile" value="C:/Users/yedtoss/Documents/Projects/OPM_Inter/inter/conf/rules/deduction_table.xls" />
             <property name="startCellRow" value="11" />
             <property name="startCellColumn" value="2" />
         </bean>

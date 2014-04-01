@@ -1098,7 +1098,7 @@
                 <join-column name="retirement_type_id" referenced-column-name="id" nullable="false" />
             </many-to-one>
             <one-to-many name="intermediateResults" target-entity="gov.opm.scrd.entities.application.IntermediateResult" fetch="LAZY">
-                <join-column name="intermediate_result_id" referenced-column-name="id" nullable="true" />
+                <join-column name="calculation_result_item_id" referenced-column-name="id" nullable="true" />
                 <cascade>
                   <cascade-all/>
                 </cascade>

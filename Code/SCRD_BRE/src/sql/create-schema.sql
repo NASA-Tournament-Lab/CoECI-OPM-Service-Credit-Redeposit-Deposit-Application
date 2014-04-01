@@ -639,18 +639,6 @@ CREATE TABLE opm.calculation (
     ON UPDATE NO ACTION);
 
 
--- -----------------------------------------------------
--- Table calculation_result_item
--- -----------------------------------------------------
-CREATE TABLE opm.intermediate_result (
-  id BIGSERIAL NOT NULL,
-  deleted BOOLEAN NOT NULL,
-  intermediate_amount DECIMAL(10,2) NULL,
-  intermediate_rate DOUBLE PRECISION NULL,
-  intermediate_begin_date TIMESTAMP NULL ,
-  intermediate_end_date TIMESTAMP NULL,
-  balance_with_interest DECIMAL(10,2) NULL,
-  PRIMARY KEY (id));
 
 -- -----------------------------------------------------
 -- Table calculation_result_item
@@ -689,6 +677,27 @@ CREATE TABLE opm.calculation_result_item (
     REFERENCES opm.retirement_type (id )
     ON DELETE CASCADE
     ON UPDATE NO ACTION);
+
+
+-- -----------------------------------------------------
+-- Table calculation_result_item
+-- -----------------------------------------------------
+CREATE TABLE opm.intermediate_result (
+  id BIGSERIAL NOT NULL,
+  deleted BOOLEAN NOT NULL,
+  intermediate_amount DECIMAL(10,2) NULL,
+  intermediate_rate DOUBLE PRECISION NULL,
+  intermediate_begin_date TIMESTAMP NULL ,
+  intermediate_end_date TIMESTAMP NULL,
+  balance_with_interest DECIMAL(10,2) NULL,
+  calculation_result_item_id BIGINT NULL,
+  PRIMARY KEY (id),
+  CONSTRAINT fk_intermediate_result_calculation_result_item
+    FOREIGN KEY (calculation_result_item_id )
+    REFERENCES opm.calculation_result_item (id )
+    ON DELETE CASCADE
+    ON UPDATE NO ACTION);
+
 
 -- -----------------------------------------------------
 -- Table redeposit

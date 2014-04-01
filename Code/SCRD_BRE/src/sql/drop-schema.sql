@@ -51,6 +51,7 @@ DROP TABLE IF EXISTS opm.audit_parameter_record;
 DROP TABLE IF EXISTS opm.audit_record;
 DROP TABLE IF EXISTS opm.dedeposit;
 DROP TABLE IF EXISTS opm.redeposit;
+DROP TABLE IF EXISTS opm.intermediate_result;
 DROP TABLE IF EXISTS opm.calculation_result_item;
 DROP TABLE IF EXISTS opm.calculation;
 DROP TABLE IF EXISTS opm.calculation_version;
