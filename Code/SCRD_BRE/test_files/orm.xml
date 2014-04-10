@@ -1042,6 +1042,51 @@
                 <column name="balance_with_interest" nullable="true"/>
             </basic>
 
+            <basic name="interestCalculatedToDate">
+                <column name="interest_calculated_to_date" nullable="true"/>
+            </basic>
+            <basic name="beforeBalanceWithInterest">
+                <column name="before_balance_with_interest" nullable="true"/>
+            </basic>
+            <basic name="startYearFactor">
+                <column name="start_year_factor" nullable="true"/>
+            </basic>
+            <basic name="periodInDays">
+                <column name="period_in_days" nullable="true"/>
+            </basic>
+
+            <basic name="periodInDays2">
+                <column name="period_in_days2" nullable="true"/>
+            </basic>
+            <basic name="periodBeginDate">
+                <column name="period_begin_date" nullable="true"/>
+            </basic>
+            <basic name="periodEndDate">
+                <column name="period_end_date" nullable="true"/>
+            </basic>
+            <basic name="periodType">
+                <column name="period_type" nullable="true"/>
+            </basic>
+
+            <basic name="retirementType">
+                <column name="retirement_type" nullable="true"/>
+            </basic>
+            <basic name="intermediateRate2">
+                <column name="intermediate_rate2" nullable="true"/>
+            </basic>
+            <basic name="compositeRate1">
+                <column name="composite_rate1" nullable="true"/>
+            </basic>
+             <basic name="compositeRate2">
+                <column name="composite_rate2" nullable="true"/>
+            </basic>
+            <basic name="interestCalculationYear">
+                <column name="interest_calculation_year" nullable="true"/>
+            </basic>
+            <basic name="interestAccrualDate">
+                <column name="interest_accrual_date" nullable="true"/>
+            </basic>
+
         </attributes>
 
     </entity>

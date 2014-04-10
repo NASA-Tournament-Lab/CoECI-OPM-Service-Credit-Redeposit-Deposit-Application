@@ -153,10 +153,10 @@
       <bean id="receiptPaymentTypeId" class="java.lang.Long">
     	<constructor-arg value="1" />
    </bean>
-         <bean id="debitVoucherAdjustmentPaymentTypeId" class="java.lang.String">
+         <bean id="debitVoucherAdjustmentPaymentTypeId" class="java.lang.Long">
     	<constructor-arg value="2" />
    </bean>
-         <bean id="replacementAdjustmentPaymentTypeId" class="java.lang.String">
+         <bean id="replacementAdjustmentPaymentTypeId" class="java.lang.Long">
     	<constructor-arg value="3" />
    </bean>   
    

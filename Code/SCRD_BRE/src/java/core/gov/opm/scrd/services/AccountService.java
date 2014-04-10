@@ -259,10 +259,11 @@ public interface AccountService {
      *             if there is no such account to save data.
      * @throws OPMException
      *             if there is any problem when executing the method.
+     * @return the id of the created/updated calculation version
      *
      * @since 1.2 (OPM - Release I Assembly 1.0)
      */
-    public void saveCalculationVersion(long accountId, CalculationVersion calculationVersion)
+    public long saveCalculationVersion(long accountId, CalculationVersion calculationVersion)
         throws OPMException;
 
     /**

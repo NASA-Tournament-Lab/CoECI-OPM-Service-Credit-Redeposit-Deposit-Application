@@ -1022,7 +1022,6 @@ $(document).ready(function() {
         var tab = $(this).parents(".tabsBlock").eq(0);
         var result = $(".validationStatusBar .resultsVal", tab);
         var versionId = $('select', tab).val();
-        console.log(versionId);
         $.ajax({
             url: context + '/account/triggerBill',
             type: 'POST',
@@ -1738,9 +1737,13 @@ $(document).ready(function() {
                     html += '<td class="blankCell firstCol">&nbsp;</td>';
                     html += '<td> ' + parseDateToString(results['r-' + selectId].result.items[i].startDate) + '</td>';
                     html += '<td> ' + parseDateToString(results['r-' + selectId].result.items[i].endDate) + '</td>';
-                    html += '<td> ' + '</td>';
-                    html += '<td> ' + '</td>';
-                    html += '<td> ' + '</td>';
+
+                    for(var k=0; k < 17; k++){
+                        html += '<td> ' + '</td>';
+                    }
+                    //html += '<td> ' + '</td>';
+                    //html += '<td> ' + '</td>';
+                   // html += '<td> ' + '</td>';
                     html += '</tr>';
 
                     
@@ -1751,16 +1754,51 @@ $(document).ready(function() {
                         html += '<tr>';
 
                         html += '<td class="blankCell firstCol">&nbsp;</td>';
+                        html += '<td> ' + parseDateToString(obj.periodBeginDate) + '</td>';
+                        html += '<td> ' + parseDateToString(obj.periodEndDate) + '</td>';
                         html += '<td> ' + parseDateToString(obj.intermediateBeginDate) + '</td>';
                         html += '<td> ' + parseDateToString(obj.intermediateEndDate) + '</td>';
+
+                        html += '<td> ' + parseDateToString(obj.interestCalculatedToDate) + '</td>';
+                        html += '<td> ' + parseDateToString(obj.interestAccrualDate) + '</td>';
+
+                        html += '<td> ' + obj.periodType + '</td>';
+                        html += '<td> ' + obj.retirementType + '</td>';
+
+                        html += '<td> ' + parseObjToString(obj.interestCalculationYear) + '</td>';
+                        html += '<td> ' + obj.beforeBalanceWithInterest + '</td>';
+
+
                         html += '<td> ' + obj.intermediateAmount + '</td>';
                         html += '<td> ' + obj.intermediateRate + '</td>';
+                        html += '<td> ' + parseObjToString(obj.intermediateRate2) + '</td>';
+                        html += '<td> ' + parseObjToString(obj.compositeRate1) + '</td>';
+                        html += '<td> ' + parseObjToString(obj.compositeRate2) + '</td>';
+
+                        html += '<td> ' + obj.periodInDays + '</td>';
+                        html += '<td> ' + parseObjToString(obj.periodInDays2) + '</td>';
+
+                        html += '<td> ' + parseObjToString(obj.startYearFactor) + '</td>';
+
+
                         html += '<td> ' + obj.balanceWithInterest + '</td>';
 
                         html += '</tr>';
                     }
 
-                    html += '<tr><td class="blankCell firstCol">&nbsp;</td> <td></td> <td></td> <td></td> <td></td><td></td></tr><tr><td class="blankCell firstCol">&nbsp;</td> <td></td> <td></td> <td></td> <td></td><td></td></tr>';
+                    html += '<tr><td class="blankCell firstCol">&nbsp;</td>';
+                    for(var k=0; k< 19; k++){
+                        html+= '<td></td>';
+                    }
+                    html += '</tr>'
+
+                    html += '<tr><td class="blankCell firstCol">&nbsp;</td>';
+                    for(var k=0; k< 19; k++){
+                        html+= '<td></td>';
+                    }
+                    html += '</tr>'
+
+                    
                 }
 
             }
@@ -4279,6 +4317,15 @@ function formatDateTime(dateTime, fmt) {
 		fmt = "MM/dd/yyyy";
 	} 
 	return $.format.date(new Date(dateTime).toString(), fmt);
+}
+
+function parseObjToString(obj){
+
+    if(isNull(obj)){
+        return "";
+    }
+
+    return obj;
 }
 
 function showPrintReport(reportName, request, render, printPopup) {

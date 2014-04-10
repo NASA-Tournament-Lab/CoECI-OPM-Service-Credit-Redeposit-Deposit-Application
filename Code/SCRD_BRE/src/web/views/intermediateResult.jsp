@@ -47,15 +47,44 @@
                     <col class="col3"/>
                     <col class="col4"/>
                     <col class="col5"/>
+                    <col class="col6"/>
+                    <col class="col7"/>
+                    <col class="col8"/>
+                    <col class="col9"/>
+                    <col class="col10"/>
+                    <col class="col11"/>
+                    <col class="col12"/>
+                    <col class="col13"/>
+                    <col class="col14"/>
+                    <col class="col15"/>
+                    <col class="col16"/>
+                    <col class="col17"/>
+                    <col class="col18"/>
+                    <col class="col19"/>
                 </colgroup>
                 <thead>
                     <tr>
                         <th class="unsortable firstCol">&nbsp;</th>
-                        <th class="defaultSortCol defaultSortDown asDate">Begin Date</th>
-                        <th class="asDate">End Date</th>
+                        <th class="defaultSortCol defaultSortDown asDate">Period Begin Date</th>
+                        <th class="asDate">Period End Date</th>
+                        <th class="asDate">Interest Begin Date</th>
+                        <th class="asDate">Interest End Date</th>
+                        <th class="asDate">Interest Calculated To Date</th>
+                        <th class="asDate">Interest Accrual Date</th>
+                        <th class="asString">Period Type</th>
+                        <th class="asString">Retirement Type</th>
+                        <th class="asNumeric">Interest Calculation Year</th>
+                        <th class="asNumeric">Begin Balance With Interest</th>
+
                         <th class="asNumeric">Total Interest</th>
                         <th class="asNumeric">Interest Rate</th>
-                        <th class="lastCol asNumeric">Balance With Interest</th>
+                        <th class="asNumeric">Interest Rate 2</th>
+                        <th class="asNumeric">Composite Rate 1</th>
+                        <th class="asNumeric">Composite Rate 2</th>
+                        <th class="asNumeric">Number of days in period</th>
+                        <th class="asNumeric">Number of days in period 2</th>
+                        <th class="asNumeric">Start Year Factor</th>
+                        <th class="lastCol asNumeric">Final Balance With Interest</th>
                     </tr>
                 </thead>
                 

@@ -310,6 +310,7 @@ public class AccountController extends BaseAuditController {
      * @param accountId the account id to save
      * @param calculationVersion the calculation version
      * @param request the http servlet request
+     * @return the added/updated calculation version
      * @throws OPMException if there is any error from the backend
      * @throws ValidationException if calculationVersion is null
      * @since 1.2 (OPM - Interest Update Assembly 1.0)
@@ -345,19 +346,20 @@ public class AccountController extends BaseAuditController {
                 }
             }
         } else {
-            if(calculationVersion.getName() == null || calculationVersion.getName() == "" ){
+            if(calculationVersion.getName() == null || calculationVersion.getName().isEmpty() ){
                 calculationVersion.setName(getCalculationName(request.getSession()));
             }
         }
 
         
-        accountService.saveCalculationVersion(accountId, calculationVersion);
+        long id = accountService.saveCalculationVersion(accountId, calculationVersion);
+        calculationVersion.setId(id);
 
 
         // auditing
         auditCalculationVersion(request, calculationVersion, previousVersion);
 
-        LoggingHelper.logExit(logger, signature, null);
+        LoggingHelper.logExit(logger, signature, new Object[] {calculationVersion});
         return calculationVersion;
     }
 

@@ -781,9 +781,10 @@ public class AccountServiceImpl extends BaseService implements AccountService {
      *             if there is no such account to save data.
      * @throws OPMException
      *             if there is any problem when executing the method.
+     * @return the id of the created/updated calculation version
      */
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public void saveCalculationVersion(long accountId, CalculationVersion calculationVersion)
+    public long saveCalculationVersion(long accountId, CalculationVersion calculationVersion)
         throws OPMException {
         String signature = CLASS_NAME
             + "#saveCalculationVersion(long accountId, CalculationVersion calculationVersion)";
@@ -797,6 +798,7 @@ public class AccountServiceImpl extends BaseService implements AccountService {
         Helper.checkNull(logger, signature, calculationVersion, "calculationVersion");
 
         EntityManager entityManager = getEntityManager();
+        long result = accountId;
         try {
             // Get account
             Account account = Helper.getEntityById(entityManager, logger, signature, Account.class, accountId, true);
@@ -815,9 +817,13 @@ public class AccountServiceImpl extends BaseService implements AccountService {
                 account.getCalculationVersions().add(calculationVersion);
             }
             entityManager.merge(account);
+            if (result == 0) {
+                result = account.getCalculationVersions().get(account.getCalculationVersions().size() - 1).getId();
+            }
 
 
-            LoggingHelper.logExit(logger, signature, null);
+            LoggingHelper.logExit(logger, signature, new Object[] {result});
+            return result;
         } catch (IllegalStateException e) {
             throw LoggingHelper.logException(logger, signature, new OPMException("The entity manager has been closed.",
                 e));
@@ -1433,6 +1439,7 @@ public class AccountServiceImpl extends BaseService implements AccountService {
                     version.getCalculationResult().getCalculationStatus()
                         .setName("Calculation Triggered Pending");
                     saveCalculationVersion(accountId, version);
+                    break;
                 }
             }
             LoggingHelper.logExit(logger, signature, null);
