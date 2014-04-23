@@ -27,6 +27,7 @@ import gov.opm.scrd.entities.application.BillingSummary;
 import gov.opm.scrd.entities.application.Calculation;
 import gov.opm.scrd.entities.application.CalculationVersion;
 import gov.opm.scrd.entities.application.CalculationResult;
+import gov.opm.scrd.entities.lookup.CalculationStatus;
 import gov.opm.scrd.entities.application.Dedeposit;
 import gov.opm.scrd.entities.lookup.DepositType;
 import gov.opm.scrd.entities.application.Payment;
@@ -1435,9 +1436,10 @@ public class AccountServiceImpl extends BaseService implements AccountService {
             for (CalculationVersion version : account.getCalculationVersions()) {
                 if (version.getId() == versionId) {
                     performSaveBillings(version, accountId);
-                    version.getCalculationResult().getCalculationStatus().setId(5);
-                    version.getCalculationResult().getCalculationStatus()
-                        .setName("Calculation Triggered Pending");
+                    CalculationStatus status = new CalculationStatus();
+                    status.setId(5);
+                    status.setName("Calculation Triggered Pending");
+                    version.getCalculationResult().setCalculationStatus(status);
                     saveCalculationVersion(accountId, version);
                     break;
                 }

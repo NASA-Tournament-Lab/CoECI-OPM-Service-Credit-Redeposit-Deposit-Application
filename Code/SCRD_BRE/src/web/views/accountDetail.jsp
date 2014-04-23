@@ -1763,9 +1763,9 @@
                   <p>https://www.pay.gov</p>
                 </div>
                 <div class="printMetaRight">
-                  <div class="printNum"><label>Claim Number</label>CSD# 9164949</div>
-                  <div class="printBirth"><label>Date of Birth</label>01/01/1940</div>
-                  <div class="printAcount">ENTER AMOUNT<br/> OF THIS PAYMENT $</div>
+                  <div class="printNum"><label>Claim Number</label><span>CSD# 9164949</span></div>
+                  <div class="printBirth"><label>Date of Birth</label><span>01/01/1940</span></div>
+                  <div class="printAcount">ENTER AMOUNT<br/> OF THIS PAYMENT <span>$</span></div>
                   <h2 class="printFormTitle">SERVICE CREDIT<br/> PAYMENT FORM</h2>
                 </div>
 
@@ -1789,34 +1789,34 @@
                   <div class="printPersonalData">
                     <div class="name">
                       <label>Name</label>
-                      JBGXXXX W GAEFXXXX
+                      <span>JBGXXXX W GAEFXXXX</span>
                     </div>
                     <div class="date">
                       <label>Date</label>
-                      06/14/2013
+                      <span>06/14/2013</span>
                     </div>
                     <div class="coveredBy">
                       <label>Covered by</label>
-                      CSRS
+                      <span>CSRS</span>
                     </div>
                     <div class="claimNum">
                       <label>Claim Number</label>
-                      CSD 9164949
+                      <span>CSD 9164949</span>
                     </div>
                   </div>
                   <div class="leftPart fLeft">
-                    <p class="emLine"><label>Prior Balance Due</label><span>$1575.18</span></p>
-                    <p class="emLine"><label>Plus Interest on Prior Balance</label><span>$0.92</span></p>
-                    <p class="emLine"><label>Balance Due Before Payment</label><span>$1576.10</span></p>
-                    <p class="emLine"><label>Amount of Payment</label><span>$5.00</span></p>
+                    <p class="emLine"><label>Prior Balance Due</label><span class="priorBalanceDue">$1575.18</span></p>
+                    <p class="emLine"><label>Plus Interest on Prior Balance</label><span class="plusInterestOnPriorBalance">$0.92</span></p>
+                    <p class="emLine"><label>Balance Due Before Payment</label><span class="balanceDueBeforePayment">$1576.10</span></p>
+                    <p class="emLine"><label>Amount of Payment</label><span class="amountOfPayment">$5.00</span></p>
                     <div class="detailsLine">
-                      <p><label>FERS Deposit/Redeposit</label><span>$0.00</span></p>
-                      <p><label>Post 9/30/82 Redeposit</label><span>$0.00</span></p>
-                      <p><label>Post 9/30/82 Deposit</label><span>$0.00</span></p>
-                      <p><label>Pre 10/1/82 Redeposit</label><span>$0.00</span></p>
-                      <p><label>Pre 10/1/82 Deposit</label><span>$1,571.00</span></p>
+                      <p><label>FERS Deposit/Redeposit</label><span class="fersDeposit">$0.00</span></p>
+                      <p><label>Post 9/30/82 Redeposit</label><span class="postRedeposit">$0.00</span></p>
+                      <p><label>Post 9/30/82 Deposit</label><span class="postDeposit">$0.00</span></p>
+                      <p><label>Pre 10/1/82 Redeposit</label><span class="preRedeposit">$0.00</span></p>
+                      <p><label>Pre 10/1/82 Deposit</label><span class="preDeposit">$1,571.00</span></p>
                     </div>
-                    <p class="emLine"><label>New Balance Due</label><span>$1,571.00</span></p>
+                    <p class="emLine"><label>New Balance Due</label><span class="newBalanceDue">$1,571.00</span></p>
                   </div>
                   <div class="rightPart fRight">
                     <div class="paymentExplanation">
@@ -1850,7 +1850,7 @@
                 <a href="javascript:;" class="pdfLink"></a>
                 <a href="javascript:;" class="rtfLink"></a>
                 <a href="javascript:;" class="docLink"></a>
-                <a href="javascript:;" class="printLink jsDoPrintStaement">Print</a>
+                <a href="javascript:;" class="printLink jsDoPrintReport">Print</a>
               </div>
               <a class="priBtn jsClosePopup fRight"><span><span>Cancel</span></span></a>
             </div>

@@ -1651,9 +1651,7 @@ $(document).ready(function() {
         showPopup(".printFinalStatementPopup");
     });
 
-    $(".jsPrintStatement, .jsReprintStatement").click(function(e) {
-        showPopup(".printStatementPopup");
-    });
+
 
 
     //Do Print
@@ -3518,6 +3516,7 @@ function runCalculation(context, tab, save, callback) {
                 };
 
                 version.calculationResult.calculationStatus.id = 3;
+                version.calculationResult.calculationStatus.name = 'Calculation Saved';
                 var versionId = $('.versionBar select', tab).val();
                 if (versionId.indexOf('new') == -1 && versionId.indexOf('save') == -1) {
                     version.id = versionId;
@@ -3555,6 +3554,7 @@ function runCalculation(context, tab, save, callback) {
                     contentType: 'application/json',
                     data: JSON.stringify(version),
                     success: function(data, text, xhr) {
+                        $('.resultsVal', tab).html(data.calculationResult.calculationStatus.name);
 
                         if(data.id == 0){
                             data.id = versionId.replace("new", "save");

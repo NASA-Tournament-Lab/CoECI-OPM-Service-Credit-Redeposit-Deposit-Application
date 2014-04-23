@@ -16,6 +16,7 @@
 
 var currentNote = null;
 var currentDeleteMode = null;
+var gAccountInfo = null;
 $(function() {
 	// Setup page
     setupPage('VIEW_ACCOUNT', 0);
@@ -33,6 +34,7 @@ $(function() {
     populateNamedEntity('accountStatuses', context);
     $('#billingSummaryTab').hide();
     var account = getAccount(context, accountId);
+    gAccountInfo = account;
     refreshEmployeeInfo(account);
     refreshAccountSummary(account);
     refreshPaymentTable(accountId);
@@ -76,6 +78,12 @@ $(function() {
     
     $('.jsRefreshPaymentList').click(function() {
         $('.jsRefreshAccountDetails').click();
+    });
+    
+    $(".jsPrintStatement, .jsReprintStatement").click(function(e) {
+    	var data = gatherStatementReportData();
+    	renderStatementReport(data);
+        showPopup(".printStatementPopup");
     });
     
     $('#paymentHistoryTbl tbody').on("click", "tr", function() {
@@ -1158,7 +1166,125 @@ function deleteNote(context, id) {
     });
 }
 
+function gatherStatementReportData() {
+	var context = $('#context').val();
+	var accountId = $('#accountId').val();
+	var account = getAccount(context, accountId);
+	var csd = account.claimNumber;
+	var birthDate = new Date(account.holder.birthDate);
+	var amountPayment = account.balance;
+	var address = account.holder.address.street1 + '<br/>' + account.holder.address.street2 + "<br/>" + account.holder.address.city;
+	var accountName = account.holder.firstName + ' ' + account.holder.lastName;
+	var serviceType = account.planType;
+	
+	
+	var calculateDate = new Date();
+	var priorBalanceDue = account.balance;
+	var plusInterestOnPriorBalance = priorBalanceDue;
+	var balanceDueBeforePayment = account.balance;
+	
+	var fersDeposit = 0;
+	
+	var postRedeposit = 0;
+	var postDeposit = 0;
+	
+	var preRedeposit = 0;
+	var preDeposit = 0;
+	
+	var newBalanceDue = priorBalanceDue;
+	
+	
+	var calculationVersion = account.calculationVersions[0];
+	if (calculationVersion != null) {
+		calculateDate = new Date(calculationVersion.calculationDate);
+		var result = calculationVersion.calculationResult;
+		if (result != null) {
+			plusInterestOnPriorBalance += result.summary.totalInitialInterest;
+			
+			var redeposits = result.redeposits;
+			var dedeposits = result.dedeposits;
+			
+			if (redeposits != null) {
+				for (var i = 0; i < redeposits.length; i++) {
+					var item = redeposits[i];
+					if (item.depositType == 'FERS_REDEPOSIT') {
+						fersDeposit += item.total;
+					} else if (item.depositType == 'CSRS_POST_82_PRE_91_REDEPOSIT') {
+						postRedeposit += item.total;
+					} else if (item.depositType == 'CSRS_POST_3_91_REDEPOSIT') {
+						postRedeposit += item.total;
+					} else if (item.depositType == 'CSRS_PRE_10_82_REDEPOSIT'){
+						preRedeposit += item.total;
+					}
+				}
+			}
+			
+			if (dedeposits != null) {
+				for (var i = 0; i < dedeposits.length; i++) {
+					var item = dedeposits[i];
+					if (item.depositType == 'FERS_DEPOSIT') {
+						fersDeposit += item.total;
+					} else if (item.depositType == 'CSRS_POST_10_82_DEPOSIT') {
+						postDeposit += item.total;
+					} else if (item.depositType == 'CSRS_PRE_10_82_DEPOSIT') {
+						preDeposit += item.total;
+					} 
+				}
+				
+			}
+			
+			if (result.items[0] != null) {
+				newBalanceDue -= result.items[0].paymentsApplied;
+			}
+			
+		}
+		
+	} 
+	var data = {
+			csd:csd,
+			birthDate:birthDate,
+			amountPayment:amountPayment,
+			address:address,
+			accountName:accountName,
+			calculateDate:calculateDate,
+			serviceType:serviceType,
+			
+			priorBalanceDue:priorBalanceDue,
+			plusInterestOnPriorBalance:plusInterestOnPriorBalance,
+			balanceDueBeforePayment:balanceDueBeforePayment,
+			fersDeposit:fersDeposit,
+			postRedeposit:postRedeposit,
+			postDeposit:postDeposit,
+			preRedeposit:preRedeposit,
+			preDeposit:preDeposit,
+			newBalanceDue:newBalanceDue
+	};
+	return data;
+}
 
+function renderStatementReport(data) {
+	var popup = $('.printStatementPopup');
+	// csd
+	$('.printNum span', popup).text('CSD #' + data.csd);
+	$('.printBirth span', popup).text(formatDateTime(data.birthDate));
+	$('.printAcount span', popup).text(formatReportMoney(data.amountPayment));
+	$('.printAddressBody', popup).html(data.address);
+	$('.printPersonalData .name', popup).text(data.accountName);
+	$('.printPersonalData .date span', popup).text(formatDateTime(data.calculateDate));
+	$('.printPersonalData .coveredBy span', popup).text(data.serviceType);
+	$('.printPersonalData .claimNum span', popup).text('CSD #' + data.csd);
+	
+	$('.priorBalanceDue', popup).text(formatReportMoney(data.priorBalanceDue));
+	$('.plusInterestOnPriorBalance', popup).text(formatReportMoney(data.plusInterestOnPriorBalance));
+	$('.balanceDueBeforePayment', popup).text(formatReportMoney(data.balanceDueBeforePayment));
+	$('.amountOfPayment', popup).text(formatReportMoney(data.amountPayment));
+	$('.fersDeposit', popup).text(formatReportMoney(data.fersDeposit));
+	$('.postRedeposit', popup).text(formatReportMoney(data.postRedeposit));
+	$('.postDeposit', popup).text(formatReportMoney(data.postDeposit));
+	$('.preRedeposit', popup).text(formatReportMoney(data.preRedeposit));
+	$('.preDeposit', popup).text(formatReportMoney(data.preDeposit));
+	$('.newBalanceDue', popup).text(formatReportMoney(data.newBalanceDue));
+}
 
 function refreshEmployeeInfo(account) {
     $('.balance').html(account.balance);
