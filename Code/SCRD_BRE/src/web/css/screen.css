@@ -7002,4 +7002,18 @@ figcaption {
     display: none;
 }
 
+#depTblBody {
+
+	line-height: normal;
+	word-spacing: normal;
+	letter-spacing: normal;
+	font-family:"Times New Roman",Georgia,Serif;
+	font-style:normal;
+	font-size: medium;
+	margin-left:25px;
+	margin-right:25px;
+	margin-top:25px;
+	margin-bottom:25px;
+}
+
 	

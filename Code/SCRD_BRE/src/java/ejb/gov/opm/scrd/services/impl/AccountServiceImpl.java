@@ -27,6 +27,7 @@ import gov.opm.scrd.entities.application.BillingSummary;
 import gov.opm.scrd.entities.application.Calculation;
 import gov.opm.scrd.entities.application.CalculationVersion;
 import gov.opm.scrd.entities.application.CalculationResult;
+import gov.opm.scrd.entities.application.CalculationResultItem;
 import gov.opm.scrd.entities.lookup.CalculationStatus;
 import gov.opm.scrd.entities.application.Dedeposit;
 import gov.opm.scrd.entities.lookup.DepositType;
@@ -417,6 +418,15 @@ public class AccountServiceImpl extends BaseService implements AccountService {
                 Hibernate.initialize(c.getCalculationResult().getDedeposits());
                 Hibernate.initialize(c.getCalculationResult().getRedeposits());
                 Hibernate.initialize(c.getCalculationResult().getItems());
+
+                // Added in OPM-188. Loading intermediateResult
+                if(c.getCalculationResult().getItems() != null){
+
+                    for(CalculationResultItem item : c.getCalculationResult().getItems()){
+
+                        Hibernate.initialize(item.getIntermediateResults());
+                    }
+                }
             }
 
             LoggingHelper.logExit(logger, signature, new Object[] {result});

@@ -1054,7 +1054,7 @@ $(document).ready(function() {
         status.html("Unknown").removeClass("successLabel").removeClass('failLabel');
         result.html("Unknown").removeClass("successLabel").removeClass('failLabel');
         
-        $(".validationStatusBar .interestCalculatedToDate", tab).val("");
+        // $(".validationStatusBar .interestCalculatedToDate", tab).val(""); // Commented in OPM-188 as it is an input
                         
         //dateField.html("-"); Removed in "OPM - Rules Engine - Integrate with Web App Assembly v1.0 "
         $(".jsShowSample", tab).addClass("priBtnDisabled");
@@ -1182,7 +1182,7 @@ $(document).ready(function() {
         } else {
             //$('.jsCancelFunction', tab).trigger('click');           
             
-            $(".validationStatusBar .interestCalculatedToDate", tab).val("");                                        
+            //$(".validationStatusBar .interestCalculatedToDate", tab).val(""); // Commented in OPM-188 as it is an input                                    
             $(".jsShowSample", tab).addClass("priBtnDisabled");
             $(".jsExpandCalculation", tab).addClass("priBtnDisabled");
             
@@ -1727,78 +1727,242 @@ $(document).ready(function() {
             
             var html = '';
 
+            var days = 0;
+
+            var midDate = null;
+
+            var effectiveDate = null;
+
+            var req = {};
+
+            var rate = null;
+
+            var val = "Default";
+
+            var prevEndDate = null;
+
+            var prevPeriod = null;
+
+            var calculatedDate = null;
+
+            var sep = "--------------------------------------------------------------------------------------------------------------------------------------------------------------------";
+
+            var date1090 = new Date(1990, 9).getTime();
+
+            var date0982 = new Date(1982, 8).getTime();
+
+            var date1082 = new Date(1982, 9).getTime();
+
+            var isPeaceCorps = false;
+
+            var peaceCorpsDate = new Date(1975, 6, 15);
+
             if (results['r-' + selectId] && results['r-' + selectId].result && results['r-' + selectId].result.items &&  results['r-' + selectId].result.items.length > 0) {
+
+                if (results['r-' + selectId].request && results['r-' + selectId].request.calculations &&  results['r-' + selectId].request.calculations.length > 0){
+
+                    calculatedDate = results['r-' + selectId].request.interestCalculatedToDate;
+
+
+                    for(var i=0; i<results['r-' + selectId].request.calculations.length; i++){
+
+                        html += "<br>" +  sep;
+                        req = results['r-' + selectId].request.calculations[i];
+                        html += "<br>Entered service period from " + parseDateToString(req.beginDate);
+                        html += " to " + parseDateToString(req.endDate);
+                        days = calculatePeriodInDays(req.beginDate, req.endDate);
+                        html+= " has " + formatDaysInYearMonthDay(days) + " has " + getExactYearInDays(days) + " years ";
+                        html += " ( " + days + " Total Days)";
+
+                        if(req.periodType === "NO EARNINGS"){
+                            html += "<br>This is a non-earnings period. The amount is ignored when calculating the deduction.";
+
+                        } else {
+
+                             if(isNull(req.interestRate)){
+                                rate = "Default";
+                            } else {
+
+                                rate = req.interestRate + "%";
+                            }
+                            // Disable currently
+
+                            //html += "<br> Deduction rate is " + rate + " beginning on " + parseDateToString(req.beginDate);
+                            //html += " " + req.payType.name + " of " + req.amount + " translates to deduction : " + val;
+
+                            //html += " using " + rate + " percent";
+
+                        }
+                        // Disable currently
+                        //html += "<br> Total earning at end of period : Default";
+
+                        if(prevEndDate != null){
+
+                            if(calculatePeriodInDays(prevEndDate, req.beginDate) > 3){
+
+                                html += "<br>There was a break in service because the last service period ended more than 3 days before the start of this one.";
+                            }else if(prevPeriod !== req.periodType && req.periodType !== "NO EARNINGS"){
+                                html += "<br> There was a break in service because this is different type of service";
+                                html += "<br> (Deposit or Redeposit) and not a non earnings continuation of the service period.";
+                            } else {
+                                //html += "<br> No break in service. Total Deposit : Default";
+                                html += "<br> No break in service.";
+                            }
+                        }
+
+                        html += "<br>";
+                    }
+
+                    html += "<br>";
+
+                }
+
+                html += "<br> Interest Calculation";
+                html += "<br>Calculating interest to " + parseDateToString(calculatedDate);
 
                 for(var i=0; i<results['r-' + selectId].result.items.length; i++){
 
-                    html += '<tr>';
-                    html += '<td class="blankCell firstCol">&nbsp;</td>';
-                    html += '<td> ' + parseDateToString(results['r-' + selectId].result.items[i].startDate) + '</td>';
-                    html += '<td> ' + parseDateToString(results['r-' + selectId].result.items[i].endDate) + '</td>';
+                    midDate = results['r-' + selectId].result.items[i].midDate;
+                    effectiveDate = results['r-' + selectId].result.items[i].effectiveDate; 
+                    if(isNull(midDate)){
+                        midDate = effectiveDate; 
+                    } 
 
-                    for(var k=0; k < 17; k++){
-                        html += '<td> ' + '</td>';
+
+                    html += "<br>" +  sep;
+
+                    if(midDate < effectiveDate ){
+
+                        html += "<br>This service period uses the Peace Corps rules for interest calculation.";
+                        html += "<br> This is a Peace Corps service grace period from " + parseDateToString(midDate) + " to " + parseDateToString(effectiveDate);
+                        html += "<br> Interest does not accrue until " + parseDateToString(effectiveDate);
                     }
-                    //html += '<td> ' + '</td>';
-                    //html += '<td> ' + '</td>';
-                   // html += '<td> ' + '</td>';
-                    html += '</tr>';
+                    html += "<br>Extended service Period from " + parseDateToString(results['r-' + selectId].result.items[i].startDate);
+                    html += " to " + parseDateToString(results['r-' + selectId].result.items[i].endDate);
+                    days = calculatePeriodInDays(results['r-' + selectId].result.items[i].startDate, results['r-' + selectId].result.items[i].endDate);
+                    html+= " has " + formatDaysInYearMonthDay(days);
 
                     
 
-                    for(var j=0; j<results['r-' + selectId].result.items[i].intermediateResults.length; j++){
+                    
 
-                        var obj = results['r-' + selectId].result.items[i].intermediateResults[j];
-                        html += '<tr>';
+                    html+= " with a midpoint/effective starting date of " + parseDateToString(midDate);
 
-                        html += '<td class="blankCell firstCol">&nbsp;</td>';
-                        html += '<td> ' + parseDateToString(obj.periodBeginDate) + '</td>';
-                        html += '<td> ' + parseDateToString(obj.periodEndDate) + '</td>';
-                        html += '<td> ' + parseDateToString(obj.intermediateBeginDate) + '</td>';
-                        html += '<td> ' + parseDateToString(obj.intermediateEndDate) + '</td>';
+                    html += "<br>";
 
-                        html += '<td> ' + parseDateToString(obj.interestCalculatedToDate) + '</td>';
-                        html += '<td> ' + parseDateToString(obj.interestAccrualDate) + '</td>';
+                    if(results['r-' + selectId].result.items[i].startDate < date1082){
 
-                        html += '<td> ' + obj.periodType + '</td>';
-                        html += '<td> ' + obj.retirementType + '</td>';
+                        html += "Pre 10/82 Deposit";
+                    } else {
 
-                        html += '<td> ' + parseObjToString(obj.interestCalculationYear) + '</td>';
-                        html += '<td> ' + obj.beforeBalanceWithInterest + '</td>';
-
-
-                        html += '<td> ' + obj.intermediateAmount + '</td>';
-                        html += '<td> ' + obj.intermediateRate + '</td>';
-                        html += '<td> ' + parseObjToString(obj.intermediateRate2) + '</td>';
-                        html += '<td> ' + parseObjToString(obj.compositeRate1) + '</td>';
-                        html += '<td> ' + parseObjToString(obj.compositeRate2) + '</td>';
-
-                        html += '<td> ' + obj.periodInDays + '</td>';
-                        html += '<td> ' + parseObjToString(obj.periodInDays2) + '</td>';
-
-                        html += '<td> ' + parseObjToString(obj.startYearFactor) + '</td>';
-
-
-                        html += '<td> ' + obj.balanceWithInterest + '</td>';
-
-                        html += '</tr>';
+                        html += "Post 9/82 Deposit";
                     }
 
-                    html += '<tr><td class="blankCell firstCol">&nbsp;</td>';
-                    for(var k=0; k< 19; k++){
-                        html+= '<td></td>';
-                    }
-                    html += '</tr>'
 
-                    html += '<tr><td class="blankCell firstCol">&nbsp;</td>';
-                    for(var k=0; k< 19; k++){
-                        html+= '<td></td>';
+                    if(results['r-' + selectId].result.items[i].endDate < date1090){
+
+                        html += " (Pre 10/90)";
+                    } else {
+
+                        html += " (Post 10/90)";
                     }
-                    html += '</tr>'
+
+                    html += "<br/> Initial Deposit Amount: $"  + results['r-' + selectId].result.items[i].deductionAmount;
+
+                    html += "<br/> The elapsed time for the extended service period is: " + getExactYearInDays(days) + " years.";
+
+                    if(!isNull(results['r-' + selectId].result.items[i].intermediateResults)){
+
+                        for(var j=0; j<results['r-' + selectId].result.items[i].intermediateResults.length; j++){
+                            var obj = results['r-' + selectId].result.items[i].intermediateResults[j];
+
+                            html += "<br>";
+
+                            if( !isNull(obj.compositeRate1)){
+                                days = calculatePeriodInDays(obj.intermediateBeginDate, obj.intermediateEndDate);
+
+                                html += "DateSpan from : " + parseDateToString(obj.intermediateBeginDate) + " to " + parseDateToString(obj.intermediateEndDate);
+                                html += " has time factor : " + days/360;
+
+                                html += "<br>Total days in span : " + days + " PartialYearTimeFactor1 : " + obj.periodInDays/360;
+                                html += " PartialYearTimeFactor2 : " + obj.periodInDays2/360;
+
+                                html += "<br> Composite Rate 1 : " + obj.compositeRate1;
+                                html += "<br> Composite Rate Total : " + (obj.compositeRate1 + obj.compositeRate2);
+                                obj.startYearFactor = (obj.periodInDays/360 + obj.periodInDays2/360);
+                                html += "<br>";
+
+                            }
+
+                            html+= "StartYearTimeFactor " + parseObjToString(obj.startYearFactor);
+                            html += " ServicePeriodDeposit " + obj.beforeBalanceWithInterest;
+                            html += " ThisInterestRate " + obj.intermediateRate;
+                            html+= "<br> ServicePeriodInterest " + obj.intermediateAmount;
+                            html+= "<br>  Interest from " + parseDateToString(obj.intermediateBeginDate) + " to " + parseDateToString(obj.intermediateEndDate);
+                            html += " is: " + obj.beforeBalanceWithInterest + " at " + 100*obj.intermediateRate + "% - ";
+                            html += " Balance with interest: $" + obj.balanceWithInterest;
+                            html += "<br>";
+
+                            
+                        }
+                        
+                    }
+
+                    
+
+                    html += '<br> Total interest for this service period is ' + results['r-' + selectId].result.items[i].totalInterest;
+
+                    
+                    html += '<br><br><br><br>';
+
 
                     
                 }
 
+                var entity = getCalculationResult(results['r-' + selectId].result);
+
+
+                html += "End of Calculation";
+                html += "<br>" +  sep;
+                html += "<br>Calculation Result Totals";
+                html += "<br>" +  sep;
+                html += "<br> FERS Payment Required: $" + (entity.fersre.deposit + entity.fersde.deposit + entity.fers_peace.deposit);
+                html += "<br> FERS Interest: $" + (entity.fersre.interest + entity.fersde.interest + entity.fers_peace.interest);
+                html += "<br> FERS Payments Applied: $0.00";
+                html += "<br> FERS Balance: $" + (entity.fersre.total + entity.fersde.total + entity.fers_peace.total);
+                html += "<br>" +  sep;
+                html += "<br> Post Redeposit Payment Required: $" + (entity.csrs_post391.deposit + entity.csrs_post82.deposit);
+                html += "<br> Post Redeposit Interest: $" + (entity.csrs_post391.interest + entity.csrs_post82.interest);
+                html += "<br> Post Redeposit Payments Applied: $0.00";
+                html += "<br> Post Redeposit Balance: $" + (entity.csrs_post391.total + entity.csrs_post82.total);
+                html += "<br>" +  sep;
+                html += "<br> Pre Redeposit Payment Required: $" + (entity.csrs_pre1082.deposit + entity.csrs_post82.deposit);
+                html += "<br> Pre Redeposit Interest: $" + (entity.csrs_pre1082.interest + entity.csrs_post82.interest);
+                html += "<br> Pre Redeposit Payments Applied: $0.00";
+                html += "<br> Pre Redeposit Balance: $" + (entity.csrs_pre1082.total + entity.csrs_post82.total);
+                html += "<br>" +  sep;
+                html += "<br> Post Deposit Payment Required: $" + entity.csrs_post1082_de.deposit;
+                html += "<br> Post Deposit Interest: $" + entity.csrs_post1082_de.interest;
+                html += "<br> Post Deposit Payments Applied: $0.00";
+                html += "<br> Post Deposit Balance: $" + entity.csrs_post1082_de.total;
+                html += "<br>" +  sep;
+                html += "<br> Pre Deposit Payment Required: $" + entity.csrs_pre1082_de.deposit;
+                html += "<br> Pre Deposit Interest: $" + entity.csrs_pre1082_de.interest;
+                html += "<br> Pre Deposit Payments Applied: $0.00";
+                html += "<br> Pre Deposit Balance: $" + entity.csrs_pre1082_de.total;
+                html += "<br>" +  sep;
+
+                html += "<br> Total Deposit: $" + results['r-' + selectId].result.summary.totalPaymentsRequired;
+                html += "<br> Total Interest: $" + results['r-' + selectId].result.summary.totalInitialInterest;
+                html += "<br> Total Payment Applied: $" + results['r-' + selectId].result.summary.totalPaymentsApplied;
+                html += "<br> Total Balance: $" + results['r-' + selectId].result.summary.totalBalance;
+
+                html += "<br> <br>" + parseDateToString(new Date());
+
+
+            } else {
+
+                html += "<p> No Calculation has been run for this calculation version. Please run the calculation first using the dedicated button. </p>";
             }
 
             function test(){
@@ -3502,6 +3666,7 @@ function runCalculation(context, tab, save, callback) {
             
             results['r-' + id] = {};
             results['r-' + id].result = data;
+            results['r-' + id].request = calcRequest;
             //$('.calculateDate', tab).html(parseDateToString(new Date()));
             $('.dollar').formatCurrency({
                 negativeFormat: '%s-%n'
@@ -3888,6 +4053,14 @@ function runCalculationCallBack(res, save, tab, calculationVersion){
                     $('#statusSpan-' + prevId, tempArea).prop('id', 'statusSpan-' + calculationVersion.id);
                     $('#validationSpan-' + prevId, tempArea).prop('id', 'validationSpan-' + calculationVersion.id);
 
+                    //   OPM-188
+                    if((prevId+"") !== (calculationVersion.id+"")){
+
+                        results['r-' + calculationVersion.id] = results['r-' + prevId];
+                        results['r-' + prevId] = {};
+                    }
+                    
+
                 }
 
                 $('.versionBar select option:selected').text(calculationVersion.name);
@@ -4026,7 +4199,7 @@ function populateCalculationVersion(account, tabName2) {
         if(isNull(this.calculationResult) || isNull(this.calculationResult.items) || this.calculationResult.items.length == 0){
             validationSpan.html('Unknown').removeClass('successLabel').removeClass('failLabel');
             statusSpan.html('Unknown').removeClass('successLabel').removeClass('failLabel');
-            dateSpan.val('');
+            // dateSpan.val('');  // Commented in OPM-188 calculation Date is an input.
         }
 
 
@@ -4042,6 +4215,9 @@ function populateCalculationVersion(account, tabName2) {
         // send result to global variable
         results['r-' + this.id] = {};
         results['r-' + this.id].result = this.calculationResult;
+        results['r-' + this.id].request = {};
+        results['r-' + this.id].request.calculations = this.calculations;
+        results['r-' + this.id].request.interestCalculatedToDate = this.calculationDate;
 
     });
 
@@ -4326,6 +4502,165 @@ function parseObjToString(obj){
     }
 
     return obj;
+}
+
+function calculatePeriodInDays(startDate, endDateI) {
+
+    startDate = new Date(startDate);
+    endDateI = new Date(endDateI);
+
+    var startY = startDate.getFullYear();
+    var startM = startDate.getMonth();
+    var startD = startDate.getDate();
+
+    // If the beginning date is on the 31st of the month, you must change
+    // the day to the 30th to ensure that credit is received for the first
+    // day.
+    if (startD == 31) {
+        startD = 30;
+    }
+
+
+
+    // Plus one day to the end date
+    var endDate = new Date(endDateI);
+    endDate.setDate(endDate.getDate() + 1);
+    //endDate = new Date(endDate.getTime() + 86400 * 1000);
+    var endY = endDate.getFullYear();
+    var endM = endDate.getMonth();
+    var endD = endDate.getDate();
+
+    if (endD < startD) {
+        endD += 30;
+        endM -= 1;
+    }
+
+    if (endM < startM) {
+        endM += 12;
+        endY -= 1;
+    }
+    return (endD - startD) + 30 * (endM - startM) + 30 * 12 * (endY - startY);
+}
+
+
+function formatDaysInYearMonthDay(days){
+
+    
+
+    var year =  Math.floor(days/(30*12));
+
+    days = days%(30*12);
+
+    var month = Math.floor(days/(30));
+    days = days%30;
+
+
+    return year + " years, " + month + " months, and " + days + " days";
+
+
+}
+
+
+function getExactYearInDays(days){
+
+    return days/(30*12);
+}
+
+function getCalculationResult(result) {
+    var entity = {
+        fersde: {
+            deposit: 0,
+            interest: 0,
+            total: 0
+        },
+        fersre: {
+            deposit: 0,
+            interest: 0,
+            total: 0
+        },
+        csrs_post391: {
+            deposit: 0,
+            interest: 0,
+            total: 0
+        },
+        csrs_post82: {
+            deposit: 0,
+            interest: 0,
+            total: 0
+        },
+        csrs_pre1082: {
+            deposit: 0,
+            interest: 0,
+            total: 0
+        },
+        csrs_post1082_de: {
+            deposit: 0,
+            interest: 0,
+            total: 0
+        },
+        csrs_pre1082_de: {
+            deposit: 0,
+            interest: 0,
+            total: 0
+        },
+        fers_peace: {
+            deposit: 0,
+            interest: 0,
+            total: 0
+        },
+        csrs_peace: {
+            deposit: 0,
+            interest: 0,
+            total: 0
+        }
+    };
+    $.each(result.dedeposits, function() {
+        if (this.depositType == 'FERS_DEPOSIT') {
+            entity.fersde.deposit += this.deposit;
+            entity.fersde.interest += this.interest;
+            entity.fersde.total += this.total;
+        } else if (this.depositType == 'CSRS_POST_10_82_DEPOSIT') {
+            entity.csrs_post1082_de.deposit += this.deposit;
+            entity.csrs_post1082_de.interest += this.interest;
+            entity.csrs_post1082_de.total += this.total;
+        } else if (this.depositType == 'CSRS_PRE_10_82_DEPOSIT') {
+            entity.csrs_pre1082_de.deposit += this.deposit;
+            entity.csrs_pre1082_de.interest += this.interest;
+            entity.csrs_pre1082_de.total += this.total;
+        } else if (this.depositType == 'FERS_PEACE_CORPS') {
+            entity.fers_peace.deposit += this.deposit;
+            entity.fers_peace.interest += this.interest;
+            entity.fers_peace.total += this.total;
+        } else {
+            entity.csrs_peace.deposit += this.deposit;
+            entity.csrs_peace.interest += this.interest;
+            entity.csrs_peace.total += this.total;
+        }
+    });
+    $.each(result.redeposits, function() {
+        if (this.depositType == 'FERS_REDEPOSIT') {
+            entity.fersre.deposit += this.deposit;
+            entity.fersre.interest += this.interest;
+            entity.fersre.total += this.total;
+        } else if (this.depositType == 'CSRS_POST_3_91_REDEPOSIT') {
+            entity.csrs_post391.deposit += this.deposit;
+            entity.csrs_post391.interest += this.interest;
+            entity.csrs_post391.total += this.total;
+        } else if (this.depositType == 'CSRS_POST_82_PRE_91_REDEPOSIT') {
+            entity.csrs_post82.deposit += this.deposit;
+            entity.csrs_post82.interest += this.interest;
+            entity.csrs_post82.total += this.total;
+        } else {
+            entity.csrs_pre1082.deposit += this.deposit;
+            entity.csrs_pre1082.interest += this.interest;
+            entity.csrs_pre1082.total += this.total;
+        }
+    });
+
+    return entity;
+
+
+
 }
 
 function showPrintReport(reportName, request, render, printPopup) {

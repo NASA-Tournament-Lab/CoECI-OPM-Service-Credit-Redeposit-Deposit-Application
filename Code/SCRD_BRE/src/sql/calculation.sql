@@ -111,7 +111,7 @@ INSERT INTO opm.calculation(id, deleted, begin_date, end_date, retirement_type_i
 /**
  * Scenario 13 calculations.
  */
-INSERT INTO opm.calculation(id, deleted, begin_date, end_date, retirement_type_id, period_type_id, appointment_type_id, service_type_id, amount, pay_type_id, calculation_version_id, conner_case, interest_accrual_date, frozen) VALUES(72, false, to_date('09/30/1974','MM/DD/YYYY'),to_date('08/08/1975','MM/DD/YYYY'),2,1,4,35,75.00,7, 13, false, '10/01/1995', false);
+INSERT INTO opm.calculation(id, deleted, begin_date, end_date, retirement_type_id, period_type_id, appointment_type_id, service_type_id, amount, pay_type_id, calculation_version_id, conner_case, interest_accrual_date, frozen) VALUES(72, false, to_date('09/30/1974','MM/DD/YYYY'),to_date('08/08/1975','MM/DD/YYYY'),2,1,4,35,75.00,7, 13, false, '12/08/1975', false);
 
 /**
  * Scenario 14 calculations.
