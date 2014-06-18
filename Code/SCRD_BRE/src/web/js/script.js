@@ -29,6 +29,11 @@ window.results = {};
 
 var intLimit32 = 2147483647;
 
+var ROUND_DOWN = 0;
+var ROUND_HALF_UP = 1;
+var ROUND_HALF_EVEN = 2;
+var ROUND_UP = 3;
+
 /**
  * This function check whether or not a string represents
  * a valid number integer or decimal
@@ -1771,7 +1776,7 @@ $(document).ready(function() {
                         html += "<br>Entered service period from " + parseDateToString(req.beginDate);
                         html += " to " + parseDateToString(req.endDate);
                         days = calculatePeriodInDays(req.beginDate, req.endDate);
-                        html+= " has " + formatDaysInYearMonthDay(days) + " has " + getExactYearInDays(days) + " years ";
+                        html+= " has " + formatDaysInYearMonthDay(days) + " has " + toMoney(getExactYearInDays(days), 6) + " years ";
                         html += " ( " + days + " Total Days)";
 
                         if(req.periodType === "NO EARNINGS"){
@@ -1867,9 +1872,9 @@ $(document).ready(function() {
                         html += " (Post 10/90)";
                     }
 
-                    html += "<br/> Initial Deposit Amount: $"  + results['r-' + selectId].result.items[i].deductionAmount;
+                    html += "<br/> Initial Deposit Amount: $"  + toMoney(results['r-' + selectId].result.items[i].deductionAmount);
 
-                    html += "<br/> The elapsed time for the extended service period is: " + getExactYearInDays(days) + " years.";
+                    html += "<br/> The elapsed time for the extended service period is: " + toMoney(getExactYearInDays(days), 6) + " years.";
 
                     if(!isNull(results['r-' + selectId].result.items[i].intermediateResults)){
 
@@ -1899,8 +1904,8 @@ $(document).ready(function() {
                             html += " ThisInterestRate " + obj.intermediateRate;
                             html+= "<br> ServicePeriodInterest " + obj.intermediateAmount;
                             html+= "<br>  Interest from " + parseDateToString(obj.intermediateBeginDate) + " to " + parseDateToString(obj.intermediateEndDate);
-                            html += " is: " + obj.beforeBalanceWithInterest + " at " + 100*obj.intermediateRate + "% - ";
-                            html += " Balance with interest: $" + obj.balanceWithInterest;
+                            html += " is: " + toMoney(obj.beforeBalanceWithInterest) + " at " + toMoney(100*obj.intermediateRate, 3) + "% - ";
+                            html += " Balance with interest: $" + toMoney(obj.balanceWithInterest);
                             html += "<br>";
 
                             
@@ -1910,7 +1915,7 @@ $(document).ready(function() {
 
                     
 
-                    html += '<br> Total interest for this service period is ' + results['r-' + selectId].result.items[i].totalInterest;
+                    html += '<br> Total interest for this service period is ' + toMoney(results['r-' + selectId].result.items[i].totalInterest);
 
                     
                     html += '<br><br><br><br>';
@@ -1926,36 +1931,36 @@ $(document).ready(function() {
                 html += "<br>" +  sep;
                 html += "<br>Calculation Result Totals";
                 html += "<br>" +  sep;
-                html += "<br> FERS Payment Required: $" + (entity.fersre.deposit + entity.fersde.deposit + entity.fers_peace.deposit);
-                html += "<br> FERS Interest: $" + (entity.fersre.interest + entity.fersde.interest + entity.fers_peace.interest);
+                html += "<br> FERS Payment Required: $" + toMoney(entity.fersre.deposit + entity.fersde.deposit + entity.fers_peace.deposit);
+                html += "<br> FERS Interest: $" + toMoney(entity.fersre.interest + entity.fersde.interest + entity.fers_peace.interest);
                 html += "<br> FERS Payments Applied: $0.00";
-                html += "<br> FERS Balance: $" + (entity.fersre.total + entity.fersde.total + entity.fers_peace.total);
+                html += "<br> FERS Balance: $" + toMoney(entity.fersre.total + entity.fersde.total + entity.fers_peace.total);
                 html += "<br>" +  sep;
-                html += "<br> Post Redeposit Payment Required: $" + (entity.csrs_post391.deposit + entity.csrs_post82.deposit);
-                html += "<br> Post Redeposit Interest: $" + (entity.csrs_post391.interest + entity.csrs_post82.interest);
+                html += "<br> Post Redeposit Payment Required: $" + toMoney(entity.csrs_post391.deposit + entity.csrs_post82.deposit);
+                html += "<br> Post Redeposit Interest: $" + toMoney(entity.csrs_post391.interest + entity.csrs_post82.interest);
                 html += "<br> Post Redeposit Payments Applied: $0.00";
-                html += "<br> Post Redeposit Balance: $" + (entity.csrs_post391.total + entity.csrs_post82.total);
+                html += "<br> Post Redeposit Balance: $" + toMoney(entity.csrs_post391.total + entity.csrs_post82.total);
                 html += "<br>" +  sep;
-                html += "<br> Pre Redeposit Payment Required: $" + (entity.csrs_pre1082.deposit + entity.csrs_post82.deposit);
-                html += "<br> Pre Redeposit Interest: $" + (entity.csrs_pre1082.interest + entity.csrs_post82.interest);
+                html += "<br> Pre Redeposit Payment Required: $" + toMoney(entity.csrs_pre1082.deposit + entity.csrs_post82.deposit);
+                html += "<br> Pre Redeposit Interest: $" + toMoney(entity.csrs_pre1082.interest + entity.csrs_post82.interest);
                 html += "<br> Pre Redeposit Payments Applied: $0.00";
-                html += "<br> Pre Redeposit Balance: $" + (entity.csrs_pre1082.total + entity.csrs_post82.total);
+                html += "<br> Pre Redeposit Balance: $" + toMoney(entity.csrs_pre1082.total + entity.csrs_post82.total);
                 html += "<br>" +  sep;
-                html += "<br> Post Deposit Payment Required: $" + entity.csrs_post1082_de.deposit;
-                html += "<br> Post Deposit Interest: $" + entity.csrs_post1082_de.interest;
+                html += "<br> Post Deposit Payment Required: $" + toMoney(entity.csrs_post1082_de.deposit);
+                html += "<br> Post Deposit Interest: $" + toMoney(entity.csrs_post1082_de.interest);
                 html += "<br> Post Deposit Payments Applied: $0.00";
-                html += "<br> Post Deposit Balance: $" + entity.csrs_post1082_de.total;
+                html += "<br> Post Deposit Balance: $" + toMoney(entity.csrs_post1082_de.total);
                 html += "<br>" +  sep;
-                html += "<br> Pre Deposit Payment Required: $" + entity.csrs_pre1082_de.deposit;
-                html += "<br> Pre Deposit Interest: $" + entity.csrs_pre1082_de.interest;
+                html += "<br> Pre Deposit Payment Required: $" + toMoney(entity.csrs_pre1082_de.deposit);
+                html += "<br> Pre Deposit Interest: $" + toMoney(entity.csrs_pre1082_de.interest);
                 html += "<br> Pre Deposit Payments Applied: $0.00";
-                html += "<br> Pre Deposit Balance: $" + entity.csrs_pre1082_de.total;
+                html += "<br> Pre Deposit Balance: $" + toMoney(entity.csrs_pre1082_de.total);
                 html += "<br>" +  sep;
 
-                html += "<br> Total Deposit: $" + results['r-' + selectId].result.summary.totalPaymentsRequired;
-                html += "<br> Total Interest: $" + results['r-' + selectId].result.summary.totalInitialInterest;
-                html += "<br> Total Payment Applied: $" + results['r-' + selectId].result.summary.totalPaymentsApplied;
-                html += "<br> Total Balance: $" + results['r-' + selectId].result.summary.totalBalance;
+                html += "<br> Total Deposit: $" + toMoney(results['r-' + selectId].result.summary.totalPaymentsRequired);
+                html += "<br> Total Interest: $" + toMoney(results['r-' + selectId].result.summary.totalInitialInterest);
+                html += "<br> Total Payment Applied: $" + toMoney(results['r-' + selectId].result.summary.totalPaymentsApplied);
+                html += "<br> Total Balance: $" + toMoney(results['r-' + selectId].result.summary.totalBalance);
 
                 html += "<br> <br>" + parseDateToString(new Date());
 
@@ -2678,7 +2683,32 @@ function numberFormat(number, decimals, dec_point, thousands_sep) {
     }
     return s.join(dec);
 }
-;
+
+/**
+* mode 0 ROUND_DOWN
+* mode 1 ROUND_HALF_UP
+* mode 2 ROUND_HALF_EVEN
+* mode 3 ROUND_UP
+**/
+function numberRound(number, decimals, mode){
+    if(!isInteger(decimals)){
+        decimals = 2;
+    }
+
+    if(!isInteger(mode)){
+        mode = 1;
+    } else if(mode > 3 || mode < 0){
+        mode = 1;
+    }
+
+    return Big(number).round(decimals, mode).toFixed(decimals);
+
+}
+
+// http://stackoverflow.com/questions/149055/how-can-i-format-numbers-as-money-in-javascript
+function toMoney(number, decimals, mode){ 
+   return numberRound(number, decimals, mode).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+}
 
 //Change amount type of deposite field on payment search
 function changeAmountType(obj) {

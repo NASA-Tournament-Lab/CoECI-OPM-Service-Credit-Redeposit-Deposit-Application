@@ -32,6 +32,7 @@
     <script type='text/javascript' src='<c:url value="/js/jquery.formatCurrency-1.4.0.min.js"/>'></script>
     <script type='text/javascript' src='<c:url value="/js/merge-sort.js"/>'></script>
     <script type='text/javascript' src='<c:url value="/js/sortable.js"/>'></script>
+    <script type="text/javascript" src="<c:url value="/js/big.min.js"/>"></script>
     <script type="text/javascript">
 	 var rootUrl = '${ctx}' + '/';
 	 
