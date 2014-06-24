@@ -1,18 +1,18 @@
 /*
-    Copyright 2014 OPM.gov
-
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
-*/
+ Copyright 2014 OPM.gov
+ 
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+ 
+ http://www.apache.org/licenses/LICENSE-2.0
+ 
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ */
 
 // The interval to retrieve notifications in seconds
 var notificationsInterval = 50;
@@ -26,6 +26,9 @@ var versionNum = 1;
 window.user = null;
 // calculation result cache
 window.results = {};
+// current versio id
+var currentVersionId = 0;
+
 
 var intLimit32 = 2147483647;
 
@@ -33,6 +36,17 @@ var ROUND_DOWN = 0;
 var ROUND_HALF_UP = 1;
 var ROUND_HALF_EVEN = 2;
 var ROUND_UP = 3;
+var mapping = {
+    FERS_DEPOSIT: 0,
+    FERS_REDEPOSIT: 1,
+    CSRS_POST_3_91_REDEPOSIT: 2,
+    CSRS_POST_82_PRE_91_REDEPOSIT: 3,
+    CSRS_PRE_10_82_REDEPOSIT: 4,
+    CSRS_POST_10_82_DEPOSIT: 5,
+    CSRS_PRE_10_82_DEPOSIT: 6,
+    FERS_PEACE_CORPS: 7,
+    CSRS_PEACE_CORPS: 8
+};
 
 /**
  * This function check whether or not a string represents
@@ -40,7 +54,7 @@ var ROUND_UP = 3;
  * @param {string} n a number
  * @return true if it is a valid number
  */
-var isNumber = function (n) {
+var isNumber = function(n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
 };
 
@@ -50,7 +64,7 @@ var isNumber = function (n) {
  * @param n a number
  * @return true if it is a valid integer
  */
-var isInteger = function (n) {
+var isInteger = function(n) {
 
     return isNumber(n) && parseInt(n, 10) === parseFloat(n);
 };
@@ -60,7 +74,7 @@ var isInteger = function (n) {
  * @param {object} obj the object 
  * @return true if the object is null, false otherwise
  */
-var isNull = function (obj) {
+var isNull = function(obj) {
 
     if (obj === null || obj === undefined) {
         return true;
@@ -73,19 +87,19 @@ var isNull = function (obj) {
 
 
 /**
-* Manual sorting a table.
-* @param tab the table to sort, jquery object
-*/
-function manualSort(tab){
+ * Manual sorting a table.
+ * @param tab the table to sort, jquery object
+ */
+function manualSort(tab) {
 
     /*var elem = $('#suspenseTbl thead th .current .sortheader .sortarrow');
-
-    elem.toggleClass('sort-down');
-    if(elem.attr('sortdir') == 'down'){
-        elem.attr('sortdir', 'up');
-    }else if(elem.attr('sortdir') == 'up'){
-        elem.attr('sortdir', 'down');
-    }*/
+     
+     elem.toggleClass('sort-down');
+     if(elem.attr('sortdir') == 'down'){
+     elem.attr('sortdir', 'up');
+     }else if(elem.attr('sortdir') == 'up'){
+     elem.attr('sortdir', 'down');
+     }*/
 
     $('thead th.current', tab).click();
     $('thead th.current', tab).click();
@@ -128,7 +142,7 @@ $(document).ready(function() {
         $(this).removeClass("hovered");
     });
     $("body").delegate("tr", "keyup", function(event) {
-         var keycode = (event.keyCode ? event.keyCode : event.which);
+        var keycode = (event.keyCode ? event.keyCode : event.which);
         if (keycode == 13) {
             // enter
             var clicked = false;
@@ -139,7 +153,7 @@ $(document).ready(function() {
                     return;
                 }
             });
-            
+
             event.preventDefault();
             return false;
         }
@@ -158,12 +172,12 @@ $(document).ready(function() {
         loadLookup('applicationDesignations', false);
         // update the paymentAppliance
         $.ajax({
-            url:'lookup/paymentAppliances',
+            url: 'lookup/paymentAppliances',
             type: 'GET',
             cache: false,
             async: true,
             global: false,
-            success:function(data) {
+            success: function(data) {
                 $('#paymentAppliance').html('');
                 // <input name="addPaymentType" type="radio" id="ppr" value="ppr" checked="checked"/>
                 // <label class="radioLabel longLabel" for="ppr">Prior Payment Recorded</label>
@@ -179,14 +193,14 @@ $(document).ready(function() {
                     theOption.append(theInput);
                     var theLabel = $('<label class="radioLabel longLabel" for="' + theId + '">' + item.name + '</label>');
                     theOption.append(theLabel);
-                    
+
                     $('#paymentAppliance').append(theOption);
                 }
             },
-            error:function() {
-                
+            error: function() {
+
             }
-            
+
         });
     }
 
@@ -503,12 +517,12 @@ $(document).ready(function() {
             $('.endDateError').html('The value you provide is too large.');
             showPopup('.noEndDatePopup');
             return;
-        } else if(!isInteger(hour)){
+        } else if (!isInteger(hour)) {
             $('.endDateError').html('Please enter a valid integer.');
             showPopup('.noEndDatePopup');
             return;
-        } else if(parseInt(hour, 10) > intLimit32){
-            $('.endDateError').html('Please enter an integer value lower or equal than '+intLimit32+'.');
+        } else if (parseInt(hour, 10) > intLimit32) {
+            $('.endDateError').html('Please enter an integer value lower or equal than ' + intLimit32 + '.');
             showPopup('.noEndDatePopup');
             return;
         }
@@ -718,7 +732,7 @@ $(document).ready(function() {
             buttonImage: context + "/i/calendar.png",
             buttonImageOnly: true,
             changeMonth: true,
-            buttonText:theTitle,
+            buttonText: theTitle,
             changeYear: true, yearRange: "-100:+1"
         });
     });
@@ -753,36 +767,35 @@ $(document).ready(function() {
         buttonText: "Enter the date of the actual payment."
     });
 
-	//Month Picker
-	$("input.monthPicker").datepicker({
-		dateFormat: 'MM yy',
-		changeMonth: true,
-		changeYear: true,
-		showButtonPanel: true,
+    //Month Picker
+    $("input.monthPicker").datepicker({
+        dateFormat: 'MM yy',
+        changeMonth: true,
+        changeYear: true,
+        showButtonPanel: true,
+        onClose: function(dateText, inst) {
+            var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+            var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+            $(this).val($.datepicker.formatDate('MM yy', new Date(year, month, 1)));
+        }
+    });
 
-		onClose: function(dateText, inst) {
-			var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
-			var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
-			$(this).val($.datepicker.formatDate('MM yy', new Date(year, month, 1)));
-		}
-	});
+    $(".monthPicker").focus(function() {
+        $(".ui-datepicker-calendar").hide();
+        $("#ui-datepicker-div").position({
+            my: "center top",
+            at: "center bottom",
+            of: $(this)
+        });
+    });
 
-	$(".monthPicker").focus(function () {
-		$(".ui-datepicker-calendar").hide();
-		$("#ui-datepicker-div").position({
-			my: "center top",
-			at: "center bottom",
-			of: $(this)
-		});
-	});
-
-    $('.chartValueDep').change(function(){
+    $('.chartValueDep').change(function() {
 
         $('.hourFieldDep').val("");
 
     });
 
-    $('.chartValueRep').change(function(){
+    $('.chartValueRep').change(function() {
 
         $('.hourFieldRep').val("");
 
@@ -1001,7 +1014,7 @@ $(document).ready(function() {
         if (validateCalculationEntry(this) == false) {
             return false;
         }
-        
+
         runCalculation(context, tab, false, runCalculationCallBack);
 
     });
@@ -1015,7 +1028,7 @@ $(document).ready(function() {
         }
         runCalculation(context, tab, true, runCalculationCallBack);
         //if (runCalculation(context, tab, true) == false) {
-            //return false;
+        //return false;
         //}
         //$(".jsCancelFunction", tab).hide();
         //$(".jsTriggerBill", tab).show();
@@ -1023,16 +1036,15 @@ $(document).ready(function() {
         //result.html("Calculation Saved").addClass("successLabel");
     });
 
-     $(".jsTriggerBill").click(function() {
+    $(document).delegate(".jsTriggerBill", 'click', function() {
         var tab = $(this).parents(".tabsBlock").eq(0);
         var result = $(".validationStatusBar .resultsVal", tab);
-        var versionId = $('select', tab).val();
         $.ajax({
             url: context + '/account/triggerBill',
             type: 'POST',
             data: {
                 accountId: $('#accountId').val(),
-                versionId: versionId
+                versionId: currentVersionId
             },
             success: function() {
                 result.html("Calculation Triggered Pending").addClass("successLabel").removeClass('failLabel');
@@ -1051,16 +1063,16 @@ $(document).ready(function() {
 
     $(".jsCancelFunction").click(function() {
         var tab = $(this).parents(".tabsBlock").eq(0);
-        var tabName = tab.hasClass('depositTab') ? 'depositTab' : 'redepositTab' ;
+        var tabName = tab.hasClass('depositTab') ? 'depositTab' : 'redepositTab';
         var id = $('.versionBar select', tab).val();
         var result = $(".validationStatusBar .resultsVal", tab);
         var status = $(".validationStatusBar .statusVal", tab);
         //var dateField = $(".validationStatusBar .calculateDate", tab); Removed in "OPM - Rules Engine - Integrate with Web App Assembly v1.0 "
         status.html("Unknown").removeClass("successLabel").removeClass('failLabel');
         result.html("Unknown").removeClass("successLabel").removeClass('failLabel');
-        
+
         // $(".validationStatusBar .interestCalculatedToDate", tab).val(""); // Commented in OPM-188 as it is an input
-                        
+
         //dateField.html("-"); Removed in "OPM - Rules Engine - Integrate with Web App Assembly v1.0 "
         $(".jsShowSample", tab).addClass("priBtnDisabled");
         $(".jsExpandCalculation", tab).addClass("priBtnDisabled");
@@ -1069,7 +1081,7 @@ $(document).ready(function() {
         $(".jsShowCalculation", tab).hide();
         $(".jsTriggerBill", tab).hide();
         var validTbl = $(".validateResultTbl", tab);
-        if(id!= "" && results['r-' + id] && results['r-' + id].result){
+        if (id != "" && results['r-' + id] && results['r-' + id].result) {
             results['r-' + id].result.items = [];
         }
         $("tbody", validTbl).html(vEmpty);
@@ -1079,14 +1091,14 @@ $(document).ready(function() {
     });
 
 
-    $('.interestCalculatedToDate').change(function(e){
+    $('.interestCalculatedToDate').change(function(e) {
 
-        if(!(e.originalEvent === undefined)){
+        if (!(e.originalEvent === undefined)) {
             var prev = $(this).val();
             $('.jsCancelFunction').click();
             $(this).val(prev);
         }
-        
+
     });
 
 
@@ -1099,14 +1111,14 @@ $(document).ready(function() {
     $(".jsNewVersionBtn").click(function() {
         var check = $(this).next('input').prop('checked');
         addNewVersion(this, check);
-        
+
 
     });
 
 
     $('.depositTab .versionBar select').change(function() {
-
-        if($(this).val() == ""){
+        currentVersionId = $(this).val();
+        if ($(this).val() == "") {
             return;
         }
 
@@ -1125,10 +1137,10 @@ $(document).ready(function() {
         //var selectId = this.options[this.selectedIndex].value;
         var selectId = $('option:selected', this).val();
 
-        if(currentTbody.length != 0){           
+        if (currentTbody.length != 0) {
             currentTbody.find('tr.entriesEditRow').children('td').eq(0).trigger('click');
             var id = currentTbody.prop('id');
-            if(id){
+            if (id) {
 
                 id = id.replace('tbody-', '');
                 tempArea.find('tbody#tbody-' + id).remove();
@@ -1140,7 +1152,7 @@ $(document).ready(function() {
                 //  var copyDateSpan = dateSpan.clone().prop('id', 'dateSpan-' + id); Removed in "OPM - Rules Engine - Integrate with Web App Assembly v1.0 "
                 //  tempArea.append(copyDateSpan); Removed in "OPM - Rules Engine - Integrate with Web App Assembly v1.0 "
                 //var copyStatusSpan = statusSpan.clone().prop('id', 'statusSpan-' + id);
-                var copyDateSpan = $('.interestCalculatedToDate', tab).clone().prop('id', 'dateSpan-' + id); 
+                var copyDateSpan = $('.interestCalculatedToDate', tab).clone().prop('id', 'dateSpan-' + id);
                 tempArea.append(copyDateSpan);
 
                 var copyStatusSpan = $('.resultsVal', tab).clone().prop('id', 'statusSpan-' + id);
@@ -1150,13 +1162,13 @@ $(document).ready(function() {
                 tempArea.append(copyValidationSpan);
 
             }
-            
+
 
         }
 
         $(tab).data('currentVersionId', selectId);
         $(tab).data('currentVersionName', $('option:selected', this).text());
-        
+
 
 
         var newId = $('option:selected', this).val();
@@ -1166,19 +1178,19 @@ $(document).ready(function() {
         //dateSpan.html($('#dateSpan-' + newId).html()); Removed in "OPM - Rules Engine - Integrate with Web App Assembly v1.0 "
         $('.interestCalculatedToDate', tab).val($('#dateSpan-' + newId, tempArea).val());
         //statusSpan.html($('#statusSpan-' + newId, tempArea).html());
-        if($('#statusSpan-' + newId, tempArea).length > 0){
+        if ($('#statusSpan-' + newId, tempArea).length > 0) {
             $('.resultsVal', tab).replaceWith($('#statusSpan-' + newId, tempArea).clone().addClass('resultsVal'));
         }
 
-        if($('#validationSpan-' + newId, tempArea).length >  0){
+        if ($('#validationSpan-' + newId, tempArea).length > 0) {
             $('.statusVal', tab).replaceWith($('#validationSpan-' + newId, tempArea).clone().addClass('statusVal'));
         }
-        
+
         //validationSpan.html($('#validationSpan-' + newId, tempArea).html());
-        
+
         decorateCalculationResult(tab);
 
-        if (results['r-' + selectId] && results['r-' + selectId].result && results['r-' + selectId].result.items &&  results['r-' + selectId].result.items.length > 0) {
+        if (results['r-' + selectId] && results['r-' + selectId].result && results['r-' + selectId].result.items && results['r-' + selectId].result.items.length > 0) {
             populateCalculationItem(results['r-' + selectId].result, tab);
             populateCalculationResult(results['r-' + selectId].result, tab);
             $('.dollar').formatCurrency({
@@ -1186,11 +1198,11 @@ $(document).ready(function() {
             });
         } else {
             //$('.jsCancelFunction', tab).trigger('click');           
-            
+
             //$(".validationStatusBar .interestCalculatedToDate", tab).val(""); // Commented in OPM-188 as it is an input                                    
             $(".jsShowSample", tab).addClass("priBtnDisabled");
             $(".jsExpandCalculation", tab).addClass("priBtnDisabled");
-            
+
             $(".jsCancelFunction", tab).hide();
             $(".jsShowCalculation", tab).hide();
             $(".jsTriggerBill", tab).hide();
@@ -1216,13 +1228,13 @@ $(document).ready(function() {
             var numEmptyColumn = 0;
             $.each($(tr).children('td'), function(i) {
 
-                if( i>=1 && i<= 11 && $.trim($(this).text()) == ''){
-                        numEmptyColumn++;
+                if (i >= 1 && i <= 11 && $.trim($(this).text()) == '') {
+                    numEmptyColumn++;
                 }
 
             });
 
-            if(numEmptyColumn == 11){
+            if (numEmptyColumn == 11) {
                 $(tr).addClass('unsortable');
             } else {
                 $(tr).removeClass('unsortable');
@@ -1234,7 +1246,7 @@ $(document).ready(function() {
                 var newRow = $(tr).next();
                 var ntds = $(newRow).children('td');
 
-                
+
 
                 $(ntds).eq(1).html($(tds).eq(1).children('input').val());
                 $(ntds).eq(2).html($(tds).eq(2).children('input').val());
@@ -1260,13 +1272,13 @@ $(document).ready(function() {
                 var numEmptyColumn2 = 0;
                 $.each($(newRow).children('td'), function(i) {
 
-                    if( i>=1 && i<= 11 && $.trim($(this).text()) == ''){
-                            numEmptyColumn2++;
+                    if (i >= 1 && i <= 11 && $.trim($(this).text()) == '') {
+                        numEmptyColumn2++;
                     }
 
                 });
 
-                if(numEmptyColumn2 == 11){
+                if (numEmptyColumn2 == 11) {
                     $(newRow).addClass('unsortable');
                 } else {
                     $(newRow).removeClass('unsortable');
@@ -1279,7 +1291,7 @@ $(document).ready(function() {
                 var editRowHTML = $("#versionEditTemplate tbody tr").clone();
                 var values = [];
 
-                
+
 
                 $.each($(tr).children('td'), function(i) {
                     if (i == 1 || i == 2) {
@@ -1297,7 +1309,7 @@ $(document).ready(function() {
                 var editingTr = $(tr).next('tr');
                 var tds = $(editingTr).children('td');
 
-                if(numEmptyColumn == 11){
+                if (numEmptyColumn == 11) {
                     $(editingTr).addClass('unsortable');
                 } else {
                     $(editingTr).removeClass('unsortable');
@@ -1319,7 +1331,7 @@ $(document).ready(function() {
                             $(this).attr('selected', true);
                         }
                     });
-                    
+
                     $("select option", $(tds).eq(10)).each(function() {
                         if ($(this).html() == values[10]) {
                             $(this).attr('selected', true);
@@ -1345,26 +1357,26 @@ $(document).ready(function() {
 
                 $(tds).eq(7).children('input').keypress(function(evt) {
 
-                        var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
-                        
-                        if (evt.which === 46) {
-                            if (/\./.test($(this).val()) === true) {
+                    var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+
+                    if (evt.which === 46) {
+                        if (/\./.test($(this).val()) === true) {
+                            evt.preventDefault();
+                        }
+                    } else if (!/^\d+$/.test(key)) { // Bug fix
+                        event.preventDefault();
+                        return false;
+                    } else if (evt.which > 31) {
+                        if (evt.which < 48 || evt.which > 57) {
+                            evt.preventDefault();
+                        } else {
+                            var value = $(this).val();
+                            var newVal = value + (evt.which - 48);
+                            if (parseInt(newVal) > 100000000) {
                                 evt.preventDefault();
-                            }
-                        } else if(!/^\d+$/.test(key)){ // Bug fix
-                            event.preventDefault();
-                            return false;
-                        } else if (evt.which > 31) {
-                            if (evt.which < 48 || evt.which > 57) {
-                                evt.preventDefault();
-                            } else {
-                                var value = $(this).val();
-                                var newVal = value + (evt.which - 48);
-                                if (parseInt(newVal) > 100000000) {
-                                    evt.preventDefault();
-                                }
                             }
                         }
+                    }
                 });
 
                 $(tds).eq(1).children('input').datepicker({
@@ -1478,7 +1490,7 @@ $(document).ready(function() {
     $(".tabsBar a").click(function() {
         var targetBlock = $(this).attr("id");
         //If tab has ID, switch tab display within same page
-        if (!((typeof(targetBlock) == "undefined") || (targetBlock == ""))) {
+        if (!((typeof (targetBlock) == "undefined") || (targetBlock == ""))) {
             var bar = $(this).parents(".tabsBar").eq(0);
             $("a", bar).removeClass("current");
             $(this).addClass("current");
@@ -1503,14 +1515,14 @@ $(document).ready(function() {
         }
     });
 
-    $(".jsTogglePanel").keypress(function(e){
-        
-        if(e.which == 13){
-            
+    $(".jsTogglePanel").keypress(function(e) {
+
+        if (e.which == 13) {
+
             $(this).click();
         }
-        
-        
+
+
     });
 
     if ($(".noValidMask:visible").length > 0) {
@@ -1519,17 +1531,17 @@ $(document).ready(function() {
 
 
     /*$("#accountSearchResultTbl tbody td").mouseenter(function() {
-        $(this).parent("tr").addClass("rowHover");
-    }).mouseleave(function() {
-        $(this).parent("tr").removeClass("rowHover");
-    });*/
+     $(this).parent("tr").addClass("rowHover");
+     }).mouseleave(function() {
+     $(this).parent("tr").removeClass("rowHover");
+     });*/
 
     $("#accountSearchResultTbl").delegate("td", "mouseenter", function() {
-            $(this).parent().addClass("hovered");
-            $(this).parent().addClass("rowHover");
+        $(this).parent().addClass("hovered");
+        $(this).parent().addClass("rowHover");
     }).delegate("td", "mouseleave", function() {
-            $(this).parent().removeClass("hovered");
-            $(this).parent().removeClass("rowHover");
+        $(this).parent().removeClass("hovered");
+        $(this).parent().removeClass("rowHover");
     });
 
     $('.accountNotesPanel tbody').delegate('td', 'mouseenter', function() {
@@ -1560,15 +1572,15 @@ $(document).ready(function() {
         //select.find("option[value='" + id + "']").addClass('isHidden');
         select.find("option[value='" + id + "']").remove();
         /*var firstSee = -1;
-        $.each(select.children('option'), function(i) {
-            if ($(this).hasClass('isHidden') == false) {
-                select.get(0).selectedIndex = i;
-                firstSee = i;
-                select.trigger('change');
-            }
-        });
-        if (firstSee == -1) {*/
-        if(select.val() == '') {
+         $.each(select.children('option'), function(i) {
+         if ($(this).hasClass('isHidden') == false) {
+         select.get(0).selectedIndex = i;
+         firstSee = i;
+         select.trigger('change');
+         }
+         });
+         if (firstSee == -1) {*/
+        if (select.val() == '') {
             select.text('');
             $("." + tab + " .jsDelVersionBtn").addClass('priBtnDisabled');
             $("." + tab + " .jsCancelFunction").trigger('click');
@@ -1633,26 +1645,339 @@ $(document).ready(function() {
     });
 
     //$(".jsAddPayment").click(function() {
-        //showPopup(".addPaymentPopup ");
+    //showPopup(".addPaymentPopup ");
     //});
 
     //Print Popups
 
     $(".jsPrintAccountSummary").click(function(e) {
-	var csd = $('#accountCsd').val();
-    	var request = {
-    			csd:csd
-    	};
-    	showPrintReport("AccountingSummaryReport", request, renderReportAccountingSummaryReportInViewAccountPage, '.printSummaryPopup');
+        var context = $('#context').val();
+        var accountId = $('#accountId').val();
+        var account = getAccount(context, accountId);
+        var holder = account.holder;
+        var popup = $('.printSummaryPopup .popupBody');
+        // csd and name*/
+        $('.printDate span', popup).eq(0).html(account.claimNumber);
+        $('.printDate span', popup).eq(1).html(holder.firstName + ' ' + holder.middleInitial + ' ' + holder.lastName);
+        $('.printDate span', popup).eq(2).html('printed on ' + parseDateToString(new Date()));
+
+        // plan type and name
+        $('.planType span', popup).eq(0).html(account.planType);
+        $('.planType span', popup).eq(1).html(account.status.name);
+        // phone
+        $('.phone', popup).html(holder.telephone);
+        // agency
+        $('.agency', popup).html(holder.agencyCode);
+        // employedin
+        $('.employedIn', popup).html(holder.cityOfEmployment + ' ' + holder.stateOfEmployment.name);
+        // stop ACH
+        if (account.stopAchPayment == true) {
+            $('.stopACH', popup).html('yes');
+        } else {
+            $('.stopACH', popup).html('no');
+        }
+        // address
+        $('.addressStr', popup).html(buildAddrerssString(holder.address));
+
+        // billing summary
+        $('.intitialBilling', popup).html(parseDateToString(account.billingSummary.firstBillingDate));
+        $('.lastPayment', popup).html(parseDateToString(account.billingSummary.lastDepositDate));
+        $('.lastTransaction', popup).html(parseDateToString(account.billingSummary.lastTransactionDate));
+        $('.computed', popup).html(parseDateToString(account.billingSummary.computedDate));
+
+        var billings = account.billingSummary.billings;
+        var billingTbody = $('.billing-tbody', popup);
+        var tInitialBilling = 0;
+        var tAdditionalInterest = 0;
+        var tPayment = 0;
+        var tBalance = 0;
+        $.each(billings, function() {
+            var tr = billingTbody.find('tr').eq(mapping[this.name]);
+            var tds = tr.find('td');
+            tds.eq(1).html(this.initialBilling);
+            tds.eq(3).html(this.additionalInterest);
+            tds.eq(5).html(this.totalPayments);
+            tds.eq(7).html(this.balance);
+            tds.eq(9).html(this.paymentOrder);
+            tInitialBilling += this.initialBilling;
+            tAdditionalInterest += this.additionalInterest;
+            tPayment += this.totalPayments;
+            tBalance += this.balance;
+        });
+        var totalTds = billingTbody.find('tr').eq(9).find('td');
+        totalTds.eq(1).html(tInitialBilling);
+        totalTds.eq(3).html(tAdditionalInterest);
+        totalTds.eq(5).html(tPayment);
+        totalTds.eq(7).html(tBalance);
+        // payment information
+        $('.transaction-tbody').html('');
+        var payments = account.paymentHistory;
+        $.each(payments, function() {
+            var template = $('.transaction-tfoot').find('tr').eq(0).clone();
+            var tds = template.find('td');
+            tds.eq(0).html(this.batchNumber + '-' + this.blockNumber + '-' + this.sequence);
+            tds.eq(1).html(shortDate(this.depositDate));
+            tds.eq(2).html(this.amount);
+            tds.eq(3).html(this.approvalStatus);
+            tds.eq(4).html(shortDate(this.transactionDate));
+            tds.eq(5).html(this.paymentType);
+            tds.eq(6).html(this.approvalUser);
+            tds.eq(7).html(this.accountBalance);
+            $('.transaction-tbody').append(template);
+        });
+        // account notes
+        $('.note-csd', popup).html(account.claimNumber);
+        $('.note-tbody', popup).html('');
+        $.ajax({
+            url: context + '/account/' + accountId + '/notes',
+            async: false,
+            cache: false,
+            success: function(data) {
+                $.each(data, function() {
+                    var template = $('.note-tfoot').find('tr').eq(0).clone();
+                    template.find('td').eq(0).html(parseDateToString(this.date));
+                    template.find('td').eq(1).html(this.writer);
+                    template.find('td').eq(2).html(this.text);
+                    $('.note-tbody', popup).append(template);
+                });
+            },
+            error: function(a, b, c) {
+                alert('Fail to get account notes, message:' + a.responseText);
+            }
+        });
+        // service history
+        var version = getOfficialVersion(account.calculationVersions);
+        var aggregate = aggregateCalculationResult(version.calculationResult);
+        $('.calculation-tbody').html();
+        if (aggregate.FERS_DEPOSIT.items.length != 0) {
+            $.each(aggregate.FERS_DEPOSIT.items, function() {
+                var template = $('.calculation-tfoot').find('tr').eq(0).clone();
+                var tds = template.find('td');
+                tds.eq(0).html(this.retirementType.name);
+                tds.eq(1).html(this.periodType.name);
+                tds.eq(2).html(parseDateToString(this.startDate));
+                tds.eq(3).html(parseDateToString(this.endDate));
+                tds.eq(4).html(parseDateToString(this.midDate));
+                tds.eq(5).html(this.deductionAmount);
+                tds.eq(6).html(this.totalInterest);
+                tds.eq(7).html(this.paymentsApplied);
+                tds.eq(8).html(this.balance);
+                $('.calculation-tbody').append(template);
+            });
+            var totalTemplate = $('.calculation-tfoot').find('tr').eq(1).clone();
+            var totalTds = totalTemplate.find('td');
+            totalTds.eq(2).html('FERS Deposit Total');
+            totalTds.eq(3).html(aggregate.FERS_DEPOSIT.total.deduction);
+            totalTds.eq(4).html(aggregate.FERS_DEPOSIT.total.interest);
+            totalTds.eq(5).html(aggregate.FERS_DEPOSIT.total.payments);
+            totalTds.eq(6).html(aggregate.FERS_DEPOSIT.total.total);
+            $('.calculation-tbody').append(totalTemplate);
+            var emptyTemplate = $('.calculation-tfoot').find('tr').eq(2).clone();
+            $('.calculation-tbody').append(emptyTemplate);
+        }
+        if (aggregate.FERS_REDEPOSIT.items.length != 0) {
+            $.each(aggregate.FERS_REDEPOSIT.items, function() {
+                var template = $('.calculation-tfoot').find('tr').eq(0).clone();
+                var tds = template.find('td');
+                tds.eq(0).html(this.retirementType.name);
+                tds.eq(1).html(this.periodType.name);
+                tds.eq(2).html(parseDateToString(this.startDate));
+                tds.eq(3).html(parseDateToString(this.endDate));
+                tds.eq(4).html(parseDateToString(this.midDate));
+                tds.eq(5).html(this.deductionAmount);
+                tds.eq(6).html(this.totalInterest);
+                tds.eq(7).html(this.paymentsApplied);
+                tds.eq(8).html(this.balance);
+                $('.calculation-tbody').append(template);
+            });
+            var totalTemplate = $('.calculation-tfoot').find('tr').eq(1).clone();
+            var totalTds = totalTemplate.find('td');
+            totalTds.eq(2).html('FERS Redeposit Total');
+            totalTds.eq(3).html(aggregate.FERS_REDEPOSIT.total.deduction);
+            totalTds.eq(4).html(aggregate.FERS_REDEPOSIT.total.interest);
+            totalTds.eq(5).html(aggregate.FERS_REDEPOSIT.total.payments);
+            totalTds.eq(6).html(aggregate.FERS_REDEPOSIT.total.total);
+            $('.calculation-tbody').append(totalTemplate);
+            var emptyTemplate = $('.calculation-tfoot').find('tr').eq(2).clone();
+            $('.calculation-tbody').append(emptyTemplate);
+        }
+        if (aggregate.CSRS_DEPOSIT.items.length != 0) {
+            $.each(aggregate.CSRS_DEPOSIT.items, function() {
+                var template = $('.calculation-tfoot').find('tr').eq(0).clone();
+                var tds = template.find('td');
+                tds.eq(0).html(this.retirementType.name);
+                tds.eq(1).html(this.periodType.name);
+                tds.eq(2).html(parseDateToString(this.startDate));
+                tds.eq(3).html(parseDateToString(this.endDate));
+                tds.eq(4).html(parseDateToString(this.midDate));
+                tds.eq(5).html(this.deductionAmount);
+                tds.eq(6).html(this.totalInterest);
+                tds.eq(7).html(this.paymentsApplied);
+                tds.eq(8).html(this.balance);
+                $('.calculation-tbody').append(template);
+            });
+            var totalTemplate = $('.calculation-tfoot').find('tr').eq(1).clone();
+            var totalTds = totalTemplate.find('td');
+            totalTds.eq(2).html('CSRS Deposit Total');
+            totalTds.eq(3).html(aggregate.CSRS_DEPOSIT.total.deduction);
+            totalTds.eq(4).html(aggregate.CSRS_DEPOSIT.total.interest);
+            totalTds.eq(5).html(aggregate.CSRS_DEPOSIT.total.payments);
+            totalTds.eq(6).html(aggregate.CSRS_DEPOSIT.total.total);
+            $('.calculation-tbody').append(totalTemplate);
+            var emptyTemplate = $('.calculation-tfoot').find('tr').eq(2).clone();
+            $('.calculation-tbody').append(emptyTemplate);
+        }
+        if (aggregate.CSRS_REDEPOSIT.items.length != 0) {
+            $.each(aggregate.CSRS_REDEPOSIT.items, function() {
+                var template = $('.calculation-tfoot').find('tr').eq(0).clone();
+                var tds = template.find('td');
+                tds.eq(0).html(this.retirementType.name);
+                tds.eq(1).html(this.periodType.name);
+                tds.eq(2).html(parseDateToString(this.startDate));
+                tds.eq(3).html(parseDateToString(this.endDate));
+                tds.eq(4).html(parseDateToString(this.midDate));
+                tds.eq(5).html(this.deductionAmount);
+                tds.eq(6).html(this.totalInterest);
+                tds.eq(7).html(this.paymentsApplied);
+                tds.eq(8).html(this.balance);
+                $('.calculation-tbody').append(template);
+            });
+            var totalTemplate = $('.calculation-tfoot').find('tr').eq(1).clone();
+            var totalTds = totalTemplate.find('td');
+            totalTds.eq(2).html('CSRS Redeposit Total');
+            totalTds.eq(3).html(aggregate.CSRS_REDEPOSIT.total.deduction);
+            totalTds.eq(4).html(aggregate.CSRS_REDEPOSIT.total.interest);
+            totalTds.eq(5).html(aggregate.CSRS_REDEPOSIT.total.payments);
+            totalTds.eq(6).html(aggregate.CSRS_REDEPOSIT.total.total);
+            $('.calculation-tbody').append(totalTemplate);
+            var emptyTemplate = $('.calculation-tfoot').find('tr').eq(2).clone();
+            $('.calculation-tbody').append(emptyTemplate);
+        }
+        var grandTemplate = $('.calculation-tfoot').find('tr').eq(3).clone();
+        var tds = grandTemplate.find('td');
+        tds.eq(3).html(aggregate.ALL_TOTAL.deduction);
+        tds.eq(4).html(aggregate.ALL_TOTAL.interest);
+        tds.eq(5).html(aggregate.ALL_TOTAL.payments);
+        tds.eq(6).html(aggregate.ALL_TOTAL.total);
+        $('.calculation-tbody').append(grandTemplate);
+        $('.dollar').formatCurrency({
+            negativeFormat: '%s-%n'
+        });
+        showPopup(".printSummaryPopup");
     });
-    $(".jsPHReceipt").click(function(e) {
-    	var csd = $('#accountCsd').val();
-    	var request = {
-    			csd:csd
-    	};
-    	showPrintReport("PaymentHistory", request, renderReportPaymentHistoryInViewAccountPage, '.printPaymentReceiptPopup');
+    $(".jsPHReceipt").click(function() {
+        var statementDiv = $('.printPaymentReceiptPopup');
+        var context = $('#context').val();
+        var accountId = $('#accountId').val();
+        var account = getAccount(context, accountId);
+        var version = getOfficialVersion(account.calculationVersions);
+        var holder = account.holder;
+        // CSD
+        $('.printNum span, .claimNum span', statementDiv).html(account.claimNumber);
+        // birthday
+        $('.printBirth span', statementDiv).html(parseDateToString(holder.birthDate));
+        // address
+        $('.printAddressBody', statementDiv).html(buildAddrerssString(holder.address));
+        // name
+        $('.name-report span', statementDiv).html(holder.firstName + ' ' + holder.middleInitial + ' ' + holder.lastName);
+        // cover by
+        $('.coveredBy span', statementDiv).html(account.planType);
+        // date
+        $('.date span', statementDiv).html(parseDateToString(new Date()));
+        // prior balance
+        $('.priorBalance span', statementDiv).html(account.balance);
+        // interest
+        $('.interest span', statementDiv).html(version.calculationResult.summary.totalInitialInterest);
+        // balance due before payment
+        $('.balanceBeforePayment span', statementDiv).html(account.balance + version.calculationResult.summary.totalInitialInterest);
+        // payment amount
+        var paymentAmount = 0;
+        if (version.calculationResult.items.length > 0) {
+            paymentAmount = version.calculationResult.items[0].paymentsApplied;
+        }
+        $('.payment span', statementDiv).html(paymentAmount);
+        // billing information
+        var spans = $('.detailsLine', statementDiv).find('span');
+        $.each(account.billingSummary.billings, function() {
+            spans.eq(mapping[this.name]).html(this.balance);
+        });
+        // new balance due
+        $('.detailsLine').next('p').find('span').html(account.balance - paymentAmount);
+        // format currency
+        $('.dollar').formatCurrency({negativeFormat: '%s-%n'});
+        showPopup(".printPaymentReceiptPopup");
     });
     $(".jsPrintFinalStatement").click(function(e) {
+        var popup = $('.printFinalStatementPopup');
+        var accountId = $('#accountId').val();
+        var account = getAccount(context, accountId);
+        var holder = account.holder;
+        var version = getOfficialVersion(account.calculationVersions);
+        // basic information
+        $('.report-csd', popup).html(account.claimNumber);
+        $('.report-birthday', popup).html(parseDateToString(holder.birthDate));
+        $('.printAddressBody', popup).html(buildAddrerssString(holder.address));
+        $('.report-name', popup).html(holder.firstName + ' ' + holder.middleInitial + ' ' + holder.lastName);
+        $('.report-date', popup).html(parseDateToString(version.calculationDate));
+        $('.coverby', popup).html(account.planType);
+        // billing information
+        var billings = account.billingSummary.billings;
+        var trs = $('.billing-tbody', popup).find('tr');
+        var total = 0;
+        $.each(billings, function() {
+            var i = mapping[this.name];
+            trs.eq(i * 4 + 1).find('td').eq(1).html(this.initialBilling);
+            trs.eq(i * 4 + 2).find('td').eq(1).html(this.additionalInterest);
+            trs.eq(i * 4 + 3).find('td').eq(1).html(this.totalPayments);
+            trs.eq(i * 4 + 4).find('td').eq(1).html(this.initialBilling + this.totalPayments + this.additionalInterest);
+            total += this.initialBilling + this.totalPayments + this.additionalInterest;
+        });
+        trs.eq(37).find('td').eq(1).html(total);
+        // calculate less payments
+        var lessPayment = 0;
+        $.each(account.paymentHistory, function() {
+            if (this.approvalStatus == 'APPROVED') {
+                lessPayment += this.amount;
+            }
+        });
+        trs.eq(38).find('td').eq(1).html(lessPayment);
+        trs.eq(39).find('td').eq(1).html(total - lessPayment);
+        var items = version.calculationResult.items;
+        var html = "";
+        for (var i = 0; i < items.length / 2; i++) {
+            html += '<tr>';
+            html += '<td>' + parseDateToString(items[i * 2].startDate) + '</td>';
+            html += '<td>' + parseDateToString(items[i * 2].endDate) + '</td>';
+            var typeStr = 'F';
+            if (items[i * 2].retirementType == 'CSRS') {
+                if (items[i * 2].periodType.name == 'DEPOSIT') {
+                    typeStr = 'D';
+                } else {
+                    typeStr = 'R';
+                }
+            }
+            html += '<td>' + typeStr + '</td>';
+            if (i * 2 + 1 < items.length) {
+                html += '<td>' + parseDateToString(items[i * 2 + 1].startDate) + '</td>';
+                html += '<td>' + parseDateToString(items[i * 2 + 1].endDate) + '</td>';
+                var typeStr = 'F';
+                if (items[i * 2 + 1].retirementType == 'CSRS') {
+                    if (items[i * 2 + 1].periodType.name == 'DEPOSIT') {
+                        typeStr = 'D';
+                    } else {
+                        typeStr = 'R';
+                    }
+                }
+                html += '<td>' + typeStr + '</td>';
+            } else {
+                html += '<td></td><td></td><td></td>';
+            }
+            html += '</tr>';
+        }
+        $('.calculationResult-tbody').html(html);
+        $('.dollar').formatCurrency({
+            negativeFormat: '%s-%n'
+        });
         showPopup(".printFinalStatementPopup");
     });
 
@@ -1715,11 +2040,11 @@ $(document).ready(function() {
     //Popups
     $(".jsShowSample").click(function(e) {
         if (!$(this).hasClass("priBtnDisabled")) {
-            showPopup(".sampleInitialPopup");
+            showPopup(".initStatementPopup");
         }
     });
     //$(".jsShowCalculation").click(function(e) {
-        //showPopup(".confirmDatePopup");
+    //showPopup(".confirmDatePopup");
     //});
 
     $(".jsShowCalculation").click(function(e) {
@@ -1768,52 +2093,64 @@ $(document).ready(function() {
 
                     calculatedDate = results['r-' + selectId].request.interestCalculatedToDate;
 
-
-                    for(var i=0; i<results['r-' + selectId].request.calculations.length; i++){
+                    // Calculation version is now passed to the result, we can use it
+                    // If this is confirm correct we can later remove results[i].request
+                    //for(var i=0; i<results['r-' + selectId].request.calculations.length; i++){
+                    for(var i=0; i<results['r-' + selectId].result.calculations.length; i++){
 
                         html += "<br>" +  sep;
-                        req = results['r-' + selectId].request.calculations[i];
+                        req = results['r-' + selectId].result.calculations[i];
                         html += "<br>Entered service period from " + parseDateToString(req.beginDate);
                         html += " to " + parseDateToString(req.endDate);
                         days = calculatePeriodInDays(req.beginDate, req.endDate);
                         html+= " has " + formatDaysInYearMonthDay(days) + " has " + toMoney(getExactYearInDays(days), 6) + " years ";
                         html += " ( " + days + " Total Days)";
+                        
+                        var details = req.deductionCalculationDetail;
 
-                        if(req.periodType === "NO EARNINGS"){
+                        if(req.periodType.name === "NO EARNINGS"){
                             html += "<br>This is a non-earnings period. The amount is ignored when calculating the deduction.";
 
                         } else {
+                             
+                             if(!isNull(details)){
+                                 
+                                 rate = 100 * details.deductionRate;
 
-                             if(isNull(req.interestRate)){
-                                rate = "Default";
-                            } else {
+                                 html += "<br> Deduction rate is " + toMoney(rate) + "% beginning on " + parseDateToString(req.beginDate);
+                                 
+                                 if(req.payType.name !== "REFUND"){
+                                     html += " " + req.payType.name + " of: $" + req.amount + " translates to deduction : $" + toMoney(details.runningDeductions);
+                                     html += " using " + toMoney(rate, 4)  + " percent";
+                                 } else {
+                                     html += " " + req.payType.name + " of: $" + req.amount + " paid on " + parseDateToString(req.interestAccrualDate);
+                                 }
+                                 
 
-                                rate = req.interestRate + "%";
-                            }
-                            // Disable currently
-
-                            //html += "<br> Deduction rate is " + rate + " beginning on " + parseDateToString(req.beginDate);
-                            //html += " " + req.payType.name + " of " + req.amount + " translates to deduction : " + val;
-
-                            //html += " using " + rate + " percent";
+                                 
+                             }
+                            
 
                         }
-                        // Disable currently
-                        //html += "<br> Total earning at end of period : Default";
+                        html += "<br> Total earning at end of period : $" + toMoney(details.totalRunningEarnings);
 
                         if(prevEndDate != null){
 
                             if(calculatePeriodInDays(prevEndDate, req.beginDate) > 3){
 
                                 html += "<br>There was a break in service because the last service period ended more than 3 days before the start of this one.";
-                            }else if(prevPeriod !== req.periodType && req.periodType !== "NO EARNINGS"){
+                            }else if(prevPeriod !== req.periodType.name && req.periodType.name !== "NO EARNINGS"){
                                 html += "<br> There was a break in service because this is different type of service";
                                 html += "<br> (Deposit or Redeposit) and not a non earnings continuation of the service period.";
                             } else {
-                                //html += "<br> No break in service. Total Deposit : Default";
-                                html += "<br> No break in service.";
+                                html += "<br> No break in service. Total Deposit : $" + toMoney(details.totalRunningDeductions);
+                                //html += "<br> No break in service.";
                             }
                         }
+                        
+                        prevEndDate = req.endDate;
+                        
+                        prevPeriod = req.periodType.name;
 
                         html += "<br>";
                     }
@@ -1980,13 +2317,13 @@ $(document).ready(function() {
 
 
     $(".jsShowPeriodErrorPopup").click(function(e) {
-        if(!isDate($('.confirmDatePopup .popupPadding .actualPayment2').val())){
+        if (!isDate($('.confirmDatePopup .popupPadding .actualPayment2').val())) {
             alert('The actual payment date is not in correct format mm/dd/yyyy.');
             return false;
         }
         closePopup();
-        var errMsg2 = '<img src="'+ context + '/i/icon-error.png" alt="error" width="22" height="22" class="vMiddle" />';
-        $('.periodErrorPopupMsg').html(errMsg2 + "The effective date for the refund is "+$('.confirmDatePopup .popupPadding .actualPayment2').val());
+        var errMsg2 = '<img src="' + context + '/i/icon-error.png" alt="error" width="22" height="22" class="vMiddle" />';
+        $('.periodErrorPopupMsg').html(errMsg2 + "The effective date for the refund is " + $('.confirmDatePopup .popupPadding .actualPayment2').val());
         showPopup(".periodErrorPopup");
     });
     $(".jsAddNote").click(function(e) {
@@ -2007,7 +2344,7 @@ $(document).ready(function() {
             var tab = $(this).parents('.tabsBlock').eq(0);
 
             var w = window.open(context + '/account/calculationResult', 'Calculation', 'width=1000,height=300,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=0,top=0');
-            function test(){
+            function test() {
                 w.document.getElementById('depTbl').innerHTML = $('.validateResultTbl', tab).html();
             }
             addEvent(w, 'load', test);
@@ -2032,7 +2369,6 @@ $(document).ready(function() {
 
 
     $(".jsLastUpdate").click(function(e) {
-        ;
         closePopup();
         showPopup(".lastUpdatePopup");
     });
@@ -2042,9 +2378,9 @@ $(document).ready(function() {
         return !(charCode > 31 && (charCode < 48 || charCode > 57));
     });
 
-    $('.hourField').on('change', function(){
+    $('.hourField').on('change', function() {
 
-        if(!isInteger($(this).val())){
+        if (!isInteger($(this).val())) {
             $('.endDateError').html('Please enter a valid integer.');
             showPopup('.noEndDatePopup');
             $(this).val('');
@@ -2054,7 +2390,7 @@ $(document).ready(function() {
 
     $(".jsShowLastUpdateReport").click(function(e) {
         closePopup();
-        showPopup(".updateInterestReportPopup");
+        $('.jsPHReceipt').trigger('click');
     });
 
     // parse the format MM/dd/yyyy and return Date type
@@ -2069,30 +2405,27 @@ $(document).ready(function() {
             date.setMinutes(0)
             date.setSeconds(0)
             date.setMilliseconds(0);
-            //console.log(formatNotificationDate(date));
             return date;
         }
-        
+
         return null;
     }
 
     function createPayment(payment, accountId) {
         var context = $('#context').val();
-        //console.log("The context is: " + context);
         $.ajax({
-        url: context + "/payment?resourceName=link&accountId=" + accountId,
-        data: JSON.stringify(payment),
-        async:false,
-        contentType: 'application/json',
-        headers: { 'Accept': 'application/json'},
-        type: "POST",
-        cache : false,
-        success: function(data) {
-        },
-
-        error:function(jqXHR, textStatus,errorThrow){
-            alert("Failed to create payment.");
-        }
+            url: context + "/payment?resourceName=link&accountId=" + accountId,
+            data: JSON.stringify(payment),
+            async: false,
+            contentType: 'application/json',
+            headers: {'Accept': 'application/json'},
+            type: "POST",
+            cache: false,
+            success: function(data) {
+            },
+            error: function(jqXHR, textStatus, errorThrow) {
+                alert("Failed to create payment.");
+            }
         }
         );
     }
@@ -2104,7 +2437,7 @@ $(document).ready(function() {
         entity.blockNumber = $('div.addPaymentPopup input[name="blockNum"]').val();
         entity.sequenceNumber = $('div.addPaymentPopup input[name="seqNum"]').val();
         entity.amount = $('div.addPaymentPopup input[name="paymentAmount"]').val();
-        if($.trim(entity.amount) === ''){
+        if ($.trim(entity.amount) === '') {
             alert("Enter a non empty amount number.");
             return;
         }
@@ -2112,7 +2445,7 @@ $(document).ready(function() {
             alert("The amount should be a number.");
             return;
         }
-        if($.trim(entity.batchNumber) === ''){
+        if ($.trim(entity.batchNumber) === '') {
             alert("Enter a non empty batch number.");
             return;
         }
@@ -2120,7 +2453,7 @@ $(document).ready(function() {
             alert("The batch number should be a number.");
             return;
         }
-        if($.trim(entity.blockNumber) === ''){
+        if ($.trim(entity.blockNumber) === '') {
             alert("Enter a non empty block number.");
             return;
         }
@@ -2141,18 +2474,18 @@ $(document).ready(function() {
 
         //entity.applyTo = $('div.addPaymentPopup select[name="paymentApplyTo"]').find("option:selected").data("data");
         entity.applyTo = {
-                id : $('div.addPaymentPopup select[name="paymentApplyTo"]').val()
+            id: $('div.addPaymentPopup select[name="paymentApplyTo"]').val()
         };
-        
+
         //entity.paymentAppliance = $(".radioWrapper input:checked").data("data");
         entity.paymentAppliance = {
-                id : $(".radioWrapper input:checked").val()
+            id: $(".radioWrapper input:checked").val()
         }
 
         if (entity.paymentType == null) {
             entity.paymentType = "ORDINARY";
         }
-        
+
         entity.id = null;
         if (entity.accountId == null && $('#accountId').length > 0) {
             entity.accountId = $('#accountId').val();
@@ -2185,13 +2518,13 @@ $(document).ready(function() {
         // Bug Fix 2
         var popupHint = $(this).parents(".popup").eq(0).find(".paymentNoteHint");
         var noteN = $(this).parents(".popup").eq(0).find(".paymentNoteTextArea");
-        if(noteN.data("note")){
+        if (noteN.data("note")) {
             popupHint.text("Existing Note Updated.");
-        } else{
+        } else {
             popupHint.text("New Note Saved.");
         }
         noteN.data("note", noteN.val());
-        
+
     });
 
     $(".jsDoCancelPHNote").click(function(e) {
@@ -2235,10 +2568,10 @@ $(document).ready(function() {
         $(this).attr('title', theTitle);
     });
 
-    
+
 
     //Start Suspense Page
-    if ( $("#suspensePage").length > 0 ){
+    if ($("#suspensePage").length > 0) {
         //init checkbox
         $("tbody input[name='postChkbx']").prop("checked", false);
         $("tbody input[name='postChkbx']").eq(0).prop("disabled", false);
@@ -2247,60 +2580,60 @@ $(document).ready(function() {
         $("tbody input[name='postChkbx']").eq(3).prop("disabled", false);
 
         //Suspense Tbl
-        $("#suspenseTbl").delegate("td", "mouseenter", function(){
+        $("#suspenseTbl").delegate("td", "mouseenter", function() {
             $(this).parent().addClass("hovered");
-        }).delegate("td", "mouseleave", function(){
+        }).delegate("td", "mouseleave", function() {
             $(this).parent().removeClass("hovered");
         });
 
 
-        
 
-        $("#suspenseTbl").delegate("input[name='postChkbx']", "click", function(){
+
+        $("#suspenseTbl").delegate("input[name='postChkbx']", "click", function() {
             var checkBox = $("#suspenseTbl input[name='postChkbx']:checked:enabled");
-            if (checkBox.length > 0){
+            if (checkBox.length > 0) {
                 $(".jsPostCheckedPaymentsSuspense").removeClass("priBtnDisabled");
-            }else{
+            } else {
                 $(".jsPostCheckedPaymentsSuspense").addClass("priBtnDisabled");
             }
         });
 
-        $(".jsTransferSuspense").click(function(){
-            if (!($(this).hasClass("priHighBtnDisabled"))){
+        $(".jsTransferSuspense").click(function() {
+            if (!($(this).hasClass("priHighBtnDisabled"))) {
                 showPopup(".transferSuspensePopup");
             }
         });
 
-        $(".jsPrintSuspense").click(function(){
+        $(".jsPrintSuspense").click(function() {
             var request = {};
-            showPrintReport("CurrentSuspense", request, 
-        			renderReportCurrentSuspenseInSuspensePage, '.currentSuspensePrintPopup');
+            showPrintReport("CurrentSuspense", request,
+                    renderReportCurrentSuspenseInSuspensePage, '.currentSuspensePrintPopup');
         });
 
-        $(".jsDoPrintCurrentSuspense").click(function(){
-            window.open('Suspense_CurrentSuspense_printview.html','SuspenseCurrentSuspense','width=940,height=500,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=0,top=0');
+        $(".jsDoPrintCurrentSuspense").click(function() {
+            window.open('Suspense_CurrentSuspense_printview.html', 'SuspenseCurrentSuspense', 'width=940,height=500,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=0,top=0');
             return false;
         });
 
-        $(".jsHistorySuspense").click(function(){
+        $(".jsHistorySuspense").click(function() {
             showPopup(".suspenseHistoryPrintPopup");
         });
 
-        $(".jsDoPrintSuspenseHistory").click(function(){
-            window.open('Suspense_History_printview.html','SuspenseHistory','width=940,height=500,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=0,top=0');
+        $(".jsDoPrintSuspenseHistory").click(function() {
+            window.open('Suspense_History_printview.html', 'SuspenseHistory', 'width=940,height=500,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=0,top=0');
             return false;
         });
 
-        $(".jsPostCheckedPaymentsSuspense").click(function(){
-            if (!($(this).hasClass("priBtnDisabled"))){
+        $(".jsPostCheckedPaymentsSuspense").click(function() {
+            if (!($(this).hasClass("priBtnDisabled"))) {
                 $(this).addClass("priBtnDisabled");
                 var checkedBoxs = $("#suspenseTbl tbody input[name='postChkbx']:checked");
-                checkedBoxs.each(function(){
+                checkedBoxs.each(function() {
                     var row = $(this).parents("tr").eq(0);
-                    var txt= row.find("td").eq(2).text();
-                    if ( txt.indexOf('Ready for ') > -1 ){
+                    var txt = row.find("td").eq(2).text();
+                    if (txt.indexOf('Ready for ') > -1) {
                         newTxt = txt.replace('Ready for ', '') + " - Pending Approval";
-                    }else{
+                    } else {
                         newTxt = "Posted - Pending Approval";
                     }
                     row.find("td").eq(2).html(newTxt);
@@ -2313,8 +2646,8 @@ $(document).ready(function() {
         });
 
         // should be removed.
-        $(".jsResetSelectedPaymentSuspense").click(function(){
-            if (!($(this).hasClass("priBtnDisabled"))){
+        $(".jsResetSelectedPaymentSuspense").click(function() {
+            if (!($(this).hasClass("priBtnDisabled"))) {
                 $(this).addClass("priBtnDisabled");
                 var row = $("#suspenseTbl tbody tr.highlighted");
                 $("input[name='postChkbx']", row).prop('checked', false).attr("disabled", false);
@@ -2323,8 +2656,8 @@ $(document).ready(function() {
         });
 
         // should be removed
-        $(".jsLinkPaymentToCurrent").click(function(){
-            if (!($(this).hasClass("priHighBtnDisabled"))){
+        $(".jsLinkPaymentToCurrent").click(function() {
+            if (!($(this).hasClass("priHighBtnDisabled"))) {
                 var selectedRow = $("#suspenseTbl tr.highlighted");
                 var cells = selectedRow.find("td");
                 $("input[name='postChkbx']", selectedRow).prop('checked', true);
@@ -2333,32 +2666,32 @@ $(document).ready(function() {
             }
         });
 
-        $(".jsMakeThisEmpCur").click(function(){
-            if (!($(this).hasClass("priHighBtnDisabled"))){
-                if ($(".accountPanymentsWrapper input[name='csdNum']").hasClass("error")){
+        $(".jsMakeThisEmpCur").click(function() {
+            if (!($(this).hasClass("priHighBtnDisabled"))) {
+                if ($(".accountPanymentsWrapper input[name='csdNum']").hasClass("error")) {
                     showPopup(".invalidCSDPopup");
                 }
             }
         });
 
-        $(".jsDoTransferSuspense").click(function(){
+        $(".jsDoTransferSuspense").click(function() {
             var tpType = $("input[name='tpType']:checked").val();
-            if ( tpType === "tpType1"){
+            if (tpType === "tpType1") {
                 closePopup();
                 showPopup(".refundCreditBalancePopup");
-            }else{
+            } else {
                 closePopup();
                 var tpTypeTxt = $(".transferSuspensePopup input[name='tpType']:checked").next("label").text();
                 $("#suspenseTbl tbody tr.highlighted td").eq(2).text("Ready for " + tpTypeTxt);
                 $("#suspenseTbl tbody tr.highlighted input[name='postChkbx']").prop("checked", true);
                 $(".jsPostCheckedPaymentsSuspense").removeClass("priBtnDisabled");
-                if ( tpType !== "tpType4"){
+                if (tpType !== "tpType4") {
                     alert("This action will normally open Microsoft Word, and display a document. For purposes of the wireframes, this is just a placeholder.");
                 }
             }
         });
 
-        $(".jsAlertOpenDoc").click(function(e){
+        $(".jsAlertOpenDoc").click(function(e) {
             closePopup();
             var tpType = $(".transferSuspensePopup input[name='tpType']:checked").next("label").text();
             $("#suspenseTbl tbody tr.highlighted td").eq(2).text("Ready for " + tpType);
@@ -2367,7 +2700,7 @@ $(document).ready(function() {
             alert("This action will normally open Microsoft Word, and display a document. For purposes of the wireframes, this is just a placeholder.");
         });
 
-        $( ".paymentNotes" ).resizable({
+        $(".paymentNotes").resizable({
             minWidth: 239,
             maxWidth: 239,
             minHeight: 237,
@@ -2377,11 +2710,11 @@ $(document).ready(function() {
             }
         }).parent().css("padding", "1");
 
-        $(".jsSaveNoteSuspense").click(function(e){
+        $(".jsSaveNoteSuspense").click(function(e) {
             showPopup(".savePaymentNotesSuccessPopup");
         });
 
-        $(".jsDiscardNoteChangesSuspense").click(function(){
+        $(".jsDiscardNoteChangesSuspense").click(function() {
             var form = $(this).parents("form").eq(0);
             var resetBtn = $("input[type='reset']", form);
             resetBtn.click();
@@ -2411,21 +2744,21 @@ $(document).ready(function() {
         });
         // Bug Fix 1
         //$(".jsSearchPayment").click(function() {
-            //$(".paymentSearchResultsWrapper > div").show();
+        //$(".paymentSearchResultsWrapper > div").show();
         //});
         $(".jsShowAuditTrail").click(function() {
             if (!($(this).hasClass("priBtnDisabled"))) {
-		var tr = $('#paymentSearchResultsTbl').find("tr.highlighted");
-            	if (tr.length == 0) {
-            		alert("No row selected");
-            		return;
-            	}
-            	var csd = tr.find("td:eq(3)").text();
-            	var request = {
-            			csd:csd
-            	};
-            	showPrintReport("AccountNotesByUser", request, 
-            			renderReportAccountNotesByUserInPaymentPage, '.sampleReportPlaceholderPopup');
+                var tr = $('#paymentSearchResultsTbl').find("tr.highlighted");
+                if (tr.length == 0) {
+                    alert("No row selected");
+                    return;
+                }
+                var csd = tr.find("td:eq(3)").text();
+                var request = {
+                    csd: csd
+                };
+                showPrintReport("AccountNotesByUser", request,
+                        renderReportAccountNotesByUserInPaymentPage, '.sampleReportPlaceholderPopup');
             }
         });
         $(".paymentSearchBox input#startDate").datepicker({
@@ -2453,7 +2786,7 @@ $(document).ready(function() {
     }
     //End Payments Page
 
-    $('#bYearSearch').on('focus', function(){
+    $('#bYearSearch').on('focus', function() {
 
         $('.viewAccountSearchFormWrapper .datePickerSep .ui-datepicker-trigger').click();
 
@@ -2472,7 +2805,7 @@ function getPendingCasesCount(context) {
         async: true,
         global: false,
         contentType: 'application/json',
-        data : JSON.stringify({}),
+        data: JSON.stringify({}),
         success: function(casesArray) {
             $('.topNav > ul > li:eq(2) .notificationNum > span > span').text(casesArray.items.length);
         },
@@ -2584,10 +2917,10 @@ function setHomePage(homePage) {
     var setHomeData = $('#setHome').prop("checked") ? homePage : 'null';
     var url = 'common/tab';
     if (setHomeData != 'null') {
-    	url = 'common/tab?tab=' + setHomeData;
+        url = 'common/tab?tab=' + setHomeData;
     }
     if (typeof rootUrl != 'undefined') {
-    	url = rootUrl + url;
+        url = rootUrl + url;
     }
     $.ajax({
         url: url,
@@ -2669,9 +3002,9 @@ function numberFormat(number, decimals, dec_point, thousands_sep) {
             dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
             s = '',
             toFixedFix = function(n, prec) {
-        var k = Math.pow(10, prec);
-        return '' + Math.round(n * k) / k;
-    };
+                var k = Math.pow(10, prec);
+                return '' + Math.round(n * k) / k;
+            };
     // Fix for IE parseFloat(0.55).toFixed(0) = 0;
     s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
     if (s[0].length > 3) {
@@ -2685,19 +3018,19 @@ function numberFormat(number, decimals, dec_point, thousands_sep) {
 }
 
 /**
-* mode 0 ROUND_DOWN
-* mode 1 ROUND_HALF_UP
-* mode 2 ROUND_HALF_EVEN
-* mode 3 ROUND_UP
-**/
-function numberRound(number, decimals, mode){
-    if(!isInteger(decimals)){
+ * mode 0 ROUND_DOWN
+ * mode 1 ROUND_HALF_UP
+ * mode 2 ROUND_HALF_EVEN
+ * mode 3 ROUND_UP
+ **/
+function numberRound(number, decimals, mode) {
+    if (!isInteger(decimals)) {
         decimals = 2;
     }
 
-    if(!isInteger(mode)){
+    if (!isInteger(mode)) {
         mode = 1;
-    } else if(mode > 3 || mode < 0){
+    } else if (mode > 3 || mode < 0) {
         mode = 1;
     }
 
@@ -2706,8 +3039,8 @@ function numberRound(number, decimals, mode){
 }
 
 // http://stackoverflow.com/questions/149055/how-can-i-format-numbers-as-money-in-javascript
-function toMoney(number, decimals, mode){ 
-   return numberRound(number, decimals, mode).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+function toMoney(number, decimals, mode) {
+    return numberRound(number, decimals, mode).replace(/\d(?=(\d{3})+\.)/g, '$&,');
 }
 
 //Change amount type of deposite field on payment search
@@ -2741,7 +3074,7 @@ function changeDepositedDate(obj) {
         if (checkValue === "any") {
             $(".singleDate", filedRow).addClass("fieldDisabled");
             $(".singleDate input", filedRow).prop("readonly", true);
-        } else{
+        } else {
             $('div.paymentSearchBox input[name="depositedDate"]').val("01/01/2014");
         }
     }
@@ -2751,20 +3084,20 @@ function changeDepositedDate(obj) {
         filedRow.removeClass("longSelect");
     }
 
-    if (obj.selectedIndex === 0){
+    if (obj.selectedIndex === 0) {
         $('div.paymentSearchBox input[name="depositedDate"]').val("");
         $("#startDate").val("");
         $("#endDate").val("");
     }
 
-    if(checkValue == 'Deposited after' || checkValue == 'Deposited on or after' || checkValue == 'Deposited on'){
-        $(".singleDate input", filedRow).datepicker( "option", "maxDate", new Date() );
-    } else{
-        $(".singleDate input", filedRow).datepicker( "option", "maxDate", null );
+    if (checkValue == 'Deposited after' || checkValue == 'Deposited on or after' || checkValue == 'Deposited on') {
+        $(".singleDate input", filedRow).datepicker("option", "maxDate", new Date());
+    } else {
+        $(".singleDate input", filedRow).datepicker("option", "maxDate", null);
     }
 }
 
-function loadPaymentTransactionDetails(row){
+function loadPaymentTransactionDetails(row) {
     var cells = $(row).find("td");
     var pStatus = cells.eq(2).text();
     var tDate = cells.eq(3).text();
@@ -2784,11 +3117,11 @@ function loadPaymentTransactionDetails(row){
     $(".accountPanymentsWrapper input[name='bDate']").removeClass("error");
     $(".accountPanymentsWrapper .errorIcon").remove();
 
-    
-    if ( pStatus.indexOf('Pending Approval') > -1 ){
+
+    if (pStatus.indexOf('Pending Approval') > -1) {
         $(".jsTransferSuspense, .jsLinkPaymentToCurrent").addClass("priHighBtnDisabled");
     }
-    if  ( pStatus === "" ){
+    if (pStatus === "") {
         $(".jsLinkPaymentToCurrent, .jsMakeThisEmpCur, .jsTransferSuspense").addClass("priHighBtnDisabled");
     }
 }
@@ -2892,8 +3225,10 @@ function setPopupTabIndex(popUpWindow, index) {
     }
     // focus on the first one
     if (firstOne != null) {
-        setTimeout(function() {firstOne.focus();}, 100);
-        
+        setTimeout(function() {
+            firstOne.focus();
+        }, 100);
+
     }
 }
 /**
@@ -2910,7 +3245,7 @@ function showPopup(selector) {
             maxHeight: (winHeight - 100)
         });
     }
-    $('body').css('overflow','hidden');
+    $('body').css('overflow', 'hidden');
     popup.css('display', 'block').css('margin', -popup.height() / 2 + 'px 0 0 ' + (-popup.width() / 2) + 'px');
     setPopupTabIndex(popup);
 }
@@ -2918,7 +3253,7 @@ function showPopup(selector) {
 function closePopup() {
     $('.alpha').css('display', 'none').removeClass("alphaTrans");
     $('.popup').css('display', 'none');
-    $('body').css('overflow','auto');
+    $('body').css('overflow', 'auto');
 }
 ;
 /**
@@ -3191,7 +3526,7 @@ function populateNamedEntity(typeName, context, callback, noSelect) {
 }
 
 function parseDateToString(item) {
-    if(item === null){
+    if (item === null) {
         return 'N/A';
     }
     var date = new Date(item);
@@ -3291,14 +3626,14 @@ function validateCalculationEntry(button) {
     // Bug Fix 2
     var numRows = 0;
 
-    if($(".entriesTbl tbody tr.entriesEditRow", tab).length > 0){
-            $(".valErrorRow").prev("tr").addClass("valErrorRowBefore");
-            $(".valErrorRow").next("tr").addClass("valErrorRowAfter");
-            status.html("Failure").removeClass("successLabel").addClass("failLabel");
+    if ($(".entriesTbl tbody tr.entriesEditRow", tab).length > 0) {
+        $(".valErrorRow").prev("tr").addClass("valErrorRowBefore");
+        $(".valErrorRow").next("tr").addClass("valErrorRowAfter");
+        status.html("Failure").removeClass("successLabel").addClass("failLabel");
 
-            alert('Please finish editing before calculation.');
-            return false;
-     }
+        alert('Please finish editing before calculation.');
+        return false;
+    }
 
     $.each(entriesTblRows, function(i, row) {
         $(row).removeClass('valErrorRow');
@@ -3306,7 +3641,7 @@ function validateCalculationEntry(button) {
             editing = true;
         }
         if (!$(this).hasClass('newEntryRow')) {
-            
+
             var selectBoxes = [3, 4, 5, 6, 8, 10];
             var allSelectBoxes = [3, 4, 5, 6, 8, 9, 10];
             var bDate = $.trim($(row).children('td').eq(1).html());
@@ -3321,12 +3656,12 @@ function validateCalculationEntry(button) {
                 var cell = $(row).children('td').eq(this);
                 $(cell).removeClass('valErrorRowCell');
                 if ($.trim($(cell).html()) === '' || $(cell).html() === 'Select') {
-                    
+
                     numSelectBoxEmpty++;
                 }
             });
 
-            if(bDate == '' && eDate == '' && amount == '' && iDate == '' && numSelectBoxEmpty == allSelectBoxes.length){
+            if (bDate == '' && eDate == '' && amount == '' && iDate == '' && numSelectBoxEmpty == allSelectBoxes.length) {
 
                 $(this).addClass('unsortable');
                 return true;
@@ -3348,7 +3683,7 @@ function validateCalculationEntry(button) {
                     $(row).addClass('valErrorRow');
                 }
             });
-            
+
             var dmValidate = true;
             if (bDate == '' || isDate(bDate) == false) {
                 $(row).children('td').eq(1).addClass('valErrorRowCell');
@@ -3388,11 +3723,11 @@ function validateCalculationEntry(button) {
         }
     });
 
-    
+
 
     // Bug Fix 2
 
-    if(numRows == 0){
+    if (numRows == 0) {
         $(".valErrorRow").prev("tr").addClass("valErrorRowBefore");
         $(".valErrorRow").next("tr").addClass("valErrorRowAfter");
         status.html("Failure").removeClass("successLabel").addClass("failLabel");
@@ -3416,7 +3751,7 @@ function validateCalculationEntry(button) {
 
 
 
-function emptyCalculationResult(tab){
+function emptyCalculationResult(tab) {
 
 
     var reTable = $('.chartCalAreaBox4 table tbody', tab);
@@ -3592,7 +3927,7 @@ var calculationRunning = false;
 function runCalculation(context, tab, save, callback) {
     if (calculationRunning) {
         // ignore
-        if(callback){
+        if (callback) {
             callback(2, save, tab);
         }
         return;
@@ -3606,7 +3941,7 @@ function runCalculation(context, tab, save, callback) {
             if ($(this).hasClass('entriesEditRow')) {
                 alert('Please finish editing before calculation.');
                 editing = true;
-                if(callback){
+                if (callback) {
                     callback(0, save, tab);
                 }
                 return false;
@@ -3618,7 +3953,7 @@ function runCalculation(context, tab, save, callback) {
                     serviceType: {},
                     payType: {}
                 };
-                if ($(this).prop('id').indexOf('cal-') != -1  && id.indexOf('new') == -1) {
+                if ($(this).prop('id').indexOf('cal-') != -1 && id.indexOf('new') == -1) {
                     //calculation.id = $(this).prop('id').replace('cal-', '');
                 }
                 var tds = $(this).children('td');
@@ -3648,14 +3983,14 @@ function runCalculation(context, tab, save, callback) {
 
     });
     if (editing == true) {
-        if(callback){
+        if (callback) {
             callback(0, save, tab);
         }
         return false;
     }
     if (entity.length == 0) {
         alert('No calculation entry in the table.');
-        if(callback){
+        if (callback) {
             callback(0, save, tab);
         }
         return false;
@@ -3664,22 +3999,22 @@ function runCalculation(context, tab, save, callback) {
     // BRE Integration Update
     var calcRequest = {};
     calcRequest.calculations = entity;
-    
-    if($('.interestCalculatedToDate', tab).val().length  == 0){
+
+    if ($('.interestCalculatedToDate', tab).val().length == 0) {
         $('.interestCalculatedToDate', tab).val(parseDateToString(new Date()));
     }
-    
-    if( !isDate($('.interestCalculatedToDate', tab).val())) {
+
+    if (!isDate($('.interestCalculatedToDate', tab).val())) {
         alert("Please specify a valid date value for 'Calculate as of' field");
-        if(callback){
+        if (callback) {
             callback(0, save, tab);
         }
         return false;
     }
-    
+
     calcRequest.interestCalculatedToDate = Date.parse($('.interestCalculatedToDate', tab).val());
-    
-    
+
+
     calculationRunning = true;
 
     $.ajax({
@@ -3693,7 +4028,7 @@ function runCalculation(context, tab, save, callback) {
             populateCalculationItem(data, tab);
             decorateCalculationResult(tab);
             populateCalculationResult(data, tab);
-            
+
             results['r-' + id] = {};
             results['r-' + id].result = data;
             results['r-' + id].request = calcRequest;
@@ -3716,27 +4051,27 @@ function runCalculation(context, tab, save, callback) {
                 if (versionId.indexOf('new') == -1 && versionId.indexOf('save') == -1) {
                     version.id = versionId;
                     version.name = $('.versionBar select option:selected', tab).text();
-                } else if(versionId.indexOf('save') >= 0){
+                } else if (versionId.indexOf('save') >= 0) {
 
                     version.name = $('.versionBar select option:selected', tab).text();
 
                 } else {
 
                     /*var maxId = 0;
-                    $(".versionBar select option", tab).each(function(){
-                        if(isNumber(parseInt($(this).val(), 10)) && parseInt($(this).val(), 10) > maxId){
-                            maxId = parseInt($(this).val(), 10);
-                        }
-                    });
-
-                    if(maxId > 0){
-                        version.name = "newScenario"+ maxId;
-                    }*/
+                     $(".versionBar select option", tab).each(function(){
+                     if(isNumber(parseInt($(this).val(), 10)) && parseInt($(this).val(), 10) > maxId){
+                     maxId = parseInt($(this).val(), 10);
+                     }
+                     });
+                     
+                     if(maxId > 0){
+                     version.name = "newScenario"+ maxId;
+                     }*/
 
                     //version.id = 0;
 
-                    version.name = "scenario "+$('.versionBar select option:selected', tab).text().replace("New Version ","");
-                    
+                    version.name = "scenario " + $('.versionBar select option:selected', tab).text().replace("New Version ", "");
+
 
                     //version.name = "newScenario"+Math.max.apply(null, $(".versionBar select option[value^='new']", tab).map(function(){ return parseInt($(this).val(),10);}).get());
                 }
@@ -3751,11 +4086,11 @@ function runCalculation(context, tab, save, callback) {
                     success: function(data, text, xhr) {
                         $('.resultsVal', tab).html(data.calculationResult.calculationStatus.name);
 
-                        if(data.id == 0){
+                        if (data.id == 0) {
                             data.id = versionId.replace("new", "save");
                         }
                         calculationRunning = false;
-                        if(callback){
+                        if (callback) {
                             callback(1, save, tab, data);
                         }
                         return true;
@@ -3763,7 +4098,7 @@ function runCalculation(context, tab, save, callback) {
                     error: function(a, b, c) {
                         calculationRunning = false;
                         alert('Fail to save calculation version, message:' + a.responseText);
-                        if(callback){
+                        if (callback) {
                             callback(0, save, tab);
                         }
                         return false;
@@ -3773,7 +4108,7 @@ function runCalculation(context, tab, save, callback) {
                 calculationRunning = false;
             }
 
-            if(callback){
+            if (callback) {
                 callback(1, save, tab);
             }
 
@@ -3782,7 +4117,7 @@ function runCalculation(context, tab, save, callback) {
         error: function(a, b, c) {
             calculationRunning = false;
             alert('Fail to run calculation, message:' + a.responseText);
-            if(callback){
+            if (callback) {
                 callback(0, save, tab);
             }
             return false;
@@ -3867,15 +4202,15 @@ function decorateCalculationResult(tab) {
 }
 
 // Bug Fix 2
-function shortenSelect(identifier, lengthToShortenTo){
+function shortenSelect(identifier, lengthToShortenTo) {
 
     // Shorten select option text if it stretches beyond max-width of select element
-    $.each($(identifier+' option'), function(key, optionElement) {
+    $.each($(identifier + ' option'), function(key, optionElement) {
         var curText = $(optionElement).text();
         $(this).attr('title', curText);
-    
+
         if (curText.length > lengthToShortenTo) {
-            $(this).text(curText.substring(0, lengthToShortenTo-3) + '... ' );
+            $(this).text(curText.substring(0, lengthToShortenTo - 3) + '... ');
         }
     });
 }
@@ -3923,12 +4258,12 @@ function addNewVersion(button, copy) {
     var emptyExists = false;
 
 
-    $.each(select.find("option[value^='new']"), function(){
+    $.each(select.find("option[value^='new']"), function() {
 
-        if(currentTbody.prop('id') == 'tbody-' + $(this).val()){
+        if (currentTbody.prop('id') == 'tbody-' + $(this).val()) {
 
             var newVers = $('tbody tr', table).not('.unsortable');
-            if(newVers.length == 0){
+            if (newVers.length == 0) {
 
                 emptyExists = true;
                 $('.newVersionImpossibleError').html('Please Enter at least one non empty calculation row in the current version before creating a new one.');
@@ -3942,7 +4277,7 @@ function addNewVersion(button, copy) {
 
             var newVers = $('.depositVersionTbodyArea tbody#tbody-' + $(this).val() + ' tr').not('.unsortable');
 
-            if(newVers.length == 0){
+            if (newVers.length == 0) {
 
                 emptyExists = true;
                 select.val($(this).val());
@@ -3957,7 +4292,7 @@ function addNewVersion(button, copy) {
 
     });
 
-    if(emptyExists){
+    if (emptyExists) {
 
         return;
     }
@@ -3991,7 +4326,7 @@ function addNewVersion(button, copy) {
 
     verSelector.append($('<option>', {
         value: newIndex,
-        text: 'New Version '+ formatFullDate(new Date())
+        text: 'New Version ' + formatFullDate(new Date())
     }));
     versionNum++;
 
@@ -4001,8 +4336,8 @@ function addNewVersion(button, copy) {
     $('option', select).sort(selectSortByText).appendTo($(select));
     select.val(newIndex);
     select.change();
-    
-    
+
+
 
 }
 
@@ -4035,39 +4370,39 @@ function updateCalculationVersionDeleteButton(tabName) {
     }
 }
 
-function predicatBy(prop){
-   return function(a,b){
-      if( a[prop] > b[prop]){
-          return 1;
-      }else if( a[prop] < b[prop] ){
-          return -1;
-      }
-      return 0;
-   }
+function predicatBy(prop) {
+    return function(a, b) {
+        if (a[prop] > b[prop]) {
+            return 1;
+        } else if (a[prop] < b[prop]) {
+            return -1;
+        }
+        return 0;
+    }
 }
 
-function selectSortByText(objA, objB){
+function selectSortByText(objA, objB) {
 
     return $(objA).text().localeCompare($(objB).text());
 
 }
 
-function runCalculationCallBack(res, save, tab, calculationVersion){
+function runCalculationCallBack(res, save, tab, calculationVersion) {
 
     var result = $(".validationStatusBar .resultsVal", tab);
 
-    if(save){
+    if (save) {
 
-        if(res === 1){
+        if (res === 1) {
 
             $(".jsCancelFunction", tab).hide();
             $(".jsTriggerBill", tab).show();
 
-            if(calculationVersion){
+            if (calculationVersion) {
 
                 var prevId = $('.versionBar select option:selected').val();
 
-                if(calculationVersion.id > 0 || (calculationVersion.id+"").indexOf("save") >= 0 ){
+                if (calculationVersion.id > 0 || (calculationVersion.id + "").indexOf("save") >= 0) {
 
                     $('.versionBar select option:selected').val(calculationVersion.id);
                     $(tab).data('currentVersionId', calculationVersion.id);
@@ -4084,12 +4419,12 @@ function runCalculationCallBack(res, save, tab, calculationVersion){
                     $('#validationSpan-' + prevId, tempArea).prop('id', 'validationSpan-' + calculationVersion.id);
 
                     //   OPM-188
-                    if((prevId+"") !== (calculationVersion.id+"")){
+                    if ((prevId + "") !== (calculationVersion.id + "")) {
 
                         results['r-' + calculationVersion.id] = results['r-' + prevId];
                         results['r-' + prevId] = {};
                     }
-                    
+
 
                 }
 
@@ -4097,23 +4432,23 @@ function runCalculationCallBack(res, save, tab, calculationVersion){
 
 
             }
-            
+
             /*var prevId = $('.versionBar select option:selected').val();
-            $('.versionBar select option:selected').val(calculationVersion.id);
-            $(tab).data('currentVersionId', calculationVersion.id);
-            $('tbody#tbody-' + prevId, tab).prop('id', calculationVersion.id);
-            var tabName = $(tab).hasClass('depositTab') ? 'depositTab' : 'redepositTab';
-            var tempArea = tabName == 'depositTab' ? $('.depositVersionTbodyArea') : $('.redepositVersionTbodyArea');
-            $('tbody#tbody-' + prevId, tempArea).prop('id', calculationVersion.id);*/
+             $('.versionBar select option:selected').val(calculationVersion.id);
+             $(tab).data('currentVersionId', calculationVersion.id);
+             $('tbody#tbody-' + prevId, tab).prop('id', calculationVersion.id);
+             var tabName = $(tab).hasClass('depositTab') ? 'depositTab' : 'redepositTab';
+             var tempArea = tabName == 'depositTab' ? $('.depositVersionTbodyArea') : $('.redepositVersionTbodyArea');
+             $('tbody#tbody-' + prevId, tempArea).prop('id', calculationVersion.id);*/
 
 
-        } else if (res === 0){
+        } else if (res === 0) {
             result.html("Failed").addClass("failLabel").removeClass('successLabel');
         }
 
     } else {
 
-        if(res === 0){
+        if (res === 0) {
             result.html("Failed").addClass("failLabel").removeClass('successLabel');
         }
     }
@@ -4156,8 +4491,8 @@ function populateCalculationVersion(account, tabName2) {
     $('.depositVersionTbodyArea').html("");
     $('.depositTab  .entriesTbl tbody').remove();
     //if (dvs.length == 0 && finish == false) {
-        //addNewVersion(select);
-        //return;
+    //addNewVersion(select);
+    //return;
     //}
 
     $.each(dvs, function(i) {
@@ -4166,7 +4501,7 @@ function populateCalculationVersion(account, tabName2) {
             option += " selected='selected'";
         }
         //    option += ">" + (i + 1) + "-" + this.name + "</option>";
-        option += ">"+ this.name + "</option>";
+        option += ">" + this.name + "</option>";
         select.append(option);
 
         var tbody = $('#versionTableTemplate tbody').clone();
@@ -4210,15 +4545,15 @@ function populateCalculationVersion(account, tabName2) {
         tbody.prop('id', 'tbody-' + this.id);
         tempArea.append(tbody);
         dateSpan.val(parseDateToString(this.calculationDate));
-        
+
         statusSpan.html(this.calculationResult.calculationStatus.name);
 
 
-        
+
         if (statusSpan.html() == 'Success' || statusSpan.html() == 'Calculation Saved' || statusSpan.html() == 'Calculation Triggered Pending' || statusSpan.html() == 'Calculation') {
             validationSpan.html('Success').addClass('successLabel').removeClass('failLabel');
             statusSpan.addClass('successLabel').removeClass('failLabel');
-        } else if(statusSpan.html() == 'Failure' || statusSpan.html() == 'Failed') {
+        } else if (statusSpan.html() == 'Failure' || statusSpan.html() == 'Failed') {
             validationSpan.html('Failure').removeClass('successLabel').addClass('failLabel');
             statusSpan.removeClass('successLabel').addClass('failLabel');
         } else {
@@ -4226,7 +4561,7 @@ function populateCalculationVersion(account, tabName2) {
             statusSpan.removeClass('successLabel').removeClass('failLabel');
         }
 
-        if(isNull(this.calculationResult) || isNull(this.calculationResult.items) || this.calculationResult.items.length == 0){
+        if (isNull(this.calculationResult) || isNull(this.calculationResult.items) || this.calculationResult.items.length == 0) {
             validationSpan.html('Unknown').removeClass('successLabel').removeClass('failLabel');
             statusSpan.html('Unknown').removeClass('successLabel').removeClass('failLabel');
             // dateSpan.val('');  // Commented in OPM-188 calculation Date is an input.
@@ -4255,10 +4590,10 @@ function populateCalculationVersion(account, tabName2) {
 
     var idFound = false;
 
-    if($(tab).data('currentVersionId') !== ""){
+    if ($(tab).data('currentVersionId') !== "") {
 
-        var cur = select.find("option[value='"+$(tab).data('currentVersionId')+"']");
-        if(cur.length != 0){
+        var cur = select.find("option[value='" + $(tab).data('currentVersionId') + "']");
+        if (cur.length != 0) {
             idFound = true;
             select.val($(tab).data('currentVersionId'));
 
@@ -4266,20 +4601,20 @@ function populateCalculationVersion(account, tabName2) {
 
     }
 
-    if(!idFound && $(tab).data('currentVersionName') !== ""){
+    if (!idFound && $(tab).data('currentVersionName') !== "") {
 
-        select.find('option').filter(function(index){
+        select.find('option').filter(function(index) {
             return $(this).text() === $(tab).data('currentVersionName');
 
         }).prop('selected', true);
 
-    } 
+    }
 
-    if(select.val() !== ''){
+    if (select.val() !== '') {
         select.change();
     }
 
-    
+
 
     if (dvs.length == 0 && finish == false) {
         addNewVersion(select);
@@ -4288,246 +4623,246 @@ function populateCalculationVersion(account, tabName2) {
 
 
 function numberWithCommas(x) {
-	if (x == null) {
-		return "0";
-	}
-	var prefix = "";
-	if (x < 0) {
-		prefix = "-";
-		x = -x;
-	}
+    if (x == null) {
+        return "0";
+    }
+    var prefix = "";
+    if (x < 0) {
+        prefix = "-";
+        x = -x;
+    }
     var parts = x.toString().split(".");
     parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     return prefix + parts.join(".");
 }
 
 function formatReportMoney(money) {
-	if (money == null) {
-		return '';
-	}
-	return '$' + numberWithCommas(money.toFixed(2));
+    if (money == null) {
+        return '';
+    }
+    return '$' + numberWithCommas(money.toFixed(2));
 }
 
 function renderReportAccountingSummaryReportInViewAccountPage(panel, response) {
-	var titleArea = $(".reportTitleArea", panel);
-	$(titleArea).children("h1").text(response.reportName);
-	$(titleArea).find(".realReportDate").text(parseDateToString(response.reportGenerationDate));
-	
-	var theTbody = $("table.reportRealTable", panel);
-	theTbody.html($("table.reportTemplateTable", panel).html());
-	
-	theTbody.find("tr:eq(1) td:eq(2)").text(formatReportMoney(response.receipts));
-	theTbody.find("tr:eq(2) td:eq(2)").text(formatReportMoney(response.suspense));
-	theTbody.find("tr:eq(3) td:eq(2)").text(formatReportMoney(response.totalReceipts));
-	theTbody.find("tr:eq(4) td:eq(2)").text(formatReportMoney(response.replacedAccounts));
-	theTbody.find("tr:eq(5) td:eq(2)").text(formatReportMoney(response.adjustmentPlus));
-	theTbody.find("tr:eq(6) td:eq(2)").text(formatReportMoney(response.totalAdditions));
-	theTbody.find("tr:eq(11) td:eq(2)").text(formatReportMoney(response.debitVouchers));
-	theTbody.find("tr:eq(12) td:eq(2)").text(formatReportMoney(response.adjustmentMinus));
-	theTbody.find("tr:eq(13) td:eq(2)").text(formatReportMoney(response.totalDeductions));
-	theTbody.find("tr:eq(14) td:eq(1)").text(formatReportMoney(response.netChange));
+    var titleArea = $(".reportTitleArea", panel);
+    $(titleArea).children("h1").text(response.reportName);
+    $(titleArea).find(".realReportDate").text(parseDateToString(response.reportGenerationDate));
+
+    var theTbody = $("table.reportRealTable", panel);
+    theTbody.html($("table.reportTemplateTable", panel).html());
+
+    theTbody.find("tr:eq(1) td:eq(2)").text(formatReportMoney(response.receipts));
+    theTbody.find("tr:eq(2) td:eq(2)").text(formatReportMoney(response.suspense));
+    theTbody.find("tr:eq(3) td:eq(2)").text(formatReportMoney(response.totalReceipts));
+    theTbody.find("tr:eq(4) td:eq(2)").text(formatReportMoney(response.replacedAccounts));
+    theTbody.find("tr:eq(5) td:eq(2)").text(formatReportMoney(response.adjustmentPlus));
+    theTbody.find("tr:eq(6) td:eq(2)").text(formatReportMoney(response.totalAdditions));
+    theTbody.find("tr:eq(11) td:eq(2)").text(formatReportMoney(response.debitVouchers));
+    theTbody.find("tr:eq(12) td:eq(2)").text(formatReportMoney(response.adjustmentMinus));
+    theTbody.find("tr:eq(13) td:eq(2)").text(formatReportMoney(response.totalDeductions));
+    theTbody.find("tr:eq(14) td:eq(1)").text(formatReportMoney(response.netChange));
 }
 
 
 function renderReportAccountNotesByUserInPaymentPage(panel, response) {
-	var titleArea = $(".reportTitleArea", panel);
-	$(titleArea).find(".reportDate").text(parseDateToString(response.reportGenerationDate));
-	$(titleArea).children("h1").text(response.reportName);
-	
-	var groups = {};
-	// assuming that all items are sort in auditDateTime
-	var items = response.items;
-	for (var i = 0; i < items.length; i++) {
-		var item = items[i];
-		var key = $.format.date(new Date(item.auditDateTime).toString(), "MM/dd/yyyy") + " - " + item.userDescription;
-		var theList = groups[key];
-		if (theList == null) {
-			theList = [];
-			groups[key] = theList;
-		}
-		theList.push(item);
-	}
-	
-	var theTable = $('table.AccountNotesByUserTbl', panel);
-	var theTbody = $('tbody', theTable);
-	var templateTbody = $('table.reportTemplateTable tbody', panel);
-	var tTitleRow = $("tr.tTitleRow", templateTbody).clone();
-	var tHeadRow = $("tr.tHeadRow", templateTbody).clone();
-	var tDataRow = $("tr.tDataRow", templateTbody).clone();
-	var tSeperateRow = $("tr.tSeperateRow", templateTbody).clone();
-	
-	// clear the body
-	theTbody.html('');
-	
-	for (var key in groups) {
-		var theList = groups[key];
-		var titleRow = tTitleRow.clone();
-		titleRow.find("td:eq(0)").text(key);
-		theTbody.append(titleRow);
-		theTbody.append(tHeadRow.clone());
-		for (var i = 0; i < theList.length; i++) {
-			var item = theList[i];
-			var dataRow = tDataRow.clone();
-			dataRow.find("td:eq(0)").text($.format.date(new Date(item.auditDateTime).toString(), "HH:mm p"));
-			dataRow.find("td:eq(1)").text(item.databaseTable == null ? '' : item.databaseTable);
+    var titleArea = $(".reportTitleArea", panel);
+    $(titleArea).find(".reportDate").text(parseDateToString(response.reportGenerationDate));
+    $(titleArea).children("h1").text(response.reportName);
 
-			dataRow.find("td:eq(2)").text(item.activity);
-			dataRow.find("td:eq(3)").text(item.csd);
-			dataRow.find("td:eq(4)").text(item.description);
-			theTbody.append(dataRow);
-		}
-		theTbody.append(tSeperateRow.clone());
-	}
-	
-	
+    var groups = {};
+    // assuming that all items are sort in auditDateTime
+    var items = response.items;
+    for (var i = 0; i < items.length; i++) {
+        var item = items[i];
+        var key = $.format.date(new Date(item.auditDateTime).toString(), "MM/dd/yyyy") + " - " + item.userDescription;
+        var theList = groups[key];
+        if (theList == null) {
+            theList = [];
+            groups[key] = theList;
+        }
+        theList.push(item);
+    }
+
+    var theTable = $('table.AccountNotesByUserTbl', panel);
+    var theTbody = $('tbody', theTable);
+    var templateTbody = $('table.reportTemplateTable tbody', panel);
+    var tTitleRow = $("tr.tTitleRow", templateTbody).clone();
+    var tHeadRow = $("tr.tHeadRow", templateTbody).clone();
+    var tDataRow = $("tr.tDataRow", templateTbody).clone();
+    var tSeperateRow = $("tr.tSeperateRow", templateTbody).clone();
+
+    // clear the body
+    theTbody.html('');
+
+    for (var key in groups) {
+        var theList = groups[key];
+        var titleRow = tTitleRow.clone();
+        titleRow.find("td:eq(0)").text(key);
+        theTbody.append(titleRow);
+        theTbody.append(tHeadRow.clone());
+        for (var i = 0; i < theList.length; i++) {
+            var item = theList[i];
+            var dataRow = tDataRow.clone();
+            dataRow.find("td:eq(0)").text($.format.date(new Date(item.auditDateTime).toString(), "HH:mm p"));
+            dataRow.find("td:eq(1)").text(item.databaseTable == null ? '' : item.databaseTable);
+
+            dataRow.find("td:eq(2)").text(item.activity);
+            dataRow.find("td:eq(3)").text(item.csd);
+            dataRow.find("td:eq(4)").text(item.description);
+            theTbody.append(dataRow);
+        }
+        theTbody.append(tSeperateRow.clone());
+    }
+
+
 }
 
 function renderReportCurrentSuspenseInSuspensePage(panel, response) {
-	var titleArea = $(".reportTitleArea", panel);
-	$(titleArea).find(".reportDate").text(parseDateToString(response.reportGenerationDate));
-	$(titleArea).children("h1").text(response.reportName);
-	
-	
-	// find all the rows template
-	var theTbody = $("table.reportRealTable tbody", panel);
-	var templateBody = $("table.reportTemplateTable tbody", panel);
-	
-	var tHeadRow = $("tr.tHeadRow", templateBody).clone();
-	var tDataRow = $("tr.tDataRow", templateBody).clone();
-	var tSeperateRow = $("tr.sepRow", templateBody).clone();
-	var tTitleRow = $("tr.tTitleRow", templateBody).clone();
-	var tTotalRow = $("tr.totalRow", templateBody).clone();
-	
-	theTbody.html('');
-	
-	var checks = [];
-	var achs = [];
-	for (var i = 0; i < response.items.length; i++) {
-		var item = response.items[i];
-		if (item.ach) {
-			achs.push(item);
-		} else {
-			checks.push(item);
-		}
-	}
-	
-	// checks
-	var titleRow = tTitleRow.clone();
-	titleRow.find('td:eq(0)').text('Check Payments from Lockbox');
-	theTbody.append(titleRow);
-	
-	var headRow = tHeadRow.clone();
-	theTbody.append(headRow);
-	var sum = 0;
-	for (var i = 0; i < checks.length; i++) {
-		var item = checks[i];
-		var dataRow = tDataRow.clone();
-		dataRow.find("td:eq(0)").text(item.paymentStatus ? item.paymentStatus : '');
-		dataRow.find("td:eq(1)").text($.format.date(new Date(item.date).toString(), "MM/dd/yyyy"));
-		dataRow.find("td:eq(2)").text(item.batchNumber);
-		dataRow.find("td:eq(3)").text(item.csd);
-		dataRow.find("td:eq(4)").text('$' + numberWithCommas(item.amount.toFixed(2)));
-		dataRow.find("td:eq(5)").text($.format.date(new Date(item.birthDate).toString(), "MM/dd/yyyy"));
-		dataRow.find("td:eq(6)").text(item.claimant);
-		dataRow.find("td:eq(7)").text('$' + numberWithCommas(item.balance.toFixed(2)));
-		dataRow.find("td:eq(8)").text(item.accountStatus);
-		if (item.amount) {
-			sum += item.amount;
-		}
-		theTbody.append(dataRow);
-	}
-	var totalRow = tTotalRow.clone();
-	totalRow.find("td:eq(0)").text("Check Payments from Lockbox");
-	totalRow.find("td:eq(1)").text('$' + numberWithCommas(sum.toFixed(2)));
-	theTbody.append(totalRow);
-	
-	theTbody.append(tSeperateRow.clone());
-	theTbody.append(tSeperateRow.clone());
-	theTbody.append(tSeperateRow.clone());
-	
-	titleRow = tTitleRow.clone();
-	titleRow.find('td:eq(0)').text('ACH Payments from Lockbox');
-	theTbody.append(titleRow);
-	
-	headRow = tHeadRow.clone();
-	theTbody.append(headRow);
-	sum = 0;
-	for (var i = 0; i < achs.length; i++) {
-		var item = achs[i];
-		var dataRow = tDataRow.clone();
-		dataRow.find("td:eq(0)").text(item.paymentStatus ? item.paymentStatus : '');
-		dataRow.find("td:eq(1)").text($.format.date(new Date(item.date).toString(), "MM/dd/yyyy"));
-		dataRow.find("td:eq(2)").text(item.batchNumber);
-		dataRow.find("td:eq(3)").text(item.csd);
-		dataRow.find("td:eq(4)").text(item.amount ? '$' + numberWithCommas(item.amount.toFixed(2)) : '');
-		dataRow.find("td:eq(5)").text($.format.date(new Date(item.birthDate).toString(), "MM/dd/yyyy"));
-		dataRow.find("td:eq(6)").text(item.claimant);
-		dataRow.find("td:eq(7)").text(item.balance ? '$' + numberWithCommas(item.balance.toFixed(2)) : '');
-		dataRow.find("td:eq(8)").text(item.accountStatus);
-		if (item.amount) {
-			sum += item.amount;
-		}
-		theTbody.append(dataRow);
-	}
-	totalRow = tTotalRow.clone();
-	totalRow.find("td:eq(0)").text("ACH Payments from Lockbox");
-	totalRow.find("td:eq(1)").text('$' + numberWithCommas(sum.toFixed(2)));
-	theTbody.append(totalRow);
-	
-	// grand total
-	totalRow = tTotalRow.clone();
-	totalRow.find("td:eq(0)").text("");
-	totalRow.find("td:eq(1)").text('$' + numberWithCommas(response.totalPayment));
-	theTbody.append(totalRow);
-	
+    var titleArea = $(".reportTitleArea", panel);
+    $(titleArea).find(".reportDate").text(parseDateToString(response.reportGenerationDate));
+    $(titleArea).children("h1").text(response.reportName);
+
+
+    // find all the rows template
+    var theTbody = $("table.reportRealTable tbody", panel);
+    var templateBody = $("table.reportTemplateTable tbody", panel);
+
+    var tHeadRow = $("tr.tHeadRow", templateBody).clone();
+    var tDataRow = $("tr.tDataRow", templateBody).clone();
+    var tSeperateRow = $("tr.sepRow", templateBody).clone();
+    var tTitleRow = $("tr.tTitleRow", templateBody).clone();
+    var tTotalRow = $("tr.totalRow", templateBody).clone();
+
+    theTbody.html('');
+
+    var checks = [];
+    var achs = [];
+    for (var i = 0; i < response.items.length; i++) {
+        var item = response.items[i];
+        if (item.ach) {
+            achs.push(item);
+        } else {
+            checks.push(item);
+        }
+    }
+
+    // checks
+    var titleRow = tTitleRow.clone();
+    titleRow.find('td:eq(0)').text('Check Payments from Lockbox');
+    theTbody.append(titleRow);
+
+    var headRow = tHeadRow.clone();
+    theTbody.append(headRow);
+    var sum = 0;
+    for (var i = 0; i < checks.length; i++) {
+        var item = checks[i];
+        var dataRow = tDataRow.clone();
+        dataRow.find("td:eq(0)").text(item.paymentStatus ? item.paymentStatus : '');
+        dataRow.find("td:eq(1)").text($.format.date(new Date(item.date).toString(), "MM/dd/yyyy"));
+        dataRow.find("td:eq(2)").text(item.batchNumber);
+        dataRow.find("td:eq(3)").text(item.csd);
+        dataRow.find("td:eq(4)").text('$' + numberWithCommas(item.amount.toFixed(2)));
+        dataRow.find("td:eq(5)").text($.format.date(new Date(item.birthDate).toString(), "MM/dd/yyyy"));
+        dataRow.find("td:eq(6)").text(item.claimant);
+        dataRow.find("td:eq(7)").text('$' + numberWithCommas(item.balance.toFixed(2)));
+        dataRow.find("td:eq(8)").text(item.accountStatus);
+        if (item.amount) {
+            sum += item.amount;
+        }
+        theTbody.append(dataRow);
+    }
+    var totalRow = tTotalRow.clone();
+    totalRow.find("td:eq(0)").text("Check Payments from Lockbox");
+    totalRow.find("td:eq(1)").text('$' + numberWithCommas(sum.toFixed(2)));
+    theTbody.append(totalRow);
+
+    theTbody.append(tSeperateRow.clone());
+    theTbody.append(tSeperateRow.clone());
+    theTbody.append(tSeperateRow.clone());
+
+    titleRow = tTitleRow.clone();
+    titleRow.find('td:eq(0)').text('ACH Payments from Lockbox');
+    theTbody.append(titleRow);
+
+    headRow = tHeadRow.clone();
+    theTbody.append(headRow);
+    sum = 0;
+    for (var i = 0; i < achs.length; i++) {
+        var item = achs[i];
+        var dataRow = tDataRow.clone();
+        dataRow.find("td:eq(0)").text(item.paymentStatus ? item.paymentStatus : '');
+        dataRow.find("td:eq(1)").text($.format.date(new Date(item.date).toString(), "MM/dd/yyyy"));
+        dataRow.find("td:eq(2)").text(item.batchNumber);
+        dataRow.find("td:eq(3)").text(item.csd);
+        dataRow.find("td:eq(4)").text(item.amount ? '$' + numberWithCommas(item.amount.toFixed(2)) : '');
+        dataRow.find("td:eq(5)").text($.format.date(new Date(item.birthDate).toString(), "MM/dd/yyyy"));
+        dataRow.find("td:eq(6)").text(item.claimant);
+        dataRow.find("td:eq(7)").text(item.balance ? '$' + numberWithCommas(item.balance.toFixed(2)) : '');
+        dataRow.find("td:eq(8)").text(item.accountStatus);
+        if (item.amount) {
+            sum += item.amount;
+        }
+        theTbody.append(dataRow);
+    }
+    totalRow = tTotalRow.clone();
+    totalRow.find("td:eq(0)").text("ACH Payments from Lockbox");
+    totalRow.find("td:eq(1)").text('$' + numberWithCommas(sum.toFixed(2)));
+    theTbody.append(totalRow);
+
+    // grand total
+    totalRow = tTotalRow.clone();
+    totalRow.find("td:eq(0)").text("");
+    totalRow.find("td:eq(1)").text('$' + numberWithCommas(response.totalPayment));
+    theTbody.append(totalRow);
+
 }
 
 function renderReportPaymentHistoryInViewAccountPage(panel, response) {
-	var titleArea = $(".reportTitleArea", panel);
-	$(titleArea).children("h1").text(response.reportName);
-	
-	var infoBlock = $("table.infoTable tbody tr:eq(0)", panel);
-	infoBlock.find("span:eq(0)").text(response.username);
-	infoBlock.find("span:eq(1)").text(response.city);
-	infoBlock.find("span:eq(2)").text(response.address1);
-	infoBlock.find("span:eq(3)").text(response.address2);
-	infoBlock.find("span:eq(4)").text(response.state + ' ' + response.zip);
-	infoBlock.find("span:eq(5)").text(response.csd);
-	infoBlock.find("span:eq(6)").text(formatDateTime(response.reportGenerationDate));
-	
-	// find all the rows template
-	var theTbody = $("table.reportRealTable tbody", panel);
-	var templateBody = $("table.reportTemplateTable tbody", panel);
-	
-	theTbody.html('');
-	
-	var tDataRow = $("tr.tDataRow", templateBody).clone();
-	for (var i = 0; i < response.items.length; i++) {
-		var item = response.items[i];
-		var dataRow = tDataRow.clone();
-		dataRow.find("td:eq(0)").text(formatDateTime(item.dateOfPayment));
-		dataRow.find("td:eq(1)").text(formatDateTime(item.processDate));
-		dataRow.find("td:eq(2)").text(formatReportMoney(item.balanceDueBeforePayment));
-		dataRow.find("td:eq(3)").text(formatReportMoney(item.interestOnPrior));
-		dataRow.find("td:eq(4)").text(formatReportMoney(item.dueBeforePayment));
-		dataRow.find("td:eq(5)").text(formatReportMoney(item.paymentAmount));
-		dataRow.find("td:eq(6)").text(formatReportMoney(item.balanceDueAfterPayment));
-		dataRow.find("td:eq(7)").text(formatReportMoney(item.totalOfPaymentsToDate));
-		theTbody.append(dataRow);
-	}
-	
+    var titleArea = $(".reportTitleArea", panel);
+    $(titleArea).children("h1").text(response.reportName);
+
+    var infoBlock = $("table.infoTable tbody tr:eq(0)", panel);
+    infoBlock.find("span:eq(0)").text(response.username);
+    infoBlock.find("span:eq(1)").text(response.city);
+    infoBlock.find("span:eq(2)").text(response.address1);
+    infoBlock.find("span:eq(3)").text(response.address2);
+    infoBlock.find("span:eq(4)").text(response.state + ' ' + response.zip);
+    infoBlock.find("span:eq(5)").text(response.csd);
+    infoBlock.find("span:eq(6)").text(formatDateTime(response.reportGenerationDate));
+
+    // find all the rows template
+    var theTbody = $("table.reportRealTable tbody", panel);
+    var templateBody = $("table.reportTemplateTable tbody", panel);
+
+    theTbody.html('');
+
+    var tDataRow = $("tr.tDataRow", templateBody).clone();
+    for (var i = 0; i < response.items.length; i++) {
+        var item = response.items[i];
+        var dataRow = tDataRow.clone();
+        dataRow.find("td:eq(0)").text(formatDateTime(item.dateOfPayment));
+        dataRow.find("td:eq(1)").text(formatDateTime(item.processDate));
+        dataRow.find("td:eq(2)").text(formatReportMoney(item.balanceDueBeforePayment));
+        dataRow.find("td:eq(3)").text(formatReportMoney(item.interestOnPrior));
+        dataRow.find("td:eq(4)").text(formatReportMoney(item.dueBeforePayment));
+        dataRow.find("td:eq(5)").text(formatReportMoney(item.paymentAmount));
+        dataRow.find("td:eq(6)").text(formatReportMoney(item.balanceDueAfterPayment));
+        dataRow.find("td:eq(7)").text(formatReportMoney(item.totalOfPaymentsToDate));
+        theTbody.append(dataRow);
+    }
+
 }
 
 function formatDateTime(dateTime, fmt) {
-	if (!fmt) {
-		fmt = "MM/dd/yyyy";
-	} 
-	return $.format.date(new Date(dateTime).toString(), fmt);
+    if (!fmt) {
+        fmt = "MM/dd/yyyy";
+    }
+    return $.format.date(new Date(dateTime).toString(), fmt);
 }
 
-function parseObjToString(obj){
+function parseObjToString(obj) {
 
-    if(isNull(obj)){
+    if (isNull(obj)) {
         return "";
     }
 
@@ -4573,16 +4908,16 @@ function calculatePeriodInDays(startDate, endDateI) {
 }
 
 
-function formatDaysInYearMonthDay(days){
+function formatDaysInYearMonthDay(days) {
 
-    
 
-    var year =  Math.floor(days/(30*12));
 
-    days = days%(30*12);
+    var year = Math.floor(days / (30 * 12));
 
-    var month = Math.floor(days/(30));
-    days = days%30;
+    days = days % (30 * 12);
+
+    var month = Math.floor(days / (30));
+    days = days % 30;
 
 
     return year + " years, " + month + " months, and " + days + " days";
@@ -4591,9 +4926,9 @@ function formatDaysInYearMonthDay(days){
 }
 
 
-function getExactYearInDays(days){
+function getExactYearInDays(days) {
 
-    return days/(30*12);
+    return days / (30 * 12);
 }
 
 function getCalculationResult(result) {
@@ -4694,77 +5029,175 @@ function getCalculationResult(result) {
 }
 
 function showPrintReport(reportName, request, render, printPopup) {
-	var context = $('#context').val();
-	var url =  context + '/report/get';
-	$.ajax({
-		url:url,
-		data:{
-			requestJSON:JSON.stringify(request),
-			reportName:reportName
-		},
-		type:"POST",
-		async:true,
-		dataType:"json",
-		success:function(response) {
-			// copy to the print div
-			var previewArea = $(printPopup).find(".printPreviewArea");
-			
-			// lookup the render panel
-			previewArea.empty();
-			
-			var panel = $(".report-" + reportName).clone();
-			render(panel, response);
-			
-			panel.removeClass("isHidden");
-			previewArea.append(panel);
-			
-			// update the links
-			var theLink = context + '/report/download?requestJSON=' + JSON.stringify(request) + '&reportName=' + reportName + '&exportType=';
-			var pdfLink = $('.pdfLink', $(printPopup));
-			var docLink = $('.docLink', $(printPopup));
-			var rtfLink = $('.rtfLink', $(printPopup));
-			pdfLink.attr({
-				href:theLink + 'PDF',
-				target:'_blank'
-			});
-			docLink.attr({
-				href:theLink + 'DOC',
-				target:'_blank'
-			});
-			rtfLink.attr({
-				href:theLink + 'RTF',
-				target:'_blank'
-			});
-			
-			// show popup
-			showPopup(printPopup)
-		},
-		error:function() {
-			alert("failed to get the report data");
-		}
-	});
+    var context = $('#context').val();
+    var url = context + '/report/get';
+    $.ajax({
+        url: url,
+        data: {
+            requestJSON: JSON.stringify(request),
+            reportName: reportName
+        },
+        type: "POST",
+        async: true,
+        dataType: "json",
+        success: function(response) {
+            // copy to the print div
+            var previewArea = $(printPopup).find(".printPreviewArea");
+
+            // lookup the render panel
+            previewArea.empty();
+
+            var panel = $(".report-" + reportName).clone();
+            render(panel, response);
+
+            panel.removeClass("isHidden");
+            previewArea.append(panel);
+
+            // update the links
+            var theLink = context + '/report/download?requestJSON=' + JSON.stringify(request) + '&reportName=' + reportName + '&exportType=';
+            var pdfLink = $('.pdfLink', $(printPopup));
+            var docLink = $('.docLink', $(printPopup));
+            var rtfLink = $('.rtfLink', $(printPopup));
+            pdfLink.attr({
+                href: theLink + 'PDF',
+                target: '_blank'
+            });
+            docLink.attr({
+                href: theLink + 'DOC',
+                target: '_blank'
+            });
+            rtfLink.attr({
+                href: theLink + 'RTF',
+                target: '_blank'
+            });
+
+            // show popup
+            showPopup(printPopup)
+        },
+        error: function() {
+            alert("failed to get the report data");
+        }
+    });
 }
 
 function printPopup(data) {
-	var context = $('#context').val();
+    var context = $('#context').val();
     var mywindow = window.open(context + '/report/preview', '_blank', "width=800, heigh=600");
     var theInterval = setInterval(function() {
-    	mywindow && mywindow.initPreview && mywindow.initPreview(data);
+        mywindow && mywindow.initPreview && mywindow.initPreview(data);
     }, 200);
-    
-    openerCleanup = function(){ 
-    	$('#loadingOverlay').hide();
-    	clearInterval(theInterval);
+
+    openerCleanup = function() {
+        $('#loadingOverlay').hide();
+        clearInterval(theInterval);
     }
-    
+
     return true;
 }
 
 $(document).on("click", ".jsDoPrintReport", function() {
-	$('#loadingOverlay').show();
-	var that = this;
-	setTimeout(function() {
-		var printArea = $(that).closest('.popup').find(".printScrollArea");
-		printPopup(printArea.clone().html());
-	}, 100);
+    $('#loadingOverlay').show();
+    var that = this;
+    setTimeout(function() {
+        var printArea = $(that).closest('.popup').find(".printScrollArea");
+        printPopup(printArea.clone().html());
+    }, 100);
 });
+
+function buildAddrerssString(address) {
+    var str = address.street1 + '<br/>';
+    if (address.street2 != null) {
+        str += address.street2 + '<br/>';
+    }
+    if (address.street3 != null) {
+        str += address.street3 + '<br/>';
+    }
+    if (address.street4 != null) {
+        str += address.street4 + '<br/>';
+    }
+    if (address.street5 != null) {
+        str += address.street5 + '<br/>';
+    }
+    var stateString = '';
+    if (address.state != null && address.state.name != 'Not Applicable') {
+        stateString = address.state.name;
+    }
+    str += address.city + ', ' + stateString + ' ' + address.zipCode;
+    return str;
+}
+
+function shortDate(date) {
+    var d = new Date(date);
+    var shortYear = d.getFullYear() % 100;
+    if (shortYear < 10) {
+        shortYear = '0' + shortYear
+    }
+    return (d.getMonth() + 1) + '/' + d.getDate() + '/' + shortYear;
+}
+
+function getOfficialVersion(versions) {
+    var result = null;
+    $.each(versions, function() {
+        if (this.calculationResult.official == true) {
+            if (result == null) {
+                result = this;
+            } else {
+                if (this.calculationDate > result.calculationDate) {
+                    result = this;
+                }
+            }
+        }
+    });
+    return result;
+}
+
+function aggregateCalculationResult(calculationResult) {
+    var result = {
+        FERS_DEPOSIT: {total: {
+                deduction: 0,
+                interest: 0,
+                payments: 0,
+                total: 0
+
+            }, items: []},
+        FERS_REDEPOSIT: {total: {
+                deduction: 0,
+                interest: 0,
+                payments: 0,
+                total: 0
+            },
+            items: []},
+        CSRS_DEPOSIT: {total: {
+                deduction: 0,
+                interest: 0,
+                payments: 0,
+                total: 0
+            },
+            items: []},
+        CSRS_REDEPOSIT: {total: {
+                deduction: 0,
+                interest: 0,
+                payments: 0,
+                total: 0
+            },
+            items: []},
+        ALL_TOTAL: {
+            deduction: 0,
+            interest: 0,
+            payments: 0,
+            total: 0
+        }
+    };
+    $.each(calculationResult.items, function() {
+        result[this.retirementType.name + '_' + this.periodType.name].items.push(this);
+        result[this.retirementType.name + '_' + this.periodType.name].total.deduction += this.deductionAmount;
+        result[this.retirementType.name + '_' + this.periodType.name].total.interest += this.totalInterest;
+        result[this.retirementType.name + '_' + this.periodType.name].total.payments += this.paymentsApplied;
+        result[this.retirementType.name + '_' + this.periodType.name].total.total += this.balance;
+        result.ALL_TOTAL.deduction += this.deductionAmount;
+        result.ALL_TOTAL.interest += this.totalInterest;
+        result.ALL_TOTAL.payments += this.paymentsApplied;
+        result.ALL_TOTAL.total += this.balance;
+    });
+    return result;
+}

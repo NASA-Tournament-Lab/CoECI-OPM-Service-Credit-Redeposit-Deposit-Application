@@ -56,6 +56,7 @@ DROP TABLE IF EXISTS opm.calculation_result_item;
 DROP TABLE IF EXISTS opm.calculation;
 DROP TABLE IF EXISTS opm.calculation_version;
 DROP TABLE IF EXISTS opm.calculation_result;
+DROP TABLE IF EXISTS opm.deduction_calculation_detail;
 DROP TABLE IF EXISTS opm.summary_data;
 DROP TABLE IF EXISTS opm.billing;
 DROP TABLE IF EXISTS opm.account_note;

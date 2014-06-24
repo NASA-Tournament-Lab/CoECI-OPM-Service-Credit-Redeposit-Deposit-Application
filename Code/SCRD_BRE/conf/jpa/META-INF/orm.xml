@@ -978,6 +978,12 @@
             <many-to-one name="agencyCode" target-entity="gov.opm.scrd.entities.lookup.AgencyCode" fetch="EAGER">
                 <join-column name="agency_code_id" referenced-column-name="id" nullable="true" />
             </many-to-one>
+            <one-to-one name="deductionCalculationDetail" target-entity="gov.opm.scrd.entities.application.DeductionCalculationDetail" fetch="LAZY" orphan-removal="true">
+                <join-column name="deduction_calculation_detail_id" referenced-column-name="id" nullable="true" />
+                <cascade>
+                  <cascade-all/>
+                </cascade>
+            </one-to-one>
         </attributes>
     </entity>
 
@@ -999,6 +1005,12 @@
             <many-to-one name="calculationStatus" target-entity="gov.opm.scrd.entities.lookup.CalculationStatus" fetch="EAGER">
                 <join-column name="calculation_status_id" referenced-column-name="id" nullable="false" />
             </many-to-one>
+            <one-to-many name="calculations" target-entity="gov.opm.scrd.entities.application.Calculation" fetch="LAZY" orphan-removal="true">
+                <join-column name="calculation_result_id" referenced-column-name="id" nullable="false" />
+                <cascade>
+                  <cascade-all/>
+                </cascade>
+            </one-to-many>
             <one-to-many name="items" target-entity="gov.opm.scrd.entities.application.CalculationResultItem" fetch="LAZY">
                 <join-column name="calculation_result_id" referenced-column-name="id" nullable="false" />
                 <cascade>
@@ -1024,6 +1036,30 @@
                 </cascade>
             </one-to-one>
         </attributes>
+    </entity>
+    
+    <entity class="gov.opm.scrd.entities.application.DeductionCalculationDetail">
+        <table name="deduction_calculation_detail"/>
+        <attributes>
+            <basic name="deductionRate">
+                <column name="deduction_rate" nullable="true"/>
+            </basic>
+            
+            <basic name="totalRunningEarnings">
+                <column name="total_running_earnings" nullable="true"/>
+            </basic>
+            
+            <basic name="totalRunningDeductions">
+                <column name="total_running_deductions" nullable="true"/>
+            </basic>
+            
+            <basic name="runningDeductions">
+                <column name="running_deductions" nullable="true"/>
+            </basic>
+            
+                  
+        </attributes>
+    
     </entity>
 
     <entity class="gov.opm.scrd.entities.application.IntermediateResult">

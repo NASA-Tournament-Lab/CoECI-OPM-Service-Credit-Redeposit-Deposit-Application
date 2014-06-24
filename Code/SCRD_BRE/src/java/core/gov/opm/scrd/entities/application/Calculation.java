@@ -207,6 +207,13 @@ public class Calculation extends IdentifiableEntity {
     private boolean frozen;
     
     /**
+     * <p>
+     * The calculation details
+     * </p>
+     */
+    private DeductionCalculationDetail  deductionCalculationDetail;
+    
+    /**
      * Creates an instance of Calculation.
      */
     public Calculation() {
@@ -568,5 +575,28 @@ public class Calculation extends IdentifiableEntity {
      */
     public void setFrozen(boolean frozen) {
         this.frozen = frozen;
+    }
+
+    /**
+     * <p>
+     * Gets the deductionCalculationDetail value.
+     * </p>
+     *
+     * @return the deductionCalculationDetail
+     */
+    public DeductionCalculationDetail getDeductionCalculationDetail() {
+        return deductionCalculationDetail;
+    }
+
+    /**
+     * <p>
+     * Sets the given value to deductionCalculationDetail.
+     * </p>
+     *
+     * @param deductionCalculationDetail the deductionCalculationDetail to set
+     */
+    public void setDeductionCalculationDetail(
+            DeductionCalculationDetail deductionCalculationDetail) {
+        this.deductionCalculationDetail = deductionCalculationDetail;
     }
 }

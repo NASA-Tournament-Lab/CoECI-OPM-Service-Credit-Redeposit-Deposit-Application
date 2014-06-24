@@ -42,6 +42,14 @@ import java.util.List;
  * @version 1.1
  */
 public class CalculationResult extends IdentifiableEntity {
+    
+    /**
+     * <p>
+     * Represents the list of individual calculation items of calculation version. It is managed with a getter and
+     * setter. It may have any value. It is fully mutable.
+     * </p>
+     */
+    private List<Calculation> calculations;
     /**
      * <p>
      * Represents the individual result of calculation result. It is managed with a getter and setter. It may have any
@@ -294,5 +302,27 @@ public class CalculationResult extends IdentifiableEntity {
      */
     public void setInterestAccrualDate(Date interestAccrualDate) {
         this.interestAccrualDate = interestAccrualDate;
+    }
+
+    /**
+     * <p>
+     * Gets the calculations value.
+     * </p>
+     *
+     * @return the calculations
+     */
+    public List<Calculation> getCalculations() {
+        return calculations;
+    }
+
+    /**
+     * <p>
+     * Sets the given value to calculations.
+     * </p>
+     *
+     * @param calculations the calculations to set
+     */
+    public void setCalculations(List<Calculation> calculations) {
+        this.calculations = calculations;
     }
 }

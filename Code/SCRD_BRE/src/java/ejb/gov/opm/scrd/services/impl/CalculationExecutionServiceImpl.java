@@ -22,6 +22,7 @@ import gov.opm.scrd.entities.application.Calculation;
 import gov.opm.scrd.entities.application.CalculationResult;
 import gov.opm.scrd.entities.application.CalculationResultItem;
 import gov.opm.scrd.entities.application.Dedeposit;
+import gov.opm.scrd.entities.application.DeductionCalculationDetail;
 import gov.opm.scrd.entities.application.DeductionCalculationRequest;
 import gov.opm.scrd.entities.application.DeductionCalculationResponse;
 import gov.opm.scrd.entities.application.DeductionValidationRequest;
@@ -44,6 +45,7 @@ import gov.opm.scrd.services.OPMConfigurationException;
 import gov.opm.scrd.services.OPMException;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -287,6 +289,10 @@ public class CalculationExecutionServiceImpl extends BaseService implements Calc
                     /** Version 1.2 updates End **/
 
                     servicePeriods.add(period);
+                    
+                    DeductionCalculationDetail  detail = new DeductionCalculationDetail();
+                    calculation.setDeductionCalculationDetail(detail);
+                    period.setDeductionCalculationDetail(detail);
 
                 }
             }
@@ -298,6 +304,8 @@ public class CalculationExecutionServiceImpl extends BaseService implements Calc
             
             
             DeductionCalculationResponse deductionResponse = deductionCalculationRuleService.execute(deductionRequest);
+            
+            
 
             // Run interest calculation rule
             InterestCalculationRequest interestRequest = new InterestCalculationRequest();
@@ -312,6 +320,11 @@ public class CalculationExecutionServiceImpl extends BaseService implements Calc
 
             // Create CalculationResult
             CalculationResult result = new CalculationResult();
+            
+            List<Calculation> calcs = new ArrayList<Calculation>();
+            calcs.addAll(calculations);
+            
+            result.setCalculations(calcs);
 
             List<CalculationResultItem> items = new ArrayList<CalculationResultItem>();
             result.setItems(items);

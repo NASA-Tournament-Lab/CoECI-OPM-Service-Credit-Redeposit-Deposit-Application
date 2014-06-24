@@ -510,7 +510,6 @@ public class AccountController extends BaseAuditController {
         Logger logger = getLogger();
         LoggingHelper.logEntrance(logger, signature, new String[] {"versionId", "accountId"},
             new Object[] {versionId,  accountId});
-
         accountService.triggerBill(accountId, versionId);
 
         LoggingHelper.logExit(logger, signature, null);

@@ -78,6 +78,14 @@ import junit.framework.Assert;
  * @version 1.0
  */
 public class TestsHelper {
+    
+    /**
+     * <p>
+     * Delta for comparing double.
+     * </p>
+     */
+    private static final double delta = 0.06;
+    
     /**
      * <p>
      * Represents the empty string.
@@ -273,9 +281,9 @@ public class TestsHelper {
         Assert.assertEquals("Period types are not equal.", esp1.getPeriodType().getName(), esp2
                 .getPeriodType().getName());
         Assert.assertEquals("Total Deductions are not equal.", toDouble(esp1.getTotalDeduction()),
-                toDouble(esp2.getTotalDeduction()));
+                toDouble(esp2.getTotalDeduction()), delta);
         Assert.assertEquals("Total Earnings are not equal.", toDouble(esp1.getTotalEarnings()),
-                toDouble(esp2.getTotalEarnings()));
+                toDouble(esp2.getTotalEarnings()), delta);
         Assert.assertEquals("Number of validation errors is not correct.", 0, esp2.getValidationErrors().size());
         if (esp1.getInterestAccrualDate() == null) {
             Assert.assertNull("Interest Accural Dates are not equal.", esp2.getInterestAccrualDate());

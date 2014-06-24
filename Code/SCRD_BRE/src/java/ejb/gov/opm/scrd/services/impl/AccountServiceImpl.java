@@ -921,9 +921,13 @@ public class AccountServiceImpl extends BaseService implements AccountService {
             Date calculationDate = null;
 
             for (CalculationVersion version : account.getCalculationVersions()) {
+
                 if (version.getCalculationResult().isOfficial()) {
-                    calculationDate = version.getCalculationDate();
-                    break;
+                    if (calculationDate == null) {
+                        calculationDate = version.getCalculationDate();
+                    } else if (calculationDate.before(version.getCalculationDate())) {
+                        calculationDate = version.getCalculationDate();
+                    }
                 }
             }
 
@@ -1093,6 +1097,7 @@ public class AccountServiceImpl extends BaseService implements AccountService {
                     latestVersion = version;
                 }
             }
+            
 
              // If no official account is found, use the latest one.
             if (latestVersion == null) {
@@ -1572,6 +1577,7 @@ public class AccountServiceImpl extends BaseService implements AccountService {
     private void performSaveBillings(CalculationVersion version, long accountId) throws OPMException {
         // The calculation was done before today, need recalculation
         CalculationResult result = calculationExecutionService.runCalculation(version.getCalculations(), new Date());
+        result.setOfficial(version.getCalculationResult().isOfficial());
 
         // Save the update calculation version
         version.setCalculationResult(result);

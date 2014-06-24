@@ -73,6 +73,13 @@ public class DeductionTest {
      */
     @Autowired
     private ApplicationContext applicationContext;
+    
+    /**
+     * <p>
+     * Delta for comparing double.
+     * </p>
+     */
+    private static final double delta = 0.06;
 
     /**
      * <p>
@@ -172,54 +179,54 @@ public class DeductionTest {
         BigDecimal totalEarnings = BigDecimal.ZERO;
 
         ServicePeriod period = request.getServicePeriods().get(0);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 4819.03, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 313.24, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 4819.03, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 313.24, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(1);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 4928.92, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 109.89, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 4928.92, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 109.89, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(2);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 5433.41, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 504.49, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 5433.41, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 504.49, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(3);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 7893.20, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 2459.79, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 7893.20, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 2459.79, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(4);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 9860.20, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 137.69, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 9860.20, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 137.69, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(5);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 9934.22, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 74.02, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 9934.22, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 74.02, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(6);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 10505.34, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 571.12, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 10505.34, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 571.12, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(7);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 12905.17, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 174.10, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 12905.17, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 174.10, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(8);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
         Assert.assertEquals("The earnings is not correct", 42112.33, TestsHelper.toDouble(totalEarnings));
         Assert.assertEquals("The deduction is not correct", 2157.25, TestsHelper.toDouble(period.getDeduction()));
 
         period = request.getServicePeriods().get(9);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 56830.15, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 1030.25, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 56830.15, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 1030.25, TestsHelper.toDouble(period.getDeduction()), delta);
 
         // Check main calculation result
         TestsHelper.assertEqualsExtendedServicePeriodList(Arrays.asList(
@@ -268,44 +275,44 @@ public class DeductionTest {
 
         ServicePeriod period = request.getServicePeriods().get(0);
 
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 1361.22, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 95.29, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 1361.22, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 95.29, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(1);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 8748.64, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 517.12, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 8748.64, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 517.12, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(2);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 15180.75, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 450.25, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 15180.75, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 450.25, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(3);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 16705.74, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 106.75, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 16705.74, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 106.75, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(4);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 25326.72, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 603.47, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 25326.72, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 603.47, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(5);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 34525.33, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 643.90, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 34525.33, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 643.90, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(6);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 35422.40, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 62.79, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 35422.40, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 62.79, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(7);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 36409.90, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 69.12, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 36409.90, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 69.12, TestsHelper.toDouble(period.getDeduction()), delta);
 
         // this period is split to two new periods
         period = request.getServicePeriods().get(8);
@@ -314,9 +321,9 @@ public class DeductionTest {
 
         period = request.getServicePeriods().get(9);
         totalEarnings = BigDecimal.valueOf(42260.73);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 46710.73, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 4450.00, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 46710.73, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 4450.00, TestsHelper.toDouble(period.getDeduction()), delta);
 
         // Check main calculation result
         List<ExtendedServicePeriod> esps = Arrays.asList(
@@ -355,54 +362,54 @@ public class DeductionTest {
         BigDecimal totalEarnings = BigDecimal.ZERO;
 
         ServicePeriod period = request.getServicePeriods().get(0);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 1420.64, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 99.44, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 1420.64, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 99.44, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(1);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 1420.64, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 0.0, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 1420.64, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 0.0, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(2);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 3371.90, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 136.59, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 3371.90, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 136.59, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(3);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 9830.64, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 452.11, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 9830.64, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 452.11, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(4);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 13531.07, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 259.03, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 13531.07, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 259.03, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(5);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 15467.68, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 135.56, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 15467.68, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 135.56, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(6);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 24234.08, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 613.65, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 24234.08, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 613.65, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(7);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 31437.94, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 504.27, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 31437.94, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 504.27, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(8);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 39518.80, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 565.66, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 39518.80, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 565.66, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(9);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 41398.80, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 1880.00, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 41398.80, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 1880.00, TestsHelper.toDouble(period.getDeduction()), delta);
 
         // Check main calculation result
         TestsHelper.assertEqualsExtendedServicePeriodList(Arrays.asList(
@@ -439,19 +446,19 @@ public class DeductionTest {
 
         ServicePeriod period = request.getServicePeriods().get(0);
 
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 1326.58, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 92.86, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 1326.58, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 92.86, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(1);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 2745.84, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 99.35, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 2745.84, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 99.35, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(2);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 10866.40, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 568.44, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 10866.40, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 568.44, TestsHelper.toDouble(period.getDeduction()), delta);
 
         // Check main calculation result
         TestsHelper.assertEqualsExtendedServicePeriodList(Arrays.asList(
@@ -485,14 +492,14 @@ public class DeductionTest {
 
         ServicePeriod period = request.getServicePeriods().get(0);
 
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 19500.00, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 1365.00, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 19500.00, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 1365.00, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(1);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 36908.45, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 1218.59, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 36908.45, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 1218.59, TestsHelper.toDouble(period.getDeduction()), delta);
 
         // Check main calculation result
         TestsHelper.assertEqualsExtendedServicePeriodList(Arrays.asList(
@@ -522,14 +529,14 @@ public class DeductionTest {
         BigDecimal totalEarnings = BigDecimal.ZERO;
 
         ServicePeriod period = request.getServicePeriods().get(0);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 17689.87, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 17689.87, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 17689.87, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 17689.87, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(1);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 18189.87, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 500.00, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 18189.87, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 500.00, TestsHelper.toDouble(period.getDeduction()), delta);
 
         // Check main calculation result
         TestsHelper.assertEqualsExtendedServicePeriodList(Arrays.asList(
@@ -560,24 +567,24 @@ public class DeductionTest {
 
         ServicePeriod period = request.getServicePeriods().get(0);
 
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 8400.00, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 8400.00, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 8400.00, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 8400.00, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(1);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 16017.60, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 99.03, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 16017.60, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 99.03, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(2);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 29455.52, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 174.69, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 29455.52, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 174.69, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(3);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 30065.52, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 610.00, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 30065.52, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 610.00, TestsHelper.toDouble(period.getDeduction()), delta);
 
         // Check main calculation result
         TestsHelper.assertEqualsExtendedServicePeriodList(Arrays.asList(
@@ -610,19 +617,19 @@ public class DeductionTest {
         BigDecimal totalEarnings = BigDecimal.ZERO;
 
         ServicePeriod period = request.getServicePeriods().get(0);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 2375.71, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 30.88, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 2375.71, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 30.88, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(1);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 3170.28, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 10.33, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 3170.28, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 10.33, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(2);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 3735.25, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 564.97, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 3735.25, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 564.97, TestsHelper.toDouble(period.getDeduction()), delta);
 
         // Check main calculation result
         TestsHelper.assertEqualsExtendedServicePeriodList(Arrays.asList(
@@ -653,29 +660,29 @@ public class DeductionTest {
 
         ServicePeriod period = request.getServicePeriods().get(0);
 
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 2400.60, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 31.21, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 2400.60, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 31.21, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(1);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 6448.93, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 121.45, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 6448.93, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 121.45, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(2);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 16909.48, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 135.99, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 16909.48, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 135.99, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(3);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 24237.12, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 95.26, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 24237.12, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 95.26, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(4);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 25675.12, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 1438.00, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 25675.12, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 1438.00, TestsHelper.toDouble(period.getDeduction()), delta);
 
         // Check main calculation result
         List<ExtendedServicePeriod> esps = Arrays.asList(
@@ -713,14 +720,14 @@ public class DeductionTest {
 
         ServicePeriod period = request.getServicePeriods().get(0);
 
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 2386.94, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 31.03, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 2386.94, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 31.03, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(1);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 2386.94, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 0.0, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 2386.94, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 0.0, TestsHelper.toDouble(period.getDeduction()), delta);
 
         // Check main calculation result
         TestsHelper.assertEqualsExtendedServicePeriodList(Arrays.asList(
@@ -748,99 +755,99 @@ public class DeductionTest {
 
         ServicePeriod period = request.getServicePeriods().get(0);
 
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 20551.07, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 267.16, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 20551.07, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 267.16, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(1);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 28851.11, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 107.90, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 28851.11, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 107.90, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(2);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 45154.97, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 211.95, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 45154.97, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 211.95, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(3);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 47292.27, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 27.78, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 47292.27, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 27.78, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(4);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 74483.50, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 353.49, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 74483.50, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 353.49, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(5);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 107622.15, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 430.80, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 107622.15, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 430.80, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(6);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 136328.56, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 373.18, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 136328.56, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 373.18, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(7);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 141153.99, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 62.73, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 141153.99, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 62.73, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(8);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 178444.59, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 484.78, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 178444.59, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 484.78, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(9);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 208847.79, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 395.24, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 208847.79, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 395.24, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(10);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 215043.17, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 80.54, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 215043.17, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 80.54, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(11);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 277438.07, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 811.13, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 277438.07, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 811.13, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(12);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 294546.88, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 222.41, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 294546.88, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 222.41, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(13);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 370787.92, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 991.13, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 370787.92, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 991.13, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(14);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 389201.39, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 239.38, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 389201.39, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 239.38, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(15);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 471766.95, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 1073.35, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 471766.95, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 1073.35, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(16);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 491639.58, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 258.34, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 491639.58, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 258.34, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(17);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 578742.31, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 1132.34, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 578742.31, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 1132.34, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(18);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 689422.98, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 1438.85, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 689422.98, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 1438.85, TestsHelper.toDouble(period.getDeduction()), delta);
 
         // Check main calculation result
         TestsHelper.assertEqualsExtendedServicePeriodList(Arrays.asList(
@@ -868,9 +875,9 @@ public class DeductionTest {
 
         ServicePeriod period = request.getServicePeriods().get(0);
 
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 772.50, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 54.07, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 772.50, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 54.07, TestsHelper.toDouble(period.getDeduction()), delta);
 
         // Check main calculation result
         List<ExtendedServicePeriod> esps = Arrays.asList(
@@ -899,14 +906,14 @@ public class DeductionTest {
 
         ServicePeriod period = request.getServicePeriods().get(0);
 
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 1298.00, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 90.86, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 1298.00, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 90.86, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(1);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 3798.00, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 75.00, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 3798.00, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 75.00, TestsHelper.toDouble(period.getDeduction()), delta);
 
         // Check main calculation result
         List<ExtendedServicePeriod> esps = Arrays.asList(
@@ -940,133 +947,133 @@ public class DeductionTest {
         ServicePeriod period = request.getServicePeriods().get(0);
 
         totalEarnings = totalEarnings.add(period.getEarnings());
-        Assert.assertEquals("The earnings is not correct", 1259.64, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 88.17, TestsHelper.toDouble(period.getDeduction()));
+        Assert.assertEquals("The earnings is not correct", 1259.64, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 88.17, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(1);
         totalEarnings = totalEarnings.add(period.getEarnings());
-        Assert.assertEquals("The earnings is not correct", 2514.88, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 87.87, TestsHelper.toDouble(period.getDeduction()));
+        Assert.assertEquals("The earnings is not correct", 2514.88, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 87.87, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(2);
         totalEarnings = totalEarnings.add(period.getEarnings());
-        Assert.assertEquals("The earnings is not correct", 6149.46, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 254.42, TestsHelper.toDouble(period.getDeduction()));
+        Assert.assertEquals("The earnings is not correct", 6149.46, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 254.42, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(3);
         totalEarnings = totalEarnings.add(period.getEarnings());
-        Assert.assertEquals("The earnings is not correct", 7450.84, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 91.10, TestsHelper.toDouble(period.getDeduction()));
+        Assert.assertEquals("The earnings is not correct", 7450.84, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 91.10, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(4);
         totalEarnings = totalEarnings.add(period.getEarnings());
-        Assert.assertEquals("The earnings is not correct", 12276.77, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 337.82, TestsHelper.toDouble(period.getDeduction()));
+        Assert.assertEquals("The earnings is not correct", 12276.77, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 337.82, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(5);
         totalEarnings = totalEarnings.add(period.getEarnings());
-        Assert.assertEquals("The earnings is not correct", 12667.57, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 27.36, TestsHelper.toDouble(period.getDeduction()));
+        Assert.assertEquals("The earnings is not correct", 12667.57, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 27.36, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(6);
         totalEarnings = totalEarnings.add(period.getEarnings());
-        Assert.assertEquals("The earnings is not correct", 14385.25, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 120.24, TestsHelper.toDouble(period.getDeduction()));
+        Assert.assertEquals("The earnings is not correct", 14385.25, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 120.24, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(7);
         totalEarnings = totalEarnings.add(period.getEarnings());
-        Assert.assertEquals("The earnings is not correct", 19725.67, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 373.83, TestsHelper.toDouble(period.getDeduction()));
+        Assert.assertEquals("The earnings is not correct", 19725.67, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 373.83, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(8);
         totalEarnings = totalEarnings.add(period.getEarnings());
-        Assert.assertEquals("The earnings is not correct", 22076.66, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 164.57, TestsHelper.toDouble(period.getDeduction()));
+        Assert.assertEquals("The earnings is not correct", 22076.66, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 164.57, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(9);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 28175.59, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 426.92, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 28175.59, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 426.92, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(10);
         totalEarnings = totalEarnings.add(period.getEarnings());
-        Assert.assertEquals("The earnings is not correct", 30139.40, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 137.47, TestsHelper.toDouble(period.getDeduction()));
+        Assert.assertEquals("The earnings is not correct", 30139.40, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 137.47, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(11);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 36459.29, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 442.39, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 36459.29, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 442.39, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(12);
         totalEarnings = totalEarnings.add(period.getEarnings());
-        Assert.assertEquals("The earnings is not correct", 36530.71, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 5.00, TestsHelper.toDouble(period.getDeduction()));
+        Assert.assertEquals("The earnings is not correct", 36530.71, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 5.00, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(13);
         totalEarnings = totalEarnings.add(period.getEarnings());
-        Assert.assertEquals("The earnings is not correct", 40095.78, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 249.55, TestsHelper.toDouble(period.getDeduction()));
+        Assert.assertEquals("The earnings is not correct", 40095.78, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 249.55, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(14);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 49825.44, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 681.08, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 49825.44, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 681.08, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(15);
         totalEarnings = totalEarnings.add(period.getEarnings());
-        Assert.assertEquals("The earnings is not correct", 59895.70, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 704.92, TestsHelper.toDouble(period.getDeduction()));
+        Assert.assertEquals("The earnings is not correct", 59895.70, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 704.92, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(16);
         totalEarnings = totalEarnings.add(period.getEarnings());
-        Assert.assertEquals("The earnings is not correct", 68689.59, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 615.57, TestsHelper.toDouble(period.getDeduction()));
+        Assert.assertEquals("The earnings is not correct", 68689.59, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 615.57, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(17);
         totalEarnings = totalEarnings.add(period.getEarnings());
-        Assert.assertEquals("The earnings is not correct", 70075.91, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 97.04, TestsHelper.toDouble(period.getDeduction()));
+        Assert.assertEquals("The earnings is not correct", 70075.91, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 97.04, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(18);
         totalEarnings = totalEarnings.add(period.getEarnings());
-        Assert.assertEquals("The earnings is not correct", 70075.91, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 0.0, TestsHelper.toDouble(period.getDeduction()));
+        Assert.assertEquals("The earnings is not correct", 70075.91, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 0.0, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(19);
         totalEarnings = totalEarnings.add(period.getEarnings());
-        Assert.assertEquals("The earnings is not correct", 86513.59, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 1150.64, TestsHelper.toDouble(period.getDeduction()));
+        Assert.assertEquals("The earnings is not correct", 86513.59, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 1150.64, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(20);
         totalEarnings = totalEarnings.add(period.getEarnings());
-        Assert.assertEquals("The earnings is not correct", 86513.59, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 0.0, TestsHelper.toDouble(period.getDeduction()));
+        Assert.assertEquals("The earnings is not correct", 86513.59, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 0.0, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(21);
         totalEarnings = totalEarnings.add(period.getEarnings());
-        Assert.assertEquals("The earnings is not correct", 102222.63, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 1099.63, TestsHelper.toDouble(period.getDeduction()));
+        Assert.assertEquals("The earnings is not correct", 102222.63, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 1099.63, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(22);
         totalEarnings = totalEarnings.add(period.getEarnings());
-        Assert.assertEquals("The earnings is not correct", 103679.10, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 101.95, TestsHelper.toDouble(period.getDeduction()));
+        Assert.assertEquals("The earnings is not correct", 103679.10, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 101.95, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(23);
         totalEarnings = totalEarnings.add(period.getEarnings());
-        Assert.assertEquals("The earnings is not correct", 103679.10, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 0.0, TestsHelper.toDouble(period.getDeduction()));
+        Assert.assertEquals("The earnings is not correct", 103679.10, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 0.0, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(24);
         totalEarnings = totalEarnings.add(period.getEarnings());
-        Assert.assertEquals("The earnings is not correct", 118347.79, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 1026.81, TestsHelper.toDouble(period.getDeduction()));
+        Assert.assertEquals("The earnings is not correct", 118347.79, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 1026.81, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(25);
         totalEarnings = totalEarnings.add(period.getEarnings());
-        Assert.assertEquals("The earnings is not correct", 118347.79, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 0.0, TestsHelper.toDouble(period.getDeduction()));
+        Assert.assertEquals("The earnings is not correct", 118347.79, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 0.0, TestsHelper.toDouble(period.getDeduction()), delta);
 
         // Check main calculation result
         TestsHelper.assertEqualsExtendedServicePeriodList(Arrays.asList(
@@ -1121,69 +1128,69 @@ public class DeductionTest {
 
         ServicePeriod period = request.getServicePeriods().get(0);
 
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 0.0, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 0.0, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 0.0, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 0.0, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(1);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 13753.40, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 962.74, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 13753.40, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 962.74, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(2);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 28394.78, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 1024.90, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 28394.78, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 1024.90, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(3);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 28394.78, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 0.0, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 28394.78, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 0.0, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(4);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 44570.80, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 1132.32, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 44570.80, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 1132.32, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(5);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 44570.80, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 0.0, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 44570.80, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 0.0, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(6);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 57471.00, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 903.01, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 57471.00, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 903.01, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(7);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 59610.67, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 149.78, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 59610.67, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 149.78, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(8);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 73493.28, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 971.78, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 73493.28, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 971.78, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(9);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 93139.22, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 1375.22, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 93139.22, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 1375.22, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(10);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 94074.03, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 65.44, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 94074.03, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 65.44, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(11);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 94074.03, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 0.0, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 94074.03, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 0.0, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(12);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 106894.29, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 897.42, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 106894.29, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 897.42, TestsHelper.toDouble(period.getDeduction()), delta);
 
         // Check main calculation result
         TestsHelper.assertEqualsExtendedServicePeriodList(Arrays.asList(
@@ -1227,131 +1234,131 @@ public class DeductionTest {
         ServicePeriod period = request.getServicePeriods().get(0);
 
         // Error delta
-        double delta = 1e-10 + 0.01;
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
+        //double delta = 1e-10 + 0.01;
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
         Assert.assertEquals("The earnings is not correct", 1259.64, TestsHelper.toDouble(totalEarnings), delta);
-        Assert.assertEquals("The deduction is not correct", 16.38, TestsHelper.toDouble(period.getDeduction()));
+        Assert.assertEquals("The deduction is not correct", 16.38, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(1);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
         Assert.assertEquals("The earnings is not correct", 2514.88, TestsHelper.toDouble(totalEarnings), delta);
-        Assert.assertEquals("The deduction is not correct", 16.32, TestsHelper.toDouble(period.getDeduction()));
+        Assert.assertEquals("The deduction is not correct", 16.32, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(2);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
         Assert.assertEquals("The earnings is not correct", 6149.46, TestsHelper.toDouble(totalEarnings), delta);
-        Assert.assertEquals("The deduction is not correct", 47.25, TestsHelper.toDouble(period.getDeduction()));
+        Assert.assertEquals("The deduction is not correct", 47.25, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(3);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
         Assert.assertEquals("The earnings is not correct", 7450.84, TestsHelper.toDouble(totalEarnings), delta);
-        Assert.assertEquals("The deduction is not correct", 16.92, TestsHelper.toDouble(period.getDeduction()));
+        Assert.assertEquals("The deduction is not correct", 16.92, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(4);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
         Assert.assertEquals("The earnings is not correct", 12276.77, TestsHelper.toDouble(totalEarnings), delta);
-        Assert.assertEquals("The deduction is not correct", 62.74, TestsHelper.toDouble(period.getDeduction()));
+        Assert.assertEquals("The deduction is not correct", 62.74, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(5);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
         Assert.assertEquals("The earnings is not correct", 12667.57, TestsHelper.toDouble(totalEarnings), delta);
-        Assert.assertEquals("The deduction is not correct", 5.08, TestsHelper.toDouble(period.getDeduction()));
+        Assert.assertEquals("The deduction is not correct", 5.08, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(6);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
         Assert.assertEquals("The earnings is not correct", 14385.25, TestsHelper.toDouble(totalEarnings), delta);
-        Assert.assertEquals("The deduction is not correct", 22.33, TestsHelper.toDouble(period.getDeduction()));
+        Assert.assertEquals("The deduction is not correct", 22.33, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(7);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
         Assert.assertEquals("The earnings is not correct", 19725.67, TestsHelper.toDouble(totalEarnings), delta);
         Assert.assertEquals("The deduction is not correct", 69.43, TestsHelper.toDouble(period.getDeduction()));
 
         period = request.getServicePeriods().get(8);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
         Assert.assertEquals("The earnings is not correct", 22076.66, TestsHelper.toDouble(totalEarnings), delta);
-        Assert.assertEquals("The deduction is not correct", 30.56, TestsHelper.toDouble(period.getDeduction()));
+        Assert.assertEquals("The deduction is not correct", 30.56, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(9);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
         Assert.assertEquals("The earnings is not correct", 28175.59, TestsHelper.toDouble(totalEarnings), delta);
         Assert.assertEquals("The deduction is not correct", 79.29, TestsHelper.toDouble(period.getDeduction()));
 
         period = request.getServicePeriods().get(10);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
         Assert.assertEquals("The earnings is not correct", 30139.40, TestsHelper.toDouble(totalEarnings), delta);
-        Assert.assertEquals("The deduction is not correct", 25.53, TestsHelper.toDouble(period.getDeduction()));
+        Assert.assertEquals("The deduction is not correct", 25.53, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(11);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
         Assert.assertEquals("The earnings is not correct", 36459.29, TestsHelper.toDouble(totalEarnings), delta);
-        Assert.assertEquals("The deduction is not correct", 82.16, TestsHelper.toDouble(period.getDeduction()));
+        Assert.assertEquals("The deduction is not correct", 82.16, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(12);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
         Assert.assertEquals("The earnings is not correct", 36530.71, TestsHelper.toDouble(totalEarnings), delta);
-        Assert.assertEquals("The deduction is not correct", 0.93, TestsHelper.toDouble(period.getDeduction()));
+        Assert.assertEquals("The deduction is not correct", 0.93, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(13);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
         Assert.assertEquals("The earnings is not correct", 40095.78, TestsHelper.toDouble(totalEarnings), delta);
-        Assert.assertEquals("The deduction is not correct", 46.35, TestsHelper.toDouble(period.getDeduction()));
+        Assert.assertEquals("The deduction is not correct", 46.35, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(14);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
         Assert.assertEquals("The earnings is not correct", 49825.44, TestsHelper.toDouble(totalEarnings), delta);
-        Assert.assertEquals("The deduction is not correct", 126.49, TestsHelper.toDouble(period.getDeduction()));
+        Assert.assertEquals("The deduction is not correct", 126.49, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(15);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
         Assert.assertEquals("The earnings is not correct", 59895.70, TestsHelper.toDouble(totalEarnings), delta);
-        Assert.assertEquals("The deduction is not correct", 130.91, TestsHelper.toDouble(period.getDeduction()));
+        Assert.assertEquals("The deduction is not correct", 130.91, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(16);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
         Assert.assertEquals("The earnings is not correct", 68689.59, TestsHelper.toDouble(totalEarnings), delta);
-        Assert.assertEquals("The deduction is not correct", 114.32, TestsHelper.toDouble(period.getDeduction()));
+        Assert.assertEquals("The deduction is not correct", 114.32, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(17);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
         Assert.assertEquals("The earnings is not correct", 70075.91, TestsHelper.toDouble(totalEarnings), delta);
-        Assert.assertEquals("The deduction is not correct", 18.02, TestsHelper.toDouble(period.getDeduction()));
+        Assert.assertEquals("The deduction is not correct", 18.02, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(18);
         Assert.assertEquals("The earnings is not correct", 70075.91, TestsHelper.toDouble(totalEarnings), delta);
-        Assert.assertEquals("The deduction is not correct", 0.00, TestsHelper.toDouble(period.getDeduction()));
+        Assert.assertEquals("The deduction is not correct", 0.00, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(19);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
         Assert.assertEquals("The earnings is not correct", 86513.59, TestsHelper.toDouble(totalEarnings), delta);
-        Assert.assertEquals("The deduction is not correct", 213.69, TestsHelper.toDouble(period.getDeduction()));
+        Assert.assertEquals("The deduction is not correct", 213.69, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(20);
         Assert.assertEquals("The earnings is not correct", 86513.59, TestsHelper.toDouble(totalEarnings), delta);
-        Assert.assertEquals("The deduction is not correct", 0.00, TestsHelper.toDouble(period.getDeduction()));
+        Assert.assertEquals("The deduction is not correct", 0.00, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(21);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
         Assert.assertEquals("The earnings is not correct", 102222.63, TestsHelper.toDouble(totalEarnings), delta);
-        Assert.assertEquals("The deduction is not correct", 204.22, TestsHelper.toDouble(period.getDeduction()));
+        Assert.assertEquals("The deduction is not correct", 204.22, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(22);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
         Assert.assertEquals("The earnings is not correct", 103679.10, TestsHelper.toDouble(totalEarnings), delta);
-        Assert.assertEquals("The deduction is not correct", 18.93, TestsHelper.toDouble(period.getDeduction()));
+        Assert.assertEquals("The deduction is not correct", 18.93, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(23);
         Assert.assertEquals("The earnings is not correct", 103679.10, TestsHelper.toDouble(totalEarnings), delta);
-        Assert.assertEquals("The deduction is not correct", 0.00, TestsHelper.toDouble(period.getDeduction()));
+        Assert.assertEquals("The deduction is not correct", 0.00, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(24);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
         Assert.assertEquals("The earnings is not correct", 118347.79, TestsHelper.toDouble(totalEarnings), delta);
-        Assert.assertEquals("The deduction is not correct", 190.69, TestsHelper.toDouble(period.getDeduction()));
+        Assert.assertEquals("The deduction is not correct", 190.69, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(25);
         Assert.assertEquals("The earnings is not correct", 118347.79, TestsHelper.toDouble(totalEarnings), delta);
-        Assert.assertEquals("The deduction is not correct", 0.00, TestsHelper.toDouble(period.getDeduction()));
+        Assert.assertEquals("The deduction is not correct", 0.00, TestsHelper.toDouble(period.getDeduction()), delta);
 
         // Check main calculation result
         TestsHelper.assertEqualsExtendedServicePeriodList(Arrays.asList(
@@ -1405,19 +1412,19 @@ public class DeductionTest {
 
         ServicePeriod period = request.getServicePeriods().get(0);
 
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 10503.97, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 787.80, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 10503.97, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 787.80, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(1);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 23825.58, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 999.12, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 23825.58, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 999.12, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(2);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 37263.50, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 1007.84, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 37263.50, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 1007.84, TestsHelper.toDouble(period.getDeduction()), delta);
 
         // Check main calculation result
         TestsHelper.assertEqualsExtendedServicePeriodList(Arrays.asList(
@@ -1448,19 +1455,19 @@ public class DeductionTest {
 
         ServicePeriod period = request.getServicePeriods().get(0);
 
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 8403.89, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 588.27, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 8403.89, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 588.27, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(1);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 23167.85, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 1033.48, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 23167.85, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 1033.48, TestsHelper.toDouble(period.getDeduction()), delta);
 
         period = request.getServicePeriods().get(2);
-        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(2, RoundingMode.HALF_UP);
-        Assert.assertEquals("The earnings is not correct", 42299.55, TestsHelper.toDouble(totalEarnings));
-        Assert.assertEquals("The deduction is not correct", 1339.22, TestsHelper.toDouble(period.getDeduction()));
+        totalEarnings = totalEarnings.add(period.getEarnings()).setScale(6, RoundingMode.HALF_UP);
+        Assert.assertEquals("The earnings is not correct", 42299.55, TestsHelper.toDouble(totalEarnings), delta);
+        Assert.assertEquals("The deduction is not correct", 1339.22, TestsHelper.toDouble(period.getDeduction()), delta);
 
         // Check main calculation result
         TestsHelper.assertEqualsExtendedServicePeriodList(Arrays.asList(

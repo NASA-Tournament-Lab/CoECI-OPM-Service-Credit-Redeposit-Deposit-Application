@@ -16,7 +16,10 @@
 
 package gov.opm.scrd.services.impl;
 
+import gov.opm.scrd.ExtendedServicePeriodComparator;
 import gov.opm.scrd.LoggingHelper;
+import gov.opm.scrd.ServicePeriodComparator;
+import gov.opm.scrd.entities.application.DeductionCalculationDetail;
 import gov.opm.scrd.entities.application.DeductionCalculationRequest;
 import gov.opm.scrd.entities.application.DeductionCalculationResponse;
 import gov.opm.scrd.entities.application.DeductionRate;
@@ -30,6 +33,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -142,7 +146,7 @@ import org.drools.runtime.StatefulKnowledgeSession;
  * </ul>
  * </p>
  *
- * @author albertwang, TCSASSEMBLER
+ * @author albertwang, TCSASSEMBLER, yedtoss
  * @version 1.1
  * @since OPM - Implement Business Rules Engine Deduction Calculation Assembly
  *        v1.0
@@ -268,8 +272,46 @@ public class DeductionCalculationRuleServiceImpl extends DroolsRuleService
             DeductionCalculationResponse response = new DeductionCalculationResponse();
 
             response.setExtendedServicePeriods(esps);
+            
+            // Set deduction details
+            BigDecimal totalEarnings = BigDecimal.valueOf(0);
+            BigDecimal totalDeductions = BigDecimal.valueOf(0);
+            
+            Collections.sort(esps, new ExtendedServicePeriodComparator());
+            
+            for (ExtendedServicePeriod esp : esps) {
+                
+                List<ServicePeriod> sps = esp.getServicePeriods();
+                
+                Collections.sort(sps, new ServicePeriodComparator());
+                
+                for (ServicePeriod sp : sps) {
+                    
+                    // accumulate earnings and deductions
+                    totalEarnings = totalEarnings.add(sp.getEarnings());
+                    totalDeductions = totalDeductions.add(sp.getDeduction());
+                    
+                    if(sp.getDeductionCalculationDetail() == null){
+                        sp.setDeductionCalculationDetail(new DeductionCalculationDetail());
+                    }
+                    
+                    // set current accumulated value as total
+                    // running earnings/deductions for this period
+                    sp.getDeductionCalculationDetail().setTotalRunningEarnings(
+                        totalEarnings);
+                    sp.getDeductionCalculationDetail().setTotalRunningDeductions(
+                        totalDeductions);
+                    
+                    sp.getDeductionCalculationDetail().setRunningDeductions(sp.getDeduction());
+                }
+                
+                // set current accumulated value as total
+                // running earnings/deductions for this extended service period
+                esp.setTotalRunningEarnings(totalEarnings);
+                esp.setTotalRunningDeductions(totalDeductions);
+            }
 
-            ksession.dispose();
+            //ksession.dispose(); 
 
             // log and return
             LoggingHelper.logExit(getLogger(), signature, new Object[] {response});

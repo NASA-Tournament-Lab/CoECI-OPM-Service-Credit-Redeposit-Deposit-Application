@@ -118,7 +118,7 @@ public class DeductionValidationRuleServiceImpl extends DroolsRuleService
 
             response.setServicePeriods(request.getServicePeriods());
 
-            ksession.dispose();
+            //ksession.dispose();
 
             // log and return
             LoggingHelper.logExit(getLogger(), signature, new Object[] {response});

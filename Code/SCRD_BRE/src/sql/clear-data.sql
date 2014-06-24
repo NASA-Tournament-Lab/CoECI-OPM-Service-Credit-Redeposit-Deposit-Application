@@ -50,11 +50,13 @@ DELETE FROM opm.audit_parameter_record;
 DELETE FROM opm.audit_record;
 DELETE FROM opm.dedeposit;
 DELETE FROM opm.redeposit;
+
 DELETE FROM opm.intermediate_result;
 DELETE FROM opm.calculation_result_item;
 DELETE FROM opm.calculation;
 DELETE FROM opm.calculation_version;
 DELETE FROM opm.calculation_result;
+DELETE FROM opm.deduction_calculation_detail;
 DELETE FROM opm.summary_data;
 DELETE FROM opm.billing;
 DELETE FROM opm.account_note;

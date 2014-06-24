@@ -43,7 +43,7 @@ import java.util.Locale;
  * </ul>
  * </p>
  * 
- * @author albertwang, TCSASSEMBLER
+ * @author albertwang, TCSASSEMBLER, yedtoss
  * @version 1.1
  * @since OPM Rules Engine Models Exceptions and Interest Calculation v1.0 Assembly
  */
@@ -138,6 +138,16 @@ public class ExtendedServicePeriod {
      * Represents the intermediate result.
      */
     private List<IntermediateResult> intermediateResults;
+    
+    /**
+     * The total earning for this period
+     */
+    private BigDecimal totalRunningEarnings;
+    
+    /**
+     * The total deduction for this period
+     */
+    private BigDecimal totalRunningDeductions;
 
    
 
@@ -405,6 +415,50 @@ public class ExtendedServicePeriod {
      */
     public void setIntermediateResults(List<IntermediateResult> intermediateResults) {
         this.intermediateResults = intermediateResults;
+    }
+
+    /**
+     * <p>
+     * Gets the totalRunningEarnings value.
+     * </p>
+     *
+     * @return the totalRunningEarnings
+     */
+    public BigDecimal getTotalRunningEarnings() {
+        return totalRunningEarnings;
+    }
+
+    /**
+     * <p>
+     * Sets the given value to totalRunningEarnings.
+     * </p>
+     *
+     * @param totalRunningEarnings the totalRunningEarnings to set
+     */
+    public void setTotalRunningEarnings(BigDecimal totalRunningEarnings) {
+        this.totalRunningEarnings = totalRunningEarnings;
+    }
+
+    /**
+     * <p>
+     * Gets the totalRunningDeductions value.
+     * </p>
+     *
+     * @return the totalRunningDeductions
+     */
+    public BigDecimal getTotalRunningDeductions() {
+        return totalRunningDeductions;
+    }
+
+    /**
+     * <p>
+     * Sets the given value to totalRunningDeductions.
+     * </p>
+     *
+     * @param totalRunningDeductions the totalRunningDeductions to set
+     */
+    public void setTotalRunningDeductions(BigDecimal totalRunningDeductions) {
+        this.totalRunningDeductions = totalRunningDeductions;
     }
 
     /**

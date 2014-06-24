@@ -39,7 +39,7 @@ import java.util.Map;
  * <li>Added interestAccuralDate and connerCase properties.</li>
  * </ul>
  * </p>
- * @author albertwang, TCSASSEMBLER
+ * @author albertwang, TCSASSEMBLER, yedtoss
  * @version 1.1
  * @since OPM Rules Engine Models Exceptions and Interest Calculation v1.0 Assembly
  */
@@ -112,6 +112,14 @@ public class ServicePeriod {
      * Represents the validation errors.
      */
     private Map<String, String> validationErrors;
+    
+    
+    /**
+     * <p>
+     * The calculation details
+     * </p>
+     */
+    private DeductionCalculationDetail  deductionCalculationDetail;
 
     /**
      * Creates the instance of InterestCalculationResponse.
@@ -330,6 +338,29 @@ public class ServicePeriod {
      */
     public void setConnerCase(boolean connerCase) {
         this.connerCase = connerCase;
+    }
+
+    /**
+     * <p>
+     * Gets the deductionCalculationDetail value.
+     * </p>
+     *
+     * @return the deductionCalculationDetail
+     */
+    public DeductionCalculationDetail getDeductionCalculationDetail() {
+        return deductionCalculationDetail;
+    }
+
+    /**
+     * <p>
+     * Sets the given value to deductionCalculationDetail.
+     * </p>
+     *
+     * @param deductionCalculationDetail the deductionCalculationDetail to set
+     */
+    public void setDeductionCalculationDetail(
+            DeductionCalculationDetail deductionCalculationDetail) {
+        this.deductionCalculationDetail = deductionCalculationDetail;
     }
 
     /**

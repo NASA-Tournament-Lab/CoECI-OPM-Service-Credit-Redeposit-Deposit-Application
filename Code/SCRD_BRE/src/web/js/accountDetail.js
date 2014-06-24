@@ -1,26 +1,26 @@
 /*
-    Copyright 2014 OPM.gov
-
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
-*/
+ Copyright 2014 OPM.gov
+ 
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+ 
+ http://www.apache.org/licenses/LICENSE-2.0
+ 
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ */
 
 var currentNote = null;
 var currentDeleteMode = null;
 var gAccountInfo = null;
 $(function() {
-	// Setup page
+    // Setup page
     setupPage('VIEW_ACCOUNT', 0);
-    
+
     var context = $('#context').val();
     var accountId = $('#accountId').val();
     populateNamedEntity('payTypes', context);
@@ -60,32 +60,69 @@ $(function() {
         $.ajax({
             url: context + '/payment',
             type: 'PUT',
-            headers: { 
-                'Content-Type': 'application/json' 
+            headers: {
+                'Content-Type': 'application/json'
             },
-            data:JSON.stringify(modifiedPayments),
-            success:function(){
+            data: JSON.stringify(modifiedPayments),
+            success: function() {
                 // clear the modifiedPayments
                 modifiedPayments = [];
                 // refresh the list
                 $('.jsRefreshPaymentList').click();
             },
-            error:function(response) {
+            error: function(response) {
                 alert("Failed to save the changes: " + response.responseText);
             }
         });
     });
-    
+
     $('.jsRefreshPaymentList').click(function() {
         $('.jsRefreshAccountDetails').click();
     });
-    
+
     $(".jsPrintStatement, .jsReprintStatement").click(function(e) {
-    	var data = gatherStatementReportData();
-    	renderStatementReport(data);
+        var context = $('#context').val();
+        var accountId = $('#accountId').val();
+        var account = getAccount(context, accountId);
+        var holder = account.holder;
+        var version = getOfficialVersion(account.calculationVersions);
+        var statementDiv = $('.printStatementPopup .popupBody');
+        // CSD
+        $('.printNum span, .claimNum span', statementDiv).html(account.claimNumber);
+        // birthday
+        $('.printBirth span', statementDiv).html(parseDateToString(holder.birthDate));
+        // address
+        $('.printAddressBody', statementDiv).html(buildAddrerssString(holder.address));
+        // name
+        $('.name-report span', statementDiv).html(holder.firstName + ' ' + holder.middleInitial + ' ' + holder.lastName);
+        // cover by
+        $('.coveredBy span', statementDiv).html(account.planType);
+        // date
+        $('.date span', statementDiv).html(parseDateToString(version.calculationDate));
+        // prior balance
+        $('.priorBalance span', statementDiv).html(account.balance);
+        // interest
+        $('.interest span', statementDiv).html(version.calculationResult.summary.totalInitialInterest);
+        // balance due before payment
+        $('.balanceBeforePayment span', statementDiv).html(account.balance + version.calculationResult.summary.totalInitialInterest);
+        // payment amount
+        var paymentAmount = 0;
+        if (version.calculationResult.items.length > 0) {
+            paymentAmount = version.calculationResult.items[0].paymentsApplied;
+        }
+        $('.payment span', statementDiv).html(paymentAmount);
+        // billing information
+        var spans = $('.detailsLine', statementDiv).find('span');
+        $.each(account.billingSummary.billings, function() {
+            spans.eq(mapping[this.name]).html(this.balance);
+        });
+        // new balance due
+        $('.detailsLine').next('p').find('span').html(account.balance - paymentAmount);
+        // format currency
+        $('.dollar').formatCurrency({negativeFormat: '%s-%n'});
         showPopup(".printStatementPopup");
     });
-    
+
     $('#paymentHistoryTbl tbody').on("click", "tr", function() {
         // remove the previous selected rows
         $(this).closest("tbody").find("tr.selectedRow").each(function() {
@@ -110,22 +147,22 @@ $(function() {
         var applyReverseToGL = $("#applyReversalTo").prop('checked');
         var url = context + '/payment/reverse';
         $.ajax({
-            url:url,
-            cache:false,
-            async:true,
-            type:"POST",
-            data:{
-                paymentId:paymentId,
-                applyReversalToGL:applyReverseToGL,
-                paymentReversalReasonId:reason
+            url: url,
+            cache: false,
+            async: true,
+            type: "POST",
+            data: {
+                paymentId: paymentId,
+                applyReversalToGL: applyReverseToGL,
+                paymentReversalReasonId: reason
             },
-            success:function() {
+            success: function() {
                 // success
             },
-            error:function() {
+            error: function() {
                 alert("Failed to reverse payment.")
             }
-            
+
         });
         closePopup();
     });
@@ -244,7 +281,7 @@ $(function() {
         $(".employeeTab .accountBasicInfoPanelEdit .tabBtnsWrapper .priBtn").hide();
         $(".employeeTab .accountBasicInfoPanelEdit .tabBtnsWrapper .editEmployeeBtn").show();
     });
-   
+
 
     //Edit Employee Basic tab
     $(".jsCancelEditBasicInfo").click(function(e) {
@@ -340,7 +377,7 @@ $(function() {
         $('#loadingOverlay2').show();
         setTimeout(doAccountRefresh, 1000);
     });
-        
+
     $('#paymentHistoryTbl').on("refreshPaymentTable", function() {
         refreshPaymentTable(accountId);
     });
@@ -353,7 +390,7 @@ $(function() {
             success: function(data, text, xhr) {
                 var account = getAccount(context, accountId);
                 populateBillingSummary(account.billingSummary);
-                showPopup(".updateInterestReportPopup");
+                $('.jsPHReceipt').trigger('click');
             },
             error: function(a, b, c) {
                 if (a.responseText == 'The current account has already been calculated as of today.') {
@@ -445,7 +482,7 @@ $(function() {
             html += "<span>Last Interest Calc is not correct.</span><br/>";
             validated = false;
         }
-        
+
         if (validated == false) {
             $('.billingValidationError').html(html);
             showPopup(".billingInfoValidationPopup");
@@ -471,7 +508,7 @@ $(function() {
         $('.checkAllRow').prop('checked', false);
         closePopup();
     });
-    
+
     $('.emptyNewNoteOk').click(function() {
         closePopup();
         showPopup('.accountNotesAddPopup');
@@ -509,7 +546,7 @@ $(function() {
             currentNote.remove();
         }
 
-        if($("#accountNoteTbl tbody input:checked").length === 0){
+        if ($("#accountNoteTbl tbody input:checked").length === 0) {
             $('#accountNoteTbl .checkAllRow').prop('checked', false);
         }
 
@@ -666,13 +703,13 @@ function validateBasicInfo() {
         data: JSON.stringify(filter),
         async: false,
         success: function(data, text, xhr) {
-                numssn = data.items.length;
+            numssn = data.items.length;
         },
     });
 
     var account = getAccount(contextR, accountIdR);
 
-    if(numssn > 0 && ssn !== account.holder.ssn){
+    if (numssn > 0 && ssn !== account.holder.ssn) {
 
         html += "<li style='margin-left: 20px;'><span>The SSN already exists. Pick another one.</span><br/></li>";
         validated = false;
@@ -687,7 +724,7 @@ function validateBasicInfo() {
     var phoneext = tab.find("input[name=phoneExt]").val();
     var phonenum = tab.find("input[name=phoneInput]").val();
 
-    if($.trim(phoneext) != '' && $.trim(phonenum) == ''){
+    if ($.trim(phoneext) != '' && $.trim(phonenum) == '') {
 
         html += "<li style='margin-left: 20px;'><span>When you enter phone extension, phone number can not be empty</span><br/></li>";
         validated = false;
@@ -708,7 +745,7 @@ function validateBasicInfo() {
             validated = false;
         }
     });
-    html +=  "</ul>";
+    html += "</ul>";
     if (validated == false) {
         $('.basicValidationError').html(html);
         showPopup(".basicInfoValidationPopup ");
@@ -757,12 +794,12 @@ function saveEmployeeInfo(context, accountId, showSuccessBox) {
     var ssn2B = '';
     var ssn3B = '';
     $.each(fields, function() {
-        if(this.name === 'ssn1B'){
+        if (this.name === 'ssn1B') {
             ssn1B = this.value;
 
-        } else if(this.name === 'ssn2B'){
+        } else if (this.name === 'ssn2B') {
             ssn2B = this.value;
-        } else if(this.name === 'ssn3B'){
+        } else if (this.name === 'ssn3B') {
             ssn3B = this.value;
         }
     });
@@ -800,7 +837,7 @@ function saveEmployeeInfo(context, accountId, showSuccessBox) {
             $(".employeeTab .rowCheckStatus").removeClass("rowCheckShow");
             $(".accountBasicInfoPanel").show();
             $(".accountBasicInfoPanelEdit").hide();
-            if(showSuccessBox && showSuccessBox === true){
+            if (showSuccessBox && showSuccessBox === true) {
                 showPopup(".confirmSaveEmployeePopup");
             }
         },
@@ -861,13 +898,13 @@ function populateEditInfo(context, accountId) {
     fields = $('.accountBasicInfoPanelEdit input.ssnB:text');
     $.each(fields, function() {
 
-        if($(this).prop('name') === 'ssn1B'){
-            $(this).prop('value', data.holder.ssn.substr(0,3));
-        } else if($(this).prop('name') === 'ssn2B'){
-            $(this).prop('value', data.holder.ssn.substr(4,2));
+        if ($(this).prop('name') === 'ssn1B') {
+            $(this).prop('value', data.holder.ssn.substr(0, 3));
+        } else if ($(this).prop('name') === 'ssn2B') {
+            $(this).prop('value', data.holder.ssn.substr(4, 2));
 
-        } else if($(this).prop('name') === 'ssn3B'){
-            $(this).prop('value', data.holder.ssn.substr(7,4));
+        } else if ($(this).prop('name') === 'ssn3B') {
+            $(this).prop('value', data.holder.ssn.substr(7, 4));
 
         }
     });
@@ -1167,123 +1204,122 @@ function deleteNote(context, id) {
 }
 
 function gatherStatementReportData() {
-	var context = $('#context').val();
-	var accountId = $('#accountId').val();
-	var account = getAccount(context, accountId);
-	var csd = account.claimNumber;
-	var birthDate = new Date(account.holder.birthDate);
-	var amountPayment = account.balance;
-	var address = account.holder.address.street1 + '<br/>' + account.holder.address.street2 + "<br/>" + account.holder.address.city;
-	var accountName = account.holder.firstName + ' ' + account.holder.lastName;
-	var serviceType = account.planType;
-	
-	
-	var calculateDate = new Date();
-	var priorBalanceDue = account.balance;
-	var plusInterestOnPriorBalance = priorBalanceDue;
-	var balanceDueBeforePayment = account.balance;
-	
-	var fersDeposit = 0;
-	
-	var postRedeposit = 0;
-	var postDeposit = 0;
-	
-	var preRedeposit = 0;
-	var preDeposit = 0;
-	
-	var newBalanceDue = priorBalanceDue;
-	
-	
-	var calculationVersion = account.calculationVersions[0];
-	if (calculationVersion != null) {
-		calculateDate = new Date(calculationVersion.calculationDate);
-		var result = calculationVersion.calculationResult;
-		if (result != null) {
-			plusInterestOnPriorBalance += result.summary.totalInitialInterest;
-			
-			var redeposits = result.redeposits;
-			var dedeposits = result.dedeposits;
-			
-			if (redeposits != null) {
-				for (var i = 0; i < redeposits.length; i++) {
-					var item = redeposits[i];
-					if (item.depositType == 'FERS_REDEPOSIT') {
-						fersDeposit += item.total;
-					} else if (item.depositType == 'CSRS_POST_82_PRE_91_REDEPOSIT') {
-						postRedeposit += item.total;
-					} else if (item.depositType == 'CSRS_POST_3_91_REDEPOSIT') {
-						postRedeposit += item.total;
-					} else if (item.depositType == 'CSRS_PRE_10_82_REDEPOSIT'){
-						preRedeposit += item.total;
-					}
-				}
-			}
-			
-			if (dedeposits != null) {
-				for (var i = 0; i < dedeposits.length; i++) {
-					var item = dedeposits[i];
-					if (item.depositType == 'FERS_DEPOSIT') {
-						fersDeposit += item.total;
-					} else if (item.depositType == 'CSRS_POST_10_82_DEPOSIT') {
-						postDeposit += item.total;
-					} else if (item.depositType == 'CSRS_PRE_10_82_DEPOSIT') {
-						preDeposit += item.total;
-					} 
-				}
-				
-			}
-			
-			if (result.items[0] != null) {
-				newBalanceDue -= result.items[0].paymentsApplied;
-			}
-			
-		}
-		
-	} 
-	var data = {
-			csd:csd,
-			birthDate:birthDate,
-			amountPayment:amountPayment,
-			address:address,
-			accountName:accountName,
-			calculateDate:calculateDate,
-			serviceType:serviceType,
-			
-			priorBalanceDue:priorBalanceDue,
-			plusInterestOnPriorBalance:plusInterestOnPriorBalance,
-			balanceDueBeforePayment:balanceDueBeforePayment,
-			fersDeposit:fersDeposit,
-			postRedeposit:postRedeposit,
-			postDeposit:postDeposit,
-			preRedeposit:preRedeposit,
-			preDeposit:preDeposit,
-			newBalanceDue:newBalanceDue
-	};
-	return data;
+    var context = $('#context').val();
+    var accountId = $('#accountId').val();
+    var account = getAccount(context, accountId);
+    var csd = account.claimNumber;
+    var birthDate = new Date(account.holder.birthDate);
+    var amountPayment = account.balance;
+    var address = account.holder.address.street1 + '<br/>' + account.holder.address.street2 + "<br/>" + account.holder.address.city;
+    var accountName = account.holder.firstName + ' ' + account.holder.lastName;
+    var serviceType = account.planType;
+
+
+    var calculateDate = new Date();
+    var priorBalanceDue = account.balance;
+    var plusInterestOnPriorBalance = priorBalanceDue;
+    var balanceDueBeforePayment = account.balance;
+
+    var fersDeposit = 0;
+
+    var postRedeposit = 0;
+    var postDeposit = 0;
+
+    var preRedeposit = 0;
+    var preDeposit = 0;
+
+    var newBalanceDue = priorBalanceDue;
+
+
+    var calculationVersion = account.calculationVersions[0];
+    if (calculationVersion != null) {
+        calculateDate = new Date(calculationVersion.calculationDate);
+        var result = calculationVersion.calculationResult;
+        if (result != null) {
+            plusInterestOnPriorBalance += result.summary.totalInitialInterest;
+
+            var redeposits = result.redeposits;
+            var dedeposits = result.dedeposits;
+
+            if (redeposits != null) {
+                for (var i = 0; i < redeposits.length; i++) {
+                    var item = redeposits[i];
+                    if (item.depositType == 'FERS_REDEPOSIT') {
+                        fersDeposit += item.total;
+                    } else if (item.depositType == 'CSRS_POST_82_PRE_91_REDEPOSIT') {
+                        postRedeposit += item.total;
+                    } else if (item.depositType == 'CSRS_POST_3_91_REDEPOSIT') {
+                        postRedeposit += item.total;
+                    } else if (item.depositType == 'CSRS_PRE_10_82_REDEPOSIT') {
+                        preRedeposit += item.total;
+                    }
+                }
+            }
+
+            if (dedeposits != null) {
+                for (var i = 0; i < dedeposits.length; i++) {
+                    var item = dedeposits[i];
+                    if (item.depositType == 'FERS_DEPOSIT') {
+                        fersDeposit += item.total;
+                    } else if (item.depositType == 'CSRS_POST_10_82_DEPOSIT') {
+                        postDeposit += item.total;
+                    } else if (item.depositType == 'CSRS_PRE_10_82_DEPOSIT') {
+                        preDeposit += item.total;
+                    }
+                }
+
+            }
+
+            if (result.items[0] != null) {
+                newBalanceDue -= result.items[0].paymentsApplied;
+            }
+
+        }
+
+    }
+    var data = {
+        csd: csd,
+        birthDate: birthDate,
+        amountPayment: amountPayment,
+        address: address,
+        accountName: accountName,
+        calculateDate: calculateDate,
+        serviceType: serviceType,
+        priorBalanceDue: priorBalanceDue,
+        plusInterestOnPriorBalance: plusInterestOnPriorBalance,
+        balanceDueBeforePayment: balanceDueBeforePayment,
+        fersDeposit: fersDeposit,
+        postRedeposit: postRedeposit,
+        postDeposit: postDeposit,
+        preRedeposit: preRedeposit,
+        preDeposit: preDeposit,
+        newBalanceDue: newBalanceDue
+    };
+    return data;
 }
 
 function renderStatementReport(data) {
-	var popup = $('.printStatementPopup');
-	// csd
-	$('.printNum span', popup).text('CSD #' + data.csd);
-	$('.printBirth span', popup).text(formatDateTime(data.birthDate));
-	$('.printAcount span', popup).text(formatReportMoney(data.amountPayment));
-	$('.printAddressBody', popup).html(data.address);
-	$('.printPersonalData .name', popup).text(data.accountName);
-	$('.printPersonalData .date span', popup).text(formatDateTime(data.calculateDate));
-	$('.printPersonalData .coveredBy span', popup).text(data.serviceType);
-	$('.printPersonalData .claimNum span', popup).text('CSD #' + data.csd);
-	
-	$('.priorBalanceDue', popup).text(formatReportMoney(data.priorBalanceDue));
-	$('.plusInterestOnPriorBalance', popup).text(formatReportMoney(data.plusInterestOnPriorBalance));
-	$('.balanceDueBeforePayment', popup).text(formatReportMoney(data.balanceDueBeforePayment));
-	$('.amountOfPayment', popup).text(formatReportMoney(data.amountPayment));
-	$('.fersDeposit', popup).text(formatReportMoney(data.fersDeposit));
-	$('.postRedeposit', popup).text(formatReportMoney(data.postRedeposit));
-	$('.postDeposit', popup).text(formatReportMoney(data.postDeposit));
-	$('.preRedeposit', popup).text(formatReportMoney(data.preRedeposit));
-	$('.preDeposit', popup).text(formatReportMoney(data.preDeposit));
-	$('.newBalanceDue', popup).text(formatReportMoney(data.newBalanceDue));
+    var popup = $('.printStatementPopup');
+    // csd
+    $('.printNum span', popup).text('CSD #' + data.csd);
+    $('.printBirth span', popup).text(formatDateTime(data.birthDate));
+    $('.printAcount span', popup).text(formatReportMoney(data.amountPayment));
+    $('.printAddressBody', popup).html(data.address);
+    $('.printPersonalData .name', popup).text(data.accountName);
+    $('.printPersonalData .date span', popup).text(formatDateTime(data.calculateDate));
+    $('.printPersonalData .coveredBy span', popup).text(data.serviceType);
+    $('.printPersonalData .claimNum span', popup).text('CSD #' + data.csd);
+
+    $('.priorBalanceDue', popup).text(formatReportMoney(data.priorBalanceDue));
+    $('.plusInterestOnPriorBalance', popup).text(formatReportMoney(data.plusInterestOnPriorBalance));
+    $('.balanceDueBeforePayment', popup).text(formatReportMoney(data.balanceDueBeforePayment));
+    $('.amountOfPayment', popup).text(formatReportMoney(data.amountPayment));
+    $('.fersDeposit', popup).text(formatReportMoney(data.fersDeposit));
+    $('.postRedeposit', popup).text(formatReportMoney(data.postRedeposit));
+    $('.postDeposit', popup).text(formatReportMoney(data.postDeposit));
+    $('.preRedeposit', popup).text(formatReportMoney(data.preRedeposit));
+    $('.preDeposit', popup).text(formatReportMoney(data.preDeposit));
+    $('.newBalanceDue', popup).text(formatReportMoney(data.newBalanceDue));
 }
 
 function refreshEmployeeInfo(account) {
@@ -1383,8 +1419,8 @@ function refreshPaymentTable(accountId) {
     $.ajax({
         url: context + '/account/' + accountId + '/payments',
         async: true,
-        dataType:"json",
-        type:"GET",
+        dataType: "json",
+        type: "GET",
         cache: false,
         success: function(data) {
             currentPayments = data;
@@ -1398,39 +1434,39 @@ function refreshPaymentTable(accountId) {
                 }
                 var cell = $('<td class="blankCell jsShowRowAction">&nbsp;</td>');
                 row.append(cell);
-                
+
                 cell = $('<td></td>');
                 cell.text(item.batchNumber);
                 row.append(cell);
-                
+
                 cell = $('<td></td>');
                 cell.text(item.blockNumber);
                 row.append(cell);
-                
+
                 cell = $('<td></td>');
                 cell.text(item.sequenceNumber);
                 row.append(cell);
-                
+
                 cell = $('<td></td>');
                 cell.text(parseDateToString(item.depositDate));
                 row.append(cell);
-                
+
                 cell = $('<td></td>');
                 cell.text('$' + item.amount);
                 row.append(cell);
-                
+
                 cell = $('<td></td>');
                 cell.text(item.paymentAppliance == null ? '' : item.paymentAppliance.name);
                 row.append(cell);
-                
+
                 cell = $('<td></td>');
                 cell.text(item.applyTo == null ? '' : item.applyTo.name);
                 row.append(cell);
-                
+
                 cell = $('<td></td>');
                 cell.text('Wall-E Service Credit');
                 row.append(cell);
-                
+
                 cell = $('<td class="lastCol"></td>');
                 // <input name="phRow5" type="checkbox" value="phRow1" checked="checked" class="checkboxInput">
                 var theInput = $('<input type="checkbox" class="checkboxInput glcheckbox">');
@@ -1441,10 +1477,10 @@ function refreshPaymentTable(accountId) {
                 }
                 cell.append(theInput);
                 row.append(cell);
-                
+
                 theTable.find('tbody').append(row);
             }
-            
+
         },
         error: function(error, b, c) {
             alert('fail to get payments for account: ' + error.responseText);

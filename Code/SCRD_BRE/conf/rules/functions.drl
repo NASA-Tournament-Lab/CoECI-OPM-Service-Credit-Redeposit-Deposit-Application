@@ -6,6 +6,7 @@ package gov.opm.scrd.rules;
 import gov.opm.scrd.entities.application.ExtendedServicePeriod;
 import gov.opm.scrd.entities.application.ServicePeriod;
 import gov.opm.scrd.entities.application.IntermediateResult;
+import gov.opm.scrd.entities.application.DeductionCalculationDetail;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
@@ -742,6 +743,12 @@ function void calculateDeduction(ServicePeriod sp, double deductionRate) {
     BigDecimal deduction = sp.getEarnings().multiply(BigDecimal.valueOf(deductionRate))
             .setScale(2, RoundingMode.HALF_UP);
     sp.setDeduction(deduction);
+    
+    if(sp.getDeductionCalculationDetail() == null){
+        sp.setDeductionCalculationDetail(new DeductionCalculationDetail());
+    }
+    
+    sp.getDeductionCalculationDetail().setDeductionRate(deductionRate);
 }
 
 /**
@@ -788,6 +795,12 @@ function void calculateProratedDeduction(ServicePeriod sp, Date dateRangeFrom, D
         .setScale(6, RoundingMode.HALF_UP).divide(BigDecimal.valueOf(totalDays), 6, RoundingMode.HALF_UP);
 
     sp.setDeduction(sp.getDeduction().add(proratedDeduction));
+    
+    if(sp.getDeductionCalculationDetail() == null){
+        sp.setDeductionCalculationDetail(new DeductionCalculationDetail());
+    }
+    
+    sp.getDeductionCalculationDetail().setDeductionRate(deductionRate);
 }
 
 /**
@@ -832,6 +845,7 @@ function void splitServicePeriod(ServicePeriod sp, Date date, KnowledgeContext k
     sp1.setInterestAccrualDate(sp.getInterestAccrualDate());
     sp1.setConnerCase(sp.isConnerCase());
     sp1.setValidationErrors(sp.getValidationErrors());
+    sp1.setDeductionCalculationDetail(sp.getDeductionCalculationDetail());
 
     ServicePeriod sp2 = new ServicePeriod();
     sp2.setBeginDate(sp.getBeginDate());
@@ -848,6 +862,7 @@ function void splitServicePeriod(ServicePeriod sp, Date date, KnowledgeContext k
     sp2.setInterestAccrualDate(sp.getInterestAccrualDate());
     sp2.setConnerCase(sp.isConnerCase());
     sp2.setValidationErrors(sp.getValidationErrors());
+    sp2.setDeductionCalculationDetail(sp.getDeductionCalculationDetail());
 
     if ("EARNINGS".equals(sp.getPayType().getName())) {
         // Split earnings amount
