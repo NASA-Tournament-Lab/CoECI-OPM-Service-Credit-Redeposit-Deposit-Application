@@ -18,8 +18,8 @@ INSERT INTO opm.service_type(id, deleted, name) VALUES(4, false, 'SES-Senior Exe
 INSERT INTO opm.service_type(id, deleted, name) VALUES(5, false, 'Senior Official');
 INSERT INTO opm.service_type(id, deleted, name) VALUES(6, false, 'Legislators');
 INSERT INTO opm.service_type(id, deleted, name) VALUES(7, false, 'Legislators- SS Max');
-INSERT INTO opm.service_type(id, deleted, name) VALUES(8, false, 'Postal Service- PTF');
-INSERT INTO opm.service_type(id, deleted, name) VALUES(9, false, 'Postal Service- LT (and FT)');
+-- INSERT INTO opm.service_type(id, deleted, name) VALUES(8, false, 'Postal Service- PTF');
+-- INSERT INTO opm.service_type(id, deleted, name) VALUES(9, false, 'Postal Service- LT (and FT)');
 INSERT INTO opm.service_type(id, deleted, name) VALUES(10, false, 'Legislative Employee');
 INSERT INTO opm.service_type(id, deleted, name) VALUES(11, false, 'Senate Child Care');
 INSERT INTO opm.service_type(id, deleted, name) VALUES(12, false, 'Library of Congress Child Care');
@@ -590,11 +590,11 @@ INSERT INTO opm.period_type(id, deleted, name) VALUES (3, false, 'Military');
 INSERT INTO opm.period_type(id, deleted, name) VALUES (4, false, 'LWOP');
 INSERT INTO opm.period_type(id, deleted, name) VALUES (5, false, 'NO EARNINGS');
 INSERT INTO opm.period_type(id, deleted, name) VALUES (6, false, 'Deduction Service');
-INSERT INTO opm.period_type(id, deleted, name) VALUES (7, false, 'Unpaid Redeposit');
-INSERT INTO opm.period_type(id, deleted, name) VALUES (8, false, 'Pre 10-82 Redeposit');
-INSERT INTO opm.period_type(id, deleted, name) VALUES (9, false, 'Post 10-82 Redeposit');
-INSERT INTO opm.period_type(id, deleted, name) VALUES (10, false, 'Post 03-91 Redeposit');
-INSERT INTO opm.period_type(id, deleted, name) VALUES (11, false, 'Pre 03-91 Redeposit');
+-- INSERT INTO opm.period_type(id, deleted, name) VALUES (7, false, 'Unpaid Redeposit');
+-- INSERT INTO opm.period_type(id, deleted, name) VALUES (8, false, 'Pre 10-82 Redeposit');
+-- INSERT INTO opm.period_type(id, deleted, name) VALUES (9, false, 'Post 10-82 Redeposit');
+-- INSERT INTO opm.period_type(id, deleted, name) VALUES (10, false, 'Post 03-91 Redeposit');
+-- INSERT INTO opm.period_type(id, deleted, name) VALUES (11, false, 'Pre 03-91 Redeposit');
 
 INSERT INTO opm.user_status(id, deleted, name) VALUES(1, false, 'Active User');
 INSERT INTO opm.user_status(id, deleted, name) VALUES(2, false, 'Suspended User');

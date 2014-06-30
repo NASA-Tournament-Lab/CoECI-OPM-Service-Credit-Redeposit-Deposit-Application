@@ -76,7 +76,7 @@
             <p class="fieldLabel">Form submitted:</p>
             <input name="formType" type="radio" value="1" id="formCsrs" />
             <label class="radioLabel" for="formCsrs">2803 (CSRS)</label>
-            <input name="formType" type="radio" id="formFers" value="2" checked="checked"/>
+            <input name="formType" type="radio" id="formFers" value="2"/>
             <label class="radioLabel" for="formFers">3108 (FERS)</label>
           </div>
           <div class="halfCol">
@@ -99,11 +99,11 @@
             </div>
             <div class="halfRowField">
               <label for="birthDateL"><p class="fieldLabel">Birth Date <span class="reqMark">*</span> :</p></label>
-              <input name="birthDate" type="text" id="birthDateL" class="text midLength holder birthDate2" value="02/10/1992"/>
+              <input name="birthDate" type="text" id="birthDateL" class="text midLength holder birthDate22"/>
             </div>
             <div class="halfRowField">
               <label for="ssn1L"><p class="fieldLabel">SSN <span class="reqMark">*</span> :</p></label>
-              <input name="ssn1" id="ssn1L" type="text" class="text ssn1 ssn" maxlength="3"/><span class="sep">-</span><input name="ssn2" type="text" class="text ssn2 ssn" maxlength="2"/><span class="sep">-</span><input name="ssn3" type="text" class="text ssn3 ssn" maxlength="4"/>
+              <input name="ssn1" id="ssn1L" type="text" class="text ssn1 ssn advanceSsn1" maxlength="3"/><span class="sep">-</span><input name="ssn2" type="text" class="text ssn2 ssn advanceSsn2" maxlength="2"/><span class="sep">-</span><input name="ssn3" type="text" class="text ssn3 ssn advanceSsn3" maxlength="4"/>
             </div>
             <div class="halfRowField phoneField">
               <label for="phoneInputL"><p class="fieldLabel">Telephone :</p></label>
@@ -238,6 +238,8 @@
       <div class="popupFooter"><div class="popupFooterRight"><div class="popupFooterInner"></div></div></div>
     </div>
     <!-- .notificationPopup -->
+
+    
 
     <div class="popup infoNotiPopup isHidden">
       <div class="popupHeader"><div class="popupHeaderRight"><div class="popupHeaderInner"></div></div></div>

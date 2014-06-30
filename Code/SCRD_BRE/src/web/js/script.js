@@ -29,6 +29,8 @@ window.results = {};
 // current versio id
 var currentVersionId = 0;
 
+var rowCopy = null;
+
 
 var intLimit32 = 2147483647;
 
@@ -167,6 +169,111 @@ $(document).ready(function() {
         }
         return true;
     });
+
+    $(".advanceSsn1").on("keyup paste", function(){
+
+        if($(this).val().length == 3){
+            $(this).parent().children(".advanceSsn2").focus();
+        }
+
+    });
+
+    $(".advanceSsn2").on("keyup paste", function(){
+
+        if($(this).val().length == 2){
+            $(this).parent().children(".advanceSsn3").focus();
+        }
+
+    });
+
+    if($.isFunction($.contextMenu)){
+
+    $.contextMenu({
+            selector: '.blankCell', 
+            callback: function(key, options) {
+                //var m = "clicked: " + key;
+                //window.console && console.log(m) || alert(m); 
+            },
+            items: {
+                "add": {name: "Add a row to the end",
+                callback: function(key, options){
+
+                    //opt.$trigger
+                    $(".depositTab .newEntryRow .blankCell ").click();
+                }
+
+            },
+
+            "delete": {name: "Delete this row",
+
+                callback: function(key, options){
+                    var cur = options.$trigger;
+                    var parent = $(cur).parent("tr");
+                        if(!parent.hasClass("newEntryRow")){
+                            parent.remove();
+                        } else {
+                            alert("This row can not be deleted");
+                        }
+                }
+
+            },
+
+            "copy": {name: "Copy this row",
+                callback: function(key, options){
+                    var cur = options.$trigger;
+                    var parent = $(cur).parent("tr");
+
+                    if(!parent.hasClass("newEntryRow")){
+                        rowCopy = parent.clone();
+                    } else {
+                        alert("This row can not be copied");
+                    }
+                    
+                }
+
+            },
+
+            "paste": {name: "Paste  here",
+                callback: function(key, options){
+                        var cur = options.$trigger;
+                        var parent = $(cur).parent("tr");
+
+                        if(!parent.hasClass("newEntryRow")){
+
+                            if(!isNumber(rowCopy)){
+                                rowCopy = rowCopy.clone();
+                                parent.replaceWith(rowCopy);
+                            } else {
+                                alert("No rows were copied. Please copy one first");
+                            }
+                            
+                        } else {
+                            alert("This row can not be replaced");
+                        }
+                        
+                    }
+
+            },
+
+            "insert": {name: "Insert before this row",
+                callback: function(key, options){
+                    var cur = options.$trigger;
+                        var parent = $(cur).parent("tr");
+
+                        if(!isNumber(rowCopy)){
+                            rowCopy = rowCopy.clone();
+                            rowCopy.insertBefore(parent);
+                        } else {
+                                alert("No rows were copied. Please copy one first");
+                        }
+                        
+                }
+
+            }
+            }
+        });
+
+    }
 
     if ($(".addPaymentPopup").length > 0) {
         loadLookup('applicationDesignations', false);
@@ -1105,7 +1212,7 @@ $(document).ready(function() {
 
     var editRowHTML = $(".entriesTbl tfoot").html();
     var viewRowHTML = '<tr class="even"><td class="blankCell firstCol">&nbsp;</td><td>01/01/2001</td><td>01/11/2012</td><td>CSRS</td><td>Deposit</td><td>Career</td><td>Wage Grade</td><td>$ 20,000.00</td><td class="lastCol">Refund/Lump Sum</td></tr>';
-    var emptyRowHTML = '<tr class="even newEntryRow unsortable"><td class="blankCell firstCol">&nbsp;</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td class="withHoldDisabled"></td><td></td><td class="lastCol"></td></tr>';
+    var emptyRowHTML = '<tr class="even newEntryRow unsortable"><td class="blankCell firstCol">&nbsp;</td><td></td><td></td><td></td><td></td><td class="appointmentDisabled"></td><td></td><td></td><td></td><td class="withHoldDisabled"></td><td></td><td class="lastCol"></td></tr>';
     //var emptyRowHTML = '<tr class="even2 newEntryRow unsortable"><td class="blankCell firstCol">&nbsp;</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td class="lastCol"></td></tr>';
 
     $(".jsNewVersionBtn").click(function() {
@@ -1379,7 +1486,7 @@ $(document).ready(function() {
                     }
                 });
 
-                $(tds).eq(1).children('input').datepicker({
+                /*$(tds).eq(1).children('input').datepicker({
                     showOn: "button",
                     buttonImage: context + "/i/calendar.png",
                     buttonImageOnly: true,
@@ -1403,7 +1510,7 @@ $(document).ready(function() {
                     changeMonth: true,
                     changeYear: true, yearRange: "-100:+1",
                     buttonText: "Enter the Interest Begin Date."
-                });
+                });*/
 
                 if (tr.hasClass("newEntryRow")) {
                     $(tr).parent('tbody').append(emptyRowHTML);
@@ -1444,7 +1551,7 @@ $(document).ready(function() {
                 tBody.append(editRowHTML);
                 var newRow = $("tr:last-child", tBody);
                 $("input", newRow).val("");
-                $(".bDate, .eDate, .iDate", newRow).addClass("datePicker");
+                //$(".bDate, .eDate, .iDate", newRow).addClass("datePicker");
                 $("input.datePicker", newRow).datepicker({
                     showOn: "button",
                     buttonImage: context + "/i/calendar.png",
@@ -1747,119 +1854,127 @@ $(document).ready(function() {
         });
         // service history
         var version = getOfficialVersion(account.calculationVersions);
-        var aggregate = aggregateCalculationResult(version.calculationResult);
-        $('.calculation-tbody').html();
-        if (aggregate.FERS_DEPOSIT.items.length != 0) {
-            $.each(aggregate.FERS_DEPOSIT.items, function() {
-                var template = $('.calculation-tfoot').find('tr').eq(0).clone();
-                var tds = template.find('td');
-                tds.eq(0).html(this.retirementType.name);
-                tds.eq(1).html(this.periodType.name);
-                tds.eq(2).html(parseDateToString(this.startDate));
-                tds.eq(3).html(parseDateToString(this.endDate));
-                tds.eq(4).html(parseDateToString(this.midDate));
-                tds.eq(5).html(this.deductionAmount);
-                tds.eq(6).html(this.totalInterest);
-                tds.eq(7).html(this.paymentsApplied);
-                tds.eq(8).html(this.balance);
-                $('.calculation-tbody').append(template);
-            });
-            var totalTemplate = $('.calculation-tfoot').find('tr').eq(1).clone();
-            var totalTds = totalTemplate.find('td');
-            totalTds.eq(2).html('FERS Deposit Total');
-            totalTds.eq(3).html(aggregate.FERS_DEPOSIT.total.deduction);
-            totalTds.eq(4).html(aggregate.FERS_DEPOSIT.total.interest);
-            totalTds.eq(5).html(aggregate.FERS_DEPOSIT.total.payments);
-            totalTds.eq(6).html(aggregate.FERS_DEPOSIT.total.total);
-            $('.calculation-tbody').append(totalTemplate);
-            var emptyTemplate = $('.calculation-tfoot').find('tr').eq(2).clone();
-            $('.calculation-tbody').append(emptyTemplate);
+        if (version != null) {
+            $('.version-number', popup).html(version.id);
+            var aggregate = aggregateCalculationResult(version.calculationResult);
+            $('.calculation-tbody').html("");
+            if (aggregate.FERS_DEPOSIT.items.length != 0) {
+                $.each(aggregate.FERS_DEPOSIT.items, function() {
+                    var template = $('.calculation-tfoot').find('tr').eq(0).clone();
+                    var tds = template.find('td');
+                    tds.eq(0).html(this.retirementType.name);
+                    tds.eq(1).html(this.periodType.name);
+                    tds.eq(2).html(parseDateToString(this.startDate));
+                    tds.eq(3).html(parseDateToString(this.endDate));
+                    tds.eq(4).html(parseDateToString(this.midDate));
+
+                    tds.eq(5).html(this.deductionAmount);
+                    tds.eq(6).html(this.totalInterest);
+                    tds.eq(7).html(this.paymentsApplied);
+                    tds.eq(8).html(this.balance);
+                    $('.calculation-tbody').append(template);
+                });
+                var totalTemplate = $('.calculation-tfoot').find('tr').eq(1).clone();
+                var totalTds = totalTemplate.find('td');
+                totalTds.eq(2).html('FERS Deposit Total');
+                totalTds.eq(3).html(aggregate.FERS_DEPOSIT.total.deduction);
+                totalTds.eq(4).html(aggregate.FERS_DEPOSIT.total.interest);
+                totalTds.eq(5).html(aggregate.FERS_DEPOSIT.total.payments);
+                totalTds.eq(6).html(aggregate.FERS_DEPOSIT.total.total);
+                $('.calculation-tbody').append(totalTemplate);
+                var emptyTemplate = $('.calculation-tfoot').find('tr').eq(2).clone();
+                $('.calculation-tbody').append(emptyTemplate);
+            }
+            if (aggregate.FERS_REDEPOSIT.items.length != 0) {
+                $.each(aggregate.FERS_REDEPOSIT.items, function() {
+
+                    var template = $('.calculation-tfoot').find('tr').eq(0).clone();
+                    var tds = template.find('td');
+                    tds.eq(0).html(this.retirementType.name);
+                    tds.eq(1).html(this.periodType.name);
+                    tds.eq(2).html(parseDateToString(this.startDate));
+                    tds.eq(3).html(parseDateToString(this.endDate));
+                    tds.eq(4).html(parseDateToString(this.midDate));
+                    tds.eq(5).html(this.deductionAmount);
+                    tds.eq(6).html(this.totalInterest);
+                    tds.eq(7).html(this.paymentsApplied);
+                    tds.eq(8).html(this.balance);
+                    $('.calculation-tbody').append(template);
+                });
+                var totalTemplate = $('.calculation-tfoot').find('tr').eq(1).clone();
+                var totalTds = totalTemplate.find('td');
+                totalTds.eq(2).html('FERS Redeposit Total');
+                totalTds.eq(3).html(aggregate.FERS_REDEPOSIT.total.deduction);
+                totalTds.eq(4).html(aggregate.FERS_REDEPOSIT.total.interest);
+                totalTds.eq(5).html(aggregate.FERS_REDEPOSIT.total.payments);
+                totalTds.eq(6).html(aggregate.FERS_REDEPOSIT.total.total);
+                $('.calculation-tbody').append(totalTemplate);
+                var emptyTemplate = $('.calculation-tfoot').find('tr').eq(2).clone();
+                $('.calculation-tbody').append(emptyTemplate);
+            }
+            if (aggregate.CSRS_DEPOSIT.items.length != 0) {
+                $.each(aggregate.CSRS_DEPOSIT.items, function() {
+                    var template = $('.calculation-tfoot').find('tr').eq(0).clone();
+                    var tds = template.find('td');
+                    tds.eq(0).html(this.retirementType.name);
+                    tds.eq(1).html(this.periodType.name);
+                    tds.eq(2).html(parseDateToString(this.startDate));
+                    tds.eq(3).html(parseDateToString(this.endDate));
+                    tds.eq(4).html(parseDateToString(this.midDate));
+                    tds.eq(5).html(this.deductionAmount);
+                    tds.eq(6).html(this.totalInterest);
+                    tds.eq(7).html(this.paymentsApplied);
+                    tds.eq(8).html(this.balance);
+
+                    $('.calculation-tbody').append(template);
+                });
+                var totalTemplate = $('.calculation-tfoot').find('tr').eq(1).clone();
+                var totalTds = totalTemplate.find('td');
+                totalTds.eq(2).html('CSRS Deposit Total');
+                totalTds.eq(3).html(aggregate.CSRS_DEPOSIT.total.deduction);
+                totalTds.eq(4).html(aggregate.CSRS_DEPOSIT.total.interest);
+                totalTds.eq(5).html(aggregate.CSRS_DEPOSIT.total.payments);
+                totalTds.eq(6).html(aggregate.CSRS_DEPOSIT.total.total);
+                $('.calculation-tbody').append(totalTemplate);
+                var emptyTemplate = $('.calculation-tfoot').find('tr').eq(2).clone();
+                $('.calculation-tbody').append(emptyTemplate);
+            }
+            if (aggregate.CSRS_REDEPOSIT.items.length != 0) {
+                $.each(aggregate.CSRS_REDEPOSIT.items, function() {
+                    var template = $('.calculation-tfoot').find('tr').eq(0).clone();
+                    var tds = template.find('td');
+                    tds.eq(0).html(this.retirementType.name);
+                    tds.eq(1).html(this.periodType.name);
+                    tds.eq(2).html(parseDateToString(this.startDate));
+                    tds.eq(3).html(parseDateToString(this.endDate));
+                    tds.eq(4).html(parseDateToString(this.midDate));
+                    tds.eq(5).html(this.deductionAmount);
+                    tds.eq(6).html(this.totalInterest);
+                    tds.eq(7).html(this.paymentsApplied);
+                    tds.eq(8).html(this.balance);
+                    $('.calculation-tbody').append(template);
+                });
+                var totalTemplate = $('.calculation-tfoot').find('tr').eq(1).clone();
+                var totalTds = totalTemplate.find('td');
+                totalTds.eq(2).html('CSRS Redeposit Total');
+                totalTds.eq(3).html(aggregate.CSRS_REDEPOSIT.total.deduction);
+                totalTds.eq(4).html(aggregate.CSRS_REDEPOSIT.total.interest);
+                totalTds.eq(5).html(aggregate.CSRS_REDEPOSIT.total.payments);
+                totalTds.eq(6).html(aggregate.CSRS_REDEPOSIT.total.total);
+                $('.calculation-tbody').append(totalTemplate);
+                var emptyTemplate = $('.calculation-tfoot').find('tr').eq(2).clone();
+                $('.calculation-tbody').append(emptyTemplate);
+            }
+
+            var grandTemplate = $('.calculation-tfoot').find('tr').eq(3).clone();
+            var tds = grandTemplate.find('td');
+            tds.eq(3).html(aggregate.ALL_TOTAL.deduction);
+            tds.eq(4).html(aggregate.ALL_TOTAL.interest);
+            tds.eq(5).html(aggregate.ALL_TOTAL.payments);
+            tds.eq(6).html(aggregate.ALL_TOTAL.total);
+            $('.calculation-tbody').append(grandTemplate);
         }
-        if (aggregate.FERS_REDEPOSIT.items.length != 0) {
-            $.each(aggregate.FERS_REDEPOSIT.items, function() {
-                var template = $('.calculation-tfoot').find('tr').eq(0).clone();
-                var tds = template.find('td');
-                tds.eq(0).html(this.retirementType.name);
-                tds.eq(1).html(this.periodType.name);
-                tds.eq(2).html(parseDateToString(this.startDate));
-                tds.eq(3).html(parseDateToString(this.endDate));
-                tds.eq(4).html(parseDateToString(this.midDate));
-                tds.eq(5).html(this.deductionAmount);
-                tds.eq(6).html(this.totalInterest);
-                tds.eq(7).html(this.paymentsApplied);
-                tds.eq(8).html(this.balance);
-                $('.calculation-tbody').append(template);
-            });
-            var totalTemplate = $('.calculation-tfoot').find('tr').eq(1).clone();
-            var totalTds = totalTemplate.find('td');
-            totalTds.eq(2).html('FERS Redeposit Total');
-            totalTds.eq(3).html(aggregate.FERS_REDEPOSIT.total.deduction);
-            totalTds.eq(4).html(aggregate.FERS_REDEPOSIT.total.interest);
-            totalTds.eq(5).html(aggregate.FERS_REDEPOSIT.total.payments);
-            totalTds.eq(6).html(aggregate.FERS_REDEPOSIT.total.total);
-            $('.calculation-tbody').append(totalTemplate);
-            var emptyTemplate = $('.calculation-tfoot').find('tr').eq(2).clone();
-            $('.calculation-tbody').append(emptyTemplate);
-        }
-        if (aggregate.CSRS_DEPOSIT.items.length != 0) {
-            $.each(aggregate.CSRS_DEPOSIT.items, function() {
-                var template = $('.calculation-tfoot').find('tr').eq(0).clone();
-                var tds = template.find('td');
-                tds.eq(0).html(this.retirementType.name);
-                tds.eq(1).html(this.periodType.name);
-                tds.eq(2).html(parseDateToString(this.startDate));
-                tds.eq(3).html(parseDateToString(this.endDate));
-                tds.eq(4).html(parseDateToString(this.midDate));
-                tds.eq(5).html(this.deductionAmount);
-                tds.eq(6).html(this.totalInterest);
-                tds.eq(7).html(this.paymentsApplied);
-                tds.eq(8).html(this.balance);
-                $('.calculation-tbody').append(template);
-            });
-            var totalTemplate = $('.calculation-tfoot').find('tr').eq(1).clone();
-            var totalTds = totalTemplate.find('td');
-            totalTds.eq(2).html('CSRS Deposit Total');
-            totalTds.eq(3).html(aggregate.CSRS_DEPOSIT.total.deduction);
-            totalTds.eq(4).html(aggregate.CSRS_DEPOSIT.total.interest);
-            totalTds.eq(5).html(aggregate.CSRS_DEPOSIT.total.payments);
-            totalTds.eq(6).html(aggregate.CSRS_DEPOSIT.total.total);
-            $('.calculation-tbody').append(totalTemplate);
-            var emptyTemplate = $('.calculation-tfoot').find('tr').eq(2).clone();
-            $('.calculation-tbody').append(emptyTemplate);
-        }
-        if (aggregate.CSRS_REDEPOSIT.items.length != 0) {
-            $.each(aggregate.CSRS_REDEPOSIT.items, function() {
-                var template = $('.calculation-tfoot').find('tr').eq(0).clone();
-                var tds = template.find('td');
-                tds.eq(0).html(this.retirementType.name);
-                tds.eq(1).html(this.periodType.name);
-                tds.eq(2).html(parseDateToString(this.startDate));
-                tds.eq(3).html(parseDateToString(this.endDate));
-                tds.eq(4).html(parseDateToString(this.midDate));
-                tds.eq(5).html(this.deductionAmount);
-                tds.eq(6).html(this.totalInterest);
-                tds.eq(7).html(this.paymentsApplied);
-                tds.eq(8).html(this.balance);
-                $('.calculation-tbody').append(template);
-            });
-            var totalTemplate = $('.calculation-tfoot').find('tr').eq(1).clone();
-            var totalTds = totalTemplate.find('td');
-            totalTds.eq(2).html('CSRS Redeposit Total');
-            totalTds.eq(3).html(aggregate.CSRS_REDEPOSIT.total.deduction);
-            totalTds.eq(4).html(aggregate.CSRS_REDEPOSIT.total.interest);
-            totalTds.eq(5).html(aggregate.CSRS_REDEPOSIT.total.payments);
-            totalTds.eq(6).html(aggregate.CSRS_REDEPOSIT.total.total);
-            $('.calculation-tbody').append(totalTemplate);
-            var emptyTemplate = $('.calculation-tfoot').find('tr').eq(2).clone();
-            $('.calculation-tbody').append(emptyTemplate);
-        }
-        var grandTemplate = $('.calculation-tfoot').find('tr').eq(3).clone();
-        var tds = grandTemplate.find('td');
-        tds.eq(3).html(aggregate.ALL_TOTAL.deduction);
-        tds.eq(4).html(aggregate.ALL_TOTAL.interest);
-        tds.eq(5).html(aggregate.ALL_TOTAL.payments);
-        tds.eq(6).html(aggregate.ALL_TOTAL.total);
-        $('.calculation-tbody').append(grandTemplate);
+
         $('.dollar').formatCurrency({
             negativeFormat: '%s-%n'
         });
@@ -1984,23 +2099,7 @@ $(document).ready(function() {
 
 
 
-    //Do Print
-    $(".jsDoPrintPaymentReceipt").click(function(e) {
-        window.open('AccountDetails_PaymentHistory_PaymentReceipt_printview.html', 'PaymentReceipt', 'width=940,height=500,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=0,top=0');
-        return false;
-    });
-    $(".jsDoPrintAccountSummary").click(function(e) {
-        window.open('AccountDetails_PrintSummary_printview.html', 'Summary', 'width=940,height=500,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=0,top=0');
-        return false;
-    });
-    $(".jsDoPrintFinalStatement").click(function(e) {
-        window.open('AccountDetails_BillingSummary_PrintStatement_printview.html', 'FinalStatement', 'width=940,height=500,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=0,top=0');
-        return false;
-    });
-    $(".jsDoPrintStaement").click(function(e) {
-        window.open('AccountDetails_PrintStatement_printview.html', 'Statement', 'width=940,height=500,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=0,top=0');
-        return false;
-    });
+    
 
 
     $("#paymentHistoryTbl .jsShowRowAction").click(function(e) {
@@ -2040,6 +2139,79 @@ $(document).ready(function() {
     //Popups
     $(".jsShowSample").click(function(e) {
         if (!$(this).hasClass("priBtnDisabled")) {
+            var popup = $('.initStatementPopup');
+            var accountId = $('#accountId').val();
+            var account = getAccount(context, accountId);
+            var holder = account.holder;
+            var version = getOfficialVersion(account.calculationVersions);
+            // basic information
+            $('.report-csd', popup).html(account.claimNumber);
+            $('.report-birthday', popup).html(parseDateToString(holder.birthDate));
+            $('.printAddressBody', popup).html(buildAddrerssString(holder.address));
+
+            $('.report-name', popup).html(holder.firstName + ' ' + holder.middleInitial + ' ' + holder.lastName);
+            $('.report-date', popup).html(parseDateToString(version.calculationDate));
+            $('.coverby', popup).html(account.planType);
+            // billing information
+            var billings = account.billingSummary.billings;
+            var trs = $('.billing1-tbody', popup).find('tr');
+            var total = 0;
+            $.each(billings, function() {
+                var i = mapping[this.name];
+                trs.eq(i * 3 + 1).find('td').eq(1).html(this.initialBilling);
+                trs.eq(i * 3 + 2).find('td').eq(1).html(this.additionalInterest);
+                trs.eq(i + 31).find('td').eq(1).html(this.initialBilling + this.totalPayments + this.additionalInterest);
+                total += this.initialBilling + this.totalPayments + this.additionalInterest;
+            });
+            $('.billing-total', popup).html(total);
+
+            // calculate less payments
+            var lessPayment = 0;
+            $.each(account.paymentHistory, function() {
+                if (this.approvalStatus == 'APPROVED') {
+                    lessPayment += this.amount;
+                }
+            });
+            $('.less-payments', popup).html(lessPayment);
+            $('.balance-due', popup).html(account.balance);
+            var items = version.calculationResult.items;
+            var html = "";
+            for (var i = 0; i < items.length / 2; i++) {
+                html += '<tr>';
+                html += '<td>' + parseDateToString(items[i * 2].startDate) + '</td>';
+                html += '<td>' + parseDateToString(items[i * 2].endDate) + '</td>';
+                var typeStr = 'F';
+                if (items[i * 2].retirementType == 'CSRS') {
+                    if (items[i * 2].periodType.name == 'DEPOSIT') {
+                        typeStr = 'D';
+
+                        } else {
+                        typeStr = 'R';
+                    }
+                }
+                html += '<td>' + typeStr + '</td>';
+                if (i * 2 + 1 < items.length) {
+                    html += '<td>' + parseDateToString(items[i * 2 + 1].startDate) + '</td>';
+                    html += '<td>' + parseDateToString(items[i * 2 + 1].endDate) + '</td>';
+                    var typeStr = 'F';
+                    if (items[i * 2 + 1].retirementType == 'CSRS') {
+                        if (items[i * 2 + 1].periodType.name == 'DEPOSIT') {
+                            typeStr = 'D';
+                        } else {
+                            typeStr = 'R';
+                        }
+                    }
+                    html += '<td>' + typeStr + '</td>';
+
+                    } else {
+                    html += '<td></td><td></td><td></td>';
+                }
+                html += '</tr>';
+            }
+            $('.calculationResult-tbody').html(html);
+            $('.dollar').formatCurrency({
+                negativeFormat: '%s-%n'
+            });
             showPopup(".initStatementPopup");
         }
     });
@@ -2241,7 +2413,7 @@ $(document).ready(function() {
                             html += " ThisInterestRate " + obj.intermediateRate;
                             html+= "<br> ServicePeriodInterest " + obj.intermediateAmount;
                             html+= "<br>  Interest from " + parseDateToString(obj.intermediateBeginDate) + " to " + parseDateToString(obj.intermediateEndDate);
-                            html += " is: " + toMoney(obj.beforeBalanceWithInterest) + " at " + toMoney(100*obj.intermediateRate, 3) + "% - ";
+                            html += " is: " + toMoney(obj.intermediateAmount) + " at " + toMoney(100*obj.intermediateRate, 3) + "% - ";
                             html += " Balance with interest: $" + toMoney(obj.balanceWithInterest);
                             html += "<br>";
 
@@ -3533,6 +3705,13 @@ function parseDateToString(item) {
     return two(date.getMonth() + 1) + "/" + two(date.getDate()) + "/" + date.getFullYear();
 }
 
+function formatStringDate (arg, fmt) {
+    if (!fmt) {
+        fmt = "MM/dd/yyyy";
+    }
+    return $.format.date(arg, fmt);
+}
+
 function two(value) {
     if (value > 9) {
         return '' + value;
@@ -3562,7 +3741,10 @@ function refreshAccountSummary(account) {
     $('.name').html(account.holder.firstName + ' ' + account.holder.lastName);
     $('.birthDate').html(parseDateToString(account.holder.birthDate));
     $('.ssn').html(account.holder.ssn);
-    $('.formType').html(account.formType.name);
+    if(account.formType){
+       $('.formType').html(account.formType.name); 
+    }
+    
     $('.title').html(account.holder.title);
     $('.frozen').html(account.frozen === true ? 'YES' : 'NO');
     $('.grace').html(account.grace === true ? 'YES' : 'NO');
@@ -3642,8 +3824,8 @@ function validateCalculationEntry(button) {
         }
         if (!$(this).hasClass('newEntryRow')) {
 
-            var selectBoxes = [3, 4, 5, 6, 8, 10];
-            var allSelectBoxes = [3, 4, 5, 6, 8, 9, 10];
+            var selectBoxes = [3, 4, 6, 8, 10];
+            var allSelectBoxes = [3, 4, 6, 8, 9, 10];
             var bDate = $.trim($(row).children('td').eq(1).html());
             var eDate = $.trim($(row).children('td').eq(2).removeClass('valErrorRowCell').html());
             var amount = $.trim($(row).children('td').eq(7).removeClass('valErrorRowCell').html()).replace(/[^0-9\.]+/g, "");
@@ -3683,6 +3865,8 @@ function validateCalculationEntry(button) {
                     $(row).addClass('valErrorRow');
                 }
             });
+
+            $(row).children('td').eq(5).html("DEPOSIT");
 
             var dmValidate = true;
             if (bDate == '' || isDate(bDate) == false) {
@@ -3961,6 +4145,7 @@ function runCalculation(context, tab, save, callback) {
                 calculation.endDate = Date.parse($(tds).eq(2).html());
                 calculation.retirementType = {id: $(tds).eq(3).next('input:hidden').val(), name: $(tds).eq(3).html()};
                 calculation.periodType = {id: $(tds).eq(4).next('input:hidden').val(), name: $(tds).eq(4).html()};
+                $(tds).eq(5).next('input:hidden').val("1");
                 calculation.appointmentType = {id: $(tds).eq(5).next('input:hidden').val(), name: $(tds).eq(5).html()};
                 calculation.serviceType = {id: $(tds).eq(6).next('input:hidden').val(), name: $(tds).eq(6).html()};
                 calculation.amount = $(tds).eq(7).html().replace(/[^0-9\.]+/g, "");
@@ -5082,7 +5267,7 @@ function showPrintReport(reportName, request, render, printPopup) {
 
 function printPopup(data) {
     var context = $('#context').val();
-    var mywindow = window.open(context + '/report/preview', '_blank', "width=800, heigh=600");
+    var mywindow = window.open(context + '/report/preview', '_blank', "width=800, heigh=1000");
     var theInterval = setInterval(function() {
         mywindow && mywindow.initPreview && mywindow.initPreview(data);
     }, 200);

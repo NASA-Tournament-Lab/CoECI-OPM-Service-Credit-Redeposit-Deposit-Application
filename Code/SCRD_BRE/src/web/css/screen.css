@@ -1022,7 +1022,7 @@ a:hover, a:focus {
 }
 #depTbl .entriesEditRow select{
     /* height: 18px; */
-    width: 80px; /* Bug Fix 153 */
+    width: 90px; /* Bug Fix 153 */
     /* font-size: 11px; */
     vertical-align: middle;
 }
@@ -2714,7 +2714,7 @@ h3.panelExpanded{
 .printBirth label{
     text-indent: 15px;
 }
-.printAmount{
+.printAcount{
     width: 225px;
     height: 30px;
     padding: 5px 0 6px 4px;
@@ -2903,6 +2903,9 @@ h3.panelExpanded{
     border-right: 1px solid #000000;
     border-bottom: 1px solid #000000;
     margin-right: 3px;
+}
+.initial-billingTblWrapper{
+    min-height: 500px;
 }
 .accountDetailsPrintPreview .printPersonalData  .coveredBy{
     width: 207px;
@@ -5200,7 +5203,7 @@ h3.panelExpanded{
 .sampleInitialStatementPrintPreview .printFormTitle {
     padding: 12px 0 0;
 }
-.sampleInitialStatementPrintPreview .printPersonalData  .name{
+.sampleInitialStatementPrintPreview .printPersonalData  .name-report{
     width: 237px;
     border-right: 1px solid #000000;
     border-bottom: 1px solid #000000;
@@ -6054,7 +6057,7 @@ h3.panelExpanded{
 }
 
 #depTbl .entriesEditRow input.text{
-    width: 56px; /* Bug Fix 153 */
+    width: 86px; /* Bug Fix 153 */
     padding: 0 3px;      vertical-align: middle;      color: #000000;
 }
 
@@ -7085,6 +7088,10 @@ figcaption {
     display: none;
 }
 
+#depTbl .appointmentDisabled {
+    display: none;
+}
+
 #depTblBody {
 
     line-height: normal;
@@ -7097,6 +7104,15 @@ figcaption {
     margin-right:25px;
     margin-top:25px;
     margin-bottom:25px;
+}
+
+.accountInfo {
+    padding-left: 10px;
+    border-left: 1px solid #e7e7e7;
+    border-right: 1px solid #e7e7e7;
+}
+.accountInfo .claim {
+    padding-left: 100px;
 }
 
 

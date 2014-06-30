@@ -24,6 +24,7 @@
     <!-- External CSS -->
     <link rel="stylesheet" href="<c:url value="/css/jquery-ui-1.10.3.custom.css"/>" media="all" />
     <link rel="stylesheet" href="<c:url value="/css/screen.css"/>" media="all" />
+    <link rel="stylesheet" href="<c:url value="/css/jquery.contextMenu.css"/>" media="all" />
 
     <!-- JS lib/plugins-->
     <script type="text/javascript" src="<c:url value="/js/jquery-1.10.2.min.js"/>"></script>
@@ -35,6 +36,7 @@
     <script type="text/javascript" src="<c:url value="/js/big.min.js"/>"></script>
 
     <!-- external main js -->
+    <script type="text/javascript" src="<c:url value="/js/jquery.contextMenu.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/js/script.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/js/createAccount.js"/>"></script>
 
@@ -58,16 +60,28 @@
           </div>
         </div>
 
+
+
         <div class="progressStepsBar">
           <ul>
-            <li class="firstStep finishedStep justFinishedStep"><a href="<c:url value="/account/viewCreate?step=createAccount"/>">Basic Information</a></li>
+            <li class="firstStep finishedStep justFinishedStep"><a class="jsStep2Prev" href="javascript:;">Basic Information</a></li>
             <li class="step2 currentStep">Service History</li>
-            <li class="step3"><a href="<c:url value="/account/viewCreate?step=createAccountNote"/>">Notes</a></li>
-            <li class="lastStep"><a href="<c:url value="/account/viewCreate?step=createAccountFinish"/>">Finish</a></li>
+            <li class="step3"><a href="javascript:;">Notes</a></li>
+            <li class="lastStep"><a href="javascript:;" class="jsStep2Finish">Finish</a></li>
           </ul>
           <div class="corner cornerTl"></div>
           <div class="corner cornerTr"></div>
         </div>
+
+        <div class="accountInfo">
+
+          <br>
+          <span class="name bold"></span>  
+
+          <span class="claim"> Claim#: <span class="claimNum bold">9391139</span> 
+          </span>
+        </div>
+
         <div class="serviceHistoryPanel tabsArea roundedGrayPanel">
           
           <div class="tabsBlock depositTab">
@@ -88,7 +102,7 @@
                   <col class="col2"/>
                   <col class="col3"/>
                   <col class="col4"/>
-                  <col class="col5"/>
+                  <col class="col5 appointmentDisabled"/>
                   <col class="col6"/>
                   <col class="col7"/>
                   <col class="col8"/>
@@ -103,13 +117,13 @@
                     <th class="asDate">End Date</th>
                     <th class="asString">Retire Type</th>
                     <th class="asString">Period Type</th>
-                    <th class="asString">Appointment Type</th>
+                    <th class="asString appointmentDisabled unsortable">Appointment Type</th>
                     <th class="asString">Service Type</th>
                     <th class="asNumeric">Amount</th>
                     <th class="asString">Pay Type</th>
                     <th class="asNumeric withHoldDisabled unsortable">Withholding Rate</th>
-                    <th class="asString">Interest Waved</th>
-                    <th class="lastCol asDate">Interest Begins</th>
+                    <th class="asString">Interest Waived</th>
+                    <th class="lastCol asDate">Refund Date/IAD</th>
                   </tr>
                 </thead>
                 <tfoot class="isHidden">
@@ -121,7 +135,7 @@
                       </select></td>
                     <td><select typeName="periodTypes" class="pType">
                       </select></td>
-                    <td><select class="aType" typeName="appointmentTypes">
+                    <td class="appointmentDisabled"><select class="aType" typeName="appointmentTypes">
                       </select></td>
                     <td><select class="sType" typeName="serviceTypes" >
                       </select></td>
@@ -138,13 +152,13 @@
       </td>
       <td>
         <select>
-          <option selected></option>
+          <option></option>
           <option>YES</option>
-          <option>NO</option>
+          <option selected>NO</option>
         </select>
       </td>
       <td class="lastCol">
-        <input name="iDate" type="text" class="text iDate" value="" title="Enter the Interest Begin Date"/>
+        <input name="iDate" type="text" class="text iDate" value="" title="Enter the Refund Date/IAD"/>
       </td>
                   </tr>
                 </tfoot>
@@ -173,12 +187,12 @@
               <span>
                 <span class="fieldLabel">Calculate as of :</span>
                 <span class="fieldVal dateVal">
-                    <input name="depositInterestCalculatedToDate" type="text" class="text interestCalculatedToDate datePicker"/>
+                    <input name="depositInterestCalculatedToDate" type="text" class="text interestCalculatedToDate"/>
                 </span>
               </span>
             </div>
             <div class="scrollTblArea">
-              <table cellpadding="0" cellspacing="0" border="0" class="stdTbl validateResultTbl sortable" id="depTbl" width="113%">
+              <table cellpadding="0" cellspacing="0" border="0" class="stdTbl validateResultTbl sortable" id="depTbl" width="100%">
                 <colgroup>
                   <col class="blankCol"/>
                   <col class="col1"/>
@@ -196,7 +210,7 @@
                     <th class="defaultSortCol defaultSortDown asDate">Begin Date</th>
                     <th class="asDate">End Date</th>
                     <th class="asDate">Mid Point</th>
-                    <th class="asDate">Effective Date</th>
+                    <th class="asDate">Refund Date/IAD</th>
                     <th class="asString">Period Type</th>
                     <th class="asNumeric">Deduction Amount</th>
                     <th class="asNumeric">Total Interest</th>
@@ -422,8 +436,8 @@
         </div>
         <div class="stepsBtnWrapper">
           <a href="javascript:;" class="priBtn fLeft jsCancelCreateAccount"><span><span>Cancel</span></span></a>
-          <a href="<c:url value="/account/viewCreate?step=createAccountNote"/>" class="priBtn fRight nextBtn jsStep2Next"><span><span>Next<i class="nextArrow"></i></span></span></a>
-          <a href="<c:url value="/account/viewCreate?step=createAccount"/>" class="priBtn fRight"><span><span>Previous</span></span></a>
+          <a href="javascript:;" class="priBtn fRight nextBtn jsStep2Next"><span><span>Next<i class="nextArrow"></i></span></span></a>
+          <a href="javascript:;" class="priBtn fRight jsStep2Prev"><span><span>Previous</span></span></a>
         </div>
 
 
@@ -478,6 +492,64 @@
       <div class="popupFooter"><div class="popupFooterRight"><div class="popupFooterInner"></div></div></div>
     </div>
     <!-- .notificationPopup -->
+
+      <div class="popup createAccountPopupNext isHidden">
+          <div class="popupHeader"><div class="popupHeaderRight"><div class="popupHeaderInner"></div></div></div>
+          <div class="popupBody"><div class="popupBodyRight"><div class="popupBodyInner">
+                      <div class="popupTitleWrapper">
+                          <h4 class="popupTitle">Service History creation Warning</h4>
+                          <a href="javascript:;" class="popupClose jsClosePopup">Close</a>
+                      </div>
+                      <p class="popMsg">There was error when saving the service history. You can continue by clicking on "Continue".
+              In this case all your changes will be lost.
+              <br>
+              If you want to correct the service history click on "Close"</p>
+                      <div class="popupBtnWrapper">
+                          <a class="priBtn jsClosePopup"><span><span>Close</span></span></a>
+                          <a href="<c:url value="/account/viewCreate?step=createAccountNote"/>" class="priBtn fRight"><span><span>Continue</span></span></a>
+                      </div>
+                  </div></div></div>
+          <div class="popupFooter"><div class="popupFooterRight"><div class="popupFooterInner"></div></div></div>
+      </div>
+
+      <div class="popup createAccountPopupFinish isHidden">
+          <div class="popupHeader"><div class="popupHeaderRight"><div class="popupHeaderInner"></div></div></div>
+          <div class="popupBody"><div class="popupBodyRight"><div class="popupBodyInner">
+                      <div class="popupTitleWrapper">
+                          <h4 class="popupTitle">Service History creation Warning</h4>
+                          <a href="javascript:;" class="popupClose jsClosePopup">Close</a>
+                      </div>
+                      <p class="popMsg">There was error when saving the service history. You can continue by clicking on "Continue".
+              In this case all your changes will be lost.
+              <br>
+              If you want to correct the service history click on "Close"</p>
+                      <div class="popupBtnWrapper">
+                          <a class="priBtn jsClosePopup"><span><span>Close</span></span></a>
+                          <a href="<c:url value="/account/viewCreate?step=createAccountFinish"/>" class="priBtn fRight"><span><span>Continue</span></span></a>
+                      </div>
+                  </div></div></div>
+          <div class="popupFooter"><div class="popupFooterRight"><div class="popupFooterInner"></div></div></div>
+      </div>
+
+      <div class="popup createAccountPopupPrev isHidden">
+          <div class="popupHeader"><div class="popupHeaderRight"><div class="popupHeaderInner"></div></div></div>
+          <div class="popupBody"><div class="popupBodyRight"><div class="popupBodyInner">
+                      <div class="popupTitleWrapper">
+                          <h4 class="popupTitle">Service History creation Warning</h4>
+                          <a href="javascript:;" class="popupClose jsClosePopup">Close</a>
+                      </div>
+                      <p class="popMsg">There was error when saving the service history. You can continue by clicking on "Previous".
+              In this case all your changes will be lost.
+              <br>
+              If you want to correct the service history click on "Close"</p>
+                      <div class="popupBtnWrapper">
+                          <a href="javascript:;" class="priBtn jsClosePopup"><span><span>Close</span></span></a>
+                          <a href="<c:url value="/account/viewCreate?step=createAccount"/>" class="priBtn fRight"><span><span>Previous</span></span></a>
+                      </div>
+                  </div></div></div>
+          <div class="popupFooter"><div class="popupFooterRight"><div class="popupFooterInner"></div></div></div>
+      </div>
+
 
     <div class="popup infoNotiPopup isHidden">
       <div class="popupHeader"><div class="popupHeaderRight"><div class="popupHeaderInner"></div></div></div>
@@ -663,7 +735,7 @@
             <input type="hidden"/>
             <td></td>
             <input type="hidden"/>
-            <td></td>
+            <td class="appointmentDisabled"></td>
             <input type="hidden"/>
             <td></td>
             <input type="hidden"/>
@@ -686,7 +758,7 @@
               </select></td>
             <td><select typeName="periodTypes" class="pType">
               </select></td>
-            <td><select class="aType" typeName="appointmentTypes">
+            <td class="appointmentDisabled"><select class="aType" typeName="appointmentTypes">
               </select></td>
             <td><select class="sType" typeName="serviceTypes" >
               </select></td>
@@ -703,13 +775,13 @@
       </td>
       <td>
         <select>
-          <option selected></option>
+          <option ></option>
           <option>YES</option>
-          <option>NO</option>
+          <option selected>NO</option>
         </select>
       </td>
       <td class="lastCol">
-        <input name="iDate" type="text" class="text iDate" value="" title="Enter the Interest Begin Date"/>
+        <input name="iDate" type="text" class="text iDate" value="" title="Enter the Refund Date/IAD"/>
       </td>
           </tr>
         </tbody>
@@ -725,7 +797,7 @@
             <input type="hidden"/>
             <td></td>
             <input type="hidden"/>
-            <td></td>
+            <td class="appointmentDisabled"></td>
             <input type="hidden"/>
             <td></td>
             <input type="hidden"/>

@@ -49,6 +49,14 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:applicationContext.xml" })
 public class IntegrationTest {
+
+    /**
+     * <p>
+     * Delta for comparing double.
+     * </p>
+     */
+    private static final double delta = 0.04;
+
     /**
      * Represents the test scenarios file folder.
      */
@@ -109,10 +117,10 @@ public class IntegrationTest {
 
         // Check calculation result
         Assert.assertEquals("The interest for the extended service period is not correct.", 622.70,
-              TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(0)));
+              TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(0)), delta);
 
         Assert.assertEquals("The interest for the extended service period is not correct.", 168.02,
-              TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(1)));
+              TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(1)), delta);
     }
 
     /**
@@ -138,21 +146,21 @@ public class IntegrationTest {
 
         // Check calculation result
         Assert.assertEquals("The interest for the extended service period is not correct.", 796.90,
-                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(0)));
+                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(0)), delta);
         Assert.assertEquals("The interest for the extended service period is not correct.", 228.89,
-                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(1)));
+                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(1)), delta);
         Assert.assertEquals("The interest for the extended service period is not correct.", 851.24,
-                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(2)));
+                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(2)), delta);
         Assert.assertEquals("The interest for the extended service period is not correct.", 10330.72,
-                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(3)));
+                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(3)), delta);
         Assert.assertEquals("The interest for the extended service period is not correct.", 383.35,
-                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(4)));
+                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(4)), delta);
         Assert.assertEquals("The interest for the extended service period is not correct.", 88.22,
-                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(5)));
+                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(5)), delta);
         Assert.assertEquals("The interest for the extended service period is not correct.", 680.68,
-                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(6)));
+                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(6)), delta);
         Assert.assertEquals("The interest for the extended service period is not correct.", 1629.62,
-                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(7)));
+                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(7)), delta);
     }
 
     /**
@@ -178,13 +186,13 @@ public class IntegrationTest {
 
         // Check calculation result
         Assert.assertEquals("The interest for the extended service period is not correct.", 4476.07,
-                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(0)));
+                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(0)), delta);
         Assert.assertEquals("The interest for the extended service period is not correct.", 212.43,
-                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(1)));
+                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(1)), delta);
         Assert.assertEquals("The interest for the extended service period is not correct.", 396.03,
-                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(2)));
+                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(2)), delta);
         Assert.assertEquals("The interest for the extended service period is not correct.", 13797.56,
-                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(3)));
+                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(3)), delta);
     }
 
     /**
@@ -210,13 +218,13 @@ public class IntegrationTest {
 
         // Check calculation result
         Assert.assertEquals("The interest for the extended service period is not correct.", 200.36,
-                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(0)));
+                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(0)), delta);
         Assert.assertEquals("The interest for the extended service period is not correct.", 1334.26,
-                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(1)));
+                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(1)), delta);
         Assert.assertEquals("The interest for the extended service period is not correct.", 8681.10,
-                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(2)));
+                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(2)), delta);
         Assert.assertEquals("The interest for the extended service period is not correct.", 4202.14,
-                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(3)));
+                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(3)), delta);
     }
 
     /**
@@ -242,11 +250,11 @@ public class IntegrationTest {
 
         // Check calculation result
         Assert.assertEquals("The interest for the extended service period is not correct.", 219.82,
-                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(0)));
+                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(0)), delta);
         Assert.assertEquals("The interest for the extended service period is not correct.", 180.08,
-                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(1)));
+                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(1)), delta);
         Assert.assertEquals("The interest for the extended service period is not correct.", 2010.73,
-                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(2)));
+                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(2)), delta);
     }
 
     /**
@@ -272,9 +280,9 @@ public class IntegrationTest {
 
         // Check calculation result
         Assert.assertEquals("The interest for the extended service period is not correct.", 4837.87,
-                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(0)));
+                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(0)), delta);
         Assert.assertEquals("The interest for the extended service period is not correct.", 2651.21,
-                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(1)));
+                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(1)), delta);
     }
 
     /**
@@ -300,9 +308,9 @@ public class IntegrationTest {
 
         // Check calculation result
         Assert.assertEquals("The interest for the extended service period is not correct.", 1229.22,
-                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(0)));
+                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(0)), delta);
         Assert.assertEquals("The interest for the extended service period is not correct.", 44942.87,
-                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(1)));
+                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(1)), delta);
     }
 
     /**
@@ -328,11 +336,11 @@ public class IntegrationTest {
 
         // Check calculation result
         Assert.assertEquals("The interest for the extended service period is not correct.", 40639.23,
-                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(0)));
+                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(0)), delta);
         Assert.assertEquals("The interest for the extended service period is not correct.", 838.01,
-                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(1)));
+                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(1)), delta);
         Assert.assertEquals("The interest for the extended service period is not correct.", 1116.06,
-                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(2)));
+                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(2)), delta);
     }
 
     /**
@@ -358,9 +366,9 @@ public class IntegrationTest {
 
         // Check calculation result
         Assert.assertEquals("The interest for the extended service period is not correct.", 162.34,
-                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(0)));
+                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(0)), delta);
         Assert.assertEquals("The interest for the extended service period is not correct.", 1123.91,
-                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(1)));
+                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(1)), delta);
     }
 
     /**
@@ -386,13 +394,13 @@ public class IntegrationTest {
 
         // Check calculation result
         Assert.assertEquals("The interest for the extended service period is not correct.", 170.22,
-                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(0)));
+                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(0)), delta);
         Assert.assertEquals("The interest for the extended service period is not correct.", 154.38,
-                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(1)));
+                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(1)), delta);
         Assert.assertEquals("The interest for the extended service period is not correct.", 916.77,
-                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(2)));
+                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(2)), delta);
         Assert.assertEquals("The interest for the extended service period is not correct.", 1996.74,
-                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(3)));
+                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(3)), delta);
     }
 
     /**
@@ -418,7 +426,7 @@ public class IntegrationTest {
 
         // Check calculation result
         Assert.assertEquals("The interest for the extended service period is not correct.", 159.65,
-                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(0)));
+                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(0)), delta);
     }
 
     /**
@@ -444,7 +452,7 @@ public class IntegrationTest {
 
         // Check calculation result
         Assert.assertEquals("The interest for the extended service period is not correct.", 1772.15,
-                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(0)));
+                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(0)), delta);
     }
 
     /**
@@ -470,7 +478,7 @@ public class IntegrationTest {
 
         // Check calculation result
         Assert.assertEquals("The interest for the extended service period is not correct.", 49.43,
-                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(0)));
+                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(0)), delta);
 
     }
 
@@ -497,9 +505,9 @@ public class IntegrationTest {
 
         // Check calculation result
         Assert.assertEquals("The interest for the extended service period is not correct.", 115.49,
-                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(0)));
+                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(0)), delta);
         Assert.assertEquals("The interest for the extended service period is not correct.", 0.0,
-                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(1)));
+                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(1)), delta);
     }
 
     /**
@@ -525,25 +533,25 @@ public class IntegrationTest {
 
         // Check calculation result
         Assert.assertEquals("The interest for the extended service period is not correct.", 334.70,
-                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(0)));
+                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(0)), delta);
         Assert.assertEquals("The interest for the extended service period is not correct.", 626.37,
-                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(1)));
+                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(1)), delta);
         Assert.assertEquals("The interest for the extended service period is not correct.", 840.76,
-                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(2)));
+                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(2)), delta);
         Assert.assertEquals("The interest for the extended service period is not correct.", 889.09,
                 TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(3)));
         Assert.assertEquals("The interest for the extended service period is not correct.", 889.86,
-                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(4)));
+                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(4)), delta);
         Assert.assertEquals("The interest for the extended service period is not correct.", 666.95,
-                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(5)));
+                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(5)), delta);
         Assert.assertEquals("The interest for the extended service period is not correct.", 1277.50,
-                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(6)));
+                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(6)), delta);
         Assert.assertEquals("The interest for the extended service period is not correct.", 3330.43,
-                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(7)));
+                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(7)), delta);
         Assert.assertEquals("The interest for the extended service period is not correct.", 3326.74,
-                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(8)));
+                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(8)), delta);
         Assert.assertEquals("The interest for the extended service period is not correct.", 14145.0,
-                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(9)));
+                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(9)), delta);
     }
 
     /**
@@ -576,17 +584,17 @@ public class IntegrationTest {
         // periods is $1,3788.99
         // The following verification uses correct interest result computed manually
         Assert.assertEquals("The interest for the extended service period is not correct.", 0.0,
-                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(0)));
+                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(0)), delta);
         Assert.assertEquals("The interest for the extended service period is not correct.", 810.11,
-                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(1)));
+                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(1)), delta);
         Assert.assertEquals("The interest for the extended service period is not correct.", 1815.23,
-                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(2)));
+                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(2)), delta);
         Assert.assertEquals("The interest for the extended service period is not correct.", 759.85,
-                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(3)));
+                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(3)), delta);
         Assert.assertEquals("The interest for the extended service period is not correct.", 943.76,
-                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(4)));
+                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(4)), delta);
         Assert.assertEquals("The interest for the extended service period is not correct.", 1967.42,
-                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(5)));
+                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(5)), delta);
     }
 
     /**
@@ -613,23 +621,23 @@ public class IntegrationTest {
 
         // Check calculation result
         Assert.assertEquals("The interest for the extended service period is not correct.", 197.60,
-                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(0)));
+                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(0)), delta);
         Assert.assertEquals("The interest for the extended service period is not correct.", 373.99,
-                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(1)));
+                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(1)), delta);
         Assert.assertEquals("The interest for the extended service period is not correct.", 507.72,
-                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(2)));
+                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(2)), delta);
         Assert.assertEquals("The interest for the extended service period is not correct.", 543.55,
-                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(3)));
+                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(3)), delta);
         Assert.assertEquals("The interest for the extended service period is not correct.", 550.81,
-                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(4)));
+                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(4)), delta);
         Assert.assertEquals("The interest for the extended service period is not correct.", 655.31,
-                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(5)));
+                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(5)), delta);
         Assert.assertEquals("The interest for the extended service period is not correct.", 618.53,
-                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(6)));
+                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(6)), delta);
         Assert.assertEquals("The interest for the extended service period is not correct.", 617.81,
-                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(7)));
+                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(7)), delta);
         Assert.assertEquals("The interest for the extended service period is not correct.", 2626.91,
-                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(8)));
+                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(8)), delta);
     }
 
     /**
@@ -655,9 +663,9 @@ public class IntegrationTest {
 
         // Check calculation result
         Assert.assertEquals("The interest for the extended service period is not correct.", 3277.70,
-                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(0)));
+                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(0)), delta);
         Assert.assertEquals("The interest for the extended service period is not correct.", 6283.24,
-                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(1)));
+                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(1)), delta);
     }
 
     /**
@@ -683,8 +691,8 @@ public class IntegrationTest {
 
         // Check calculation result
         Assert.assertEquals("The interest for the extended service period is not correct.", 957.58,
-                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(0)));
+                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(0)), delta);
         Assert.assertEquals("The interest for the extended service period is not correct.", 8696.61,
-                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(1)));
+                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(1)), delta);
     }
 }

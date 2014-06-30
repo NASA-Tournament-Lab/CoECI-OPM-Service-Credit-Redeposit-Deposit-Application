@@ -53,7 +53,7 @@
             </div>
             <div class="fieldRow">
               <label for="ssn1L"><p class="fieldLabel">SSN <span>:</span></p></label>
-              <input name="ssn1" title="Enter the ssn number in the format XXX-XX-XXXX" id="ssn1L" type="text" maxlength="3" class="text ssn searchSsn1" onkeypress='return  validateNumberInput(event);'/><span class="sep">-</span><input name="ssn2" title="Enter the ssn number in the format XXX-XX-XXXX" maxlength="2" type="text" class="text ssn searchSsn2" onkeypress='return  validateNumberInput(event);'/><span class="sep">-</span><input name="ssn3" title="Enter the ssn number in the format XXX-XX-XXXX" maxlength="4" type="text" class="text ssn searchSsn3" onkeypress='return  validateNumberInput(event);'/><span class="orSep">OR</span>
+              <input name="ssn1" title="Enter the ssn number in the format XXX-XX-XXXX" id="ssn1L" type="text" maxlength="3" class="text ssn searchSsn1 advanceSsn1" onkeypress='return  validateNumberInput(event);'/><span class="sep">-</span><input name="ssn2" title="Enter the ssn number in the format XXX-XX-XXXX" maxlength="2" type="text" class="text ssn searchSsn2 advanceSsn2" onkeypress='return  validateNumberInput(event);'/><span class="sep">-</span><input name="ssn3" title="Enter the ssn number in the format XXX-XX-XXXX" maxlength="4" type="text" class="text ssn searchSsn3 advanceSsn3" onkeypress='return  validateNumberInput(event);'/><span class="orSep">OR</span>
             </div>
             <div class="fieldRow">
               <label for="firstNameL"><p class="fieldLabel">First Name <span>:</span></p></label>

@@ -67,6 +67,17 @@
           <div class="corner cornerTl"></div>
           <div class="corner cornerTr"></div>
         </div>
+
+        <div class="accountInfo">
+
+          <br>
+          <span class="name bold"></span>  
+
+          <span class="claim"> Claim#: <span class="claimNum bold"></span> 
+          </span>
+        </div>
+
+
         <div class="notesPanel roundedGrayPanel">
           <label for="notesN"><p>Enter Account Notes:</p></label>
           <textarea class="notes" maxlength="2000" name="notes" id="notesN" cols="1" rows="1"><c:if test="${notes.size() != 0}">${notes[0].text}</c:if></textarea>

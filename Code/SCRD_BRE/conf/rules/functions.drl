@@ -164,7 +164,7 @@ function BigDecimal calculateInterest(ExtendedServicePeriod esp, double interest
 
     // Calculate interest for the year
     BigDecimal interest = startYearFactor.multiply(esp.getBalanceWithInterest())
-            .multiply(BigDecimal.valueOf(interestRate)).setScale(26, RoundingMode.HALF_UP);
+            .multiply(BigDecimal.valueOf(interestRate)).setScale(6, RoundingMode.HALF_UP);
 
     // Accumulate to the total balance
     esp.setBalanceWithInterest(esp.getBalanceWithInterest().add(interest));
@@ -265,7 +265,7 @@ function BigDecimal calculatePeaceCorpsInterest(ExtendedServicePeriod esp, doubl
 
     // Calculate interest
     BigDecimal interest = compositeRate1.add(compositeRate2).multiply(esp.getBalanceWithInterest())
-        .setScale(26, RoundingMode.HALF_UP);
+        .setScale(6, RoundingMode.HALF_UP);
 
     // Accumulate to the total balance
     esp.setBalanceWithInterest(esp.getBalanceWithInterest().add(interest));

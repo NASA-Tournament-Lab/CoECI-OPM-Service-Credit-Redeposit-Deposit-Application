@@ -25,6 +25,7 @@
         <!-- External CSS -->
         <link rel="stylesheet" href="<c:url value="/css/jquery-ui-1.10.3.custom.css"/>" media="all" />
         <link rel="stylesheet" href="<c:url value="/css/screen.css"/>" media="all" />
+        <link rel="stylesheet" href="<c:url value="/css/jquery.contextMenu.css"/>" media="all" />
 
         <!-- JS lib/plugins-->
         <script type="text/javascript" src="<c:url value="/js/jquery-1.10.2.min.js"/>"></script>
@@ -37,6 +38,7 @@
         <script type="text/javascript" src="<c:url value="/js/big.min.js"/>"></script>
 
         <!-- external main js -->
+        <script type="text/javascript" src="<c:url value="/js/jquery.contextMenu.js"/>"></script>
         <script type="text/javascript" src="<c:url value="/js/script.js"/>"></script>
         <script type="text/javascript" src="<c:url value="/js/accountDetail.js"/>"></script>
 
@@ -373,12 +375,12 @@
                                 </div>
                                 <div class="halfRowField">
                                     <label for="birthDateD"><p class="fieldLabel">Birth Date <span class="reqMark">*</span> :</p></label>
-                                    <input name="birthDate" type="text" id="birthDateD" class="text midLength datePicker holder" title="Choose the birth date"/>
+                                    <input name="birthDate" type="text" id="birthDateD" class="text midLength holder" title="Choose the birth date"/>
                                     <input name="check6" id="check6" type="checkbox" value="check6" class="checkboxInput checkValidateInputBox" checked="checked"/>
                                 </div>
                                 <div class="halfRowField">
                                     <label for="ssnD"><p class="fieldLabel">SSN <span class="reqMark">*</span> :</p></label>
-                                    <input name="ssn1B" id="ssnD" type="text" maxlength="3" class="text ssnB searchSsn1B" title="Enter the ssn number in the format XXX-XX-XXXX" onkeypress='return  validateNumberInput(event);'/><span class="sep">-</span><input name="ssn2B" title="Enter the ssn number in the format XXX-XX-XXXX" maxlength="2" type="text" class="text ssnB searchSsn2B" onkeypress='return  validateNumberInput(event);'/><span class="sep">-</span><input name="ssn3B" title="Enter the ssn number in the format XXX-XX-XXXX" maxlength="4" type="text" class="text ssnB searchSsn3B" onkeypress='return  validateNumberInput(event);' title="input the phone extension"/>
+                                    <input name="ssn1B" id="ssnD" type="text" maxlength="3" class="text ssnB searchSsn1B advanceSsn1" title="Enter the ssn number in the format XXX-XX-XXXX" onkeypress='return  validateNumberInput(event);'/><span class="sep">-</span><input name="ssn2B" title="Enter the ssn number in the format XXX-XX-XXXX" maxlength="2" type="text" class="text ssnB searchSsn2B advanceSsn2" onkeypress='return  validateNumberInput(event);'/><span class="sep">-</span><input name="ssn3B" title="Enter the ssn number in the format XXX-XX-XXXX" maxlength="4" type="text" class="text ssnB searchSsn3B advanceSsn3" onkeypress='return  validateNumberInput(event);' title="input the phone extension"/>
                                     <!--<input name="ssn" type="text" id="ssnD" class="text holder" maxlength="128"/>-->
                                     <input name="check7" id="check7" type="checkbox" value="check7" class="checkboxInput checkValidateInputBox" checked="checked"/>
                                 </div>
@@ -411,9 +413,9 @@
                                 </div>
                                 <div class="halfRowField radioRow formTypeDiv">
                                     <p class="fieldLabel">Form Submitted:</p>
-                                    <input name="formType" type="radio" value="2" id="formCsrs1" />
+                                    <input name="formType" type="radio" value="1" id="formCsrs1" />
                                     <label class="radioLabel" for="formCsrs1">2803 (CSRS)</label>
-                                    <input name="formType" type="radio" id="formFers1" value="1" checked="checked"/>
+                                    <input name="formType" type="radio" id="formFers1" value="2"/>
                                     <label class="radioLabel" for="formFers1">3108 (FERS)</label>
                                     <input name="check12" id="check12" type="checkbox" value="check12" class="checkboxInput checkValidateInputBox" checked="checked"/>
                                 </div>
@@ -937,7 +939,7 @@
                                             <col class="col2"/>
                                             <col class="col3"/>
                                             <col class="col4"/>
-                                            <col class="col5"/>
+                                            <col class="col5 appointmentDisabled"/>
                                             <col class="col6"/>
                                             <col class="col7"/>
                                             <col class="col8"/>
@@ -952,13 +954,13 @@
                                                 <th class="asDate">End Date</th>
                                                 <th class="asString">Retire Type</th>
                                                 <th class="asString">Period Type</th>
-                                                <th class="asString">Appointment Type</th>
+                                                <th class="asString appointmentDisabled unsortable">Appointment Type</th>
                                                 <th class="asString">Service Type</th>
                                                 <th class="asNumeric">Amount</th>
                                                 <th class="asString">Pay Type</th>
                                                 <th class="asNumeric withHoldDisabled unsortable">Withholding Rate</th>
-                                                <th class="asString">Interest Waved</th>
-                                                <th class="lastCol asDate">Interest Begins</th>
+                                                <th class="asString">Interest Waived</th>
+                                                <th class="lastCol asDate">Refund Date/IAD</th>
                                             </tr>
                                         </thead>
                                         <tfoot class="isHidden">
@@ -970,7 +972,7 @@
                                                     </select></td>
                                                 <td><select typeName="periodTypes" class="pType">
                                                     </select></td>
-                                                <td><select class="aType" typeName="appointmentTypes">
+                                                <td class="appointmentDisabled"><select class="aType" typeName="appointmentTypes">
                                                     </select></td>
                                                 <td><select class="sType" typeName="serviceTypes" >
                                                     </select></td>
@@ -988,13 +990,13 @@
                                                 </td>
                                                 <td>
                                                     <select>
-                                                        <option selected></option>
+                                                        <option></option>
                                                         <option>YES</option>
-                                                        <option>NO</option>
+                                                        <option selected>NO</option>
                                                     </select>
                                                 </td>
                                                 <td class="lastCol">
-                                                    <input name="iDate" type="text" class="text iDate" value="" title="Enter the Interest Begin Date"/>
+                                                    <input name="iDate" type="text" class="text iDate" value="" title="Enter the Refund Date/IAD"/>
                                                 </td>
                                             </tr>
                                         </tfoot>
@@ -1023,12 +1025,12 @@
                                     <span>
                                         <span class="fieldLabel">Calculate as of :</span> 
                                         <span class="fieldVal dateVal">
-                                            <input name="depositInterestCalculatedToDate" type="text" class="text interestCalculatedToDate datePicker"/>
+                                            <input name="depositInterestCalculatedToDate" type="text" class="text interestCalculatedToDate"/>
                                         </span>
                                     </span>
                                 </div>
                                 <div class="scrollTblArea">
-                                    <table cellpadding="0" cellspacing="0" border="0" class="stdTbl validateResultTbl sortable" id="depTbl" width="113%">
+                                    <table cellpadding="0" cellspacing="0" border="0" class="stdTbl validateResultTbl sortable" id="depTbl" width="100%">
                                         <colgroup>
                                             <col class="blankCol"/>
                                             <col class="col1"/>
@@ -1046,7 +1048,7 @@
                                                 <th class="asDate defaultSortCol defaultSortDown">Begin Date</th>
                                                 <th class="asDate">End Date</th>
                                                 <th class="asDate">Mid Point</th>
-                                                <th class="asDate">Effective Date</th>
+                                                <th class="asDate">Refund Date/IAD</th>
                                                 <th class="asString">Period Type</th>
                                                 <th class="asNumeric">Deduction Amount</th>
                                                 <th class="asNumeric">Total Interest</th>
@@ -3226,7 +3228,7 @@
                         <input type="hidden"/>
                         <td></td>
                         <input type="hidden"/>
-                        <td></td>
+                        <td class="appointmentDisabled"></td>
                         <input type="hidden"/>
                         <td></td>
                         <input type="hidden"/>
@@ -3249,7 +3251,7 @@
                             </select></td>
                         <td><select typeName="periodTypes" class="pType">
                             </select></td>
-                        <td><select class="aType" typeName="appointmentTypes">
+                        <td class="appointmentDisabled"><select class="aType" typeName="appointmentTypes">
                             </select></td>
                         <td><select class="sType" typeName="serviceTypes" >
                             </select></td>
@@ -3266,13 +3268,13 @@
                         </td>
                         <td>
                             <select>
-                                <option selected></option>
+                                <option ></option>
                                 <option>YES</option>
-                                <option>NO</option>
+                                <option selected>NO</option>
                             </select>
                         </td>
                         <td class="lastCol">
-                            <input name="iDate" type="text" class="text iDate" value="" title="Enter the Interest Begin Date"/>
+                            <input name="iDate" type="text" class="text iDate" value="" title="Enter the Refund Date/IAD"/>
                         </td>
                     </tr>
                 </tbody>
@@ -3288,7 +3290,7 @@
                         <input type="hidden"/>
                         <td></td>
                         <input type="hidden"/>
-                        <td></td>
+                        <td class="appointmentDisabled"></td>
                         <input type="hidden"/>
                         <td></td>
                         <input type="hidden"/>

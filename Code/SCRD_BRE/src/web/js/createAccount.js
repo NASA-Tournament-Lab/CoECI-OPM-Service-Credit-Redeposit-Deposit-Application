@@ -34,7 +34,7 @@ $(function() {
         }
     }
 
-    $('.sDateLC').datepicker({
+    /*$('.sDateLC').datepicker({
         showOn: "button",
         buttonImage: context + "/i/calendar.png",
         buttonImageOnly: true,
@@ -50,7 +50,7 @@ $(function() {
         changeMonth: true,
         changeYear: true, yearRange: "-100:+1",
         buttonText: "Enter the Ending Date for calculation."
-    });
+    });*/
 
     // Shorten select option text if it stretches beyond max-width of select element
 $.each($('.shortenedSelect option'), function(key, optionElement) {
@@ -75,9 +75,92 @@ $.each($('.shortenedSelect option'), function(key, optionElement) {
 
     });
 
+    $('.step3 a, .jsStep2Next').click(function() {
+        
+                var cur = $(".jsSaveCalculation");
+                var tab = $(cur).parents(".tabsBlock").eq(0);
+                var interestDateSave = $(".validationStatusBar .interestCalculatedToDate", tab).val(); // should be removed when interestCalculatedToDate become readonly
+                $(".jsCancelFunction", tab).trigger("click");
+                $(".validationStatusBar .interestCalculatedToDate", tab).val(interestDateSave); // should be removed when interestCalculatedToDate become readonly
+                if (validateCalculationEntry(cur) == false) {
+                    showPopup(".createAccountPopupNext");
+                    return false;
+                }
+
+                var saveBack = function(res, save, tab, calculationVersion) {
+                    runCalculationCallBack(res, save, tab, calculationVersion);
+                    if(res == 0){
+                        showPopup(".createAccountPopupNext");
+                        return false;
+                    } else {
+                        window.location = context + "/account/viewCreate?step=createAccountNote";
+                    }
+                };
+                runCalculation(context, tab, true, saveBack);
+            
+        
+    });
+
+
+    $('.jsStep2Prev').click(function() {
+        
+                var cur = $(".jsSaveCalculation");
+                var tab = $(cur).parents(".tabsBlock").eq(0);
+                var interestDateSave = $(".validationStatusBar .interestCalculatedToDate", tab).val(); // should be removed when interestCalculatedToDate become readonly
+                $(".jsCancelFunction", tab).trigger("click");
+                $(".validationStatusBar .interestCalculatedToDate", tab).val(interestDateSave); // should be removed when interestCalculatedToDate become readonly
+                if (validateCalculationEntry(cur) == false) {
+                    showPopup(".createAccountPopupPrev");
+                    return false;
+                }
+
+                var saveBack = function(res, save, tab, calculationVersion) {
+                    runCalculationCallBack(res, save, tab, calculationVersion);
+                    if(res == 0){
+                        showPopup(".createAccountPopupPrev");
+                        return false;
+                    } else {
+                        window.location = context + "/account/viewCreate?step=createAccount";
+                    }
+                };
+                runCalculation(context, tab, true, saveBack);
+            
+        
+    });
+
+
+    $('.jsStep2Finish').click(function() {
+        
+                var cur = $(".jsSaveCalculation");
+                var tab = $(cur).parents(".tabsBlock").eq(0);
+                var interestDateSave = $(".validationStatusBar .interestCalculatedToDate", tab).val(); // should be removed when interestCalculatedToDate become readonly
+                $(".jsCancelFunction", tab).trigger("click");
+                $(".validationStatusBar .interestCalculatedToDate", tab).val(interestDateSave); // should be removed when interestCalculatedToDate become readonly
+                if (validateCalculationEntry(cur) == false) {
+                    showPopup(".createAccountPopupFinish");
+                    return false;
+                }
+
+                var saveBack = function(res, save, tab, calculationVersion) {
+                    runCalculationCallBack(res, save, tab, calculationVersion);
+                    if(res == 0){
+                        showPopup(".createAccountPopupFinish");
+                        return false;
+                    } else {
+                        window.location = context + "/account/viewCreate?step=createAccountFinish";
+                    }
+                };
+                runCalculation(context, tab, true, saveBack);
+            
+        
+    });
+
+    
+
     $('.step1-3 a').click(function() {
         if (validate(accountId) == true) {
             if (createAccount(context, accountId) == true) {
+                
                 window.location = context + "/account/viewCreate?step=createAccountNote";
             }
         }
@@ -177,7 +260,7 @@ function validate(createdAccountId) {
         validated = false;
     }
     var state = $("select[name='state']", context);
-    if (state.val() == 0 && country == '197') {
+    if ((state.val() == "0" || state.val() == "") && country == '197') {
         state.parents('div.halfRowField').eq(0).append("<span class='errorIcon' title='Invalid input. Select a valid state'></span>");
         state.addClass('error');
         validated = false;
@@ -343,8 +426,16 @@ function createAccount(context, createdAccountId) {
         account.holder.telephone = null;
     }
 
-    fields = $('.basicInfoPanel input:radio').serializeArray();
-    account.formType.id = fields[0].value;
+    var formType = $('input[name=formType]:checked', '.basicInfoPanel').val();
+
+    if(formType && formType !== "" ){
+        account.formType.id = formType;
+
+    } else {
+        account.formType = null;
+    }
+
+
     // send ajax request 
     var url = context + '/account/';
     var method = 'POST';
@@ -396,7 +487,10 @@ function populateBasicInfo(context, createdAccountId) {
             $("input[name='city']", panel).val(data.holder.address.city);
             
             
-            $("input[name=formType][value=" + data.formType.id + "]").prop('checked', true);
+            if(data.formType){
+                $("input[name=formType][value=" + data.formType.id + "]").prop('checked', true);
+            }
+            
 
             // get ssn
             var ssnTokens = data.holder.ssn.split('-');
@@ -429,6 +523,11 @@ function populateBasicInfo(context, createdAccountId) {
             if(!isNull(data.holder.address.zipCode)){
                 $("input[name='zipCode']", panel).val(data.holder.address.zipCode);
             }
+
+            $(".accountInfo .name").text(data.holder.firstName + " " + data.holder.lastName);
+            $(".accountInfo .claimNum").text(data.claimNumber);
+
+
 
 
 

@@ -84,7 +84,7 @@ public class TestsHelper {
      * Delta for comparing double.
      * </p>
      */
-    private static final double delta = 0.06;
+    private static final double delta = 0.04;
     
     /**
      * <p>

@@ -668,7 +668,12 @@ function validateBasicInfo() {
         html += "<li style='margin-left: 20px;'><span>Please select the account status</span><br/></li>";
         validated = false;
     }
-    if (tab.find('select.address').val() == 0) {
+
+    var state = $("select[name='state']", tab).val();
+
+    var country = $("select[name='country']", tab).val();
+
+    if ((state == "0" || state == '') && country == '197') {
         html += "<li style='margin-left: 20px;'><span>Please select State/Province/Region</span><br/></li>";
         validated = false;
     }
@@ -731,8 +736,8 @@ function validateBasicInfo() {
 
     }
 
-    var notEmpty = ['zipCode', 'lastName', 'firstName', 'city', 'street1'];
-    var fieldName = ['ZIP/Postal Code', 'Last Name', 'First Name', 'City', 'Line #1'];
+    var notEmpty = ['lastName', 'firstName', 'city', 'street1'];
+    var fieldName = ['Last Name', 'First Name', 'City', 'Line #1'];
     $.each(notEmpty, function(i) {
         var value = $.trim(tab.find("input[name=" + this + "]").val());
 
@@ -745,6 +750,13 @@ function validateBasicInfo() {
             validated = false;
         }
     });
+
+    var zipCode = $("input[name='" + "zipCode" + "']", tab);
+    if (country == '197' && (/^\d{5}(?:[-\s]\d{4})?$/.test(zipCode.val()) == false || $.trim(zipCode.val()) == '' )) {
+            html += "<li style='margin-left: 20px;'><span>The format of zipCode is not correct.</span><br/></li>";
+            validated = false;
+    }
+
     html += "</ul>";
     if (validated == false) {
         $('.basicValidationError').html(html);
@@ -820,8 +832,17 @@ function saveEmployeeInfo(context, accountId, showSuccessBox) {
     fields = $('.accountBasicInfoPanelEdit input.phone:text').serializeArray();
     account.holder.telephone = fields[0].value + '-' + fields[1].value;
 
-    fields = $('.formTypeDiv input:radio').serializeArray();
-    account.formType.id = fields[0].value;
+    var formType = $('input[name=formType]:checked', '.formTypeDiv').val();
+
+    if(formType && formType !== "" ){
+        account.formType.id = formType;
+
+    } else{
+       account.formType = null; 
+    }
+
+
+
     fields = $('select.accountStatus').serializeArray();
     account.status.id = fields[0].value;
     $.ajax({
@@ -889,7 +910,8 @@ function populateEditInfo(context, accountId) {
     $.each(fields, function() {
         if ($(this).prop('name') === 'birthDate') {
             var date = new Date(data.holder.birthDate);
-            $(this).prop('value', (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear());
+            //$(this).prop('value', (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear());
+            $(this).prop('value',formatDateTime(data.holder.birthDate));
         } else {
             $(this).prop('value', data.holder[$(this).prop('name')]);
         }
@@ -943,13 +965,17 @@ function populateEditInfo(context, accountId) {
     });
 
     $('.accountStatus').val(data.status.id);
-    $(".formTypeDiv input:radio[value='" + data.formType.id + "']").trigger('click');
 
-    $.each($(".accountBasicInfoPanelEdit input[name='formType']"), function() {
-        if (parseInt($(this).val()) === data.formType.id) {
-            $(this).prop('checked', 'checked');
-        }
-    });
+    if(data.formType){
+        $(".formTypeDiv input:radio[value='" + data.formType.id + "']").trigger('click');
+
+        $.each($(".accountBasicInfoPanelEdit input[name='formType']"), function() {
+            if (parseInt($(this).val()) === data.formType.id) {
+                $(this).prop('checked', 'checked');
+            }
+        });
+    }
+    
 }
 
 function updateNote(context, accountId) {
@@ -972,7 +998,8 @@ function updateNote(context, accountId) {
         data: JSON.stringify(note),
         success: function(data, text, xhr) {
             //$(currentNote).children('td').eq(1).html((note.date.getMonth() + 1) + "/" + note.date.getDate() + "/" + note.date.getFullYear());
-            $(currentNote).children('td').eq(1).html((note.date.getMonth() + 1 < 10 ? '0' : '') + (note.date.getMonth() + 1) + "/" + note.date.getDate() + "/" + note.date.getFullYear());
+            //$(currentNote).children('td').eq(1).html((note.date.getMonth() + 1 < 10 ? '0' : '') + (note.date.getMonth() + 1) + "/" + note.date.getDate() + "/" + note.date.getFullYear());
+            $(currentNote).children('td').eq(1).html(formatDateTime(note.date));
             $(currentNote).children('td').eq(2).html(note.text);
             $(currentNote).children('td').eq(3).html(note.writer);
         },
@@ -1360,13 +1387,18 @@ function refreshEmployeeInfo(account) {
         $(panel).find('.suffix').html("");
     }
 
-    $(panel).find('.birthDate').html((birthDate.getMonth() + 1) + "/" + birthDate.getDate() + "/" + birthDate.getFullYear());
+    //$(panel).find('.birthDate').html((birthDate.getMonth() + 1) + "/" + birthDate.getDate() + "/" + birthDate.getFullYear());
+    $(panel).find('.birthDate').html(formatDateTime(birthDate));
+    
     $(panel).find('.ssn').html(account.holder.ssn);
     $(panel).find('.telephone').html(account.holder.telephone);
     $(panel).find('.email').html(account.holder.email);
     $(panel).find('.title').html(account.holder.title);
     $(panel).find('.departmentCode').html(account.holder.departmentCode);
-    $(panel).find('.formType').html(account.formType.name);
+    if(account.formType){
+        $(panel).find('.formType').html(account.formType.name);
+    }
+    
     $(panel).find('.street1').html(account.holder.address.street1);
     $(panel).find('.street2').html(account.holder.address.street2);
     $(panel).find('.street3').html(account.holder.address.street3);

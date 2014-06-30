@@ -813,7 +813,10 @@ public class AccountServiceImpl extends BaseService implements AccountService {
         try {
             // Get account
             Account account = Helper.getEntityById(entityManager, logger, signature, Account.class, accountId, true);
-
+            // Make the calculation version official
+            calculationVersion.getCalculationResult().setOfficial(true);
+            // Update calculation date
+            calculationVersion.setCalculationDate(new Date());
 
 
             if (calculationVersion.getId() != 0) {
