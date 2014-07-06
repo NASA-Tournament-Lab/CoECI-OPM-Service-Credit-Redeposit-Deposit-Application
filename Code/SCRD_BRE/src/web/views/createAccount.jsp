@@ -74,9 +74,9 @@
         <div class="basicInfoPanel roundedGrayPanel">
           <div class="fullRowField">
             <p class="fieldLabel">Form submitted:</p>
-            <input name="formType" type="radio" value="1" id="formCsrs" />
+            <input name="formType" type="radio" value="2" id="formCsrs" />
             <label class="radioLabel" for="formCsrs">2803 (CSRS)</label>
-            <input name="formType" type="radio" id="formFers" value="2"/>
+            <input name="formType" type="radio" id="formFers" value="1"/>
             <label class="radioLabel" for="formFers">3108 (FERS)</label>
           </div>
           <div class="halfCol">
@@ -238,6 +238,21 @@
       <div class="popupFooter"><div class="popupFooterRight"><div class="popupFooterInner"></div></div></div>
     </div>
     <!-- .notificationPopup -->
+
+    <div class="popup basicInfoValidationPopup isHidden">
+        <div class="popupHeader"><div class="popupHeaderRight"><div class="popupHeaderInner"></div></div></div>
+        <div class="popupBody"><div class="popupBodyRight"><div class="popupBodyInner">
+                    <div class="popupTitleWrapper">
+                        <h4 class="popupTitle">Validation Error</h4>
+                        <a href="javascript:;" class="popupClose jsClosePopup">Close</a>
+                    </div>
+                    <p class="popMsg basicValidationError"></p>
+                    <div class="popupBtnWrapper">
+                        <a class="priBtn jsClosePopup validationErrorOk"><span><span>OK</span></span></a>
+                    </div>
+                </div></div></div>
+        <div class="popupFooter"><div class="popupFooterRight"><div class="popupFooterInner"></div></div></div>
+    </div>
 
     
 

@@ -414,6 +414,12 @@ public class AccountServiceImpl extends BaseService implements AccountService {
             Hibernate.initialize(result.getCalculationVersions());
             for (CalculationVersion c : result.getCalculationVersions()) {
                 Hibernate.initialize(c.getCalculations());
+                if(c.getCalculations() != null){
+                    for(Calculation calculation : c.getCalculations()){
+                        
+                        Hibernate.initialize(calculation.getDeductionCalculationDetail());
+                    }
+                }
                 Hibernate.initialize(c.getCalculationResult().getSummary());
                 Hibernate.initialize(c.getCalculationResult().getDedeposits());
                 Hibernate.initialize(c.getCalculationResult().getRedeposits());
@@ -425,6 +431,14 @@ public class AccountServiceImpl extends BaseService implements AccountService {
                     for(CalculationResultItem item : c.getCalculationResult().getItems()){
 
                         Hibernate.initialize(item.getIntermediateResults());
+                    }
+                }
+
+                Hibernate.initialize(c.getCalculationResult().getCalculations());
+                if(c.getCalculationResult().getCalculations() != null){
+                    for(Calculation calculation : c.getCalculationResult().getCalculations()){
+                        
+                        Hibernate.initialize(calculation.getDeductionCalculationDetail());
                     }
                 }
             }

@@ -505,9 +505,9 @@ public class CalculationExecutionServiceImpl extends BaseService implements Calc
      * @return the modified dedeposit entity
      */
     private static Dedeposit modifyDedeposit(Dedeposit dedeposit, CalculationResultItem item) {
-        dedeposit.setDeposit(dedeposit.getDeposit().add(item.getDeductionAmount()));
-        dedeposit.setInterest(dedeposit.getInterest().add(item.getTotalInterest()));
-        dedeposit.setTotal(dedeposit.getTotal().add(item.getBalance()));
+        dedeposit.setDeposit(dedeposit.getDeposit().setScale(2, RoundingMode.HALF_UP).add(item.getDeductionAmount().setScale(2, RoundingMode.HALF_UP)).setScale(2, RoundingMode.HALF_UP));
+        dedeposit.setInterest(dedeposit.getInterest().setScale(2, RoundingMode.HALF_UP).add(item.getTotalInterest().setScale(2, RoundingMode.HALF_UP)).setScale(2, RoundingMode.HALF_UP));
+        dedeposit.setTotal(dedeposit.getTotal().setScale(2, RoundingMode.HALF_UP).add(item.getBalance().setScale(2, RoundingMode.HALF_UP)).setScale(2, RoundingMode.HALF_UP));
         return dedeposit;
     }
 
@@ -518,9 +518,9 @@ public class CalculationExecutionServiceImpl extends BaseService implements Calc
      * @return the modified redeposit entity
      */
     private static Redeposit modifyRedeposit(Redeposit redeposit, CalculationResultItem item) {
-        redeposit.setDeposit(redeposit.getDeposit().add(item.getDeductionAmount()));
-        redeposit.setInterest(redeposit.getInterest().add(item.getTotalInterest()));
-        redeposit.setTotal(redeposit.getTotal().add(item.getBalance()));
+        redeposit.setDeposit(redeposit.getDeposit().setScale(2, RoundingMode.HALF_UP).add(item.getDeductionAmount().setScale(2, RoundingMode.HALF_UP)).setScale(2, RoundingMode.HALF_UP));
+        redeposit.setInterest(redeposit.getInterest().setScale(2, RoundingMode.HALF_UP).add(item.getTotalInterest().setScale(2, RoundingMode.HALF_UP)).setScale(2, RoundingMode.HALF_UP));
+        redeposit.setTotal(redeposit.getTotal().setScale(2, RoundingMode.HALF_UP).add(item.getBalance().setScale(2, RoundingMode.HALF_UP)).setScale(2, RoundingMode.HALF_UP));
         return redeposit;
     }
 

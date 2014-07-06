@@ -1653,7 +1653,7 @@ a:hover, a:focus {
     position: relative;
 }
 .calReuslts {
-    width: 588px;
+    width: 618px;
     height: 140px;
 }
 .dateCalculator .blocktitle, .calReuslts .blocktitle{
@@ -1973,7 +1973,7 @@ h3.panelExpanded{
 .chartCalAreaBox3{
     border-bottom: 1px solid #e7e7e7;	
     float: left;
-    width: 221px;
+    width: 250px;
     height: 71px;
     line-height: 71px;
     text-align: center;

@@ -413,9 +413,9 @@
                                 </div>
                                 <div class="halfRowField radioRow formTypeDiv">
                                     <p class="fieldLabel">Form Submitted:</p>
-                                    <input name="formType" type="radio" value="1" id="formCsrs1" />
+                                    <input name="formType" type="radio" value="2" id="formCsrs1" />
                                     <label class="radioLabel" for="formCsrs1">2803 (CSRS)</label>
-                                    <input name="formType" type="radio" id="formFers1" value="2"/>
+                                    <input name="formType" type="radio" id="formFers1" value="1"/>
                                     <label class="radioLabel" for="formFers1">3108 (FERS)</label>
                                     <input name="check12" id="check12" type="checkbox" value="check12" class="checkboxInput checkValidateInputBox" checked="checked"/>
                                 </div>
@@ -1768,7 +1768,7 @@
                                     <div class="printMetaRight">
                                         <div class="printNum"><label>Claim Number</label>CSD <span></span></div>
                                         <div class="printBirth"><label>Date of Birth</label><span></span></div>
-                                        <div class="printAmount">ENTER AMOUNT<br/> OF THIS PAYMENT $</div>
+                                        <div class="printAcount">ENTER AMOUNT<br/> OF THIS PAYMENT $</div>
                                         <h2 class="printFormTitle">SERVICE CREDIT<br/> PAYMENT FORM</h2>
                                     </div>
 
@@ -1856,7 +1856,7 @@
                                     <a href="javascript:;" class="pdfLink"></a>
                                     <a href="javascript:;" class="rtfLink"></a>
                                     <a href="javascript:;" class="docLink"></a>
-                                    <a href="javascript:;" class="printLink jsDoPrintStaement">Print</a>
+                                    <a href="javascript:;" class="printLink jsDoPrintReport">Print</a>
                                 </div>
                                 <a class="priBtn jsClosePopup fRight"><span><span>Cancel</span></span></a>
                             </div>
@@ -1973,11 +1973,11 @@
                                         <tbody class="billing-tbody">
                                             <tr>
                                                 <td>FERS Deposit</td>
-                                                <td class="borderCell aRight dollar">$158.96</td>
+                                                <td class="borderCell aRight dollar">$0.00</td>
                                                 <td class="borderCell sepCell">&nbsp;</td>
                                                 <td class="borderCell aRight dollar">$0.00</td>
                                                 <td class="borderCell sepCell">&nbsp;</td>
-                                                <td class="borderCell aRight dollar">$158.96</td>
+                                                <td class="borderCell aRight dollar">$0.00</td>
                                                 <td class="borderCell sepCell">&nbsp;</td>
                                                 <td class="borderCell aRight dollar">$0.00</td>
                                                 <td class="colSepBig">&nbsp;</td>
@@ -2081,11 +2081,11 @@
                                             </tr>
                                             <tr>
                                                 <td>Total</td>
-                                                <td class="borderCell aRight dollar">$158.96</td>
+                                                <td class="borderCell aRight dollar">$0.00</td>
                                                 <td class="borderCell sepCell">&nbsp;</td>
                                                 <td class="borderCell aRight dollar">$0.00</td>
                                                 <td class="borderCell sepCell">&nbsp;</td>
-                                                <td class="borderCell aRight dollar">$158.96</td>
+                                                <td class="borderCell aRight dollar">$0.00</td>
                                                 <td class="borderCell sepCell">&nbsp;</td>
                                                 <td class="borderCell aRight dollar">$0.00</td>
                                                 <td class="colSepBig">&nbsp;</td>
@@ -2095,7 +2095,7 @@
                                     </table>
 
                                     <div class="summaryTblWrapper">
-                                        <h2>One transaction on this accout.</h2>
+                                        <h2>One transaction on this account.</h2>
                                         <table border="0" cellpadding="0" cellspacing="0" width="100%" class="summaryAccountTransactionPrintTbl">
                                             <thead>
                                                 <tr>
@@ -2128,7 +2128,7 @@
                                     </div>
 
                                     <div class="summaryTblWrapper">
-                                        <h2>Initial Service Period Calculations</h2>
+                                        <h2>Initial Service Period Calculations.</h2>
                                         <table border="0" cellpadding="0" cellspacing="0" width="100%" class="summaryAccountTransactionPrintTbl">
                                             <thead>
                                                 <tr>
@@ -2214,7 +2214,7 @@
                                     <a href="javascript:;" class="pdfLink"></a>
                                     <a href="javascript:;" class="rtfLink"></a>
                                     <a href="javascript:;" class="docLink"></a>
-                                    <a href="javascript:;" class="printLink jsDoPrintAccountSummary">Print</a>
+                                    <a href="javascript:;" class="printLink jsDoPrintAccountSummary jsDoPrintReport">Print</a>
                                 </div>
                                 <a class="priBtn jsClosePopup fRight"><span><span>Cancel</span></span></a>
                             </div>
@@ -2506,7 +2506,7 @@
                                     <a href="javascript:;" class="pdfLink"></a>
                                     <a href="javascript:;" class="rtfLink"></a>
                                     <a href="javascript:;" class="docLink"></a>
-                                    <a href="javascript:;" class="printLink jsDoPrintFinalStatement">Print</a>
+                                    <a href="javascript:;" class="printLink jsDoPrintReport">Print</a>
                                 </div>
                                 <a class="priBtn jsClosePopup fRight"><span><span>Cancel</span></span></a>
                             </div>
@@ -2532,7 +2532,7 @@
                                     <div class="printMetaRight">
                                         <div class="printNum"><label>Claim Number</label>CSD <span></span></div>
                                         <div class="printBirth"><label>Date of Birth</label><span></span></div>
-                                        <div class="printAmount">ENTER AMOUNT<br/> OF THIS PAYMENT $</div>
+                                        <div class="printAcount">ENTER AMOUNT<br/> OF THIS PAYMENT $</div>
                                         <h2 class="printFormTitle">SERVICE CREDIT<br/> PAYMENT FORM</h2>
                                     </div>
 
@@ -2620,7 +2620,7 @@
                                     <a href="javascript:;" class="pdfLink"></a>
                                     <a href="javascript:;" class="rtfLink"></a>
                                     <a href="javascript:;" class="docLink"></a>
-                                    <a href="javascript:;" class="printLink jsDoPrintStaement">Print</a>
+                                    <a href="javascript:;" class="printLink jsDoPrintReport">Print</a>
                                 </div>
                                 <a class="priBtn jsClosePopup fRight"><span><span>Cancel</span></span></a>
                             </div>
@@ -2842,8 +2842,8 @@
                                         <h1><span>UNITED STATES</span><br/>OFFICE OF PERSONNEL MANAGEMENT</h1>
                                     </div>
                                     <div class="printMetaRight">
-                                        <div class="printNum"><label>Claim Number</label>CSD# 9166045</div>
-                                        <div class="printBirth"><label>Date of Birth</label>01/01/1940</div>
+                                        <div class="printNum"><label>Claim Number</label>CSD# <span class="report-csd"></span></div>
+                                        <div class="printBirth"><label>Date of Birth</label><span class="report-birthday"></span></div>
                                         <div class="printAcount">ENTER AMOUNT<br/> OF THIS PAYMENT $</div>
                                         <h2 class="printFormTitle">CIVIL SERVICE DEPOSIT<br />ACCOUNT STATEMENT</h2>
                                     </div>
@@ -2853,11 +2853,6 @@
                                         <div class="printAddressBox">
                                             <div class="printAddressHeader"></div>
                                             <div class="printAddressBody">
-                                                JBGXXXX S EJEJXXXX<br/>
-                                                Fantasy Towers<br/>
-                                                Apertment 1-A<br/>
-                                                123 Main Street<br/>
-                                                Any Town, DC 55555-4444
                                             </div>
                                             <div class="printAddressFooter"></div>
                                         </div>
@@ -2866,21 +2861,21 @@
                                     <div class="printDataArea">
                                         <h3>STATEMENT OF ACCOUNT - KEEP FOR YOUR RECORDS</h3>
                                         <div class="printPersonalData">
-                                            <div class="name">
+                                            <div class="name-report">
                                                 <label>Name</label>
-                                                JBGXXXX W GAEFXXXX
+                                                <span class="report-name"></span>
                                             </div>
                                             <div class="date">
                                                 <label>Date</label>
-                                                06/14/2013
+                                                <span class="report-date"></span>
                                             </div>
                                             <div class="coveredBy">
                                                 <label>Covered by</label>
-                                                CSRS
+                                                <span class="coverby"></span>
                                             </div>
                                             <div class="claimNum">
                                                 <label>Claim Number</label>
-                                                CSD# 9166045
+                                                CSD# <span class="report-csd"></span>
                                             </div>
                                         </div>
                                         <div class="billingLeftPart fLeft ">
@@ -2889,73 +2884,121 @@
                                                     <col class="col1"/>
                                                     <col class="col2"/>
                                                 </colgroup>
-                                                <tbody>
+                                                <tbody class="billing1-tbody">
                                                     <tr class="totalArea">
-                                                        <td colspan="2" class="title Row">Amount Due</td>
+                                                        <td colspan="2" class="Row">Amount Due</td>
                                                     </tr>
                                                     <tr>
-                                                        <td>FERS Deposit/Redeposit</td>
-                                                        <td class="aRight">$0.00</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Interest *</td>
-                                                        <td class="aRight">$0.00</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>&nbsp;</td>
-                                                        <td>&nbsp;</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>CSRS Post 9/30/82 Redeposit</td>
-                                                        <td class="aRight">$0.00</td>
+                                                        <td>FERS Deposit</td>
+                                                        <td class="aRight dollar">$0.00</td>
                                                     </tr>
                                                     <tr>
                                                         <td>Interest *</td>
-                                                        <td class="aRight">$0.00</td>
+                                                        <td class="aRight dollar">$0.00</td>
                                                     </tr>
                                                     <tr>
                                                         <td>&nbsp;</td>
                                                         <td>&nbsp;</td>
                                                     </tr>
                                                     <tr>
-                                                        <td>CSRS Post 9/30/82 Deposit</td>
-                                                        <td class="aRight">$0.00</td>
+                                                        <td>FERS Redeposit</td>
+                                                        <td class="aRight dollar">$0.00</td>
                                                     </tr>
                                                     <tr>
                                                         <td>Interest *</td>
-                                                        <td class="aRight">$0.00</td>
+                                                        <td class="aRight dollar">$0.00</td>
                                                     </tr>
                                                     <tr>
                                                         <td>&nbsp;</td>
                                                         <td>&nbsp;</td>
                                                     </tr>
                                                     <tr>
-                                                        <td>CSRS Pre 10/1/82 Redeposit</td>
-                                                        <td class="aRight">$0.00</td>
+                                                        <td>CSRS Post 3/91 Redeposit</td>
+                                                        <td class="aRight dollar">$0.00</td>
                                                     </tr>
                                                     <tr>
                                                         <td>Interest *</td>
-                                                        <td class="aRight">$0.00</td>
+                                                        <td class="aRight dollar">$0.00</td>
                                                     </tr>
                                                     <tr>
                                                         <td>&nbsp;</td>
                                                         <td>&nbsp;</td>
                                                     </tr>
                                                     <tr>
-                                                        <td>CSRS Pre 10/1/82 Deposit</td>
-                                                        <td class="aRight">$596.71</td>
+                                                        <td>CSRS Post82/Pre91 Redeposit</td>
+                                                        <td class="aRight dollar">$0.00</td>
                                                     </tr>
                                                     <tr>
                                                         <td>Interest *</td>
-                                                        <td class="aRight">$947.91</td>
+                                                        <td class="aRight dollar">$0.00</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>&nbsp;</td>
+                                                        <td>&nbsp;</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>CSRS Pre 10/82 Redeposit</td>
+                                                        <td class="aRight dollar">$0.00</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Interest *</td>
+                                                        <td class="aRight dollar">$0.00</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>&nbsp;</td>
+                                                        <td>&nbsp;</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>CSRS Post 10/82 Deposit</td>
+                                                        <td class="aRight dollar">$0.00</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Interest *</td>
+                                                        <td class="aRight dollar">$0.00</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>&nbsp;</td>
+                                                        <td>&nbsp;</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>CSRS Pre 10/82 Deposit</td>
+                                                        <td class="aRight dollar">$0.00</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Interest *</td>
+                                                        <td class="aRight dollar">$0.00</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>&nbsp;</td>
+                                                        <td>&nbsp;</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>FERS Peace Corps</td>
+                                                        <td class="aRight dollar">$0.00</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Interest *</td>
+                                                        <td class="aRight dollar">$0.00</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>&nbsp;</td>
+                                                        <td>&nbsp;</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>CSRS Peace Corps</td>
+                                                        <td class="aRight dollar">$0.00</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Interest *</td>
+                                                        <td class="aRight dollar">$0.00</td>
                                                     </tr>
                                                     <tr>
                                                         <td>&nbsp;</td>
                                                         <td>&nbsp;</td>
                                                     </tr>
                                                     <tr class="totalArea">
-                                                        <td>Lest Payments</td>
-                                                        <td class="aRight">$0.00</td>
+                                                        <td>Less Payments</td>
+                                                        <td class="aRight dollar less-payments">$0.00</td>
                                                     </tr>
                                                     <tr>
                                                         <td>&nbsp;</td>
@@ -2967,27 +3010,43 @@
                                                     </tr>
                                                     <tr class="totalArea heightRow">
                                                         <td>Balance Due</td>
-                                                        <td class="aRight">$0.00</td>
+                                                        <td class="aRight dollar balance-due">$0.00</td>
                                                     </tr>
                                                     <tr class="heightRow">
                                                         <td>FERS Deposit</td>
-                                                        <td class="aRight">$0.00</td>
+                                                        <td class="aRight dollar">$0.00</td>
                                                     </tr>
                                                     <tr class="heightRow">
-                                                        <td>CSRS Post 9/30/82 Redeposit</td>
-                                                        <td class="aRight">$0.00</td>
+                                                        <td>FERS Redeposit</td>
+                                                        <td class="aRight dollar">$0.00</td>
                                                     </tr>
                                                     <tr class="heightRow">
-                                                        <td>CSRS Post 9/30/82 Deposit</td>
-                                                        <td class="aRight">$0.00</td>
+                                                        <td>CSRS Post 3/91 Redeposit</td>
+                                                        <td class="aRight dollar">$0.00</td>
                                                     </tr>
                                                     <tr class="heightRow">
-                                                        <td>CSRS Pre 10/1/82 Redeposit</td>
-                                                        <td class="aRight">$0.00</td>
+                                                        <td>CSRS Post82/Pre91 Redeposit</td>
+                                                        <td class="aRight dollar">$0.00</td>
                                                     </tr>
                                                     <tr class="heightRow">
-                                                        <td>CSRS Pre 10/1/82 Deposit</td>
-                                                        <td class="aRight">$1,544.62</td>
+                                                        <td>CSRS Pre 10/82 Redeposit</td>
+                                                        <td class="aRight dollar">$0.00</td>
+                                                    </tr>
+                                                    <tr class="heightRow">
+                                                        <td>CSRS Post 10/82 Deposit</td>
+                                                        <td class="aRight dollar">$0.00</td>
+                                                    </tr>
+                                                    <tr class="heightRow">
+                                                        <td>CSRS Pre 10/82 Deposit</td>
+                                                        <td class="aRight dollar">$0.00</td>
+                                                    </tr>
+                                                    <tr class="heightRow">
+                                                        <td>FERS Peace Corps</td>
+                                                        <td class="aRight dollar">$0.00</td>
+                                                    </tr>
+                                                    <tr class="heightRow">
+                                                        <td>CSRS Peace Corps</td>
+                                                        <td class="aRight dollar">$0.00</td>
                                                     </tr>
                                                     <tr>
                                                         <td>&nbsp;</td>
@@ -3003,13 +3062,13 @@
                                                     </tr>
                                                     <tr class="totalArea">
                                                         <td>Total</td>
-                                                        <td class="aRight">$1,544.62</td>
+                                                        <td class="aRight dollar billing-total">$0.00</td>
                                                     </tr>
                                                 </tbody>
                                             </table>
                                         </div>
                                         <div class="billingRightPart fLeft">
-                                            <div class="billingTblWrapper">
+                                            <div class="initial-billingTblWrapper">
                                                 <table border="0" cellpadding="0" cellspacing="0" width="100%" class="printListTbl">
                                                     <thead>
                                                         <tr>
@@ -3021,15 +3080,8 @@
                                                             <th>Type</th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>11/18/1979</td>
-                                                            <td>11/29/1980</td>
-                                                            <td>D</td>
-                                                            <td>&nbsp;</td>
-                                                            <td>&nbsp;</td>
-                                                            <td>&nbsp;</td>
-                                                        </tr>
+                                                    <tbody class="calculationResult-tbody">
+                                                        
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -3038,10 +3090,14 @@
                                                 <p>The payments you make are applied to -</p>
                                                 <ol class="numberList">
                                                     <li>Pay for FERS Deposit or Redeposit, if any</li>
-                                                    <li>Pay for CSRS Post-9/30/82 redeposit, if any</li>
-                                                    <li>Pay for CSRS Pre-10/1/82 redeposit, if any</li>
-                                                    <li>Pay for CSRS Post-9/30/82 deposit, if any</li>
-                                                    <li>Pay for CSRS Pre-10/1/82 deposit, if any</li>
+                                                    <li>Pay for CSRS Post-03/91 redeposit, if any</li>
+                                                    <li>Pay for CSRS Post-09/82 redeposit, if any</li>
+                                                    <li>Pay for CSRS Pre-03/91 redeposit, if any</li>
+                                                    <li>Pay for CSRS Pre-10/82 redeposit, if any</li>
+                                                    <li>Pay for CSRS Post-09/82 deposit, if any</li>
+                                                    <li>Pay for CSRS Pre-10/82 deposit, if any</li>
+                                                    <li>Pay for CERS Peace Corps deposit, if any</li>
+                                                    <li>Pay for FERS Peace Corps deposit, if any</li>
                                                 </ol>
                                                 <p>If your want your payments applied in a different order, <br />Call 1-888-767-6738 or email retire@opm.gov</p>
                                             </div>
@@ -3063,7 +3119,7 @@
                                     <a href="javascript:;" class="pdfLink"></a>
                                     <a href="javascript:;" class="rtfLink"></a>
                                     <a href="javascript:;" class="docLink"></a>
-                                    <a href="javascript:;" class="printLink jsDoPrintSampleInitialStatement">Print</a>
+                                    <a href="javascript:;" class="printLink jsDoPrintReport">Print</a>
                                 </div>
                                 <a class="priBtn jsClosePopup fRight"><span><span>Cancel</span></span></a>
                             </div>

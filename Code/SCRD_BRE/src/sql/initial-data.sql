@@ -664,9 +664,10 @@ INSERT INTO opm.state(id, deleted, name) values(45, false, 'UT');
 INSERT INTO opm.state(id, deleted, name) values(46, false, 'VT');
 INSERT INTO opm.state(id, deleted, name) values(47, false, 'VA');
 INSERT INTO opm.state(id, deleted, name) values(48, false, 'WA');
-INSERT INTO opm.state(id, deleted, name) values(49, false, 'WV');
-INSERT INTO opm.state(id, deleted, name) values(50, false, 'WI');
-INSERT INTO opm.state(id, deleted, name) values(51, false, 'WY');
+INSERT INTO opm.state(id, deleted, name) values(49, false, 'Washington D.C');
+INSERT INTO opm.state(id, deleted, name) values(50, false, 'WV');
+INSERT INTO opm.state(id, deleted, name) values(51, false, 'WI');
+INSERT INTO opm.state(id, deleted, name) values(52, false, 'WY');
 
 INSERT INTO opm.country(id, deleted, name) VALUES (1, false,'Afghanistan');
 INSERT INTO opm.country(id, deleted, name) VALUES (2, false,'Albania');

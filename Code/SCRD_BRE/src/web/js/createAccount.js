@@ -233,14 +233,18 @@ function validate(createdAccountId) {
     var context = $('.basicInfoPanel');
     var country = $("select[name='country']", context).val();
     $('.halfRowField', context).find('.errorIcon').remove();
+
+    var html = "<ul style='list-style-type: square;'>";
     // Bug Fix 2
-    var fieldNames = ['firstName', 'lastName', 'street1', 'city'];
-    var displayNames = ['First Name', 'Last Name', 'Address #1', 'city'];
+    var fieldNames = ['firstName', 'lastName', 'street1'];
+    var displayNames = ['First Name', 'Last Name', 'Address #1'];
     $.each(fieldNames, function(idx) {
         var input = $("input[name='" + this + "']", context);
         if ($.trim(input.val()) == '') {
-            input.parent('div.halfRowField').append("<span class='errorIcon' title='Invalid " + displayNames[idx] + ". Enter a non empty value.'></span>");
-            input.addClass('error');
+            //input.parent('div.halfRowField').append("<span class='errorIcon' title='Invalid " + displayNames[idx] + ". Enter a non empty value.'></span>");
+            //input.addClass('error');
+            //validated = false;
+            html += "<li style='margin-left: 20px;'><span>Invalid " + displayNames[idx] + ". Enter a non empty value.</span><br/></li>";
             validated = false;
         }
         // Bug Fix 2
@@ -248,34 +252,48 @@ function validate(createdAccountId) {
     // Bug Fix 2
     var zipCode = $("input[name='" + "zipCode" + "']", context);
     if (country == '197' && (/^\d{5}(?:[-\s]\d{4})?$/.test(zipCode.val()) == false || $.trim(zipCode.val()) == '' )) {
-            zipCode.parent('div.halfRowField').append("<span class='errorIcon' title='Invalid input. Enter a valid zip code.'></span>");
-            zipCode.addClass('error');
+            //zipCode.parent('div.halfRowField').append("<span class='errorIcon' title='Invalid input. Enter a valid zip code.'></span>");
+            //zipCode.addClass('error');
+            html += "<li style='margin-left: 20px;'><span>The format of zipCode is not correct.</span><br/></li>";
             validated = false;
+    }
+
+    var city =  $("input[name='" + "city" + "']", context);
+
+    if (country == '197' &&  $.trim(city.val()) == ''){
+        //city.parent('div.halfRowField').append("<span class='errorIcon' title='Invalid city. Enter a non empty value.'></span>");
+        //city.addClass('error');
+        html += "<li style='margin-left: 20px;'><span> City is required</span><br/></li>";
+        validated = false;
     }
 
     var date = $("input[name='birthDate']", context);
     if (isNaN(Date.parse(date.val())) || Date.parse(date.val()) > new Date()) {
-        date.parent('div.halfRowField').append("<span class='errorIcon' title='The birth date is invalid or after the current time.'></span>");
-        date.addClass('error');
+        //date.parent('div.halfRowField').append("<span class='errorIcon' title='The birth date is invalid or after the current time.'></span>");
+        //date.addClass('error');
+        html += "<li style='margin-left: 20px;'><span>The format of birth date is not correct or after the current time.</span><br/></li>";
         validated = false;
     }
     var state = $("select[name='state']", context);
     if ((state.val() == "0" || state.val() == "") && country == '197') {
-        state.parents('div.halfRowField').eq(0).append("<span class='errorIcon' title='Invalid input. Select a valid state'></span>");
-        state.addClass('error');
+        //state.parents('div.halfRowField').eq(0).append("<span class='errorIcon' title='Invalid input. Select a valid state'></span>");
+        //state.addClass('error');
+        html += "<li style='margin-left: 20px;'><span>Please select State/Province/Region</span><br/></li>";
         validated = false;
     }
 
     var ssn = $('.ssn1').val() + '-' + $('.ssn2').val() + '-' + $('.ssn3').val();
     if (/^\d{3}-?\d{2}-?\d{4}$/g.test(ssn) == false) {
-        $('.ssn', context).addClass('error');
-        $('.ssn1', context).parent('div.halfRowField').append("<span class='errorIcon' title='Invalid input. Enter the ssn in the format XXX-XX-XXXX.'></span>");
+        //$('.ssn', context).addClass('error');
+        //$('.ssn1', context).parent('div.halfRowField').append("<span class='errorIcon' title='Invalid input. Enter the ssn in the format XXX-XX-XXXX.'></span>");
+        html += "<li style='margin-left: 20px;'><span>The format of SSN is not correct</span><br/></li>";
         validated = false;
     }
     var email = $("input[name='email']", context);
     if ($.trim(email.val()) != '' && /^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$/g.test($.trim(email.val())) == false) {
-        email.addClass('error');
-        email.parent('div.halfRowField').append("<span class='errorIcon' title='The email format is invalid.'></span>");
+        //email.addClass('error');
+        //email.parent('div.halfRowField').append("<span class='errorIcon' title='The email format is invalid.'></span>");
+        html += "<li style='margin-left: 20px;'><span>The format of email is not correct</span><br/></li>";
         validated = false;
     }
     var filter = {};
@@ -303,8 +321,9 @@ function validate(createdAccountId) {
 
     if(numssn > 0 && foundId+"" !== createdAccountId+""){
 
-        $('.ssn', context).addClass('error');
-        $('.ssn1', context).parent('div.halfRowField').append("<span class='errorIcon' title='Invalid input. The ssn already exists. Enter the ssn in the format XXX-XX-XXXX.'></span>");
+        //$('.ssn', context).addClass('error');
+        //$('.ssn1', context).parent('div.halfRowField').append("<span class='errorIcon' title='Invalid input. The ssn already exists. Enter the ssn in the format XXX-XX-XXXX.'></span>");
+        html += "<li style='margin-left: 20px;'><span>The SSN already exists. Pick another one.</span><br/></li>";
         validated = false;
 
     }
@@ -315,6 +334,12 @@ function validate(createdAccountId) {
         value = value.replace(/\>/g, "&gt;");
         $(this).val(value);
     });
+
+    html += "</ul>";
+    if (validated == false) {
+        $('.basicValidationError').html(html);
+        showPopup(".basicInfoValidationPopup ");
+    }
 
     return validated;
 }

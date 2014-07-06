@@ -757,6 +757,12 @@ function validateBasicInfo() {
             validated = false;
     }
 
+    var city = $("input[name='" + "city" + "']", tab);
+    if (country == '197' && $.trim(city.val()) == '' ) {
+            html += "<li style='margin-left: 20px;'><span> City is required</span><br/></li>";
+            validated = false;
+    }
+
     html += "</ul>";
     if (validated == false) {
         $('.basicValidationError').html(html);

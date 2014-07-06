@@ -170,6 +170,13 @@ $(document).ready(function() {
         return true;
     });
 
+    
+
+    $("body").delegate("input[name='bDate'], input[name='eDate'], input[name='birthDate'], input[name='depositInterestCalculatedToDate'], input[name='sDate']", "change", function(){
+        $(this).val(correctDateInput($(this).val()));
+
+    });
+
     $(".advanceSsn1").on("keyup paste", function(){
 
         if($(this).val().length == 3){
@@ -224,7 +231,14 @@ $(document).ready(function() {
                     var parent = $(cur).parent("tr");
 
                     if(!parent.hasClass("newEntryRow")){
+
+                        if(parent.hasClass('entriesEditRow')){
+                            alert("Please finish editing before copying the row");
+                            return;
+                        }
+
                         rowCopy = parent.clone();
+                        
                     } else {
                         alert("This row can not be copied");
                     }
@@ -240,9 +254,11 @@ $(document).ready(function() {
 
                         if(!parent.hasClass("newEntryRow")){
 
-                            if(!isNumber(rowCopy)){
+                            if(!isNull(rowCopy)){
                                 rowCopy = rowCopy.clone();
                                 parent.replaceWith(rowCopy);
+                                
+                                
                             } else {
                                 alert("No rows were copied. Please copy one first");
                             }
@@ -260,12 +276,11 @@ $(document).ready(function() {
                     var cur = options.$trigger;
                         var parent = $(cur).parent("tr");
 
-                        if(!isNumber(rowCopy)){
-                            rowCopy = rowCopy.clone();
-                            rowCopy.insertBefore(parent);
-                        } else {
-                                alert("No rows were copied. Please copy one first");
-                        }
+                        //$(emptyRowHTML).insertBefore(parent);
+                        var row = $('#versionNewTemplate tbody tr').clone().removeClass('newEntryRow');
+                        row.insertBefore(parent);
+                        row.children("td.blankCell").click();
+
                         
                 }
 
@@ -2143,7 +2158,13 @@ $(document).ready(function() {
             var accountId = $('#accountId').val();
             var account = getAccount(context, accountId);
             var holder = account.holder;
-            var version = getOfficialVersion(account.calculationVersions);
+            var version = null;
+            $('.dollar', popup).html('0');
+            $.each(account.calculationVersions, function() {
+                if (this.id == currentVersionId) {
+                    version = this;
+                }
+            });
             // basic information
             $('.report-csd', popup).html(account.claimNumber);
             $('.report-birthday', popup).html(parseDateToString(holder.birthDate));
@@ -2153,18 +2174,20 @@ $(document).ready(function() {
             $('.report-date', popup).html(parseDateToString(version.calculationDate));
             $('.coverby', popup).html(account.planType);
             // billing information
-            var billings = account.billingSummary.billings;
             var trs = $('.billing1-tbody', popup).find('tr');
-            var total = 0;
-            $.each(billings, function() {
-                var i = mapping[this.name];
-                trs.eq(i * 3 + 1).find('td').eq(1).html(this.initialBilling);
-                trs.eq(i * 3 + 2).find('td').eq(1).html(this.additionalInterest);
-                trs.eq(i + 31).find('td').eq(1).html(this.initialBilling + this.totalPayments + this.additionalInterest);
-                total += this.initialBilling + this.totalPayments + this.additionalInterest;
+            $.each(version.calculationResult.dedeposits, function() {
+                var i = mapping[this.depositType];
+                trs.eq(i * 3 + 1).find('td').eq(1).html(this.deposit);
+                trs.eq(i * 3 + 2).find('td').eq(1).html(this.interest);
+                trs.eq(i + 32).find('td').eq(1).html(this.total);
             });
-            $('.billing-total', popup).html(total);
-
+            $.each(version.calculationResult.redeposits, function() {
+                var i = mapping[this.depositType];
+                trs.eq(i * 3 + 1).find('td').eq(1).html(this.deposit);
+                trs.eq(i * 3 + 2).find('td').eq(1).html(this.interest);
+                trs.eq(i + 32).find('td').eq(1).html(this.total);
+            });
+            $('.billing-total', popup).html(version.calculationResult.summary.totalBalance);
             // calculate less payments
             var lessPayment = 0;
             $.each(account.paymentHistory, function() {
@@ -3554,6 +3577,22 @@ function showPaginationDot(wrapper) {
             pageLinks.eq(currentPage).after('<span class="fLeft">...</span>');
         }
     }
+}
+
+function correctDateInput(dateIn){
+    var result = dateIn;
+    if(dateIn.length == 8){
+
+        result = dateIn.substr(0, 2) + '/' + dateIn.substr(2, 2) + '/' + dateIn.substr(4, 4);
+    }
+
+    if(dateIn.length == 10){
+
+        result = dateIn.substr(0, 2) + '/' + dateIn.substr(3, 2) + '/' + dateIn.substr(6, 4);
+    }
+
+
+    return result;
 }
 
 
