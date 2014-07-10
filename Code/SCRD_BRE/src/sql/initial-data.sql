@@ -907,44 +907,12 @@ INSERT INTO opm.payment_status(id, deleted, name) VALUES(29, false, 'Suspended')
 INSERT INTO opm.payment_status(id, deleted, name) VALUES(30, false, 'Posted - Pending Approval');
 INSERT INTO opm.payment_status(id, deleted, name) VALUES(31, false, 'Lockbox Bank error');
 
-INSERT INTO opm.role (id, deleted, name, description) VALUES (1, false, 'Admin', 'Administrator');
-INSERT INTO opm.role (id, deleted, name, description) VALUES (2, false, 'FinTech', 'FinTech');
-INSERT INTO opm.role (id, deleted, name, description) VALUES (3, false, 'Faces', 'FACES User');
-INSERT INTO opm.role (id, deleted, name, description) VALUES (4, false, 'supervisor', 'Supervisor');
-INSERT INTO opm.role (id, deleted, name, description) VALUES (5, false, 'Customer Service Specialist', 'Customer Service Specialist');
-INSERT INTO opm.role (id, deleted, name, description) VALUES (6, false, 'FACES User', 'FACES User');
-INSERT INTO opm.role (id, deleted, name, description) VALUES (7, false, 'Financial Supervisor', 'Financial Supervisor');
-INSERT INTO opm.role (id, deleted, name, description) VALUES (8, false, 'Financial Technician', 'Financial Technician');
-INSERT INTO opm.role (id, deleted, name, description) VALUES (9, false, 'Information Technician', 'Information Technician');
-INSERT INTO opm.role (id, deleted, name, description) VALUES (10, false, 'New User', 'New User');
-INSERT INTO opm.role (id, deleted, name, description) VALUES (11, false, 'Receivables Supervisor', 'Receivables Supervisor');
-INSERT INTO opm.role (id, deleted, name, description) VALUES (12, false, 'Receivables Technician', 'Receivables Technician');
-INSERT INTO opm.role (id, deleted, name, description) VALUES (13, false, 'Refunds Data Entry', 'Refunds Data Entry');
-INSERT INTO opm.role (id, deleted, name, description) VALUES (14, false, 'Refunds Specialist', 'Refunds Specialist');
-INSERT INTO opm.role (id, deleted, name, description) VALUES (15, false, 'Refunds Supervisor', 'Refunds Supervisor');
-INSERT INTO opm.role (id, deleted, name, description) VALUES (16, false, 'RIO  User', 'RIO  User');
-INSERT INTO opm.role (id, deleted, name, description) VALUES (17, false, 'Batch Processing', 'Batch Processing');
-
 INSERT INTO opm.application_designation(id, deleted, name) VALUES(1, false, 'Default User Order');
 INSERT INTO opm.application_designation(id, deleted, name) VALUES(2, false, 'Pre Deposit');
 INSERT INTO opm.application_designation(id, deleted, name) VALUES(3, false, 'Post Deposit');
 INSERT INTO opm.application_designation(id, deleted, name) VALUES(4, false, 'Pre Redeposit');
 INSERT INTO opm.application_designation(id, deleted, name) VALUES(5, false, 'Post Redeposit');
 INSERT INTO opm.application_designation(id, deleted, name) VALUES(6, false, 'FERS');
-
-INSERT INTO opm.app_user (id, deleted, username, default_tab, network_id, role_id, first_name, last_name, email, telephone, user_status_id, default_tab_account_id) VALUES (1, false, 'user1', 'VIEW_ACCOUNT', 'networkId1', 1, 'Jack', 'Hughes', 'Email1@topcoder.com', '212-999-0983', 1, 1);
-INSERT INTO opm.app_user (id, deleted, username, default_tab, network_id, role_id, first_name, last_name, email, telephone, user_status_id, default_tab_account_id) VALUES (2, false, 'user2', 'VIEW_ACCOUNT', 'networkId2', 2, 'Mark', 'Zuckerberg', 'email2@topcoder.com', '212-999-0982', 1, 1);
-INSERT INTO opm.app_user (id, deleted, username, default_tab, network_id, role_id, first_name, last_name, email, telephone, user_status_id, default_tab_account_id) VALUES (3, false, 'user3', 'VIEW_ACCOUNT', 'networkId3', 4, 'Posh', 'Gutenberg', 'posh@topcoder.com', '212-999-0982', 1, 1);
-INSERT INTO opm.app_user (id, deleted, username, default_tab, network_id, role_id, first_name, last_name, email, telephone, user_status_id, default_tab_account_id) VALUES (4, false, 'user4', 'VIEW_ACCOUNT', 'networkId4', 4, 'Mesh', 'Winchester', 'mesh@topcoder.com', '212-999-0982', 1, 1);
-INSERT INTO opm.app_user (id, deleted, username, default_tab, network_id, role_id, first_name, last_name, email, telephone, user_status_id, default_tab_account_id) VALUES (5, false, 'user5', 'VIEW_ACCOUNT', 'networkId5', 3, 'Bannie', 'Lai', 'email3@topcoder.com', '212-999-0982', 1, 1);
-INSERT INTO opm.app_user (id, deleted, username, default_tab, network_id, role_id, first_name, last_name, email, telephone, user_status_id, default_tab_account_id) VALUES (6, false, 'ScrdAdmin@OPM.EC2.INTERNAL', 'VIEW_ACCOUNT', 'networkId6', 1, 'Windows', 'User', 'email3@topcoder.com', '212-999-0982', 1, 1);
-INSERT INTO opm.app_user (id, deleted, username, default_tab, network_id, role_id, first_name, last_name, email, telephone, user_status_id, default_tab_account_id) VALUES (7, false, 'BatchUser', 'VIEW_ACCOUNT', 'networkId7', 17, 'Batch', 'User', 'email3@topcoder.com', '212-999-0982', 1, 1);
-INSERT INTO opm.app_user (id, deleted, username, default_tab, network_id, role_id, first_name, last_name, email, telephone, user_status_id, default_tab_account_id) VALUES (8, false, 'faces@OPM.EC2.INTERNAL', 'VIEW_ACCOUNT', 'networkId8', 3, 'FACES', 'Windows User', 'email3@topcoder.com', '212-999-0982', 1, 1);
-
-INSERT INTO opm.user_permission (id, deleted, username, action) VALUES (1, false, 'user1', 'link');
-INSERT INTO opm.user_permission (id, deleted, username, action) VALUES (2, false, 'user1', 'button');
-INSERT INTO opm.user_permission (id, deleted, username, action) VALUES (3, false, 'user1', 'table');
-INSERT INTO opm.user_permission (id, deleted, username, action) VALUES (4, false, 'user1', 'control');
 
 INSERT INTO opm.error (id, deleted, date, details) VALUES (1, false, CURRENT_TIMESTAMP, 'You have 2 records in <br/><a href="workQueue/view">Work Queue.</a>');
 INSERT INTO opm.error (id, deleted, date, details) VALUES (2, false, CURRENT_TIMESTAMP - INTERVAL '16 days', 'Error before 15 days');
@@ -957,74 +925,700 @@ INSERT INTO opm.notification (id, deleted, date, details, sender, read, recipien
 INSERT INTO opm.notification (id, deleted, date, details, sender, read, recipient) VALUES (2, false, CURRENT_TIMESTAMP, '- You have 1 Record in <a href="workQueue/view">Work Queue.</a><br/>- You have 7 <a href="suspension/view">Payments in Suspense</a>.', 'System', false, 'user1');
 INSERT INTO opm.notification (id, deleted, date, details, sender, read, recipient) VALUES (3, false, CURRENT_TIMESTAMP - INTERVAL '16 days', 'Notification before 15 days', 'System', false, 'user1');
 
-INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (1, false, 'Admin', 'VIEW_ACCOUNT');
-INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (2, false, 'Admin', 'CREATE_NEW_ACCOUNT');
-INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (3, false, 'Admin', 'WORK_QUEUE');
-INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (4, false, 'Admin', 'REPORTS');
-INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (5, false, 'Admin', 'SUSPENSE');
-INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (6, false, 'Admin', 'APPROVAL');
-INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (7, false, 'Admin', 'PAYMENTS');
-INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (8, false, 'Admin', 'TOOLS');
-INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (9, false, 'Admin', 'ADMIN');
-INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (10, false, 'Admin', 'NOTIFICATION_LOG');
-INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (11, false, 'Admin', 'HELP');
+INSERT INTO opm.role (id, deleted, name, description) VALUES (1, false, 'Administrator', 'Administrator');
+INSERT INTO opm.role (id, deleted, name, description) VALUES (2, false, 'RIO User', 'RIO User');
+INSERT INTO opm.role (id, deleted, name, description) VALUES (3, false, 'FACES User', 'FACES User');
+INSERT INTO opm.role (id, deleted, name, description) VALUES (4, false, 'Financial Supervisor', 'Financial Supervisor');
+INSERT INTO opm.role (id, deleted, name, description) VALUES (5, false, 'Financial Technician', 'Financial Technician');
+INSERT INTO opm.role (id, deleted, name, description) VALUES (6, false, 'Information Technician', 'Information Technician');
+INSERT INTO opm.role (id, deleted, name, description) VALUES (7, false, 'Receivables Supervisor', 'Receivables Supervisor');
+INSERT INTO opm.role (id, deleted, name, description) VALUES (8, false, 'Receivables Technician', 'Receivables Technician');
+INSERT INTO opm.role (id, deleted, name, description) VALUES (9, false, 'Service Credit Data Entry Technician', 'Service Credit Data Entry Technician');
+INSERT INTO opm.role (id, deleted, name, description) VALUES (10, false, 'View Only User', 'View Only User');
+INSERT INTO opm.role (id, deleted, name, description) VALUES (11, false, 'Service Credit Reviewer', 'Service Credit Reviewer');
+INSERT INTO opm.role (id, deleted, name, description) VALUES (12, false, 'Service Credit Specialist', 'Service Credit Specialist');
+INSERT INTO opm.role (id, deleted, name, description) VALUES (13, false, 'Batch Processing', 'Batch Processing');
 
-INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (13, false, 'Admin', 'GET /lookup');
-INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (14, false, 'Admin', 'GET /common');
-INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (15, false, 'Admin', 'POST /common');
-INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (16, false, 'Admin', 'GET /account');
-INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (116, false, 'Admin', 'GET /letter');
-INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (117, false, 'Admin', 'PUT /letter');
-INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (118, false, 'Admin', 'POST /letter');
-INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (119, false, 'Admin', 'DELETE /letter');
-INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (120, false, 'Admin', 'GET /reference');
-INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (121, false, 'Admin', 'PUT /reference');
-INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (122, false, 'Admin', 'POST /reference');
-INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (123, false, 'Admin', 'DELETE /reference');
-INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (17, false, 'Admin', 'POST /account');
-INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (18, false, 'Admin', 'PUT /account');
-INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (19, false, 'Admin', 'DELETE /account');
-INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (20, false, 'Admin', 'GET /workQueue');
-INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (21, false, 'Admin', 'POST /workQueue');
-INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (22, false, 'Admin', 'GET /report');
-INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (222, false, 'Admin', 'POST /report');
-INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (23, false, 'Admin', 'GET /suspension');
-INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (24, false, 'Admin', 'POST /suspension');
-INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (25, false, 'Admin', 'GET /approval');
-INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (26, false, 'Admin', 'PUT /approval');
-INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (27, false, 'Admin', 'POST /approval');
-INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (28, false, 'Admin', 'GET /payment');
-INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (29, false, 'Admin', 'PUT /payment');
-INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (30, false, 'Admin', 'POST /payment');
-INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (31, false, 'Admin', 'DELETE /payment');
-INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (32, false, 'Admin', 'GET /tools');
-INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (33, false, 'Admin', 'POST /tools');
-INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (34, false, 'Admin', 'GET /admin');
-INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (35, false, 'Admin', 'PUT /admin');
-INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (36, false, 'Admin', 'GET /notificationLog');
-INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (37, false, 'Admin', 'POST /notificationLog');
-INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (38, false, 'Admin', 'GET /help');
 
-INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (39, false, 'FinTech', 'APPROVAL');
-INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (40, false, 'FinTech', 'NOTIFICATION_LOG');
-INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (41, false, 'FinTech', 'GET /default');
-INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (42, false, 'FinTech', 'GET /lookup');
-INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (43, false, 'FinTech', 'GET /common');
-INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (44, false, 'FinTech', 'POST /common');
-INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (45, false, 'FinTech', 'GET /approval');
-INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (46, false, 'FinTech', 'PUT /approval');
-INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (47, false, 'FinTech', 'POST /approval');
-INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (48, false, 'FinTech', 'GET /notificationLog');
-INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (49, false, 'FinTech', 'POST /notificationLog');
-INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (50, false, 'FinTech', 'GET /account');
-INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (51, false, 'Faces', 'VIEW_ACCOUNT');
+INSERT INTO opm.app_user (id, deleted, username, default_tab, network_id, role_id, first_name, last_name, email, telephone, user_status_id, default_tab_account_id) VALUES (1, false, 'user1', 'VIEW_ACCOUNT', 'networkId1', 1, 'Jack', 'Hughes', 'Email1@topcoder.com', '212-999-0983', 1, 1);
+INSERT INTO opm.app_user (id, deleted, username, default_tab, network_id, role_id, first_name, last_name, email, telephone, user_status_id, default_tab_account_id) VALUES (2, false, 'user2', 'VIEW_ACCOUNT', 'networkId2', 2, 'Mark', 'Zuckerberg', 'email2@topcoder.com', '212-999-0982', 1, 1);
+INSERT INTO opm.app_user (id, deleted, username, default_tab, network_id, role_id, first_name, last_name, email, telephone, user_status_id, default_tab_account_id) VALUES (3, false, 'user3', 'VIEW_ACCOUNT', 'networkId3', 4, 'Posh', 'Gutenberg', 'posh@topcoder.com', '212-999-0982', 1, 1);
+INSERT INTO opm.app_user (id, deleted, username, default_tab, network_id, role_id, first_name, last_name, email, telephone, user_status_id, default_tab_account_id) VALUES (4, false, 'user4', 'VIEW_ACCOUNT', 'networkId4', 4, 'Mesh', 'Winchester', 'mesh@topcoder.com', '212-999-0982', 1, 1);
+INSERT INTO opm.app_user (id, deleted, username, default_tab, network_id, role_id, first_name, last_name, email, telephone, user_status_id, default_tab_account_id) VALUES (5, false, 'user5', 'VIEW_ACCOUNT', 'networkId5', 3, 'Bannie', 'Lai', 'email3@topcoder.com', '212-999-0982', 1, 1);
+INSERT INTO opm.app_user (id, deleted, username, default_tab, network_id, role_id, first_name, last_name, email, telephone, user_status_id, default_tab_account_id) VALUES (6, false, 'ScrdAdmin@OPM.EC2.INTERNAL', 'VIEW_ACCOUNT', 'networkId6', 1, 'Windows', 'User', 'email3@topcoder.com', '212-999-0982', 1, 1);
+INSERT INTO opm.app_user (id, deleted, username, default_tab, network_id, role_id, first_name, last_name, email, telephone, user_status_id, default_tab_account_id) VALUES (7, false, 'BatchUser', 'VIEW_ACCOUNT', 'networkId7', 13, 'Batch', 'User', 'email3@topcoder.com', '212-999-0982', 1, 1);
+INSERT INTO opm.app_user (id, deleted, username, default_tab, network_id, role_id, first_name, last_name, email, telephone, user_status_id, default_tab_account_id) VALUES (8, false, 'faces@OPM.EC2.INTERNAL', 'VIEW_ACCOUNT', 'networkId8', 3, 'FACES', 'Windows User', 'email3@topcoder.com', '212-999-0982', 1, 1);
 
-INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (52, false, 'Faces', 'GET /lookup');
-INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (53, false, 'Faces', 'GET /common');
-INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (54, false, 'Faces', 'POST /common');
-INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (55, false, 'Faces', 'GET /faces');
-INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (56, false, 'Faces', 'POST /faces');
-INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (57, false, 'Faces', 'PUT /faces');
-INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (58, false, 'Faces', 'DELETE /faces');
+INSERT INTO opm.app_user (id, deleted, username, default_tab, network_id, role_id, first_name, last_name, email, telephone, user_status_id, default_tab_account_id) VALUES (11, false, 'administrator', 'VIEW_ACCOUNT', 'networkid1', 1, 'Pamela', 'Ferguson', 'administrator@opm.topcoder.com', '212-999-0983', 1, 1);
+INSERT INTO opm.app_user (id, deleted, username, default_tab, network_id, role_id, first_name, last_name, email, telephone, user_status_id, default_tab_account_id) VALUES (12, false, 'rio_user', 'VIEW_ACCOUNT', 'networkid2', 2, 'Walter', 'Frazier', 'rio_user@opm.topcoder.com', '212-999-0983', 1, 1);
+INSERT INTO opm.app_user (id, deleted, username, default_tab, network_id, role_id, first_name, last_name, email, telephone, user_status_id, default_tab_account_id) VALUES (13, false, 'faces_user', 'VIEW_ACCOUNT', 'networkid3', 3, 'Johnny', 'Garrett', 'faces_user@opm.topcoder.com', '212-999-0983', 1, 1);
+INSERT INTO opm.app_user (id, deleted, username, default_tab, network_id, role_id, first_name, last_name, email, telephone, user_status_id, default_tab_account_id) VALUES (14, false, 'financial_supervisor', 'VIEW_ACCOUNT', 'networkid4', 4, 'Andrew', 'Knight', 'financial_supervisor@opm.topcoder.com', '212-999-0983', 1, 1);
+INSERT INTO opm.app_user (id, deleted, username, default_tab, network_id, role_id, first_name, last_name, email, telephone, user_status_id, default_tab_account_id) VALUES (15, false, 'financial_technician', 'VIEW_ACCOUNT', 'networkid5', 5, 'Wanda', 'Gardner', 'financial_technician@opm.topcoder.com', '212-999-0983', 1, 1);
+INSERT INTO opm.app_user (id, deleted, username, default_tab, network_id, role_id, first_name, last_name, email, telephone, user_status_id, default_tab_account_id) VALUES (16, false, 'information_technician', 'VIEW_ACCOUNT', 'networkid6', 6, 'Keith', 'Lewis', 'information_technician@opm.topcoder.com', '212-999-0983', 1, 1);
+INSERT INTO opm.app_user (id, deleted, username, default_tab, network_id, role_id, first_name, last_name, email, telephone, user_status_id, default_tab_account_id) VALUES (17, false, 'receivables_supervisor', 'VIEW_ACCOUNT', 'networkid7', 7, 'Earl', 'Cooper', 'receivables_supervisor@opm.topcoder.com', '212-999-0983', 1, 1);
+INSERT INTO opm.app_user (id, deleted, username, default_tab, network_id, role_id, first_name, last_name, email, telephone, user_status_id, default_tab_account_id) VALUES (18, false, 'receivables_technician', 'VIEW_ACCOUNT', 'networkid8', 8, 'Anthony', 'Vasquez', 'receivables_technician@opm.topcoder.com', '212-999-0983', 1, 1);
+INSERT INTO opm.app_user (id, deleted, username, default_tab, network_id, role_id, first_name, last_name, email, telephone, user_status_id, default_tab_account_id) VALUES (19, false, 'service_credit_data_entry_technician', 'VIEW_ACCOUNT', 'networkid9', 9, 'David', 'Allen', 'service_credit_data_entry_technician@opm.topcoder.com', '212-999-0983', 1, 1);
+INSERT INTO opm.app_user (id, deleted, username, default_tab, network_id, role_id, first_name, last_name, email, telephone, user_status_id, default_tab_account_id) VALUES (20, false, 'view_only_user', 'VIEW_ACCOUNT', 'networkid10', 10, 'Joan', 'Bennett', 'view_only_user@opm.topcoder.com', '212-999-0983', 1, 1);
+INSERT INTO opm.app_user (id, deleted, username, default_tab, network_id, role_id, first_name, last_name, email, telephone, user_status_id, default_tab_account_id) VALUES (21, false, 'service_credit_reviewer', 'VIEW_ACCOUNT', 'networkid11', 11, 'Ruby', 'Cruz', 'service_credit_reviewer@opm.topcoder.com', '212-999-0983', 1, 1);
+INSERT INTO opm.app_user (id, deleted, username, default_tab, network_id, role_id, first_name, last_name, email, telephone, user_status_id, default_tab_account_id) VALUES (22, false, 'service_credit_specialist', 'VIEW_ACCOUNT', 'networkid12', 12, 'Julia', 'Gordon', 'service_credit_specialist@opm.topcoder.com', '212-999-0983', 1, 1);
 
-INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (59, false, 'Batch Processing', 'batchProcessingJob');
+INSERT INTO opm.user_permission (id, deleted, username, action) VALUES (1, false, 'user1', 'link');
+INSERT INTO opm.user_permission (id, deleted, username, action) VALUES (2, false, 'user1', 'button');
+INSERT INTO opm.user_permission (id, deleted, username, action) VALUES (3, false, 'user1', 'table');
+INSERT INTO opm.user_permission (id, deleted, username, action) VALUES (4, false, 'user1', 'control');
+
+INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (1, false, 'Administrator', 'VIEW_ACCOUNT');
+INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (2, false, 'Administrator', 'CREATE_NEW_ACCOUNT');
+INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (3, false, 'Administrator', 'WORK_QUEUE');
+INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (4, false, 'Administrator', 'REPORTS');
+INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (5, false, 'Administrator', 'SUSPENSE');
+INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (6, false, 'Administrator', 'APPROVAL');
+INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (7, false, 'Administrator', 'PAYMENTS');
+INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (8, false, 'Administrator', 'TOOLS');
+INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (9, false, 'Administrator', 'ADMIN');
+INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (10, false, 'Administrator', 'NOTIFICATION_LOG');
+INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (11, false, 'Administrator', 'HELP');
+INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (12, false, 'Administrator', 'GET /lookup');
+INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (13, false, 'Administrator', 'GET /common');
+INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (14, false, 'Administrator', 'POST /common');
+INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (15, false, 'Administrator', 'GET /account');
+INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (16, false, 'Administrator', 'GET /letter');
+INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (17, false, 'Administrator', 'PUT /letter');
+INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (18, false, 'Administrator', 'POST /letter');
+INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (19, false, 'Administrator', 'DELETE /letter');
+INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (20, false, 'Administrator', 'GET /reference');
+INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (21, false, 'Administrator', 'PUT /reference');
+INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (22, false, 'Administrator', 'POST /reference');
+INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (23, false, 'Administrator', 'DELETE /reference');
+INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (24, false, 'Administrator', 'POST /account');
+INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (25, false, 'Administrator', 'PUT /account');
+INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (26, false, 'Administrator', 'DELETE /account');
+INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (27, false, 'Administrator', 'GET /workQueue');
+INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (28, false, 'Administrator', 'POST /workQueue');
+INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (29, false, 'Administrator', 'GET /report');
+INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (30, false, 'Administrator', 'POST /report');
+INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (31, false, 'Administrator', 'GET /suspension');
+INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (32, false, 'Administrator', 'POST /suspension');
+INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (33, false, 'Administrator', 'GET /approval');
+INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (34, false, 'Administrator', 'PUT /approval');
+INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (35, false, 'Administrator', 'POST /approval');
+INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (36, false, 'Administrator', 'GET /payment');
+INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (37, false, 'Administrator', 'PUT /payment');
+INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (38, false, 'Administrator', 'POST /payment');
+INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (39, false, 'Administrator', 'DELETE /payment');
+INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (40, false, 'Administrator', 'GET /tools');
+INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (41, false, 'Administrator', 'POST /tools');
+INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (42, false, 'Administrator', 'GET /admin');
+INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (43, false, 'Administrator', 'PUT /admin');
+INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (44, false, 'Administrator', 'GET /notificationLog');
+INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (45, false, 'Administrator', 'POST /notificationLog');
+INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (46, false, 'Administrator', 'GET /help');
+
+INSERT INTO opm.role_permission (id, deleted, rolename, action) VALUES (67, false, 'Batch Processing', 'batchProcessingJob');
+ALTER SEQUENCE opm.role_permission_id_seq RESTART WITH 68;
+-- View Only User
+-- delete from opm.role_permission where rolename = 'View Only User';
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'View Only User', 'GET /lookup');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'View Only User', 'GET /common');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'View Only User', 'POST /common');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'View Only User', 'TOOLS');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'View Only User', 'GET /tools');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'View Only User', 'POST /tools');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'View Only User', 'VIEW_ACCOUNT');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'View Only User', 'GET /account/\d+$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'View Only User', 'GET /account/\d+/detail$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'View Only User', 'GET /account/view$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'View Only User', 'GET /account/search');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'View Only User', 'POST /account/search');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'View Only User', 'GET /account/\d+/notes$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'View Only User', 'POST /account/\d+/notes$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'View Only User', 'DELETE /account/notes$');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'View Only User', 'NOTIFICATION_LOG');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'View Only User', 'GET /notificationLog');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'View Only User', 'POST /notificationLog');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'View Only User', 'HELP');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'View Only User', 'GET /help');
+
+
+-- RIO User
+-- delete from opm.role_permission where rolename = 'RIO User';
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'RIO User', 'GET /lookup');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'RIO User', 'GET /common');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'RIO User', 'POST /common');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'RIO User', 'TOOLS');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'RIO User', 'GET /tools');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'RIO User', 'POST /tools');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'RIO User', 'VIEW_ACCOUNT');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'RIO User', 'GET /account/\d+$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'RIO User', 'GET /account/\d+/detail$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'RIO User', 'GET /account/view$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'RIO User', 'GET /account/search');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'RIO User', 'POST /account/search');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'RIO User', 'GET /account/\d+/notes$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'RIO User', 'POST /account/\d+/notes$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'RIO User', 'POST /account/\d+/calculation');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'RIO User', 'PUT /account/\d+/calculation');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'RIO User', 'PUT /account');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'RIO User', 'PAYMENTS');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'RIO User', 'GET /payment');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'RIO User', 'GET /account/\d+/payments');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'RIO User', 'POST /payments/search$');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'RIO User', 'NOTIFICATION_LOG');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'RIO User', 'GET /notificationLog');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'RIO User', 'POST /notificationLog');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'RIO User', 'HELP');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'RIO User', 'GET /help');
+
+
+-- FACES User
+-- delete from opm.role_permission where rolename = 'FACES User';
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'FACES User', 'GET /lookup');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'FACES User', 'GET /common');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'FACES User', 'POST /common');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'FACES User', 'TOOLS');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'FACES User', 'GET /tools');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'FACES User', 'POST /tools');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'FACES User', 'VIEW_ACCOUNT');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'FACES User', 'GET /account/\d+$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'FACES User', 'GET /account/\d+/detail$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'FACES User', 'GET /account/view$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'FACES User', 'GET /account/search');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'FACES User', 'POST /account/search');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'FACES User', 'GET /account/\d+/notes$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'FACES User', 'POST /account/\d+/notes$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'FACES User', 'PUT /account');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'FACES User', 'PAYMENTS');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'FACES User', 'GET /payment');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'FACES User', 'GET /account/\d+/payments');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'FACES User', 'POST /payments/search$');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'FACES User', 'NOTIFICATION_LOG');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'FACES User', 'GET /notificationLog');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'FACES User', 'POST /notificationLog');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'FACES User', 'HELP');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'FACES User', 'GET /help');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'FACES User', 'GET /faces');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'FACES User', 'POST /faces');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'FACES User', 'PUT /faces');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'FACES User', 'DELETE /faces');
+
+
+-- Financial Supervisor
+-- delete from opm.role_permission where rolename = 'Financial Supervisor';
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Supervisor', 'GET /lookup');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Supervisor', 'GET /common');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Supervisor', 'POST /common');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Supervisor', 'TOOLS');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Supervisor', 'GET /tools');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Supervisor', 'POST /tools');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Supervisor', 'VIEW_ACCOUNT');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Supervisor', 'PUT /account');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Supervisor', 'GET /account/\d+$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Supervisor', 'POST /account/\d+/calculation');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Supervisor', 'PUT /account/\d+/calculation');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Supervisor', 'GET /account/\d+/detail$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Supervisor', 'GET /account/\d+/notes$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Supervisor', 'POST /account/\d+/notes$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Supervisor', 'PUT /account/\d+/notes$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Supervisor', 'GET /account/\d+/payments');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Supervisor', 'POST /account/\d+/updateInterest');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Supervisor', 'PUT /account/\d+/summary');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Supervisor', 'POST /account/approve');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Supervisor', 'DELETE /account/notes$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Supervisor', 'GET /account/search');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Supervisor', 'POST /account/search');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Supervisor', 'GET /account/view$');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Supervisor', 'NOTIFICATION_LOG');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Supervisor', 'GET /notificationLog');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Supervisor', 'POST /notificationLog');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Supervisor', 'HELP');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Supervisor', 'GET /help');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Supervisor', 'PAYMENTS');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Supervisor', 'GET /payment');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Supervisor', 'PUT /payment');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Supervisor', 'POST /payment$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Supervisor', 'POST /payment/reverse');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Supervisor', 'POST /payments/search$');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Supervisor', 'WORK_QUEUE');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Supervisor', 'POST /workQueue/assign');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Supervisor', 'POST /workQueue/unassignedCases$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Supervisor', 'GET /workQueue/view$');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Supervisor', 'REPORTS');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Supervisor', 'GET /report');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Supervisor', 'POST /report');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Supervisor', 'GET /letter');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Supervisor', 'POST /letter');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Supervisor', 'PUT /letter');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Supervisor', 'DELETE /letter');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Supervisor', 'GET /reference');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Supervisor', 'POST /reference');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Supervisor', 'PUT /reference');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Supervisor', 'DELETE /reference');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Supervisor', 'SUSPENSE');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Supervisor', 'GET /suspension');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Supervisor', 'POST /suspension');
+
+
+-- Financial Technician
+-- delete from opm.role_permission where rolename = 'Financial Technician';
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Technician', 'GET /lookup');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Technician', 'GET /common');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Technician', 'POST /common');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Technician', 'TOOLS');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Technician', 'GET /tools');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Technician', 'POST /tools');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Technician', 'VIEW_ACCOUNT');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Technician', 'PUT /account');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Technician', 'GET /account/\d+$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Technician', 'POST /account/\d+/calculation');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Technician', 'PUT /account/\d+/calculation');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Technician', 'GET /account/\d+/detail$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Technician', 'GET /account/\d+/notes$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Technician', 'POST /account/\d+/notes$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Technician', 'PUT /account/\d+/notes$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Technician', 'GET /account/\d+/payments');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Technician', 'POST /account/\d+/updateInterest');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Technician', 'PUT /account/\d+/summary');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Technician', 'POST /account/approve');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Technician', 'DELETE /account/notes$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Technician', 'GET /account/search');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Technician', 'POST /account/search');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Technician', 'GET /account/view$');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Technician', 'NOTIFICATION_LOG');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Technician', 'GET /notificationLog');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Technician', 'POST /notificationLog');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Technician', 'HELP');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Technician', 'GET /help');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Technician', 'PAYMENTS');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Technician', 'GET /payment');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Technician', 'PUT /payment');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Technician', 'POST /payment$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Technician', 'POST /payment/reverse');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Technician', 'POST /payments/search$');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Technician', 'WORK_QUEUE');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Technician', 'POST /workQueue/assign');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Technician', 'POST /workQueue/unassignedCases$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Technician', 'GET /workQueue/view$');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Technician', 'REPORTS');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Technician', 'GET /report');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Technician', 'POST /report');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Technician', 'GET /letter');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Technician', 'POST /letter');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Technician', 'PUT /letter');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Technician', 'DELETE /letter');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Technician', 'GET /reference');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Technician', 'POST /reference');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Technician', 'PUT /reference');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Technician', 'DELETE /reference');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Technician', 'SUSPENSE');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Technician', 'GET /suspension');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Financial Technician', 'POST /suspension');
+
+
+-- Information Technician
+-- delete from opm.role_permission where rolename = 'Information Technician';
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Information Technician', 'GET /lookup');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Information Technician', 'GET /common');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Information Technician', 'POST /common');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Information Technician', 'TOOLS');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Information Technician', 'GET /tools');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Information Technician', 'POST /tools');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Information Technician', 'VIEW_ACCOUNT');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Information Technician', 'GET /account/\d+$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Information Technician', 'GET /account/\d+/detail$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Information Technician', 'POST /account/\d+/notes$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Information Technician', 'GET /account/\d+/notes$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Information Technician', 'GET /account/\d+/payments');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Information Technician', 'GET /account/search');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Information Technician', 'POST /account/search');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Information Technician', 'GET /account/view$');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Information Technician', 'HELP');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Information Technician', 'GET /help');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Information Technician', 'NOTIFICATION_LOG');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Information Technician', 'GET /notificationLog');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Information Technician', 'POST /notificationLog');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Information Technician', 'PAYMENTS');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Information Technician', 'GET /payment');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Information Technician', 'POST /payment/reverse');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Information Technician', 'POST /payments/search$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Information Technician', 'POST /report/get');
+
+
+-- Receivables Supervisor
+-- delete from opm.role_permission where rolename = 'Receivables Supervisor';
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Supervisor', 'GET /lookup');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Supervisor', 'GET /common');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Supervisor', 'POST /common');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Supervisor', 'TOOLS');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Supervisor', 'GET /tools');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Supervisor', 'POST /tools');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Supervisor', 'VIEW_ACCOUNT');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Supervisor', 'PUT /account');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Supervisor', 'GET /account/\d+$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Supervisor', 'POST /account/\d+/calculation');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Supervisor', 'PUT /account/\d+/calculation');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Supervisor', 'GET /account/\d+/detail$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Supervisor', 'GET /account/\d+/notes$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Supervisor', 'POST /account/\d+/notes$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Supervisor', 'PUT /account/\d+/notes$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Supervisor', 'GET /account/\d+/payments');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Supervisor', 'POST /account/\d+/updateInterest');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Supervisor', 'PUT /account/\d+/summary');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Supervisor', 'POST /account/approve');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Supervisor', 'DELETE /account/notes$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Supervisor', 'GET /account/search');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Supervisor', 'POST /account/search');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Supervisor', 'GET /account/view$');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Supervisor', 'NOTIFICATION_LOG');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Supervisor', 'GET /notificationLog');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Supervisor', 'POST /notificationLog');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Supervisor', 'HELP');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Supervisor', 'GET /help');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Supervisor', 'PAYMENTS');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Supervisor', 'GET /payment');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Supervisor', 'PUT /payment');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Supervisor', 'POST /payment/reverse');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Supervisor', 'POST /payments/search$');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Supervisor', 'WORK_QUEUE');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Supervisor', 'POST /workQueue/assign');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Supervisor', 'POST /workQueue/unassignedCases$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Supervisor', 'GET /workQueue/view$');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Supervisor', 'REPORTS');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Supervisor', 'GET /report');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Supervisor', 'POST /report');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Supervisor', 'GET /letter');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Supervisor', 'POST /letter');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Supervisor', 'PUT /letter');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Supervisor', 'DELETE /letter');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Supervisor', 'GET /reference');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Supervisor', 'POST /reference');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Supervisor', 'PUT /reference');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Supervisor', 'DELETE /reference');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Supervisor', 'SUSPENSE');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Supervisor', 'GET /suspension');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Supervisor', 'POST /suspension');
+
+
+-- Receivables Technician
+-- delete from opm.role_permission where rolename = 'Receivables Technician';
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Technician', 'GET /lookup');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Technician', 'GET /common');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Technician', 'POST /common');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Technician', 'TOOLS');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Technician', 'GET /tools');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Technician', 'POST /tools');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Technician', 'CREATE_NEW_ACCOUNT');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Technician', 'POST /account/create$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Technician', 'GET /account/viewCreate');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Technician', 'VIEW_ACCOUNT');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Technician', 'PUT /account');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Technician', 'GET /account/\d+$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Technician', 'POST /account/\d+/calculation');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Technician', 'PUT /account/\d+/calculation');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Technician', 'GET /account/\d+/detail$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Technician', 'GET /account/\d+/notes$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Technician', 'POST /account/\d+/notes$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Technician', 'GET /account/\d+/payments');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Technician', 'POST /account/\d+/updateInterest');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Technician', 'PUT /account/\d+/summary');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Technician', 'POST /account/approve');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Technician', 'GET /account/search');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Technician', 'POST /account/search');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Technician', 'GET /account/view$');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Technician', 'NOTIFICATION_LOG');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Technician', 'GET /notificationLog');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Technician', 'POST /notificationLog');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Technician', 'HELP');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Technician', 'GET /help');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Technician', 'PAYMENTS');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Technician', 'GET /payment');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Technician', 'PUT /payment');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Technician', 'POST /payment$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Technician', 'POST /payment/reverse');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Technician', 'POST /payments/search$');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Technician', 'WORK_QUEUE');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Technician', 'POST /workQueue/assign');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Technician', 'POST /workQueue/unassignedCases$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Technician', 'GET /workQueue/view$');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Technician', 'REPORTS');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Technician', 'GET /report');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Technician', 'POST /report');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Technician', 'GET /letter');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Technician', 'POST /letter');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Technician', 'PUT /letter');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Technician', 'DELETE /letter');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Technician', 'GET /reference');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Technician', 'POST /reference');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Technician', 'PUT /reference');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Technician', 'DELETE /reference');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Technician', 'SUSPENSE');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Technician', 'GET /suspension');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Receivables Technician', 'POST /suspension');
+
+
+-- Service Credit Data Entry Technician
+-- delete from opm.role_permission where rolename = 'Service Credit Data Entry Technician';
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Data Entry Technician', 'GET /lookup');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Data Entry Technician', 'GET /common');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Data Entry Technician', 'POST /common');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Data Entry Technician', 'TOOLS');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Data Entry Technician', 'GET /tools');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Data Entry Technician', 'POST /tools');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Data Entry Technician', 'CREATE_NEW_ACCOUNT');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Data Entry Technician', 'POST /account/create$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Data Entry Technician', 'GET /account/viewCreate');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Data Entry Technician', 'VIEW_ACCOUNT');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Data Entry Technician', 'GET /account/\d+$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Data Entry Technician', 'POST /account/\d+/calculation');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Data Entry Technician', 'PUT /account/\d+/calculation');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Data Entry Technician', 'GET /account/\d+/detail$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Data Entry Technician', 'GET /account/\d+/notes$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Data Entry Technician', 'POST /account/\d+/notes$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Data Entry Technician', 'PUT /account/\d+/notes$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Data Entry Technician', 'GET /account/\d+/payments');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Data Entry Technician', 'POST /account/\d+/updateInterest');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Data Entry Technician', 'PUT /account/\d+/summary');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Data Entry Technician', 'POST /account/approve');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Data Entry Technician', 'GET /account/search');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Data Entry Technician', 'POST /account/search');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Data Entry Technician', 'GET /account/view$');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Data Entry Technician', 'NOTIFICATION_LOG');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Data Entry Technician', 'GET /notificationLog');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Data Entry Technician', 'POST /notificationLog');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Data Entry Technician', 'HELP');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Data Entry Technician', 'GET /help');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Data Entry Technician', 'PAYMENTS');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Data Entry Technician', 'GET /payment');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Data Entry Technician', 'PUT /payment');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Data Entry Technician', 'POST /payment/reverse');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Data Entry Technician', 'POST /payments/search$');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Data Entry Technician', 'WORK_QUEUE');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Data Entry Technician', 'POST /workQueue/assign');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Data Entry Technician', 'POST /workQueue/unassignedCases$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Data Entry Technician', 'GET /workQueue/view$');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Data Entry Technician', 'REPORTS');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Data Entry Technician', 'GET /report');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Data Entry Technician', 'POST /report');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Data Entry Technician', 'GET /letter');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Data Entry Technician', 'POST /letter');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Data Entry Technician', 'PUT /letter');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Data Entry Technician', 'DELETE /letter');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Data Entry Technician', 'GET /reference');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Data Entry Technician', 'POST /reference');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Data Entry Technician', 'PUT /reference');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Data Entry Technician', 'DELETE /reference');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Data Entry Technician', 'SUSPENSE');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Data Entry Technician', 'GET /suspension');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Data Entry Technician', 'POST /suspension');
+
+
+-- Service Credit Reviewer
+-- delete from opm.role_permission where rolename = 'Service Credit Reviewer';
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Reviewer', 'GET /lookup');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Reviewer', 'GET /common');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Reviewer', 'POST /common');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Reviewer', 'TOOLS');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Reviewer', 'GET /tools');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Reviewer', 'POST /tools');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Reviewer', 'CREATE_NEW_ACCOUNT');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Reviewer', 'POST /account/create$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Reviewer', 'GET /account/viewCreate');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Reviewer', 'VIEW_ACCOUNT');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Reviewer', 'PUT /account');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Reviewer', 'GET /account/\d+$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Reviewer', 'POST /account/\d+/calculation');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Reviewer', 'PUT /account/\d+/calculation');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Reviewer', 'DELETE /account/calculation');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Reviewer', 'GET /account/\d+/detail$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Reviewer', 'GET /account/\d+/notes$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Reviewer', 'POST /account/\d+/notes$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Reviewer', 'PUT /account/\d+/notes$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Reviewer', 'GET /account/\d+/payments');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Reviewer', 'POST /account/\d+/updateInterest');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Reviewer', 'PUT /account/\d+/summary');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Reviewer', 'POST /account/approve');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Reviewer', 'DELETE /account/notes$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Reviewer', 'GET /account/search');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Reviewer', 'POST /account/search');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Reviewer', 'GET /account/view$');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Reviewer', 'NOTIFICATION_LOG');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Reviewer', 'GET /notificationLog');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Reviewer', 'POST /notificationLog');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Reviewer', 'HELP');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Reviewer', 'GET /help');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Reviewer', 'PAYMENTS');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Reviewer', 'GET /payment');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Reviewer', 'PUT /payment');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Reviewer', 'POST /payment/reverse');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Reviewer', 'POST /payments/search$');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Reviewer', 'WORK_QUEUE');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Reviewer', 'POST /workQueue/assign');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Reviewer', 'POST /workQueue/unassignedCases$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Reviewer', 'GET /workQueue/view$');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Reviewer', 'REPORTS');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Reviewer', 'GET /report');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Reviewer', 'POST /report');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Reviewer', 'GET /letter');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Reviewer', 'POST /letter');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Reviewer', 'PUT /letter');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Reviewer', 'DELETE /letter');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Reviewer', 'GET /reference');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Reviewer', 'POST /reference');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Reviewer', 'PUT /reference');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Reviewer', 'DELETE /reference');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Reviewer', 'SUSPENSE');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Reviewer', 'GET /suspension');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Reviewer', 'POST /suspension');
+
+
+-- Service Credit Specialist
+-- delete from opm.role_permission where rolename = 'Service Credit Specialist';
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Specialist', 'GET /lookup');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Specialist', 'GET /common');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Specialist', 'POST /common');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Specialist', 'TOOLS');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Specialist', 'GET /tools');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Specialist', 'POST /tools');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Specialist', 'CREATE_NEW_ACCOUNT');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Specialist', 'POST /account/create$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Specialist', 'GET /account/viewCreate');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Specialist', 'VIEW_ACCOUNT');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Specialist', 'PUT /account');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Specialist', 'GET /account/\d+$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Specialist', 'POST /account/\d+/calculation');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Specialist', 'PUT /account/\d+/calculation');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Specialist', 'DELETE /account/calculation');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Specialist', 'GET /account/\d+/detail$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Specialist', 'GET /account/\d+/notes$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Specialist', 'POST /account/\d+/notes$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Specialist', 'GET /account/\d+/payments');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Specialist', 'POST /account/\d+/updateInterest');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Specialist', 'PUT /account/\d+/summary');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Specialist', 'POST /account/approve');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Specialist', 'GET /account/search');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Specialist', 'POST /account/search');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Specialist', 'GET /account/view$');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Specialist', 'NOTIFICATION_LOG');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Specialist', 'GET /notificationLog');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Specialist', 'POST /notificationLog');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Specialist', 'HELP');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Specialist', 'GET /help');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Specialist', 'PAYMENTS');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Specialist', 'GET /payment');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Specialist', 'PUT /payment');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Specialist', 'POST /payment$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Specialist', 'POST /payment/reverse');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Specialist', 'POST /payments/search$');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Specialist', 'WORK_QUEUE');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Specialist', 'POST /workQueue/assign');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Specialist', 'POST /workQueue/unassignedCases$');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Specialist', 'GET /workQueue/view$');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Specialist', 'REPORTS');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Specialist', 'GET /report');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Specialist', 'POST /report');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Specialist', 'GET /letter');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Specialist', 'POST /letter');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Specialist', 'PUT /letter');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Specialist', 'DELETE /letter');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Specialist', 'GET /reference');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Specialist', 'POST /reference');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Specialist', 'PUT /reference');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Specialist', 'DELETE /reference');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Specialist', 'SUSPENSE');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Specialist', 'GET /suspension');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Specialist', 'POST /suspension');
+
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Specialist', 'APPROVAL');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Specialist', 'GET /approval');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Specialist', 'PUT /approval');
+INSERT INTO opm.role_permission (deleted, rolename, action) VALUES (false, 'Service Credit Specialist', 'POST /approval');

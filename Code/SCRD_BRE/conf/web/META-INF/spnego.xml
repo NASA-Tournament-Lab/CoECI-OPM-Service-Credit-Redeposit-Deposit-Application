@@ -65,6 +65,19 @@
  	<sec:user-service id="configuredUserService">
                 <sec:user name="user1" password="123456" authorities="ROLE_USER,ROLE_SUPERVISOR" />
                 <sec:user name="user2" password="123456" authorities="ROLE_USER" />
+
+                <sec:user name="administrator" password="123456" authorities="ROLE_USER" />
+                <sec:user name="rio_user" password="123456" authorities="ROLE_USER" />
+                <sec:user name="faces_user" password="123456" authorities="ROLE_USER" />
+                <sec:user name="financial_supervisor" password="123456" authorities="ROLE_USER" />
+                <sec:user name="financial_technician" password="123456" authorities="ROLE_USER" />
+                <sec:user name="information_technician" password="123456" authorities="ROLE_USER" />
+                <sec:user name="receivables_supervisor" password="123456" authorities="ROLE_USER" />
+                <sec:user name="receivables_technician" password="123456" authorities="ROLE_USER" />
+                <sec:user name="service_credit_data_entry_technician" password="123456" authorities="ROLE_USER" />
+                <sec:user name="view_only_user" password="123456" authorities="ROLE_USER" />
+                <sec:user name="service_credit_reviewer" password="123456" authorities="ROLE_USER" />
+                <sec:user name="service_credit_specialist" password="123456" authorities="ROLE_USER" />
   	</sec:user-service>
   
    <bean id="spnegoUserService"

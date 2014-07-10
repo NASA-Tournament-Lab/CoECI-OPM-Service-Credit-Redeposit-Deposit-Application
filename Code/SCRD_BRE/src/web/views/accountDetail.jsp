@@ -3010,7 +3010,7 @@
                                                     </tr>
                                                     <tr class="totalArea heightRow">
                                                         <td>Balance Due</td>
-                                                        <td class="aRight dollar balance-due">$0.00</td>
+                                                        <td class="aRight"></td>
                                                     </tr>
                                                     <tr class="heightRow">
                                                         <td>FERS Deposit</td>

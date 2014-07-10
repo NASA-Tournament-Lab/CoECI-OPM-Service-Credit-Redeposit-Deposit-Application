@@ -2175,19 +2175,45 @@ $(document).ready(function() {
             $('.coverby', popup).html(account.planType);
             // billing information
             var trs = $('.billing1-tbody', popup).find('tr');
-            $.each(version.calculationResult.dedeposits, function() {
-                var i = mapping[this.depositType];
-                trs.eq(i * 3 + 1).find('td').eq(1).html(this.deposit);
-                trs.eq(i * 3 + 2).find('td').eq(1).html(this.interest);
-                trs.eq(i + 32).find('td').eq(1).html(this.total);
-            });
-            $.each(version.calculationResult.redeposits, function() {
-                var i = mapping[this.depositType];
-                trs.eq(i * 3 + 1).find('td').eq(1).html(this.deposit);
-                trs.eq(i * 3 + 2).find('td').eq(1).html(this.interest);
-                trs.eq(i + 32).find('td').eq(1).html(this.total);
-            });
-            $('.billing-total', popup).html(version.calculationResult.summary.totalBalance);
+            var redepositTr = $('.chartCalAreaBox4 table').find('tbody').find('tr');
+            var depositTr = $('.chartCalAreaBox5 table').find('tbody').find('tr');
+            // FRES Deposit
+            trs.eq(1).find('td').eq(1).html(depositTr.eq(0).find('td').eq(1).html());
+            trs.eq(2).find('td').eq(1).html(depositTr.eq(0).find('td').eq(2).html());
+            trs.eq(32).find('td').eq(1).html(depositTr.eq(0).find('td').eq(3).html());
+            // FERS Redeposit
+            trs.eq(4).find('td').eq(1).html(redepositTr.eq(0).find('td').eq(1).html());
+            trs.eq(5).find('td').eq(1).html(redepositTr.eq(0).find('td').eq(2).html());
+            trs.eq(33).find('td').eq(1).html(redepositTr.eq(0).find('td').eq(3).html());
+            // CSRS Post 3/91 Redeposit
+            trs.eq(7).find('td').eq(1).html(redepositTr.eq(1).find('td').eq(1).html());
+            trs.eq(8).find('td').eq(1).html(redepositTr.eq(1).find('td').eq(2).html());
+            trs.eq(34).find('td').eq(1).html(redepositTr.eq(1).find('td').eq(3).html());
+            // CSRS Post 82/ Pre 91 Redeposit
+            trs.eq(10).find('td').eq(1).html(redepositTr.eq(2).find('td').eq(1).html());
+            trs.eq(11).find('td').eq(1).html(redepositTr.eq(2).find('td').eq(2).html());
+            trs.eq(35).find('td').eq(1).html(redepositTr.eq(2).find('td').eq(3).html());
+            // CSRS Pre 10/82 Redeposit
+            trs.eq(13).find('td').eq(1).html(redepositTr.eq(3).find('td').eq(1).html());
+            trs.eq(14).find('td').eq(1).html(redepositTr.eq(3).find('td').eq(2).html());
+            trs.eq(36).find('td').eq(1).html(redepositTr.eq(3).find('td').eq(3).html());
+            // CSRS Post 10/82 Deposit
+            trs.eq(16).find('td').eq(1).html(depositTr.eq(1).find('td').eq(1).html());
+            trs.eq(17).find('td').eq(1).html(depositTr.eq(1).find('td').eq(2).html());
+            trs.eq(37).find('td').eq(1).html(depositTr.eq(1).find('td').eq(3).html());
+            // CSRS Pre 10/82 Deposit
+            trs.eq(19).find('td').eq(1).html(depositTr.eq(2).find('td').eq(1).html());
+            trs.eq(20).find('td').eq(1).html(depositTr.eq(2).find('td').eq(2).html());
+            trs.eq(38).find('td').eq(1).html(depositTr.eq(2).find('td').eq(3).html());
+            // FERS Peace Corps
+            trs.eq(22).find('td').eq(1).html(depositTr.eq(3).find('td').eq(1).html());
+            trs.eq(23).find('td').eq(1).html(depositTr.eq(3).find('td').eq(2).html());
+            trs.eq(39).find('td').eq(1).html(depositTr.eq(3).find('td').eq(3).html());
+            // CSRS Peace Corps
+            trs.eq(25).find('td').eq(1).html(depositTr.eq(4).find('td').eq(1).html());
+            trs.eq(26).find('td').eq(1).html(depositTr.eq(4).find('td').eq(2).html());
+            trs.eq(40).find('td').eq(1).html(depositTr.eq(4).find('td').eq(3).html());
+            $('.billing-total', popup).html($('.chartCalAreaBox6 table tbody').find('tr').eq(3).find('td').eq(1).html());
             // calculate less payments
             var lessPayment = 0;
             $.each(account.paymentHistory, function() {
@@ -2196,7 +2222,6 @@ $(document).ready(function() {
                 }
             });
             $('.less-payments', popup).html(lessPayment);
-            $('.balance-due', popup).html(account.balance);
             var items = version.calculationResult.items;
             var html = "";
             for (var i = 0; i < items.length / 2; i++) {
@@ -4308,6 +4333,12 @@ function runCalculation(context, tab, save, callback) {
                     contentType: 'application/json',
                     data: JSON.stringify(version),
                     success: function(data, text, xhr) {
+                        var account = getAccount(context, accountId);
+                        $.each(account.calculationVersions, function() {
+                            if (data.name == this.name) {
+                                currentVersionId = this.id;
+                            }
+                        });
                         $('.resultsVal', tab).html(data.calculationResult.calculationStatus.name);
 
                         if (data.id == 0) {
