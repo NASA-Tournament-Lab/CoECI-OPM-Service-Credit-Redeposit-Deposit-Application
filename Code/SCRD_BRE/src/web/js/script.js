@@ -170,110 +170,138 @@ $(document).ready(function() {
         return true;
     });
 
-    
 
-    $("body").delegate("input[name='bDate'], input[name='eDate'], input[name='birthDate'], input[name='depositInterestCalculatedToDate'], input[name='sDate']", "change", function(){
+
+    $("body").delegate("input[name='bDate'], input[name='eDate'], input[name='birthDate'], input[name='depositInterestCalculatedToDate'], input[name='sDate']", "change", function() {
         $(this).val(correctDateInput($(this).val()));
 
     });
 
-    $(".advanceSsn1").on("keyup paste", function(){
+    $(".advanceSsn1").on("keyup paste", function() {
 
-        if($(this).val().length == 3){
+        if ($(this).val().length == 3) {
             $(this).parent().children(".advanceSsn2").focus();
         }
 
     });
 
-    $(".advanceSsn2").on("keyup paste", function(){
+    $(".advanceSsn2").on("keyup paste", function() {
 
-        if($(this).val().length == 2){
+        if ($(this).val().length == 2) {
             $(this).parent().children(".advanceSsn3").focus();
         }
 
     });
 
-    if($.isFunction($.contextMenu)){
+    if ($.isFunction($.contextMenu)) {
 
-    $.contextMenu({
-            selector: '.blankCell', 
+        $.contextMenu({
+            selector: '.blankCell',
             callback: function(key, options) {
                 //var m = "clicked: " + key;
                 //window.console && console.log(m) || alert(m); 
             },
             items: {
                 "add": {name: "Add a row to the end",
-                callback: function(key, options){
+                    callback: function(key, options) {
 
-                    //opt.$trigger
-                    $(".depositTab .newEntryRow .blankCell ").click();
-                }
+                        //opt.$trigger
+                        $(".depositTab .newEntryRow .blankCell ").click();
+                    }
 
-            },
-
-            "delete": {name: "Delete this row",
-
-                callback: function(key, options){
-                    var cur = options.$trigger;
-                    var parent = $(cur).parent("tr");
-                        if(!parent.hasClass("newEntryRow")){
+                },
+                "delete": {name: "Delete this row",
+                    callback: function(key, options) {
+                        var cur = options.$trigger;
+                        var parent = $(cur).parent("tr");
+                        if (!parent.hasClass("newEntryRow")) {
                             parent.remove();
                         } else {
                             alert("This row can not be deleted");
                         }
-                }
-
-            },
-
-            "copy": {name: "Copy this row",
-                callback: function(key, options){
-                    var cur = options.$trigger;
-                    var parent = $(cur).parent("tr");
-
-                    if(!parent.hasClass("newEntryRow")){
-
-                        if(parent.hasClass('entriesEditRow')){
-                            alert("Please finish editing before copying the row");
-                            return;
-                        }
-
-                        rowCopy = parent.clone();
-                        
-                    } else {
-                        alert("This row can not be copied");
                     }
-                    
-                }
 
-            },
-
-            "paste": {name: "Paste  here",
-                callback: function(key, options){
+                },
+                "copy": {name: "Copy this row",
+                    callback: function(key, options) {
                         var cur = options.$trigger;
                         var parent = $(cur).parent("tr");
 
-                        if(!parent.hasClass("newEntryRow")){
+                        if (!parent.hasClass("newEntryRow")) {
 
-                            if(!isNull(rowCopy)){
+                            if (parent.hasClass('entriesEditRow')) {
+                                rowCopy = parent.clone();
+
+                                $("td", parent).each(function(idx, elem) {
+
+
+
+                                    if (idx != 0) {
+
+                                        var childp = $(this).children().eq(0);
+                                        var childc = $("td", rowCopy).eq(idx).children().eq(0);
+                                        childc.val(childp.val());
+
+                                    }
+
+                                });
+
+                                return;
+                            }
+
+                            rowCopy = parent.clone();
+
+                        } else {
+                            alert("This row can not be copied");
+                        }
+
+                    }
+
+                },
+                "paste": {name: "Paste  here",
+                    callback: function(key, options) {
+                        var cur = options.$trigger;
+                        var parent = $(cur).parent("tr");
+
+                        if (!parent.hasClass("newEntryRow")) {
+
+                            if (!isNull(rowCopy)) {
+                                var saved = rowCopy;
                                 rowCopy = rowCopy.clone();
+
+                                if (rowCopy.hasClass('entriesEditRow')) {
+
+                                    $("td", rowCopy).each(function(idx, elem) {
+
+
+
+                                        if (idx != 0) {
+
+                                            var childc = $(this).children().eq(0);
+                                            var childp = $("td", saved).eq(idx).children().eq(0);
+                                            childc.val(childp.val());
+
+                                        }
+
+                                    });
+                                }
                                 parent.replaceWith(rowCopy);
-                                
-                                
+
+
                             } else {
                                 alert("No rows were copied. Please copy one first");
                             }
-                            
+
                         } else {
                             alert("This row can not be replaced");
                         }
-                        
+
                     }
 
-            },
-
-            "insert": {name: "Insert before this row",
-                callback: function(key, options){
-                    var cur = options.$trigger;
+                },
+                "insert": {name: "Insert before this row",
+                    callback: function(key, options) {
+                        var cur = options.$trigger;
                         var parent = $(cur).parent("tr");
 
                         //$(emptyRowHTML).insertBefore(parent);
@@ -281,10 +309,10 @@ $(document).ready(function() {
                         row.insertBefore(parent);
                         row.children("td.blankCell").click();
 
-                        
-                }
 
-            }
+                    }
+
+                }
             }
         });
 
@@ -1372,20 +1400,20 @@ $(document).ready(function() {
 
                 $(ntds).eq(1).html($(tds).eq(1).children('input').val());
                 $(ntds).eq(2).html($(tds).eq(2).children('input').val());
-                $(ntds).eq(3).html($(tds).eq(3).children('select').get(0).options[$(tds).eq(3).children('select').get(0).selectedIndex].innerHTML);
+                $(ntds).eq(3).html($(tds).eq(3).children('select').find('option:selected').text());
                 $(ntds).eq(3).next('input:hidden').val($(tds).eq(3).children('select').val());
-                $(ntds).eq(4).html($(tds).eq(4).children('select').get(0).options[$(tds).eq(4).children('select').get(0).selectedIndex].innerHTML);
+                $(ntds).eq(4).html($(tds).eq(4).children('select').find('option:selected').text());
                 $(ntds).eq(4).next('input:hidden').val($(tds).eq(4).children('select').val());
-                $(ntds).eq(5).html($(tds).eq(5).children('select').get(0).options[$(tds).eq(5).children('select').get(0).selectedIndex].innerHTML);
+                $(ntds).eq(5).html($(tds).eq(5).children('select').find('option:selected').text());
                 $(ntds).eq(5).next('input:hidden').val($(tds).eq(5).children('select').val());
-                $(ntds).eq(6).html($(tds).eq(6).children('select').get(0).options[$(tds).eq(6).children('select').get(0).selectedIndex].innerHTML);
+                $(ntds).eq(6).html($(tds).eq(6).children('select').find('option:selected').text());
                 $(ntds).eq(6).next('input:hidden').val($(tds).eq(6).children('select').val());
                 $(ntds).eq(7).html($(tds).eq(7).children('input').val());
-                $(ntds).eq(8).html($(tds).eq(8).children('select').get(0).options[$(tds).eq(8).children('select').get(0).selectedIndex].innerHTML);
+                $(ntds).eq(8).html($(tds).eq(8).children('select').find('option:selected').text());
                 $(ntds).eq(8).next('input:hidden').val($(tds).eq(8).children('select').val());
 
-                $(ntds).eq(9).html($(tds).eq(9).children('select').get(0).options[$(tds).eq(9).children('select').get(0).selectedIndex].innerHTML);
-                $(ntds).eq(10).html($(tds).eq(10).children('select').get(0).options[$(tds).eq(10).children('select').get(0).selectedIndex].innerHTML);
+                $(ntds).eq(9).html($(tds).eq(9).children('select').find('option:selected').text());
+                $(ntds).eq(10).html($(tds).eq(10).children('select').find('option:selected').text());
                 $(ntds).eq(11).html($(tds).eq(11).children('input').val());
                 $('.dollar').formatCurrency({
                     negativeFormat: '%s-%n'
@@ -1440,13 +1468,15 @@ $(document).ready(function() {
                 if (!tr.hasClass('newEntryRow')) {
                     $(tds).eq(1).children('input').val(values[1]);
                     $(tds).eq(2).children('input').val(values[2]);
-                    $(tds).eq(3).children('select').get(0).selectedIndex = values[3];
-                    $(tds).eq(4).children('select').get(0).selectedIndex = values[4];
-                    $(tds).eq(5).children('select').get(0).selectedIndex = values[5];
-                    $(tds).eq(6).children('select').get(0).selectedIndex = values[6];
+                    $(tds).eq(3).children('select').val(values[3]);
+
+                    $(tds).eq(4).children('select').val(values[4]);
+                    $(tds).eq(5).children('select').val(values[5]);
+                    $(tds).eq(6).children('select').val(values[6]);
                     $(tds).eq(7).children('input').val(values[7]);
 
-                    $(tds).eq(8).children('select').get(0).selectedIndex = values[8];
+
+                    $(tds).eq(8).children('select').val(values[8]);
 
                     $("select option", $(tds).eq(9)).each(function() {
                         if ($(this).html() == values[9]) {
@@ -1502,30 +1532,30 @@ $(document).ready(function() {
                 });
 
                 /*$(tds).eq(1).children('input').datepicker({
-                    showOn: "button",
-                    buttonImage: context + "/i/calendar.png",
-                    buttonImageOnly: true,
-                    changeMonth: true,
-                    changeYear: true, yearRange: "-100:+1",
-                    buttonText: "Enter the Begin Date."
-                });
-                $(tds).eq(2).children('input').datepicker({
-                    showOn: "button",
-                    buttonImage: context + "/i/calendar.png",
-                    buttonImageOnly: true,
-                    changeMonth: true,
-                    changeYear: true, yearRange: "-100:+1",
-                    buttonText: "Enter the End Date."
-                });
-
-                $(tds).eq(11).children('input').datepicker({
-                    showOn: "button",
-                    buttonImage: context + "/i/calendar.png",
-                    buttonImageOnly: true,
-                    changeMonth: true,
-                    changeYear: true, yearRange: "-100:+1",
-                    buttonText: "Enter the Interest Begin Date."
-                });*/
+                 showOn: "button",
+                 buttonImage: context + "/i/calendar.png",
+                 buttonImageOnly: true,
+                 changeMonth: true,
+                 changeYear: true, yearRange: "-100:+1",
+                 buttonText: "Enter the Begin Date."
+                 });
+                 $(tds).eq(2).children('input').datepicker({
+                 showOn: "button",
+                 buttonImage: context + "/i/calendar.png",
+                 buttonImageOnly: true,
+                 changeMonth: true,
+                 changeYear: true, yearRange: "-100:+1",
+                 buttonText: "Enter the End Date."
+                 });
+                 
+                 $(tds).eq(11).children('input').datepicker({
+                 showOn: "button",
+                 buttonImage: context + "/i/calendar.png",
+                 buttonImageOnly: true,
+                 changeMonth: true,
+                 changeYear: true, yearRange: "-100:+1",
+                 buttonText: "Enter the Interest Begin Date."
+                 });*/
 
                 if (tr.hasClass("newEntryRow")) {
                     $(tr).parent('tbody').append(emptyRowHTML);
@@ -1780,7 +1810,7 @@ $(document).ready(function() {
         var popup = $('.printSummaryPopup .popupBody');
         // csd and name*/
         $('.printDate span', popup).eq(0).html(account.claimNumber);
-        $('.printDate span', popup).eq(1).html(holder.firstName + ' ' + holder.middleInitial + ' ' + holder.lastName);
+        $('.printDate span', popup).eq(1).html(holder.firstName + ' ' + (holder.middleInitial == null ? '' : holder.middleInitial) + ' ' + holder.lastName);
         $('.printDate span', popup).eq(2).html('printed on ' + parseDateToString(new Date()));
 
         // plan type and name
@@ -1791,7 +1821,7 @@ $(document).ready(function() {
         // agency
         $('.agency', popup).html(holder.agencyCode);
         // employedin
-        $('.employedIn', popup).html(holder.cityOfEmployment + ' ' + holder.stateOfEmployment.name);
+        $('.employedIn', popup).html((holder.cityOfEmployment == null ? '' : holder.cityOfEmployment) + ' ' + (holder.stateOfEmployment == null ? '' : holder.stateOfEmployment.name));
         // stop ACH
         if (account.stopAchPayment == true) {
             $('.stopACH', popup).html('yes');
@@ -1802,38 +1832,46 @@ $(document).ready(function() {
         $('.addressStr', popup).html(buildAddrerssString(holder.address));
 
         // billing summary
-        $('.intitialBilling', popup).html(parseDateToString(account.billingSummary.firstBillingDate));
-        $('.lastPayment', popup).html(parseDateToString(account.billingSummary.lastDepositDate));
-        $('.lastTransaction', popup).html(parseDateToString(account.billingSummary.lastTransactionDate));
-        $('.computed', popup).html(parseDateToString(account.billingSummary.computedDate));
+        if (account.billingSummary != null) {
+            $('.intitialBilling', popup).html(parseDateToString(account.billingSummary.firstBillingDate));
+            $('.lastPayment', popup).html(parseDateToString(account.billingSummary.lastDepositDate));
+            $('.lastTransaction', popup).html(parseDateToString(account.billingSummary.lastTransactionDate));
+            $('.computed', popup).html(parseDateToString(account.billingSummary.computedDate));
 
-        var billings = account.billingSummary.billings;
-        var billingTbody = $('.billing-tbody', popup);
-        var tInitialBilling = 0;
-        var tAdditionalInterest = 0;
-        var tPayment = 0;
-        var tBalance = 0;
-        $.each(billings, function() {
-            var tr = billingTbody.find('tr').eq(mapping[this.name]);
-            var tds = tr.find('td');
-            tds.eq(1).html(this.initialBilling);
-            tds.eq(3).html(this.additionalInterest);
-            tds.eq(5).html(this.totalPayments);
-            tds.eq(7).html(this.balance);
-            tds.eq(9).html(this.paymentOrder);
-            tInitialBilling += this.initialBilling;
-            tAdditionalInterest += this.additionalInterest;
-            tPayment += this.totalPayments;
-            tBalance += this.balance;
-        });
-        var totalTds = billingTbody.find('tr').eq(9).find('td');
-        totalTds.eq(1).html(tInitialBilling);
-        totalTds.eq(3).html(tAdditionalInterest);
-        totalTds.eq(5).html(tPayment);
-        totalTds.eq(7).html(tBalance);
+            var billings = account.billingSummary.billings;
+            var billingTbody = $('.billing-tbody', popup);
+            var tInitialBilling = 0;
+            var tAdditionalInterest = 0;
+            var tPayment = 0;
+            var tBalance = 0;
+            $.each(billings, function() {
+                var tr = billingTbody.find('tr').eq(mapping[this.name]);
+                var tds = tr.find('td');
+                tds.eq(1).html(this.initialBilling);
+                tds.eq(3).html(this.additionalInterest);
+                tds.eq(5).html(this.totalPayments);
+                tds.eq(7).html(this.balance);
+                tds.eq(9).html(this.paymentOrder);
+                tInitialBilling += this.initialBilling;
+                tAdditionalInterest += this.additionalInterest;
+                tPayment += this.totalPayments;
+                tBalance += this.balance;
+            });
+            var totalTds = billingTbody.find('tr').eq(9).find('td');
+            totalTds.eq(1).html(tInitialBilling);
+            totalTds.eq(3).html(tAdditionalInterest);
+            totalTds.eq(5).html(tPayment);
+            totalTds.eq(7).html(tBalance);
+        }
+
         // payment information
         $('.transaction-tbody').html('');
         var payments = account.paymentHistory;
+        var numberStr = "No transactions on this account";
+        if (payments.length != 0) {
+            numberStr = payments.length + ' transaction' + (payments.length == 1 ? '' : 's') + ' on this account';
+        }
+        $('.transactionNumber', popup).html(numberStr);
         $.each(payments, function() {
             var template = $('.transaction-tfoot').find('tr').eq(0).clone();
             var tds = template.find('td');
@@ -2000,14 +2038,21 @@ $(document).ready(function() {
         var context = $('#context').val();
         var accountId = $('#accountId').val();
         var account = getAccount(context, accountId);
+        if (account.billingSummary == null) {
+            alert('There is no Billing Summary for this account yet.\r\n Please process the Service History.');
+            return false;
+        }
         var version = getOfficialVersion(account.calculationVersions);
         var holder = account.holder;
+        var paymentAmount = findLatestPayment(account.paymentHistory);
         // CSD
         $('.printNum span, .claimNum span', statementDiv).html(account.claimNumber);
         // birthday
         $('.printBirth span', statementDiv).html(parseDateToString(holder.birthDate));
         // address
         $('.printAddressBody', statementDiv).html(buildAddrerssString(holder.address));
+        // payment amount
+        $('.printAcount', statementDiv).html(paymentAmount);
         // name
         $('.name-report span', statementDiv).html(holder.firstName + ' ' + holder.middleInitial + ' ' + holder.lastName);
         // cover by
@@ -2021,10 +2066,6 @@ $(document).ready(function() {
         // balance due before payment
         $('.balanceBeforePayment span', statementDiv).html(account.balance + version.calculationResult.summary.totalInitialInterest);
         // payment amount
-        var paymentAmount = 0;
-        if (version.calculationResult.items.length > 0) {
-            paymentAmount = version.calculationResult.items[0].paymentsApplied;
-        }
         $('.payment span', statementDiv).html(paymentAmount);
         // billing information
         var spans = $('.detailsLine', statementDiv).find('span');
@@ -2032,7 +2073,7 @@ $(document).ready(function() {
             spans.eq(mapping[this.name]).html(this.balance);
         });
         // new balance due
-        $('.detailsLine').next('p').find('span').html(account.balance - paymentAmount);
+        $('.detailsLine').next('p').find('span').html(account.balance + version.calculationResult.summary.totalBalance - paymentAmount);
         // format currency
         $('.dollar').formatCurrency({negativeFormat: '%s-%n'});
         showPopup(".printPaymentReceiptPopup");
@@ -2047,6 +2088,7 @@ $(document).ready(function() {
         $('.report-csd', popup).html(account.claimNumber);
         $('.report-birthday', popup).html(parseDateToString(holder.birthDate));
         $('.printAddressBody', popup).html(buildAddrerssString(holder.address));
+        $('.printAcount', popup).html(findLatestPayment(account.paymentHistory));
         $('.report-name', popup).html(holder.firstName + ' ' + holder.middleInitial + ' ' + holder.lastName);
         $('.report-date', popup).html(parseDateToString(version.calculationDate));
         $('.coverby', popup).html(account.planType);
@@ -2114,7 +2156,7 @@ $(document).ready(function() {
 
 
 
-    
+
 
 
     $("#paymentHistoryTbl .jsShowRowAction").click(function(e) {
@@ -2165,12 +2207,17 @@ $(document).ready(function() {
                     version = this;
                 }
             });
+            if (version == null) {
+                alert("Please save the calculation first.");
+                return false;
+            }
             // basic information
             $('.report-csd', popup).html(account.claimNumber);
             $('.report-birthday', popup).html(parseDateToString(holder.birthDate));
             $('.printAddressBody', popup).html(buildAddrerssString(holder.address));
+            $('.printAcount', popup).html(findLatestPayment(account.paymentHistory));
 
-            $('.report-name', popup).html(holder.firstName + ' ' + holder.middleInitial + ' ' + holder.lastName);
+            $('.report-name', popup).html(holder.firstName + ' ' + (holder.middleInitial == null ? '' : holder.middleInitial) + ' ' + holder.lastName);
             $('.report-date', popup).html(parseDateToString(version.calculationDate));
             $('.coverby', popup).html(account.planType);
             // billing information
@@ -2213,7 +2260,6 @@ $(document).ready(function() {
             trs.eq(25).find('td').eq(1).html(depositTr.eq(4).find('td').eq(1).html());
             trs.eq(26).find('td').eq(1).html(depositTr.eq(4).find('td').eq(2).html());
             trs.eq(40).find('td').eq(1).html(depositTr.eq(4).find('td').eq(3).html());
-            $('.billing-total', popup).html($('.chartCalAreaBox6 table tbody').find('tr').eq(3).find('td').eq(1).html());
             // calculate less payments
             var lessPayment = 0;
             $.each(account.paymentHistory, function() {
@@ -2222,6 +2268,9 @@ $(document).ready(function() {
                 }
             });
             $('.less-payments', popup).html(lessPayment);
+            var total = $('.chartCalAreaBox6 table tbody').find('tr').eq(3).find('td').eq(1).asNumber();
+            
+            $('.billing-total', popup).html(total - lessPayment);
             var items = version.calculationResult.items;
             var html = "";
             for (var i = 0; i < items.length / 2; i++) {
@@ -2233,7 +2282,7 @@ $(document).ready(function() {
                     if (items[i * 2].periodType.name == 'DEPOSIT') {
                         typeStr = 'D';
 
-                        } else {
+                    } else {
                         typeStr = 'R';
                     }
                 }
@@ -2251,7 +2300,7 @@ $(document).ready(function() {
                     }
                     html += '<td>' + typeStr + '</td>';
 
-                    } else {
+                } else {
                     html += '<td></td><td></td><td></td>';
                 }
                 html += '</tr>';
@@ -2274,7 +2323,7 @@ $(document).ready(function() {
             var selectId = $('.versionBar select option:selected', tab).val();
 
             var w = window.open(context + '/account/intermediateResult', '', 'width=1000,height=300,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=0,top=0');
-            
+
             var html = '';
 
             var days = 0;
@@ -2307,59 +2356,59 @@ $(document).ready(function() {
 
             var peaceCorpsDate = new Date(1975, 6, 15);
 
-            if (results['r-' + selectId] && results['r-' + selectId].result && results['r-' + selectId].result.items &&  results['r-' + selectId].result.items.length > 0) {
+            if (results['r-' + selectId] && results['r-' + selectId].result && results['r-' + selectId].result.items && results['r-' + selectId].result.items.length > 0) {
 
-                if (results['r-' + selectId].request && results['r-' + selectId].request.calculations &&  results['r-' + selectId].request.calculations.length > 0){
+                if (results['r-' + selectId].request && results['r-' + selectId].request.calculations && results['r-' + selectId].request.calculations.length > 0) {
 
                     calculatedDate = results['r-' + selectId].request.interestCalculatedToDate;
 
                     // Calculation version is now passed to the result, we can use it
                     // If this is confirm correct we can later remove results[i].request
                     //for(var i=0; i<results['r-' + selectId].request.calculations.length; i++){
-                    for(var i=0; i<results['r-' + selectId].result.calculations.length; i++){
+                    for (var i = 0; i < results['r-' + selectId].result.calculations.length; i++) {
 
-                        html += "<br>" +  sep;
+                        html += "<br>" + sep;
                         req = results['r-' + selectId].result.calculations[i];
                         html += "<br>Entered service period from " + parseDateToString(req.beginDate);
                         html += " to " + parseDateToString(req.endDate);
                         days = calculatePeriodInDays(req.beginDate, req.endDate);
-                        html+= " has " + formatDaysInYearMonthDay(days) + " has " + toMoney(getExactYearInDays(days), 6) + " years ";
+                        html += " has " + formatDaysInYearMonthDay(days) + " has " + toMoney(getExactYearInDays(days), 6) + " years ";
                         html += " ( " + days + " Total Days)";
-                        
+
                         var details = req.deductionCalculationDetail;
 
-                        if(req.periodType.name === "NO EARNINGS"){
+                        if (req.periodType.name === "NO EARNINGS") {
                             html += "<br>This is a non-earnings period. The amount is ignored when calculating the deduction.";
 
                         } else {
-                             
-                             if(!isNull(details)){
-                                 
-                                 rate = 100 * details.deductionRate;
 
-                                 html += "<br> Deduction rate is " + toMoney(rate) + "% beginning on " + parseDateToString(req.beginDate);
-                                 
-                                 if(req.payType.name !== "REFUND"){
-                                     html += " " + req.payType.name + " of: $" + req.amount + " translates to deduction : $" + toMoney(details.runningDeductions);
-                                     html += " using " + toMoney(rate, 4)  + " percent";
-                                 } else {
-                                     html += " " + req.payType.name + " of: $" + req.amount + " paid on " + parseDateToString(req.interestAccrualDate);
-                                 }
-                                 
+                            if (!isNull(details)) {
 
-                                 
-                             }
-                            
+                                rate = 100 * details.deductionRate;
+
+                                html += "<br> Deduction rate is " + toMoney(rate) + "% beginning on " + parseDateToString(req.beginDate);
+
+                                if (req.payType.name !== "REFUND") {
+                                    html += " " + req.payType.name + " of: $" + req.amount + " translates to deduction : $" + toMoney(details.runningDeductions);
+                                    html += " using " + toMoney(rate, 4) + " percent";
+                                } else {
+                                    html += " " + req.payType.name + " of: $" + req.amount + " paid on " + parseDateToString(req.interestAccrualDate);
+                                }
+
+
+
+                            }
+
 
                         }
                         html += "<br> Total earning at end of period : $" + toMoney(details.totalRunningEarnings);
 
-                        if(prevEndDate != null){
+                        if (prevEndDate != null) {
 
-                            if(calculatePeriodInDays(prevEndDate, req.beginDate) > 3){
+                            if (calculatePeriodInDays(prevEndDate, req.beginDate) > 3) {
 
                                 html += "<br>There was a break in service because the last service period ended more than 3 days before the start of this one.";
-                            }else if(prevPeriod !== req.periodType.name && req.periodType.name !== "NO EARNINGS"){
+                            } else if (prevPeriod !== req.periodType.name && req.periodType.name !== "NO EARNINGS") {
                                 html += "<br> There was a break in service because this is different type of service";
                                 html += "<br> (Deposit or Redeposit) and not a non earnings continuation of the service period.";
                             } else {
@@ -2367,9 +2416,9 @@ $(document).ready(function() {
                                 //html += "<br> No break in service.";
                             }
                         }
-                        
+
                         prevEndDate = req.endDate;
-                        
+
                         prevPeriod = req.periodType.name;
 
                         html += "<br>";
@@ -2382,18 +2431,18 @@ $(document).ready(function() {
                 html += "<br> Interest Calculation";
                 html += "<br>Calculating interest to " + parseDateToString(calculatedDate);
 
-                for(var i=0; i<results['r-' + selectId].result.items.length; i++){
+                for (var i = 0; i < results['r-' + selectId].result.items.length; i++) {
 
                     midDate = results['r-' + selectId].result.items[i].midDate;
-                    effectiveDate = results['r-' + selectId].result.items[i].effectiveDate; 
-                    if(isNull(midDate)){
-                        midDate = effectiveDate; 
-                    } 
+                    effectiveDate = results['r-' + selectId].result.items[i].effectiveDate;
+                    if (isNull(midDate)) {
+                        midDate = effectiveDate;
+                    }
 
 
-                    html += "<br>" +  sep;
+                    html += "<br>" + sep;
 
-                    if(midDate < effectiveDate ){
+                    if (midDate < effectiveDate) {
 
                         html += "<br>This service period uses the Peace Corps rules for interest calculation.";
                         html += "<br> This is a Peace Corps service grace period from " + parseDateToString(midDate) + " to " + parseDateToString(effectiveDate);
@@ -2402,17 +2451,17 @@ $(document).ready(function() {
                     html += "<br>Extended service Period from " + parseDateToString(results['r-' + selectId].result.items[i].startDate);
                     html += " to " + parseDateToString(results['r-' + selectId].result.items[i].endDate);
                     days = calculatePeriodInDays(results['r-' + selectId].result.items[i].startDate, results['r-' + selectId].result.items[i].endDate);
-                    html+= " has " + formatDaysInYearMonthDay(days);
+                    html += " has " + formatDaysInYearMonthDay(days);
 
-                    
 
-                    
 
-                    html+= " with a midpoint/effective starting date of " + parseDateToString(midDate);
+
+
+                    html += " with a midpoint/effective starting date of " + parseDateToString(midDate);
 
                     html += "<br>";
 
-                    if(results['r-' + selectId].result.items[i].startDate < date1082){
+                    if (results['r-' + selectId].result.items[i].startDate < date1082) {
 
                         html += "Pre 10/82 Deposit";
                     } else {
@@ -2421,7 +2470,7 @@ $(document).ready(function() {
                     }
 
 
-                    if(results['r-' + selectId].result.items[i].endDate < date1090){
+                    if (results['r-' + selectId].result.items[i].endDate < date1090) {
 
                         html += " (Pre 10/90)";
                     } else {
@@ -2429,90 +2478,90 @@ $(document).ready(function() {
                         html += " (Post 10/90)";
                     }
 
-                    html += "<br/> Initial Deposit Amount: $"  + toMoney(results['r-' + selectId].result.items[i].deductionAmount);
+                    html += "<br/> Initial Deposit Amount: $" + toMoney(results['r-' + selectId].result.items[i].deductionAmount);
 
                     html += "<br/> The elapsed time for the extended service period is: " + toMoney(getExactYearInDays(days), 6) + " years.";
 
-                    if(!isNull(results['r-' + selectId].result.items[i].intermediateResults)){
+                    if (!isNull(results['r-' + selectId].result.items[i].intermediateResults)) {
 
-                        for(var j=0; j<results['r-' + selectId].result.items[i].intermediateResults.length; j++){
+                        for (var j = 0; j < results['r-' + selectId].result.items[i].intermediateResults.length; j++) {
                             var obj = results['r-' + selectId].result.items[i].intermediateResults[j];
 
                             html += "<br>";
 
-                            if( !isNull(obj.compositeRate1)){
+                            if (!isNull(obj.compositeRate1)) {
                                 days = calculatePeriodInDays(obj.intermediateBeginDate, obj.intermediateEndDate);
 
                                 html += "DateSpan from : " + parseDateToString(obj.intermediateBeginDate) + " to " + parseDateToString(obj.intermediateEndDate);
-                                html += " has time factor : " + days/360;
+                                html += " has time factor : " + days / 360;
 
-                                html += "<br>Total days in span : " + days + " PartialYearTimeFactor1 : " + obj.periodInDays/360;
-                                html += " PartialYearTimeFactor2 : " + obj.periodInDays2/360;
+                                html += "<br>Total days in span : " + days + " PartialYearTimeFactor1 : " + obj.periodInDays / 360;
+                                html += " PartialYearTimeFactor2 : " + obj.periodInDays2 / 360;
 
                                 html += "<br> Composite Rate 1 : " + obj.compositeRate1;
                                 html += "<br> Composite Rate Total : " + (obj.compositeRate1 + obj.compositeRate2);
-                                obj.startYearFactor = (obj.periodInDays/360 + obj.periodInDays2/360);
+                                obj.startYearFactor = (obj.periodInDays / 360 + obj.periodInDays2 / 360);
                                 html += "<br>";
 
                             }
 
-                            html+= "StartYearTimeFactor " + parseObjToString(obj.startYearFactor);
+                            html += "StartYearTimeFactor " + parseObjToString(obj.startYearFactor);
                             html += " ServicePeriodDeposit " + obj.beforeBalanceWithInterest;
                             html += " ThisInterestRate " + obj.intermediateRate;
-                            html+= "<br> ServicePeriodInterest " + obj.intermediateAmount;
-                            html+= "<br>  Interest from " + parseDateToString(obj.intermediateBeginDate) + " to " + parseDateToString(obj.intermediateEndDate);
-                            html += " is: " + toMoney(obj.intermediateAmount) + " at " + toMoney(100*obj.intermediateRate, 3) + "% - ";
+                            html += "<br> ServicePeriodInterest " + obj.intermediateAmount;
+                            html += "<br>  Interest from " + parseDateToString(obj.intermediateBeginDate) + " to " + parseDateToString(obj.intermediateEndDate);
+                            html += " is: " + toMoney(obj.intermediateAmount) + " at " + toMoney(100 * obj.intermediateRate, 3) + "% - ";
                             html += " Balance with interest: $" + toMoney(obj.balanceWithInterest);
                             html += "<br>";
 
-                            
+
                         }
-                        
+
                     }
 
-                    
+
 
                     html += '<br> Total interest for this service period is ' + toMoney(results['r-' + selectId].result.items[i].totalInterest);
 
-                    
+
                     html += '<br><br><br><br>';
 
 
-                    
+
                 }
 
                 var entity = getCalculationResult(results['r-' + selectId].result);
 
 
                 html += "End of Calculation";
-                html += "<br>" +  sep;
+                html += "<br>" + sep;
                 html += "<br>Calculation Result Totals";
-                html += "<br>" +  sep;
+                html += "<br>" + sep;
                 html += "<br> FERS Payment Required: $" + toMoney(entity.fersre.deposit + entity.fersde.deposit + entity.fers_peace.deposit);
                 html += "<br> FERS Interest: $" + toMoney(entity.fersre.interest + entity.fersde.interest + entity.fers_peace.interest);
                 html += "<br> FERS Payments Applied: $0.00";
                 html += "<br> FERS Balance: $" + toMoney(entity.fersre.total + entity.fersde.total + entity.fers_peace.total);
-                html += "<br>" +  sep;
+                html += "<br>" + sep;
                 html += "<br> Post Redeposit Payment Required: $" + toMoney(entity.csrs_post391.deposit + entity.csrs_post82.deposit);
                 html += "<br> Post Redeposit Interest: $" + toMoney(entity.csrs_post391.interest + entity.csrs_post82.interest);
                 html += "<br> Post Redeposit Payments Applied: $0.00";
                 html += "<br> Post Redeposit Balance: $" + toMoney(entity.csrs_post391.total + entity.csrs_post82.total);
-                html += "<br>" +  sep;
+                html += "<br>" + sep;
                 html += "<br> Pre Redeposit Payment Required: $" + toMoney(entity.csrs_pre1082.deposit + entity.csrs_post82.deposit);
                 html += "<br> Pre Redeposit Interest: $" + toMoney(entity.csrs_pre1082.interest + entity.csrs_post82.interest);
                 html += "<br> Pre Redeposit Payments Applied: $0.00";
                 html += "<br> Pre Redeposit Balance: $" + toMoney(entity.csrs_pre1082.total + entity.csrs_post82.total);
-                html += "<br>" +  sep;
+                html += "<br>" + sep;
                 html += "<br> Post Deposit Payment Required: $" + toMoney(entity.csrs_post1082_de.deposit);
                 html += "<br> Post Deposit Interest: $" + toMoney(entity.csrs_post1082_de.interest);
                 html += "<br> Post Deposit Payments Applied: $0.00";
                 html += "<br> Post Deposit Balance: $" + toMoney(entity.csrs_post1082_de.total);
-                html += "<br>" +  sep;
+                html += "<br>" + sep;
                 html += "<br> Pre Deposit Payment Required: $" + toMoney(entity.csrs_pre1082_de.deposit);
                 html += "<br> Pre Deposit Interest: $" + toMoney(entity.csrs_pre1082_de.interest);
                 html += "<br> Pre Deposit Payments Applied: $0.00";
                 html += "<br> Pre Deposit Balance: $" + toMoney(entity.csrs_pre1082_de.total);
-                html += "<br>" +  sep;
+                html += "<br>" + sep;
 
                 html += "<br> Total Deposit: $" + toMoney(results['r-' + selectId].result.summary.totalPaymentsRequired);
                 html += "<br> Total Interest: $" + toMoney(results['r-' + selectId].result.summary.totalInitialInterest);
@@ -2527,7 +2576,7 @@ $(document).ready(function() {
                 html += "<p> No Calculation has been run for this calculation version. Please run the calculation first using the dedicated button. </p>";
             }
 
-            function test(){
+            function test() {
                 w.document.getElementById('depTblBody').innerHTML = html;
             }
             addEvent(w, 'load', test);
@@ -3604,14 +3653,14 @@ function showPaginationDot(wrapper) {
     }
 }
 
-function correctDateInput(dateIn){
+function correctDateInput(dateIn) {
     var result = dateIn;
-    if(dateIn.length == 8){
+    if (dateIn.length == 8) {
 
         result = dateIn.substr(0, 2) + '/' + dateIn.substr(2, 2) + '/' + dateIn.substr(4, 4);
     }
 
-    if(dateIn.length == 10){
+    if (dateIn.length == 10) {
 
         result = dateIn.substr(0, 2) + '/' + dateIn.substr(3, 2) + '/' + dateIn.substr(6, 4);
     }
@@ -3769,7 +3818,7 @@ function parseDateToString(item) {
     return two(date.getMonth() + 1) + "/" + two(date.getDate()) + "/" + date.getFullYear();
 }
 
-function formatStringDate (arg, fmt) {
+function formatStringDate(arg, fmt) {
     if (!fmt) {
         fmt = "MM/dd/yyyy";
     }
@@ -3805,10 +3854,10 @@ function refreshAccountSummary(account) {
     $('.name').html(account.holder.firstName + ' ' + account.holder.lastName);
     $('.birthDate').html(parseDateToString(account.holder.birthDate));
     $('.ssn').html(account.holder.ssn);
-    if(account.formType){
-       $('.formType').html(account.formType.name); 
+    if (account.formType) {
+        $('.formType').html(account.formType.name);
     }
-    
+
     $('.title').html(account.holder.title);
     $('.frozen').html(account.frozen === true ? 'YES' : 'NO');
     $('.grace').html(account.grace === true ? 'YES' : 'NO');
@@ -5455,4 +5504,24 @@ function aggregateCalculationResult(calculationResult) {
         result.ALL_TOTAL.total += this.balance;
     });
     return result;
+}
+
+function findLatestPayment(payments) {
+    var result = null;
+    if (payments == null || payments.length == 0) {
+        return 0;
+    } else {
+        $.each(payments, function() {
+            if (result == null) {
+                result = this;
+            } else {
+                if (this.depositDate > result.depositDate) {
+                    result = this;
+                }
+            }
+
+        });
+        return result.amount;
+    }
+
 }

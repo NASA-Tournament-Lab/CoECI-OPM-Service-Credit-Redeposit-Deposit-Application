@@ -1,19 +1,18 @@
 /*
-    Copyright 2014 OPM.gov
+ Copyright 2014 OPM.gov
 
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
 
-       http://www.apache.org/licenses/LICENSE-2.0
+ http://www.apache.org/licenses/LICENSE-2.0
 
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
-*/
-
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ */
 package gov.opm.scrd.services.impl;
 
 import gov.opm.scrd.LoggingHelper;
@@ -116,6 +115,7 @@ import org.jboss.logging.Logger;
 @LocalBean
 @TransactionManagement(TransactionManagementType.CONTAINER)
 public class AccountServiceImpl extends BaseService implements AccountService {
+
     /**
      * <p>
      * Represents the class name.
@@ -129,7 +129,7 @@ public class AccountServiceImpl extends BaseService implements AccountService {
      * </p>
      */
     private static final String JPQL_QUERY_ACCOUNT_BY_CLAIM_NUMBER = "SELECT e FROM Account e"
-        + " WHERE e.deleted = false AND e.claimNumber = :claimNumber";
+            + " WHERE e.deleted = false AND e.claimNumber = :claimNumber";
 
     /**
      * <p>
@@ -137,7 +137,7 @@ public class AccountServiceImpl extends BaseService implements AccountService {
      * </p>
      */
     private static final String JPQL_QUERY_ACCOUNT_COUNT_BY_CLAIM_OFFICER = "SELECT COUNT(e) FROM Account e"
-        + " WHERE e.deleted = false AND e.claimOfficer = :username";
+            + " WHERE e.deleted = false AND e.claimOfficer = :username";
 
     /**
      * <p>
@@ -145,7 +145,7 @@ public class AccountServiceImpl extends BaseService implements AccountService {
      * </p>
      */
     private static final String JPQL_QUERY_NOTE_BY_ACCOUNT_ID = "SELECT e FROM AccountNote e"
-        + " WHERE e.deleted = false AND e.accountId = :accountId";
+            + " WHERE e.deleted = false AND e.accountId = :accountId";
 
     /**
      * <p>
@@ -153,14 +153,14 @@ public class AccountServiceImpl extends BaseService implements AccountService {
      * </p>
      */
     private static final String JPQL_QUERY_PAYMENTS_BY_ACCOUNT_ID = "SELECT e FROM Payment e"
-        + " WHERE e.deleted = false AND e.accountId = :accountId";
+            + " WHERE e.deleted = false AND e.accountId = :accountId";
     /**
      * <p>
      * Represents the SQL to query date calculation data value.
      * </p>
      */
     private static final String SQL_QUERY_DATE_CALCULATION_DATA_VALUE = "SELECT day_offset, month_offset FROM "
-        + "opm.date_calculation_data WHERE deleted = false AND calculation_type=:type AND value=:value";
+            + "opm.date_calculation_data WHERE deleted = false AND calculation_type=:type AND value=:value";
     /**
      * <p>
      * Represents the SQL to query Account.
@@ -176,14 +176,16 @@ public class AccountServiceImpl extends BaseService implements AccountService {
 
     /**
      * JNDI binding for the calculation execution service.
+     *
      * @since 1.2 (OPM - Release I Assembly 1.0)
      */
     private static final String CALCULATION_EXECUTION_SERVICE_JNDI = "java:app/opm-scrd-ejb/CalculationExecutionServiceImpl!"
             + "gov.opm.scrd.services.impl.CalculationExecutionServiceImpl";
 
-      /**
+    /**
      * Represents the CalculationExecutionService instance for performing account calculations. It is modified by
      * setter. It is injected by Spring. It can not be null after injected.
+     *
      * @since 1.2 (OPM - Release I Assembly 1.0)
      */
     @EJB(mappedName = CALCULATION_EXECUTION_SERVICE_JNDI)
@@ -199,15 +201,12 @@ public class AccountServiceImpl extends BaseService implements AccountService {
     /**
      * Creates the account.
      *
-     * @param account
-     *            the account to create.
+     * @param account the account to create.
      *
      * @return The id of the created account instance.
      *
-     * @throws IllegalArgumentException
-     *             if account is null.
-     * @throws OPMException
-     *             if there is any problem when executing the method.
+     * @throws IllegalArgumentException if account is null.
+     * @throws OPMException if there is any problem when executing the method.
      */
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public long create(Account account) throws OPMException {
@@ -215,8 +214,8 @@ public class AccountServiceImpl extends BaseService implements AccountService {
         Logger logger = getLogger();
 
         LoggingHelper.logEntrance(logger, signature,
-            new String[] {"account"},
-            new Object[] {account});
+                new String[]{"account"},
+                new Object[]{account});
 
         Helper.checkNull(logger, signature, account, "account");
 
@@ -224,29 +223,25 @@ public class AccountServiceImpl extends BaseService implements AccountService {
             getEntityManager().persist(account);
 
             long result = account.getId();
-            LoggingHelper.logExit(logger, signature, new Object[] {result});
+            LoggingHelper.logExit(logger, signature, new Object[]{result});
             return result;
         } catch (IllegalStateException e) {
             throw LoggingHelper.logException(logger, signature, new OPMException("The entity manager has been closed.",
-                e));
+                    e));
         } catch (PersistenceException e) {
             throw LoggingHelper.logException(logger, signature, new OPMException(
-                "An error has occurred when accessing persistence.", e));
+                    "An error has occurred when accessing persistence.", e));
         }
     }
 
     /**
      * Updates the account.
      *
-     * @param account
-     *            the account to update.
+     * @param account the account to update.
      *
-     * @throws IllegalArgumentException
-     *             if account is null.
-     * @throws EntityNotFoundException
-     *             if there is no such account to update.
-     * @throws OPMException
-     *             if there is any problem when executing the method.
+     * @throws IllegalArgumentException if account is null.
+     * @throws EntityNotFoundException if there is no such account to update.
+     * @throws OPMException if there is any problem when executing the method.
      */
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public void update(Account account) throws OPMException {
@@ -254,8 +249,8 @@ public class AccountServiceImpl extends BaseService implements AccountService {
         Logger logger = getLogger();
 
         LoggingHelper.logEntrance(logger, signature,
-            new String[] {"account"},
-            new Object[] {account});
+                new String[]{"account"},
+                new Object[]{account});
 
         Helper.checkNull(logger, signature, account, "account");
 
@@ -269,25 +264,21 @@ public class AccountServiceImpl extends BaseService implements AccountService {
             LoggingHelper.logExit(logger, signature, null);
         } catch (IllegalStateException e) {
             throw LoggingHelper.logException(logger, signature, new OPMException("The entity manager has been closed.",
-                e));
+                    e));
         } catch (PersistenceException e) {
             throw LoggingHelper.logException(logger, signature, new OPMException(
-                "An error has occurred when accessing persistence.", e));
+                    "An error has occurred when accessing persistence.", e));
         }
     }
 
     /**
      * Updates the employee data of the account.
      *
-     * @param account
-     *            the account to update.
+     * @param account the account to update.
      *
-     * @throws IllegalArgumentException
-     *             if account is null.
-     * @throws EntityNotFoundException
-     *             if there is no such account to update.
-     * @throws OPMException
-     *             if there is any problem when executing the method.
+     * @throws IllegalArgumentException if account is null.
+     * @throws EntityNotFoundException if there is no such account to update.
+     * @throws OPMException if there is any problem when executing the method.
      */
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public void updateEmployee(Account account) throws OPMException {
@@ -295,8 +286,8 @@ public class AccountServiceImpl extends BaseService implements AccountService {
         Logger logger = getLogger();
 
         LoggingHelper.logEntrance(logger, signature,
-            new String[] {"account"},
-            new Object[] {account});
+                new String[]{"account"},
+                new Object[]{account});
 
         Helper.checkNull(logger, signature, account, "account");
 
@@ -304,7 +295,7 @@ public class AccountServiceImpl extends BaseService implements AccountService {
         try {
             // Check the Account
             Account originalAccount = Helper.getEntityById(entityManager, logger, signature, Account.class,
-                account.getId(), true);
+                    account.getId(), true);
 
             AccountHolder holder = account.getHolder();
             Helper.checkFieldNull(logger, signature, holder, "account.getHolder()");
@@ -317,25 +308,21 @@ public class AccountServiceImpl extends BaseService implements AccountService {
             LoggingHelper.logExit(logger, signature, null);
         } catch (IllegalStateException e) {
             throw LoggingHelper.logException(logger, signature, new OPMException("The entity manager has been closed.",
-                e));
+                    e));
         } catch (PersistenceException e) {
             throw LoggingHelper.logException(logger, signature, new OPMException(
-                "An error has occurred when accessing persistence.", e));
+                    "An error has occurred when accessing persistence.", e));
         }
     }
 
     /**
      * Deletes the account by id.
      *
-     * @param accountId
-     *            the account id to update.
+     * @param accountId the account id to update.
      *
-     * @throws IllegalArgumentException
-     *             if accountId is not positive.
-     * @throws EntityNotFoundException
-     *             if there is no such account to delete.
-     * @throws OPMException
-     *             if there is any problem when executing the method.
+     * @throws IllegalArgumentException if accountId is not positive.
+     * @throws EntityNotFoundException if there is no such account to delete.
+     * @throws OPMException if there is any problem when executing the method.
      */
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public void delete(long accountId) throws OPMException {
@@ -343,8 +330,8 @@ public class AccountServiceImpl extends BaseService implements AccountService {
         Logger logger = getLogger();
 
         LoggingHelper.logEntrance(logger, signature,
-            new String[] {"accountId"},
-            new Object[] {accountId});
+                new String[]{"accountId"},
+                new Object[]{accountId});
 
         Helper.checkPositive(logger, signature, accountId, "accountId");
 
@@ -359,25 +346,22 @@ public class AccountServiceImpl extends BaseService implements AccountService {
             LoggingHelper.logExit(logger, signature, null);
         } catch (IllegalStateException e) {
             throw LoggingHelper.logException(logger, signature, new OPMException("The entity manager has been closed.",
-                e));
+                    e));
         } catch (PersistenceException e) {
             throw LoggingHelper.logException(logger, signature, new OPMException(
-                "An error has occurred when accessing persistence.", e));
+                    "An error has occurred when accessing persistence.", e));
         }
     }
 
     /**
      * Gets the account by id.
      *
-     * @param accountId
-     *            the account id to get.
+     * @param accountId the account id to get.
      *
      * @return The account for the id or null if it can not be found.
      *
-     * @throws IllegalArgumentException
-     *             if accountId is not positive.
-     * @throws OPMException
-     *             if there is any problem when executing the method.
+     * @throws IllegalArgumentException if accountId is not positive.
+     * @throws OPMException if there is any problem when executing the method.
      */
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public Account get(long accountId) throws OPMException {
@@ -385,17 +369,17 @@ public class AccountServiceImpl extends BaseService implements AccountService {
         Logger logger = getLogger();
 
         LoggingHelper.logEntrance(logger, signature,
-            new String[] {"accountId"},
-            new Object[] {accountId});
+                new String[]{"accountId"},
+                new Object[]{accountId});
 
         Helper.checkPositive(logger, signature, accountId, "accountId");
 
         try {
             // Get account
             Account result = Helper.getEntityById(getEntityManager(), logger, signature, Account.class, accountId,
-                false);
+                    false);
             if (result == null) {
-                LoggingHelper.logExit(logger, signature, new Object[] {result});
+                LoggingHelper.logExit(logger, signature, new Object[]{result});
                 return result;
             }
             Hibernate.initialize(result.getHolder());
@@ -414,9 +398,9 @@ public class AccountServiceImpl extends BaseService implements AccountService {
             Hibernate.initialize(result.getCalculationVersions());
             for (CalculationVersion c : result.getCalculationVersions()) {
                 Hibernate.initialize(c.getCalculations());
-                if(c.getCalculations() != null){
-                    for(Calculation calculation : c.getCalculations()){
-                        
+                if (c.getCalculations() != null) {
+                    for (Calculation calculation : c.getCalculations()) {
+
                         Hibernate.initialize(calculation.getDeductionCalculationDetail());
                     }
                 }
@@ -426,46 +410,43 @@ public class AccountServiceImpl extends BaseService implements AccountService {
                 Hibernate.initialize(c.getCalculationResult().getItems());
 
                 // Added in OPM-188. Loading intermediateResult
-                if(c.getCalculationResult().getItems() != null){
+                if (c.getCalculationResult().getItems() != null) {
 
-                    for(CalculationResultItem item : c.getCalculationResult().getItems()){
+                    for (CalculationResultItem item : c.getCalculationResult().getItems()) {
 
                         Hibernate.initialize(item.getIntermediateResults());
                     }
                 }
 
                 Hibernate.initialize(c.getCalculationResult().getCalculations());
-                if(c.getCalculationResult().getCalculations() != null){
-                    for(Calculation calculation : c.getCalculationResult().getCalculations()){
-                        
+                if (c.getCalculationResult().getCalculations() != null) {
+                    for (Calculation calculation : c.getCalculationResult().getCalculations()) {
+
                         Hibernate.initialize(calculation.getDeductionCalculationDetail());
                     }
                 }
             }
 
-            LoggingHelper.logExit(logger, signature, new Object[] {result});
+            LoggingHelper.logExit(logger, signature, new Object[]{result});
             return result;
         } catch (IllegalStateException e) {
             throw LoggingHelper.logException(logger, signature, new OPMException("The entity manager has been closed.",
-                e));
+                    e));
         } catch (PersistenceException e) {
             throw LoggingHelper.logException(logger, signature, new OPMException(
-                "An error has occurred when accessing persistence.", e));
+                    "An error has occurred when accessing persistence.", e));
         }
     }
 
     /**
      * Gets the account by claim number.
      *
-     * @param claimNumber
-     *            the claim number to get account.
+     * @param claimNumber the claim number to get account.
      *
      * @return The account for the claim number or null if it can not be found.
      *
-     * @throws IllegalArgumentException
-     *             if claimNumber is null/empty.
-     * @throws OPMException
-     *             if there is any problem when executing the method.
+     * @throws IllegalArgumentException if claimNumber is null/empty.
+     * @throws OPMException if there is any problem when executing the method.
      */
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
     public Account getByClaimNumber(String claimNumber) throws OPMException {
@@ -473,38 +454,35 @@ public class AccountServiceImpl extends BaseService implements AccountService {
         Logger logger = getLogger();
 
         LoggingHelper.logEntrance(logger, signature,
-            new String[] {"claimNumber"},
-            new Object[] {claimNumber});
+                new String[]{"claimNumber"},
+                new Object[]{claimNumber});
 
         Helper.checkNullOrEmpty(logger, signature, claimNumber, "claimNumber");
 
         try {
             Account result = Helper.getValue(getEntityManager(), logger, signature, Account.class,
-                JPQL_QUERY_ACCOUNT_BY_CLAIM_NUMBER, new String[] {"claimNumber"}, new Object[] {claimNumber}, false);
+                    JPQL_QUERY_ACCOUNT_BY_CLAIM_NUMBER, new String[]{"claimNumber"}, new Object[]{claimNumber}, false);
 
-            LoggingHelper.logExit(logger, signature, new Object[] {result});
+            LoggingHelper.logExit(logger, signature, new Object[]{result});
             return result;
         } catch (IllegalStateException e) {
             throw LoggingHelper.logException(logger, signature, new OPMException("The entity manager has been closed.",
-                e));
+                    e));
         } catch (PersistenceException e) {
             throw LoggingHelper.logException(logger, signature, new OPMException(
-                "An error has occurred when accessing persistence.", e));
+                    "An error has occurred when accessing persistence.", e));
         }
     }
 
     /**
      * Searches accounts based on the filter.
      *
-     * @param filter
-     *            the filter to search account.
+     * @param filter the filter to search account.
      *
      * @return SearchResult&lt;Account&gt; instance holding information about search result.
      *
-     * @throws IllegalArgumentException
-     *             if filter is null.
-     * @throws OPMException
-     *             if there is any problem when executing the method.
+     * @throws IllegalArgumentException if filter is null.
+     * @throws OPMException if there is any problem when executing the method.
      */
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public SearchResult<Account> search(AccountSearchFilter filter) throws OPMException {
@@ -512,8 +490,8 @@ public class AccountServiceImpl extends BaseService implements AccountService {
         Logger logger = getLogger();
 
         LoggingHelper.logEntrance(logger, signature,
-            new String[] {"filter"},
-            new Object[] {filter});
+                new String[]{"filter"},
+                new Object[]{filter});
 
         Helper.checkNull(logger, signature, filter, "filter");
 
@@ -527,7 +505,7 @@ public class AccountServiceImpl extends BaseService implements AccountService {
 
             // Create query
             TypedQuery<Account> query = entityManager.createQuery(SQL_QUERY_ACCOUNT + whereClause + orderByClause,
-                Account.class);
+                    Account.class);
             Helper.setParameters(query, paramNames, paramValues);
 
             int pageNumber = filter.getPageNumber();
@@ -550,7 +528,7 @@ public class AccountServiceImpl extends BaseService implements AccountService {
             if (pageNumber > 0) {
                 // Create query
                 TypedQuery<Number> countQuery = entityManager.createQuery(SQL_QUERY_ACCOUNT_COUNT + whereClause,
-                    Number.class);
+                        Number.class);
                 Helper.setParameters(countQuery, paramNames, paramValues);
 
                 int totalCount = countQuery.getSingleResult().intValue();
@@ -561,31 +539,26 @@ public class AccountServiceImpl extends BaseService implements AccountService {
                 result.setTotalPageCount(records.isEmpty() ? 0 : 1);
             }
 
-            LoggingHelper.logExit(logger, signature, new Object[] {result});
+            LoggingHelper.logExit(logger, signature, new Object[]{result});
             return result;
         } catch (IllegalStateException e) {
             throw LoggingHelper.logException(logger, signature, new OPMException("The entity manager has been closed.",
-                e));
+                    e));
         } catch (PersistenceException e) {
             throw LoggingHelper.logException(logger, signature, new OPMException(
-                "An error has occurred when accessing persistence.", e));
+                    "An error has occurred when accessing persistence.", e));
         }
     }
 
     /**
      * Adds the note for the account.
      *
-     * @param accountId
-     *            the id of account to add note.
-     * @param note
-     *            the account note to add.
+     * @param accountId the id of account to add note.
+     * @param note the account note to add.
      *
-     * @throws IllegalArgumentException
-     *             if accountId is not positive or note is null.
-     * @throws EntityNotFoundException
-     *             if there is no such account to add note.
-     * @throws OPMException
-     *             if there is any problem when executing the method.
+     * @throws IllegalArgumentException if accountId is not positive or note is null.
+     * @throws EntityNotFoundException if there is no such account to add note.
+     * @throws OPMException if there is any problem when executing the method.
      * @return the note id
      */
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
@@ -594,8 +567,8 @@ public class AccountServiceImpl extends BaseService implements AccountService {
         Logger logger = getLogger();
 
         LoggingHelper.logEntrance(logger, signature,
-            new String[] {"accountId", "note"},
-            new Object[] {accountId, note});
+                new String[]{"accountId", "note"},
+                new Object[]{accountId, note});
 
         Helper.checkPositive(logger, signature, accountId, "accountId");
         Helper.checkNull(logger, signature, note, "note");
@@ -612,31 +585,26 @@ public class AccountServiceImpl extends BaseService implements AccountService {
             account.getNotes().add(note);
             entityManager.merge(account);
             long id = note.getId();
-            LoggingHelper.logExit(logger, signature, new Object[] {id});
+            LoggingHelper.logExit(logger, signature, new Object[]{id});
             return id;
         } catch (IllegalStateException e) {
             throw LoggingHelper.logException(logger, signature, new OPMException("The entity manager has been closed.",
-                e));
+                    e));
         } catch (PersistenceException e) {
             throw LoggingHelper.logException(logger, signature, new OPMException(
-                "An error has occurred when accessing persistence.", e));
+                    "An error has occurred when accessing persistence.", e));
         }
     }
 
     /**
      * Adds the note for the account giving account claim number.
      *
-     * @param claimNumber
-     *            the claimNumber of account to add note.
-     * @param note
-     *            the account note to add.
+     * @param claimNumber the claimNumber of account to add note.
+     * @param note the account note to add.
      *
-     * @throws IllegalArgumentException
-     *             if claimNumber is null/empty or note is null.
-     * @throws EntityNotFoundException
-     *             if there is no such account to add note.
-     * @throws OPMException
-     *             if there is any problem when executing the method.
+     * @throws IllegalArgumentException if claimNumber is null/empty or note is null.
+     * @throws EntityNotFoundException if there is no such account to add note.
+     * @throws OPMException if there is any problem when executing the method.
      */
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public void addNoteByClaimNumber(String claimNumber, AccountNote note) throws OPMException {
@@ -644,8 +612,8 @@ public class AccountServiceImpl extends BaseService implements AccountService {
         Logger logger = getLogger();
 
         LoggingHelper.logEntrance(logger, signature,
-            new String[] {"claimNumber", "note"},
-            new Object[] {claimNumber, note});
+                new String[]{"claimNumber", "note"},
+                new Object[]{claimNumber, note});
 
         Helper.checkNullOrEmpty(logger, signature, claimNumber, "claimNumber");
         Helper.checkNull(logger, signature, note, "note");
@@ -653,7 +621,7 @@ public class AccountServiceImpl extends BaseService implements AccountService {
         EntityManager entityManager = getEntityManager();
         try {
             Account account = Helper.getValue(entityManager, logger, signature, Account.class,
-                JPQL_QUERY_ACCOUNT_BY_CLAIM_NUMBER, new String[] {"claimNumber"}, new Object[] {claimNumber}, true);
+                    JPQL_QUERY_ACCOUNT_BY_CLAIM_NUMBER, new String[]{"claimNumber"}, new Object[]{claimNumber}, true);
 
             note.setAccountId(account.getId());
             entityManager.persist(note);
@@ -664,25 +632,21 @@ public class AccountServiceImpl extends BaseService implements AccountService {
             LoggingHelper.logExit(logger, signature, null);
         } catch (IllegalStateException e) {
             throw LoggingHelper.logException(logger, signature, new OPMException("The entity manager has been closed.",
-                e));
+                    e));
         } catch (PersistenceException e) {
             throw LoggingHelper.logException(logger, signature, new OPMException(
-                "An error has occurred when accessing persistence.", e));
+                    "An error has occurred when accessing persistence.", e));
         }
     }
 
     /**
      * Updates account note.
      *
-     * @param note
-     *            the account note to update.
+     * @param note the account note to update.
      *
-     * @throws IllegalArgumentException
-     *             if note is null.
-     * @throws EntityNotFoundException
-     *             if there is no such note to update.
-     * @throws OPMException
-     *             if there is any problem when executing the method.
+     * @throws IllegalArgumentException if note is null.
+     * @throws EntityNotFoundException if there is no such note to update.
+     * @throws OPMException if there is any problem when executing the method.
      */
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public void updateNote(AccountNote note) throws OPMException {
@@ -690,8 +654,8 @@ public class AccountServiceImpl extends BaseService implements AccountService {
         Logger logger = getLogger();
 
         LoggingHelper.logEntrance(logger, signature,
-            new String[] {"note"},
-            new Object[] {note});
+                new String[]{"note"},
+                new Object[]{note});
 
         Helper.checkNull(logger, signature, note, "note");
 
@@ -704,25 +668,21 @@ public class AccountServiceImpl extends BaseService implements AccountService {
             LoggingHelper.logExit(logger, signature, null);
         } catch (IllegalStateException e) {
             throw LoggingHelper.logException(logger, signature, new OPMException("The entity manager has been closed.",
-                e));
+                    e));
         } catch (PersistenceException e) {
             throw LoggingHelper.logException(logger, signature, new OPMException(
-                "An error has occurred when accessing persistence.", e));
+                    "An error has occurred when accessing persistence.", e));
         }
     }
 
     /**
      * Deletes account note.
      *
-     * @param note
-     *            the account note to delete.
+     * @param note the account note to delete.
      *
-     * @throws IllegalArgumentException
-     *             if note is null.
-     * @throws EntityNotFoundException
-     *             if there is no such note to delete.
-     * @throws OPMException
-     *             if there is any problem when executing the method.
+     * @throws IllegalArgumentException if note is null.
+     * @throws EntityNotFoundException if there is no such note to delete.
+     * @throws OPMException if there is any problem when executing the method.
      */
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public void deleteNote(AccountNote note) throws OPMException {
@@ -730,8 +690,8 @@ public class AccountServiceImpl extends BaseService implements AccountService {
         Logger logger = getLogger();
 
         LoggingHelper.logEntrance(logger, signature,
-            new String[] {"note"},
-            new Object[] {note});
+                new String[]{"note"},
+                new Object[]{note});
 
         Helper.checkNull(logger, signature, note, "note");
 
@@ -739,32 +699,29 @@ public class AccountServiceImpl extends BaseService implements AccountService {
         try {
             // Check note
             AccountNote entity = Helper.getEntityById(entityManager, logger, signature, AccountNote.class,
-                note.getId(), true);
+                    note.getId(), true);
 
             entityManager.remove(entity);
 
             LoggingHelper.logExit(logger, signature, null);
         } catch (IllegalStateException e) {
             throw LoggingHelper.logException(logger, signature, new OPMException("The entity manager has been closed.",
-                e));
+                    e));
         } catch (PersistenceException e) {
             throw LoggingHelper.logException(logger, signature, new OPMException(
-                "An error has occurred when accessing persistence.", e));
+                    "An error has occurred when accessing persistence.", e));
         }
     }
 
     /**
      * Retrieves all notes for the account given account id.
      *
-     * @param accountId
-     *            the id of account to retrieve notes.
+     * @param accountId the id of account to retrieve notes.
      *
      * @return List of account notes for the account, can not be null/contain null elements.
      *
-     * @throws IllegalArgumentException
-     *             if accountId is not positive.
-     * @throws OPMException
-     *             if there is any problem when executing the method.
+     * @throws IllegalArgumentException if accountId is not positive.
+     * @throws OPMException if there is any problem when executing the method.
      */
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
     public List<AccountNote> getNotes(long accountId) throws OPMException {
@@ -772,52 +729,47 @@ public class AccountServiceImpl extends BaseService implements AccountService {
         Logger logger = getLogger();
 
         LoggingHelper.logEntrance(logger, signature,
-            new String[] {"accountId"},
-            new Object[] {accountId});
+                new String[]{"accountId"},
+                new Object[]{accountId});
 
         Helper.checkPositive(logger, signature, accountId, "accountId");
 
         try {
             List<AccountNote> result = Helper.getValues(getEntityManager(), logger, signature, AccountNote.class,
-                JPQL_QUERY_NOTE_BY_ACCOUNT_ID, new String[] {"accountId"}, new Object[] {accountId});
+                    JPQL_QUERY_NOTE_BY_ACCOUNT_ID, new String[]{"accountId"}, new Object[]{accountId});
 
-            LoggingHelper.logExit(logger, signature, new Object[] {result});
+            LoggingHelper.logExit(logger, signature, new Object[]{result});
             return result;
         } catch (IllegalStateException e) {
             throw LoggingHelper.logException(logger, signature, new OPMException("The entity manager has been closed.",
-                e));
+                    e));
         } catch (PersistenceException e) {
             throw LoggingHelper.logException(logger, signature, new OPMException(
-                "An error has occurred when accessing persistence.", e));
+                    "An error has occurred when accessing persistence.", e));
         }
     }
 
     /**
      * Saves the calculation version for the account.
      *
-     * @param accountId
-     *            the id of account to save calculation version.
-     * @param calculationVersion
-     *            the calculation version to save.
+     * @param accountId the id of account to save calculation version.
+     * @param calculationVersion the calculation version to save.
      *
-     * @throws IllegalArgumentException
-     *             if accountId is not positive or calculationVersion is null.
-     * @throws EntityNotFoundException
-     *             if there is no such account to save data.
-     * @throws OPMException
-     *             if there is any problem when executing the method.
+     * @throws IllegalArgumentException if accountId is not positive or calculationVersion is null.
+     * @throws EntityNotFoundException if there is no such account to save data.
+     * @throws OPMException if there is any problem when executing the method.
      * @return the id of the created/updated calculation version
      */
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public long saveCalculationVersion(long accountId, CalculationVersion calculationVersion)
-        throws OPMException {
+            throws OPMException {
         String signature = CLASS_NAME
-            + "#saveCalculationVersion(long accountId, CalculationVersion calculationVersion)";
+                + "#saveCalculationVersion(long accountId, CalculationVersion calculationVersion)";
         Logger logger = getLogger();
 
         LoggingHelper.logEntrance(logger, signature,
-            new String[] {"accountId", "calculationVersion"},
-            new Object[] {accountId, calculationVersion});
+                new String[]{"accountId", "calculationVersion"},
+                new Object[]{accountId, calculationVersion});
 
         Helper.checkPositive(logger, signature, accountId, "accountId");
         Helper.checkNull(logger, signature, calculationVersion, "calculationVersion");
@@ -832,12 +784,11 @@ public class AccountServiceImpl extends BaseService implements AccountService {
             // Update calculation date
             calculationVersion.setCalculationDate(new Date());
 
-
             if (calculationVersion.getId() != 0) {
                 for (int i = 0; i < account.getCalculationVersions().size(); i++) {
                     if (account.getCalculationVersions().get(i).getId() == calculationVersion.getId()) {
                         account.getCalculationVersions().set(i, calculationVersion);
-                        
+
                         break;
                     }
                 }
@@ -849,30 +800,25 @@ public class AccountServiceImpl extends BaseService implements AccountService {
                 result = account.getCalculationVersions().get(account.getCalculationVersions().size() - 1).getId();
             }
 
-
-            LoggingHelper.logExit(logger, signature, new Object[] {result});
+            LoggingHelper.logExit(logger, signature, new Object[]{result});
             return result;
         } catch (IllegalStateException e) {
             throw LoggingHelper.logException(logger, signature, new OPMException("The entity manager has been closed.",
-                e));
+                    e));
         } catch (PersistenceException e) {
             throw LoggingHelper.logException(logger, signature, new OPMException(
-                "An error has occurred when accessing persistence.", e));
+                    "An error has occurred when accessing persistence.", e));
         }
     }
 
     /**
      * Deletes the calculation version for the id.
      *
-     * @param calculationVersionId
-     *            the id of calculation version to delete.
+     * @param calculationVersionId the id of calculation version to delete.
      *
-     * @throws IllegalArgumentException
-     *             if calculationVersionId is not positive.
-     * @throws EntityNotFoundException
-     *             if there is no such calculation version to delete.
-     * @throws OPMException
-     *             if there is any problem when executing the method.
+     * @throws IllegalArgumentException if calculationVersionId is not positive.
+     * @throws EntityNotFoundException if there is no such calculation version to delete.
+     * @throws OPMException if there is any problem when executing the method.
      */
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public void deleteCalculationVersion(long calculationVersionId) throws OPMException {
@@ -880,8 +826,8 @@ public class AccountServiceImpl extends BaseService implements AccountService {
         Logger logger = getLogger();
 
         LoggingHelper.logEntrance(logger, signature,
-            new String[] {"calculationVersionId"},
-            new Object[] {calculationVersionId});
+                new String[]{"calculationVersionId"},
+                new Object[]{calculationVersionId});
 
         Helper.checkPositive(logger, signature, calculationVersionId, "calculationVersionId");
 
@@ -889,34 +835,29 @@ public class AccountServiceImpl extends BaseService implements AccountService {
         try {
             // Get calculation version
             CalculationVersion calculationVersion = Helper.getEntityById(entityManager, logger, signature,
-                CalculationVersion.class, calculationVersionId, true);
+                    CalculationVersion.class, calculationVersionId, true);
 
             entityManager.remove(calculationVersion);
 
             LoggingHelper.logExit(logger, signature, null);
         } catch (IllegalStateException e) {
             throw LoggingHelper.logException(logger, signature, new OPMException("The entity manager has been closed.",
-                e));
+                    e));
         } catch (PersistenceException e) {
             throw LoggingHelper.logException(logger, signature, new OPMException(
-                "An error has occurred when accessing persistence.", e));
+                    "An error has occurred when accessing persistence.", e));
         }
     }
 
     /**
      * Saves the billings data.
      *
-     * @param accountId
-     *            the id of account to save billing data
-     * @param billings
-     *            the billings data to save.
+     * @param accountId the id of account to save billing data
+     * @param billings the billings data to save.
      *
-     * @throws IllegalArgumentException
-     *             if accountId is not positive or billings is null or contains null elements.
-     * @throws EntityNotFoundException
-     *             if there is no such note to save billings.
-     * @throws OPMException
-     *             if there is any problem when executing the method.
+     * @throws IllegalArgumentException if accountId is not positive or billings is null or contains null elements.
+     * @throws EntityNotFoundException if there is no such note to save billings.
+     * @throws OPMException if there is any problem when executing the method.
      */
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public void saveBillings(long accountId, List<Billing> billings) throws OPMException {
@@ -924,8 +865,8 @@ public class AccountServiceImpl extends BaseService implements AccountService {
         Logger logger = getLogger();
 
         LoggingHelper.logEntrance(logger, signature,
-            new String[] {"accountId", "billings"},
-            new Object[] {accountId, billings});
+                new String[]{"accountId", "billings"},
+                new Object[]{accountId, billings});
 
         Helper.checkPositive(logger, signature, accountId, "accountId");
         Helper.checkList(logger, signature, billings, "billings");
@@ -950,25 +891,22 @@ public class AccountServiceImpl extends BaseService implements AccountService {
 
             if (calculationDate == null) {
                 throw LoggingHelper.logException(logger, signature, new OPMException(
-                    "No official calculation date when saving billings for accountId=" + accountId));
+                        "No official calculation date when saving billings for accountId=" + accountId));
             }
-
-            List<Billing> oldBillings = account.getBillingSummary().getBillings();
 
             BillingSummary oldBillingSummary = account.getBillingSummary();
 
-            if(oldBillingSummary != null){
+            if (oldBillingSummary != null) {
+                List<Billing> oldBillings = account.getBillingSummary().getBillings();
+                if (oldBillings != null) {
+
+                    for (Billing oldbilling : oldBillings) {
+                        entityManager.remove(oldbilling);
+                    }
+
+                }
                 entityManager.remove(oldBillingSummary);
             }
-            if(oldBillings != null){
-
-                for(Billing oldbilling : oldBillings){
-                    entityManager.remove(oldbilling);
-                }
-                
-            }
-            
-            
 
             BillingSummary summary = new BillingSummary();
             summary.setComputedDate(calculationDate);
@@ -987,23 +925,20 @@ public class AccountServiceImpl extends BaseService implements AccountService {
             LoggingHelper.logExit(logger, signature, null);
         } catch (IllegalStateException e) {
             throw LoggingHelper.logException(logger, signature, new OPMException("The entity manager has been closed.",
-                e));
+                    e));
         } catch (PersistenceException e) {
             throw LoggingHelper.logException(logger, signature, new OPMException(
-                "An error has occurred when accessing persistence.", e));
+                    "An error has occurred when accessing persistence.", e));
         }
     }
 
     /**
      * Approves the account.
      *
-     * @param validity
-     *            the information about account approval.
+     * @param validity the information about account approval.
      *
-     * @throws IllegalArgumentException
-     *             if validity is null.
-     * @throws OPMException
-     *             if there is any problem when executing the method.
+     * @throws IllegalArgumentException if validity is null.
+     * @throws OPMException if there is any problem when executing the method.
      */
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public void approve(AccountConfirmationValidation validity) throws OPMException {
@@ -1011,8 +946,8 @@ public class AccountServiceImpl extends BaseService implements AccountService {
         Logger logger = getLogger();
 
         LoggingHelper.logEntrance(logger, signature,
-            new String[] {"validity"},
-            new Object[] {validity});
+                new String[]{"validity"},
+                new Object[]{validity});
 
         Helper.checkNull(logger, signature, validity, "validity");
 
@@ -1022,30 +957,27 @@ public class AccountServiceImpl extends BaseService implements AccountService {
             getEntityManager().persist(validity);
 
             Account account = Helper.getEntityById(getEntityManager(), logger, signature, Account.class,
-                validity.getAccountId(), false);
+                    validity.getAccountId(), false);
             account.setValidity(validity);
             getEntityManager().merge(account);
 
             LoggingHelper.logExit(logger, signature, null);
         } catch (IllegalStateException e) {
             throw LoggingHelper.logException(logger, signature, new OPMException("The entity manager has been closed.",
-                e));
+                    e));
         } catch (PersistenceException e) {
             throw LoggingHelper.logException(logger, signature, new OPMException(
-                "An error has occurred when accessing persistence.", e));
+                    "An error has occurred when accessing persistence.", e));
         }
     }
 
     /**
      * Rejects the account.
      *
-     * @param validity
-     *            the information about account rejection.
+     * @param validity the information about account rejection.
      *
-     * @throws IllegalArgumentException
-     *             if validity is null.
-     * @throws OPMException
-     *             if there is any problem when executing the method.
+     * @throws IllegalArgumentException if validity is null.
+     * @throws OPMException if there is any problem when executing the method.
      */
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public void reject(AccountConfirmationValidation validity) throws OPMException {
@@ -1053,8 +985,8 @@ public class AccountServiceImpl extends BaseService implements AccountService {
         Logger logger = getLogger();
 
         LoggingHelper.logEntrance(logger, signature,
-            new String[] {"validity"},
-            new Object[] {validity});
+                new String[]{"validity"},
+                new Object[]{validity});
 
         Helper.checkNull(logger, signature, validity, "validity");
 
@@ -1064,32 +996,28 @@ public class AccountServiceImpl extends BaseService implements AccountService {
             getEntityManager().persist(validity);
 
             Account account = Helper.getEntityById(getEntityManager(), logger, signature, Account.class,
-                validity.getAccountId(), false);
+                    validity.getAccountId(), false);
             account.setValidity(validity);
             getEntityManager().merge(account);
 
             LoggingHelper.logExit(logger, signature, null);
         } catch (IllegalStateException e) {
             throw LoggingHelper.logException(logger, signature, new OPMException("The entity manager has been closed.",
-                e));
+                    e));
         } catch (PersistenceException e) {
             throw LoggingHelper.logException(logger, signature, new OPMException(
-                "An error has occurred when accessing persistence.", e));
+                    "An error has occurred when accessing persistence.", e));
         }
     }
 
     /**
      * Updates account interest.
      *
-     * @param accountId
-     *            the id of account to update interest.
+     * @param accountId the id of account to update interest.
      *
-     * @throws IllegalArgumentException
-     *             if accountId is not positive.
-     * @throws EntityNotFoundException
-     *             if there is no such account to update.
-     * @throws OPMException
-     *             if there is any problem when executing the method.
+     * @throws IllegalArgumentException if accountId is not positive.
+     * @throws EntityNotFoundException if there is no such account to update.
+     * @throws OPMException if there is any problem when executing the method.
      */
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public void updateInterest(long accountId) throws OPMException {
@@ -1110,17 +1038,16 @@ public class AccountServiceImpl extends BaseService implements AccountService {
             for (CalculationVersion version : calculationVersions) {
                 if (version.getCalculationResult().isOfficial()
                         && (latestVersion == null || version.getCalculationDate()
-                    .after(latestVersion.getCalculationDate()))) {
+                        .after(latestVersion.getCalculationDate()))) {
                     latestVersion = version;
                 }
             }
-            
 
-             // If no official account is found, use the latest one.
+            // If no official account is found, use the latest one.
             if (latestVersion == null) {
                 for (CalculationVersion version : calculationVersions) {
                     if (latestVersion == null || version.getCalculationDate()
-                        .after(latestVersion.getCalculationDate())) {
+                            .after(latestVersion.getCalculationDate())) {
                         latestVersion = version;
                     }
                 }
@@ -1128,13 +1055,13 @@ public class AccountServiceImpl extends BaseService implements AccountService {
             // Compare the date of today and the date of the calculation version, accurate to day
             Date today = new DateTime(new Date()).millisOfDay().withMinimumValue().toDate();
             Date calculationDate = new DateTime(latestVersion
-                .getCalculationDate()).millisOfDay().withMinimumValue().toDate();
+                    .getCalculationDate()).millisOfDay().withMinimumValue().toDate();
 
             if (calculationDate.before(today)) {
                 performSaveBillings(latestVersion, accountId);
             } else {
                 throw LoggingHelper.logException(logger, signature, new InterestAlreadyCalculatedException("The"
-                    + " current account has already been calculated as of today."));
+                        + " current account has already been calculated as of today."));
             }
 
             LoggingHelper.logExit(logger, signature, null);
@@ -1143,13 +1070,13 @@ public class AccountServiceImpl extends BaseService implements AccountService {
                     e));
         } catch (PersistenceException e) {
             throw LoggingHelper.logException(logger, signature, new OPMException(
-                "An error has occurred when accessing persistence.", e));
+                    "An error has occurred when accessing persistence.", e));
         }
     }
 
-
     /**
      * Get the account for interest update.
+     *
      * @param accountId the account id
      * @param logger the logger
      * @param signature the method signature
@@ -1159,41 +1086,37 @@ public class AccountServiceImpl extends BaseService implements AccountService {
      * @throws EntityNotFoundException if the account is not found
      */
     private List<CalculationVersion> getAccountForInterestUpdate(long accountId, Logger logger, String signature)
-        throws ZeroBalanceInAccountException, OPMException, EntityNotFoundException {
+            throws ZeroBalanceInAccountException, OPMException, EntityNotFoundException {
         // Retrieve account
         Account account = get(accountId);
         if (account == null) {
             throw LoggingHelper.logException(logger,
-                signature, new EntityNotFoundException("There is no account with ID " + accountId));
+                    signature, new EntityNotFoundException("There is no account with ID " + accountId));
         }
         // Check if account balance is zero
         if (account.getBalance().intValue() == 0) {
             throw LoggingHelper.logException(logger, signature, new ZeroBalanceInAccountException("The"
-                + " current account has a zero balance.  There is no additional interest."));
+                    + " current account has a zero balance.  There is no additional interest."));
         }
         // Find the latest official calculation version
         List<CalculationVersion> calculationVersions = account.getCalculationVersions();
         if (calculationVersions.isEmpty()) {
             // No calculation versions, throw exception
             throw LoggingHelper.logException(logger, signature,
-                new OPMException("No calculation version for the account!"));
+                    new OPMException("No calculation version for the account!"));
         }
         return calculationVersions;
     }
 
-
     /**
      * Retrieves the count of accounts assigned to the user.
      *
-     * @param username
-     *            the name of user to count accounts for.
+     * @param username the name of user to count accounts for.
      *
      * @return Number of accounts assigned to the user, can be 0 or positive integer.
      *
-     * @throws IllegalArgumentException
-     *             if username is null/empty
-     * @throws OPMException
-     *             if there is any problem when executing the method.
+     * @throws IllegalArgumentException if username is null/empty
+     * @throws OPMException if there is any problem when executing the method.
      */
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
     public int countAccountsAssignedToUser(String username) throws OPMException {
@@ -1201,41 +1124,36 @@ public class AccountServiceImpl extends BaseService implements AccountService {
         Logger logger = getLogger();
 
         LoggingHelper.logEntrance(logger, signature,
-            new String[] {"username"},
-            new Object[] {username});
+                new String[]{"username"},
+                new Object[]{username});
 
         Helper.checkNullOrEmpty(logger, signature, username, "username");
 
         try {
             int result = Helper.getValue(getEntityManager(), logger, signature, Long.class,
-                JPQL_QUERY_ACCOUNT_COUNT_BY_CLAIM_OFFICER, new String[] {"username"}, new Object[] {username}, false)
-                .intValue();
+                    JPQL_QUERY_ACCOUNT_COUNT_BY_CLAIM_OFFICER, new String[]{"username"}, new Object[]{username}, false)
+                    .intValue();
 
-            LoggingHelper.logExit(logger, signature, new Object[] {result});
+            LoggingHelper.logExit(logger, signature, new Object[]{result});
             return result;
         } catch (IllegalStateException e) {
             throw LoggingHelper.logException(logger, signature, new OPMException("The entity manager has been closed.",
-                e));
+                    e));
         } catch (PersistenceException e) {
             throw LoggingHelper.logException(logger, signature, new OPMException(
-                "An error has occurred when accessing persistence.", e));
+                    "An error has occurred when accessing persistence.", e));
         }
     }
 
     /**
      * Assigns account to the claim officer.
      *
-     * @param accountId
-     *            the id of account to assign claim officer.
-     * @param claimOfficer
-     *            the name of the claim officer to assign account.
+     * @param accountId the id of account to assign claim officer.
+     * @param claimOfficer the name of the claim officer to assign account.
      *
-     * @throws IllegalArgumentException
-     *             if accountId is not positive or claimOfficer is null/empty.
-     * @throws EntityNotFoundException
-     *             if there is no such account to assign.
-     * @throws OPMException
-     *             if there is any problem when executing the method.
+     * @throws IllegalArgumentException if accountId is not positive or claimOfficer is null/empty.
+     * @throws EntityNotFoundException if there is no such account to assign.
+     * @throws OPMException if there is any problem when executing the method.
      */
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public void assignAccount(long accountId, String claimOfficer) throws OPMException {
@@ -1243,8 +1161,8 @@ public class AccountServiceImpl extends BaseService implements AccountService {
         Logger logger = getLogger();
 
         LoggingHelper.logEntrance(logger, signature,
-            new String[] {"accountId", "claimOfficer"},
-            new Object[] {accountId, claimOfficer});
+                new String[]{"accountId", "claimOfficer"},
+                new Object[]{accountId, claimOfficer});
 
         Helper.checkPositive(logger, signature, accountId, "accountId");
         Helper.checkNullOrEmpty(logger, signature, claimOfficer, "claimOfficer");
@@ -1262,25 +1180,21 @@ public class AccountServiceImpl extends BaseService implements AccountService {
             LoggingHelper.logExit(logger, signature, null);
         } catch (IllegalStateException e) {
             throw LoggingHelper.logException(logger, signature, new OPMException("The entity manager has been closed.",
-                e));
+                    e));
         } catch (PersistenceException e) {
             throw LoggingHelper.logException(logger, signature, new OPMException(
-                "An error has occurred when accessing persistence.", e));
+                    "An error has occurred when accessing persistence.", e));
         }
     }
 
     /**
      * Unassigns account from claim officer.
      *
-     * @param accountId
-     *            the id of account to unassign from claim officer.
+     * @param accountId the id of account to unassign from claim officer.
      *
-     * @throws IllegalArgumentException
-     *             if accountId is not positive.
-     * @throws EntityNotFoundException
-     *             if there is no such account to unassign.
-     * @throws OPMException
-     *             if there is any problem when executing the method.
+     * @throws IllegalArgumentException if accountId is not positive.
+     * @throws EntityNotFoundException if there is no such account to unassign.
+     * @throws OPMException if there is any problem when executing the method.
      */
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public void unassignAccount(long accountId) throws OPMException {
@@ -1288,8 +1202,8 @@ public class AccountServiceImpl extends BaseService implements AccountService {
         Logger logger = getLogger();
 
         LoggingHelper.logEntrance(logger, signature,
-            new String[] {"accountId"},
-            new Object[] {accountId});
+                new String[]{"accountId"},
+                new Object[]{accountId});
 
         Helper.checkPositive(logger, signature, accountId, "accountId");
 
@@ -1306,27 +1220,23 @@ public class AccountServiceImpl extends BaseService implements AccountService {
             LoggingHelper.logExit(logger, signature, null);
         } catch (IllegalStateException e) {
             throw LoggingHelper.logException(logger, signature, new OPMException("The entity manager has been closed.",
-                e));
+                    e));
         } catch (PersistenceException e) {
             throw LoggingHelper.logException(logger, signature, new OPMException(
-                "An error has occurred when accessing persistence.", e));
+                    "An error has occurred when accessing persistence.", e));
         }
     }
 
     /**
      * Calculates the end date for the given time value.
      *
-     * @param value
-     *            the value of the time to calculate.
-     * @param type
-     *            the calculation type of the operation.
+     * @param value the value of the time to calculate.
+     * @param type the calculation type of the operation.
      *
      * @return The end date for the given calculation type and value, can not be null.
      *
-     * @throws IllegalArgumentException
-     *             if value is null/negative integer, type is null.
-     * @throws OPMException
-     *             if there is any problem when executing the method.
+     * @throws IllegalArgumentException if value is null/negative integer, type is null.
+     * @throws OPMException if there is any problem when executing the method.
      */
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
     public Date calculateEndDate(Integer value, CalculationEndDateCalculationType type) throws OPMException {
@@ -1334,25 +1244,25 @@ public class AccountServiceImpl extends BaseService implements AccountService {
         Logger logger = getLogger();
 
         LoggingHelper.logEntrance(logger, signature,
-            new String[] {"value", "type"},
-            new Object[] {value, type});
+                new String[]{"value", "type"},
+                new Object[]{value, type});
 
         Helper.checkNull(logger, signature, value, "value");
         if (value < 0) {
             // Log exception
             throw LoggingHelper.logException(logger, signature, new IllegalArgumentException(
-                "'value' should not be negative."));
+                    "'value' should not be negative."));
         }
 
         Helper.checkNull(logger, signature, type, "type");
 
         try {
             List<Object[]> originalResult = getEntityManager()
-                .createNativeQuery(SQL_QUERY_DATE_CALCULATION_DATA_VALUE)
-                .setParameter("type", type.name()).setParameter("value", value).getResultList();
+                    .createNativeQuery(SQL_QUERY_DATE_CALCULATION_DATA_VALUE)
+                    .setParameter("type", type.name()).setParameter("value", value).getResultList();
             if (originalResult.isEmpty()) {
                 throw LoggingHelper.logException(logger, signature,
-                    new OPMException("The value you input can not be resolved to provide the end date."));
+                        new OPMException("The value you input can not be resolved to provide the end date."));
             }
             Object[] values = originalResult.get(0);
             int dayOffset = (Integer) values[0];
@@ -1362,16 +1272,17 @@ public class AccountServiceImpl extends BaseService implements AccountService {
             calendar.add(Calendar.MONTH, monthOffset);
 
             Date result = calendar.getTime();
-            LoggingHelper.logExit(logger, signature, new Object[] {result});
+            LoggingHelper.logExit(logger, signature, new Object[]{result});
             return result;
         } catch (IllegalStateException e) {
             throw LoggingHelper.logException(logger, signature, new OPMException("The entity manager has been closed.",
-                e));
+                    e));
         } catch (PersistenceException e) {
             throw LoggingHelper.logException(logger, signature, new OPMException(
-                "An error has occurred when accessing persistence.", e));
+                    "An error has occurred when accessing persistence.", e));
         }
     }
+
     /**
      * Get payments for the account.
      *
@@ -1389,23 +1300,23 @@ public class AccountServiceImpl extends BaseService implements AccountService {
         Logger logger = getLogger();
 
         LoggingHelper.logEntrance(logger, signature,
-            new String[] {"accountId"},
-            new Object[] {accountId});
+                new String[]{"accountId"},
+                new Object[]{accountId});
 
         Helper.checkPositive(logger, signature, accountId, "accountId");
 
         try {
             List<Payment> result = Helper.getValues(getEntityManager(), logger, signature, Payment.class,
-                JPQL_QUERY_PAYMENTS_BY_ACCOUNT_ID, new String[] {"accountId"}, new Object[] {accountId});
+                    JPQL_QUERY_PAYMENTS_BY_ACCOUNT_ID, new String[]{"accountId"}, new Object[]{accountId});
 
-            LoggingHelper.logExit(logger, signature, new Object[] {result});
+            LoggingHelper.logExit(logger, signature, new Object[]{result});
             return result;
         } catch (IllegalStateException e) {
             throw LoggingHelper.logException(logger, signature, new OPMException("The entity manager has been closed.",
-                e));
+                    e));
         } catch (PersistenceException e) {
             throw LoggingHelper.logException(logger, signature, new OPMException(
-                "An error has occurred when accessing persistence.", e));
+                    "An error has occurred when accessing persistence.", e));
         }
     }
 
@@ -1424,8 +1335,8 @@ public class AccountServiceImpl extends BaseService implements AccountService {
         Logger logger = getLogger();
 
         LoggingHelper.logEntrance(logger, signature,
-            new String[] {"summary"},
-            new Object[] {summary});
+                new String[]{"summary"},
+                new Object[]{summary});
 
         Helper.checkNull(logger, signature, summary, "summary");
 
@@ -1439,16 +1350,16 @@ public class AccountServiceImpl extends BaseService implements AccountService {
             LoggingHelper.logExit(logger, signature, null);
         } catch (IllegalStateException e) {
             throw LoggingHelper.logException(logger, signature, new OPMException("The entity manager has been closed.",
-                e));
+                    e));
         } catch (PersistenceException e) {
             throw LoggingHelper.logException(logger, signature, new OPMException(
-                "An error has occurred when accessing persistence.", e));
+                    "An error has occurred when accessing persistence.", e));
         }
     }
 
-
-     /**
+    /**
      * Trigger the update billing summary process.
+     *
      * @param accountId the account id
      * @param versionId the calculation version id
      * @throws OPMException if there is any problem when executing the method
@@ -1461,8 +1372,8 @@ public class AccountServiceImpl extends BaseService implements AccountService {
         Logger logger = getLogger();
 
         LoggingHelper.logEntrance(logger, signature,
-            new String[] {"accountId", "versionId"},
-            new Object[] {accountId, versionId});
+                new String[]{"accountId", "versionId"},
+                new Object[]{accountId, versionId});
         try {
             Account account = get(accountId);
             for (CalculationVersion version : account.getCalculationVersions()) {
@@ -1486,16 +1397,12 @@ public class AccountServiceImpl extends BaseService implements AccountService {
         }
     }
 
-
     /**
      * Builds the WHERE string.
      *
-     * @param filter
-     *            the filter
-     * @param paramNames
-     *            the parameter name
-     * @param paramValues
-     *            the parameter values
+     * @param filter the filter
+     * @param paramNames the parameter name
+     * @param paramValues the parameter values
      *
      * @return the WHERE string.
      */
@@ -1503,17 +1410,17 @@ public class AccountServiceImpl extends BaseService implements AccountService {
         StringBuilder sb = new StringBuilder();
 
         Helper.appendCondition(sb, "e.claimNumber LIKE :claimNumber ESCAPE '\\'",
-            filter.getClaimNumber(), "claimNumber", paramNames, paramValues);
+                filter.getClaimNumber(), "claimNumber", paramNames, paramValues);
         Helper.appendCondition(sb, "e.holder.ssn LIKE :ssn ESCAPE '\\'", filter.getSsn(),
-            "ssn", paramNames, paramValues);
+                "ssn", paramNames, paramValues);
         Helper.appendCondition(sb, "e.holder.firstName LIKE :firstName ESCAPE '\\'", filter.getFirstName(), "firstName",
-            paramNames, paramValues);
+                paramNames, paramValues);
         Helper.appendCondition(sb, "e.holder.middleInitial LIKE :middleName ESCAPE '\\'",
-            filter.getMiddleName(), "middleName", paramNames, paramValues);
+                filter.getMiddleName(), "middleName", paramNames, paramValues);
         Helper.appendCondition(sb, "e.holder.lastName LIKE :lastName ESCAPE '\\'", filter.getLastName(), "lastName",
-            paramNames, paramValues);
+                paramNames, paramValues);
         Helper.appendCondition(sb, "e.holder.birthDate = :birthDate", filter.getBirthDate(), "birthDate", paramNames,
-            paramValues);
+                paramValues);
 
         Boolean assigned = filter.getAssigned();
         if (assigned != null) {
@@ -1528,7 +1435,6 @@ public class AccountServiceImpl extends BaseService implements AccountService {
         return sb.toString();
     }
 
-
     /**
      * This method checks whether the instance of the class was initialized properly.
      *
@@ -1541,9 +1447,9 @@ public class AccountServiceImpl extends BaseService implements AccountService {
         Helper.checkState(calculationExecutionService == null, "calculationExecutionService should not be null.");
     }
 
-
     /**
      * Return the service category for a calculation.
+     *
      * @param calculation the calculation
      * @return the service category
      */
@@ -1562,7 +1468,7 @@ public class AccountServiceImpl extends BaseService implements AccountService {
             if (calculation.getEndDate().before(splitDate1082)) {
                 return DepositType.CSRS_PRE_10_82_REDEPOSIT;
             } else if (!calculation.getBeginDate().before(splitDate1082)
-                && calculation.getEndDate().before(splitDate391)) {
+                    && calculation.getEndDate().before(splitDate391)) {
                 return DepositType.CSRS_POST_82_PRE_91_REDEPOSIT;
             } else if (!calculation.getBeginDate().before(splitDate391)) {
                 return DepositType.CSRS_POST_3_91_REDEPOSIT;
@@ -1583,9 +1489,9 @@ public class AccountServiceImpl extends BaseService implements AccountService {
         return null;
     }
 
-
     /**
      * Update billing summary by calculation version.
+     *
      * @param version the calculation version
      * @param accountId the account id
      * @throws OPMException if there is any persistence error

@@ -73,7 +73,7 @@
         </div>
         <div class="basicInfoPanel roundedGrayPanel">
           <div class="fullRowField">
-            <p class="fieldLabel">Form submitted:</p>
+            <p class="fieldLabel">Form submitted <span class="reqMark">*</span> :</p>
             <input name="formType" type="radio" value="2" id="formCsrs" />
             <label class="radioLabel" for="formCsrs">2803 (CSRS)</label>
             <input name="formType" type="radio" id="formFers" value="1"/>

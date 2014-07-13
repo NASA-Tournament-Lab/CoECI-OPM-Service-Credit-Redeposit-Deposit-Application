@@ -82,7 +82,7 @@ $.each($('.shortenedSelect option'), function(key, optionElement) {
                 var interestDateSave = $(".validationStatusBar .interestCalculatedToDate", tab).val(); // should be removed when interestCalculatedToDate become readonly
                 $(".jsCancelFunction", tab).trigger("click");
                 $(".validationStatusBar .interestCalculatedToDate", tab).val(interestDateSave); // should be removed when interestCalculatedToDate become readonly
-                if (validateCalculationEntry(cur) == false) {
+                if ($(".entriesTbl tbody tr").length > 1 && validateCalculationEntry(cur) == false) {
                     showPopup(".createAccountPopupNext");
                     return false;
                 }
@@ -96,7 +96,14 @@ $.each($('.shortenedSelect option'), function(key, optionElement) {
                         window.location = context + "/account/viewCreate?step=createAccountNote";
                     }
                 };
-                runCalculation(context, tab, true, saveBack);
+
+                if($(".entriesTbl tbody tr").length <= 1){
+                    window.location = context + "/account/viewCreate?step=createAccountNote";
+
+                } else {
+                   runCalculation(context, tab, true, saveBack); 
+                }
+                
             
         
     });
@@ -109,7 +116,7 @@ $.each($('.shortenedSelect option'), function(key, optionElement) {
                 var interestDateSave = $(".validationStatusBar .interestCalculatedToDate", tab).val(); // should be removed when interestCalculatedToDate become readonly
                 $(".jsCancelFunction", tab).trigger("click");
                 $(".validationStatusBar .interestCalculatedToDate", tab).val(interestDateSave); // should be removed when interestCalculatedToDate become readonly
-                if (validateCalculationEntry(cur) == false) {
+                if ($(".entriesTbl tbody tr").length > 1 && validateCalculationEntry(cur) == false) {
                     showPopup(".createAccountPopupPrev");
                     return false;
                 }
@@ -123,7 +130,12 @@ $.each($('.shortenedSelect option'), function(key, optionElement) {
                         window.location = context + "/account/viewCreate?step=createAccount";
                     }
                 };
-                runCalculation(context, tab, true, saveBack);
+                if($(".entriesTbl tbody tr").length <= 1){
+                    window.location = context + "/account/viewCreate?step=createAccount";
+
+                } else {
+                   runCalculation(context, tab, true, saveBack); 
+                }
             
         
     });
@@ -136,7 +148,7 @@ $.each($('.shortenedSelect option'), function(key, optionElement) {
                 var interestDateSave = $(".validationStatusBar .interestCalculatedToDate", tab).val(); // should be removed when interestCalculatedToDate become readonly
                 $(".jsCancelFunction", tab).trigger("click");
                 $(".validationStatusBar .interestCalculatedToDate", tab).val(interestDateSave); // should be removed when interestCalculatedToDate become readonly
-                if (validateCalculationEntry(cur) == false) {
+                if ($(".entriesTbl tbody tr").length > 1 && validateCalculationEntry(cur) == false) {
                     showPopup(".createAccountPopupFinish");
                     return false;
                 }
@@ -150,7 +162,12 @@ $.each($('.shortenedSelect option'), function(key, optionElement) {
                         window.location = context + "/account/viewCreate?step=createAccountFinish";
                     }
                 };
-                runCalculation(context, tab, true, saveBack);
+                if($(".entriesTbl tbody tr").length <= 1){
+                    window.location = context + "/account/viewCreate?step=createAccountFinish";
+
+                } else {
+                   runCalculation(context, tab, true, saveBack); 
+                }
             
         
     });
@@ -235,6 +252,13 @@ function validate(createdAccountId) {
     $('.halfRowField', context).find('.errorIcon').remove();
 
     var html = "<ul style='list-style-type: square;'>";
+
+    var formType = $("input[name='formType']:checked", context);
+    if(formType.length <= 0){
+
+        html += "<li style='margin-left: 20px;'><span>Invalid Form submitted. Select a non empty value.</span><br/></li>";
+        validated = false;
+    }
     // Bug Fix 2
     var fieldNames = ['firstName', 'lastName', 'street1'];
     var displayNames = ['First Name', 'Last Name', 'Address #1'];
@@ -314,7 +338,8 @@ function validate(createdAccountId) {
         success: function(data, text, xhr) {
                 numssn = data.items.length;
                 if(numssn > 0){
-                    foundId = data.items[0].holder.id;
+                    //foundId = data.items[0].holder.id;
+                    foundId = data.items[0].id;
                 }
         },
     });
@@ -358,7 +383,8 @@ function createAccount(context, createdAccountId) {
         },
         status: {
             id: 1
-        }
+        },
+        balance: 0
     };
 
     if (createdAccountId !== '') {
@@ -454,7 +480,16 @@ function createAccount(context, createdAccountId) {
     var formType = $('input[name=formType]:checked', '.basicInfoPanel').val();
 
     if(formType && formType !== "" ){
+
+        if(isNull(account.formType)){
+            account.formType = {};
+        }
         account.formType.id = formType;
+        if (formType == 2) {
+            account.planType = 'CSRS';
+        } else {
+            account.planType = 'FERS';
+        }
 
     } else {
         account.formType = null;

@@ -87,29 +87,29 @@ $(function() {
         var holder = account.holder;
         var version = getOfficialVersion(account.calculationVersions);
         var statementDiv = $('.printStatementPopup .popupBody');
+        var paymentAmount = findLatestPayment(account.paymentHistory);
+        var priorBalance = account.balance == null ? 0 : account.balance;
         // CSD
         $('.printNum span, .claimNum span', statementDiv).html(account.claimNumber);
         // birthday
         $('.printBirth span', statementDiv).html(parseDateToString(holder.birthDate));
         // address
         $('.printAddressBody', statementDiv).html(buildAddrerssString(holder.address));
+        // payment amount
+        $('.printAcount', statementDiv).html(paymentAmount);
         // name
-        $('.name-report span', statementDiv).html(holder.firstName + ' ' + holder.middleInitial + ' ' + holder.lastName);
+        $('.name-report span', statementDiv).html(holder.firstName + ' ' + (holder.middleInitial == null ? '' : holder.middleInitial) + ' ' + holder.lastName);
         // cover by
         $('.coveredBy span', statementDiv).html(account.planType);
         // date
         $('.date span', statementDiv).html(parseDateToString(version.calculationDate));
         // prior balance
-        $('.priorBalance span', statementDiv).html(account.balance);
+        $('.priorBalance span', statementDiv).html(priorBalance);
         // interest
         $('.interest span', statementDiv).html(version.calculationResult.summary.totalInitialInterest);
         // balance due before payment
-        $('.balanceBeforePayment span', statementDiv).html(account.balance + version.calculationResult.summary.totalInitialInterest);
+        $('.balanceBeforePayment span', statementDiv).html(priorBalance + version.calculationResult.summary.totalInitialInterest);
         // payment amount
-        var paymentAmount = 0;
-        if (version.calculationResult.items.length > 0) {
-            paymentAmount = version.calculationResult.items[0].paymentsApplied;
-        }
         $('.payment span', statementDiv).html(paymentAmount);
         // billing information
         var spans = $('.detailsLine', statementDiv).find('span');
@@ -117,7 +117,7 @@ $(function() {
             spans.eq(mapping[this.name]).html(this.balance);
         });
         // new balance due
-        $('.detailsLine').next('p').find('span').html(account.balance - paymentAmount);
+        $('.detailsLine').next('p').find('span').html(priorBalance + version.calculationResult.summary.totalBalance - paymentAmount);
         // format currency
         $('.dollar').formatCurrency({negativeFormat: '%s-%n'});
         showPopup(".printStatementPopup");

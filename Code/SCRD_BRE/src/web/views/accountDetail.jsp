@@ -2095,7 +2095,7 @@
                                     </table>
 
                                     <div class="summaryTblWrapper">
-                                        <h2>One transaction on this account.</h2>
+                                        <h2 class="transactionNumber">One transaction on this account.</h2>
                                         <table border="0" cellpadding="0" cellspacing="0" width="100%" class="summaryAccountTransactionPrintTbl">
                                             <thead>
                                                 <tr>
