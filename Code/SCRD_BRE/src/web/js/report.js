@@ -28,6 +28,9 @@ $(document).ready(function() {
 	
 	//reports page edit button
 	$(".jsEditReport").click(function(){
+		if ($(this).hasClass("priBtnDisabled")) {
+			return;
+		}
 		var panel = $(this).closest(".reportsTab");
 		var view = $('.viewReportWrapper:visible', panel);
 		$(".jsEditReport, .jsCreateReport, .jsDelReport, .jsPrintReport, .viewReportWrapper", panel).addClass("isHidden");
@@ -50,6 +53,9 @@ $(document).ready(function() {
 	});
 	
 	$(".jsCreateReport").click(function() {
+		if ($(this).hasClass("priBtnDisabled")) {
+			return;
+		}
 		var panel = $(this).closest(".reportsTab");
 		$(".jsEditReport, .jsCreateReport, .jsDelReport, .jsPrintReport, .viewReportWrapper", panel).addClass("isHidden")
 		$(".jsCancelSaveReport, .jsSaveReport, .editReportWrapper", panel).removeClass("isHidden");
@@ -208,6 +214,9 @@ $(document).ready(function() {
 
 	//reports page delete button
 	$(".jsDelReport").click(function(){
+		if ($(this).hasClass("priBtnDisabled")) {
+			return;
+		}
 		showPopup(".deleteReportConfirmationPopup");
 		
 	});	

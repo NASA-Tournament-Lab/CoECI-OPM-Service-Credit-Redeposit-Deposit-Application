@@ -67,8 +67,8 @@ function search(filter) {
         		clipboard();
         		$(this).closest("tbody").find("tr").removeClass("highlighted");
         		$(this).addClass("highlighted");
-        		$(".paymentSearchResultsBtnWrapper a").removeClass("priBtnDisabled");
-        	    $(".paymentSearchResultsBtnWrapper a").addClass("priBtnActive");
+        		$(".paymentSearchResultsBtnWrapper a:not(.priBtnDisabledForever)").removeClass("priBtnDisabled");
+        	    $(".paymentSearchResultsBtnWrapper a:not(.priBtnDisabledForever)").addClass("priBtnActive");
         	    
         	    if ($(this).data("data").accountId != null) {
         	        setCurrentAccountId($(this).data("data").accountId);

@@ -25,7 +25,6 @@
         <mvc:exclude-mapping path="/js/**"/>
         <mvc:exclude-mapping path="/i/**"/>
         <mvc:exclude-mapping path="/include/**"/>
-        
         <bean class="gov.opm.scrd.web.interceptors.AuthorizationInterceptor" />
     </mvc:interceptor>
   </mvc:interceptors>

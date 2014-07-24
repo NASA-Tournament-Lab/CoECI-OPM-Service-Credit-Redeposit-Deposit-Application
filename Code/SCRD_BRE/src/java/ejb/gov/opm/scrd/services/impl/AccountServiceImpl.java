@@ -101,14 +101,19 @@ import org.jboss.logging.Logger;
  * <li>add method triggerBill.</li>
  * </ul>
  * </p>
- *
+ * <p>
+ * <em>Changes in 1.3 (Defect Assembly SCRD App part 1.0):</em>
+ * <ul>
+ * <li>case incensitive in search</li>
+ * </ul>
+ * </p>
  * <p>
  * <strong>Thread Safety: </strong> This class is effectively thread safe after configuration, the configuration is done
  * in a thread safe manner.
  * </p>
  *
  * @author faeton, sparemax, bannie2492, TCSASSEMBLER
- * @version 1.2
+ * @version 1.3
  */
 @Stateless
 @Local(AccountService.class)
@@ -1413,11 +1418,13 @@ public class AccountServiceImpl extends BaseService implements AccountService {
                 filter.getClaimNumber(), "claimNumber", paramNames, paramValues);
         Helper.appendCondition(sb, "e.holder.ssn LIKE :ssn ESCAPE '\\'", filter.getSsn(),
                 "ssn", paramNames, paramValues);
-        Helper.appendCondition(sb, "e.holder.firstName LIKE :firstName ESCAPE '\\'", filter.getFirstName(), "firstName",
+        Helper.appendCondition(sb, "lower(e.holder.firstName) LIKE :firstName ESCAPE '\\'", 
+                toLowerSafely(filter.getFirstName()), "firstName",
                 paramNames, paramValues);
-        Helper.appendCondition(sb, "e.holder.middleInitial LIKE :middleName ESCAPE '\\'",
-                filter.getMiddleName(), "middleName", paramNames, paramValues);
-        Helper.appendCondition(sb, "e.holder.lastName LIKE :lastName ESCAPE '\\'", filter.getLastName(), "lastName",
+        Helper.appendCondition(sb, "lower(e.holder.middleInitial) LIKE :middleName ESCAPE '\\'",
+                toLowerSafely(filter.getMiddleName()), "middleName", paramNames, paramValues);
+        Helper.appendCondition(sb, "lower(e.holder.lastName) LIKE :lastName ESCAPE '\\'", 
+                toLowerSafely(filter.getLastName()), "lastName",
                 paramNames, paramValues);
         Helper.appendCondition(sb, "e.holder.birthDate = :birthDate", filter.getBirthDate(), "birthDate", paramNames,
                 paramValues);
@@ -1435,6 +1442,18 @@ public class AccountServiceImpl extends BaseService implements AccountService {
         return sb.toString();
     }
 
+    /**
+     * Converts a string to lower case.
+     * @param str the string to convert.
+     * @return the lower case string.
+     */
+    private static String toLowerSafely(String str) {
+        if (str != null) {
+            return str.toLowerCase();
+        }
+        return str;
+    }
+    
     /**
      * This method checks whether the instance of the class was initialized properly.
      *

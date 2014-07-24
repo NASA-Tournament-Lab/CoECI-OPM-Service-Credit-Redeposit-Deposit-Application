@@ -26,7 +26,9 @@ import gov.opm.scrd.services.SecurityService;
 import gov.opm.scrd.services.UserService;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
@@ -49,9 +51,15 @@ import org.springframework.web.servlet.ModelAndView;
  * not modified in controllers by methods after configuration and configuration will be done in a thread safe manner by
  * Spring IoC framework.
  * </p>
- *
+ * <p>
+ * <em>Changes in 1.1 (Defect Assembly - SCRD App - part 1.0):</em>
+ * <ul>
+ * <li>Add api to get the actions.</li>
+ * </ul>
+ * </p>
+ * <p>
  * @author faeton, sparemax
- * @version 1.0
+ * @version 1.1
  * @since OPM - SCRD - Frontend Initial Module Assembly 1.0
  */
 public abstract class BaseController {
@@ -148,7 +156,15 @@ public abstract class BaseController {
                 modelAndView.addObject(widgetId, false);
             }
         }
-
+        
+        // get the action list
+        List<String> actions = securityService.getPermittedActions(user.getUsername(), Arrays.asList(user.getRole().getName()));
+        Map<String, Boolean> permittedActionsMap = new HashMap<String, Boolean>();
+        for (String action : actions) {
+            permittedActionsMap.put(action, true);
+        }
+        modelAndView.addObject("PERMITTED_ACTIONS", permittedActionsMap);
+        
         LoggingHelper.logExit(logger, signature, new Object[] {modelAndView});
         return modelAndView;
     }

@@ -1,13 +1,29 @@
 <%--
   - Author: TCSASSEMBLER
-  - Version: 1.0
+  - Version: 1.1
   - Copyright (C) 2014 TopCoder Inc., All Rights Reserved.
   -
   - Description: The account detail page.
+  - Change log:
+  -  1.1 Defect Assembly - SCRD App - part 1
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<c:set var="EDIT_ACCOUNT_NOTES" value="PUT /account/\d+/notes$" />
+<c:set var="DELETE_ACCOUNT_NOTES" value="DELETE /account/notes$" />
+<c:set var="SAVE_SERVICE_HISTORY" value ="PUT /account/\d+/calculation" />
+
+<c:set var="CALCULATE_SERVICE_HISTORY" value ="POST /account/\d+/calculation" />
+
+<c:set var="CAN_TRIGGER_BILL" value ="${empty PERMITTED_ACTIONS['POST /account'] && empty PERMITTED_ACTIONS['POST /account/triggerBill'] ? false : true}" />
+
+<c:set var="CAN_ADD_SERVICE_HISTORY" value ="${(empty PERMITTED_ACTIONS[SAVE_SERVICE_HISTORY] && empty PERMITTED_ACTIONS['PUT /account']) ? false : true}" />
+<c:set var="CAN_EDIT_SERVICE_HISTORY" value ="${(empty PERMITTED_ACTIONS[SAVE_SERVICE_HISTORY] && empty PERMITTED_ACTIONS['PUT /account']) ? false : true}" />
+<c:set var="CAN_CALCULATE_SERVICE_HISTORY" value ="${(empty PERMITTED_ACTIONS[CALCULATE_SERVICE_HISTORY] && empty PERMITTED_ACTIONS['POST /account']) ? false : true}" />
+<c:set var="CAN_DELETE_SERVICE_HISTORY" value ="${(empty PERMITTED_ACTIONS['DELETE /account/calculation'] && empty PERMITTED_ACTIONS['DELETE /account']) ? false : true}" />
+
 <html xmlns="http://www.w3.org/1999/xhtml">
     <%
         String path = request.getContextPath();
@@ -50,6 +66,10 @@
     <body>
         <input id="accountId" type="hidden" value="${a.id}"/>
         <input id="accountCsd" type="hidden" value="${a.claimNumber}"/>
+        <input id="canDeletePayment" type="hidden" value="${empty PERMITTED_ACTIONS['DELETE /payment'] ? 'false' : 'true'}" />
+        <input id="canEditPayment" type="hidden" value="${empty PERMITTED_ACTIONS['PUT /payment'] ? 'false' : 'true'}" />
+        <input id="canEditServiceHistory" type="hidden" value="${CAN_EDIT_SERVICE_HISTORY}" />
+        
         <div id="wrapper">
             <%@ include file="include/header.jsp"%>
 
@@ -137,8 +157,8 @@
                     <h3 class="panelHeader jsTogglePanel panelExpanded" tabindex="0">Account Notes</h3>
                     <div class="panelBtnWrapper">
                         <a href="javascript:;" class="priBtn jsAddNote"><span><span>Add</span></span></a>
-                        <a href="javascript:;" class="priBtn jsEditNote"><span><span>Edit</span></span></a>
-                        <a href="javascript:;" class="priBtn jsDelNote"><span><span>Delete</span></span></a>
+                        <a href="javascript:;" class="priBtn jsEditNote <c:if test="${empty PERMITTED_ACTIONS['PUT /account'] && empty PERMITTED_ACTIONS[EDIT_ACCOUNT_NOTES]}">priBtnDisabled</c:if>"><span><span>Edit</span></span></a>
+                        <a href="javascript:;" class="priBtn jsDelNote <c:if test="${empty PERMITTED_ACTIONS['DELETE /account'] && empty PERMITTED_ACTIONS[DELETE_ACCOUNT_NOTES]}">priBtnDisabled</c:if>"><span><span>Delete</span></span></a>
                     </div>
                     <div class="panelBody">
                         <table cellpadding="0" cellspacing="0" border="0" class="stdTbl checkGroup" id="accountNoteTbl" width="100%">
@@ -328,8 +348,8 @@
                             </div>
                             <div class="clear tabBtnsWrapper">
                                 <div class="fRight">
-                                    <a href="javascript:;" class="priBtn jsEditBasicInfo"><span><span>Edit Basic Info</span></span></a>
-                                    <a href="javascript:;" class="priBtn jsConfirmNewAccountValidity"><span><span>Confirm New Account Validity</span></span></a>
+                                    <a href="javascript:;" class="priBtn jsEditBasicInfo <c:if test="${empty PERMITTED_ACTIONS['PUT /account'] && empty PERMITTED_ACTIONS['PUT /account/saveEmployee']}">priBtnDisabled</c:if>"><span><span>Edit Basic Info</span></span></a>
+                                    <a href="javascript:;" class="priBtn jsConfirmNewAccountValidity <c:if test="${empty PERMITTED_ACTIONS['POST /account'] && empty PERMITTED_ACTIONS['POST /account/approve']}">priBtnDisabled</c:if>"><span><span>Confirm New Account Validity</span></span></a>
                                 </div>
                             </div>
                         </div>
@@ -657,9 +677,11 @@
                             <div class="clear tabBtnsWrapper">
                                 <a href="javascript:;" class="priBtn fRight jsPrintFinalStatement"><span><span>Print Final Statement</span></span></a>
                                 <a href="javascript:;" class="priBtn fRight jsReprintStatement"><span><span>Reprint Statement</span></span></a>
-                                <a href="javascript:;" class="priBtn fRight jsUpdateInterest"><span><span>Update Interest</span></span></a>
+                                <c:set var="UPDATE_INTEREST_ACTION" value="POST /account/\d+/updateInterest" />
+                                <c:set var="EDIT_SUMARRAY_ACTION" value="PUT /account/\d+/summary" />
+                                <a href="javascript:;" class="priBtn fRight jsUpdateInterest <c:if test="${empty PERMITTED_ACTIONS['POST /account'] && empty PERMITTED_ACTIONS[UPDATE_INTEREST_ACTION]}">priBtnDisabled</c:if>"><span><span>Update Interest</span></span></a>
                                 <a href="javascript:;" class="priBtn fRight isHidden jsLastUpdate"><span><span>Last update</span></span></a>
-                                <a href="javascript:;" class="priBtn fRight jsEditBillingInfo"><span><span>Edit Billing Info</span></span></a>
+                                <a href="javascript:;" class="priBtn fRight jsEditBillingInfo <c:if test="${empty PERMITTED_ACTIONS['PUT /account'] && empty PERMITTED_ACTIONS[EDIT_SUMARRAY_ACTION]}">priBtnDisabled</c:if>"><span><span>Edit Billing Info</span></span></a>
                             </div>
                         </div>
                         <!-- .billingSummaryPanel -->
@@ -927,9 +949,9 @@
                                     <select class="fLeft" id="calcVersionDepD">
 
                                     </select>
-                                    <a href="javascript:;" class="priBtn jsNewVersionBtn fLeft"><span><span>New Version</span></span></a>
-                                    <input name="copyCurrent" id="copyCurrent" type="checkbox" value="copyCurrent" class="fLeft checkboxInput"/> <label for="copyCurrent" class="fLeft">Copy Current</label>
-                                    <a href="javascript:;" class="priBtn jsDelVersionBtn fRight"><span><span>Delete Current</span></span></a>
+                                    <a href="javascript:;" class="priBtn jsNewVersionBtn fLeft <c:if test="${CAN_ADD_SERVICE_HISTORY == 'false'}">priBtnDisabled</c:if>"><span><span>New Version</span></span></a>
+                                    <input name="copyCurrent" id="copyCurrent" type="checkbox" value="copyCurrent" class="fLeft checkboxInput" <c:if test="${CAN_ADD_SERVICE_HISTORY == 'false'}">disabled="disabled"</c:if>/> <label for="copyCurrent" class="fLeft">Copy Current</label>
+                                    <a href="javascript:;" class="priBtn jsDelVersionBtn fRight <c:if test="${CAN_DELETE_SERVICE_HISTORY == 'false'}">priBtnDisabled priBtnDisabledForever</c:if>"><span><span>Delete Current</span></span></a>
                                 </div>
                                 <div class="scrollTblArea">
                                     <table cellpadding="0" cellspacing="0" border="0" class="stdTbl entriesTbl  periodTable sortable" id="depTbl" width="100%">
@@ -1004,11 +1026,11 @@
                                 </div>
                                 <div class="funtionArea">
                                     <p>
-                                        <a href="javascript:;" class="priBtn jsValidateEntries fLeft"><span><span>Validate Entries</span></span></a>
-                                        <a href="javascript:;" class="priBtn jsRunCalculation fLeft"><span><span>Run Calculation</span></span></a>
-                                        <a href="javascript:;" class="priBtn jsSaveCalculation fLeft"><span><span>Save Calculation</span></span></a>
+                                        <a href="javascript:;" class="priBtn jsValidateEntries fLeft <c:if test="${CAN_EDIT_SERVICE_HISTORY=='false'}">priBtnDisabled</c:if>"><span><span>Validate Entries</span></span></a>
+                                        <a href="javascript:;" class="priBtn jsRunCalculation fLeft <c:if test="${CAN_CALCULATE_SERVICE_HISTORY=='false'}">priBtnDisabled</c:if>"><span><span>Run Calculation</span></span></a>
+                                        <a href="javascript:;" class="priBtn jsSaveCalculation fLeft <c:if test="${CAN_EDIT_SERVICE_HISTORY=='false'}">priBtnDisabled</c:if>"><span><span>Save Calculation</span></span></a>
                                         <a href="javascript:;" class="priBtn jsCancelFunction fLeft isHidden"><span><span>Cancel</span></span></a>
-                                        <a href="javascript:;" class="priBtn jsTriggerBill fLeft isHidden"><span><span>Trigger Bill</span></span></a>
+                                        <a href="javascript:;" class="priBtn jsTriggerBill fLeft isHidden <c:if test="${CAN_TRIGGER_BILL=='false'}">priBtnDisabled</c:if>"><span><span>Trigger Bill</span></span></a>
                                         <a href="javascript:;" class="priBtn jsRefreshGrid fRight"><span><span>Refresh Grid</span></span></a>
                                         <a href="javascript:;" class="priBtn jsShowCalculation isHidden fRight"><span><span>Show Calculation</span></span></a>
                                     </p>
@@ -1092,7 +1114,7 @@
                                         </div>
                                         <div class="chartCalAreaBox2">
                                             <label for="hoursInputL"><p class="boxTitle">Enter Hours: </p></label>
-                                            <input name="hoursInput" id="hoursInputL" type="text" class="text hourField hourFieldDep"/><a href="javascript:;" class="priBtn jsSubmitHour"><span><span>Submit</span></span></a>
+                                            <input name="hoursInput" id="hoursInputL" type="text" class="text hourField hourFieldDep"/><a href="javascript:;" class="priBtn jsSubmitHour <c:if test="${CAN_CALCULATE_SERVICE_HISTORY=='false'}">priBtnDisabled</c:if>"><span><span>Submit</span></span></a>
                                         </div>
                                         <div class="chartCalAreaBox3">End Date : <strong></strong></div>
                                         <div class="chartCalAreaBox4">
@@ -1238,7 +1260,7 @@
                                 </div>
                             </div>
                             <div class="paymentBtnsWrapper">
-                                <a href="javascript:;" class="priBtn fLeft jsAddPayment"><span><span>Add Payment</span></span></a>
+                                <a href="javascript:;" class="priBtn fLeft jsAddPayment <c:if test="${empty PERMITTED_ACTIONS['POST /payment'] && empty PERMITTED_ACTIONS['POST /payment$']}">priBtnDisabled</c:if>"><span><span>Add Payment</span></span></a>
                                 <div class="fRight">
                                     <a href="javascript:;" class="priBtn jsPHReceipt"><span><span>Payment Receipt</span></span></a>
                                     <a href="javascript:;" class="priBtn jsShowPHNote"><span><span>Show Note</span></span></a>
@@ -1273,20 +1295,6 @@
                                             <th class="unsortable lastCol">GL</th>
                                         </tr>
                                     </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <td class="blankCell starMark">&nbsp;</td>
-                                            <td>&nbsp;</td>
-                                            <td>&nbsp;</td>
-                                            <td>&nbsp;</td>
-                                            <td>&nbsp;</td>
-                                            <td>&nbsp;</td>
-                                            <td>&nbsp;</td>
-                                            <td>&nbsp;</td>
-                                            <td>&nbsp;</td>
-                                            <td>&nbsp;</td>
-                                        </tr>
-                                    </tfoot>
                                     <tbody>
                                         <tr>
                                             <td class="blankCell jsShowRowAction">&nbsp;</td>
@@ -1355,8 +1363,8 @@
                         <!-- .paymentHistoryPanel -->
                         <div class="clear tabBtnsWrapper">
                             <div class="fRight">
-                                <a href="javascript:;" class="priBtn jsSavePHChanges"><span><span>Save Changes</span></span></a>
-                                <a href="javascript:;" class="priBtn jsPHReversePayment"><span><span>Reverse Payment</span></span></a>
+                                <a href="javascript:;" class="priBtn jsSavePHChanges <c:if test="${empty PERMITTED_ACTIONS['DELETE /payment'] && empty PERMITTED_ACTIONS['PUT /payment']}">priBtnDisabled</c:if>"><span><span>Save Changes</span></span></a>
+                                <a href="javascript:;" class="priBtn jsPHReversePayment <c:if test="${empty PERMITTED_ACTIONS['POST /payment'] && empty PERMITTED_ACTIONS['POST /payment/reverse']}">priBtnDisabled</c:if>"><span><span>Reverse Payment</span></span></a>
                             </div>
                         </div>
                     </div>           
@@ -1510,9 +1518,10 @@
                             </div>
                             <div class="notesPopupBtnWrapper">
                                 <a href="javascript:;" class="priBtn jsClosePopup"><span><span>Cancel</span></span></a>
-                                <a href="javascript:;" class="priBtn jsEditNotePopup"><span><span>Edit</span></span></a>
+                                
+                                <a href="javascript:;" class="priBtn jsEditNotePopup <c:if test="${empty PERMITTED_ACTIONS['PUT /account'] && empty PERMITTED_ACTIONS[EDIT_ACCOUNT_NOTES]}">priBtnDisabled</c:if>"><span><span>Edit</span></span></a>
                                 <a href="javascript:;" class="priBtn priBtnDisabled"><span><span>Save</span></span></a>
-                                <a href="javascript:;" class="priBtn jsDelNotePopup"><span><span>Delete</span></span></a>
+                                <a href="javascript:;" class="priBtn jsDelNotePopup <c:if test="${empty PERMITTED_ACTIONS['DELETE /account'] && empty PERMITTED_ACTIONS[DELETE_ACCOUNT_NOTES]}">priBtnDisabled</c:if>"><span><span>Delete</span></span></a>
                                 <a href="javascript:;" class="priBtn jsClipboardCopy"><span><span>Clipboard Copy</span></span></a>
                             </div>
                         </div></div></div>
@@ -1544,7 +1553,7 @@
                                 <a href="javascript:;" class="priBtn jsClosePopup"><span><span>Cancel</span></span></a>
                                 <a href="javascript:;" class="priBtn priBtnDisabled"><span><span>Edit</span></span></a>
                                 <a href="javascript:;" class="priBtn jsUpdateNotePopup"><span><span>Save</span></span></a>
-                                <a href="javascript:;" class="priBtn jsDelNotePopup"><span><span>Delete</span></span></a>
+                                <a href="javascript:;" class="priBtn jsDelNotePopup <c:if test="${empty PERMITTED_ACTIONS['DELETE /account'] && empty PERMITTED_ACTIONS[DELETE_ACCOUNT_NOTES]}">priBtnDisabled</c:if>"><span><span>Delete</span></span></a>
                                 <a href="javascript:;" class="priBtn jsClipboardCopy"><span><span>Clipboard Copy</span></span></a>
                             </div>
                         </div></div></div>
@@ -2628,7 +2637,8 @@
                 <div class="popupFooter"><div class="popupFooterRight"><div class="popupFooterInner"></div></div></div>
             </div>
             <!-- .printPaymentReceiptPopup -->
-
+			
+			
             <div class="popup paymentNotePopup isHidden">
                 <div class="popupArrow"></div>
                 <div class="popupHeader"><div class="popupHeaderRight"><div class="popupHeaderInner"></div></div></div>
@@ -2750,6 +2760,12 @@
                             <div class="paymentField">
                                 <p class="fieldLabel">Apply to :</p>
                                 <select name="paymentApplyTo" class="paymentApplyTo" id="applicationDesignations">
+                                    <option>Default User Order</option>
+                                </select>
+                            </div>
+                            <div class="paymentField">
+                                <p class="fieldLabel">Status :</p>
+                                <select name="paymentStatuses" class="paymentStatuses" id="paymentStatuses">
                                     <option>Default User Order</option>
                                 </select>
                             </div>
@@ -3277,7 +3293,7 @@
             <table class="isHidden" id="versionTableTemplate">
                 <tbody>
                     <tr>
-                        <td class="blankCell firstCol">&nbsp;</td>
+                        <td class="blankCell firstCol <c:if test="${CAN_EDIT_SERVICE_HISTORY=='false'}">cellDisabled</c:if>">&nbsp;</td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -3339,7 +3355,7 @@
             <table class="isHidden" id="versionNewTemplate">
                 <tbody>
                     <tr class="even2 newEntryRow unsortable">
-                        <td class="blankCell firstCol">&nbsp;</td>
+                        <td class="blankCell firstCol <c:if test="${CAN_EDIT_SERVICE_HISTORY=='false'}">cellDisabled</c:if>">&nbsp;</td>
                         <td></td>
                         <td></td>
                         <td></td>

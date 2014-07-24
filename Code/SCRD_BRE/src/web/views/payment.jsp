@@ -1,9 +1,11 @@
 <%--
   - Author: TCSASSEMBLER
-  - Version: 1.0
+  - Version: 1.1
   - Copyright (C) 2014 TopCoder Inc., All Rights Reserved.
   -
   - Description: The payment page.
+  - Change log:
+  -  1.1 Defect Assembly - SCRD App - part 1
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -243,10 +245,10 @@
                     
                     	<div class="isHidden clear paymentSearchResultsBtnWrapper group">
                         	<div class="fRight">
-                                <a href="javascript:;" class="priBtn priBtnDisabled jsAddPayment"><span><span>Add Payment</span></span></a>
+                                <a href="javascript:;" class="priBtn priBtnDisabled jsAddPayment <c:if test="${empty PERMITTED_ACTIONS['POST /payment'] && empty PERMITTED_ACTIONS['POST /payment$']}">priBtnDisabledForever</c:if>"><span><span>Add Payment</span></span></a>
                                 <a href="javascript:;" class="priBtn priBtnDisabled jsViewAccountBtn"><span><span>View Account</span></span></a>
                                 <a href="javascript:;" class="priBtn priBtnDisabled jsCopyPaymentsToClipboard"><span><span>Copy to Clipboard</span></span></a>
-                                <a href="javascript:;" class="priBtn priBtnDisabled jsShowAuditTrail"><span><span>Show Audit Trail</span></span></a>
+                                <a href="javascript:;" class="priBtn priBtnDisabled jsShowAuditTrail <c:if test="${empty PERMITTED_ACTIONS['AUDIT_HISTORY']}">priBtnDisabledForever</c:if>"><span><span>Show Audit Trail</span></span></a>
                             </div>
                         </div>
                     </div>

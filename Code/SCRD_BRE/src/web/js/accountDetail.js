@@ -41,6 +41,25 @@ $(function() {
     populateBillingSummary(account.billingSummary);
     populateCalculationVersion(account);
 
+    $(".paymentHistoryPanel .jsAddPayment").click(function() {
+    	if ($(this).hasClass("priBtnDisabled")) {
+    		return;
+    	}
+        $('.addPaymentPopup input[name="batchNum"]').val('');
+        $('.addPaymentPopup input[name="blockNum"]').val('');
+        $('.addPaymentPopup input[name="seqNum"]').val('');
+        $('.addPaymentPopup input[name="paymentAmount"]').val('');
+        $('.addPaymentPopup input[name="depositDate"]').val('');
+        $('.addPaymentPopup input[name="addPaymentAppliance"][value=1]').prop('checked', true);
+        
+        $('.addPaymentPopup div.currentAccountInfo div.fLeft div.accountField p.fieldVal').eq(0).text(account.claimant);
+        $('.addPaymentPopup div.currentAccountInfo div.fLeft div.accountField p.fieldVal').eq(1).text(account.claimNumber);
+		$('.addPaymentPopup div.currentAccountInfo div.fRight div.accountField p.fieldVal').eq(0).text(formatNotificationDate(account.holder.birthDate));
+		$('.addPaymentPopup div.currentAccountInfo div.fRight div.accountField p.fieldVal').eq(1).text("$" + (account.balance!=null?account.balance.toFixed(2):"0.00"));
+		
+        showPopup(".addPaymentPopup ");
+    });
+    
     $(document).on("change", ".glcheckbox", function() {
         // add to the modification changed payments
         var paymentId = $(this).closest("tr").data('payment-id');
@@ -57,6 +76,9 @@ $(function() {
     });
 
     $('.jsSavePHChanges').on("click", function() {
+    	if ($(this).hasClass('priBtnDisabled')) {
+    		return;
+    	}
         $.ajax({
             url: context + '/payment',
             type: 'PUT',
@@ -216,6 +238,9 @@ $(function() {
     });
 
     $(".jsEditNotePopup").click(function() {
+    	if ($(this).hasClass("priBtnDisabled")) {
+    		return;
+    	}
         closePopup();
         populateNote();
         showPopup(".accountNotesEditPopup");
@@ -231,6 +256,9 @@ $(function() {
 
 
     $(".jsEditNote").click(function() {
+    	if ($(this).hasClass("priBtnDisabled")) {
+    		return;
+    	}
         var checked = $("#accountNoteTbl tbody input:checked");
         if (checked.length < 1) {
             closePopup();
@@ -245,12 +273,15 @@ $(function() {
         }
     });
     $(".jsDelNote").click(function() {
+    	if ($(this).hasClass("priBtnDisabled")) {
+    		return;
+    	}
         var checked = $("#accountNoteTbl tbody input:checked");
         currentDeleteMode = 1;
         if (checked.length < 1) {
             closePopup();
             currentDeleteMode = 1;
-            showPopup(".noAccountNoteSelectedPopup ");
+            showPopup(".noAccountNoteSelectedPopup");
         } else {
             if (checked.length == 1) {
                 $('.delAccountNotePopup').find('p').html('Do you want to delete this note?');
@@ -266,6 +297,9 @@ $(function() {
 
 
     $(".jsDelNotePopup").click(function() {
+    	if ($(this).hasClass("priBtnDisabled")) {
+    		return;
+    	}
         currentDeleteMode = 2;
         $('.delAccountNotePopup').find('p').html('Do you want to delete this note?');
         closePopup();
@@ -273,6 +307,9 @@ $(function() {
     });
 
     $(".jsEditBasicInfo").click(function(e) {
+    	if ($(this).hasClass("priBtnDisabled")) {
+    		return;
+    	}
         $(".accountBasicInfoPanel").hide();
         populateEditInfo(context, accountId);
         $(".accountBasicInfoPanelEdit").show();
@@ -290,6 +327,9 @@ $(function() {
         $(".accountBasicInfoPanelEdit").hide();
     });
     $(".jsConfirmNewAccountValidity").click(function(e) {
+    	if ($(this).hasClass("priBtnDisabled")) {
+    		return;
+    	}
         populateEditInfo(context, accountId);
         $('.jsRejectConfirmNewAccountValidity, .jsApproveConfirmNewAccountValidity').removeClass('priBtnDisabled');
         if (checkApproveRejectStatus() == true) {
@@ -414,6 +454,9 @@ $(function() {
 
     //Edit Billing Info
     $(".jsEditBillingInfo").click(function(e) {
+    	if ($(this).hasClass("priBtnDisabled")) {
+    		return;
+    	}
         $(".billingSummaryPanel").hide();
         $(".billingSummaryPanelEdit").show();
         $(".billingSummaryPanelEdit input:text").keypress(function(evt) {
@@ -1454,6 +1497,8 @@ var modifiedPayments = [];
 
 function refreshPaymentTable(accountId) {
     var context = $('#context').val();
+    var canEditPayment = $('#canEditPayment').val() == "true";
+    var canDeletePayment = $('#canDeletePayment').val() == "true";
     $.ajax({
         url: context + '/account/' + accountId + '/payments',
         async: true,
@@ -1470,9 +1515,11 @@ function refreshPaymentTable(accountId) {
                 if (i % 2 == 0) {
                     row.addClass('even');
                 }
-                var cell = $('<td class="blankCell jsShowRowAction">&nbsp;</td>');
+                var cell = $('<td class="blankCell jsShowRowAction paymentCell">&nbsp;</td>');
                 row.append(cell);
-
+                if (!canDeletePayment) {
+                	cell.addClass("cellDisabled");
+                }
                 cell = $('<td></td>');
                 cell.text(item.batchNumber);
                 row.append(cell);
@@ -1512,6 +1559,9 @@ function refreshPaymentTable(accountId) {
                     theInput.prop('checked', true);
                 } else {
                     theInput.prop('checked', false);
+                }
+                if (!canEditPayment) {
+                	theInput.prop('disabled', true);
                 }
                 cell.append(theInput);
                 row.append(cell);

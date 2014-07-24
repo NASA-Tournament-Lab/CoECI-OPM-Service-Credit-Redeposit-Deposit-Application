@@ -194,9 +194,29 @@ $(document).ready(function() {
     });
 
     if ($.isFunction($.contextMenu)) {
-
         $.contextMenu({
-            selector: '.blankCell',
+            selector: '.blankCell.paymentCell:not(.cellDisabled)',
+            callback: function(key, options) {
+            },
+            items: {
+                "delete": {name: "Delete this row",
+                    callback: function(key, options) {
+                        var cur = options.$trigger;
+                        var parent = $(cur).parent("tr");
+                        if (!parent.hasClass("newEntryRow")) {
+                            parent.remove();
+                        } else {
+                            alert("This row can not be deleted");
+                        }
+                    }
+
+                }
+            }
+        });
+    }
+    if ($.isFunction($.contextMenu)) {
+        $.contextMenu({
+            selector: '.blankCell:not(".paymentCell, .cellDisabled")',
             callback: function(key, options) {
                 //var m = "clicked: " + key;
                 //window.console && console.log(m) || alert(m); 
@@ -320,6 +340,7 @@ $(document).ready(function() {
 
     if ($(".addPaymentPopup").length > 0) {
         loadLookup('applicationDesignations', false);
+        loadLookup('paymentStatuses', false);
         // update the paymentAppliance
         $.ajax({
             url: 'lookup/paymentAppliances',
@@ -652,6 +673,9 @@ $(document).ready(function() {
     });
     // calculate end date
     $('.jsSubmitHour').click(function() {
+    	if ($(this).hasClass("priBtnDisabled")) {
+    		return;
+    	}
         var hour = $(this).prev('input').val();
         if (hour == '') {
             $('.endDateError').html('Please enter a non empty integer hour.');
@@ -1145,6 +1169,9 @@ $(document).ready(function() {
 
     //Step 2 Validate Entries
     $(".jsValidateEntries").click(function() {
+    	if ($(this).hasClass("priBtnDisabled")) {
+    		return;
+    	}
         validateCalculationEntry(this);
 
 
@@ -1153,6 +1180,9 @@ $(document).ready(function() {
     var vEmpty = $(".validateResultTbl tbody").eq(0).html();
     var vSuccess = $(".validateResultTbl tfoot").eq(0).html();
     $(".jsRunCalculation").click(function() {
+    	if ($(this).hasClass("priBtnDisabled")) {
+    		return;
+    	}
         //$(".jsCancelFunction", tab).hide();
         //$(".jsTriggerBill", tab).hide();
         var tab = $(this).parents(".tabsBlock").eq(0);
@@ -1169,6 +1199,9 @@ $(document).ready(function() {
 
     });
     $(".jsSaveCalculation").click(function() {
+    	if ($(this).hasClass("priBtnDisabled")) {
+    		return;
+    	}
         var tab = $(this).parents(".tabsBlock").eq(0);
         var interestDateSave = $(".validationStatusBar .interestCalculatedToDate", tab).val(); // should be removed when interestCalculatedToDate become readonly
         $(".jsCancelFunction", tab).trigger("click");
@@ -1187,6 +1220,9 @@ $(document).ready(function() {
     });
 
     $(document).delegate(".jsTriggerBill", 'click', function() {
+    	if ($(this).hasClass("priBtnDisabled")) {
+    		return;
+    	}
         var tab = $(this).parents(".tabsBlock").eq(0);
         var result = $(".validationStatusBar .resultsVal", tab);
         $.ajax({
@@ -1259,6 +1295,9 @@ $(document).ready(function() {
     //var emptyRowHTML = '<tr class="even2 newEntryRow unsortable"><td class="blankCell firstCol">&nbsp;</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td class="lastCol"></td></tr>';
 
     $(".jsNewVersionBtn").click(function() {
+    	if ($(this).hasClass('priBtnDisabled')) {
+    		return;
+    	}
         var check = $(this).next('input').prop('checked');
         addNewVersion(this, check);
 
@@ -1372,6 +1411,15 @@ $(document).ready(function() {
     });
 
     $("body").delegate(".entriesTbl tbody td", "click", function() {
+    	var canEditServiceHistory = true;
+    	if ($('#canEditServiceHistory').length == 0) {
+    		canEditServiceHistory = true;
+    	} else {
+    		canEditServiceHistory = $('#canEditServiceHistory').val() == 'true';
+    	}
+    	if (!canEditServiceHistory) {
+    		return;
+    	}
         if (!$(this).parents("table").eq(0).hasClass("entriesTblUnedit")) {
             var tr = $(this).parent("tr");
 
@@ -1751,7 +1799,7 @@ $(document).ready(function() {
         $('.depositTab  .entriesTbl tbody').remove();
         var account = getAccount(context, accountId);
         populateCalculationVersion(account);
-        $('.depositTab .jsDelVersionBtn').removeClass('priBtnDisabled');
+        $('.depositTab .jsDelVersionBtn:not(.priBtnDisabledForever)').removeClass('priBtnDisabled');
         $('.dollar').formatCurrency({negativeFormat: '%s-%n'});
     });
 
@@ -1786,15 +1834,7 @@ $(document).ready(function() {
         showPopup(".paymentNotePopup ");
     });
 
-    $(".paymentHistoryPanel .jsAddPayment").click(function() {
-        $('.addPaymentPopup input[name="batchNum"]').val('');
-        $('.addPaymentPopup input[name="blockNum"]').val('');
-        $('.addPaymentPopup input[name="seqNum"]').val('');
-        $('.addPaymentPopup input[name="paymentAmount"]').val('');
-        $('.addPaymentPopup input[name="depositDate"]').val('');
-        $('.addPaymentPopup input[name="addPaymentAppliance"][value=1]').prop('checked', true);
-        showPopup(".addPaymentPopup ");
-    });
+
 
     //$(".jsAddPayment").click(function() {
     //showPopup(".addPaymentPopup ");
@@ -2621,10 +2661,16 @@ $(document).ready(function() {
         }
     });
     $(".jsUpdateInterest").click(function(e) {
+    	if ($(this).hasClass("priBtnDisabled")) {
+    		return;
+    	}
         closePopup();
         showPopup(".updateInterestPopup");
     });
     $(".jsPHReversePayment").click(function(e) {
+    	if ($(this).hasClass("priBtnDisabled")) {
+    		return;
+    	}
         // check if there is a row selected
         var selectedRow = $("#paymentHistoryTbl tbody tr.selectedRow");
         if (selectedRow.length == 0) {
@@ -2759,7 +2805,23 @@ $(document).ready(function() {
         if (entity.accountId == null && $('#accountId').length > 0) {
             entity.accountId = $('#accountId').val();
         }
-
+        
+        if (entity.ssn == null && gAccountInfo != null) {
+        	entity.ssn = gAccountInfo.holder.ssn;
+        }
+        if (entity.claimNumber == null && gAccountInfo != null) {
+        	entity.claimNumber = gAccountInfo.claimNumber;
+        }
+        
+        if (entity.accountHolderBirthdate == null && gAccountInfo != null) {
+        	entity.accountHolderBirthdate = gAccountInfo.holder.birthDate;
+        }
+        if (entity.claimant == null && gAccountInfo != null) {
+        	entity.claimant = gAccountInfo.holder.firstName + ' ' + gAccountInfo.holder.lastName;
+        }
+        if (entity.paymentStatus == null) {
+        	entity.paymentStatus = {id:$('div.addPaymentPopup select[name="paymentStatuses"]').val()};
+        }
         if (entity.accountId == null) {
             alert("This payment has no account attached.");
             return;
@@ -2998,7 +3060,7 @@ $(document).ready(function() {
             var row = $(this).parent();
             $("#paymentSearchResultsTbl tbody tr").removeClass("highlighted");
             row.addClass("highlighted");
-            $(".paymentSearchResultsBtnWrapper .priBtn").removeClass("priBtnDisabled");
+            $(".paymentSearchResultsBtnWrapper .priBtn:not(.priBtnDisabledForever)").removeClass("priBtnDisabled");
 
         });
 
@@ -4550,7 +4612,7 @@ function addNewVersion(button, copy) {
     // select
     var select = $('.versionBar select', tab);
     // delete button
-    $('.jsDelVersionBtn', tab).removeClass('priBtnDisabled');
+    $('.jsDelVersionBtn:not(.priBtnDisabledForever)', tab).removeClass('priBtnDisabled');
     // temparea
     var tempArea = $('.depositVersionTbodyArea');
     //$(".jsCancelFunction", tab).trigger("click");
@@ -4668,7 +4730,7 @@ function updateCalculationVersionDeleteButton(tabName) {
         }
     });
     if (count > 0) {
-        $('.jsDelVersionBtn', tabName).removeClass('priBtnDisabled');
+        $('.jsDelVersionBtn:not(.priBtnDisabledForever)', tabName).removeClass('priBtnDisabled');
     } else {
         $('.jsDelVersionBtn', tabName).addClass('priBtnDisabled');
     }

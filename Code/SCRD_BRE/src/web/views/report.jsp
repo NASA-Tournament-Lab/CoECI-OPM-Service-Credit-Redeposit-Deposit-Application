@@ -1,9 +1,11 @@
 <%--
   - Author: TCSASSEMBLER
-  - Version: 1.0
+  - Version: 1.1
   - Copyright (C) 2014 TopCoder Inc., All Rights Reserved.
   -
   - Description: The reports page
+  - Change log:
+  -  1.1 Defect Assembly - SCRD App - part 1
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -177,11 +179,11 @@
                 </div>
                 <div class="reportsActionsWrapper">
                 	<a href="javascript:;" class="priBtn fRight jsPrintReport"><span><span>Print</span></span></a>
-                    <a href="javascript:;" class="priBtn fRight jsDelReport isHidden"><span><span>Delete</span></span></a>
+                    <a href="javascript:;" class="priBtn fRight jsDelReport isHidden <c:if test="${empty PERMITTED_ACTIONS['DELETE /letter']}">priBtnDisabled</c:if>"><span><span>Delete</span></span></a>
                     <a href="javascript:;" class="priBtn fRight jsCancelSaveReport isHidden"><span><span>Cancel</span></span></a>
                     <a href="javascript:;" class="priBtn fRight jsSaveReport isHidden"><span><span>Save</span></span></a>
-                    <a href="javascript:;" class="priBtn fRight jsEditReport isHidden"><span><span>Edit</span></span></a>
-                    <a href="javascript:;" class="priBtn fRight jsCreateReport"><span><span>Create</span></span></a>
+                    <a href="javascript:;" class="priBtn fRight jsEditReport isHidden <c:if test="${empty PERMITTED_ACTIONS['PUT /letter']}">priBtnDisabled</c:if>"><span><span>Edit</span></span></a>
+                    <a href="javascript:;" class="priBtn fRight jsCreateReport <c:if test="${empty PERMITTED_ACTIONS['POST /letter']}">priBtnDisabled</c:if>"><span><span>Create</span></span></a>
                 </div>
             	<div class="tabsBlock reportTabsBlock group">
                 	<div class="leftTreeWrapper">
@@ -225,11 +227,11 @@
                 </div>
                 <div class="reportsActionsWrapper">
                    <a href="javascript:;" class="priBtn fRight jsPrintReport"><span><span>Print</span></span></a>
-                    <a href="javascript:;" class="priBtn fRight jsDelReport isHidden"><span><span>Delete</span></span></a>
+                    <a href="javascript:;" class="priBtn fRight jsDelReport isHidden <c:if test="${empty PERMITTED_ACTIONS['DELETE /reference']}">priBtnDisabled</c:if>"><span><span>Delete</span></span></a>
                     <a href="javascript:;" class="priBtn fRight jsCancelSaveReport isHidden"><span><span>Cancel</span></span></a>
                     <a href="javascript:;" class="priBtn fRight jsSaveReport isHidden"><span><span>Save</span></span></a>
-                    <a href="javascript:;" class="priBtn fRight jsEditReport isHidden"><span><span>Edit</span></span></a>
-                    <a href="javascript:;" class="priBtn fRight jsCreateReport"><span><span>Create</span></span></a>
+                    <a href="javascript:;" class="priBtn fRight jsEditReport isHidden <c:if test="${empty PERMITTED_ACTIONS['PUT /reference']}">priBtnDisabled</c:if>"><span><span>Edit</span></span></a>
+                    <a href="javascript:;" class="priBtn fRight jsCreateReport <c:if test="${empty PERMITTED_ACTIONS['POST /reference']}">priBtnDisabled</c:if>"><span><span>Create</span></span></a>
                 </div>
             	<div class="tabsBlock reportTabsBlock group">
                 	<div class="leftTreeWrapper">

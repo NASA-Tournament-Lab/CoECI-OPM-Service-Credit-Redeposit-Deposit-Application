@@ -25,6 +25,7 @@ import gov.opm.scrd.services.OPMConfigurationException;
 import gov.opm.scrd.services.OPMException;
 import gov.opm.scrd.services.SecurityService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -48,7 +49,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * </p>
  *
  * <p>
- * <em>Changes in 1.1 (OPM - SCRD - Frontend Initial Module Assembly 1.0):</em>
+ * <em>Changes in 1.3 (OPM - SCRD - Frontend Initial Module Assembly 1.0):</em>
  * <ul>
  * <li>Changed to use LoggingHelper instead for logging</li>
  * </ul>
@@ -60,14 +61,20 @@ import org.springframework.beans.factory.annotation.Autowired;
  * <li>Use postgres reg match to authorize the action.</li>
  * </ul>
  * </p>
- *
+
+ * <p>
+ * <em>Changes in 1.3 (Defect Assembly - SCRD App - part 1.0):</em>
+ * <ul>
+ * <li>Add api to get the actions.</li>
+ * </ul>
+ * </p>
  * <p>
  * <strong>Thread Safety: </strong> This class is effectively thread safe after configuration, the configuration is done
  * in a thread safe manner.
  * </p>
  *
- * @author faeton, sparemax, liuliquan
- * @version 1.2
+ * @author faeton, sparemax, liuliquan, TCSASSEMBLER
+ * @version 1.3
  */
 @Stateless
 @Local(SecurityService.class)
@@ -98,6 +105,22 @@ public class SecurityServiceImpl extends BaseService implements SecurityService 
         + " WHERE e.deleted = false AND :action ~ e.action AND e.rolename IN :roles";
 
     /**
+     * <p>
+     * Represents the JPQL to query the actions for a user.
+     * </p>
+     */
+    private static final String JPQL_QUERY_USER_ACTIONS = "SELECT e.action FROM opm.user_permission e" 
+            + " WHERE e.deleted = false AND e.username = :username";
+    
+    /**
+     * <p>
+     * Represents the JPQL to query the actions to the roles.
+     * </p>
+     */
+    private static final String JPQL_QUERY_ROLE_ACTIONS = "SELECT e.action FROM opm.role_permission e"
+        + " WHERE e.deleted = false AND e.rolename IN :roles";
+    
+    /**
      * Represents L2 JPA cache which is used to evict cached instances when necessary. It is injected by Spring. It can
      * not be null after injected.
      */
@@ -111,6 +134,64 @@ public class SecurityServiceImpl extends BaseService implements SecurityService 
         // Empty
     }
 
+    /**
+     * Gets the actions for a user or roles.
+     *
+     * @param username
+     *            the name of the user performing the operation.
+     * @param roles
+     *            the list of roles associated with user.
+     * @return the action lists
+     * @throws IllegalArgumentException
+     *             if username is null/empty, roles is null or contain null/empty elements.
+     * @throws OPMException
+     *             if there is any problem when executing the method.
+     */
+    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
+    @SuppressWarnings("unchecked")
+    public List<String> getPermittedActions(String username, List<String> roles) throws OPMException {
+        String signature = CLASS_NAME + "#getPermittedActions(String username, List<String> roles)";
+        Logger logger = getLogger();
+
+        LoggingHelper.logEntrance(logger, signature,
+            new String[] {"username", "roles"},
+            new Object[] {username, roles});
+
+        Helper.checkNullOrEmpty(logger, signature, username, "username");
+
+        Helper.checkNull(logger, signature, roles, "roles");
+        int index = 0;
+        for (String role : roles) {
+            Helper.checkNullOrEmpty(logger, signature, role, "roles[" + index + "]");
+            ++index;
+        }
+
+        List<String> actions = new ArrayList<String>();
+        
+        try {
+            EntityManager entityManager = getEntityManager();
+            
+            
+            List<String> userActions = (List<String>) entityManager.createNativeQuery(JPQL_QUERY_USER_ACTIONS)
+                    .setParameter("username", username).getResultList();
+            List<String> roleActions = (List<String>) entityManager.createNativeQuery(JPQL_QUERY_ROLE_ACTIONS)
+                    .setParameter("roles", roles).getResultList();
+            
+            actions.addAll(userActions);
+            actions.addAll(roleActions);
+
+            LoggingHelper.logExit(logger, signature, null);
+        } catch (IllegalStateException e) {
+            throw LoggingHelper.logException(logger, signature,
+                new OPMException("The entity manager has been closed.", e));
+        } catch (PersistenceException e) {
+            throw LoggingHelper.logException(logger, signature, new OPMException(
+                "An error has occurred when accessing persistence.", e));
+        }
+        LoggingHelper.logExit(logger, signature, new Object[] {actions});
+        return actions;
+    }
+    
     /**
      * Checks whether user is authorized to perform a particular action or access a given widget.
      *

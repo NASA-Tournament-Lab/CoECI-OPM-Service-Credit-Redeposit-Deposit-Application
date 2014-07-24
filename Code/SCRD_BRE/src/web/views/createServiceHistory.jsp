@@ -1,11 +1,17 @@
 <%--
   - Author: TCSASSEMBLER
-  - Version: 1.0
+  - Version: 1.1
   - Copyright (C) 2014 TopCoder Inc., All Rights Reserved.
   -
   - Description: The create account page, used to create service history.
+  - Change log:
+  -  1.1 Defect Assembly - SCRD App - part 1
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<c:set var="CAN_TRIGGER_BILL" value ="${empty PERMITTED_ACTIONS['POST /account'] && empty PERMITTED_ACTIONS['POST /account/triggerBill'] ? false : true}" />
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <%
@@ -170,7 +176,7 @@
                 <a href="javascript:;" class="priBtn jsRunCalculation fLeft"><span><span>Run Calculation</span></span></a>
                 <a href="javascript:;" class="priBtn jsSaveCalculation fLeft"><span><span>Save Calculation</span></span></a>
                 <a href="javascript:;" class="priBtn jsCancelFunction fLeft isHidden"><span><span>Cancel</span></span></a>
-                <a href="javascript:;" class="priBtn jsTriggerBill fLeft isHidden"><span><span>Trigger Bill</span></span></a>
+                <a href="javascript:;" class="priBtn jsTriggerBill fLeft isHidden <c:if test="${CAN_TRIGGER_BILL=='false'}">priBtnDisabled</c:if>"><span><span>Trigger Bill</span></span></a>
                 <a href="javascript:;" class="priBtn jsRefreshGrid fRight"><span><span>Refresh Grid</span></span></a>
                 <a href="javascript:;" class="priBtn jsShowCalculation isHidden fRight"><span><span>Show Calculation</span></span></a>
               </p>

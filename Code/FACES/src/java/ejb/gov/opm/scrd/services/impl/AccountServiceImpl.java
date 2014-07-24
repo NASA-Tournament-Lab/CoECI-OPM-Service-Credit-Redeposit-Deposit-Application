@@ -1641,11 +1641,13 @@ public class AccountServiceImpl extends BaseService implements AccountService {
             filter.getClaimNumber(), "claimNumber", paramNames, paramValues);
         Helper.appendCondition(sb, "e.holder.ssn LIKE :ssn ESCAPE '\\'", filter.getSsn(),
             "ssn", paramNames, paramValues);
-        Helper.appendCondition(sb, "e.holder.firstName LIKE :firstName ESCAPE '\\'", filter.getFirstName(), "firstName",
+        Helper.appendCondition(sb, "lower(e.holder.firstName) LIKE :firstName ESCAPE '\\'", 
+                toLowerSafely(filter.getFirstName()), "firstName",
             paramNames, paramValues);
-        Helper.appendCondition(sb, "e.holder.middleInitial LIKE :middleName ESCAPE '\\'",
-            filter.getMiddleName(), "middleName", paramNames, paramValues);
-        Helper.appendCondition(sb, "e.holder.lastName LIKE :lastName ESCAPE '\\'", filter.getLastName(), "lastName",
+        Helper.appendCondition(sb, "lower(e.holder.middleInitial) LIKE :middleName ESCAPE '\\'",
+                toLowerSafely(filter.getMiddleName()), "middleName", paramNames, paramValues);
+        Helper.appendCondition(sb, "lower(e.holder.lastName) LIKE :lastName ESCAPE '\\'", 
+                toLowerSafely(filter.getLastName()), "lastName",
             paramNames, paramValues);
         Helper.appendCondition(sb, "e.holder.birthDate = :birthDate", filter.getBirthDate(), "birthDate", paramNames,
             paramValues);
@@ -1663,6 +1665,18 @@ public class AccountServiceImpl extends BaseService implements AccountService {
         return sb.toString();
     }
 
+    /**
+     * Converts a string to lower case.
+     * @param str the string to convert.
+     * @return the lower case string.
+     */
+    private static String toLowerSafely(String str) {
+        if (str != null) {
+            return str.toLowerCase();
+        }
+        return str;
+    }
+    
     /**
      * Return the service category for a calculation.
      * @param calculation the calculation

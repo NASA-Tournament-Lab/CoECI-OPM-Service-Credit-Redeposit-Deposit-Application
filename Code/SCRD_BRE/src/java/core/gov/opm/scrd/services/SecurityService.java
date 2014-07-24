@@ -27,9 +27,9 @@ import java.util.List;
  * <p>
  * <strong>Thread Safety: </strong> Implementations should be thread safe.
  * </p>
- *
- * @author faeton, sparemax
- * @version 1.0
+ * @version 1.1 Added the API to get the permitted actions.
+ * @author faeton, sparemax, TCSASSEMBLER
+ * @version 1.1
  */
 public interface SecurityService {
     /**
@@ -58,4 +58,19 @@ public interface SecurityService {
      *             if there is any problem when executing the method.
      */
     public void clearSecurityCacheData() throws OPMException;
+    
+    /**
+     * Gets the actions for a user or roles.
+     *
+     * @param username
+     *            the name of the user performing the operation.
+     * @param roles
+     *            the list of roles associated with user.
+     * @return the action lists
+     * @throws IllegalArgumentException
+     *             if username is null/empty, roles is null or contain null/empty elements.
+     * @throws OPMException
+     *             if there is any problem when executing the method.
+     */
+    public List<String> getPermittedActions(String username, List<String> roles) throws OPMException;
 }
