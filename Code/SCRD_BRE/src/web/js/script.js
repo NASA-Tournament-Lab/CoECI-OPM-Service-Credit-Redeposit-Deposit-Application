@@ -1382,6 +1382,7 @@ $(document).ready(function() {
         if (results['r-' + selectId] && results['r-' + selectId].result && results['r-' + selectId].result.items && results['r-' + selectId].result.items.length > 0) {
             populateCalculationItem(results['r-' + selectId].result, tab);
             populateCalculationResult(results['r-' + selectId].result, tab);
+            populateAsOfDate(results['r-' + selectId].result, tab);
             $('.dollar').formatCurrency({
                 negativeFormat: '%s-%n'
             });
@@ -1553,6 +1554,25 @@ $(document).ready(function() {
 
                     $(tds).eq(8).children('select').get(0).selectedIndex = 0;
                     $(editingTr).addClass('unsortable');
+
+                    //////////
+                    // https://github.com/nasa/SCRD/issues/21
+                    
+					var prevDate = $(tr).prev('tr').children('td').eq(2).text();
+
+                    if (prevDate) {
+                        // there's a weird issue where if a date is keyed as "1/1/1980" vs. "01/01/1980" it gets double slashed. It's out there so am working around it. 
+                        prevDate = prevDate.replace(/\/\//g, "/");
+                        
+                        try {
+                            var datePlusOneDay = $.datepicker.parseDate('mm/dd/yy', prevDate);
+                            datePlusOneDay.setDate(datePlusOneDay.getDate() + 1);
+                            $(tds).eq(1).children('input').val($.datepicker.formatDate('mm/dd/yy', datePlusOneDay));
+                        }
+                        catch (error) {
+                            // nop
+                        }
+                    }
                 }
 
                 $(tds).eq(7).children('input').keypress(function(evt) {
@@ -2161,7 +2181,7 @@ $(document).ready(function() {
             html += '<td>' + parseDateToString(items[i * 2].startDate) + '</td>';
             html += '<td>' + parseDateToString(items[i * 2].endDate) + '</td>';
             var typeStr = 'F';
-            if (items[i * 2].retirementType == 'CSRS') {
+            if (items[i * 2].retirementType.name == 'CSRS') {
                 if (items[i * 2].periodType.name == 'DEPOSIT') {
                     typeStr = 'D';
                 } else {
@@ -2173,7 +2193,7 @@ $(document).ready(function() {
                 html += '<td>' + parseDateToString(items[i * 2 + 1].startDate) + '</td>';
                 html += '<td>' + parseDateToString(items[i * 2 + 1].endDate) + '</td>';
                 var typeStr = 'F';
-                if (items[i * 2 + 1].retirementType == 'CSRS') {
+                if (items[i * 2 + 1].retirementType.name == 'CSRS') {
                     if (items[i * 2 + 1].periodType.name == 'DEPOSIT') {
                         typeStr = 'D';
                     } else {
@@ -2254,7 +2274,7 @@ $(document).ready(function() {
             // basic information
             $('.report-csd', popup).html(account.claimNumber);
             $('.report-birthday', popup).html(parseDateToString(holder.birthDate));
-            $('.printAddressBody', popup).html(buildAddrerssString(holder.address));
+            $('.printAddressBody', popup).html(buildAddrerssString(holder));
             $('.printAcount', popup).html(findLatestPayment(account.paymentHistory));
 
             $('.report-name', popup).html(holder.firstName + ' ' + (holder.middleInitial == null ? '' : holder.middleInitial) + ' ' + holder.lastName);
@@ -2302,6 +2322,7 @@ $(document).ready(function() {
             trs.eq(40).find('td').eq(1).html(depositTr.eq(4).find('td').eq(3).html());
             // calculate less payments
             var lessPayment = 0;
+            // validation of https://github.com/nasa/SCRD/issues/76 point 6
             $.each(account.paymentHistory, function() {
                 if (this.approvalStatus == 'APPROVED') {
                     lessPayment += this.amount;
@@ -2318,7 +2339,7 @@ $(document).ready(function() {
                 html += '<td>' + parseDateToString(items[i * 2].startDate) + '</td>';
                 html += '<td>' + parseDateToString(items[i * 2].endDate) + '</td>';
                 var typeStr = 'F';
-                if (items[i * 2].retirementType == 'CSRS') {
+                if (items[i * 2].retirementType.name == 'CSRS') {
                     if (items[i * 2].periodType.name == 'DEPOSIT') {
                         typeStr = 'D';
 
@@ -2331,7 +2352,7 @@ $(document).ready(function() {
                     html += '<td>' + parseDateToString(items[i * 2 + 1].startDate) + '</td>';
                     html += '<td>' + parseDateToString(items[i * 2 + 1].endDate) + '</td>';
                     var typeStr = 'F';
-                    if (items[i * 2 + 1].retirementType == 'CSRS') {
+                    if (items[i * 2 + 1].retirementType.name == 'CSRS') {
                         if (items[i * 2 + 1].periodType.name == 'DEPOSIT') {
                             typeStr = 'D';
                         } else {
@@ -3902,7 +3923,10 @@ function refreshAccountSummary(account) {
         success: function(data) {
             var sum = 0;
             $.each(data, function() {
-                sum = sum + this.amount;
+                // https://github.com/nasa/SCRD/issues/75
+                if (this.approvalStatus == 'APPROVED') {
+                    sum = sum + this.amount;
+                }
             });
             $('.paymentInfo').html('Payments(' + data.length + ')');
             $('.total').html(sum);
@@ -3921,7 +3945,7 @@ function refreshAccountSummary(account) {
     }
 
     $('.title').html(account.holder.title);
-    $('.frozen').html(account.frozen === true ? 'YES' : 'NO');
+//    $('.frozen').html(account.frozen === true ? 'YES' : 'NO'); https://github.com/nasa/SCRD/issues/32
     $('.grace').html(account.grace === true ? 'YES' : 'NO');
     $('.balance').html(account.balance);
     $('.lastAction').html(account.lastAction);
@@ -4079,6 +4103,26 @@ function validateCalculationEntry(button) {
                 }
             }
 
+            // https://github.com/nasa/SCRD/issues/36, issue line item #3: Peace Corps _OR_ Redposit
+            if (($(row).children('td').eq(6).html() == 'PEACE CORPS/VISTA') || ($(row).children('td').eq(4).html() == 'REDEPOSIT')) {
+                // Issue line item #3 
+                if (iDate == '' || !isDate(iDate)) {
+                    $(row).children('td').eq(11).addClass('valErrorRowCell');
+                    $(row).addClass('valErrorRow');
+                    validated = false;
+                }
+            }
+            
+            // https://github.com/nasa/SCRD/issues/36, issue line item #4: Deposit _AND_ not Peace Corps (since all Peace Corps line items
+            // are Deposits, per the issue.
+            if (($(row).children('td').eq(4).html() == 'DEPOSIT') && ($(row).children('td').eq(6).html() != 'PEACE CORPS/VISTA')) {
+                if (iDate != '') {
+                    showPopup(".depositsWithInterestBeginsPopup");
+                    $(row).children('td').eq(11).addClass('valErrorRowCell');
+                    $(row).addClass('valErrorRow');
+                    validated = false;
+                }
+            }
         }
     });
 
@@ -4150,6 +4194,13 @@ function emptyCalculationResult(tab) {
     $('.chartCalAreaBox6 .dollar', tab).eq(3).html('');
 
 
+}
+
+// https://github.com/nasa/SCRD/issues/66
+// extracts the asOfDate from the given result and populates the as of date box!
+function populateAsOfDate(result, tab) {
+    var asOfDate = new Date(parseInt(result.asOfDate, 10));
+    $('.interestCalculatedToDate', tab).val($.datepicker.formatDate('mm/dd/yy', asOfDate));
 }
 
 function populateCalculationResult(result, tab) {
@@ -4276,7 +4327,7 @@ function populateCalculationResult(result, tab) {
 
     $('.chartCalAreaBox6 .dollar', tab).eq(0).html(result.summary.totalPaymentsRequired);
     $('.chartCalAreaBox6 .dollar', tab).eq(1).html(result.summary.totalInitialInterest);
-    $('.chartCalAreaBox6 .dollar', tab).eq(2).html(result.summary.totalPaymentsApplied);
+    $('.chartCalAreaBox6 .dollar', tab).eq(2).html(result.summary.totalPaymentsApplied + results.totalApprovedPayments /* https://github.com/nasa/SCRD/issues/76 */);
     $('.chartCalAreaBox6 .dollar', tab).eq(3).html(result.summary.totalBalance);
 
 }
@@ -4977,6 +5028,16 @@ function populateCalculationVersion(account, tabName2) {
     }
 
     if (select.val() !== '') {
+        // https://github.com/nasa/SCRD/issues/76
+        var totalApprovedPayment = 0;
+        $.each(account.paymentHistory, function() {
+            if (this.approvalStatus == 'APPROVED') {
+                totalApprovedPayment += this.amount;
+            }
+        });
+
+        results['totalApprovedPayments'] = totalApprovedPayment;
+        
         select.change();
     }
 
@@ -5470,8 +5531,21 @@ $(document).on("click", ".jsDoPrintReport", function() {
     }, 100);
 });
 
-function buildAddrerssString(address) {
-    var str = address.street1 + '<br/>';
+function buildAddrerssString(holder) {
+    // https://github.com/nasa/SCRD/issues/30, point 10
+    var firstName = holder.firstName || '';
+    var middleInitial = holder.middleInitial || '';
+    var lastName = holder.lastName || '';
+    
+    var fullName = firstName + ' ' + middleInitial + ' ' + lastName;
+    
+    var str = fullName + '<br/>';
+    
+    //
+    
+    var address = holder.address;
+    
+    str += address.street1 + '<br/>';
     if (address.street2 != null) {
         str += address.street2 + '<br/>';
     }
@@ -5489,6 +5563,17 @@ function buildAddrerssString(address) {
         stateString = address.state.name;
     }
     str += address.city + ', ' + stateString + ' ' + address.zipCode;
+    
+    // https://github.com/nasa/SCRD/issues/30 point 11
+    if (holder.address && holder.address.country && holder.address.country.name
+            && holder.address.country.name != 'United States') {
+        str += '<br/>' + holder.address.country.name;
+
+        if (holder.geoCode) {
+            str += '&nbsp;' + holder.geoCode;
+        }
+    }
+    
     return str;
 }
 

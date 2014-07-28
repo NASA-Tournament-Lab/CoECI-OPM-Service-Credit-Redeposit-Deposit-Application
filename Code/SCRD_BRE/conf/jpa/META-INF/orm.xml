@@ -1002,6 +1002,9 @@
             <basic name="interestAccrualDate">
                 <column name="interest_accrual_date" nullable="true"/>
             </basic>
+            <basic name="asOfDate">
+                <column name="as_of_date" nullable="false"/>
+            </basic>
             <many-to-one name="calculationStatus" target-entity="gov.opm.scrd.entities.lookup.CalculationStatus" fetch="EAGER">
                 <join-column name="calculation_status_id" referenced-column-name="id" nullable="false" />
             </many-to-one>

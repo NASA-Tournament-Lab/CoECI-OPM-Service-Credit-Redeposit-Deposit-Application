@@ -2405,7 +2405,7 @@ h3.panelExpanded{
     border-bottom-color: #F6F6F6;
     background-color: #F6F6F7;
 }
-.accountNotesPopup, .accountNotesEditPopup, .rejectAccountPopup, .paymentNotePopup, .addPaymentPopup, .confirmDatePopup, .accountNotesAddPopup, .noAccountNoteSelectedPopup, .updateInterestPopup, .reversePayementPopup, .periodErrorPopup, .lastUpdatePopup, .noAccountNoteSelectedEditPopup, .refundCreditBalancePopup, .pendingPaymentDisapprovePopup, .interestAdjustmentsDisapprovePopup, .paymentMovesDisapprovePopup, .editUserPermissionsPopup, .changeAccountInterestNotesPopup  {
+.accountNotesPopup, .accountNotesEditPopup, .rejectAccountPopup, .paymentNotePopup, .addPaymentPopup, .confirmDatePopup, .accountNotesAddPopup, .noAccountNoteSelectedPopup, .updateInterestPopup, .reversePayementPopup, .periodErrorPopup, .lastUpdatePopup, .noAccountNoteSelectedEditPopup, .refundCreditBalancePopup, .pendingPaymentDisapprovePopup, .interestAdjustmentsDisapprovePopup, .paymentMovesDisapprovePopup, .editUserPermissionsPopup, .changeAccountInterestNotesPopup, .depositsWithInterestBeginsPopup  {
     width: 510px;	
 }
 .accountNoteCopyPopup{
@@ -3529,6 +3529,9 @@ h3.panelExpanded{
 .billingSummaryTab .billingTbl .col2,
 .billingSummaryTab .billingTbl .col3{
     width: 141px;
+}
+.billingSummaryTab .billingTbl .col4{
+    width: 50px;
 }
 .billingSummaryTab .billingTbl th, .billingSummaryTab .billingTbl td{
     text-indent: 0;

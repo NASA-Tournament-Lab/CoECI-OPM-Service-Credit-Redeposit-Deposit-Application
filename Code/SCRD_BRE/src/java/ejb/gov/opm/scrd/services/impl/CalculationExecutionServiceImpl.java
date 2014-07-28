@@ -112,13 +112,26 @@ import org.springframework.beans.factory.annotation.Autowired;
  * </ul>
  * </p>
  * 
+ * <em>Changes in 1.4 (Defect Assembly - SCRD App - Part 2 1.0):</em>
+ * <ul>
+ * <li>Set the (new field) asOfDate on the CalculationResult</li>
+ * <li>Make Peace Corps service types have a higher precendence than others when
+ * determining how to bill</li>
+ * </ul>
+ * </p>
+ * 
+ * <p>
+ * <strong>Thread Safety:</strong>This class is effectively thread safe after
+ * configuration, the configuration is done in a thread safe manner.
+ * </p>
+ *
  * <p>
  * <strong>Thread Safety:</strong>This class is effectively thread safe after configuration, the configuration is done
  * in a thread safe manner.
  * </p>
  *
  * @author faeton, sparemax, liuliquan, Schpotsky, bannie2492
- * @version 1.3
+ * @version 1.4
  */
 @Stateless
 @Local(CalculationExecutionService.class)
@@ -321,6 +334,9 @@ public class CalculationExecutionServiceImpl extends BaseService implements Calc
             // Create CalculationResult
             CalculationResult result = new CalculationResult();
             
+            // https://github.com/nasa/SCRD/issues/66
+            result.setAsOfDate(interestCalculatedToDate);
+            
             List<Calculation> calcs = new ArrayList<Calculation>();
             calcs.addAll(calculations);
             
@@ -389,7 +405,15 @@ public class CalculationExecutionServiceImpl extends BaseService implements Calc
                 String periodType = item.getPeriodType().getName();
                 String serviceType = period.getServiceType().getName();
                 // Calculate redeposits/dedeposits
-                if (periodType.equals(dedepositPeriodType.getName())
+                if (item.getRetirementType().equals(csrsRetirementType)
+                        && "PEACE CORPS/VISTA".equalsIgnoreCase(serviceType)) {
+                    csrsPeaceCorpsDedeposit = modifyDedeposit(csrsPeaceCorpsDedeposit, item);
+                    item.setServiceCategory(DepositType.CSRS_PEACE_CORPS);
+                } else if (item.getRetirementType().equals(fersRetirementType)
+                        && "PEACE CORPS/VISTA".equalsIgnoreCase(serviceType)) {
+                    fersPeaceCorpsDedeposit = modifyDedeposit(fersPeaceCorpsDedeposit, item);
+                    item.setServiceCategory(DepositType.FERS_PEACE_CORPS);
+                } else if (periodType.equals(dedepositPeriodType.getName())
                         && item.getRetirementType().getName().equalsIgnoreCase(fersRetirementType.getName())) {
                     fersDedeposit = modifyDedeposit(fersDedeposit, item);
                     item.setServiceCategory(DepositType.FERS_DEPOSIT);
@@ -402,7 +426,7 @@ public class CalculationExecutionServiceImpl extends BaseService implements Calc
                     if (item.getEndDate().before(splitDate1082)) {
                         csrsPre1082Redeposit = modifyRedeposit(csrsPre1082Redeposit, item);
                         item.setServiceCategory(DepositType.CSRS_PRE_10_82_REDEPOSIT);
-                    } else if (!item.getStartDate().before(splitDate1082) && item.getEndDate().before(splitDate391)) {
+                    } else if (!item.getEndDate().before(splitDate1082) && item.getEndDate().before(splitDate391)) {
                         csrsPost82Pre91Redeposit = modifyRedeposit(csrsPost82Pre91Redeposit, item);
                         item.setServiceCategory(DepositType.CSRS_POST_82_PRE_91_REDEPOSIT);
                     } else if (!item.getStartDate().before(splitDate391)) {
@@ -418,14 +442,6 @@ public class CalculationExecutionServiceImpl extends BaseService implements Calc
                         csrsPost1082Dedeposit = modifyDedeposit(csrsPost1082Dedeposit, item);
                         item.setServiceCategory(DepositType.CSRS_POST_10_82_DEPOSIT);
                     }
-                } else if (item.getRetirementType().equals(csrsRetirementType)
-                        && "PEACE CORPS/VISTA".equalsIgnoreCase(serviceType)) {
-                    csrsPeaceCorpsDedeposit = modifyDedeposit(csrsPeaceCorpsDedeposit, item);
-                    item.setServiceCategory(DepositType.CSRS_PEACE_CORPS);
-                } else if (item.getRetirementType().equals(fersRetirementType)
-                        && "PEACE CORPS/VISTA".equalsIgnoreCase(serviceType)) {
-                    fersPeaceCorpsDedeposit = modifyDedeposit(fersPeaceCorpsDedeposit, item);
-                    item.setServiceCategory(DepositType.FERS_PEACE_CORPS);
                 }
 
                 if (periodType.equals(redepositPeriodType.getName())) {

@@ -541,6 +541,7 @@ CREATE TABLE opm.calculation_result (
   summary_data_id BIGINT NULL,
   payment_order INTEGER NULL,
   interest_accrual_date TIMESTAMP NULL,
+  as_of_date DATE NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (id) ,
   CONSTRAINT fk_calculation_result_calculation_status
     FOREIGN KEY (calculation_status_id )
@@ -980,6 +981,7 @@ CREATE TABLE opm.payment (
   order_code_id BIGINT NULL,
   pay_trans_status_code_id BIGINT NULL,
   payment_appliance_id BIGINT,
+  payment_reverse_id BIGINT NULL,
   PRIMARY KEY (id) ,
   CONSTRAINT fk_payment_payment_appliance
     FOREIGN KEY (payment_appliance_id )
@@ -2527,3 +2529,9 @@ CREATE TABLE opm.reference (
   name VARCHAR(128) NOT NULL ,
   content TEXT NULL ,
   PRIMARY KEY (id) );
+
+-- -----------------------------------------------------
+-- Sequence claim_number
+-- -----------------------------------------------------
+
+CREATE SEQUENCE opm.claim_number START 100000;

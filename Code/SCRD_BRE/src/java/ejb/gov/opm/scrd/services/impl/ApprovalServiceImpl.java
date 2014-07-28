@@ -66,14 +66,21 @@ import org.springframework.beans.factory.annotation.Autowired;
  * to configured status</li>
  * </ul>
  * </p>
- *
+ * 
+ * <p>
+ * <em>Changes in 1.2 (Defect Assembly - SCRD App - Part 2 1.0):</em>
+ * <ul>
+ * <li>Added reversalPendingApprovalStatus, reversalPendingStatus</li>
+ * </ul>
+ * </p>
+ * 
  * <p>
  * <strong>Thread Safety: </strong> This class is effectively thread safe after configuration, the configuration is done
  * in a thread safe manner.
  * </p>
  *
  * @author faeton, sparemax, liuliquan
- * @version 1.1
+ * @version 1.2
  */
 @Stateless
 @Local(ApprovalService.class)
@@ -161,6 +168,22 @@ public class ApprovalServiceImpl extends BaseService implements ApprovalService 
      */
     @Autowired
     private PaymentStatus disapprovedPaymentStatus;
+
+    /**
+     * When a Payment is reversed and pending approval, it will have this PaymentStatus.
+     * 
+     * @since 1.2 (Defect Assembly - SCRD App - Part 2 1.0)
+     */
+    @Autowired
+    private PaymentStatus reversalPendingApprovalStatus;
+
+    /**
+     * When a Payment is reversed and pending posting, it will have this PaymentStatus.
+     * 
+     * @since 1.2 (Defect Assembly - SCRD App - Part 2 1.0)
+     */
+    @Autowired
+    private PaymentStatus reversalPendingStatus;
 
     /**
      * Represents the ids(comma separated) of PaymentStatus for a pending payment. It is injected by
@@ -692,7 +715,14 @@ public class ApprovalServiceImpl extends BaseService implements ApprovalService 
                 payment.setApprovalUser(approver);
                 payment.setApprovalStatus(ApprovalStatus.APPROVED);
                 if (updateStatus) {
-                    payment.setPaymentStatus(approvedPaymentStatus);
+                    // https://github.com/nasa/SCRD/issues/47
+                    if (payment.getPaymentStatus().equals(reversalPendingApprovalStatus)) {
+                        // reversal pending approval transitions to reversal pending
+                        payment.setPaymentStatus(reversalPendingStatus);
+                    } else {
+                        // (default behavior)
+                        payment.setPaymentStatus(approvedPaymentStatus);
+                    }
                 }
 
                 entityManager.merge(payment);

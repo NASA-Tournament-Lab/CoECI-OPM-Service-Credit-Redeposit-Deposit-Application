@@ -51,7 +51,8 @@ INSERT INTO opm.service_type(id, deleted, name) VALUES(37, false, 'CAREER');
 INSERT INTO opm.service_type(id, deleted, name) VALUES(38, false, 'POSTAL PART TIME FLEX');
 INSERT INTO opm.service_type(id, deleted, name) VALUES(39, false, 'POSTAL LIMITED TOUR');
 INSERT INTO opm.service_type(id, deleted, name) VALUES(40, false, 'FSPS-LEO/FF');
-INSERT INTO opm.service_type(id, deleted, name) VALUES(41, false, 'Not Applicable');
+INSERT INTO opm.service_type(id, deleted, name) VALUES(41, false, 'Conner-5.7%');
+INSERT INTO opm.service_type(id, deleted, name) VALUES(42, false, 'Not Applicable');
 
 INSERT INTO opm.claim_officer(id, deleted, name) VALUES(1, false, 'Jeffrey Kelley');
 INSERT INTO opm.claim_officer(id, deleted, name) VALUES(2, false, 'Terry Larson');

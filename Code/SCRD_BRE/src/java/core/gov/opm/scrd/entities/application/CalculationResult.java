@@ -33,13 +33,20 @@ import java.util.List;
  * <li>Added fields: paymentOrder, interestAccrualDate</li>
  * </ul>
  * </p>
- *
+ * 
+ * <p>
+ * <em>Changes in 1.2 (Defect Assembly - SCRD App - Part 2 1.0):</em>
+ * <ul>
+ * <li>Added fields: asOfDate</li>
+ * </ul>
+ * </p>
+ * 
  * <p>
  * <strong>Thread Safety: </strong> This class is mutable and not thread safe.
  * </p>
  *
  * @author faeton, sparemax
- * @version 1.1
+ * @version 1.2
  */
 public class CalculationResult extends IdentifiableEntity {
     
@@ -117,6 +124,11 @@ public class CalculationResult extends IdentifiableEntity {
      * @since 1.1 (OPM - Data Migration - Entities Update Module Assembly 1.0)
      */
     private Date interestAccrualDate;
+    
+    /**
+     * The date this CalculationResult was computed to be as-of. https://github.com/nasa/SCRD/issues/66
+     */
+    private Date asOfDate;
 
     /**
      * Creates an instance of CalculationResult.
@@ -324,5 +336,24 @@ public class CalculationResult extends IdentifiableEntity {
      */
     public void setCalculations(List<Calculation> calculations) {
         this.calculations = calculations;
+    }
+    
+    /**
+     * Gets the as of date
+     * @return always returns a Date. asOfDate cannot be null.
+     */
+    public Date getAsOfDate() {
+        return asOfDate;
+    }
+    
+    /**
+     * Set the as of date
+     * @param asOfDate a valid Date object. Throws if null.
+     */
+    public void setAsOfDate(Date asOfDate) {
+        if (asOfDate == null) {
+            throw new IllegalArgumentException("asOfDate cannot be null");
+        }
+        this.asOfDate = asOfDate;
     }
 }

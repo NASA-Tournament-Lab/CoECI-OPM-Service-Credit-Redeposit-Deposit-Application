@@ -139,8 +139,8 @@
                         </div>
                         <div class="column column4">
                             <div class="fieldRow">
-                                <p class="fieldTitle">Frozen<span>:</span></p>
-                                <p class="fieldVal frozen"></p>
+                                <p class="fieldTitle"><!--  Frozen --><span>:</span></p>
+                                <p class="fieldVal frozen"><!--  https://github.com/nasa/SCRD/issues/32 --></p>
                             </div>
                             <div class="fieldRow">
                                 <p class="fieldTitle">Grace Period<span>:</span></p>
@@ -565,6 +565,7 @@
                                         <col class="col3"/>
                                         <col class="col3"/>
                                         <col class="col3"/>
+                                        <col class="col4"/>
                                     </colgroup>
                                     <thead>
                                         <tr>
@@ -574,6 +575,7 @@
                                             <th>Total Payments</th>
                                             <th>Balance</th>
                                             <th>Payment Order</th>
+                                            <th>Frozen</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -587,6 +589,7 @@
                                                 <input name="achStop" id="achStop" type="checkbox" disabled="disabled" value="achStop" class="checkboxInput checkboxDisabled"/>
                                                 <label for="achStop" class="checkboxDisabled">Stop ACH Payments</label>
                                             </td>
+                                            <td>&nbsp;</td>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -598,6 +601,7 @@
                                             <td class="dollar"></td>
                                             <td class="dollar"></td>
                                             <td></td>
+                                            <td><input type="checkbox" disabled="disabled" class="checkboxInput checkboxDisabled"/></td>
                                         </tr>
                                         <tr>
                                             <input type="hidden" value="FERS_REDEPOSIT"/>
@@ -607,6 +611,7 @@
                                             <td class="dollar"></td>
                                             <td class="dollar"></td>
                                             <td></td>
+                                            <td><input type="checkbox" disabled="disabled" class="checkboxInput checkboxDisabled"/></td>
                                         </tr>
                                         <tr>
                                             <input type="hidden" value="CSRS_POST_3_91_REDEPOSIT"/>
@@ -616,6 +621,7 @@
                                             <td class="dollar"></td>
                                             <td class="dollar"></td>
                                             <td></td>
+                                            <td><input type="checkbox" disabled="disabled" class="checkboxInput checkboxDisabled"/></td>
                                         </tr>
                                         <tr>
                                             <input type="hidden" value="CSRS_POST_82_PRE_91_REDEPOSIT"/>
@@ -625,6 +631,7 @@
                                             <td class="dollar"></td>
                                             <td class="dollar"></td>
                                             <td></td>
+                                            <td><input type="checkbox" disabled="disabled" class="checkboxInput checkboxDisabled"/></td>
                                         </tr>
                                         <tr>
                                             <input type="hidden" value="CSRS_PRE_10_82_REDEPOSIT"/>
@@ -634,6 +641,7 @@
                                             <td class="dollar"></td>
                                             <td class="dollar"></td>
                                             <td></td>
+                                            <td><input type="checkbox" disabled="disabled" class="checkboxInput checkboxDisabled"/></td>
                                         </tr>
                                         <tr>
                                             <input type="hidden" value="CSRS_POST_10_82_DEPOSIT"/>
@@ -643,6 +651,7 @@
                                             <td class="dollar"></td>
                                             <td class="dollar"></td>
                                             <td></td>
+                                            <td><input type="checkbox" disabled="disabled" class="checkboxInput checkboxDisabled"/></td>
                                         </tr>
                                         <tr>
                                             <input type="hidden" value="CSRS_PRE_10_82_DEPOSIT"/>
@@ -652,6 +661,7 @@
                                             <td class="dollar"></td>
                                             <td class="dollar"></td>
                                             <td></td>
+                                            <td><input type="checkbox" disabled="disabled" class="checkboxInput checkboxDisabled"/></td>
                                         </tr>
                                         <tr>
                                             <input type="hidden" value="FERS_PEACE_CORPS"/>
@@ -661,6 +671,7 @@
                                             <td class="dollar"></td>
                                             <td class="dollar"></td>
                                             <td></td>
+                                            <td><input type="checkbox" disabled="disabled" class="checkboxInput checkboxDisabled"/></td>
                                         </tr>
                                         <tr>
                                             <input type="hidden" value="CSRS_PEACE_CORPS"/>
@@ -670,6 +681,7 @@
                                             <td class="dollar"></td>
                                             <td class="dollar"></td>
                                             <td></td>
+                                            <td><input type="checkbox" disabled="disabled" class="checkboxInput checkboxDisabled"/></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -3270,6 +3282,25 @@
                     </div></div></div>
             <div class="popupFooter"><div class="popupFooterRight"><div class="popupFooterInner"></div></div></div>
         </div>
+        
+        <div class="popup depositsWithInterestBeginsPopup isHidden">
+                <div class="popupHeader"><div class="popupHeaderRight"><div class="popupHeaderInner"></div></div></div>
+                <div class="popupBody"><div class="popupBodyRight"><div class="popupBodyInner">
+                            <div class="popupTitleWrapper">
+                                <h4 class="popupTitle">Service Period Errors and Warnings</h4>
+                                <a href="javascript:;" class="popupClose popupCloseX jsClosePopup">Close</a>
+                            </div>
+                            <div class="popupPadding">
+                                <p class="periodErrorPopupMsg"><img src="<c:url value="/i/icon-error.png"/>" alt="error" width="22" height="22" class="vMiddle" />
+                                For Deposits, please do not enter a value for Interest Begins EXCEPT for deposits on Conner cases, in which we would need to specify when interest begins for certain scenarios.</p>
+                        </div>
+                        <div class="popupBtnWrapper">
+                            <a class="priBtn jsClosePopup"><span><span>OK</span></span></a>
+                        </div>
+                    </div></div></div>
+            <div class="popupFooter"><div class="popupFooterRight"><div class="popupFooterInner"></div></div></div>
+        </div>
+        <!-- .periodErrorPopup -->
         <!-- .reversePayementPopup -->
         <%@ include file="report-template/AccountingSummaryReport.jsp" %>
         <%@ include file="report-template/PaymentHistory.jsp" %>

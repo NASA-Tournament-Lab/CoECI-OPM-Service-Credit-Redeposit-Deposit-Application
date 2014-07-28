@@ -482,6 +482,7 @@ function void continueExtendedServicePeriods(List esps, ExtendedServicePeriod es
             fakeSP.setRetirementType(esp.getRetirementType());
             fakeSP.setPeriodType(esp.getPeriodType());
             fakeSP.setInterestAccrualDate(esp.getInterestAccrualDate());
+            fakeSP.setServiceType(esp.getServiceType()); /* https://github.com/nasa/SCRD/issues/53 */
 
             if (isInExtendedServicePeriod(fakeSP, esp2, breakThresholdInDays, splitDates)) {
                 // Merge to esp2
@@ -513,6 +514,12 @@ function boolean isInExtendedServicePeriod(ServicePeriod sp, ExtendedServicePeri
     List splitDates) {
     // if two period are not the same retirement type, they should not be merged
     if (!sp.getRetirementType().getName().equals(esp.getRetirementType().getName())) {
+        return false;
+    }
+
+    // https://github.com/nasa/SCRD/issues/53
+    // if two period are not the same service type, they should not be merged
+    if (!sp.getServiceType().getName().equals(esp.getServiceType().getName())) {
         return false;
     }
 

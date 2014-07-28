@@ -180,6 +180,7 @@ $(function() {
             },
             success: function() {
                 // success
+                refreshPaymentTable(accountId);
             },
             error: function() {
                 alert("Failed to reverse payment.")
@@ -1123,11 +1124,7 @@ function populateBillingSummary(billingSummary) {
                 $(tr).children('td').eq(3).html(this.totalPayments);
                 $(tr).children('td').eq(4).html(this.balance);
                 $(tr).children('td').eq(5).html(this.paymentOrder);
-                if (this.frozen == true) {
-                    $(tr).children('td').eq(0).append("<span class='frozenRow'>(FROZEN)</span>");
-                } else {
-                    $(tr).children('td').eq(0).children('span').remove();
-                }
+                $(tr).children('td').eq(6).children('input').prop('checked', this.frozen);
             }
         });
 
@@ -1541,7 +1538,8 @@ function refreshPaymentTable(accountId) {
                 row.append(cell);
 
                 cell = $('<td></td>');
-                cell.text(item.paymentAppliance == null ? '' : item.paymentAppliance.name);
+                // https://github.com/nasa/SCRD/issues/47
+                cell.text(item.paymentStatus == null ? '' : item.paymentStatus.name);
                 row.append(cell);
 
                 cell = $('<td></td>');

@@ -40,6 +40,15 @@ suspendedStatus.id=31
 suspendedStatus.name=Suspended
 
 
+# The PaymentStatus info corresponding to "Reversed - Pending Approval"
+reversalPendingApprovalStatus.id=2
+reversalPendingApprovalStatus.name=Reversed - Pending Approval
+
+# The PaymentStatus info corresponding to "Reversed - Pending"
+reversalPendingStatus.id=3
+reversalPendingStatus.name=Reversed - Pending
+
+
 # The configuration for CalculationExecutionServiceImpl
 redepositPeriodType.id=2
 redepositPeriodType.name=REDEPOSIT

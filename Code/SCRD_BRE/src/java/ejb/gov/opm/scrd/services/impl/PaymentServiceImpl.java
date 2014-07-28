@@ -26,6 +26,7 @@ import gov.opm.scrd.entities.common.SearchResult;
 import gov.opm.scrd.entities.lookup.ComparisonType;
 import gov.opm.scrd.entities.lookup.DepositComparisonType;
 import gov.opm.scrd.entities.lookup.PaymentReversalReason;
+import gov.opm.scrd.entities.lookup.PaymentStatus;
 import gov.opm.scrd.services.EntityNotFoundException;
 import gov.opm.scrd.services.OPMException;
 import gov.opm.scrd.services.PaymentService;
@@ -35,6 +36,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.Local;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -47,6 +49,7 @@ import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
 import org.jboss.logging.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * <p>
@@ -58,6 +61,15 @@ import org.jboss.logging.Logger;
  * <ul>
  * <li>Add get(long paymentId) method to get payment by Id</li>
  * <li>Add getPaymentNote(long paymentId) method to get payment note</li>
+ * </ul>
+ * </p>
+ *  
+ * <p>
+ * <em>Changes in 1.2 (Defect Assembly - SCRD App - Part 2 1.0):</em>
+ * <ul>
+ * <li>Added reversalPendingApprovalStatus</li>
+ * <li>Modified {@link #reverse(String, long, long, boolean)} to set the {@link PaymentReverse} instance into the
+ * Payment being reversed and also to set the status of the Payment to {@link #reversalPendingApprovalStatus}
  * </ul>
  * </p>
  * 
@@ -119,6 +131,16 @@ public class PaymentServiceImpl extends BaseService implements PaymentService {
             new HashMap<DepositComparisonType, String>();
 
     /**
+     * When a Payment is reversed, we tell it to transition into this status:
+     * reversal pending approval. Note that this is provided by Spring and must
+     * not be null post construction.
+     * 
+     * @since 1.2 (Defect Assembly - SCRD App - Part 2 1.0)
+     */
+    @Autowired
+    private PaymentStatus reversalPendingApprovalStatus;
+    
+    /**
      * Initialization.
      */
     static {
@@ -143,6 +165,18 @@ public class PaymentServiceImpl extends BaseService implements PaymentService {
         // Empty
     }
 
+    /**
+     * Checks that the fields we expect to have been wired, have been set to legal values.
+     * 
+     * @since 1.2 (Defect Assembly - SCRD App - Part 2 1.0)
+     */
+    @PostConstruct
+    protected void checkInit() {
+        super.checkInit();
+
+        Helper.checkState(reversalPendingApprovalStatus == null, "'reversalPendingApproval' can't be null.");
+    }
+    
     /**
      * Gets the payment by id.
      * 
@@ -515,7 +549,8 @@ public class PaymentServiceImpl extends BaseService implements PaymentService {
 
         try {
             // Check the Payment
-            Helper.getEntityById(entityManager, logger, signature, Payment.class, paymentId, true);
+	    Payment reversedPayment = Helper.getEntityById(entityManager, logger, signature, Payment.class, paymentId,
+		    true);
 
             // Get the PaymentReversalReason
             PaymentReversalReason reason =
@@ -529,6 +564,9 @@ public class PaymentServiceImpl extends BaseService implements PaymentService {
             reverse.setApplyToGL(applyReversalToGL);
 
             getEntityManager().persist(reverse);
+            
+            // https://github.com/nasa/SCRD/issues/47
+            reversedPayment.reverse(reverse, reversalPendingApprovalStatus);
 
             LoggingHelper.logExit(logger, signature, null);
         } catch (IllegalStateException e) {

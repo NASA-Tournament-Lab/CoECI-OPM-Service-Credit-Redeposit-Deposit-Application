@@ -45,6 +45,7 @@ import gov.opm.scrd.services.InterestAlreadyCalculatedException;
 import gov.opm.scrd.services.OPMConfigurationException;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -63,9 +64,10 @@ import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
-import org.hibernate.Hibernate;
 
+import org.hibernate.Hibernate;
 import org.jboss.logging.Logger;
 
 /**
@@ -107,13 +109,22 @@ import org.jboss.logging.Logger;
  * <li>case incensitive in search</li>
  * </ul>
  * </p>
+ * 
+ * <p>
+ * <em>Changes in 1.4 (Defect Assembly - SCRD App - Part 2 1.0):</em>
+ * <ul>
+ * <li>added integration with <code>claim_number</code> sequence to ensure
+ * claim_numbers are generated incrementally</li>. 
+ * </ul>
+ * </p>
+ *
  * <p>
  * <strong>Thread Safety: </strong> This class is effectively thread safe after configuration, the configuration is done
  * in a thread safe manner.
  * </p>
  *
  * @author faeton, sparemax, bannie2492, TCSASSEMBLER
- * @version 1.3
+ * @version 1.4
  */
 @Stateless
 @Local(AccountService.class)
@@ -180,6 +191,12 @@ public class AccountServiceImpl extends BaseService implements AccountService {
     private static final String SQL_QUERY_ACCOUNT_COUNT = "SELECT COUNT(e) FROM Account e WHERE e.deleted = false";
 
     /**
+     * This is <b>Postgres specific</b> SQL to fetch the next claim_number to
+     * use from the sequence. See https://github.com/nasa/SCRD/issues/43
+     */
+    private static final String SQL_NEXT_CLAIM_NUMBER = "select nextval('opm.claim_number')";
+
+    /**
      * JNDI binding for the calculation execution service.
      *
      * @since 1.2 (OPM - Release I Assembly 1.0)
@@ -225,6 +242,11 @@ public class AccountServiceImpl extends BaseService implements AccountService {
         Helper.checkNull(logger, signature, account, "account");
 
         try {
+            Query query = getEntityManager().createNativeQuery(SQL_NEXT_CLAIM_NUMBER);
+            BigInteger nextClaimNumber = (BigInteger) query.getSingleResult();
+
+            account.setClaimNumber(nextClaimNumber.toString());
+
             getEntityManager().persist(account);
 
             long result = account.getId();
@@ -1518,7 +1540,7 @@ public class AccountServiceImpl extends BaseService implements AccountService {
      */
     private void performSaveBillings(CalculationVersion version, long accountId) throws OPMException {
         // The calculation was done before today, need recalculation
-        CalculationResult result = calculationExecutionService.runCalculation(version.getCalculations(), new Date());
+        CalculationResult result = calculationExecutionService.runCalculation(version.getCalculations(), version.getCalculationResult().getAsOfDate());
         result.setOfficial(version.getCalculationResult().isOfficial());
 
         // Save the update calculation version

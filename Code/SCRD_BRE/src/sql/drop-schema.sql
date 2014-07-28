@@ -144,6 +144,7 @@ DROP TABLE IF EXISTS opm.period_type;
 DROP TABLE IF EXISTS opm.suffix;
 DROP TABLE IF EXISTS opm.form_type;
 DROP TABLE IF EXISTS opm.payment_appliance;
+DROP SEQUENCE IF EXISTS opm.claim_number;
 
 DROP FUNCTION IF EXISTS opm.batch_daily_payments_func();
 DROP FUNCTION IF EXISTS opm.audit_batch_func();

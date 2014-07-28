@@ -50,6 +50,14 @@ import java.util.Date;
  * statusCode</li>
  * </ul>
  * </p>
+ * 
+ * <p>
+ * <em>Changes in 1.3 (Defect Assembly - SCRD App - Part 2 1.0):</em>
+ * <ul>
+ * <li>Added field: paymentReverse</li>
+ * <li>Added method: {@link #reverse(PaymentReverse, PaymentStatus)}</li>
+ * </ul>
+ * </p>
  *
  * <p>
  * <strong>Thread Safety: </strong> This class is mutable and not thread safe.
@@ -59,7 +67,7 @@ import java.util.Date;
  * Add the PaymentAppliance field.
  *
  * @author faeton, sparemax, woodjhon
- * @version 1.2
+ * @version 1.3
  */
 public class Payment extends IdentifiableEntity {
     /**
@@ -386,6 +394,14 @@ public class Payment extends IdentifiableEntity {
      * @since 1.2 (OPM - Data Migration - Entities Update Module Assembly 1.0)
      */
     private PayTransStatusCode statusCode;
+    
+    /**
+     * If this payment was reversed, this field will contain the details for the
+     * reversal. Will be null if the payment has not been reversed.
+     * 
+     * @since 1.3 (Defect Assembly - SCRD App - Part 2 1.0)
+     */
+    private PaymentReverse paymentReverse;
     
     /**
      * The payment appliance field.
@@ -1284,5 +1300,22 @@ public class Payment extends IdentifiableEntity {
      */
     public void setStatusCode(PayTransStatusCode statusCode) {
         this.statusCode = statusCode;
+    }
+    
+    /**
+     * Reverses this payment and sets the status to the provided
+     * reversalPendingApprovalStatus.
+     * 
+     * @param paymentReverse
+     *            the details of the reversal
+     * @since 1.3 (Defect Assembly - SCRD App - Part 2 1.0)
+     */
+    public void reverse(PaymentReverse paymentReverse, PaymentStatus reversalPendingApprovalStatus) {
+        if (this.paymentReverse != null) {
+            throw new IllegalStateException("Payment " + getId() + " has already been reversed");
+        }
+
+        this.paymentStatus = reversalPendingApprovalStatus;
+        this.paymentReverse = paymentReverse;
     }
 }

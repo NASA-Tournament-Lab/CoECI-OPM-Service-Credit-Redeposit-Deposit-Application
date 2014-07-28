@@ -75,6 +75,16 @@
         <property name="name" value="@suspendedStatus.name@" />
     </bean>
 
+  <bean id="reversalPendingApprovalStatus" class="gov.opm.scrd.entities.lookup.PaymentStatus">
+    <property name="id" value="@reversalPendingApprovalStatus.id@" />
+    <property name="name" value="@reversalPendingApprovalStatus.name@" />
+  </bean>
+    
+  <bean id="reversalPendingStatus" class="gov.opm.scrd.entities.lookup.PaymentStatus">
+    <property name="id" value="@reversalPendingStatus.id@" />
+    <property name="name" value="@reversalPendingStatus.name@" />
+  </bean>
+    
   <bean id="redepositPeriodType" class="gov.opm.scrd.entities.lookup.PeriodType">
     <property name="id" value="@redepositPeriodType.id@" />
     <property name="name" value="@redepositPeriodType.name@" />

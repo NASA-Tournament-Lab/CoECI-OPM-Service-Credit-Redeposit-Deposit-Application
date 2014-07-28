@@ -647,36 +647,10 @@ function checkNull(value) {
     return value;
 }
 
-
-function calculatePeriodInDays(startDate, endDate) {
-    var startY = startDate.getFullYear();
-    var startM = startDate.getMonth();
-    var startD = startDate.getDate();
-
-    // If the beginning date is on the 31st of the month, you must change
-    // the day to the 30th to ensure that credit is received for the first
-    // day.
-    if (startD == 31) {
-        startD = 30;
-    }
-
-    // Plus one day to the end date
-    endDate = new Date(endDate.getTime() + 86400 * 1000);
-    var endY = endDate.getFullYear();
-    var endM = endDate.getMonth();
-    var endD = endDate.getDate();
-
-    if (endD < startD) {
-        endD += 30;
-        endM -= 1;
-    }
-
-    if (endM < startM) {
-        endM += 12;
-        endY -= 1;
-    }
-    return (endD - startD) + 30 * (endM - startM) + 30 * 12 * (endY - startY);
-}
+// removed from here per https://github.com/nasa/SCRD/issues/72 since the function already exists (and is working)
+// in script.js
+//
+// function calculatePeriodInDays(startDate, endDate)
 
 function calculateMidPoint(beginDate, endDate) {
 
