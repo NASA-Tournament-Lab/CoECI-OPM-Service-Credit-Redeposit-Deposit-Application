@@ -692,7 +692,10 @@ public class IntegrationTest {
         // Check calculation result
         Assert.assertEquals("The interest for the extended service period is not correct.", 957.58,
                 TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(0)), delta);
-        Assert.assertEquals("The interest for the extended service period is not correct.", 8696.61,
+        Assert.assertEquals("The interest for the extended service period is not correct.", 4111.54,
                 TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(1)), delta);
+        Assert.assertEquals("The interest for the extended service period is not correct.", 4502.52,
+                TestsHelper.getTotalInterest(interestResponse.getExtendedServicePeriods().get(2)), delta);
+
     }
 }

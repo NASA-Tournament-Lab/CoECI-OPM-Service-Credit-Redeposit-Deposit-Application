@@ -1471,9 +1471,10 @@ public class DeductionTest {
 
         // Check main calculation result
         TestsHelper.assertEqualsExtendedServicePeriodList(Arrays.asList(
-                // extended service period 2 (in Page 6 of the pdf file)
                 TestsHelper.parseExtendedServicePeriod(
-                        "05/06/1985,12/31/1987,CSRS,DEPOSIT,2372.70,33895.66,null,false"),
+                        "10/02/1986,12/31/1987,CSRS,DEPOSIT,1339.22,19131.7,null,false"),
+                TestsHelper.parseExtendedServicePeriod(
+                        "05/06/1985,10/01/1986,CSRS,DEPOSIT,1033.48,14763.96,null,false"),
                 // extended service period 1 (in Page 4 of the pdf file)
                 TestsHelper.parseExtendedServicePeriod(
                         "05/20/1980,06/01/1981,CSRS,DEPOSIT,588.27,8403.89,null,false")),
